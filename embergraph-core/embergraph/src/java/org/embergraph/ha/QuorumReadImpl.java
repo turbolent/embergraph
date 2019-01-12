@@ -128,7 +128,7 @@ public class QuorumReadImpl<S extends HAReadGlue> extends
         }
 
         // @todo monitoring hook (Nagios)?
-        //
+
         // @todo counters (in WORMStrategy right now).
         
         // Block if necessary awaiting a met quorum.

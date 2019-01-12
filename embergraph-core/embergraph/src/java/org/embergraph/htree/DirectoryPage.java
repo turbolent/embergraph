@@ -1250,7 +1250,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 		sb.append(", nbuddies=" + (1 << htree.addressBits) / (1 << globalDepth));
 		sb.append(", slotsPerBuddy=" + (1 << globalDepth));
 		// sb.append(", minKeys=" + minKeys());
-		//
+
 		// sb.append(", maxKeys=" + maxKeys());
 
 		toString(this, sb);
@@ -1674,7 +1674,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 		sb.append(", nchildren=" + nchildren);
 
 		// sb.append(", spannedTupleCount=" + data.getSpannedTupleCount());
-		//
+
 		// sb.append(",\nkeys=" + data.getKeys());
 
 		{
@@ -1695,20 +1695,20 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 		}
 
 		// {
-		//
+
 		// sb.append(",\nchildEntryCount=[");
-		//
+
 		// for (int i = 0; i < nchildren; i++) {
-		//
+
 		// if (i > 0)
 		// sb.append(", ");
-		//
+
 		// sb.append(data.getChildEntryCount(i));
-		//
+
 		// }
-		//
+
 		// sb.append("]");
-		//
+
 		// }
 
 		if (data.hasVersionTimestamps()) {
@@ -2143,7 +2143,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
         // Allocate a new bucket page (globalDepth is increased by one).
         final DirectoryPage newChild = new DirectoryPage((HTree) htree,
                 null, // overflowKey
-                newDepth//
+                newDepth
                 );
 
         ((HTree) htree).nnodes++; // One more directory page in the hash tree. 
@@ -2318,9 +2318,9 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
             final int lastDstBuddyIndex = newBuddyCount;
 
             // work backwards over buddies to avoid stomping data!
-            for (int srcBuddyIndex = lastSrcBuddyIndex - 1, dstBuddyIndex = lastDstBuddyIndex - 1; //
-            srcBuddyIndex >= firstSrcBuddyIndex; //
-            srcBuddyIndex--, dstBuddyIndex--//
+            for (int srcBuddyIndex = lastSrcBuddyIndex - 1, dstBuddyIndex = lastDstBuddyIndex - 1;
+            srcBuddyIndex >= firstSrcBuddyIndex;
+            srcBuddyIndex--, dstBuddyIndex--
             ) {
 
                 final int firstSrcSlot = srcBuddyIndex * slotsPerOldBuddy;
@@ -2385,9 +2385,9 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
              * have to work backwards over the slots in each source buddy table
              * to avoid stomping our data.
              */
-            for (int srcBuddyIndex = lastSrcBuddyIndex - 1, dstBuddyIndex = lastDstBuddyIndex - 1; //
+            for (int srcBuddyIndex = lastSrcBuddyIndex - 1, dstBuddyIndex = lastDstBuddyIndex - 1;
             srcBuddyIndex >= firstSrcBuddyIndex; // 
-            srcBuddyIndex--, dstBuddyIndex--//
+            srcBuddyIndex--, dstBuddyIndex--
             ) {
 
                 final int firstSrcSlot = srcBuddyIndex * slotsPerOldBuddy;

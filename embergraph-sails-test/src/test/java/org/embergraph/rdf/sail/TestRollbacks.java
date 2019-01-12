@@ -347,11 +347,11 @@ public class TestRollbacks extends QuadsTestCase {
              * might be problems on those code paths as well.
              */
             final boolean useJoin = counter % 2 == 0;
-            final String query = !useJoin//
+            final String query = !useJoin
             // access path scan
-            ? "SELECT ?b { ?a ?b ?c } LIMIT 20"//
+            ? "SELECT ?b { ?a ?b ?c } LIMIT 20"
             // join
-            : "SELECT ?b { ?a ?b ?c . ?d ?b ?e} LIMIT 20"//
+            : "SELECT ?b { ?a ?b ?c . ?d ?b ?e} LIMIT 20"
             ;
             final TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
             q.setBinding("b", conn.getValueFactory().createURI("u:p"));

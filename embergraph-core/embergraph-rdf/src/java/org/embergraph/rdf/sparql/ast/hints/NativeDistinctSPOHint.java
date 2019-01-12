@@ -49,7 +49,7 @@ final class NativeDistinctSPOHint extends AbstractBooleanQueryHint {
             return;
 
             // } else {
-            //
+
             // super.attach(context, scope, op, value);
 
         }

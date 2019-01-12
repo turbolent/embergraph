@@ -179,7 +179,7 @@ public class TestASTSubGroupJoinVarOptimizer extends
                 given.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("_var1"),// var
                                 new FunctionNode(
                                         // expr
@@ -265,7 +265,7 @@ public class TestASTSubGroupJoinVarOptimizer extends
             expected.setProjection(projection);
 
             projection
-                    .addProjectionExpression(new AssignmentNode(//
+                    .addProjectionExpression(new AssignmentNode(
                             new VarNode("_var1"),// var
                             new FunctionNode(
                                     // expr

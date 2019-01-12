@@ -134,14 +134,14 @@ abstract public class AbstractJoinNexusFactory implements IJoinNexusFactory {
      *            {@link IRule} explicitly specifies a factory object using
      *            {@link IRule#getTaskFactory()}.
      */
-    protected AbstractJoinNexusFactory(//
-            final ActionEnum action,//
-            final long writeTimestamp,//
-            final long readTimestamp,//
-            final Properties properties,//
-            final int solutionFlags, //
-            final IElementFilter<?> solutionFilter,//
-            final IEvaluationPlanFactory evaluationPlanFactory,//
+    protected AbstractJoinNexusFactory(
+            final ActionEnum action,
+            final long writeTimestamp,
+            final long readTimestamp,
+            final Properties properties,
+            final int solutionFlags,
+            final IElementFilter<?> solutionFilter,
+            final IEvaluationPlanFactory evaluationPlanFactory,
             final IRuleTaskFactory defaultRuleTaskFactory
             ) {
 

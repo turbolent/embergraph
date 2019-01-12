@@ -67,11 +67,11 @@ public class LexPredicate extends Predicate<BigdataValue> {
      * @param term
      *            the term to resolve using forward lookup (term2id)
      */
-    public static LexPredicate forwardInstance(//
-            final String relationName,//
-    		final long timestamp,//
-    		final IVariableOrConstant<BigdataValue> term,//
-    		final IVariable<IV> var//
+    public static LexPredicate forwardInstance(
+            final String relationName,
+    		final long timestamp,
+    		final IVariableOrConstant<BigdataValue> term,
+    		final IVariable<IV> var
     		) {
 
         return new LexPredicate(
@@ -80,7 +80,7 @@ public class LexPredicate extends Predicate<BigdataValue> {
                 Var.var(), // iv 
             },
             new NV(Annotations.RELATION_NAME, new String[] { relationName }),
-            new NV(Annotations.TIMESTAMP, timestamp) //
+            new NV(Annotations.TIMESTAMP, timestamp)
         );
 
     }
@@ -109,13 +109,13 @@ public class LexPredicate extends Predicate<BigdataValue> {
     		final IVariable<BigdataValue> var,
     		final IVariableOrConstant<IV> term) {
 
-        return new LexPredicate(//
-            new IVariableOrConstant[] {//
+        return new LexPredicate(
+            new IVariableOrConstant[] {
                 var, // term
                 term, // iv
             },
             new NV(Annotations.RELATION_NAME, new String[] { relationName }),
-            new NV(Annotations.TIMESTAMP, timestamp) //
+            new NV(Annotations.TIMESTAMP, timestamp)
         );
 
     }

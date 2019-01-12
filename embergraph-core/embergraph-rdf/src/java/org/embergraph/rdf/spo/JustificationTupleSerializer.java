@@ -93,7 +93,7 @@ public class JustificationTupleSerializer extends
     public JustificationTupleSerializer(int N) {
         
         super(new ASCIIKeyBuilderFactory(),
-                getDefaultLeafKeysCoder(), //
+                getDefaultLeafKeysCoder(),
                 EmptyRabaValueCoder.INSTANCE // no values
         );
 

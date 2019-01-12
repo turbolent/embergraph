@@ -169,7 +169,7 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
         }
 
         // slice on just the coded data record.
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         return new CodedRabaImpl(slice, size);

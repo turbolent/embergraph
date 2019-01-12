@@ -53,12 +53,12 @@ public class RuleFastClosure13 extends AbstractRuleFastClosure_11_13 {
      */
     public RuleFastClosure13(String relationName,Vocabulary vocab) {
         
-        super(  "fastClosure13",//
-                new SPOPredicate(relationName,var("z"), vocab.getConstant(RDF.TYPE), var("b")),//
-                new SPOPredicate[] {//
-                    new SPOPredicate(relationName,var("x"), var("y"), var("z")),//
-                    new SPOPredicate(relationName,var("y"), vocab.getConstant(RDFS.SUBPROPERTYOF), var("a")),//
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDFS.RANGE), var("b"))//
+        super(  "fastClosure13",
+                new SPOPredicate(relationName,var("z"), vocab.getConstant(RDF.TYPE), var("b")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("x"), var("y"), var("z")),
+                    new SPOPredicate(relationName,var("y"), vocab.getConstant(RDFS.SUBPROPERTYOF), var("a")),
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDFS.RANGE), var("b"))
                 },
                 new IConstraint[] {
         			Constraint.wrap(new NE(var("y"),var("a")))

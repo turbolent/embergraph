@@ -1319,26 +1319,26 @@ public class TestFusedView extends AbstractBTreeTestCase {
             ITuple actual;
 
             assertTrue(cursor.hasNext());
-            assertEquals(//
-                    new TestTuple(flags, k3, v3a), //
+            assertEquals(
+                    new TestTuple(flags, k3, v3a),
                     actual = cursor.next());
             assertEquals(1, actual.getSourceIndex());
 
             assertTrue(cursor.hasNext());
-            assertEquals(//
-                    new TestTuple(flags, k5, v5a), //
+            assertEquals(
+                    new TestTuple(flags, k5, v5a),
                     actual = cursor.next());
             assertEquals(0, actual.getSourceIndex());
 
             assertTrue(cursor.hasNext());
-            assertEquals(//
-                    new TestTuple(flags, k9, v9a), //
+            assertEquals(
+                    new TestTuple(flags, k9, v9a),
                     actual = cursor.next());
             assertEquals(1, actual.getSourceIndex());
 
             assertTrue(cursor.hasNext());
-            assertEquals(//
-                    new TestTuple(flags, k11, v11a), //
+            assertEquals(
+                    new TestTuple(flags, k11, v11a),
                     actual = cursor.next());
             assertEquals(0, actual.getSourceIndex());
 
@@ -1355,20 +1355,20 @@ public class TestFusedView extends AbstractBTreeTestCase {
             ITuple actual;
 
             assertTrue(cursor.hasPrior());
-            assertEquals(//
-                    new TestTuple(flags, k9, v9a), //
+            assertEquals(
+                    new TestTuple(flags, k9, v9a),
                     actual = cursor.prior());
             assertEquals(1, actual.getSourceIndex());
 
             assertTrue(cursor.hasPrior());
-            assertEquals(//
-                    new TestTuple(flags, k5, v5a), //
+            assertEquals(
+                    new TestTuple(flags, k5, v5a),
                     actual = cursor.prior());
             assertEquals(0, actual.getSourceIndex());
 
             assertTrue(cursor.hasPrior());
-            assertEquals(//
-                    new TestTuple(flags, k3, v3a), //
+            assertEquals(
+                    new TestTuple(flags, k3, v3a),
                     actual = cursor.prior());
             assertEquals(1, actual.getSourceIndex());
 

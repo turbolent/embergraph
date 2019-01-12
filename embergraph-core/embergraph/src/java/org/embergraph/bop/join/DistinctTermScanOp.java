@@ -338,11 +338,11 @@ public class DistinctTermScanOp<E> extends PipelineOp {
 						right.set(distinctVar, new Constant(rightItr.next()));
 						
 						// See if the solutions join.
-						final IBindingSet outSolution = BOpContext.bind(//
+						final IBindingSet outSolution = BOpContext.bind(
 								bindingSet,// left
-								right,//
-								constraints,//
-								selectVars//
+								right,
+								constraints,
+								selectVars
 								);
 
 						if (outSolution != null) {
@@ -455,7 +455,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
 
             @SuppressWarnings("unchecked")
             final Iterator<IV> itr = new Striterator(ap.getIndex(/*keyOrder*/)
-                    .rangeIterator(fromKey, toKey,//
+                    .rangeIterator(fromKey, toKey,
                             0/* capacity */, IRangeQuery.KEYS | IRangeQuery.CURSOR,
                             filter)).addFilter(new Resolver() {
                         

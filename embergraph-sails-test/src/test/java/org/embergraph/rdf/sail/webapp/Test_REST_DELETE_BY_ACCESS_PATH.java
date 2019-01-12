@@ -68,8 +68,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             null);
@@ -85,8 +85,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             new URIImpl("http://www.embergraph.org/Mike"),// s
             null,// p
             null);
@@ -102,8 +102,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             new URIImpl("http://www.w3.org/2000/01/rdf-schema#label"),// p
             null// o
@@ -120,8 +120,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             new URIImpl("http://xmlns.com/foaf/0.1/Person")// o
@@ -138,8 +138,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             new URIImpl("http://www.embergraph.org/Bryan")// o
@@ -156,8 +156,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             RDF.TYPE,// p
             new URIImpl("http://xmlns.com/foaf/0.1/Person")// o
@@ -174,8 +174,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             RDFS.LABEL,// p
             new LiteralImpl("Bryan")// o
@@ -192,8 +192,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.ttl");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             new URIImpl("http://xmlns.com/foaf/0.1/XXX")// o
@@ -237,8 +237,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
             ));
       
       // Delete the named graph (and only that graph)
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             null,// o
@@ -286,8 +286,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.trig");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             null,// o
@@ -332,8 +332,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
             c2// c
             ));
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             null,// o
@@ -385,8 +385,8 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager> extends
 
       doInsertbyURL("POST", packagePath + "test_delete_by_access_path.trig");
 
-      final long mutationResult = doDeleteWithAccessPath(//
-            // requestPath,//
+      final long mutationResult = doDeleteWithAccessPath(
+            // requestPath,
             null,// s
             null,// p
             null,// o

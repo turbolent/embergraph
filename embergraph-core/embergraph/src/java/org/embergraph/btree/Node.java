@@ -148,9 +148,9 @@ public class Node extends AbstractNode<Node> implements INodeData {
         // * this is a Node or a Leaf.
         // */
         // final int minChildren = (btree.branchingFactor + 1) >> 1;
-        //
+
         // // this.minKeys = isLeaf() ? minChildren : minChildren - 1;
-        //
+
         // return minChildren - 1;
         return btree.minChildren - 1;
 
@@ -433,7 +433,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
         assert data != null;
 
         // assert childAddr.length == branchingFactor + 1;
-        //
+
         // assert childEntryCounts.length == branchingFactor + 1;
 
         setIdentity(addr);
@@ -447,7 +447,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
         // this.keys = keys; // steal reference.
         //        
         // this.childAddr = childAddr;
-        //
+
         // this.childEntryCounts = childEntryCounts;
 
         childRefs = new Reference[branchingFactor + 1];
@@ -477,11 +477,11 @@ public class Node extends AbstractNode<Node> implements INodeData {
         // childLocks = newChildLocks(btree, 0/* nkeys */);
 
         // nentries = 0;
-        //
+
         // keys = new MutableKeyBuffer(branchingFactor);
-        //
+
         // childAddr = new long[branchingFactor + 1];
-        //
+
         // childEntryCounts = new int[branchingFactor + 1];
 
     }
@@ -531,9 +531,9 @@ public class Node extends AbstractNode<Node> implements INodeData {
         data.nentries = nentries;
 
         // keys = new MutableKeyBuffer(branchingFactor);
-        //
+
         // childAddr = new long[branchingFactor + 1];
-        //
+
         // childEntryCounts = new int[branchingFactor + 1];
 
         /*
@@ -787,9 +787,9 @@ public class Node extends AbstractNode<Node> implements INodeData {
         ((MutableNodeData) data).childAddr[i] = child.getIdentity();
 
         // if (!dirtyChildren.remove(child)) {
-        //
+
         // throw new AssertionError("Child was not on dirty list.");
-        //
+
         // }
 
     }
@@ -841,23 +841,23 @@ public class Node extends AbstractNode<Node> implements INodeData {
                  * out.
                  */
                 // if (true) {
-                //
+
                 // /*
                 // * Do some paranoia checks.
                 // */
-                //
+
                 // final AbstractNode oldChild = childRefs[i] != null ?
                 // childRefs[i]
                 // .get() : null;
-                //
+
                 // if (oldChild != null) {
-                //
+
                 // // assert oldChild.isPersistent();
-                //
+
                 // // assert !dirtyChildren.contains(oldChild);
-                //
+
                 // }
-                //
+
                 // }
 
                 // Clear the old key.
@@ -2464,37 +2464,37 @@ public class Node extends AbstractNode<Node> implements INodeData {
     // assertInvariants();
     // oldChild.assertInvariants();
     // newChild.assertInvariants();
-    //
+
     // assert newChild != null;
     // assert !newChild.isDeleted();
     // // assert !newChild.isPersistent(); // MAY be persistent - does not
     // matter.
     // assert newChild.parent.get() == oldChild;
-    //
+
     // assert oldChild != newChild;
-    //
+
     // assert !isDeleted();
     // assert !isPersistent();
-    //
+
     // int i = getIndexOf( oldChild );
-    //
+
     // // dirtyChildren.remove(oldChild);
-    // //
-    // // if (newChild.isDirty()) {
-    // //
-    // // dirtyChildren.add(newChild);
-    // //
-    // // }
     //
+    // // if (newChild.isDirty()) {
+    //
+    // // dirtyChildren.add(newChild);
+    //
+    // // }
+
     // // set the persistent key for the new child.
     // childAddr[i] = (newChild.isPersistent() ? newChild.getIdentity() : NULL);
-    //
+
     // // set the reference to the new child.
     // childRefs[i] = new WeakReference<AbstractNode>(newChild);
-    //
+
     // // Reuse the weak reference from the oldChild.
     // newChild.parent = oldChild.parent;
-    //
+
     // }
 
     /**
@@ -2833,7 +2833,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     // // if(true) return null;
     //        
     // if (!btree.isReadOnly() || !btree.getIndexMetadata().getChildLocks()) {
-    //
+
     // /*
     // * Either The mutable B+Tree has a single threaded constraint so we
     // * do not need to do any locking for that case and therefore we do
@@ -2859,7 +2859,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     // final Object[] a = new Object[n];
     //        
     // for (int i = 0; i < n; i++) {
-    //
+
     // a[i] = new Object();
     //            
     // }
@@ -3767,26 +3767,26 @@ public class Node extends AbstractNode<Node> implements INodeData {
                     }
 
                     // if (child.isDirty() && !dirtyChildren.contains(child)) {
-                    //
+
                     // out
                     // .println(indent(height + 1)
                     // + "ERROR dirty child not in node's dirty list at index="
                     // + i);
-                    //
+
                     // ok = false;
-                    //
+
                     // }
-                    //
+
                     // if (!child.isDirty() && dirtyChildren.contains(child)) {
-                    //
+
                     // out
                     // .println(indent(height + 1)
                     // +
                     // "ERROR clear child found in node's dirty list at index="
                     // + i);
-                    //
+
                     // ok = false;
-                    //
+
                     // }
 
                     if (child.isDirty()) {
@@ -3857,9 +3857,9 @@ public class Node extends AbstractNode<Node> implements INodeData {
                         // characteristic since we do not
                         // update the separatorKey for a leaf when removing its
                         // left most key.
-                        //
+
                         // if (child.isLeaf() && keys[i - 1] != child.keys[0]) {
-                        //
+
                         // /*
                         // * While each key in a node always is the first key of
                         // * some leaf, we are only testing the direct children
@@ -3872,9 +3872,9 @@ public class Node extends AbstractNode<Node> implements INodeData {
                         // + "ERROR first key on child leaf must be "
                         // + keys[i - 1] + ", not " + child.keys[0]
                         // + " at index=" + i);
-                        //
+
                         // ok = false;
-                        //
+
                         // }
 
                     } else {
@@ -3897,13 +3897,13 @@ public class Node extends AbstractNode<Node> implements INodeData {
             }
 
             // if (dirty.size() != dirtyChildren.size()) {
-            //
+
             // out.println(indent(height + 1) + "ERROR found " + dirty.size()
             // + " dirty children, but " + dirtyChildren.size()
             // + " in node's dirty list");
-            //
+
             // ok = false;
-            //
+
             // }
 
         }

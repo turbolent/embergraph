@@ -65,10 +65,10 @@ public class NamedSolutionSetRefUtility {
 	 *      nested star property paths </a>
 	 */
     @SuppressWarnings("rawtypes")
-    public static INamedSolutionSetRef newInstance(//
-            final UUID queryId, //
-            final String namedSet,//
-            final IVariable[] joinVars//
+    public static INamedSolutionSetRef newInstance(
+            final UUID queryId,
+            final String namedSet,
+            final IVariable[] joinVars
     ) {
 
         // Note: checked by the constructor.
@@ -102,11 +102,11 @@ public class NamedSolutionSetRefUtility {
      *            The join variables (required, but may be an empty array).
      */
     @SuppressWarnings("rawtypes")
-    public static INamedSolutionSetRef newInstance(//
-            final String namespace, //
-            final long timestamp,//
-            final String localName,//
-            final IVariable[] joinVars//
+    public static INamedSolutionSetRef newInstance(
+            final String namespace,
+            final long timestamp,
+            final String localName,
+            final IVariable[] joinVars
     ) {
 
         // Note: checked by the constructor.
@@ -241,10 +241,10 @@ public class NamedSolutionSetRefUtility {
      * 
      * @return The fully qualified name.
      */
-    public static String getFQN(//
-            final String namespace,//
-            final String localName, //
-            final IVariable[] joinVars//
+    public static String getFQN(
+            final String namespace,
+            final String localName,
+            final IVariable[] joinVars
             ) {
 
         if (namespace == null)
@@ -342,8 +342,8 @@ public class NamedSolutionSetRefUtility {
 //     *             if the named solution set can not be found.
 //     */
 //    public static ISolutionSetStats getSolutionSetStats(
-//            final ISparqlCache sparqlCache,//
-//            final AbstractJournal localIndexManager, //
+//            final ISparqlCache sparqlCache,
+//            final AbstractJournal localIndexManager,
 //            final INamedSolutionSetRef namedRef) {
 //        
 //        return getSolutionSetStats(sparqlCache, localIndexManager,
@@ -362,10 +362,10 @@ public class NamedSolutionSetRefUtility {
 //     *             if the named solution set can not be found.
 //     */
 //    public static ICloseableIterator<IBindingSet[]> getSolutionSet(
-//            final ISparqlCache sparqlCache,//
-//            final AbstractJournal localIndexManager,//
-//            final INamedSolutionSetRef namedRef,//
-//            final int chunkCapacity//
+//            final ISparqlCache sparqlCache,
+//            final AbstractJournal localIndexManager,
+//            final INamedSolutionSetRef namedRef,
+//            final int chunkCapacity
 //    ) {
 //
 //        return getSolutionSet(sparqlCache, localIndexManager,
@@ -395,13 +395,13 @@ public class NamedSolutionSetRefUtility {
      *             It does not matter *which* index we find, as long as it is
      *             the same data.
      */
-    public static ISolutionSetStats getSolutionSetStats(//
-            final ISolutionSetManager sparqlCache,//
-            final IBTreeManager localIndexManager, //
-            final String namespace,//
-            final long timestamp,//
-            final String localName,//
-            final IVariable[] joinVars//
+    public static ISolutionSetStats getSolutionSetStats(
+            final ISolutionSetManager sparqlCache,
+            final IBTreeManager localIndexManager,
+            final String namespace,
+            final long timestamp,
+            final String localName,
+            final IVariable[] joinVars
             ) {
 
         if (localName == null)
@@ -493,13 +493,13 @@ public class NamedSolutionSetRefUtility {
      *             {@link IIndex}?
      */
     public static ICloseableIterator<IBindingSet[]> getSolutionSet(
-            final ISolutionSetManager sparqlCache,//
-            final IBTreeManager localIndexManager,//
-            final String namespace,//
-            final long timestamp,//
-            final String localName,//
-            final IVariable[] joinVars,//
-            final int chunkCapacity//
+            final ISolutionSetManager sparqlCache,
+            final IBTreeManager localIndexManager,
+            final String namespace,
+            final long timestamp,
+            final String localName,
+            final IVariable[] joinVars,
+            final int chunkCapacity
     ) {
 
         /*

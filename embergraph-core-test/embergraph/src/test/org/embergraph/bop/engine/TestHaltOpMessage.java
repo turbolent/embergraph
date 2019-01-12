@@ -52,7 +52,7 @@ public class TestHaltOpMessage extends TestCase2 {
         
         final IHaltOpMessage expected = new HaltOpMessage(
                 UUID.randomUUID()/* queryId */, 12/* opId */,
-                8/* partitionId */, UUID.randomUUID()/* serviceId */, //
+                8/* partitionId */, UUID.randomUUID()/* serviceId */,
                 null,// cause
                 5,//sinkMessagesOut
                 3,//altSinkMessagesOut
@@ -67,7 +67,7 @@ public class TestHaltOpMessage extends TestCase2 {
         
         final IHaltOpMessage expected = new HaltOpMessage(
                 UUID.randomUUID()/* queryId */, 12/* opId */,
-                8/* partitionId */, UUID.randomUUID()/* serviceId */, //
+                8/* partitionId */, UUID.randomUUID()/* serviceId */,
                 new RuntimeException(),// cause
                 5,//sinkMessagesOut
                 3,//altSinkMessagesOut

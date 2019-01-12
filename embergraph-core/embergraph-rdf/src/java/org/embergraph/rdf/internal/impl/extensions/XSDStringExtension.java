@@ -87,7 +87,7 @@ public class XSDStringExtension<V extends BigdataValue> implements IExtension<V>
         
         final String s = value.stringValue();
 
-        final FullyInlineTypedLiteralIV<BigdataLiteral> delegate = new FullyInlineTypedLiteralIV<BigdataLiteral>(//
+        final FullyInlineTypedLiteralIV<BigdataLiteral> delegate = new FullyInlineTypedLiteralIV<BigdataLiteral>(
                 s, // label
                 null, // no language
                 null // no datatype

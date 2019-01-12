@@ -119,11 +119,11 @@ public class QueryOptions implements IQueryOptions {
 
     public String toString() {
 
-        return "QueryOptions" + //
-            "{ distinct=" + distinct + //
-            ", stable=" + stable + //
-            ", orderBy=" + (orderBy == null ? "N/A" : Arrays.toString(orderBy)) + //
-            ", slice=" + slice + //
+        return "QueryOptions" +
+            "{ distinct=" + distinct +
+            ", stable=" + stable +
+            ", orderBy=" + (orderBy == null ? "N/A" : Arrays.toString(orderBy)) +
+            ", slice=" + slice +
             "}";
 
     }

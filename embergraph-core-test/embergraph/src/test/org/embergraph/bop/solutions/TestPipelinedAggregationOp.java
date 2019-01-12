@@ -48,7 +48,7 @@ public class TestPipelinedAggregationOp extends AbstractAggregationTestCase {
 
         final IVariableFactory variableFactory = new MockVariableFactory();
 
-        final IGroupByState groupByState = new GroupByState(//
+        final IGroupByState groupByState = new GroupByState(
                 select, groupBy, having);
 
         final IGroupByRewriteState groupByRewrite = new GroupByRewriter(
@@ -64,16 +64,16 @@ public class TestPipelinedAggregationOp extends AbstractAggregationTestCase {
         };
 
         final GroupByOp query = new PipelinedAggregationOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, groupById),//
+                NV.asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, groupById),
                         new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.PIPELINED, true),//
-                        new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE, true),//
-                        new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                        new NV(GroupByOp.Annotations.GROUP_BY_STATE, groupByState), //
-                        new NV(GroupByOp.Annotations.GROUP_BY_REWRITE, groupByRewrite), //
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.PIPELINED, true),
+                        new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                        new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                        new NV(PipelineOp.Annotations.LAST_PASS, true),
+                        new NV(GroupByOp.Annotations.GROUP_BY_STATE, groupByState),
+                        new NV(GroupByOp.Annotations.GROUP_BY_REWRITE, groupByRewrite),
                 }));
 
         return query;

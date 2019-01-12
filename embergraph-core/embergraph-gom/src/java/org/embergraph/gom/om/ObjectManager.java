@@ -278,7 +278,7 @@ public class ObjectManager extends ObjectMgrModel {
 
 	@Override
 	public boolean isPersistent() {
-		return true; //
+		return true;
 	}
 
 	@Override

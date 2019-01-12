@@ -222,12 +222,12 @@ public class VoID {
         } // end defaultGraph
 
         // sb.append("termCount\t = " + tripleStore.getTermCount() + "\n");
-        //
+
         // sb.append("uriCount\t = " + tripleStore.getURICount() + "\n");
-        //
+
         // sb.append("literalCount\t = " + tripleStore.getLiteralCount() +
         // "\n");
-        //
+
         // /*
         // * Note: The blank node count is only available when using the told
         // * bnodes mode.

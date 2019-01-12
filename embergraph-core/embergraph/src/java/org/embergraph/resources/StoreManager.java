@@ -2677,15 +2677,15 @@ abstract public class StoreManager extends ResourceEvents implements
                  */
                 final ResourceManager resourceManager = ((ResourceManager) (StoreManager.this));
 
-                metadata.setPartitionMetadata(//
-                        new LocalPartitionMetadata(//
-                                pmd.getPartitionId(),//
-                                pmd.getSourcePartitionId(),//
-                                pmd.getLeftSeparatorKey(),//
-                                pmd.getRightSeparatorKey(),//
-                                new IResourceMetadata[] {//
+                metadata.setPartitionMetadata(
+                        new LocalPartitionMetadata(
+                                pmd.getPartitionId(),
+                                pmd.getSourcePartitionId(),
+                                pmd.getLeftSeparatorKey(),
+                                pmd.getRightSeparatorKey(),
+                                new IResourceMetadata[] {
                                 // The live journal.
-                                getResourceMetadata() //
+                                getResourceMetadata()
                                 },
                                 // cause
                                 IndexPartitionCause.register(resourceManager)
@@ -4850,12 +4850,12 @@ abstract public class StoreManager extends ResourceEvents implements
         p.setProperty(Options.MAXIMUM_EXTENT, Long.toString(adjustedExtent));
 
         if (log.isInfoEnabled())
-            log.info("discount=" + d //
-                    + ", bytesUnderManagement=" + bytesUnderManagement //
-                    + ", threshold=" + accelerateOverflowThreshold//
-                    + ", minimimInitialExtent=" + minimumExtent//
-                    + ", initialExtent=" + initialExtent //
-                    + ", maximumExtent=" + maximumExtent //
+            log.info("discount=" + d
+                    + ", bytesUnderManagement=" + bytesUnderManagement
+                    + ", threshold=" + accelerateOverflowThreshold
+                    + ", minimimInitialExtent=" + minimumExtent
+                    + ", initialExtent=" + initialExtent
+                    + ", maximumExtent=" + maximumExtent
                     + ", adjustedExtent=" + adjustedExtent);
 
         return;

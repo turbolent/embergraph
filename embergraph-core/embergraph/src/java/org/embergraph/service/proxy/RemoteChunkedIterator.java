@@ -146,13 +146,13 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
         } else {
 
 //            // @todo config timeout.
-//            final E[] a = sourceIterator instanceof IAsynchronousIterator//
-//                ? ((IAsynchronousIterator<E>) sourceIterator).nextChunk(//
+//            final E[] a = sourceIterator instanceof IAsynchronousIterator
+//                ? ((IAsynchronousIterator<E>) sourceIterator).nextChunk(
 //                    1000,// minChunkSize
 //                    1000L, // timeout
 //                    TimeUnit.MILLISECONDS// unit
-//                    )//
-//                : sourceIterator.nextChunk()//
+//                    )
+//                : sourceIterator.nextChunk()
 //                ;
 
             final E[] a = sourceIterator.next();

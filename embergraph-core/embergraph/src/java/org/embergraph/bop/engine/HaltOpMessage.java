@@ -68,9 +68,9 @@ public class HaltOpMessage implements Externalizable, IHaltOpMessage {
 //    *            The {@link BOp.Annotations#BOP_ID} of the alternative sink and
 //    *            <code>null</code> if there is no alternative sink.
     public HaltOpMessage(
-            //
+
             final UUID queryId, final int bopId, final int partitionId,
-            final UUID serviceId, Throwable cause, //
+            final UUID serviceId, Throwable cause,
             final int sinkMessagesOut,// 
             final int altSinkMessagesOut,// 
             final BOpStats taskStats) {

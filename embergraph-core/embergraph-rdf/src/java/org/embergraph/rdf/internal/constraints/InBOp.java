@@ -48,7 +48,7 @@ abstract public class InBOp extends XSDBooleanIVValueExpression {
     }
 
     @SuppressWarnings("rawtypes")
-    private static BOp[] mergeArguments(//
+    private static BOp[] mergeArguments(
             final IValueExpression<? extends IV> var,
             final IConstant<? extends IV>... set) {
 
@@ -67,10 +67,10 @@ abstract public class InBOp extends XSDBooleanIVValueExpression {
     }
 
     @SuppressWarnings("rawtypes")
-    public InBOp(//
-            final boolean not, //
-            final IValueExpression<? extends IV> var,//
-            final IConstant<? extends IV>... set//
+    public InBOp(
+            final boolean not,
+            final IValueExpression<? extends IV> var,
+            final IConstant<? extends IV>... set
             ) {
 
         this(mergeArguments(var, set), 

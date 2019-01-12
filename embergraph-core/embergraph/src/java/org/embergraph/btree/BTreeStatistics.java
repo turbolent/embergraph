@@ -85,13 +85,13 @@ public class BTreeStatistics implements IBTreeStatistics, Serializable {
      * Human readable representation.
      */
     public String toString() {
-        return super.toString() + //
-                "{m=" + m+ //
-                ",entryCount=" + entryCount+ //
-                ",height=" + height+ //
-                ",leafCount=" + leafCount+ //
-                ",nodeCount=" + nodeCount+ //
-                ",utilReport=" + utilReport+ //
+        return super.toString() +
+                "{m=" + m+
+                ",entryCount=" + entryCount+
+                ",height=" + height+
+                ",leafCount=" + leafCount+
+                ",nodeCount=" + nodeCount+
+                ",utilReport=" + utilReport+
                 "}";
     }
 

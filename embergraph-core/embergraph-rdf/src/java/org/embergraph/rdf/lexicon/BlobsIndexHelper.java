@@ -372,7 +372,7 @@ public class BlobsIndexHelper {
 
             // compare without materializing the tuple's value
             if (0 == BytesUtil.compareBytesWithLenAndOffset(
-                    0/* aoff */, val.length/* alen */, val,//
+                    0/* aoff */, val.length/* alen */, val,
                     0/* boff */, tb.limit()/* blen */, tb.array()/* b */
             )) {
 

@@ -46,10 +46,10 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
 //    
 //    static {
 //
-//        DEFAULT_ACCEPT_HEADER = //
-//                TupleQueryResultFormat.BINARY.getDefaultMIMEType() + ";q=1" + //
-//                "," + //
-//                TupleQueryResultFormat.SPARQL.getDefaultMIMEType() + ";q=.9"//
+//        DEFAULT_ACCEPT_HEADER =
+//                TupleQueryResultFormat.BINARY.getDefaultMIMEType() + ";q=1" +
+//                "," +
+//                TupleQueryResultFormat.SPARQL.getDefaultMIMEType() + ";q=.9"
 //        ;
 //
 //    }

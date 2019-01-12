@@ -51,11 +51,11 @@ public class RuleRdfs04b extends AbstractRuleDistinctTermScan {
 
     public RuleRdfs04b(String relationName,Vocabulary vocab) {
 
-            super(  "rdfs04b",//
-                    new SPOPredicate(relationName,var("v"), vocab.getConstant(RDF.TYPE), vocab.getConstant(RDFS.RESOURCE)), //
-                    new SPOPredicate[] { //
-                        new SPOPredicate(relationName,var("u"), var("a"), var("v"))//
-                    },//
+            super(  "rdfs04b",
+                    new SPOPredicate(relationName,var("v"), vocab.getConstant(RDF.TYPE), vocab.getConstant(RDFS.RESOURCE)),
+                    new SPOPredicate[] {
+                        new SPOPredicate(relationName,var("u"), var("a"), var("v"))
+                    },
                     null//constraints
                     );
 

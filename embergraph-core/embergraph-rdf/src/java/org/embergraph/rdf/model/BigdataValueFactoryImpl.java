@@ -415,7 +415,7 @@ public class BigdataValueFactoryImpl implements BigdataValueFactory {
     @Override
     public BigdataLiteralImpl createLiteral(final boolean arg0) {
 
-        return (arg0 //
+        return (arg0
                 ? new BigdataLiteralImpl(this, "true", null, xsd_boolean)
                 : new BigdataLiteralImpl(this, "false", null, xsd_boolean)
                 );
@@ -617,10 +617,10 @@ public class BigdataValueFactoryImpl implements BigdataValueFactory {
     public BigdataStatementImpl createStatement(Resource s, URI p, Value o,
             Resource c, StatementEnum type, final boolean userFlag) {
         
-        return new BigdataStatementImpl(//
-                (BigdataResource) asValue(s),//
-                (BigdataURI)      asValue(p),//
-                (BigdataValue)    asValue(o),//
+        return new BigdataStatementImpl(
+                (BigdataResource) asValue(s),
+                (BigdataURI)      asValue(p),
+                (BigdataValue)    asValue(o),
                 (BigdataResource) asValue(c),// optional
                 type, // the statement type (optional).
                 userFlag // the user flag (optional)
@@ -682,11 +682,11 @@ public class BigdataValueFactoryImpl implements BigdataValueFactory {
 
             final URI datatype = tmp.getDatatype();
 
-            return new BigdataLiteralImpl(//
+            return new BigdataLiteralImpl(
                     this,// Note: Passing in this factory!
-                    label,//
-                    language,//
-                    (BigdataURI)asValue(datatype)//
+                    label,
+                    language,
+                    (BigdataURI)asValue(datatype)
                     );
 
         } else {

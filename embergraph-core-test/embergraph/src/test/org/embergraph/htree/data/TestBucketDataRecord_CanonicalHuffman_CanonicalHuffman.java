@@ -53,7 +53,7 @@ public class TestBucketDataRecord_CanonicalHuffman_CanonicalHuffman extends
 
 		super.setUp();
 
-		coder = new DefaultLeafCoder(//
+		coder = new DefaultLeafCoder(
 				CanonicalHuffmanRabaCoder.INSTANCE,// keys
 				CanonicalHuffmanRabaCoder.INSTANCE // vals
 		);

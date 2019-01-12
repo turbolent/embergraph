@@ -412,13 +412,13 @@ public class TokenBuffer<V extends Comparable<V>> {
         
         textIndexer.getIndex().submit(0, //fromIndex
                 n, // toIndex
-                keys,//
-                vals,//
-                (textIndexer.isOverwrite() //
+                keys,
+                vals,
+                (textIndexer.isOverwrite()
                         ? TextIndexWriteProc.IndexWriteProcConstructor.OVERWRITE
-                        : TextIndexWriteProc.IndexWriteProcConstructor.NO_OVERWRITE//
-                        ),//
-                 resultHandler//
+                        : TextIndexWriteProc.IndexWriteProcConstructor.NO_OVERWRITE
+                        ),
+                 resultHandler
                 );
         
         return resultHandler.getResult();

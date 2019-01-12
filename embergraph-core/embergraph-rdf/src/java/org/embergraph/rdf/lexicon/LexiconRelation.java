@@ -461,10 +461,10 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             this.indexNames = Collections.unmodifiableSet(set);
 
             this.keyOrders = Arrays
-                    .asList((IKeyOrder<BigdataValue>[]) new IKeyOrder[] { //
-                            LexiconKeyOrder.TERM2ID,//
-                            LexiconKeyOrder.ID2TERM,//
-                            LexiconKeyOrder.BLOBS //
+                    .asList((IKeyOrder<BigdataValue>[]) new IKeyOrder[] {
+                            LexiconKeyOrder.TERM2ID,
+                            LexiconKeyOrder.ID2TERM,
+                            LexiconKeyOrder.BLOBS
                             });
 
         }
@@ -546,8 +546,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 /*
                  * Unshared for any other view of the triple store.
                  */
-                termCache = new TermCache<IV<?,?>, BigdataValue>(//
-                        new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue>(//
+                termCache = new TermCache<IV<?,?>, BigdataValue>(
+                        new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue>(
                         termCacheCapacity, // queueCapacity
                         .75f, // loadFactor (.75 is the default)
                         16 // concurrency level (16 is the default)
@@ -731,20 +731,20 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 				 */
 				log
 						.error("Configuration will duplicate large literals within the full text index"
-								+ //
+								+
 								": "
 								+ AbstractTripleStore.Options.TEXT_INDEX
 								+ "="
 								+ textIndex
-								+ //
+								+
 								", "
 								+ AbstractTripleStore.Options.INLINE_TEXT_LITERALS
 								+ "="
 								+ inlineTextLiterals
-								+ //
+								+
 								", "
 								+ AbstractTripleStore.Options.MAX_INLINE_TEXT_LENGTH
-								+ "=" + maxInlineTextLength//
+								+ "=" + maxInlineTextLength
 						);
 
 			}
@@ -3044,8 +3044,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         @Override
         protected ITermCache<IV<?,?>, BigdataValue> newInstance(
                 NT key, Integer termCacheCapacity) {
-            return new TermCache<IV<?,?>,BigdataValue>(//
-                    new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue>(//
+            return new TermCache<IV<?,?>,BigdataValue>(
+                    new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue>(
                     termCacheCapacity.intValue(),// backing hard reference LRU queue capacity.
                     .75f, // loadFactor (.75 is the default)
                     16 // concurrency level (16 is the default)
@@ -3434,9 +3434,9 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 if (storeBlankNodes || !iv.isBNode()) {
 
                     // if (termCache.get(id) == null) {
-                    //
+
                     // termCache.put(id, value, false/* dirty */);
-                    //
+
                     // }
 
                     termCache.putIfAbsent(iv, impl);
@@ -3498,9 +3498,9 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 if (storeBlankNodes || !iv.isBNode()) {
 
                     // if (termCache.get(id) == null) {
-                    //
+
                     // termCache.put(id, value, false/* dirty */);
-                    //
+
                     // }
 
                     termCache.putIfAbsent(iv, impl);

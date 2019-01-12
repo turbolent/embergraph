@@ -184,15 +184,15 @@ public class AccessPathFusedView<E> implements IAccessPath<E> {
         /*
          * assume the flags from the first access path.
          */
-        return new FusedTupleIterator<ITupleIterator<E>, E>(path1.flags,//
+        return new FusedTupleIterator<ITupleIterator<E>, E>(path1.flags,
                 false, // we do not want to see the deleted tuples.
-                new ITupleIterator[] {//
+                new ITupleIterator[] {
                         path1
                                 .rangeIterator(capacity, path1.flags,
-                                        path1.indexLocalFilter),//
+                                        path1.indexLocalFilter),
                         path2
                                 .rangeIterator(capacity, path2.flags,
-                                        path2.indexLocalFilter) //
+                                        path2.indexLocalFilter)
                 });
 
     }

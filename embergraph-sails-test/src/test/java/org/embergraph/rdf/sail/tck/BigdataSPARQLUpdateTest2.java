@@ -313,8 +313,8 @@ public class BigdataSPARQLUpdateTest2 extends TestCase2 {
 				getName(),//testURI,
 				null, // store
 				null, // astContainer
-				queryResult,//
-				expectedResult,//
+				queryResult,
+				expectedResult,
 				false,// laxCardinality,
 				false // checkOrder
 				);

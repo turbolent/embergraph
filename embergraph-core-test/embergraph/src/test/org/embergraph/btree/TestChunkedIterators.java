@@ -351,7 +351,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
          */
         {
             final ChunkedLocalRangeIterator<?> itr = new ChunkedLocalRangeIterator(
-                    btree,//
+                    btree,
                     null,// fromKey,
                     null,// toKey
                     1, // capacity (aka limit)

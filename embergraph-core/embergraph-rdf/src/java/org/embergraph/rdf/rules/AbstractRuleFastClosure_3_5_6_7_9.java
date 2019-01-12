@@ -99,7 +99,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
      *            An implementation returning a concrete instance of
      *            {@link FastClosureRuleTask}.
      */
-    public AbstractRuleFastClosure_3_5_6_7_9(//
+    public AbstractRuleFastClosure_3_5_6_7_9(
             final String name,
             final String relationName,
             final IConstant<IV> rdfsSubPropertyOf,
@@ -109,11 +109,11 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
     ) {
 
         super(name, new SPOPredicate(relationName, var("x"), propertyId,
-                var("y")), //
-                new SPOPredicate[] {//
-                new SPOPredicate(relationName, var("x"), var("{P}"), var("y")) //
-                },//
-                QueryOptions.NONE,//
+                var("y")),
+                new SPOPredicate[] {
+                new SPOPredicate(relationName, var("x"), var("{P}"), var("y"))
+                },
+                QueryOptions.NONE,
                 null, // constraints
                 null, // constants
                 taskFactory
@@ -193,7 +193,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
          * @param propertyId
          *            The propertyId to be used in the assertions.
          */
-        public FastClosureRuleTask(//
+        public FastClosureRuleTask(
                 String database,
                 String focusStore,
                 IRule rule,
@@ -449,17 +449,17 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
                     final long timestamp1 = joinNexus.getReadTimestamp(/*focusStore*/);
 
                     return new RelationFusedView<ISPO>(
-                            //
+
                             (IRelation<ISPO>)resourceLocator.locate(database, timestamp0),
                             (IRelation<ISPO>)resourceLocator.locate(focusStore, timestamp1))
                             .init();
 
                 }
-                    // final IAccessPath accessPath = (focusStore == null //
-                    // ? database.getAccessPath(NULL, p, NULL)//
+                    // final IAccessPath accessPath = (focusStore == null
+                    // ? database.getAccessPath(NULL, p, NULL)
                     // : new AccessPathFusedView(focusStore
-                    // .getAccessPath(NULL, p, NULL), //
-                    // database.getAccessPath(NULL, p, NULL)//
+                    // .getAccessPath(NULL, p, NULL),
+                    // database.getAccessPath(NULL, p, NULL)
                     // ));
 
                 
@@ -582,19 +582,19 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
                     for (IV p : P) {
 
-                        final SPOPredicate pred = new SPOPredicate(//
+                        final SPOPredicate pred = new SPOPredicate(
                                 "view",// @todo the label here is ignored, but should be the ordered names of the relations in the view. 
-                                Var.var("x"), new Constant<IV>(p), Var.var("y")//
+                                Var.var("x"), new Constant<IV>(p), Var.var("y")
                                 );
                         
                         final IAccessPath<ISPO> accessPath = view
                                 .getAccessPath(pred);
                         
-//                        final IAccessPath accessPath = (focusStore == null //
-//                        ? database.getAccessPath(NULL, p, NULL)//
+//                        final IAccessPath accessPath = (focusStore == null
+//                        ? database.getAccessPath(NULL, p, NULL)
 //                                : new AccessPathFusedView(focusStore
-//                                        .getAccessPath(NULL, p, NULL), //
-//                                        database.getAccessPath(NULL, p, NULL)//
+//                                        .getAccessPath(NULL, p, NULL),
+//                                        database.getAccessPath(NULL, p, NULL)
 //                                ));
 
                         final IChunkedOrderedIterator<ISPO> itr = accessPath.iterator();
@@ -715,21 +715,21 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
          */
         public Set<IV> getSubPropertiesOf(IConstant<IV> p) {
 
-            final SPOPredicate pred = new SPOPredicate(//
-                    "view", //
-                    Var.var("x"), rdfsSubPropertyOf, p//
+            final SPOPredicate pred = new SPOPredicate(
+                    "view",
+                    Var.var("x"), rdfsSubPropertyOf, p
             );
             
             final IAccessPath<ISPO> accessPath = view.getAccessPath(pred);
             
-//            final IAccessPath accessPath = //
-//            (focusStore == null //
-//            ? database.getAccessPath(NULL/* x */, rdfsSubPropertyOf.get(), p)//
-//                    : new AccessPathFusedView(//
+//            final IAccessPath accessPath =
+//            (focusStore == null
+//            ? database.getAccessPath(NULL/* x */, rdfsSubPropertyOf.get(), p)
+//                    : new AccessPathFusedView(
 //                            focusStore.getAccessPath(NULL/* x */,
-//                                    rdfsSubPropertyOf.get(), p), //
+//                                    rdfsSubPropertyOf.get(), p),
 //                            database.getAccessPath(NULL/* x */,
-//                                    rdfsSubPropertyOf.get(), p)//
+//                                    rdfsSubPropertyOf.get(), p)
 //                    ));
 
 //            if (log.isDebugEnabled()) {

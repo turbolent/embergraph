@@ -121,13 +121,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
 
                 final SPOPredicate pred = accessPath.getPredicate();
                 
-                final IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                final IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath, 0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -156,13 +156,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)noClosure.getAccessPath(y,b,null);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -186,13 +186,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 SPOAccessPath accessPath = (SPOAccessPath) 
                 	noClosure.getAccessPath((IV) null,(IV) null,(IV) w);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -221,13 +221,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)noClosure.getAccessPath(null,a,w);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -250,13 +250,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)noClosure.getAccessPath(x,null,z);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -279,13 +279,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)noClosure.getAccessPath(x,b,z);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -306,13 +306,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)noClosure.getAccessPath(null,a,null);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,
@@ -339,13 +339,13 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)noClosure.getAccessPath(NULL,NULL,NULL);
                 
-                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(//
-                        accessPath.iterator(),//
+                IChunkedOrderedIterator<ISPO> itr = new BackchainOwlSameAsPropertiesIterator(
+                        accessPath.iterator(),
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        noClosure, //
-                        same //
+                        noClosure,
+                        same
                         );
 
                 assertSameSPOsAnyOrder(noClosure,

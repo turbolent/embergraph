@@ -51,17 +51,17 @@ public class Example1 implements Callable<Void> {
 
         final ICloseableIterator<Statement> itr = om
                 .evaluateGraph(
-                        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n" + //
-                        "CONSTRUCT { \n"+//
-                        " ?u a foaf:Person . \n" + //
+                        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n" +
+                        "CONSTRUCT { \n"+
+                        " ?u a foaf:Person . \n" +
                         " ?u foaf:knows ?v . \n"+
                         " ?u rdfs:label ?name . \n"+
-                        "} \n"+//
-                        "WHERE {\n"+//
-                        " ?u a foaf:Person . \n" + //
+                        "} \n"+
+                        "WHERE {\n"+
+                        " ?u a foaf:Person . \n" +
                         " ?u foaf:knows ?v . \n"+
                         " OPTIONAL { ?u rdfs:label ?name } . \n"+
-                        "} LIMIT 100"//
+                        "} LIMIT 100"
                         );
         
         final Map<Resource, IGPO> vertices = om.initGPOs(itr);

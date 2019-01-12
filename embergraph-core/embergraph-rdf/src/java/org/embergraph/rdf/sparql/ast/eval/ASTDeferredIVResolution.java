@@ -538,7 +538,7 @@ public class ASTDeferredIVResolution {
 
                                 final IAccessPath<ISPO> ap = store
                                         .getSPORelation()
-                                        .getAccessPath(//
+                                        .getAccessPath(
                                                 uri.getIV(),// the virtual graph "name"
                                                 virtualGraph, null/* o */, null/* c */);
                                 

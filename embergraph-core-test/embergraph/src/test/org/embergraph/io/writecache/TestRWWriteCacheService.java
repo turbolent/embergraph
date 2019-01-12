@@ -78,29 +78,29 @@ public class TestRWWriteCacheService extends TestCase3 {
     // */
     // static private class MyMockQuorumMember<S extends HAPipelineGlue> extends
     // AbstractQuorumMember<S> {
-    //
+
     // /**
     // * @param quorum
     // */
     // protected MyMockQuorumMember() {
-    //
+
     // super(UUID.randomUUID());
-    //
+
     // }
-    //
+
     // @Override
     // public S getService(UUID serviceId) {
     // throw new UnsupportedOperationException();
     // }
-    //
+
     // public Executor getExecutor() {
     // throw new UnsupportedOperationException();
     // }
-    //
+
     // public S getService() {
     // throw new UnsupportedOperationException();
     // }
-    //
+
     // }
     final int k = 1; // no write on pipeline
     MockQuorumFixture fixture = null;

@@ -112,7 +112,7 @@ public class TestUnion extends TestCase2 {
         rel.create();
 
         // data to insert (in key order for convenience).
-        final E[] a = {//
+        final E[] a = {
                 new E("John", "Mary"),// [0]
                 new E("Leon", "Paul"),// [1]
                 new E("Mary", "Paul"),// [2]
@@ -159,34 +159,34 @@ public class TestUnion extends TestCase2 {
         final int startId2 = 2;
         final int unionId = 3;
 
-        final BOp startOp1 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(StartOp.Annotations.BOP_ID, startId1),//
+        final BOp startOp1 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(StartOp.Annotations.BOP_ID, startId1),
                 new NV(StartOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
-        final BOp startOp2 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(StartOp.Annotations.BOP_ID, startId2),//
+        final BOp startOp2 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(StartOp.Annotations.BOP_ID, startId2),
                 new NV(StartOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final BOp unionOp = new Union(new BOp[0], NV
-                .asMap(new NV[] {//
-                        new NV(Union.Annotations.BOP_ID, unionId),//
+                .asMap(new NV[] {
+                        new NV(Union.Annotations.BOP_ID, unionId),
                         new NV(Union.Annotations.SUBQUERIES, new BOp[] {
-                                startOp1, startOp2 }),//
+                                startOp1, startOp2 }),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                StandaloneChunkHandler.TEST_INSTANCE),//
+                                StandaloneChunkHandler.TEST_INSTANCE),
 //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
-//                                BOpEvaluationContext.CONTROLLER),//
-//                        new NV(Union.Annotations.CONTROLLER, true),//
+//                                BOpEvaluationContext.CONTROLLER),
+//                        new NV(Union.Annotations.CONTROLLER, true),
                 }));
         
         final BOp query = unionOp;
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
+        final IBindingSet[] expected = new IBindingSet[] {
                 EmptyBindingSet.INSTANCE,
                 EmptyBindingSet.INSTANCE,
         };
@@ -205,28 +205,28 @@ public class TestUnion extends TestCase2 {
         final int startId2 = 2;
         final int unionId = 3;
 
-        final BOp startOp1 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(StartOp.Annotations.BOP_ID, startId1),//
+        final BOp startOp1 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(StartOp.Annotations.BOP_ID, startId1),
                 new NV(StartOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
-        final BOp startOp2 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(StartOp.Annotations.BOP_ID, startId2),//
+        final BOp startOp2 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(StartOp.Annotations.BOP_ID, startId2),
                 new NV(StartOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final BOp unionOp = new Union(new BOp[]{}, NV
-                .asMap(new NV[] {//
-                        new NV(Union.Annotations.BOP_ID, unionId),//
+                .asMap(new NV[] {
+                        new NV(Union.Annotations.BOP_ID, unionId),
                         new NV(Union.Annotations.SUBQUERIES, new BOp[] {
-                                startOp1, startOp2 }), //
+                                startOp1, startOp2 }),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                StandaloneChunkHandler.TEST_INSTANCE),//
+                                StandaloneChunkHandler.TEST_INSTANCE),
 //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
-//                                BOpEvaluationContext.CONTROLLER),//
-//                        new NV(Union.Annotations.CONTROLLER, true),//
+//                                BOpEvaluationContext.CONTROLLER),
+//                        new NV(Union.Annotations.CONTROLLER, true),
                 }));
         
         final BOp query = unionOp;
@@ -239,7 +239,7 @@ public class TestUnion extends TestCase2 {
         bset.set(Var.var("y"), new Constant<String>("Mary"));
         
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
+        final IBindingSet[] expected = new IBindingSet[] {
                 bset, // one copy from the left side of the union.
                 bset, // one copy from the right side of the union.
         };
@@ -282,53 +282,53 @@ public class TestUnion extends TestCase2 {
             bindingSets2[0] = tmp;
         }
         
-        final BOp startOp1 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(StartOp.Annotations.BOP_ID, startId1),//
+        final BOp startOp1 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(StartOp.Annotations.BOP_ID, startId1),
                 new NV(StartOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 new NV(StartOp.Annotations.BINDING_SETS,bindingSets1)
                 }));
 
-        final BOp startOp2 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(StartOp.Annotations.BOP_ID, startId2),//
+        final BOp startOp2 = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(StartOp.Annotations.BOP_ID, startId2),
                 new NV(StartOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 new NV(StartOp.Annotations.BINDING_SETS,bindingSets2)
                 }));
 
         final BOp unionOp = new Union(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                        new NV(Union.Annotations.BOP_ID, unionId),//
+                .asMap(new NV[] {
+                        new NV(Union.Annotations.BOP_ID, unionId),
                         new NV(Union.Annotations.SUBQUERIES, new BOp[] {
-                                startOp1, startOp2 }) //
+                                startOp1, startOp2 })
 //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
-//                                BOpEvaluationContext.CONTROLLER),//
-//                        new NV(Union.Annotations.CONTROLLER, true),//
+//                                BOpEvaluationContext.CONTROLLER),
+//                        new NV(Union.Annotations.CONTROLLER, true),
                 }));
 
         final BOp sliceOp = new SliceOp(new BOp[]{unionOp},NV.asMap(
-                new NV(Union.Annotations.BOP_ID, sliceId),//
+                new NV(Union.Annotations.BOP_ID, sliceId),
                 new NV(Union.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
                 ));
         
         final BOp query = sliceOp;
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-        new ListBindingSet(//
-            new IVariable[] { x },//
-            new IConstant[] { new Constant<String>("Leon") }//
-            ), //
-        new ListBindingSet(//
-            new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+        new ListBindingSet(
+            new IVariable[] { x },
+            new IConstant[] { new Constant<String>("Leon") }
+            ),
+        new ListBindingSet(
+            new IVariable[] { x, y },
             new IConstant[] { new Constant<String>("Mary"), 
-                new Constant<String>("John") }//
-        ),//
+                new Constant<String>("John") }
+        ),
         };
 
         final IRunningQuery runningQuery = queryEngine.eval(query);

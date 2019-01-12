@@ -104,13 +104,13 @@ public class TestBasicIndexStuff extends
 //        
 ////        // obtaining index statistics
 ////        try {
-////
+//
 ////            dataService0.getStatistics(name);
 ////            
 ////        } catch (Exception ex) {
-////
+//
 ////            assertTrue( isInnerCause(ex, StaleLocatorException.class));
-////
+//
 ////            System.err.print("Ignoring expected exception: ");
 ////            getInnerCause(ex, StaleLocatorException.class).printStackTrace(System.err);
 ////            
@@ -258,10 +258,10 @@ public class TestBasicIndexStuff extends
         final int partitionId0 = 0;
         final int partitionId1 = 1;
 
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -290,21 +290,21 @@ public class TestBasicIndexStuff extends
 
         // verify correct value in the index on the correct data service.
         assertEquals(new byte[] { 1 }, ((ResultBuffer) dataService0.submit(
-                ITx.UNISOLATED,//
-                DataService.getIndexPartitionName(name, partitionId0),//
-                BatchLookupConstructor.INSTANCE.newInstance(//
-                        metadata, //
+                ITx.UNISOLATED,
+                DataService.getIndexPartitionName(name, partitionId0),
+                BatchLookupConstructor.INSTANCE.newInstance(
+                        metadata,
                         0,// fromIndex
                         1,// toIndex
                         new byte[][] { new byte[] { 1 } },// keys
                         null //vals
                 )).get()).getResult(0));
-        //
+
         assertEquals(new byte[] { 5 }, ((ResultBuffer) dataService1.submit(
-                ITx.UNISOLATED,//
-                DataService.getIndexPartitionName(name, partitionId1),//
-                BatchLookupConstructor.INSTANCE.newInstance(//
-                        metadata,//
+                ITx.UNISOLATED,
+                DataService.getIndexPartitionName(name, partitionId1),
+                BatchLookupConstructor.INSTANCE.newInstance(
+                        metadata,
                         0,// fromIndex
                         1,// toIndex
                         new byte[][] { new byte[] { 5 } },// keys
@@ -321,26 +321,26 @@ public class TestBasicIndexStuff extends
         assertEquals(2,ndx.rangeCount(null,null));
         
         // verify range iterator for the same cases as range count.
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {}, new byte[] { 1 }));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 1 } //
+        assertSameIterator(new byte[][] {
+                new byte[] { 1 }
                 }, ndx.rangeIterator(new byte[] {}, new byte[] { 2 }));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 1 }//
+        assertSameIterator(new byte[][] {
+                new byte[] { 1 }
                 }, ndx.rangeIterator(new byte[] {1}, new byte[] { 2 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(null, new byte[] { 1 }));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 1 },//
-                new byte[] { 5 } //
+        assertSameIterator(new byte[][] {
+                new byte[] { 1 },
+                new byte[] { 5 }
                 }, ndx.rangeIterator(new byte[] {1}, null));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 1 }//
+        assertSameIterator(new byte[][] {
+                new byte[] { 1 }
                 }, ndx.rangeIterator(null, new byte[] {2}));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 1 },//
-                new byte[] { 5 } //
+        assertSameIterator(new byte[][] {
+                new byte[] { 1 },
+                new byte[] { 5 }
                 }, ndx.rangeIterator(null, null));
         
         // remove the index entry.
@@ -375,21 +375,21 @@ public class TestBasicIndexStuff extends
          * entries so the deleted entry {1} MUST NOT be visited by any of these
          * iterators.
          */
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {}, new byte[] { 1 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {}, new byte[] { 2 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {1}, new byte[] { 2 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(null, new byte[] { 1 }));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 5 } //
+        assertSameIterator(new byte[][] {
+                new byte[] { 5 }
                 }, ndx.rangeIterator(new byte[] {1}, null));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(null, new byte[] {2}));
-        assertSameIterator(new byte[][] {//
-                new byte[] { 5 } //
+        assertSameIterator(new byte[][] {
+                new byte[] { 5 }
                 }, ndx.rangeIterator(null, null));
 
         // remove the other index entry.
@@ -419,19 +419,19 @@ public class TestBasicIndexStuff extends
          * Note: Unlike rangeCount, the range iterator filters out deleted
          * entries so all of these cases will be an empty iterator.
          */
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {}, new byte[] { 1 }));
-        assertSameIterator(new byte[][]{},//
+        assertSameIterator(new byte[][]{},
                 ndx.rangeIterator(new byte[] {}, new byte[] { 2 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {1}, new byte[] { 2 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(null, new byte[] { 1 }));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(new byte[] {1}, null));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(null, new byte[] {2}));
-        assertSameIterator(new byte[][] {},//
+        assertSameIterator(new byte[][] {},
                 ndx.rangeIterator(null, null));
 
     }

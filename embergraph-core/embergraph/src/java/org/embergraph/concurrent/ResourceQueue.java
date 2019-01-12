@@ -248,11 +248,11 @@ public class ResourceQueue<R, T> {
     //        public void lock() throws InterruptedException {
     //            lock(Thread.currentThread());
     //        }
-    //
+
     //        public void unlock() {
     //            unlock(Thread.currentThread());
     //        }
-    //
+
     //        public void clear() {
     //            clear(Thread.currentThread());
     //        }

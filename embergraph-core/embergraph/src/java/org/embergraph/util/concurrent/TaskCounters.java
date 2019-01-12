@@ -27,17 +27,17 @@ import org.embergraph.util.concurrent.IQueueCounters.ITaskCounters;
 public class TaskCounters {
 
     public String toString() {
-        return getClass().getSimpleName() + //
-                "{#submit=" + taskSubmitCount + //
-                ",#complete=" + taskCompleteCount + //
-                ",#fail=" + taskFailCount + //
-                ",#success=" + taskSuccessCount + //
-                ",#queueWaitingTime=" + queueWaitingNanoTime + //
-//                ",#lockWaitingTime=" + lockWaitingNanoTime + //
-                ",#serviceTime=" + serviceNanoTime + //
-//                ",#commitWaitingTime=" + commitWaitingNanoTime + //
-//                ",#commitServiceTime=" + commitServiceNanoTime + //
-                ",#queuingTime=" + queuingNanoTime + //
+        return getClass().getSimpleName() +
+                "{#submit=" + taskSubmitCount +
+                ",#complete=" + taskCompleteCount +
+                ",#fail=" + taskFailCount +
+                ",#success=" + taskSuccessCount +
+                ",#queueWaitingTime=" + queueWaitingNanoTime +
+//                ",#lockWaitingTime=" + lockWaitingNanoTime +
+                ",#serviceTime=" + serviceNanoTime +
+//                ",#commitWaitingTime=" + commitWaitingNanoTime +
+//                ",#commitServiceTime=" + commitServiceNanoTime +
+                ",#queuingTime=" + queuingNanoTime +
                 "}";
     }
     

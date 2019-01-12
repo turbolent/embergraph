@@ -71,9 +71,9 @@ public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
     // public void attach(final AST2BOpContext ctx,
     // final QueryHintScope scope, final ASTBase op,
     // final T value) {
-    //
+
     // op.setQueryHint(getName(), value.toString());
-    //
+
     // }
 
     /**

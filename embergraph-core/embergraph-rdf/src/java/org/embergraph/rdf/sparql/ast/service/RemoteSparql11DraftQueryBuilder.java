@@ -206,7 +206,7 @@ public class RemoteSparql11DraftQueryBuilder extends RemoteSparql11QueryBuilder 
 
             // Bindings.
             {
-                sb.append(" {\n"); //
+                sb.append(" {\n");
                 for (BindingSet bindingSet : bindingSets) {
                     sb.append("(");
                     for (String v : vars) {

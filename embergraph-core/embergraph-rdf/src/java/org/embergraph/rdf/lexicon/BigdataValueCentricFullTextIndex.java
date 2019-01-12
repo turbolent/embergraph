@@ -186,9 +186,9 @@ public class BigdataValueCentricFullTextIndex extends FullTextIndex implements
              * with record aware coder.
              */
             indexMetadata.setTupleSerializer(new RDFFullTextIndexTupleSerializer(
-                    keyBuilderFactory,//
-                    DefaultTupleSerializer.getDefaultLeafKeysCoder(),//
-//                    DefaultTupleSerializer.getDefaultValuesCoder(),//
+                    keyBuilderFactory,
+                    DefaultTupleSerializer.getDefaultLeafKeysCoder(),
+//                    DefaultTupleSerializer.getDefaultValuesCoder(),
                     SimpleRabaCoder.INSTANCE,
                     fieldsEnabled
             ));

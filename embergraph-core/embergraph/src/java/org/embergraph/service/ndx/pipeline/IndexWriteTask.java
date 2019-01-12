@@ -81,16 +81,16 @@ import org.embergraph.service.ndx.IScaleOutClientIndex;
  * @param <A>
  *            The type of the aggregated result.
  */
-abstract public class IndexWriteTask <//
-H extends IndexAsyncWriteStats<L, HS>, //
-O extends Object, //
-E extends KVO<O>, //
-S extends IndexPartitionWriteTask, //
-L extends PartitionLocator, //
-HS extends IndexPartitionWriteStats,//
-T extends IKeyArrayIndexProcedure,//
-R,//
-A//
+abstract public class IndexWriteTask <
+H extends IndexAsyncWriteStats<L, HS>,
+O extends Object,
+E extends KVO<O>,
+S extends IndexPartitionWriteTask,
+L extends PartitionLocator,
+HS extends IndexPartitionWriteStats,
+T extends IKeyArrayIndexProcedure,
+R,
+A
 > extends AbstractMasterTask<H, E, S, L> {
 
     // from the ctor.
@@ -273,11 +273,11 @@ A//
     @Override
     protected BlockingBuffer<E[]> newSubtaskBuffer() {
         
-        return new BlockingBuffer<E[]>(//
-                new LinkedBlockingDeque<E[]>(sinkQueueCapacity),//
+        return new BlockingBuffer<E[]>(
+                new LinkedBlockingDeque<E[]>(sinkQueueCapacity),
                 sinkChunkSize,// 
-                sinkChunkTimeoutNanos,//
-                TimeUnit.NANOSECONDS,//
+                sinkChunkTimeoutNanos,
+                TimeUnit.NANOSECONDS,
                 buffer.isOrdered()
         );
         
@@ -311,16 +311,16 @@ A//
      *            The type of the aggregated result.
      */
     public static class M<T extends IKeyArrayIndexProcedure, O, R, A> extends
-            IndexWriteTask<//
+            IndexWriteTask<
             IndexAsyncWriteStats<PartitionLocator, IndexPartitionWriteStats>, // H
             O, // O
             KVO<O>, // E
             IndexPartitionWriteTask, // S
             PartitionLocator, // L
             IndexPartitionWriteStats, // HS
-            T, //
-            R, //
-            A  //
+            T,
+            R,
+            A
             > {
 
         /**

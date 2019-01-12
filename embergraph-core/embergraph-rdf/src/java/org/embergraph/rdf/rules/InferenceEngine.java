@@ -577,9 +577,9 @@ public class InferenceEngine {
         }
 
         final MappedProgram program = baseClosure.getProgram(
-                database.getSPORelation().getNamespace(),//
+                database.getSPORelation().getNamespace(),
                 (focusStore == null ? null : focusStore.getSPORelation()
-                        .getNamespace()) //
+                        .getNamespace())
                 );
 
         if(INFO) {
@@ -598,8 +598,8 @@ public class InferenceEngine {
              * justifications from just the bindings and no longer need the rule
              * to generate the justifications (esp. for scale-out).
              */
-            final int solutionFlags = IJoinNexus.ELEMENT//
-                    | (justify ? IJoinNexus.RULE | IJoinNexus.BINDINGS : 0)//
+            final int solutionFlags = IJoinNexus.ELEMENT
+                    | (justify ? IJoinNexus.RULE | IJoinNexus.BINDINGS : 0)
 //                  | IJoinNexus.RULE  // iff debugging.
                   ;
           

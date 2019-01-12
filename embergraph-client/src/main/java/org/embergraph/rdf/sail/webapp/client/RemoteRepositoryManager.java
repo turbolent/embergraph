@@ -640,9 +640,9 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     // public RemoteRepository getRepositoryForURL(final String
     // sparqlEndpointURL,
     // final boolean useLBS) {
-    //
+
     // return new RemoteRepository(this, sparqlEndpointURL);
-    //
+
     // }
 
     /**
@@ -1734,9 +1734,9 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     // * SPARQL end point.
     // */
     // final protected ConnectOptions newConnectOptions() {
-    //
+
     // return mgr.newConnectOptions(sparqlEndpointURL);
-    //
+
     // }
 
     /**
@@ -2408,41 +2408,41 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     // */
     // protected long countResults(final JettyResponseListener response) throws
     // Exception {
-    //
+
     // try {
-    //
+
     // final String contentType = response.getContentType();
-    //
+
     // final MiniMime mimeType = new MiniMime(contentType);
-    //
+
     // final TupleQueryResultFormat format = TupleQueryResultFormat
     // .forMIMEType(mimeType.getMimeType());
-    //
+
     // if (format == null)
     // throw new IOException(
     // "Could not identify format for service response: serviceURI="
     // + sparqlEndpointURL + ", contentType=" + contentType
     // + " : response=" + response.getResponseBody());
-    //
+
     // final TupleQueryResultParserFactory factory =
     // TupleQueryResultParserRegistry
     // .getInstance().get(format);
-    //
+
     // if (factory == null)
     // throw new RuntimeException("No factory for Content-Type: " +
     // contentType);
-    //
+
     // final TupleQueryResultParser parser = factory.getParser();
-    //
+
     // final AtomicLong nsolutions = new AtomicLong();
-    //
+
     // parser.setTupleQueryResultHandler(new TupleQueryResultHandlerBase() {
     // // Indicates the end of a sequence of solutions.
     // @Override
     // public void endQueryResult() {
     // // connection close is handled in finally{}
     // }
-    //
+
     // // Handles a solution.
     // @Override
     // public void handleSolution(final BindingSet bset) {
@@ -2450,29 +2450,29 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     // log.debug(bset.toString());
     // nsolutions.incrementAndGet();
     // }
-    //
+
     // // Indicates the start of a sequence of Solutions.
     // @Override
     // public void startQueryResult(List<String> bindingNames) {
     // }
     // });
-    //
+
     // parser.parse(response.getInputStream());
-    //
+
     // if (log.isInfoEnabled())
     // log.info("nsolutions=" + nsolutions);
-    //
+
     // // done.
     // return nsolutions.longValue();
-    //
+
     // } finally {
-    //
+
     // if (response != null) {
     // response.abort();
     // }
-    //
+
     // }
-    //
+
     // }
 
 }

@@ -219,15 +219,15 @@ public class BOpContext<E> extends BOpContextBase {
      *       from ChunkedRunningQuery. It always has a fully materialized chunk
      *       on hand and ready to be processed.
      */
-    public BOpContext(//
-            final IRunningQuery runningQuery,//
-            final int partitionId,//
-            final BOpStats stats, //
-            final PipelineOp op,//
-            final boolean lastInvocation,//
-            final ICloseableIterator<E[]> source,//
-            final IBlockingBuffer<E[]> sink, //
-            final IBlockingBuffer<E[]> sink2//
+    public BOpContext(
+            final IRunningQuery runningQuery,
+            final int partitionId,
+            final BOpStats stats,
+            final PipelineOp op,
+            final boolean lastInvocation,
+            final ICloseableIterator<E[]> source,
+            final IBlockingBuffer<E[]> sink,
+            final IBlockingBuffer<E[]> sink2
             ) {
         
         this(runningQuery, runningQuery.getFederation(), runningQuery
@@ -277,17 +277,17 @@ public class BOpContext<E> extends BOpContextBase {
      *             if the <i>sink</i> is <code>null</code>
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    BOpContext(//
-                final IRunningQuery runningQuery,//
-                final IBigdataFederation<?> fed,//
-                final IIndexManager localIndexManager,//
-                final int partitionId,//
-                final BOpStats stats, //
-                final PipelineOp op,//
-                final boolean lastInvocation,//
-                final ICloseableIterator<E[]> source,//
-                final IBlockingBuffer<E[]> sink, //
-                final IBlockingBuffer<E[]> sink2//
+    BOpContext(
+                final IRunningQuery runningQuery,
+                final IBigdataFederation<?> fed,
+                final IIndexManager localIndexManager,
+                final int partitionId,
+                final BOpStats stats,
+                final PipelineOp op,
+                final boolean lastInvocation,
+                final ICloseableIterator<E[]> source,
+                final IBlockingBuffer<E[]> sink,
+                final IBlockingBuffer<E[]> sink2
                 ) {
             
         super(fed, localIndexManager);
@@ -326,17 +326,17 @@ public class BOpContext<E> extends BOpContextBase {
     /**
      * Test suite helper.
      */
-    public static <E> BOpContext<E> newMock(//
-            final IRunningQuery runningQuery,//
-            final IBigdataFederation<?> fed,//
-            final IIndexManager localIndexManager,//
-            final int partitionId,//
-            final BOpStats stats, //
-            final PipelineOp op,//
-            final boolean lastInvocation,//
-            final ICloseableIterator<E[]> source,//
-            final IBlockingBuffer<E[]> sink, //
-            final IBlockingBuffer<E[]> sink2//
+    public static <E> BOpContext<E> newMock(
+            final IRunningQuery runningQuery,
+            final IBigdataFederation<?> fed,
+            final IIndexManager localIndexManager,
+            final int partitionId,
+            final BOpStats stats,
+            final PipelineOp op,
+            final boolean lastInvocation,
+            final ICloseableIterator<E[]> source,
+            final IBlockingBuffer<E[]> sink,
+            final IBlockingBuffer<E[]> sink2
     ) {
 
         return new BOpContext<>(runningQuery, fed, localIndexManager,
@@ -744,14 +744,14 @@ public class BOpContext<E> extends BOpContextBase {
             final ISolutionSetManager sparqlCache = new SolutionSetManager(
                     localIndexManager, namespace, timestamp);
 
-            return NamedSolutionSetRefUtility.getSolutionSet(//
-                    sparqlCache,//
+            return NamedSolutionSetRefUtility.getSolutionSet(
+                    sparqlCache,
                     localIndexManager,// 
-                    namespace,//
-                    timestamp,//
-                    localName,//
-                    namedSetRef.getJoinVars(),//
-                    op.getChunkCapacity()//
+                    namespace,
+                    timestamp,
+                    localName,
+                    namedSetRef.getJoinVars(),
+                    op.getChunkCapacity()
                     );
 
         }
@@ -1031,11 +1031,11 @@ public class BOpContext<E> extends BOpContextBase {
      *         be returned if the other solution set is empty (optimization).
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    static public IBindingSet bind(//
-            final IBindingSet left,//
-            final IBindingSet right,//
-            final IConstraint[] constraints, //
-            final IVariable[] varsToKeep//
+    static public IBindingSet bind(
+            final IBindingSet left,
+            final IBindingSet right,
+            final IConstraint[] constraints,
+            final IVariable[] varsToKeep
             ) {
  
         if (constraints == null && varsToKeep == null) {
@@ -1215,10 +1215,10 @@ public class BOpContext<E> extends BOpContextBase {
 //    *            extracted from the visited {@link IElement}s.
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public ICloseableIterator<IBindingSet[]> solutions(
-            final IChunkedIterator<?> src, //
-            final IPredicate<?> pred,//
+            final IChunkedIterator<?> src,
+            final IPredicate<?> pred,
 //            final IVariable<?>[] varsx, 
-            final BaseJoinStats stats//
+            final BaseJoinStats stats
             ) {
 
         //return new CloseableIteratorWrapper(

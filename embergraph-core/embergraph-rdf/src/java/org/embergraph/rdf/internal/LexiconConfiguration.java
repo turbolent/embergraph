@@ -342,20 +342,20 @@ public class LexiconConfiguration<V extends BigdataValue>
     }
 
     @SuppressWarnings("rawtypes")
-    public LexiconConfiguration(//
+    public LexiconConfiguration(
             final int blobsThreshold,
-            final boolean inlineXSDDatatypeLiterals,//
-            final boolean inlineTextLiterals,//
-            final int maxInlineTextLength,//
-            final boolean inlineBNodes,//
-            final boolean inlineDateTimes,//
+            final boolean inlineXSDDatatypeLiterals,
+            final boolean inlineTextLiterals,
+            final int maxInlineTextLength,
+            final boolean inlineBNodes,
+            final boolean inlineDateTimes,
             final TimeZone inlineDateTimesTimeZone,
             final boolean rejectInvalidXSDValues,
-            final boolean enableRawRecordsSupport,//
-            final IExtensionFactory xFactory,//
+            final boolean enableRawRecordsSupport,
+            final IExtensionFactory xFactory,
             final Vocabulary vocab,
-            final BigdataValueFactory valueFactory,//
-            final IInlineURIFactory uriFactory,//
+            final BigdataValueFactory valueFactory,
+            final IInlineURIFactory uriFactory,
             final boolean geoSpatial,
             final GeoSpatialConfig geoSpatialConfig) {
 

@@ -131,11 +131,11 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //            sail.initialize();
 //            
 ////            if (!sail.database.getStatementIdentifiers()) {
-////
+//
 ////                log.warn("Statement identifiers are not enabled");
-////
+//
 ////                return;
-////
+//
 ////            }
 //
 //            /*
@@ -221,10 +221,10 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //      
 //        try {
 //
-//            final StatementPattern sp = new StatementPattern(//
-//                    new Var("X"),//
-//                    new Var("1", BDS.SEARCH),//
-//                    new Var("2", new LiteralImpl("Yellow"))//
+//            final StatementPattern sp = new StatementPattern(
+//                    new Var("X"),
+//                    new Var("1", BDS.SEARCH),
+//                    new Var("2", new LiteralImpl("Yellow"))
 //                    );
 //            final TupleExpr tupleExpr = 
 //                new QueryRoot(
@@ -324,13 +324,13 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
         
         final URI ENTITY = new URIImpl("http://embergraph.org/system#Entity");
         
-        final String query = "construct {"+//
-		"?s <" + RDF.TYPE + "> <" + ENTITY + "> ."+//
-		" } " + "where { "+//
-		" ?s <" + RDF.TYPE + "> <" + ENTITY + "> ."+//
-		" ?s ?p ?lit ."+//
-		" ?lit <" + BDS.SEARCH + "> \"systap\" ."+//
-		" ?lit <" + BDS.MIN_RELEVANCE + "> \"0.0\"^^<http://www.w3.org/2001/XMLSchema#double> ."+//
+        final String query = "construct {"+
+		"?s <" + RDF.TYPE + "> <" + ENTITY + "> ."+
+		" } " + "where { "+
+		" ?s <" + RDF.TYPE + "> <" + ENTITY + "> ."+
+		" ?s ?p ?lit ."+
+		" ?lit <" + BDS.SEARCH + "> \"systap\" ."+
+		" ?lit <" + BDS.MIN_RELEVANCE + "> \"0.0\"^^<http://www.w3.org/2001/XMLSchema#double> ."+
 		" }";
 
         // the ontology (nothing is indexed for full text search).

@@ -234,10 +234,10 @@ public class AbstractHTreeTestCase extends TestCase2 {
 		@Override
 		protected HardReferenceQueue<PO> newWriteRetentionQueue(boolean readOnly) {
 
-			return new HardReferenceQueue<PO>(//
-					new NoEvictionListener(),//
-					20000,//
-					10//
+			return new HardReferenceQueue<PO>(
+					new NoEvictionListener(),
+					20000,
+					10
 			);
 
 		}
@@ -357,12 +357,12 @@ public class AbstractHTreeTestCase extends TestCase2 {
 //         */
 //        {
 //            
-//            final long actualTupleCount = doEntryIteratorTest(//
+//            final long actualTupleCount = doEntryIteratorTest(
 //                    expected.rangeIterator(null/* fromKey */, null/* toKey */,
 //                            0/* capacity */, IRangeQuery.KEYS
 //                                    | IRangeQuery.VALS | IRangeQuery.REVERSE,
 //                            null/* filter */),
-//                    //
+//
 //                    actual.rangeIterator(null/* fromKey */, null/* toKey */,
 //                            0/* capacity */, IRangeQuery.KEYS
 //                                    | IRangeQuery.VALS | IRangeQuery.REVERSE,

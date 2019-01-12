@@ -447,7 +447,7 @@ public class AllocBlock {
 				// Handle free bits
 				// SC: 0110, SL: 0101 - freed one and allocated one
 				// L:  1101
-				//
+
 				// Rollback to 1110
 				// SC ^ SL: 0011
 				// 1101 ^ 0011: 1110

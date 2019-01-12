@@ -725,9 +725,9 @@ public class ResultSet implements ILeafData, Externalizable {
             // vals = new MutableValuesRaba(0, 0, new byte[ntuples][]);
             //            
             // if (ntuples > 0) {
-            //
+
             // tupleSerializer.getLeafValuesCoder().read(in, vals);
-            //
+
             // }
 
         } else {

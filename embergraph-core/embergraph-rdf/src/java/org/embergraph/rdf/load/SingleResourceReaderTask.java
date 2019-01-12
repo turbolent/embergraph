@@ -66,10 +66,10 @@ public class SingleResourceReaderTask implements Runnable {
     
     public String toString() {
         
-        return "LoadTask"//
+        return "LoadTask"
         +"{ resource="+resource
-        +", elapsed="+(System.currentTimeMillis()-createTime)//
-        +"}"//
+        +", elapsed="+(System.currentTimeMillis()-createTime)
+        +"}"
         ;
         
     }

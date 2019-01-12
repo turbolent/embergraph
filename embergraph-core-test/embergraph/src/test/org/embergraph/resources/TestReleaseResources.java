@@ -429,7 +429,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
             
             System.err.println("resources="+actualResourceUUIDs);
             
-            assertSameResources(new IRawStore[] { j1 }, //
+            assertSameResources(new IRawStore[] { j1 },
                     actualResourceUUIDs);
             
         }
@@ -549,7 +549,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
              * Verify that the resources required for [A] after overflow are
              * exactly [j1].
              */
-            assertSameResources(new IRawStore[] { j1 }, //
+            assertSameResources(new IRawStore[] { j1 },
                     resourceManager.getResourcesForTimestamp(j1.getRootBlockView()
                             .getFirstCommitTime()));
             

@@ -58,11 +58,11 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public abstract class AbstractSubtask<//
-HS extends AbstractSubtaskStats,//
-M extends AbstractMasterTask<? extends AbstractMasterStats<L, HS>, E, ? extends AbstractSubtask, L>,//
-E,//
-L>//
+public abstract class AbstractSubtask<
+HS extends AbstractSubtaskStats,
+M extends AbstractMasterTask<? extends AbstractMasterStats<L, HS>, E, ? extends AbstractSubtask, L>,
+E,
+L>
         implements Callable<HS> {
 
     protected static transient final Logger log = Logger
@@ -421,8 +421,8 @@ L>//
                 }
 
                 if (chunkSize > 0
-                        && (   (elapsedNanos > buffer.getChunkTimeout())//
-                            || (!buffer.isOpen() && !src.hasNext())//
+                        && (   (elapsedNanos > buffer.getChunkTimeout())
+                            || (!buffer.isOpen() && !src.hasNext())
                             )) {
                     /*
                      * We have SOME data and either (a) the chunk timeout has

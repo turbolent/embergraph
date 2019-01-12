@@ -46,42 +46,42 @@ public class VoidVocabularyDecl implements VocabularyDecl {
     public static final String NAMESPACE = "http://rdfs.org/ns/void#";
 
     // Classes.
-    public static final URI //
-            Dataset = new URIImpl(NAMESPACE + "Dataset"),//
-            DatasetDescription = new URIImpl(NAMESPACE + "DatasetDescription"),//
-            Linkset = new URIImpl(NAMESPACE + "Linkset"),//
-            TechnicalFeature = new URIImpl(NAMESPACE + "TechnicalFeature")//
+    public static final URI
+            Dataset = new URIImpl(NAMESPACE + "Dataset"),
+            DatasetDescription = new URIImpl(NAMESPACE + "DatasetDescription"),
+            Linkset = new URIImpl(NAMESPACE + "Linkset"),
+            TechnicalFeature = new URIImpl(NAMESPACE + "TechnicalFeature")
             ;
 
     // Properties.
-    public static final URI //
-            class_ = new URIImpl(NAMESPACE+"class"),//
-            classPartition = new URIImpl(NAMESPACE+"classPartition"),//
-            classes = new URIImpl(NAMESPACE+"classes"),//
-            dataDump = new URIImpl(NAMESPACE+"dataDump"),//
-            distinctObjects = new URIImpl(NAMESPACE+"distinctObjects"),//
-            distinctSubjects = new URIImpl(NAMESPACE+"distinctSubjects"),//
-            documents = new URIImpl(NAMESPACE+"documents"),//
-            entities = new URIImpl(NAMESPACE+"entities"),//
-            exampleResource = new URIImpl(NAMESPACE+"exampleResource"),//
-            feature = new URIImpl(NAMESPACE+"feature"),//
-            inDataset = new URIImpl(NAMESPACE+"inDataset"),//
-            linkPredicate = new URIImpl(NAMESPACE+"linkPredicate"),//
-            objectsTarget = new URIImpl(NAMESPACE+"objectsTarget"),//
-            openSearchDescription = new URIImpl(NAMESPACE+"openSearchDescription"),//
-            properties = new URIImpl(NAMESPACE+"properties"),//
-            property = new URIImpl(NAMESPACE+"property"),//
-            propertyPartition = new URIImpl(NAMESPACE+"propertyPartition"),//
-            rootResource = new URIImpl(NAMESPACE+"rootResource"),//
-            sparqlEndpoint = new URIImpl(NAMESPACE+"sparqlEndpoint"),//
-            subjectsTarget = new URIImpl(NAMESPACE+"subjectsTarget"),//
-            subset = new URIImpl(NAMESPACE+"subset"),//
-            target = new URIImpl(NAMESPACE+"target"),//
-            triples = new URIImpl(NAMESPACE+"triples"),//
-            uriLookupEndpoint = new URIImpl(NAMESPACE+"uriLookupEndpoint"),//
-            uriRegexPattern = new URIImpl(NAMESPACE+"uriRegexPattern"),//
-            uriSpace = new URIImpl(NAMESPACE+"uriSpace"),//
-            vocabulary = new URIImpl(NAMESPACE+"vocabulary")//
+    public static final URI
+            class_ = new URIImpl(NAMESPACE+"class"),
+            classPartition = new URIImpl(NAMESPACE+"classPartition"),
+            classes = new URIImpl(NAMESPACE+"classes"),
+            dataDump = new URIImpl(NAMESPACE+"dataDump"),
+            distinctObjects = new URIImpl(NAMESPACE+"distinctObjects"),
+            distinctSubjects = new URIImpl(NAMESPACE+"distinctSubjects"),
+            documents = new URIImpl(NAMESPACE+"documents"),
+            entities = new URIImpl(NAMESPACE+"entities"),
+            exampleResource = new URIImpl(NAMESPACE+"exampleResource"),
+            feature = new URIImpl(NAMESPACE+"feature"),
+            inDataset = new URIImpl(NAMESPACE+"inDataset"),
+            linkPredicate = new URIImpl(NAMESPACE+"linkPredicate"),
+            objectsTarget = new URIImpl(NAMESPACE+"objectsTarget"),
+            openSearchDescription = new URIImpl(NAMESPACE+"openSearchDescription"),
+            properties = new URIImpl(NAMESPACE+"properties"),
+            property = new URIImpl(NAMESPACE+"property"),
+            propertyPartition = new URIImpl(NAMESPACE+"propertyPartition"),
+            rootResource = new URIImpl(NAMESPACE+"rootResource"),
+            sparqlEndpoint = new URIImpl(NAMESPACE+"sparqlEndpoint"),
+            subjectsTarget = new URIImpl(NAMESPACE+"subjectsTarget"),
+            subset = new URIImpl(NAMESPACE+"subset"),
+            target = new URIImpl(NAMESPACE+"target"),
+            triples = new URIImpl(NAMESPACE+"triples"),
+            uriLookupEndpoint = new URIImpl(NAMESPACE+"uriLookupEndpoint"),
+            uriRegexPattern = new URIImpl(NAMESPACE+"uriRegexPattern"),
+            uriSpace = new URIImpl(NAMESPACE+"uriSpace"),
+            vocabulary = new URIImpl(NAMESPACE+"vocabulary")
     ;
 
     static private final URI[] uris = new URI[]{
@@ -97,7 +97,7 @@ public class VoidVocabularyDecl implements VocabularyDecl {
             inDataset, linkPredicate, objectsTarget, openSearchDescription,
             properties, property, propertyPartition, rootResource,
             sparqlEndpoint, subjectsTarget, subset, target, triples,
-            uriLookupEndpoint, uriRegexPattern, uriSpace, vocabulary//
+            uriLookupEndpoint, uriRegexPattern, uriSpace, vocabulary
     };
 
     public VoidVocabularyDecl() {

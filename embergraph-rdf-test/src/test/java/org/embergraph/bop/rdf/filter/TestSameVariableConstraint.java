@@ -183,7 +183,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
          
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), Var.var("a"), c, d));
 
             assertNotNull(constraint);
@@ -195,7 +195,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), b, Var.var("a"), d));
 
             assertNotNull(constraint);
@@ -207,7 +207,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), b, c, Var.var("a")));
 
             assertNotNull(constraint);
@@ -219,7 +219,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             a, Var.var("b"), Var.var("b"), d));
 
             assertNotNull(constraint);
@@ -231,7 +231,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             a, Var.var("b"), c, Var.var("b")));
 
             assertNotNull(constraint);
@@ -243,7 +243,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             a, b, Var.var("c"), Var.var("c")));
 
             assertNotNull(constraint);
@@ -255,7 +255,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             a, Var.var("c"), Var.var("c"), Var.var("c")));
 
             assertNotNull(constraint);
@@ -267,7 +267,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("c"), b, Var.var("c"), Var.var("c")));
 
             assertNotNull(constraint);
@@ -279,7 +279,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("c"), Var.var("c"), c, Var.var("c")));
 
             assertNotNull(constraint);
@@ -291,7 +291,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), Var.var("a"), c, Var.var("d")));
 
             assertNotNull(constraint);
@@ -303,7 +303,7 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), Var.var("a"), Var.var("a"), Var.var("d")));
 
             assertNotNull(constraint);
@@ -326,14 +326,14 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), Var.var("a"), Var.var("b"), Var.var("b")));
 
             assertNotNull(constraint);
 
-            assertEquals(new int[] { //
-                    2, 0, 1,//
-                    2, 2, 3,//
+            assertEquals(new int[] {
+                    2, 0, 1,
+                    2, 2, 3,
                     }, constraint.getIndices());
             
         }
@@ -341,14 +341,14 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), Var.var("b"), Var.var("a"), Var.var("b")));
 
             assertNotNull(constraint);
 
-            assertEquals(new int[] { //
-                    2, 0, 2,//
-                    2, 1, 3,//
+            assertEquals(new int[] {
+                    2, 0, 2,
+                    2, 1, 3,
                     }, constraint.getIndices());
             
         }
@@ -356,14 +356,14 @@ public class TestSameVariableConstraint extends TestCase2 {
         {
 
             final SameVariableConstraint<ISPO> constraint = SameVariableConstraint
-                    .newInstance(new SPOPredicate(relation,//
+                    .newInstance(new SPOPredicate(relation,
                             Var.var("a"), Var.var("b"), Var.var("b"), Var.var("a")));
 
             assertNotNull(constraint);
 
-            assertEquals(new int[] { //
-                    2, 0, 3,//
-                    2, 1, 2,//
+            assertEquals(new int[] {
+                    2, 0, 3,
+                    2, 1, 2,
                     }, constraint.getIndices());
             
         }

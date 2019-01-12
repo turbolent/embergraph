@@ -185,21 +185,21 @@ public class TestQueryEngine_GroupByOp extends TestCase2 {
 //		 * Note: The StartOp breaks up the initial set of chunks into multiple
 //		 * IChunkMessages, which results in multiple invocations of the SortOp.
 //		 */
-//    	final PipelineOp startOp = new StartOp(new BOp[]{}, NV.asMap(new NV[]{//
-//                new NV(SliceOp.Annotations.BOP_ID, startId),//
+//    	final PipelineOp startOp = new StartOp(new BOp[]{}, NV.asMap(new NV[]{
+//                new NV(SliceOp.Annotations.BOP_ID, startId),
 //                new NV(MemorySortOp.Annotations.EVALUATION_CONTEXT,
-//                        BOpEvaluationContext.CONTROLLER),//
+//                        BOpEvaluationContext.CONTROLLER),
 //    	}));
 //
-//    	final PipelineOp query = new MemorySortOp(new BOp[] {startOp}, NV.asMap(new NV[] {//
-//                new NV(SliceOp.Annotations.BOP_ID, sortId),//
+//    	final PipelineOp query = new MemorySortOp(new BOp[] {startOp}, NV.asMap(new NV[] {
+//                new NV(SliceOp.Annotations.BOP_ID, sortId),
 //				new NV(MemorySortOp.Annotations.COMPARATOR,
 //						new IntegerComparatorOp(
 //								new ISortOrder[] { new SortOrder(a,
-//										true) })),//
+//										true) })),
 //                new NV(MemorySortOp.Annotations.EVALUATION_CONTEXT,
-//                        BOpEvaluationContext.CONTROLLER),//
-//                new NV(MemorySortOp.Annotations.PIPELINED, false),//
+//                        BOpEvaluationContext.CONTROLLER),
+//                new NV(MemorySortOp.Annotations.PIPELINED, false),
 //        }));
 //
 //        final UUID queryId = UUID.randomUUID();

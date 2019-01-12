@@ -118,28 +118,28 @@ public class TestMemorySortOp extends TestCase2 {
         final IConstant<IV> d = new Constant<IV>(makeIV(f.createLiteral("d")));
         final IConstant<IV> e = new Constant<IV>(makeIV(f.createLiteral("e")));
 
-        final ISortOrder<?> sors[] = new ISortOrder[] { //
-                new SortOrder(x, true/*asc*/),//
-                new SortOrder(y, false/*asc*/)//
+        final ISortOrder<?> sors[] = new ISortOrder[] {
+                new SortOrder(x, true/*asc*/),
+                new SortOrder(y, false/*asc*/)
                 };
 
     	final int sortOpId = 1;
     	
-		final SortOp query = new MemorySortOp(new BOp[] {}, NV.asMap(new NV[] {//
-				new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),//
-                new NV(MemorySortOp.Annotations.SORT_ORDER,sors),//
-                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),//
+		final SortOp query = new MemorySortOp(new BOp[] {}, NV.asMap(new NV[] {
+				new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
+                new NV(MemorySortOp.Annotations.SORT_ORDER,sors),
+                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
 				new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-						BOpEvaluationContext.CONTROLLER),//
-                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
-//                new NV(MemorySortOp.Annotations.SHARED_STATE, true),//
-                new NV(MemorySortOp.Annotations.LAST_PASS, true),//
+						BOpEvaluationContext.CONTROLLER),
+                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
+//                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                new NV(MemorySortOp.Annotations.LAST_PASS, true),
 		}));
 
-        //
+
         // the test data
-        //
+
     	final IBindingSet data [] = new IBindingSet []
         {
               new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { a, a } )
@@ -154,9 +154,9 @@ public class TestMemorySortOp extends TestCase2 {
             , new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { b, b } )
         } ;
 
-        //
+
         // the expected solutions
-        //
+
     	final IBindingSet expected [] = new IBindingSet []
         {
               new ListBindingSet ( new IVariable<?> [] { y },    new IConstant [] { a }    )
@@ -231,28 +231,28 @@ public class TestMemorySortOp extends TestCase2 {
         final IConstant<IV> d = new Constant<IV>(new XSDNumericIV(4));
         final IConstant<IV> e = new Constant<IV>(new XSDNumericIV(5));
 
-        final ISortOrder<?> sors[] = new ISortOrder[] { //
-                new SortOrder(x, true/*asc*/),//
-                new SortOrder(y, false/*asc*/)//
+        final ISortOrder<?> sors[] = new ISortOrder[] {
+                new SortOrder(x, true/*asc*/),
+                new SortOrder(y, false/*asc*/)
                 };
 
         final int sortOpId = 1;
         
         final SortOp query = new MemorySortOp(new BOp[] {}, NV.asMap(new NV[] {
                 new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
-                new NV(MemorySortOp.Annotations.SORT_ORDER,sors),//
-                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),//
+                new NV(MemorySortOp.Annotations.SORT_ORDER,sors),
+                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
-//                new NV(MemorySortOp.Annotations.SHARED_STATE, true),//
-                new NV(MemorySortOp.Annotations.LAST_PASS, true),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
+//                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                new NV(MemorySortOp.Annotations.LAST_PASS, true),
         }));
 
-        //
+
         // the test data
-        //
+
         final IBindingSet data [] = new IBindingSet []
         {
               new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { a, a } )
@@ -267,9 +267,9 @@ public class TestMemorySortOp extends TestCase2 {
             , new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { b, b } )
         } ;
 
-        //
+
         // the expected solutions
-        //
+
         final IBindingSet expected [] = new IBindingSet []
         {
               new ListBindingSet ( new IVariable<?> [] { y },    new IConstant [] { a }    )
@@ -363,29 +363,29 @@ public class TestMemorySortOp extends TestCase2 {
         final IConstant<IV> _4 = new Constant<IV>(new XSDNumericIV(4));
         final IConstant<IV> _5 = new Constant<IV>(new XSDNumericIV(5));
 
-        final ISortOrder<?> sors[] = new ISortOrder[] { //
-                new SortOrder(new Bind(z,new MathBOp(x, y, MathBOp.MathOp.PLUS,new GlobalAnnotations(lexiconNamespace, ITx.READ_COMMITTED))), false/* asc */),//
-                new SortOrder(y, false/* asc */), //
-                new SortOrder(x, true/* asc */), //
+        final ISortOrder<?> sors[] = new ISortOrder[] {
+                new SortOrder(new Bind(z,new MathBOp(x, y, MathBOp.MathOp.PLUS,new GlobalAnnotations(lexiconNamespace, ITx.READ_COMMITTED))), false/* asc */),
+                new SortOrder(y, false/* asc */),
+                new SortOrder(x, true/* asc */),
         };
 
         final int sortOpId = 1;
         
         final SortOp query = new MemorySortOp(new BOp[] {}, NV.asMap(new NV[] {
                 new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
-                new NV(MemorySortOp.Annotations.SORT_ORDER,sors),//
-                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),//
+                new NV(MemorySortOp.Annotations.SORT_ORDER,sors),
+                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
-//                new NV(MemorySortOp.Annotations.SHARED_STATE, true),//
-                new NV(MemorySortOp.Annotations.LAST_PASS, true),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
+//                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                new NV(MemorySortOp.Annotations.LAST_PASS, true),
         }));
 
-        //
+
         // the test data
-        //
+
         final IBindingSet data [] = new IBindingSet []
         {
               new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { _1, _1 } ) // x+y=2
@@ -400,9 +400,9 @@ public class TestMemorySortOp extends TestCase2 {
             , new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { _2, _2 } ) // x+y=4
         } ;
 
-        //
+
         // the expected solutions
-        //
+
         final IBindingSet expected [] = new IBindingSet []
         {
              new ListBindingSet ( new IVariable<?> [] { x, y }, new IConstant [] { _1, _5 } )

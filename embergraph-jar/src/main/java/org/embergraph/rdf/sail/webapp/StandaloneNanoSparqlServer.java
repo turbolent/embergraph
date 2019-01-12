@@ -54,9 +54,9 @@ public class StandaloneNanoSparqlServer extends NanoSparqlServer {
          * use a different jetty.xml file, just override this property on the
          * command line.
          */
-        String jettyXml = System.getProperty(//
-                SystemProperties.JETTY_XML,//
-                "jetty.xml"//
+        String jettyXml = System.getProperty(
+                SystemProperties.JETTY_XML,
+                "jetty.xml"
 //                SystemProperties.DEFAULT_JETTY_XML
                 );
         

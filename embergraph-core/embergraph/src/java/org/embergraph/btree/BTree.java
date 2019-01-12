@@ -323,9 +323,9 @@ public class BTree extends AbstractBTree implements //ICommitter,
             final IndexMetadata metadata, final boolean readOnly) {
 
         super(  store, 
-                NodeFactory.INSTANCE, //
+                NodeFactory.INSTANCE,
                 readOnly, // read-only
-                metadata,//
+                metadata,
                 metadata.getBtreeRecordCompressorFactory()
                 );
 
@@ -825,10 +825,10 @@ public class BTree extends AbstractBTree implements //ICommitter,
 //         * avoid overhead with materializing nodes from the backing store.
 //         */
 ////        {
-////
+//
 ////            final Iterator itr = getRoot()
 ////                    .postOrderNodeIterator(true/* dirtyNodesOnly */);
-////
+//
 ////        }
 //        
 //        return tmp;
@@ -1080,12 +1080,12 @@ public class BTree extends AbstractBTree implements //ICommitter,
             
             @SuppressWarnings("rawtypes")
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    BTree.class //
+                    BTree.class
                     });
 
             final Checkpoint checkpoint = (Checkpoint) ctor
-                    .newInstance(new Object[] { //
-                            this //
+                    .newInstance(new Object[] {
+                            this
                     });
             
             return checkpoint;
@@ -1245,10 +1245,10 @@ public class BTree extends AbstractBTree implements //ICommitter,
         
         return false;
         
-//        if (metadata.getMetadataAddr() != 0L && //
-//                (root == null || //
-//                        ( !root.dirty //
-//                        && checkpoint.getRootAddr() == root.identity //
+//        if (metadata.getMetadataAddr() != 0L &&
+//                (root == null ||
+//                        ( !root.dirty
+//                        && checkpoint.getRootAddr() == root.identity
 //                        && checkpoint.getCounter() == counter.get())
 //                )
 //        ) {
@@ -1415,8 +1415,8 @@ public class BTree extends AbstractBTree implements //ICommitter,
             replaceRootWithEmptyLeaf();
 
         } else if (getIndexMetadata().getDeleteMarkers()
-                || getStore() instanceof IRWStrategy//
-                || metadata.getRawRecords()//
+                || getStore() instanceof IRWStrategy
+                || metadata.getRawRecords()
                 ) {
 
 			/*
@@ -1597,10 +1597,10 @@ public class BTree extends AbstractBTree implements //ICommitter,
             final LocalPartitionMetadata newPmd = new LocalPartitionMetadata(
                     oldPmd.getPartitionId(), // partitionId
                     -1, // sourcePartitionId
-                    oldPmd.getLeftSeparatorKey(), //
-                    oldPmd.getRightSeparatorKey(),//
-                    newResources,//
-                    oldPmd.getIndexPartitionCause()//
+                    oldPmd.getLeftSeparatorKey(),
+                    oldPmd.getRightSeparatorKey(),
+                    newResources,
+                    oldPmd.getIndexPartitionCause()
 //                    "" // history is deprecated.
             );
 
@@ -1742,16 +1742,16 @@ public class BTree extends AbstractBTree implements //ICommitter,
              * BTree.
              */
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    IRawStore.class,//
-                    Checkpoint.class,//
-                    IndexMetadata.class,//
-                    Boolean.TYPE//
+                    IRawStore.class,
+                    Checkpoint.class,
+                    IndexMetadata.class,
+                    Boolean.TYPE
                     });
 
-            final BTree btree = (BTree) ctor.newInstance(new Object[] { //
+            final BTree btree = (BTree) ctor.newInstance(new Object[] {
                     null , // store
-                    firstCheckpoint, //
-                    metadata, //
+                    firstCheckpoint,
+                    metadata,
                     false// readOnly
                     });
 
@@ -1881,16 +1881,16 @@ public class BTree extends AbstractBTree implements //ICommitter,
              * BTree.
              */
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    IRawStore.class,//
-                    Checkpoint.class,//
-                    IndexMetadata.class, //
+                    IRawStore.class,
+                    Checkpoint.class,
+                    IndexMetadata.class,
                     Boolean.TYPE
                     });
 
-            final BTree btree = (BTree) ctor.newInstance(new Object[] { //
-                    store,//
-                    checkpoint, //
-                    metadata, //
+            final BTree btree = (BTree) ctor.newInstance(new Object[] {
+                    store,
+                    checkpoint,
+                    metadata,
                     readOnly
                     });
 

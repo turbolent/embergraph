@@ -196,7 +196,7 @@ public class BytesUtil {
 		// for (int i = 0; i < alen; i++) {
 		//        
 		// if( a[i] != b[i] ) return false;
-		//
+
 		// }
 
 		return true;
@@ -343,9 +343,9 @@ public class BytesUtil {
 	 * @return a negative integer, zero, or a positive integer as the first
 	 *         argument is less than, equal to, or greater than the second.
 	 */
-	final public static int compareBytesWithLenAndOffset(//
-			int aoff, int alen, final byte[] a,//
-			int boff, int blen, final byte[] b//
+	final public static int compareBytesWithLenAndOffset(
+			int aoff, int alen, final byte[] a,
+			int boff, int blen, final byte[] b
 	) {
 
 		if (linked && alen > minlen && blen > minlen) {

@@ -293,9 +293,9 @@ class ViewMetadata extends BTreeMetadata implements Params {
         /*
          * true iff this is a good candidate for a tail split.
          */
-        this.tailSplit = //
-        this.percentOfSplit > resourceManager.percentOfSplitThreshold && //
-        super.percentTailSplits > resourceManager.tailSplitThreshold//
+        this.tailSplit =
+        this.percentOfSplit > resourceManager.percentOfSplitThreshold &&
+        super.percentTailSplits > resourceManager.tailSplitThreshold
         ;
 
         initView = true;

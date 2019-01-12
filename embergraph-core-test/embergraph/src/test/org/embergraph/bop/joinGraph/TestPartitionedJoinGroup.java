@@ -126,52 +126,52 @@ public class TestPartitionedJoinGroup extends TestCase2 {
             // ?x a ub:GraduateStudent .
             p0 = new Predicate(new BOp[] { x,
                     new Constant<String>(rdfType),
-                    new Constant<String>(graduateStudent) },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(graduateStudent) },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?y a ub:University .
             p1 = new Predicate(new BOp[] { y,
                     new Constant<String>(rdfType),
-                    new Constant<String>(university) },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(university) },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?z a ub:Department .
             p2 = new Predicate(new BOp[] { z,
                     new Constant<String>(rdfType),
-                    new Constant<String>(department) },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(department) },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?x ub:memberOf ?z .
             p3 = new Predicate(new BOp[] { x,
-                    new Constant<String>(memberOf), z },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(memberOf), z },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?z ub:subOrganizationOf ?y .
             p4 = new Predicate(new BOp[] { z,
-                    new Constant<String>(subOrganizationOf), y },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(subOrganizationOf), y },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?x ub:undergraduateDegreeFrom ?y
             p5 = new Predicate(new BOp[] { x,
-                    new Constant<String>(undergraduateDegreeFrom), y },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(undergraduateDegreeFrom), y },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // the vertices of the join graph (the predicates).
@@ -244,8 +244,8 @@ public class TestPartitionedJoinGroup extends TestCase2 {
 
                 // c1 is applied when x is bound. x is bound by p0.
 				assertEquals(new IConstraint[] { c1 }, fixture
-						.getJoinGraphConstraints(//
-								new int[] { p1.getId(), p0.getId() },//
+						.getJoinGraphConstraints(
+								new int[] { p1.getId(), p0.getId() },
 								false// pathIsComplete
 						));
 
@@ -254,8 +254,8 @@ public class TestPartitionedJoinGroup extends TestCase2 {
                  * last predicate in this join path, so c1 is attached to p0.
                  */
                 assertEquals(new IConstraint[] { c1 }, fixture
-                        .getJoinGraphConstraints(//
-                        		new int[] { p0.getId()},//
+                        .getJoinGraphConstraints(
+                        		new int[] { p0.getId()},
                         		false//pathIsComplete
                         		));
 
@@ -265,8 +265,8 @@ public class TestPartitionedJoinGroup extends TestCase2 {
 				 * this join path so c2 is attached to p1.
 				 */
 				assertEquals(new IConstraint[] { c2 }, fixture
-						.getJoinGraphConstraints(//
-								new int[] { p0.getId(), p1.getId() },//
+						.getJoinGraphConstraints(
+								new int[] { p0.getId(), p1.getId() },
 								false// pathIsComplete
 						));
                 
@@ -312,55 +312,55 @@ public class TestPartitionedJoinGroup extends TestCase2 {
             // ?x a ub:GraduateStudent .
             p0 = new Predicate(new BOp[] { x,
                     new Constant<String>(rdfType),
-                    new Constant<String>(graduateStudent) },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(graduateStudent) },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?y a ub:University .
             p1 = new Predicate(new BOp[] { y,
                     new Constant<String>(rdfType),
-                    new Constant<String>(university) },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(university) },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?z a ub:Department .  (optional)
             p2 = new Predicate(new BOp[] { z,
                     new Constant<String>(rdfType),
-                    new Constant<String>(department) },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.OPTIONAL, true),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(department) },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.OPTIONAL, true),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?x ub:memberOf ?z . (optional).
             p3 = new Predicate(new BOp[] { x,
-                    new Constant<String>(memberOf), z },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.OPTIONAL, true),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(memberOf), z },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.OPTIONAL, true),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?z ub:subOrganizationOf ?y . (optional).
             p4 = new Predicate(new BOp[] { z,
-                    new Constant<String>(subOrganizationOf), y },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.OPTIONAL, true),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(subOrganizationOf), y },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.OPTIONAL, true),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // ?x ub:undergraduateDegreeFrom ?y
             p5 = new Predicate(new BOp[] { x,
-                    new Constant<String>(undergraduateDegreeFrom), y },//
-                    new NV(BOp.Annotations.BOP_ID, nextId++),//
-                    new NV(Annotations.TIMESTAMP, timestamp),//
-                    new NV(IPredicate.Annotations.RELATION_NAME, relation)//
+                    new Constant<String>(undergraduateDegreeFrom), y },
+                    new NV(BOp.Annotations.BOP_ID, nextId++),
+                    new NV(Annotations.TIMESTAMP, timestamp),
+                    new NV(IPredicate.Annotations.RELATION_NAME, relation)
             );
 
             // the vertices of the join graph (the predicates).

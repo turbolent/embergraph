@@ -66,9 +66,9 @@ public class FixedLengthPrefixSplits implements
              * Compare the first N bytes of those keys (unsigned byte[]
              * comparison).
              */
-            final int cmp = BytesUtil.compareBytesWithLenAndOffset(//
-                    0/* aoff */, Bytes.SIZEOF_LONG/* alen */, a,//
-                    0/* boff */, Bytes.SIZEOF_LONG/* blen */, b//
+            final int cmp = BytesUtil.compareBytesWithLenAndOffset(
+                    0/* aoff */, Bytes.SIZEOF_LONG/* alen */, a,
+                    0/* boff */, Bytes.SIZEOF_LONG/* blen */, b
                     );
 
             // the keys must be correctly ordered.

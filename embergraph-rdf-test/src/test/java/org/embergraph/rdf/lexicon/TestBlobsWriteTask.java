@@ -65,9 +65,9 @@ public class TestBlobsWriteTask extends TestCase2 {
     public void test_add_abc() {
 
         // The values that we will be testing with.
-        final Value[] valuesIn = new Value[] {//
+        final Value[] valuesIn = new Value[] {
           
-                new LiteralImpl("abc") //
+                new LiteralImpl("abc")
                 
         };
 
@@ -78,9 +78,9 @@ public class TestBlobsWriteTask extends TestCase2 {
     public void test_add_emptyLiteral() {
 
         // The values that we will be testing with.
-        final Value[] valuesIn = new Value[] {//
+        final Value[] valuesIn = new Value[] {
           
-                new LiteralImpl("") //
+                new LiteralImpl("")
                 
         };
 
@@ -91,20 +91,20 @@ public class TestBlobsWriteTask extends TestCase2 {
     public void test_add_various_toldBNodes() {
 
         // The values that we will be testing with.
-        final Value[] valuesIn = new Value[] {//
+        final Value[] valuesIn = new Value[] {
           
-                new LiteralImpl("abc"), //
-                RDF.TYPE,//
-                RDF.PROPERTY,//
-                new LiteralImpl("test"),//
-                new LiteralImpl("test", "en"),//
+                new LiteralImpl("abc"),
+                RDF.TYPE,
+                RDF.PROPERTY,
+                new LiteralImpl("test"),
+                new LiteralImpl("test", "en"),
                 new LiteralImpl("10", new URIImpl("http://www.w3.org/2001/XMLSchema#int")),
                 new LiteralImpl("12", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
                 new LiteralImpl("12.", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
                 new LiteralImpl("12.0", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
                 new LiteralImpl("12.00", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-                new BNodeImpl("a"),//
-                new BNodeImpl("12"),//
+                new BNodeImpl("a"),
+                new BNodeImpl("12"),
         };
 
         doAddTermsTest(valuesIn, true/* toldBNodes */);
@@ -121,20 +121,20 @@ public class TestBlobsWriteTask extends TestCase2 {
 
         /* The values that we will be testing with.
          */
-        final Value[] valuesIn = new Value[] {//
+        final Value[] valuesIn = new Value[] {
           
-                new LiteralImpl("abc"), //
-                RDF.TYPE,//
-                RDF.PROPERTY,//
-                new LiteralImpl("test"),//
-                new LiteralImpl("test", "en"),//
+                new LiteralImpl("abc"),
+                RDF.TYPE,
+                RDF.PROPERTY,
+                new LiteralImpl("test"),
+                new LiteralImpl("test", "en"),
                 new LiteralImpl("10", new URIImpl("http://www.w3.org/2001/XMLSchema#int")),
                 new LiteralImpl("12", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
                 new LiteralImpl("12.", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
                 new LiteralImpl("12.0", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
                 new LiteralImpl("12.00", new URIImpl("http://www.w3.org/2001/XMLSchema#float")),
-//                new BNodeImpl("a"),//
-//                new BNodeImpl("12"),//
+//                new BNodeImpl("a"),
+//                new BNodeImpl("12"),
         };
 
         doAddTermsTest(valuesIn, false/* toldBNodes */);

@@ -54,12 +54,12 @@ public class TestEncodeDecodeXSDIntegerIVs extends
     /** Unit test for {@link XSDIntegerIV}. */
     public void test_encodeDecode_XSDInteger() {
 
-        final IV<?, ?>[] e = {//
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)),//
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)),//
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)),//
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)),//
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)),//
+        final IV<?, ?>[] e = {
+                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)),
+                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)),
+                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)),
+                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)),
+                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)),
         };
 
         doEncodeDecodeTest(e);
@@ -81,10 +81,10 @@ public class TestEncodeDecodeXSDIntegerIVs extends
         final BigInteger m2 = new BigInteger("-151");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDIntegerIV<BigdataLiteral>(p1),//
-                new XSDIntegerIV<BigdataLiteral>(p2),//
-                new XSDIntegerIV<BigdataLiteral>(m1),//
-                new XSDIntegerIV<BigdataLiteral>(m2),//
+                new XSDIntegerIV<BigdataLiteral>(p1),
+                new XSDIntegerIV<BigdataLiteral>(p2),
+                new XSDIntegerIV<BigdataLiteral>(m1),
+                new XSDIntegerIV<BigdataLiteral>(m2),
                 };
         
         doEncodeDecodeTest(e);

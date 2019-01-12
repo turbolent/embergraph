@@ -44,11 +44,11 @@ public class NOPLBSPolicy extends AbstractLBSPolicy {
     private static final long serialVersionUID = 1L;
 
     @Override
-    public boolean service(//
-            final boolean isLeaderRequest,//
-            final HALoadBalancerServlet servlet,//
-            final HttpServletRequest request, //
-            final HttpServletResponse response//
+    public boolean service(
+            final boolean isLeaderRequest,
+            final HALoadBalancerServlet servlet,
+            final HttpServletRequest request,
+            final HttpServletResponse response
     ) throws IOException, ServletException {
 
         if (!isLeaderRequest) {

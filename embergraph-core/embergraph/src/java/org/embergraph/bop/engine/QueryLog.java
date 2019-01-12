@@ -294,9 +294,9 @@ public class QueryLog {
         // dynamics based on elapsed wall clock time.
         sb.append("\tsolutions/ms");
         sb.append("\tmutations/ms");
-        //
+
         // cost model(s)
-        //
+
         sb.append('\n');
 
         return sb.toString();
@@ -717,10 +717,10 @@ public class QueryLog {
      *            mutations (only report for inference rules at this time).
      * @throws IOException
      */
-    public static void getTableXHTML(//
-            final String queryStr,//
-            final IRunningQuery q,//
-            final IRunningQuery[] children,//
+    public static void getTableXHTML(
+            final String queryStr,
+            final IRunningQuery q,
+            final IRunningQuery[] children,
             final Writer w, final boolean summaryOnly, final int maxBopLength,
             final boolean clusterStats, final boolean detailedStats,
             final boolean mutationStats) throws IOException {
@@ -889,9 +889,9 @@ public class QueryLog {
         if(mutationStats) {
             w.write("<th>");w.write(cdata("mutations/ms"));w.write("</th>");
         }
-        //
+
         // cost model(s)
-        //
+
         w.write("</tr\n>");
 
     }
@@ -1507,8 +1507,8 @@ public class QueryLog {
         if (detailedStats) {
             w.write(TD);
 //            final long solutionCount = stats.unitsOut.get();
-//            final String solutionsPerSec = (solutionCount == 0 ? NA //
-//                    : (elapsed == 0L ? DZ //
+//            final String solutionsPerSec = (solutionCount == 0 ? NA
+//                    : (elapsed == 0L ? DZ
 //                            : "" + (long) (solutionCount * 1000d / elapsed)));
             w.write(cdata(elapsed == 0 ? "0" : Long.toString(stats.unitsOut
                     .get() / elapsed)));

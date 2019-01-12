@@ -34,13 +34,13 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class MockMaster<//
-H extends MockMasterStats<L, HS>, //
-O extends Object, //
-E extends KVO<O>, //
-S extends MockSubtask, //
-L extends Object, //
-HS extends MockSubtaskStats//
+abstract public class MockMaster<
+H extends MockMasterStats<L, HS>,
+O extends Object,
+E extends KVO<O>,
+S extends MockSubtask,
+L extends Object,
+HS extends MockSubtaskStats
 > extends AbstractMasterTask<H, E, S, L> {
 
     public MockMaster(final H stats, final BlockingBuffer<E[]> buffer,

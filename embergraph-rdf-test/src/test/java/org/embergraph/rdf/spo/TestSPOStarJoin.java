@@ -159,7 +159,7 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
                             null, // filter
                             false, // justify
                             false, // backchain
-                            planFactory//
+                            planFactory
                     );
 
             final IJoinNexus joinNexus = joinNexusFactory.newInstance(store
@@ -317,7 +317,7 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
                             null, // filter
                             false, // justify
                             false, // backchain
-                            planFactory//
+                            planFactory
                     );
 
             final IJoinNexus joinNexus = joinNexusFactory.newInstance(store

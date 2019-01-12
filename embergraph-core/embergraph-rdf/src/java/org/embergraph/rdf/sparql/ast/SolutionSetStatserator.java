@@ -301,13 +301,13 @@ public class SolutionSetStatserator implements
 		}
 				
 		// Expose immutable versions of these collections.
-		return new CompiledSolutionSetStats(//
-				nsolutions,//
-				usedVars,//
-				alwaysBound,//
-				notAlwaysBound,//
-				materialized,//
-				constants//
+		return new CompiledSolutionSetStats(
+				nsolutions,
+				usedVars,
+				alwaysBound,
+				notAlwaysBound,
+				materialized,
+				constants
 		);
 
 	}

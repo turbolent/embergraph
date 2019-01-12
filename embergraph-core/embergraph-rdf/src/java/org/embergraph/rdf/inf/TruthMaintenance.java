@@ -740,7 +740,7 @@ public class TruthMaintenance {
                     database, // focusStore, 
                     database, // the persistent db. 
                     null, //filter @todo was inferenceEngine.doNotAddFilter,
-                    capacity,//
+                    capacity,
                     false,// justify
                     changeLog
                     );

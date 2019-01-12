@@ -435,8 +435,8 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
          dummyScoreVar.setAnonymous(true);
          dummySnippetVar.setAnonymous(true);
 
-         this.vars = new IVariable[] {//
-         searchVar,//
+         this.vars = new IVariable[] {
+         searchVar,
                score == null ? dummyScoreVar : score,// must be non-null.
                snippet == null ? dummySnippetVar : snippet // must be non-null.
          };

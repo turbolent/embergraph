@@ -557,7 +557,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         final BigdataURI rdfType = f.asValue(RDF.TYPE);
 
-        final BigdataValue[] values = new BigdataValue[] { //
+        final BigdataValue[] values = new BigdataValue[] {
                 dc, foafPerson, rdfType 
                 };
 

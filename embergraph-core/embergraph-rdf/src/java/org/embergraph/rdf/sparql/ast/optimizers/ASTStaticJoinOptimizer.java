@@ -245,7 +245,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
 //            return optimizer == QueryOptimizerEnum.Static;
 //            
 ////        } else {
-////
+//
 ////            optimizer = context == null || context.queryHints == null ? QueryOptimizerEnum.Static
 ////                    : QueryOptimizerEnum.valueOf(context.queryHints
 ////                            .getProperty(QueryHints.OPTIMIZER,

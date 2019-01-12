@@ -729,9 +729,9 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * Sum the latches for the distinct workflow states for a document
          * across all documents.
          */
-        final long n1 = workflowLatch_parser.get()//
-                + workflowLatch_bufferTids.get()//
-                + workflowLatch_bufferOther.get()//
+        final long n1 = workflowLatch_parser.get()
+                + workflowLatch_bufferTids.get()
+                + workflowLatch_bufferOther.get()
         ;
         
         final long n2 = workflowLatch_document.get();
@@ -1146,9 +1146,9 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
         /* @todo This might be ignorant of .gz and .zip extensions.
          * @todo when resource is URL use reported MimeTYPE also.
          */
-        final RDFFormat rdfFormat = (defaultFormat == null //
-                ? RDFFormat.forFileName(resourceStr) //
-                : RDFFormat.forFileName(resourceStr, defaultFormat)//
+        final RDFFormat rdfFormat = (defaultFormat == null
+                ? RDFFormat.forFileName(resourceStr)
+                : RDFFormat.forFileName(resourceStr, defaultFormat)
         );
         
         if (rdfFormat == null) {
@@ -1364,21 +1364,21 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
      *            index write buffers is controlled by their master and sink
      *            queue capacity and chunk size.
      */
-    public AsynchronousStatementBufferFactory(//
-            final ScaleOutTripleStore tripleStore,//
-            final int producerChunkSize, //
-            final int valuesInitialCapacity,//
-            final int bnodesInitialCapacity, //
-            final RDFFormat defaultFormat,//
-            final String defaultGraph,//
-            final RDFParserOptions parserOptions,//
-            final boolean deleteAfter,//
-            final int parserPoolSize,//
-            final int parserQueueCapacity,//
-            final int term2IdWriterPoolSize,//
-            final int otherWriterPoolSize,//
-            final int notifyPoolSize,//
-            final long pauseParsedPoolStatementThreshold//
+    public AsynchronousStatementBufferFactory(
+            final ScaleOutTripleStore tripleStore,
+            final int producerChunkSize,
+            final int valuesInitialCapacity,
+            final int bnodesInitialCapacity,
+            final RDFFormat defaultFormat,
+            final String defaultGraph,
+            final RDFParserOptions parserOptions,
+            final boolean deleteAfter,
+            final int parserPoolSize,
+            final int parserQueueCapacity,
+            final int term2IdWriterPoolSize,
+            final int otherWriterPoolSize,
+            final int notifyPoolSize,
+            final long pauseParsedPoolStatementThreshold
             ) {
 
         if (tripleStore == null)
@@ -1580,7 +1580,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * the maximumPoolSize and idle threads will be retired, but only after
          * several minutes. 
          */
-        parserService = new ParserThreadPoolExecutor(//
+        parserService = new ParserThreadPoolExecutor(
                 1, // corePoolSize
                 parserPoolSize, // maximumPoolSize
                 1, // keepAliveTime
@@ -1600,7 +1600,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * threads will be created. Therefore we interpret the caller's argument
          * as both the corePoolSize and the maximumPoolSize.
          */
-        tidsWriterService = new ThreadPoolExecutor(//
+        tidsWriterService = new ThreadPoolExecutor(
                 term2IdWriterPoolSize, // corePoolSize
                 term2IdWriterPoolSize, // maximumPoolSize
                 1, // keepAliveTime
@@ -1620,7 +1620,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * threads will be created. Therefore we interpret the caller's argument
          * as both the corePoolSize and the maximumPoolSize.
          */
-        otherWriterService = new ThreadPoolExecutor(//
+        otherWriterService = new ThreadPoolExecutor(
                 otherWriterPoolSize, // corePoolSize
                 otherWriterPoolSize, // maximumPoolSize
                 1, // keepAliveTime
@@ -1640,7 +1640,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * threads will be created. Therefore we interpret the caller's argument
          * as both the corePoolSize and the maximumPoolSize.
          */
-        notifyService = new ThreadPoolExecutor(//
+        notifyService = new ThreadPoolExecutor(
                 notifyPoolSize, // corePoolSize
                 notifyPoolSize, // maximumPoolSize
                 1, // keepAliveTime
@@ -3998,13 +3998,13 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
             _handleStatement(
                     (Resource) getCanonicalValue((BigdataResource) valueFactory
-                            .asValue(s)),//
+                            .asValue(s)),
                     (URI) getCanonicalValue((BigdataURI) valueFactory
-                            .asValue(p)),//
+                            .asValue(p)),
                     (Value) getCanonicalValue((BigdataValue) valueFactory
-                            .asValue(o)),//
+                            .asValue(o)),
                     (Resource) getCanonicalValue((BigdataResource) valueFactory
-                            .asValue(c)), //
+                            .asValue(c)),
                     type);
 
         }
@@ -4132,9 +4132,9 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
             try {
 
                 final Callable<Void> task1 = new AsyncTerm2IdIndexWriteTask(
-                        tidsLatch, lexiconRelation, newValuesIterator(//
-                                lexiconRelation,//
-                                values.values().iterator(),//
+                        tidsLatch, lexiconRelation, newValuesIterator(
+                                lexiconRelation,
+                                values.values().iterator(),
                                 producerChunkSize),
                                 buffer_t2id,
                                 buffer_blobs);
@@ -4248,9 +4248,9 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 //            try {
 //
 //                final Callable<Void> task = new AsyncBlobsIndexWriteTask(
-//                        tidsLatch, lexiconRelation, newValuesIterator(//
-//                                lexiconRelation,//
-//                                values.values().iterator(),//
+//                        tidsLatch, lexiconRelation, newValuesIterator(
+//                                lexiconRelation,
+//                                values.values().iterator(),
 //                                producerChunkSize),
 //                        buffer_blobs);
 //

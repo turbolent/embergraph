@@ -144,9 +144,9 @@ public class TestKeyBuilder extends AbstractSearchTest {
 //        final IKeyBuilder keyBuilder = getKeyBuilder();
 //        
 //        final IRecordBuilder<Long> tokenKeyBuilder = new DefaultRecordBuilder<Long>(
-//                fieldsEnabled,//
-//                doublePrecision,//
-//                new DefaultDocIdExtension()//
+//                fieldsEnabled,
+//                doublePrecision,
+//                new DefaultDocIdExtension()
 //        );
 
         final ITupleSerializer<ITermDocKey<Long>, ITermDocVal> tupleSer = ndx

@@ -407,11 +407,11 @@ public class SPO implements ISPO, java.io.Serializable {
      */
     public SPO(final BigdataStatement stmt) {
         
-        this(   stmt.s(),//
-                stmt.p(),//
-                stmt.o(),//
-                stmt.c(),//
-                stmt.getStatementType()//
+        this(   stmt.s(),
+                stmt.p(),
+                stmt.o(),
+                stmt.c(),
+                stmt.getStatementType()
                 );
         
     }
@@ -530,9 +530,9 @@ public class SPO implements ISPO, java.io.Serializable {
             return true;
 
         return
-                IVUtility.equals(this.s, stmt2.s()) && //
-                IVUtility.equals(this.p, stmt2.p()) && //
-                IVUtility.equals(this.o, stmt2.o()) && //
+                IVUtility.equals(this.s, stmt2.s()) &&
+                IVUtility.equals(this.p, stmt2.p()) &&
+                IVUtility.equals(this.o, stmt2.o()) &&
                 type() == stmt2.getStatementType()
                 ;
 

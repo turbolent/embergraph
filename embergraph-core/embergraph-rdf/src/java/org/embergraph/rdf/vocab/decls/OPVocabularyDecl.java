@@ -11,10 +11,10 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 
 public class OPVocabularyDecl implements VocabularyDecl {
 
-    static private final URI[] uris = new URI[]{//
+    static private final URI[] uris = new URI[]{
     	// two named graphs
-        new URIImpl("file:///home/OPS/develop/openphacts/datasets/chem2bio2rdf/chembl.nt"),//
-        new URIImpl("http://linkedlifedata.com/resource/drugbank"),//
+        new URIImpl("file:///home/OPS/develop/openphacts/datasets/chem2bio2rdf/chembl.nt"),
+        new URIImpl("http://linkedlifedata.com/resource/drugbank"),
     };
 
     public OPVocabularyDecl() {

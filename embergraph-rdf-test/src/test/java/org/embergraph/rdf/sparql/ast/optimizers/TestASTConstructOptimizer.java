@@ -99,14 +99,14 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             final BigdataURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {//
+            final BigdataStatement[] stmts = new BigdataStatement[] {
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
-                            f.createURI(FOAFVocabularyDecl.Person.toString()),//
+                            f.createURI(FOAFVocabularyDecl.Person.toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -114,36 +114,36 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Mike"),//
+                            f.createLiteral("Mike"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Bryan"),//
+                            f.createLiteral("Bryan"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("DC"),//
+                            f.createLiteral("DC"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -407,15 +407,15 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             final BigdataURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {//
+            final BigdataStatement[] stmts = new BigdataStatement[] {
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -423,36 +423,36 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Mike"),//
+                            f.createLiteral("Mike"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Bryan"),//
+                            f.createLiteral("Bryan"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("DC"),//
+                            f.createLiteral("DC"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -647,15 +647,15 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             final BigdataURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {//
+            final BigdataStatement[] stmts = new BigdataStatement[] {
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -663,36 +663,36 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Mike"),//
+                            f.createLiteral("Mike"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Bryan"),//
+                            f.createLiteral("Bryan"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("DC"),//
+                            f.createLiteral("DC"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -928,15 +928,15 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             final BigdataURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {//
+            final BigdataStatement[] stmts = new BigdataStatement[] {
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -944,36 +944,36 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Mike"),//
+                            f.createLiteral("Mike"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Bryan"),//
+                            f.createLiteral("Bryan"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("DC"),//
+                            f.createLiteral("DC"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -1217,15 +1217,15 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             final BigdataURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {//
+            final BigdataStatement[] stmts = new BigdataStatement[] {
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
@@ -1233,36 +1233,36 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
-                                    .toString()),//
+                                    .toString()),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Mike"),//
+                            f.createLiteral("Mike"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("Bryan"),//
+                            f.createLiteral("Bryan"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 
                     new BigdataStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
-                            f.createLiteral("DC"),//
+                            f.createLiteral("DC"),
                             g, // context
-                            StatementEnum.Explicit,//
+                            StatementEnum.Explicit,
                             false// userFlag
                     ),
 

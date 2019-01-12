@@ -410,7 +410,7 @@ public class ConcurrentWeakValueCache<K, V> implements
             
             // new reference.
             final WeakReference<V> ref = newWeakRef(k, v, referenceQueue);
-//            final WeakReference<V> ref = referenceQueue == null //
+//            final WeakReference<V> ref = referenceQueue == null
 //                ? new WeakReference<V>(v)
 //                : new WeakRef<K, V>(k, v, referenceQueue);
 
@@ -469,7 +469,7 @@ public class ConcurrentWeakValueCache<K, V> implements
 
             // new reference.
             final WeakReference<V> ref = newWeakRef(k, v, referenceQueue);
-//            final WeakReference<V> ref = referenceQueue == null //
+//            final WeakReference<V> ref = referenceQueue == null
 //                ? new WeakReference<V>(v)
 //                : new WeakRef<K, V>(k, v, referenceQueue);
 

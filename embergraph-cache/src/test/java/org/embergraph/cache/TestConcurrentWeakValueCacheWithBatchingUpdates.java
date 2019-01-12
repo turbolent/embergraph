@@ -54,7 +54,7 @@ public class TestConcurrentWeakValueCacheWithBatchingUpdates extends TestCase2 {
 
     public void test_memoryLeak() {
     
-        final ConcurrentWeakValueCacheWithBatchedUpdates<Long, String> fixture = new ConcurrentWeakValueCacheWithBatchedUpdates<Long, String>(//
+        final ConcurrentWeakValueCacheWithBatchedUpdates<Long, String> fixture = new ConcurrentWeakValueCacheWithBatchedUpdates<Long, String>(
                 16,// backing hard reference LRU queue capacity.
                 .75f, // loadFactor (.75 is the default)
                 16 // concurrency level (16 is the default)

@@ -88,7 +88,7 @@ public class TestJournalShutdown extends TestCase2 {
                 }
                 
                 final String failMessage = "Threads left active after task"
-                        +": test=" + getName()//
+                        +": test=" + getName()
 //                        + ", delegate="+getOurDelegate().getClass().getName()
                         + ", startupCount=" + startupActiveThreads
                         + ", teardownCount("+nactive+")=" + tearDownActiveThreads

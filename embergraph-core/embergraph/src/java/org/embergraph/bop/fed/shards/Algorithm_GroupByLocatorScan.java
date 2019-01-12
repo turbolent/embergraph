@@ -38,7 +38,7 @@ class Algorithm_GroupByLocatorScan<E extends IBindingSet, F> implements
     public void mapOverShards(Bundle<F>[] bundles) {
 
         // final byte[] fromKey = bundles[0].fromKey;
-        //
+
         // final byte[] toKey = bundles[bundles.length - 1].toKey;
 
         // TODO Auto-generated method stub

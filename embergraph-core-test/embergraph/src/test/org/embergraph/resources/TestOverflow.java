@@ -108,14 +108,14 @@ public class TestOverflow extends AbstractResourceManagerTestCase {
             // required for scale-out indices.
             indexMetadata.setDeleteMarkers(true);
 
-            indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(//
+            indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(
                     0, // partitionId
                     -1, // not a move.
                     new byte[]{}, // leftSeparator.
                     null, // rightSeparator.
                     new IResourceMetadata[]{
                             journal.getResourceMetadata()
-                    },//
+                    },
                     IndexPartitionCause.register(resourceManager)
 //                    ,""//history
                     ));

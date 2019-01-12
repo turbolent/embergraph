@@ -226,9 +226,9 @@ public class RelationFusedView<E> implements IRelation<E> {
 
     public IAccessPath<E> getAccessPath(final IPredicate<E> predicate) {
 
-        return new AccessPathFusedView<E>(//
-                (AccessPath<E>)relation1.getAccessPath(predicate),//
-                (AccessPath<E>)relation2.getAccessPath(predicate)//
+        return new AccessPathFusedView<E>(
+                (AccessPath<E>)relation1.getAccessPath(predicate),
+                (AccessPath<E>)relation2.getAccessPath(predicate)
         );
         
     }

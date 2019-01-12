@@ -112,7 +112,7 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
     		store.addTerms(new BigdataValue[]{known1});
     		assertTrue(known1.isRealIV());
     		
-        final IBindingSet[] bsets = new IBindingSet[] { //
+        final IBindingSet[] bsets = new IBindingSet[] {
                 new ListBindingSet()
         };
 
@@ -225,7 +225,7 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
     		store.addTerms(new BigdataValue[]{known1});
     		assertTrue(known1.isRealIV());
     		
-        final IBindingSet[] bsets = new IBindingSet[] { //
+        final IBindingSet[] bsets = new IBindingSet[] {
                 new ListBindingSet()
         };
 

@@ -425,11 +425,11 @@ public class URLQueryModel {
      * @param header
      *            Header entries, percent decoded
      */
-    public static URLQueryModel getInstance(//
-            final IService service,//
-            final String uri,//
-            final LinkedHashMap<String, Vector<String>> params,//
-            final Map<String, String> headers//
+    public static URLQueryModel getInstance(
+            final IService service,
+            final String uri,
+            final LinkedHashMap<String, Vector<String>> params,
+            final Map<String, String> headers
             ) {
 
         /*
@@ -468,7 +468,7 @@ public class URLQueryModel {
      * @param resp
      *            The response.
      */
-    public static URLQueryModel getInstance(//
+    public static URLQueryModel getInstance(
             final IService service,
             final HttpServletRequest req,
             final HttpServletResponse resp
@@ -579,9 +579,9 @@ public class URLQueryModel {
         toTime = Long.MAX_VALUE;
 
         // assemble the optional filter.
-        this.pattern = QueryUtil.getPattern(//
-                params.get(FILTER),//
-                params.get(REGEX)//
+        this.pattern = QueryUtil.getPattern(
+                params.get(FILTER),
+                params.get(REGEX)
                 );
 
         if (service != null && service instanceof IEventReportingService) {

@@ -488,9 +488,9 @@ public class IOStatCollector extends AbstractProcessCollector implements
                      * Issue warning for parsing problems.
                      */
 
-                    log.warn(ex.getMessage() //
-                            + "\nheader: " + header1 //
-                            + "\n  data: " + data //
+                    log.warn(ex.getMessage()
+                            + "\nheader: " + header1
+                            + "\n  data: " + data
                     , ex);
 
                 }

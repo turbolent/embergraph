@@ -159,8 +159,8 @@ public class ReadOnlyKeysRaba extends AbstractRaba {
                 final int ret = BytesUtil.compareBytes(a[i - 1], a[i]);
                 
                 assert ret < 0 : "unsigned byte[]s are out of order at index="
-                        + i +", ret="+ret //
-                        + "\na[" + (i - 1) + "]=" + BytesUtil.toString(a[i-1]) //
+                        + i +", ret="+ret
+                        + "\na[" + (i - 1) + "]=" + BytesUtil.toString(a[i-1])
                         + "\na[" + (i) + "]=" + BytesUtil.toString(a[i]);
 
             }

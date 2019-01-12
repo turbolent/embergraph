@@ -1223,8 +1223,8 @@ public class FunctionRegistry {
          */
 		IValueExpression<? extends IV> create(
 		        final BOpContextBase context,//BLZG-1343
-				final GlobalAnnotations globals,//
-				final Map<String,Object> scalarValues,//
+				final GlobalAnnotations globals,
+				final Map<String,Object> scalarValues,
 				final ValueExpressionNode... args);
 
 	}

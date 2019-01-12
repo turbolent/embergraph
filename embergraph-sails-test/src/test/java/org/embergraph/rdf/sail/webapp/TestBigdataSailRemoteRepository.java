@@ -206,12 +206,12 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 	}
 
 	@Override
-    protected long doDeleteWithAccessPath(//
-//          final String servlet,//
-          final URI s,//
-          final URI p,//
-          final Value o,//
-          final URI... c//
+    protected long doDeleteWithAccessPath(
+//          final String servlet,
+          final URI s,
+          final URI p,
+          final Value o,
+          final URI... c
           ) throws Exception {
 
 		final long start = getExactSize();
@@ -222,11 +222,11 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
 		
 	}
 	
-    protected RepositoryResult<Statement> doGetWithAccessPath(//
-          final URI s,//
-          final URI p,//
-          final Value o,//
-          final URI... c//
+    protected RepositoryResult<Statement> doGetWithAccessPath(
+          final URI s,
+          final URI p,
+          final Value o,
+          final URI... c
           ) throws Exception {
 
 		return cxn.getStatements(s, p, o, false/*includeInferred*/, c);
@@ -513,8 +513,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null
@@ -532,8 +532,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 new URIImpl("http://www.embergraph.org/Mike"),// s
                 null,// p
                 null
@@ -551,8 +551,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 new URIImpl("http://www.w3.org/2000/01/rdf-schema#label"),// p
                 null// o
@@ -570,8 +570,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 new URIImpl("http://xmlns.com/foaf/0.1/Person")// o
@@ -589,8 +589,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 new URIImpl("http://www.embergraph.org/Bryan")// o
@@ -608,8 +608,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 RDF.TYPE,// p
                 new URIImpl("http://xmlns.com/foaf/0.1/Person")// o
@@ -627,8 +627,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 RDFS.LABEL,// p
                 new LiteralImpl("Bryan")// o
@@ -646,8 +646,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 new URIImpl("http://xmlns.com/foaf/0.1/XXX")// o
@@ -668,8 +668,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.trig");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null,// o
@@ -691,8 +691,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.trig");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null,// o
@@ -714,8 +714,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.trig");
 
-        final long mutationResult = doDeleteWithAccessPath(//
-//                requestPath,//
+        final long mutationResult = doDeleteWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null,// o
@@ -734,8 +734,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null
@@ -753,8 +753,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 new URIImpl("http://www.embergraph.org/Mike"),// s
                 null,// p
                 null
@@ -772,8 +772,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 new URIImpl("http://www.w3.org/2000/01/rdf-schema#label"),// p
                 null// o
@@ -791,8 +791,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 new URIImpl("http://xmlns.com/foaf/0.1/Person")// o
@@ -810,8 +810,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 new URIImpl("http://www.embergraph.org/Bryan")// o
@@ -829,8 +829,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 RDF.TYPE,// p
                 new URIImpl("http://xmlns.com/foaf/0.1/Person")// o
@@ -848,8 +848,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 RDFS.LABEL,// p
                 new LiteralImpl("Bryan")// o
@@ -867,8 +867,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.ttl");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 new URIImpl("http://xmlns.com/foaf/0.1/XXX")// o
@@ -889,8 +889,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.trig");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null,// o
@@ -912,8 +912,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.trig");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null,// o
@@ -935,8 +935,8 @@ public class TestBigdataSailRemoteRepository<S extends IIndexManager> extends
         doInsertbyURL("POST", packagePath
                 + "test_delete_by_access_path.trig");
 
-        final long result = countResults(doGetWithAccessPath(//
-//                requestPath,//
+        final long result = countResults(doGetWithAccessPath(
+//                requestPath,
                 null,// s
                 null,// p
                 null,// o

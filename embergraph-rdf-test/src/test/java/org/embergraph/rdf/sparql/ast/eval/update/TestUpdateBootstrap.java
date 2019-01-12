@@ -132,12 +132,12 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
             final IV bryanL = makeIV(valueFactory.createLiteral("Bryan"));
             final IV dcL = makeIV(valueFactory.createLiteral("DC"));
 
-            data = new ISPO[] { //
-                    new SPO(mike, rdfType, foafPerson, g1, StatementEnum.Explicit),//
-                    new SPO(bryan, rdfType, foafPerson, g1, StatementEnum.Explicit),//
-                    new SPO(mike, rdfsLabel, mikeL, g1, StatementEnum.Explicit),//
-                    new SPO(bryan, rdfsLabel, bryanL, g1, StatementEnum.Explicit),//
-                    new SPO(dc, rdfsLabel, dcL, g1, StatementEnum.Explicit),//
+            data = new ISPO[] {
+                    new SPO(mike, rdfType, foafPerson, g1, StatementEnum.Explicit),
+                    new SPO(bryan, rdfType, foafPerson, g1, StatementEnum.Explicit),
+                    new SPO(mike, rdfsLabel, mikeL, g1, StatementEnum.Explicit),
+                    new SPO(bryan, rdfsLabel, bryanL, g1, StatementEnum.Explicit),
+                    new SPO(dc, rdfsLabel, dcL, g1, StatementEnum.Explicit),
             };
             
             /*
@@ -179,11 +179,11 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
         /*
          * Resolve/add terms against the lexicon.
          */
-        left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(//
-                new NV(BOp.Annotations.BOP_ID, resolutionId),//
-                new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),//
+        left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(
+                new NV(BOp.Annotations.BOP_ID, resolutionId),
+                new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),
                 new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getLexiconNamespace() })//
+                        new String[] { context.getLexiconNamespace() })
                 ));
 
         /*
@@ -196,19 +196,19 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
          * Note: This already does TM for SIDs mode.
          */
         left = new InsertStatementsOp(leftOrEmpty(left), NV.asMap(new NV(
-                BOp.Annotations.BOP_ID, insertStatementsId),//
-                new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),//
+                BOp.Annotations.BOP_ID, insertStatementsId),
+                new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),
                 new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getNamespace() })//
+                        new String[] { context.getNamespace() })
                 ));
         
         /*
          * Commit.
          */
-        left = new CommitOp(leftOrEmpty(left), NV.asMap(//
-                new NV(BOp.Annotations.BOP_ID, commitId),//
-                new NV(CommitOp.Annotations.TIMESTAMP, txId),//
-                new NV(CommitOp.Annotations.PIPELINED, false)//
+        left = new CommitOp(leftOrEmpty(left), NV.asMap(
+                new NV(BOp.Annotations.BOP_ID, commitId),
+                new NV(CommitOp.Annotations.TIMESTAMP, txId),
+                new NV(CommitOp.Annotations.PIPELINED, false)
                 ));
 
         /*
@@ -415,30 +415,30 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
         /*
          * Resolve/add terms against the lexicon.
          */
-        left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(//
-                new NV(ChunkedResolutionOp.Annotations.BOP_ID, resolutionId),//
-                new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),//
+        left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(
+                new NV(ChunkedResolutionOp.Annotations.BOP_ID, resolutionId),
+                new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, txId),
                 new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getLexiconNamespace() })//
+                        new String[] { context.getLexiconNamespace() })
                 ));
 
         /*
          * Insert statements.
          */
         left = new InsertStatementsOp(leftOrEmpty(left), NV.asMap(new NV(
-                BOp.Annotations.BOP_ID, insertStatementsId),//
-                new NV(InsertStatementsOp.Annotations.TIMESTAMP, txId),//
+                BOp.Annotations.BOP_ID, insertStatementsId),
+                new NV(InsertStatementsOp.Annotations.TIMESTAMP, txId),
                 new NV(InsertStatementsOp.Annotations.RELATION_NAME,
-                        new String[] { context.getNamespace() })//
+                        new String[] { context.getNamespace() })
                 ));
         
         /*
          * Commit.
          */
-        left = new CommitOp(leftOrEmpty(left), NV.asMap(//
-                new NV(BOp.Annotations.BOP_ID, commitId),//
-                new NV(CommitOp.Annotations.TIMESTAMP, txId),//
-                new NV(CommitOp.Annotations.PIPELINED, false)//
+        left = new CommitOp(leftOrEmpty(left), NV.asMap(
+                new NV(BOp.Annotations.BOP_ID, commitId),
+                new NV(CommitOp.Annotations.TIMESTAMP, txId),
+                new NV(CommitOp.Annotations.PIPELINED, false)
                 ));
         
         // Run the update.

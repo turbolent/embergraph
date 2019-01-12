@@ -176,7 +176,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
 	 * @param childEntryCounts
 	 */
 	public MutableDirectoryPageData(//final int nentries, final IRaba keys,
-	        final byte[] overflowKey,//
+	        final byte[] overflowKey,
 			final long[] childAddr, //final int[] childEntryCounts,
 			final boolean hasVersionTimestamps,
 			final long minimumVersionTimestamp,

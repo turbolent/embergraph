@@ -294,11 +294,11 @@ public class FastClosure extends BaseClosure {
                         final IVariable<IV> p = (IVariable<IV>) tmp
                                 .getHead().get(1/* p */);
 
-                        program.addStep(tmp.specialize(//
-                                noBindings,//
-                                new IConstraint[] { //
-                        		Constraint.wrap(new NEConstant(p, owlSameAs)) //
-                                }//
+                        program.addStep(tmp.specialize(
+                                noBindings,
+                                new IConstraint[] {
+                        		Constraint.wrap(new NEConstant(p, owlSameAs))
+                                }
                                 ));
 
                     }
@@ -312,11 +312,11 @@ public class FastClosure extends BaseClosure {
                         final IVariable<IV> p = (IVariable<IV>) tmp
                                 .getHead().get(1/* p */);
 
-                        program.addStep(tmp.specialize(//
-                                noBindings,//
-                                new IConstraint[] { //
-                        		Constraint.wrap(new NEConstant(p, owlSameAs)) //
-                                }//
+                        program.addStep(tmp.specialize(
+                                noBindings,
+                                new IConstraint[] {
+                        		Constraint.wrap(new NEConstant(p, owlSameAs))
+                                }
                                 ));
 
                     }

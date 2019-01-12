@@ -228,9 +228,9 @@ public class Test_REST_Structure<S extends IIndexManager> extends
    // * The <code>/namespace/</code> servlet responds (multi-tenancy API).
    // */
    // public void test_webapp_structure_namespace() throws Exception {
-   //
+
    // doGET(m_serviceURL + "/namespace/");
-   //
+
    // }
 
    /**

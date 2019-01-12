@@ -95,9 +95,9 @@ public class TestIncrementalWrite extends AbstractBTreeTestCase {
 //                false,//isolatable
 //                null,//conflictResolver
 //                new MyHardReferenceQueue<PO>(new DefaultEvictionListener(),
-//                        queueCapacity, queueScan),//
-//                KeyBufferSerializer.INSTANCE,//
-//                ByteArrayValueSerializer.INSTANCE, //
+//                        queueCapacity, queueScan),
+//                KeyBufferSerializer.INSTANCE,
+//                ByteArrayValueSerializer.INSTANCE,
 //                null // no record compressor
 //        );
 
@@ -130,10 +130,10 @@ public class TestIncrementalWrite extends AbstractBTreeTestCase {
         
         protected HardReferenceQueue<PO> newWriteRetentionQueue(final boolean readOnly) {
 
-            return new MyHardReferenceQueue<PO>(//
-                    new DefaultEvictionListener(),//
-                    getQueueCapacity(),//
-                    getQueueScan()//
+            return new MyHardReferenceQueue<PO>(
+                    new DefaultEvictionListener(),
+                    getQueueCapacity(),
+                    getQueueScan()
             );
 
         }

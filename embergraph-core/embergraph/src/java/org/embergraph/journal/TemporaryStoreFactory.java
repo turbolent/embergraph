@@ -165,16 +165,16 @@ public class TemporaryStoreFactory {
     public TemporaryStoreFactory() {
 
         this(
-        //
+
                 new File(System.getProperty(Options.TMP_DIR, System
                         .getProperty(Options.JAVA_TMP_DIR_PROPERTY))),
-                //
+
                 Integer.valueOf(System.getProperty(Options.OFFSET_BITS,
                         Options.DEFAULT_OFFSET_BITS)),
-                //
+
                 Long.valueOf(System.getProperty(Options.MAX_EXTENT,
                         Options.DEFAULT_MAX_EXTENT))
-        //
+
         );
 
     }
@@ -188,16 +188,16 @@ public class TemporaryStoreFactory {
     public TemporaryStoreFactory(final Properties properties) {
 
         this(
-        //
+
                 new File(properties.getProperty(Options.TMP_DIR, System
                         .getProperty(Options.JAVA_TMP_DIR_PROPERTY))),
-                //
+
                 Integer.valueOf(properties.getProperty(Options.OFFSET_BITS,
                         Options.DEFAULT_OFFSET_BITS)),
-                //
+
                 Long.valueOf(properties.getProperty(Options.MAX_EXTENT,
                         Options.DEFAULT_MAX_EXTENT))
-        //
+
         );
 
     }

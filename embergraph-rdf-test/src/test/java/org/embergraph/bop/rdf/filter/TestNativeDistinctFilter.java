@@ -109,7 +109,7 @@ public class TestNativeDistinctFilter extends TestCase2 {
                 final BigdataURI _luke = vf.createURI(uriString+"luke");
 
                 final BigdataValue[] a = new BigdataValue[] {
-                      _knows,//
+                      _knows,
                       _brad,
                       _john,
                       _fred,
@@ -134,7 +134,7 @@ public class TestNativeDistinctFilter extends TestCase2 {
             }
 
 //            // data to insert (in key order for convenience).
-//            final SPO[] a = {//
+//            final SPO[] a = {
 //                    new SPO(paul, knows, mary, StatementEnum.Explicit),// [0]
 //                    new SPO(paul, knows, brad, StatementEnum.Explicit),// [1]
 //                    
@@ -216,7 +216,7 @@ public class TestNativeDistinctFilter extends TestCase2 {
             /*
              * The distinct SPOs.
              */
-            final List<SPO> expected = new LinkedList<SPO>(Arrays.asList(new SPO[] {//
+            final List<SPO> expected = new LinkedList<SPO>(Arrays.asList(new SPO[] {
                     
                 new SPO(setup.paul, setup.knows, setup.mary, StatementEnum.Explicit),// [0]
                 new SPO(setup.paul, setup.knows, setup.brad, StatementEnum.Explicit),// [1]
@@ -235,7 +235,7 @@ public class TestNativeDistinctFilter extends TestCase2 {
             final List<SPO> given = new LinkedList<SPO>(expected);
             
             // Add in some duplicates too.
-            given.addAll(Arrays.asList(new SPO[] {//
+            given.addAll(Arrays.asList(new SPO[] {
                     new SPO(setup.john, setup.knows, setup.brad, StatementEnum.Explicit),// [3]
                     new SPO(setup.mary, setup.knows, setup.brad, StatementEnum.Explicit),// [4]
                     new SPO(setup.brad, setup.knows, setup.fred, StatementEnum.Explicit),// [5]

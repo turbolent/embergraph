@@ -90,9 +90,9 @@ public class TestDechunkerator extends TestCase2 {
                 "A","B"
         };
 
-        final Object[][] a = new Object[][] {//
-                new Object[]{"A"},//
-                new Object[]{"B"},//
+        final Object[][] a = new Object[][] {
+                new Object[]{"A"},
+                new Object[]{"B"},
                 };
         final Iterator<Object[]> src = Arrays.asList(a).iterator();
         final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
@@ -111,10 +111,10 @@ public class TestDechunkerator extends TestCase2 {
                 "A","B"
         };
 
-        final Object[][] a = new Object[][] {//
-                new Object[]{"A"},//
-                new Object[]{},//
-                new Object[]{"B"},//
+        final Object[][] a = new Object[][] {
+                new Object[]{"A"},
+                new Object[]{},
+                new Object[]{"B"},
                 };
         final Iterator<Object[]> src = Arrays.asList(a).iterator();
         final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);
@@ -133,10 +133,10 @@ public class TestDechunkerator extends TestCase2 {
                 "A","a","b","B"
         };
 
-        final Object[][] a = new Object[][] {//
-                new Object[]{"A"},//
-                new Object[]{"a","b"},//
-                new Object[]{"B"},//
+        final Object[][] a = new Object[][] {
+                new Object[]{"A"},
+                new Object[]{"a","b"},
+                new Object[]{"B"},
                 };
         final Iterator<Object[]> src = Arrays.asList(a).iterator();
         final Dechunkerator<Object> actual = new Dechunkerator<Object>(src);

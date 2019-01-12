@@ -44,11 +44,11 @@ public class RuleRdfs12 extends Rule {
 
     public RuleRdfs12(String relationName, Vocabulary vocab) {
 
-        super(  "rdfs12",//
-                new SPOPredicate(relationName,var("u"), vocab.getConstant(RDFS.SUBPROPERTYOF), vocab.getConstant(RDFS.MEMBER)),//
+        super(  "rdfs12",
+                new SPOPredicate(relationName,var("u"), vocab.getConstant(RDFS.SUBPROPERTYOF), vocab.getConstant(RDFS.MEMBER)),
                 new SPOPredicate[] {
-                    new SPOPredicate(relationName,var("u"), vocab.getConstant(RDF.TYPE), vocab.getConstant(RDFS.CONTAINERMEMBERSHIPPROPERTY))//
-                },//
+                    new SPOPredicate(relationName,var("u"), vocab.getConstant(RDF.TYPE), vocab.getConstant(RDFS.CONTAINERMEMBERSHIPPROPERTY))
+                },
                 null // constraints
                 );
 

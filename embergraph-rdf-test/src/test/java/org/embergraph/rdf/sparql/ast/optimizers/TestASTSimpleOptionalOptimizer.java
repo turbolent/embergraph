@@ -79,23 +79,23 @@ public class TestASTSimpleOptionalOptimizer extends
      */
     public void test_simpleOptional() throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+//
-                "PREFIX dc: <http://purl.org/dc/terms/> \n"+//
-                "PREFIX p1: <http://www.embergraph.org/> \n"+//
-                "SELECT * \n" + //
-                "WHERE { \n" + //
-                "  ?_var1 rdf:type <http://suawa.org/mediadb#Album>. \n" + //
-                "  ?_var1 p1:genre ?_var8.  \n" + //
-                "  ?_var8 dc:title ?_var9.  \n" + //
-                "  FILTER ((?_var9 in(\"Folk\", \"Hip-Hop\"))) . \n" + //
-                "  OPTIONAL { \n" + //
-                "    ?_var1 dc:title ?_var10 \n" + //
-                "  }.  \n" + //
-                "  OPTIONAL { \n" + //
-                "    ?_var1 p1:mainArtist ?_var12. \n" + //
-                "    ?_var12 dc:title ?_var11 \n" + //
-                "  } \n" + //
+        final String queryStr = "" +
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+
+                "PREFIX dc: <http://purl.org/dc/terms/> \n"+
+                "PREFIX p1: <http://www.embergraph.org/> \n"+
+                "SELECT * \n" +
+                "WHERE { \n" +
+                "  ?_var1 rdf:type <http://suawa.org/mediadb#Album>. \n" +
+                "  ?_var1 p1:genre ?_var8.  \n" +
+                "  ?_var8 dc:title ?_var9.  \n" +
+                "  FILTER ((?_var9 in(\"Folk\", \"Hip-Hop\"))) . \n" +
+                "  OPTIONAL { \n" +
+                "    ?_var1 dc:title ?_var10 \n" +
+                "  }.  \n" +
+                "  OPTIONAL { \n" +
+                "    ?_var1 p1:mainArtist ?_var12. \n" +
+                "    ?_var12 dc:title ?_var11 \n" +
+                "  } \n" +
                 "}";
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -170,16 +170,16 @@ public class TestASTSimpleOptionalOptimizer extends
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void test_sparql_bev_5() throws Exception {
 
-        final String queryStr = "" + //
-                "PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>\n" + //
-                "PREFIX  : <http://example.org/ns#>" + //
-                "SELECT ?a \n" + //
-                "WHERE" + //
-                "    { ?a :p ?v . \n" + //
-                "      OPTIONAL \n" + //
-                "        { ?a :q ?w } . \n" + //
-                "      FILTER (?w) . \n" + //
-                "    }\n" //
+        final String queryStr = "" +
+                "PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                "PREFIX  : <http://example.org/ns#>" +
+                "SELECT ?a \n" +
+                "WHERE" +
+                "    { ?a :p ?v . \n" +
+                "      OPTIONAL \n" +
+                "        { ?a :q ?w } . \n" +
+                "      FILTER (?w) . \n" +
+                "    }\n"
         ;
 
         /*
@@ -214,21 +214,21 @@ public class TestASTSimpleOptionalOptimizer extends
         {
 
             // :x3 :q ?w
-            expectedClause.addChild(new StatementPatternNode(//
+            expectedClause.addChild(new StatementPatternNode(
                     new VarNode("a"),// s
                     new ConstantNode(new Constant(p.getIV())),// p
                     new VarNode("v"),// o
                     null,// c
-                    Scope.DEFAULT_CONTEXTS//
+                    Scope.DEFAULT_CONTEXTS
                     ));
         
             // :x3 :q ?w
-            final StatementPatternNode liftedSp = new StatementPatternNode(//
+            final StatementPatternNode liftedSp = new StatementPatternNode(
                     new VarNode("a"),// s
                     new ConstantNode(new Constant(q.getIV())),// p
                     new VarNode("w"),// o
                     null,// c
-                    Scope.DEFAULT_CONTEXTS//
+                    Scope.DEFAULT_CONTEXTS
                     );
 
             expectedClause.addChild(liftedSp);
@@ -256,17 +256,17 @@ public class TestASTSimpleOptionalOptimizer extends
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void test_sparql_bev_5_withFilterInOptionalGroup() throws Exception {
 
-        final String queryStr = "" + //
-                "PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>\n" + //
-                "PREFIX  : <http://example.org/ns#>" + //
-                "SELECT ?a \n" + //
-                "WHERE" + //
-                "    { ?a :p ?v . \n" + //
-                "      OPTIONAL \n" + //
+        final String queryStr = "" +
+                "PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                "PREFIX  : <http://example.org/ns#>" +
+                "SELECT ?a \n" +
+                "WHERE" +
+                "    { ?a :p ?v . \n" +
+                "      OPTIONAL \n" +
                 "        { ?a :q ?w ." +
                 "          FILTER (BOUND(?w)) \n" +
-                "        } \n" + //
-                "    }\n" //
+                "        } \n" +
+                "    }\n"
         ;
 
         /*
@@ -305,21 +305,21 @@ public class TestASTSimpleOptionalOptimizer extends
         {
 
             // :x3 :q ?w
-            expectedClause.addChild(new StatementPatternNode(//
+            expectedClause.addChild(new StatementPatternNode(
                     new VarNode("a"),// s
                     new ConstantNode(new Constant(p.getIV())),// p
                     new VarNode("v"),// o
                     null,// c
-                    Scope.DEFAULT_CONTEXTS//
+                    Scope.DEFAULT_CONTEXTS
                     ));
         
             // :x3 :q ?w
-            final StatementPatternNode liftedSp = new StatementPatternNode(//
+            final StatementPatternNode liftedSp = new StatementPatternNode(
                     new VarNode("a"),// s
                     new ConstantNode(new Constant(q.getIV())),// p
                     new VarNode("w"),// o
                     null,// c
-                    Scope.DEFAULT_CONTEXTS//
+                    Scope.DEFAULT_CONTEXTS
                     );
 
             expectedClause.addChild(liftedSp);
@@ -328,11 +328,11 @@ public class TestASTSimpleOptionalOptimizer extends
             
             final List<FilterNode> filters = new LinkedList<FilterNode>();
             
-            final FilterNode filterNode = new FilterNode(//
+            final FilterNode filterNode = new FilterNode(
                     new FunctionNode(FunctionRegistry.BOUND, null,// scalarValues
-                            new ValueExpressionNode[] {//
-                            new VarNode("w")//
-                            }//
+                            new ValueExpressionNode[] {
+                            new VarNode("w")
+                            }
                     ));
             
             final GlobalAnnotations globals = new GlobalAnnotations(
@@ -375,17 +375,17 @@ public class TestASTSimpleOptionalOptimizer extends
 //    @SuppressWarnings({ "rawtypes", "unchecked" })
 //    public void test_sparql_bev_5_withFilterInOptionalGroup2() throws Exception {
 //
-//        final String queryStr = "" + //
-//                "PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>\n" + //
-//                "PREFIX  : <http://example.org/ns#>" + //
-//                "SELECT ?a \n" + //
-//                "WHERE" + //
-//                "    { ?a :p ?v . \n" + //
-//                "      OPTIONAL \n" + //
+//        final String queryStr = "" +
+//                "PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+//                "PREFIX  : <http://example.org/ns#>" +
+//                "SELECT ?a \n" +
+//                "WHERE" +
+//                "    { ?a :p ?v . \n" +
+//                "      OPTIONAL \n" +
 //                "        { ?a :q ?w ." +
 //                "          FILTER (?v) \n" +
-//                "        } \n" + //
-//                "    }\n" //
+//                "        } \n" +
+//                "    }\n"
 //        ;
 //
 //        /*
@@ -422,21 +422,21 @@ public class TestASTSimpleOptionalOptimizer extends
 //        {
 //
 //            // :x3 :q ?w
-//            expectedClause.addChild(new StatementPatternNode(//
+//            expectedClause.addChild(new StatementPatternNode(
 //                    new VarNode("a"),// s
 //                    new ConstantNode(new Constant(p.getIV())),// p
 //                    new VarNode("v"),// o
 //                    null,// c
-//                    Scope.DEFAULT_CONTEXTS//
+//                    Scope.DEFAULT_CONTEXTS
 //                    ));
 //        
 //            // :x3 :q ?w
-//            final StatementPatternNode liftedSp = new StatementPatternNode(//
+//            final StatementPatternNode liftedSp = new StatementPatternNode(
 //                    new VarNode("a"),// s
 //                    new ConstantNode(new Constant(q.getIV())),// p
 //                    new VarNode("w"),// o
 //                    null,// c
-//                    Scope.DEFAULT_CONTEXTS//
+//                    Scope.DEFAULT_CONTEXTS
 //                    );
 //
 //            expectedClause.addChild(liftedSp);

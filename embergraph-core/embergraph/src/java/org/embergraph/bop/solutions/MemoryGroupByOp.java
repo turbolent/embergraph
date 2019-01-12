@@ -165,8 +165,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
         @Override
 		public String toString() {
-			return super.toString() + //
-					"{group=" + Arrays.toString(vals) + //
+			return super.toString() +
+					"{group=" + Arrays.toString(vals) +
 					"}";
 		}
 
@@ -732,13 +732,13 @@ public class MemoryGroupByOp extends GroupByOp {
      *            Used to report type errors.
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private static void doAggregate(//
-            final IAggregate<?> expr,//
-            final IVariable<?> var,//
-            final boolean selectDependency,//
-            final IBindingSet aggregates,//
-            final Iterable<IBindingSet> solutions,//
-            final BOpStats stats//
+    private static void doAggregate(
+            final IAggregate<?> expr,
+            final IVariable<?> var,
+            final boolean selectDependency,
+            final IBindingSet aggregates,
+            final Iterable<IBindingSet> solutions,
+            final BOpStats stats
             ) {
         
         try {

@@ -378,8 +378,8 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     			+ ", bnodes.size()=" + (bnodes != null ? String.valueOf(bnodes.size()) : "null")
     			+ ", distinctTermMap.size()=" + (distinctTermMap != null ? String.valueOf(distinctTermMap.size()) : "null")
     			+ ", reifiedStmts.size()=" + (reifiedStmts != null ? String.valueOf(reifiedStmts.size()) : "null")
-    			+ ", deferredStmts.size()=" + (deferredStmts != null ? String.valueOf(deferredStmts.size()) : "null")//
-				+ (queue == null ? "" : ", queue.size=" + queue.size())//
+    			+ ", deferredStmts.size()=" + (deferredStmts != null ? String.valueOf(deferredStmts.size()) : "null")
+				+ (queue == null ? "" : ", queue.size=" + queue.size())
     			;
     	
     }
@@ -1695,15 +1695,15 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     	/**
     	 * Constructor used when merging multiple batches.
     	 */
-    	private Batch(  final AbstractTripleStore database, //
-				final AbstractTripleStore statementStore, //
-				final boolean readOnly, //
-				final IChangeLog changeLog, //
-				final IWrittenSPOArray didWriteCallback, //
-				final int numValues, //
-				final BigdataValue[] values, //
-				final int numStmts, //
-				final BigdataStatement[] stmts//
+    	private Batch(  final AbstractTripleStore database,
+				final AbstractTripleStore statementStore,
+				final boolean readOnly,
+				final IChangeLog changeLog,
+				final IWrittenSPOArray didWriteCallback,
+				final int numValues,
+				final BigdataValue[] values,
+				final int numStmts,
+				final BigdataStatement[] stmts
 		) {
 			this.database = database;
 			this.statementStore = statementStore;
@@ -1925,10 +1925,10 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     	}
     	
     	static private void addTerms(
-    			final AbstractTripleStore database, //
-    			final BigdataValue[] terms, //
-    			final int numTerms,//
-    			final boolean readOnly//
+    			final AbstractTripleStore database,
+    			final BigdataValue[] terms,
+    			final int numTerms,
+    			final boolean readOnly
     			) {
 
     	    if(log.isInfoEnabled())
@@ -2021,18 +2021,18 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
             final long nwritten = writeSPOs(database, statementStore, tmp.clone(), numStmts, didWriteCallback);
 
 //            if (sids) {
-    //
+
 //                /*
 //                 * Unify each assigned statement identifier with the context
 //                 * position on the corresponding statement.
 //                 */
-    //
+
 //                for (int i = 0; i < numStmts; i++) {
 //                    
 //                    final SPO spo = tmp[i];
 //                    
 //                    final BigdataStatement stmt = stmts[i];
-    //
+
 //                    // verify that the BigdataStatement and SPO are the same triple.
 //                    assert stmt.s() == spo.s;
 //                    assert stmt.p() == spo.p;
@@ -2042,9 +2042,9 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //                    
 //                    if (c == null)
 //                        continue;
-    //
+
 ////                    if (c instanceof URI) {
-    ////
+    //
 ////                        throw new UnificationException(
 ////                                "URI not permitted in context position when statement identifiers are enabled: "
 ////                                        + stmt);
@@ -2052,13 +2052,13 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 ////                    }
 //                    
 //                    if( c instanceof BNode) {
-    //
+
 //                        final IV sid = spo.getStatementIdentifier();
 //                        
 //                        if(c.getIV() != null) {
 //                            
 //                            if (!sid.equals(c.getIV())) {
-    //
+
 //                                throw new UnificationException(
 //                                        "Can not unify blankNode "
 //                                                + c
@@ -2082,7 +2082,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //                                        + "=" + sid);
 //                                
 //                            }
-    //
+
 //                        }
 //                        
 //                    }

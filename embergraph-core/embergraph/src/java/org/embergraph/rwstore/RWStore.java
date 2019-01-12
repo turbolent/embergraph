@@ -544,9 +544,9 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     private int cMaxDirectBuffers = 20; // 20M of direct buffers
     static final int cDirectAllocationOffset = 64 * 1024;
 
-    // ///////////////////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////////////////
     // RWStore Data
-    // ///////////////////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////////////////
 
     private final File m_fd;
 //  private RandomAccessFile m_raf;
@@ -914,7 +914,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         //	there is no significant advantage to parameterize this since file cache
         //	locality is handled by size of the allocation - 256K is a reasonable
         //	number as 32 * 8 * 1K size.
-        //
+
         // Equally there is no benefit to increasing the size of the Allocators beyond
         //	1K.
 //        cDefaultMetaBitsSize = Integer.valueOf(fileMetadata.getProperty(
@@ -3195,7 +3195,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 //
 //  // --------------------------------------------------------------------------------------------
 //  // rollbackTransaction
-//  //
+//
 //  // clear write cache
 //  // read in last committed header
 //  synchronized public void rollbackTransaction() {
@@ -3615,7 +3615,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
             if (m_metaBitsAddr == 0) {
             	// Allocate special region to be able to store maximum metabits (128k of 2 64K demi-space
             	// Must be aligned on 128K boundary and allocations are made in units of 64K.
-            	//
+
             	// May need to extend the file for teh demi-space!
             	while (m_nextAllocation % 2 != 0) {
             		m_nextAllocation--;

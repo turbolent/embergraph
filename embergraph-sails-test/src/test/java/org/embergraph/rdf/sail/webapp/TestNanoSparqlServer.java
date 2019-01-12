@@ -224,13 +224,13 @@ public class TestNanoSparqlServer extends TestCase2 {
 	        m_fixture.start();
 	
 	//        final WebAppContext wac = NanoSparqlServer.getWebApp(m_fixture);
-	//
+
 	//        wac.start();
-	//
+
 	//        for (Map.Entry<String, String> e : initParams.entrySet()) {
-	//
+
 	//            wac.setInitParameter(e.getKey(), e.getValue());
-	//
+
 	//        }
 	
 	        final int port = NanoSparqlServer.getLocalPort(m_fixture);

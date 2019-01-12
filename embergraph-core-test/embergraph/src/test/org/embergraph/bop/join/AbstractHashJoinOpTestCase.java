@@ -135,7 +135,7 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
                 final BigdataURI _luke = vf.createURI(uriString+"luke");
 
                 final BigdataValue[] a = new BigdataValue[] {
-                      _knows,//
+                      _knows,
                       _brad,
                       _john,
                       _fred,
@@ -160,7 +160,7 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
             }
 
             // data to insert (in key order for convenience).
-            final SPO[] a = {//
+            final SPO[] a = {
                     new SPO(paul, knows, mary, StatementEnum.Explicit),// [0]
                     new SPO(paul, knows, brad, StatementEnum.Explicit),// [1]
                     
@@ -267,28 +267,28 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
         
         final Predicate<IV> predOp = new Predicate<IV>(
                 new IVariableOrConstant[] { new Constant<IV>(setup.john),
-                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {//
+                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { setup.spoNamespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { setup.spoNamespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
 
         final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars,
                 predOp, queryId);
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
                                           new Constant<IV>(setup.fred),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -393,28 +393,28 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
         
         final Predicate<IV> predOp = new Predicate<IV>(
                 new IVariableOrConstant[] { new Constant<IV>(setup.john),
-                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {//
+                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { setup.spoNamespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { setup.spoNamespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
 
         final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars,
                 predOp, queryId);
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
                                           new Constant<IV>(setup.fred),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -509,32 +509,32 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
 
         final Predicate<IV> predOp = new Predicate<IV>(
                 new IVariableOrConstant[] { new Constant<IV>(setup.john),
-                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {//
+                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { setup.spoNamespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { setup.spoNamespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
 
         final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars, predOp,
-                queryId,//
+                queryId,
                 new NV(JoinAnnotations.CONSTRAINTS,
                         new IConstraint[] { Constraint
-                                .wrap(new EQConstant(x, new Constant<IV>(setup.brad))),//
+                                .wrap(new EQConstant(x, new Constant<IV>(setup.brad))),
                         }));
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-//                new ListBindingSet(//
-//                        new IVariable[] { x },//
-//                        new IConstant[] { new Constant<String>("Mary") }//
-//                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+//                new ListBindingSet(
+//                        new IVariable[] { x },
+//                        new IConstant[] { new Constant<String>("Mary") }
+//                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
                                           new Constant<IV>(setup.fred),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -629,31 +629,31 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
 
         final Predicate<IV> predOp = new Predicate<IV>(
                 new IVariableOrConstant[] { new Constant<IV>(setup.john),
-                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {//
+                        new Constant<IV>(setup.knows), x }, NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { setup.spoNamespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { setup.spoNamespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
 
         final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars,
-                predOp, queryId, //
+                predOp, queryId,
                 new NV(JoinAnnotations.SELECT,
-                        new IVariable[] { x })//
+                        new IVariable[] { x })
         );
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x/*, y*/ },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x/*, y*/ },
                         new IConstant[] { new Constant<IV>(setup.brad),
 //                                          new Constant<String>("Fred"),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -755,16 +755,16 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
         final Predicate<IV> pred = new Predicate<IV>(
                 new IVariableOrConstant[] { new Constant<IV>(setup.paul),
                         new Constant<IV>(setup.knows), x },
-                NV.asMap(new NV[] {//
+                NV.asMap(new NV[] {
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { setup.spoNamespace }),//
-                new NV(Predicate.Annotations.BOP_ID, predId),//
-                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),//
+                        new String[] { setup.spoNamespace }),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 // constraint x != Luke
                 new NV(PipelineJoin.Annotations.CONSTRAINTS,
                         new IConstraint[] { Constraint.wrap(new NEConstant(x,
                                 new Constant<IV>(setup.luke))) }),
-                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
         }));
         
         final PipelineOp query = newJoin(
@@ -814,22 +814,22 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
         }
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
+        final IBindingSet[] expected = new IBindingSet[] {
                 // bset1: optional solution.
-                new ListBindingSet(//
-                        new IVariable[] { },//
-                        new IConstant[] {}//
-                ),//
+                new ListBindingSet(
+                        new IVariable[] { },
+                        new IConstant[] {}
+                ),
                 // bset2: optional solution.
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.luke) }//
-                ),//
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.luke) }
+                ),
                   // bset3: joins.
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
         };
 
         final MockQueryContext queryContext = new MockQueryContext(queryId);
@@ -906,16 +906,16 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
         final Predicate<IV> pred = new Predicate<IV>(
                 new IVariableOrConstant[] { new Constant<IV>(setup.paul),
                         new Constant<IV>(setup.knows), x },
-                NV.asMap(new NV[] {//
+                NV.asMap(new NV[] {
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { setup.spoNamespace }),//
-                new NV(Predicate.Annotations.BOP_ID, predId),//
-                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),//
+                        new String[] { setup.spoNamespace }),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
                 // constraint x != Luke
                 new NV(PipelineJoin.Annotations.CONSTRAINTS,
                         new IConstraint[] { Constraint.wrap(new NEConstant(x,
                                 new Constant<IV>(setup.luke))) }),
-                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
         }));
         
         final PipelineOp query = newJoin(
@@ -978,36 +978,36 @@ abstract public class AbstractHashJoinOpTestCase extends TestCase2 {
         }
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
+        final IBindingSet[] expected = new IBindingSet[] {
 //                // bset1: optional solution.
-//                new ListBindingSet(//
-//                        new IVariable[] { },//
-//                        new IConstant[] {}//
-//                ),//
+//                new ListBindingSet(
+//                        new IVariable[] { },
+//                        new IConstant[] {}
+//                ),
 //                // bset2: optional solution.
-//                new ListBindingSet(//
-//                        new IVariable[] { x },//
-//                        new IConstant[] { new Constant<String>("Luke") }//
-//                ),//
+//                new ListBindingSet(
+//                        new IVariable[] { x },
+//                        new IConstant[] { new Constant<String>("Luke") }
+//                ),
                   // bset3: joins.
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
         };
 
         // the expected solutions for the alternative sink (the optional solutions).
-        final IBindingSet[] expected2 = new IBindingSet[] {//
+        final IBindingSet[] expected2 = new IBindingSet[] {
                 // bset1: optional solution.
-                new ListBindingSet(//
-                        new IVariable[] { },//
-                        new IConstant[] {}//
-                ),//
+                new ListBindingSet(
+                        new IVariable[] { },
+                        new IConstant[] {}
+                ),
                 // bset2: optional solution.
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.luke) }//
-                ),//
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.luke) }
+                ),
         };
 
         final MockQueryContext queryContext = new MockQueryContext(queryId);

@@ -220,11 +220,11 @@ public class TestXXXCShardSplitHandler extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );

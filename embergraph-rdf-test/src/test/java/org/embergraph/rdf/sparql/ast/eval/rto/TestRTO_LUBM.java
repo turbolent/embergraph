@@ -77,7 +77,7 @@ public class TestRTO_LUBM extends AbstractRTOTestCase {
      */
     public void test_LUBM_Q2() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/LUBM-Q2", // testURI,
                 "rto/LUBM-Q2.rq",// queryFileURL
                 "src/test/resources/data/lehigh/LUBM-U1.rdf.gz",// dataFileURL
@@ -101,7 +101,7 @@ public class TestRTO_LUBM extends AbstractRTOTestCase {
      */
     public void test_LUBM_Q8() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/LUBM-Q8", // testURI,
                 "rto/LUBM-Q8.rq",// queryFileURL
                 "src/test/resources/data/lehigh/LUBM-U1.rdf.gz",// dataFileURL
@@ -137,7 +137,7 @@ public class TestRTO_LUBM extends AbstractRTOTestCase {
      */
     public void test_LUBM_Q9() throws Exception {
         
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/LUBM-Q9", // testURI,
                 "rto/LUBM-Q9.rq",// queryFileURL
                 "src/test/resources/data/lehigh/LUBM-U1.rdf.gz",// dataFileURL

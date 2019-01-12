@@ -189,7 +189,7 @@ public abstract class ProxyBigdataSailTestCase
 
                 final String failMessage = "Threads left active after task"
                         + ": test="
-                        + getName()//
+                        + getName()
                         + ", delegate=" + getOurDelegate().getClass().getName()
                         + ", startupCount=" + startupActiveThreads
                         + ", teardownCount=" + tearDownActiveThreads

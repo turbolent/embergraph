@@ -45,17 +45,17 @@ import org.embergraph.util.InnerCause;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class IndexPartitionWriteTask<//
-H extends IndexAsyncWriteStats<L, HS>, //
-O extends Object, //
-E extends KVO<O>, //
-L extends PartitionLocator, //
-S extends IndexPartitionWriteTask, //
-HS extends IndexPartitionWriteStats,//
-M extends IndexWriteTask<H, O, E, S, L, HS, T, R, A>,//
-T extends IKeyArrayIndexProcedure,//
-R,//
-A//
+public class IndexPartitionWriteTask<
+H extends IndexAsyncWriteStats<L, HS>,
+O extends Object,
+E extends KVO<O>,
+L extends PartitionLocator,
+S extends IndexPartitionWriteTask,
+HS extends IndexPartitionWriteStats,
+M extends IndexWriteTask<H, O, E, S, L, HS, T, R, A>,
+T extends IKeyArrayIndexProcedure,
+R,
+A
 > extends AbstractSubtask<HS, M, E, L> {
 
     /**

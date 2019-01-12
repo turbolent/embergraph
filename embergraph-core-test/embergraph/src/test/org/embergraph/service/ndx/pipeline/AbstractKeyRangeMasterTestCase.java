@@ -417,12 +417,12 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
 ////            
 ////            if (cause == null)
 ////                throw new IllegalArgumentException();
-////
+//
 ////            lock.lockInterruptibly();
 ////            try {
-////
+//
 ////                stats.redirectCount++;
-////
+//
 ////                /*
 ////                 * Note: We do not need to notify the "client" because the
 ////                 * master is directly accessing the MDI object.
@@ -432,13 +432,13 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
 //////                 * locator.
 //////                 */
 //////                ndx.staleLocator(ndx.getTimestamp(), (L) sink.locator, cause);
-////
+//
 ////                /*
 ////                 * Redirect the chunk and anything in the buffer to the appropriate
 ////                 * output sinks.
 ////                 */
 ////                handleRedirect(sink, chunk);
-////
+//
 ////                /*
 ////                 * Remove the buffer from the map
 ////                 * 
@@ -448,9 +448,9 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
 ////                 * MUST be MUTEX or synchronized.
 ////                 */
 ////                removeOutputBuffer((L) sink.locator, sink);
-////
+//
 ////            } finally {
-////
+//
 ////                lock.unlock();
 ////                
 ////            }

@@ -804,7 +804,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
          */
         protected IASTOptimizer initGPURangeCountOptimizer() {
 
-           return ClassPathUtil.classForName(//
+           return ClassPathUtil.classForName(
                  "org.embergraph.rdf.gpu.sparql.ast.optimizers.ASTGPURangeCountOptimizer", // preferredClassName,
                  null, // defaultClass,
                  IASTOptimizer.class, // sharedInterface,
@@ -821,7 +821,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
          */
         protected IASTOptimizer initGPUFastRangeCountOptimizer() {
 
-           return ClassPathUtil.classForName(//
+           return ClassPathUtil.classForName(
                  "org.embergraph.rdf.gpu.sparql.ast.optimizers.ASTGPUFastRangeCountOptimizer", // preferredClassName,
                  null, // defaultClass,
                  IASTOptimizer.class, // sharedInterface,
@@ -836,7 +836,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
          */
         protected IASTOptimizer initGPUAccelerationOptimizer() {
 
-            return ClassPathUtil.classForName(//
+            return ClassPathUtil.classForName(
                     "org.embergraph.rdf.gpu.sparql.ast.optimizers.ASTGPUAccelerationOptimizer", // preferredClassName,
                     null, // defaultClass,
                     IASTOptimizer.class, // sharedInterface,

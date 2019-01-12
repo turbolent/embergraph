@@ -146,8 +146,8 @@ public class TestUnicodeHelper extends TestCase2 {
     public void test_encodeDecode2() throws IOException {
         
         doEncodeDecodeTest(new UnicodeHelper(getUnicodeCompressor()),
-                new String[] { //
-            "en", "embergraph" //
+                new String[] {
+            "en", "embergraph"
             });
 
     }

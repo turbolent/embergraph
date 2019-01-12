@@ -347,10 +347,10 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      *             <code>null</code>.
      */
     public FilterNode[][] getJoinGraphConstraints(
-            final IJoinNode[] path,//
-            final FilterNode[] joinGraphConstraints,//
+            final IJoinNode[] path,
+            final FilterNode[] joinGraphConstraints,
             Set<IVariable<?>> boundVars,// 
-            final boolean pathIsComplete//
+            final boolean pathIsComplete
             ) {
 
         if (path == null)

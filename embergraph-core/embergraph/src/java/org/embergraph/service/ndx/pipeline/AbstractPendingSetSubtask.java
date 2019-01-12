@@ -49,11 +49,11 @@ import org.embergraph.service.master.IAsynchronousClientTask;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public abstract class AbstractPendingSetSubtask<//
-HS extends AbstractSubtaskStats, //
-M extends AbstractPendingSetMasterTask<? extends AbstractPendingSetMasterStats<L, HS>, E, ? extends AbstractPendingSetSubtask, L>, //
-E, //
-L> //
+public abstract class AbstractPendingSetSubtask<
+HS extends AbstractSubtaskStats,
+M extends AbstractPendingSetMasterTask<? extends AbstractPendingSetMasterStats<L, HS>, E, ? extends AbstractPendingSetSubtask, L>,
+E,
+L>
         extends AbstractSubtask<HS, M, E, L> {
 
     final protected IAsynchronousClientTask<?, E> clientTask;
@@ -205,7 +205,7 @@ L> //
             // final int maxtries = 3;
             // final long retryDelayNanos = TimeUnit.MILLISECONDS.toNanos(1000);
             // for (int ntries = 0; ntries < maxtries; ntries++) {
-            //
+
             // try {
 
             /*
@@ -236,22 +236,22 @@ L> //
             }
             // done = true;
             // break;
-            //
+
             // } catch (ExecutionException ex) {
-            //
+
             // if (ntries + 1 < maxtries) {
-            //
+
             // log.error("Will retry (" + ntries + " of " + maxtries
             // + "): " + this, ex);
-            //
+
             // continue;
-            //
+
             // }
-            //
+
             // log.fatal(this, ex);
-            //
+
             // throw ex;
-            //
+
             // }
             // }
             // if (!done) {

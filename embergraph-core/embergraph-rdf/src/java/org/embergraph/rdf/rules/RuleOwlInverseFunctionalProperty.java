@@ -52,12 +52,12 @@ public class RuleOwlInverseFunctionalProperty extends Rule {
      */
     public RuleOwlInverseFunctionalProperty(String relationName, Vocabulary vocab) {
 
-        super( "owlInverseFunctionalProperty", //
-                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.SAMEAS), var("c")),//
-                new SPOPredicate[] {//
-                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.INVERSEFUNCTIONALPROPERTY)),//
-                    new SPOPredicate(relationName,var("b"), var("x"), var("a")),//
-                    new SPOPredicate(relationName,var("c"), var("x"), var("a"))//
+        super( "owlInverseFunctionalProperty",
+                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.SAMEAS), var("c")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.INVERSEFUNCTIONALPROPERTY)),
+                    new SPOPredicate(relationName,var("b"), var("x"), var("a")),
+                    new SPOPredicate(relationName,var("c"), var("x"), var("a"))
                 },
                 new IConstraint[] {
 					Constraint.wrap(new NE(var("b"),var("c")))

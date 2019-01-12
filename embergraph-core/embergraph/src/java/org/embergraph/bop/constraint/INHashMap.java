@@ -110,9 +110,9 @@ public class INHashMap<T> extends INConstraint<T> {
      */
     public INHashMap(final IVariable<T> x, final IConstant<T>[] set) {
 
-        super(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(Annotations.VARIABLE, x),//
-                new NV(Annotations.SET, set),//
+        super(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(Annotations.VARIABLE, x),
+                new NV(Annotations.SET, set),
                 }));
         
     }

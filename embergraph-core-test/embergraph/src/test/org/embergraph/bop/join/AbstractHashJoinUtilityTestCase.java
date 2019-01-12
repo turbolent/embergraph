@@ -551,23 +551,23 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
      * @param right
      * @param expected
      */
-    protected void doHashJoinTest(//
-            final JoinTypeEnum joinType,//
-            final IVariable<?>[] joinVars,//
-            final IVariable<?>[] selectVars,//
-            final IConstraint[] constraints,//
-            final List<IBindingSet> left, //
-            final List<IBindingSet> right,//
-            final IBindingSet[] expected//
+    protected void doHashJoinTest(
+            final JoinTypeEnum joinType,
+            final IVariable<?>[] joinVars,
+            final IVariable<?>[] selectVars,
+            final IConstraint[] constraints,
+            final List<IBindingSet> left,
+            final List<IBindingSet> right,
+            final IBindingSet[] expected
             ) {
 
         // Setup a mock PipelineOp for the test.
         final PipelineOp op = new MockPipelineOp(BOp.NOARGS, 
                 new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                        new String[] { getName() }),//
-                new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                new NV(JoinAnnotations.SELECT, selectVars),//
-                new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                        new String[] { getName() }),
+                new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                new NV(JoinAnnotations.SELECT, selectVars),
+                new NV(JoinAnnotations.CONSTRAINTS, constraints)
                 );
 
         final IHashJoinUtility state = newHashJoinUtility(op, joinType);
@@ -736,17 +736,17 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
         final List<IBindingSet> right = setup.getRight1();
 
         // The expected solutions to the join.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
                                           new Constant<IV>(setup.fred),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         doHashJoinTest(JoinTypeEnum.Normal, joinVars, selectVars, constraints,
@@ -783,17 +783,17 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
         final List<IBindingSet> right = setup.getRight1();
 
         // The expected solutions to the join.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
                                           new Constant<IV>(setup.fred),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         doHashJoinTest(JoinTypeEnum.Normal, joinVars, selectVars, constraints,
@@ -830,19 +830,19 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
         final List<IBindingSet> right = setup.getRight1();
 
         // The expected solutions to the join.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x, y },//
+                                          new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x, y },
                         new IConstant[] { new Constant<IV>(setup.john),
                                           new Constant<IV>(setup.brad),
                                           new Constant<IV>(setup.fred),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         doHashJoinTest(JoinTypeEnum.Normal, joinVars, selectVars, constraints,
@@ -898,41 +898,41 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings("rawtypes")
         final IBindingSet[] firstSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.mary),
-                                          new Constant<IV>(setup.john) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.john) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.fred),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.leon),
-                                          new Constant<IV>(setup.john) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.john) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.leon),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.paul),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
+                                          new Constant<IV>(setup.leon) }
+                ),
         };
         assertEquals(7,firstSolutions.length);
 
@@ -941,46 +941,46 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings("rawtypes")
         final IBindingSet[] otherSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.fred) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.fred) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.mary),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
-                                          new Constant<IV>(setup.fred) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.fred) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.leon),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.paul),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.paul),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
+                                          new Constant<IV>(setup.brad) }
+                ),
         };
         assertEquals(8,otherSolutions.length);
         
@@ -1003,77 +1003,77 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          * </pre>
          */
         @SuppressWarnings("rawtypes")
-        final IBindingSet[] expected = new IBindingSet[] {//
+        final IBindingSet[] expected = new IBindingSet[] {
             // many-to-many join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.brad)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.fred)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.fred)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.leon)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.leon)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.brad)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.fred)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.fred)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.leon)}//
-            ),//
+                                      new Constant<IV>(setup.leon)}
+            ),
             // 1-to-1 join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.mary),
                                       new Constant<IV>(setup.john),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
             // many-to-1 join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.leon),
                                       new Constant<IV>(setup.john),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.brad)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.leon),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
             // 1-many join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.paul),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.leon)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.leon)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.paul),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
         };
 
         IHashJoinUtility first = null;
@@ -1083,19 +1083,19 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
             // Setup a mock PipelineOp for the test.
             final PipelineOp firstOp = new MockPipelineOp(BOp.NOARGS, 
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars)//
-//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars)
+//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             // Setup a mock PipelineOp for the test.
             final PipelineOp otherOp = new MockPipelineOp(BOp.NOARGS, 
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars)//
-//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars)
+//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             first = newHashJoinUtility(firstOp,
@@ -1176,41 +1176,41 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings("rawtypes")
         final IBindingSet[] firstSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.mary),
-                                          new Constant<IV>(setup.john) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.john) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.fred),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.leon),
-                                          new Constant<IV>(setup.john) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.john) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.leon),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.paul),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
+                                          new Constant<IV>(setup.leon) }
+                ),
         };
         assertEquals(7,firstSolutions.length);
 
@@ -1219,46 +1219,46 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings("rawtypes")
         final IBindingSet[] otherSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.fred) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.fred) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.mary),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.brad),
-                                          new Constant<IV>(setup.fred) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.fred) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.leon),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.paul),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.paul),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
+                                          new Constant<IV>(setup.brad) }
+                ),
         };
         assertEquals(8,otherSolutions.length);
         
@@ -1281,83 +1281,83 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          * </pre>
          */
         @SuppressWarnings("rawtypes")
-        final IBindingSet[] expected = new IBindingSet[] {//
+        final IBindingSet[] expected = new IBindingSet[] {
             // many-to-many join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.brad)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.fred)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.fred)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.leon)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.leon)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.brad)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.fred)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.fred)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.john),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.leon)}//
-            ),//
+                                      new Constant<IV>(setup.leon)}
+            ),
             // 1-to-1 join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.mary),
                                       new Constant<IV>(setup.john),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
             // OPTIONAL JOIN
-            new ListBindingSet(//
-                    new IVariable[] { a, x },//
+            new ListBindingSet(
+                    new IVariable[] { a, x },
                     new IConstant[] { new Constant<IV>(setup.fred),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
             // many-to-1 join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.leon),
                                       new Constant<IV>(setup.john),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.brad)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.leon),
                                       new Constant<IV>(setup.mary),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
             // 1-many join
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.paul),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.leon)}//
-            ),//
-            new ListBindingSet(//
-                    new IVariable[] { a, x, y },//
+                                      new Constant<IV>(setup.leon)}
+            ),
+            new ListBindingSet(
+                    new IVariable[] { a, x, y },
                     new IConstant[] { new Constant<IV>(setup.paul),
                                       new Constant<IV>(setup.leon),
-                                      new Constant<IV>(setup.brad)}//
-            ),//
+                                      new Constant<IV>(setup.brad)}
+            ),
         };
 
         IHashJoinUtility first = null;
@@ -1367,19 +1367,19 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
             // Setup a mock PipelineOp for the test.
             final PipelineOp firstOp = new MockPipelineOp(BOp.NOARGS, 
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars)//
-//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars)
+//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             // Setup a mock PipelineOp for the test.
             final PipelineOp otherOp = new MockPipelineOp(BOp.NOARGS, 
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars)//
-//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars)
+//                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             first = newHashJoinUtility(firstOp,
@@ -1492,28 +1492,28 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
         
         // The join constraints.
         final IConstraint[] constraints = constrain ? new IConstraint[] { Constraint
-                .wrap(new EQConstant(y, new Constant<IV>(setup.brad))),//
+                .wrap(new EQConstant(y, new Constant<IV>(setup.brad))),
         } : null;
 
         /**
          * Setup the solutions for [first].
          */
         final IBindingSet[] firstSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.mary) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.leon) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+                                          new Constant<IV>(setup.leon) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.fred),
-                                          new Constant<IV>(setup.leon) }//
-                )//
+                                          new Constant<IV>(setup.leon) }
+                )
         };
         assertEquals(3,firstSolutions.length);
 
@@ -1521,15 +1521,15 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          * Setup the source solutions for [other].
          */
         final IBindingSet[] otherSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.brad) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, y },//
+                                          new Constant<IV>(setup.brad) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { a, y },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.fred) }//
+                                          new Constant<IV>(setup.fred) }
                 )
         };
         assertEquals(2,otherSolutions.length);
@@ -1538,11 +1538,11 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          * Setup the source solutions for [other].
          */
         final IBindingSet[] moreSolutions = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[] { a, z },//
+                new ListBindingSet(
+                        new IVariable[] { a, z },
                         new IConstant[] { new Constant<IV>(setup.john),
-                                          new Constant<IV>(setup.mary) }//
-                ),//
+                                          new Constant<IV>(setup.mary) }
+                ),
         };
         assertEquals(1,moreSolutions.length);
         
@@ -1560,113 +1560,113 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
         final IBindingSet[] expected;
         if (optional) {
         	if (constraints == null) {
-	        	expected = new IBindingSet[] {//
+	        	expected = new IBindingSet[] {
 	            // many-to-many join
-	            new ListBindingSet(//
-	                    new IVariable[] { a, x, y, z },//
+	            new ListBindingSet(
+	                    new IVariable[] { a, x, y, z },
 	                    new IConstant[] { new Constant<IV>(setup.john),
 	                                      new Constant<IV>(setup.mary),
 	                                      new Constant<IV>(setup.brad),
-	                                      new Constant<IV>(setup.mary)}//
-	            ),//
-	            new ListBindingSet(//
-	                    new IVariable[] { a, x, y, z },//
+	                                      new Constant<IV>(setup.mary)}
+	            ),
+	            new ListBindingSet(
+	                    new IVariable[] { a, x, y, z },
 	                    new IConstant[] { new Constant<IV>(setup.john),
 	                                      new Constant<IV>(setup.mary),
 	                                      new Constant<IV>(setup.fred),
-	                                      new Constant<IV>(setup.mary)}//
-	            ),//
-	            new ListBindingSet(//
-	                    new IVariable[] { a, x, y, z },//
+	                                      new Constant<IV>(setup.mary)}
+	            ),
+	            new ListBindingSet(
+	                    new IVariable[] { a, x, y, z },
 	                    new IConstant[] { new Constant<IV>(setup.john),
 	                                      new Constant<IV>(setup.leon),
 	                                      new Constant<IV>(setup.brad),
-	                                      new Constant<IV>(setup.mary)}//
-	            ),//
-	            new ListBindingSet(//
-	                    new IVariable[] { a, x, y, z },//
+	                                      new Constant<IV>(setup.mary)}
+	            ),
+	            new ListBindingSet(
+	                    new IVariable[] { a, x, y, z },
 	                    new IConstant[] { new Constant<IV>(setup.john),
 	                                      new Constant<IV>(setup.leon),
 	                                      new Constant<IV>(setup.fred),
-	                                      new Constant<IV>(setup.mary)}//
-	            ),//
-                new ListBindingSet(//
-                        new IVariable[] { a, x },//
+	                                      new Constant<IV>(setup.mary)}
+	            ),
+                new ListBindingSet(
+                        new IVariable[] { a, x },
                         new IConstant[] { new Constant<IV>(setup.fred),
                                           new Constant<IV>(setup.leon)})
 	        };
         	} else {
-	        	expected = new IBindingSet[] {//
+	        	expected = new IBindingSet[] {
 	    	            // many-to-many join
-	    	            new ListBindingSet(//
-	    	                    new IVariable[] { a, x, y, z },//
+	    	            new ListBindingSet(
+	    	                    new IVariable[] { a, x, y, z },
 	    	                    new IConstant[] { new Constant<IV>(setup.john),
 	    	                                      new Constant<IV>(setup.mary),
 	    	                                      new Constant<IV>(setup.brad),
-	    	                                      new Constant<IV>(setup.mary)}//
-	    	            ),//
-	    	            new ListBindingSet(//
-	    	                    new IVariable[] { a, x, y, z },//
+	    	                                      new Constant<IV>(setup.mary)}
+	    	            ),
+	    	            new ListBindingSet(
+	    	                    new IVariable[] { a, x, y, z },
 	    	                    new IConstant[] { new Constant<IV>(setup.john),
 	    	                                      new Constant<IV>(setup.leon),
 	    	                                      new Constant<IV>(setup.brad),
-	    	                                      new Constant<IV>(setup.mary)}//
-	    	            ),//
-	                    new ListBindingSet(//
-	                            new IVariable[] { a, x },//
+	    	                                      new Constant<IV>(setup.mary)}
+	    	            ),
+	                    new ListBindingSet(
+	                            new IVariable[] { a, x },
 	                            new IConstant[] { new Constant<IV>(setup.fred),
 	                                              new Constant<IV>(setup.leon)})
 	        	};
         	}
         } else {
         	if (constraints == null) {
-        	expected = new IBindingSet[] {//
+        	expected = new IBindingSet[] {
                     // many-to-many join
-                    new ListBindingSet(//
-                            new IVariable[] { a, x, y, z },//
+                    new ListBindingSet(
+                            new IVariable[] { a, x, y, z },
                             new IConstant[] { new Constant<IV>(setup.john),
                                               new Constant<IV>(setup.mary),
                                               new Constant<IV>(setup.brad),
-                                              new Constant<IV>(setup.mary)}//
-                    ),//
-                    new ListBindingSet(//
-                            new IVariable[] { a, x, y, z },//
+                                              new Constant<IV>(setup.mary)}
+                    ),
+                    new ListBindingSet(
+                            new IVariable[] { a, x, y, z },
                             new IConstant[] { new Constant<IV>(setup.john),
                                               new Constant<IV>(setup.mary),
                                               new Constant<IV>(setup.fred),
-                                              new Constant<IV>(setup.mary)}//
-                    ),//
-                    new ListBindingSet(//
-                            new IVariable[] { a, x, y, z },//
+                                              new Constant<IV>(setup.mary)}
+                    ),
+                    new ListBindingSet(
+                            new IVariable[] { a, x, y, z },
                             new IConstant[] { new Constant<IV>(setup.john),
                                               new Constant<IV>(setup.leon),
                                               new Constant<IV>(setup.brad),
-                                              new Constant<IV>(setup.mary)}//
-                    ),//
-                    new ListBindingSet(//
-                            new IVariable[] { a, x, y, z },//
+                                              new Constant<IV>(setup.mary)}
+                    ),
+                    new ListBindingSet(
+                            new IVariable[] { a, x, y, z },
                             new IConstant[] { new Constant<IV>(setup.john),
                                               new Constant<IV>(setup.leon),
                                               new Constant<IV>(setup.fred),
-                                              new Constant<IV>(setup.mary)}//
+                                              new Constant<IV>(setup.mary)}
                     )
                 };
         	} else {
-            	expected = new IBindingSet[] {//
+            	expected = new IBindingSet[] {
                         // many-to-many join
-                        new ListBindingSet(//
-                                new IVariable[] { a, x, y, z },//
+                        new ListBindingSet(
+                                new IVariable[] { a, x, y, z },
                                 new IConstant[] { new Constant<IV>(setup.john),
                                                   new Constant<IV>(setup.mary),
                                                   new Constant<IV>(setup.brad),
-                                                  new Constant<IV>(setup.mary)}//
-                        ),//
-                        new ListBindingSet(//
-                                new IVariable[] { a, x, y, z },//
+                                                  new Constant<IV>(setup.mary)}
+                        ),
+                        new ListBindingSet(
+                                new IVariable[] { a, x, y, z },
                                 new IConstant[] { new Constant<IV>(setup.john),
                                                   new Constant<IV>(setup.leon),
                                                   new Constant<IV>(setup.brad),
-                                                  new Constant<IV>(setup.mary)}//
+                                                  new Constant<IV>(setup.mary)}
                         )
                     };
         	}
@@ -1680,28 +1680,28 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
             // Setup a mock PipelineOp for the test.
             final PipelineOp firstOp = new MockPipelineOp(BOp.NOARGS, 
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars),//
-                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars),
+                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             // Setup a mock PipelineOp for the test.
             final PipelineOp otherOp = new MockPipelineOp(BOp.NOARGS, 
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars),//
-                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars),
+                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             // Setup a mock PipelineOp for the test.
             final PipelineOp moreOp = new MockPipelineOp(BOp.NOARGS,
                     new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                            new String[] { getName() }),//
-                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                    new NV(JoinAnnotations.SELECT, selectVars),//
-                    new NV(JoinAnnotations.CONSTRAINTS, constraints)//
+                            new String[] { getName() }),
+                    new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                    new NV(JoinAnnotations.SELECT, selectVars),
+                    new NV(JoinAnnotations.CONSTRAINTS, constraints)
                     );
 
             first = newHashJoinUtility(firstOp,
@@ -1789,10 +1789,10 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
      *            The expected solutions.
      */
     protected void doMergeJoinTest(
-            final IConstraint[] constraints,//
-            final IBindingSet[] expected,//
-            final boolean optional,//
-            final IHashJoinUtility first,//
+            final IConstraint[] constraints,
+            final IBindingSet[] expected,
+            final boolean optional,
+            final IHashJoinUtility first,
             final IHashJoinUtility... others
             ) {
 
@@ -1864,11 +1864,11 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
 
         // The expected solutions to the join.
         @SuppressWarnings("rawtypes")
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { person},//
-                        new IConstant[] { new Constant<IV>(setup.alice) }//
-                ),//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { person},
+                        new IConstant[] { new Constant<IV>(setup.alice) }
+                ),
         };
 
         doHashJoinTest(JoinTypeEnum.Exists, joinVars, selectVars, constraints,
@@ -1932,13 +1932,13 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
 
         // The expected solutions to the join.
         @SuppressWarnings("rawtypes")
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { avar, nvar },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { avar, nvar },
                         new IConstant[] { new Constant<IV>(setup.b),
                                           new Constant<IV>(setup.three)
-                                          }//
-                ),//
+                                          }
+                ),
         };
 
         doHashJoinTest(JoinTypeEnum.NotExists, joinVars, selectVars,
@@ -2016,13 +2016,13 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
 //
 //        // The expected solutions to the join.
 //        @SuppressWarnings("rawtypes")
-//        final IBindingSet[] expected = new IBindingSet[] {//
-//                new ListBindingSet(//
-//                        new IVariable[] { avar, nvar },//
+//        final IBindingSet[] expected = new IBindingSet[] {
+//                new ListBindingSet(
+//                        new IVariable[] { avar, nvar },
 //                        new IConstant[] { new Constant<IV>(setup.b),
 //                                          new Constant<IV>(setup.three)
-//                                          }//
-//                ),//
+//                                          }
+//                ),
 //        };
 //
 //        doHashJoinTest(JoinTypeEnum.NotExists, joinVars, selectVars,
@@ -2309,18 +2309,18 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         // The expected solutions to the join.
         @SuppressWarnings("rawtypes")
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                new IVariable[] { s, o1 },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                new IVariable[] { s, o1 },
                 new IConstant[] { new Constant<IV>(setup.b),
-                        new Constant<IV>(setup.bob) }//
-                ),//
-                new ListBindingSet(//
-                new IVariable[] { s, o1, o2},//
+                        new Constant<IV>(setup.bob) }
+                ),
+                new ListBindingSet(
+                new IVariable[] { s, o1, o2},
                 new IConstant[] { new Constant<IV>(setup.a),
                         new Constant<IV>(setup.alan),
-                        new Constant<IV>(setup.label), }//
-                ),//
+                        new Constant<IV>(setup.label), }
+                ),
         };
 
         doHashJoinTest(JoinTypeEnum.Optional, joinVars, selectVars, constraints,

@@ -376,11 +376,11 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
         final IndexMetadata md = btree.getIndexMetadata();
         
-        data = new MutableLeafData(//
-                btree.branchingFactor, //
-                md.getVersionTimestamps(),//
-                md.getDeleteMarkers(),//
-                md.getRawRecords()//
+        data = new MutableLeafData(
+                btree.branchingFactor,
+                md.getVersionTimestamps(),
+                md.getDeleteMarkers(),
+                md.getRawRecords()
                 );
 
 //        final int branchingFactor = btree.branchingFactor;
@@ -464,7 +464,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 ////        /*
 ////         * Steal the values[].
 ////         */
-////
+//
 ////        // steal reference and clear reference on the source node.
 ////        values = src.values;
 //
@@ -1022,9 +1022,9 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
          * rightSibling ) into the parent.
          */
 //        final byte[] separatorKey = getKeys().get(splitIndex);
-        final byte[] separatorKey = BytesUtil.getSeparatorKey(//
-                getKeys().get(splitIndex),//
-                getKeys().get(splitIndex - 1)//
+        final byte[] separatorKey = BytesUtil.getSeparatorKey(
+                getKeys().get(splitIndex),
+                getKeys().get(splitIndex - 1)
                 );
 
         if (getParent() != null) {

@@ -141,9 +141,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.UINT32,// metricType
 				"heartbeat",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.unspecified,//
+				GangliaSlopeEnum.unspecified,
 				heartbeatInterval,// tmax
-				0, // dmax,//
+				0, // dmax,
 				getMap(GROUP_CORE, "heartbeat", "Last heartbeat"));
 	}
 
@@ -163,9 +163,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.STRING,// metricType
 				"gexec",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.zero,//
+				GangliaSlopeEnum.zero,
 				300,// tmax is *always* 20 for the heartbeat.
-				0, // dmax,//
+				0, // dmax,
 				getMap(GROUP_CORE, "Gexec Status", "gexec available"));
 	}
 
@@ -183,9 +183,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"mem_free",// metric name (again)
 				"KB", // units
-				slope,//
-				tmax,//
-				dmax,//
+				slope,
+				tmax,
+				dmax,
 				getMap(GROUP_MEMORY, "Free Memory",
 						"Amount of available memory"));
 	}
@@ -200,9 +200,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"mem_shared",// metric name (again)
 				"KB", // units
-				slope,//
-				tmax,//
-				dmax,//
+				slope,
+				tmax,
+				dmax,
 				getMap(GROUP_MEMORY, "Shared Memory", "Amount of shared memory"));
 	}
 
@@ -216,9 +216,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"mem_buffers",// metric name (again)
 				"KB", // units
-				slope,//
-				tmax,//
-				dmax,//
+				slope,
+				tmax,
+				dmax,
 				getMap(GROUP_MEMORY, "Memory Buffers",
 						"Amount of buffered memory"));
 	}
@@ -233,9 +233,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"mem_cached",// metric name (again)
 				"KB", // units
-				slope,//
-				tmax,//
-				dmax,//
+				slope,
+				tmax,
+				dmax,
 				getMap(GROUP_MEMORY, "Cached Memory", "Amount of cached memory"));
 	}
 		
@@ -249,9 +249,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"mem_total",// metric name (again)
 				"KB", // units
-				GangliaSlopeEnum.zero,//slope,//
-				1200,//tmax,//
-				dmax,//
+				GangliaSlopeEnum.zero,//slope,
+				1200,//tmax,
+				dmax,
 				getMap(GROUP_MEMORY,"Memory Total", "Total amount of memory"));
 	}
 	
@@ -265,9 +265,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"swap_free",// metric name (again)
 				"KB", // units
-				slope,//
-				tmax,//
-				dmax,//
+				slope,
+				tmax,
+				dmax,
 				getMap(GROUP_MEMORY,"Free Swap Space", "Amount of available swap memory"));
 	}
 
@@ -281,9 +281,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"swap_total",// metric name (again)
 				"KB", // units
-				GangliaSlopeEnum.zero,//slope,//
+				GangliaSlopeEnum.zero,//slope,
 				1200,// tmax
-				dmax,//
+				dmax,
 				getMap(GROUP_MEMORY,"Swap Space Total", "Total amount of swap space"));
 	}
 
@@ -301,9 +301,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"load_one",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				70,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_LOAD, "One Minute Load Average",
 						"One minute load average"));
 	}
@@ -318,9 +318,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"load_five",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				325,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_LOAD, "Five Minute Load Average",
 						"Five minute load average"));
 	}
@@ -335,9 +335,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"load_fifteen",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				950,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_LOAD, "Fifteen Minute Load Average",
 						"Fifteen minute load average"));
 	}
@@ -352,9 +352,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.UINT32,// metricType
 				"proc_run",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				950,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_PROCESS, "Total Running Processes",
 						"Total number of running processes"));
 	}
@@ -369,9 +369,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.UINT32,// metricType
 				"proc_total",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				950,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_PROCESS, "Total Processes",
 						"Total number of processes"));
 	}
@@ -390,9 +390,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_user",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, "CPU User",
 						"Percentage of CPU utilization that occurred while executing at the user level"));
 	}
@@ -407,9 +407,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_system",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, "CPU System",						
 						"Percentage of CPU utilization that occurred while executing at the system level"));
 	}
@@ -424,11 +424,11 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_idle",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, "CPU Idle",
-						"Percentage of time that the CPU or CPUs were idle and the system did not have an outstanding disk I/O request")//
+						"Percentage of time that the CPU or CPUs were idle and the system did not have an outstanding disk I/O request")
 		);
 	}
 
@@ -442,9 +442,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_nice",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, "CPU Nice",
 						"Percentage of CPU utilization that occurred while executing at the user level with nice priority"));
 	}
@@ -459,10 +459,10 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_aidle",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				3800,// tmax
-				dmax,// dmax,//
-				getMap(GROUP_CPU, "CPU aidle","Percent of time since boot idle CPU")//
+				dmax,// dmax,
+				getMap(GROUP_CPU, "CPU aidle","Percent of time since boot idle CPU")
 		);
 	}
 
@@ -476,9 +476,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_wio",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, "CPU wio",
 						"Percentage of time that the CPU or CPUs were idle during which the system had an outstanding disk I/O request"));
 	}
@@ -493,9 +493,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_intr",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, null/* title */, null));
 	}
 
@@ -509,9 +509,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"cpu_sintr",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				90,// tmax
-				dmax,// dmax,//
+				dmax,// dmax,
 				getMap(GROUP_CPU, null/* title */, null));
 	}
 
@@ -529,10 +529,10 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"bytes_out",// metric name (again)
 				"bytes/sec", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				300,// tmax
-				0,// dmax,//
-				getMap(GROUP_NETWORK,"Bytes Sent","Number of bytes out per second")//
+				0,// dmax,
+				getMap(GROUP_NETWORK,"Bytes Sent","Number of bytes out per second")
 		);
 	}
 
@@ -546,10 +546,10 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"bytes_in",// metric name (again)
 				"bytes/sec", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				300,// tmax
-				0,// dmax,//
-				getMap(GROUP_NETWORK,"Bytes Received","Number of bytes in per second")//
+				0,// dmax,
+				getMap(GROUP_NETWORK,"Bytes Received","Number of bytes in per second")
 		);
 	}
 
@@ -563,9 +563,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"pkts_in",// metric name (again)
 				"packets/sec", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				300,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_NETWORK,"Packets Received", "Packets in per second"));
 	}
 
@@ -579,9 +579,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"pkts_out",// metric name (again)
 				"packets/sec", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				300,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_NETWORK,"Packets Sent", "Packets out per second"));
 	}
 	
@@ -599,9 +599,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.DOUBLE,// metricType
 				"disk_total",// metric name (again)
 				"GB", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_DISK, "Total Disk Space",
 						"Total available disk space"));
 	}
@@ -616,9 +616,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.DOUBLE,// metricType
 				"disk_total",// metric name (again)
 				"GB", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				tmax,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_DISK, "Disk Space Available",
 						"Total free disk space"));
 	}
@@ -633,9 +633,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.FLOAT,// metricType
 				"part_max_used",// metric name (again)
 				"%", // units
-				GangliaSlopeEnum.both,// slope,//
+				GangliaSlopeEnum.both,// slope,
 				tmax,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_DISK,"Maximum Disk Space Used",
 						"Maximum percent used for all partitions"));
 	}
@@ -654,9 +654,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.UINT32,// metricType
 				"boottime",// metric name (again)
 				"s", // units
-				GangliaSlopeEnum.zero,// slope,//
+				GangliaSlopeEnum.zero,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_SYSTEM, "Last Boot Time",
 						"The last time that the system was started"));
 	}
@@ -671,9 +671,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.STRING,// metricType
 				"machine_type",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.zero,// slope,//
+				GangliaSlopeEnum.zero,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_SYSTEM,"Machine Type","System architecture"));
 	}
 
@@ -687,9 +687,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.STRING,// metricType
 				"os_name",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.zero,// slope,//
+				GangliaSlopeEnum.zero,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_SYSTEM, "Operating System",
 						"Operating system name"));
 	}
@@ -704,9 +704,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.STRING,// metricType
 				"os_release",// metric name (again)
 				"", // units
-				GangliaSlopeEnum.zero,// slope,//
+				GangliaSlopeEnum.zero,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_SYSTEM, "Operating System Release",
 						"Operating system release"));
 	}
@@ -721,9 +721,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.UINT16,// metricType
 				"cpu_num",// metric name (again)
 				"CPUs", // units
-				GangliaSlopeEnum.zero,// slope,//
+				GangliaSlopeEnum.zero,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_CPU, "CPU Count", "Total number of CPUs"));
 	}
 
@@ -737,9 +737,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.UINT32,// metricType
 				"cpu_speed",// metric name (again)
 				"MHz", // units
-				GangliaSlopeEnum.zero,// slope,//
+				GangliaSlopeEnum.zero,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(GROUP_CPU,"CPU Speed","CPU Speed in terms of MHz")
 		);
 	}
@@ -754,9 +754,9 @@ public class GangliaCoreMetricDecls extends AbstractMetrics
 				GangliaMessageTypeEnum.STRING,// metricType
 				"location",// metric name (again)
 				"(x,y,z)", // units
-				GangliaSlopeEnum.unspecified,// slope,//
+				GangliaSlopeEnum.unspecified,// slope,
 				1200,// tmax
-				0,// dmax,//
+				0,// dmax,
 				getMap(null/* group */, null/* title */,
 						"Location of the machine"));
 	}

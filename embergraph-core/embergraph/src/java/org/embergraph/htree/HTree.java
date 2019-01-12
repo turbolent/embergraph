@@ -312,10 +312,10 @@ public class HTree extends AbstractHTree
         
         return false;
         
-//        if (metadata.getMetadataAddr() != 0L && //
-//                (root == null || //
-//                        ( !root.dirty //
-//                        && checkpoint.getRootAddr() == root.identity //
+//        if (metadata.getMetadataAddr() != 0L &&
+//                (root == null ||
+//                        ( !root.dirty
+//                        && checkpoint.getRootAddr() == root.identity
 //                        && checkpoint.getCounter() == counter.get())
 //                )
 //        ) {
@@ -452,9 +452,9 @@ public class HTree extends AbstractHTree
             final IndexMetadata metadata, final boolean readOnly) {
 
         super(  store, 
-                NodeFactory.INSTANCE, //
+                NodeFactory.INSTANCE,
                 readOnly, // read-only
-                (HTreeIndexMetadata)metadata,//
+                (HTreeIndexMetadata)metadata,
                 metadata.getBtreeRecordCompressorFactory()
                 );
 
@@ -599,7 +599,7 @@ public class HTree extends AbstractHTree
 		 */
 
 		// Initial root.
-		final DirectoryPage r = new DirectoryPage(//
+		final DirectoryPage r = new DirectoryPage(
 				this,// the owning htree instance
 				null, // overflowKey
 				addressBits // the global depth of the root.
@@ -1084,12 +1084,12 @@ public class HTree extends AbstractHTree
             
             @SuppressWarnings("rawtypes")
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    HTree.class //
+                    HTree.class
                     });
 
             final Checkpoint checkpoint = (Checkpoint) ctor
-                    .newInstance(new Object[] { //
-                            this //
+                    .newInstance(new Object[] {
+                            this
                     });
             
             return checkpoint;
@@ -1862,16 +1862,16 @@ public class HTree extends AbstractHTree
              * BTree.
              */
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    IRawStore.class,//
-                    Checkpoint.class,//
-                    IndexMetadata.class,//
-                    Boolean.TYPE//
+                    IRawStore.class,
+                    Checkpoint.class,
+                    IndexMetadata.class,
+                    Boolean.TYPE
                     });
 
-            final HTree htree = (HTree) ctor.newInstance(new Object[] { //
+            final HTree htree = (HTree) ctor.newInstance(new Object[] {
                     null , // store
-                    firstCheckpoint, //
-                    metadata, //
+                    firstCheckpoint,
+                    metadata,
                     false// readOnly
                     });
 
@@ -1973,16 +1973,16 @@ public class HTree extends AbstractHTree
              * BTree.
              */
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    IRawStore.class,//
-                    Checkpoint.class,//
-                    IndexMetadata.class, //
+                    IRawStore.class,
+                    Checkpoint.class,
+                    IndexMetadata.class,
                     Boolean.TYPE
                     });
 
-            final HTree htree = (HTree) ctor.newInstance(new Object[] { //
-                    store,//
-                    checkpoint, //
-                    metadata, //
+            final HTree htree = (HTree) ctor.newInstance(new Object[] {
+                    store,
+                    checkpoint,
+                    metadata,
                     readOnly
                     });
 

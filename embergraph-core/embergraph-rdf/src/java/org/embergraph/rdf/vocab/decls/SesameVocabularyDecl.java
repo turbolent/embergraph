@@ -42,10 +42,10 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 public class SesameVocabularyDecl implements VocabularyDecl {
 
     static private final URI[] uris = new URI[]{
-        new URIImpl(SESAME.NAMESPACE),//
-        SESAME.DIRECTSUBCLASSOF,//
-        SESAME.DIRECTSUBPROPERTYOF,//
-        SESAME.DIRECTTYPE,//
+        new URIImpl(SESAME.NAMESPACE),
+        SESAME.DIRECTSUBCLASSOF,
+        SESAME.DIRECTSUBPROPERTYOF,
+        SESAME.DIRECTTYPE,
     };
 
     public SesameVocabularyDecl() {

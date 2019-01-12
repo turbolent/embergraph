@@ -134,7 +134,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         if (true) {
 
             return ProxySuiteHelper.suiteWhenStandalone(
-                    StressTestConcurrentRestApiRequests.class, //
+                    StressTestConcurrentRestApiRequests.class,
                     "test.*",// normal
                     new LinkedHashSet<BufferMode>(Arrays
                             .asList(new BufferMode[] {
@@ -147,7 +147,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         } else if(true) {
 
             return ProxySuiteHelper.suiteWhenStandalone(
-                    StressTestConcurrentRestApiRequests.class, //
+                    StressTestConcurrentRestApiRequests.class,
 //                    "stressTest_concurrentClients_2Hours",// 2 hours!
                     "stressTest_concurrentClients_10Minutes", // 10m
                     new LinkedHashSet<BufferMode>(Arrays
@@ -156,7 +156,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         } else {
 
             return ProxySuiteHelper.suiteWhenStandalone(
-                    StressTestConcurrentRestApiRequests.class, //
+                    StressTestConcurrentRestApiRequests.class,
                     "stressTest_concurrentClients_24Hours",// 24 hours!
                     new LinkedHashSet<BufferMode>(Arrays
                             .asList(new BufferMode[] { BufferMode.DiskRW, })),
@@ -558,7 +558,7 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
          * 
          * See TestConcurrentJournal for the original version of this code.
          */
-        doConcurrentClientTest(//
+        doConcurrentClientTest(
                 m_mgr,// remote repository manager
                 10, TimeUnit.SECONDS,// timeout
                 16, // #of concurrent requests
@@ -574,7 +574,7 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
      */
     public void stressTest_concurrentClients_10Minutes() throws Exception {
 
-        doConcurrentClientTest(//
+        doConcurrentClientTest(
                 m_mgr,// remote repository manager
                 10, TimeUnit.MINUTES, // long run.
                 16, // #of concurrent requests
@@ -590,7 +590,7 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
      */
     public void stressTest_concurrentClients_2Hours() throws Exception {
 
-        doConcurrentClientTest(//
+        doConcurrentClientTest(
                 m_mgr,// remote repository manager
                 2, TimeUnit.HOURS, // long run.
                 16, // #of concurrent requests
@@ -606,7 +606,7 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
      */
     public void stressTest_concurrentClients_24Hours() throws Exception {
 
-        doConcurrentClientTest(//
+        doConcurrentClientTest(
                 m_mgr,// remote repository manager
                 24, TimeUnit.HOURS, // long run.
                 16, // #of concurrent requests
@@ -649,14 +649,14 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
      *             deleted by a concurrent operation (this is prevented by
      *             locking right now).
      */
-    private Result doConcurrentClientTest(final RemoteRepositoryManager rmgr, //
-            final long timeout, final TimeUnit unit, //
-            final int nthreads,//
-            final int initialNamespacesCount,//
-            final int ntrials,//
-            final long initialDelayInterrupts,//
-            final long periodInterrupts,//
-            final TimeUnit unitInterrupts//
+    private Result doConcurrentClientTest(final RemoteRepositoryManager rmgr,
+            final long timeout, final TimeUnit unit,
+            final int nthreads,
+            final int initialNamespacesCount,
+            final int ntrials,
+            final long initialDelayInterrupts,
+            final long periodInterrupts,
+            final TimeUnit unitInterrupts
     ) throws Exception {
 
         if (rmgr == null)
@@ -1188,7 +1188,7 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
             sharedTestState.futures.put(uuid, new FutureAndTask(ft, this));
             
             if (log.isInfoEnabled())
-                log.info("Call"//
+                log.info("Call"
                     + ": nactive="
                     + sharedTestState.nacting.incrementAndGet()
                     + ", namespace="
@@ -1218,7 +1218,7 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
             sharedTestState.futures.remove(uuid);
             
             if (log.isInfoEnabled())
-                log.info("Done"//
+                log.info("Done"
                     + ": nactive="
                     + sharedTestState.nacting.decrementAndGet()
                     + ", namespace="
@@ -1677,10 +1677,10 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
 //    private static class CREATE_DATA_SET extends RepositoryManagerOp {
 //
 //        CREATE_DATA_SET(final SharedTestState sharedTestState) {
-//            super(sharedTestState, false/* readOnly */, //
+//            super(sharedTestState, false/* readOnly */,
 //                    "n"
 //                            + sharedTestState.namespaceCreateCounter
-//                                    .incrementAndGet()//
+//                                    .incrementAndGet()
 //            );
 //        }
 //
@@ -1894,8 +1894,8 @@ if(!BigdataStatics.runKnownBadTests)return; // FIXME Conditionally disabled in C
              * Note: A mock namespace is used to make sure that this operation
              * is not serialized on any real namespace.
              */
-            super(sharedTestState, true/* readOnly */, //
-                    "mock-namespace-" + UUID.randomUUID()//
+            super(sharedTestState, true/* readOnly */,
+                    "mock-namespace-" + UUID.randomUUID()
             );
         }
 

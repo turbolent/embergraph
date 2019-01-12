@@ -111,14 +111,14 @@ public class AST2BOpJoins extends AST2BOpFilters {
      *            The evaluation context.
      */
     @SuppressWarnings("rawtypes")
-    public static PipelineOp join(//
-            PipelineOp left,//
-            Predicate pred,//
+    public static PipelineOp join(
+            PipelineOp left,
+            Predicate pred,
             final Set<IVariable<?>> doneSet,// 
-            final Collection<IConstraint> constraints,//
-            final Long cutoffLimit, //
-            final Properties queryHints,//
-            final AST2BOpContext ctx//
+            final Collection<IConstraint> constraints,
+            final Long cutoffLimit,
+            final Properties queryHints,
+            final AST2BOpContext ctx
             ) {
 
         final int joinId = ctx.nextId();
@@ -284,15 +284,15 @@ public class AST2BOpJoins extends AST2BOpFilters {
 	 *      query is slow </a>
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-    private static PipelineOp distinctTermScanJoin(//
-			final PipelineOp left,//
-			final List<NV> anns, //
-			Predicate pred,//
-			final DatasetNode dataset, //
-			final Long cutoffLimitIsIgnored,//
-			final VarNode distinctTermScanVar, //
-			final Properties queryHints, //
-			final AST2BOpContext ctx//
+    private static PipelineOp distinctTermScanJoin(
+			final PipelineOp left,
+			final List<NV> anns,
+			Predicate pred,
+			final DatasetNode dataset,
+			final Long cutoffLimitIsIgnored,
+			final VarNode distinctTermScanVar,
+			final Properties queryHints,
+			final AST2BOpContext ctx
 			) {
 
 		final IVariable distinctVar = distinctTermScanVar.getValueExpression();
@@ -330,15 +330,15 @@ public class AST2BOpJoins extends AST2BOpFilters {
 	 *      </a>
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static PipelineOp fastRangeCountJoin(//
-			final PipelineOp left,//
-			final List<NV> anns, //
-			final Predicate pred,//
-			final DatasetNode dataset, //
-			final Long cutoffLimitIsIgnored,//
-			final VarNode fastRangeCountVar, //
-			final Properties queryHints, //
-			final AST2BOpContext ctx//
+	private static PipelineOp fastRangeCountJoin(
+			final PipelineOp left,
+			final List<NV> anns,
+			final Predicate pred,
+			final DatasetNode dataset,
+			final Long cutoffLimitIsIgnored,
+			final VarNode fastRangeCountVar,
+			final Properties queryHints,
+			final AST2BOpContext ctx
 			) {
 
 		if ( ctx.gpuEvaluation != null
@@ -377,12 +377,12 @@ public class AST2BOpJoins extends AST2BOpFilters {
      * 
      * @return The join operator.
      */
-    private static PipelineOp triplesModeJoin(//
-            final PipelineOp left, //
-            final List<NV> anns, //
-            Predicate<?> pred,//
-            final Long cutoffLimit,//
-            final Properties queryHints,//
+    private static PipelineOp triplesModeJoin(
+            final PipelineOp left,
+            final List<NV> anns,
+            Predicate<?> pred,
+            final Long cutoffLimit,
+            final Properties queryHints,
             final AST2BOpContext ctx) {
 
         final boolean scaleOut = ctx.isCluster();
@@ -432,13 +432,13 @@ public class AST2BOpJoins extends AST2BOpFilters {
      *       decision until we actually evaluate that access path. This is
      *       basically a special case of runtime query optimization.
      */
-    private static PipelineOp namedGraphJoin(//
-            PipelineOp left, //
-            final List<NV> anns, //
-            Predicate<?> pred,//
-            final DatasetNode dataset, //
-            final Long cutoffLimit,//
-            final Properties queryHints,//
+    private static PipelineOp namedGraphJoin(
+            PipelineOp left,
+            final List<NV> anns,
+            Predicate<?> pred,
+            final DatasetNode dataset,
+            final Long cutoffLimit,
+            final Properties queryHints,
             final AST2BOpContext ctx) {
 
         final boolean scaleOut = ctx.isCluster();
@@ -619,9 +619,9 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
             // The data set join.
             left = new DataSetJoin(leftOrEmpty(left),
-                    new NV(DataSetJoin.Annotations.VAR, var),//
-                    new NV(DataSetJoin.Annotations.BOP_ID, ctx.nextId()),//
-                    new NV(DataSetJoin.Annotations.GRAPHS, summary.getGraphs()) //
+                    new NV(DataSetJoin.Annotations.VAR, var),
+                    new NV(DataSetJoin.Annotations.BOP_ID, ctx.nextId()),
+                    new NV(DataSetJoin.Annotations.GRAPHS, summary.getGraphs())
             );
 
 //            if (scaleOut) {
@@ -659,13 +659,13 @@ public class AST2BOpJoins extends AST2BOpFilters {
      *       basically a special case of runtime query optimization.
      */
     @SuppressWarnings("rawtypes")
-    private static PipelineOp defaultGraphJoin(//
-            PipelineOp left, //
-            final List<NV> anns, //
-            Predicate<?> pred,//
-            final DatasetNode dataset, //
-            final Long cutoffLimit,//
-            final Properties queryHints,//
+    private static PipelineOp defaultGraphJoin(
+            PipelineOp left,
+            final List<NV> anns,
+            Predicate<?> pred,
+            final DatasetNode dataset,
+            final Long cutoffLimit,
+            final Properties queryHints,
             final AST2BOpContext ctx) {
 
         final DataSetSummary summary = dataset == null ? null
@@ -975,10 +975,10 @@ public class AST2BOpJoins extends AST2BOpFilters {
 
                 // The data set join.
                 left = new DataSetJoin(leftOrEmpty(left), new NV(
-                        DataSetJoin.Annotations.VAR, var),//
-                        new NV(DataSetJoin.Annotations.BOP_ID, ctx.nextId()),//
+                        DataSetJoin.Annotations.VAR, var),
+                        new NV(DataSetJoin.Annotations.BOP_ID, ctx.nextId()),
                         new NV(DataSetJoin.Annotations.GRAPHS,
-                                summary.getGraphs()) //
+                                summary.getGraphs())
                 );
 
             } else {
@@ -1134,13 +1134,13 @@ public class AST2BOpJoins extends AST2BOpFilters {
      * @see Annotations#ESTIMATED_CARDINALITY
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    static private PipelineOp newJoin(//
-            PipelineOp left, //
-            final List<NV> anns,//
-            final boolean defaultGraphFilter,//
-            final DataSetSummary summary,//
-            final Long cutoffLimit,//
-            final Properties queryHints, //
+    static private PipelineOp newJoin(
+            PipelineOp left,
+            final List<NV> anns,
+            final boolean defaultGraphFilter,
+            final DataSetSummary summary,
+            final Long cutoffLimit,
+            final Properties queryHints,
             final AST2BOpContext ctx) {
 
         // Convert join annotations to a map so we can lookup some stuff.
@@ -1239,9 +1239,9 @@ public class AST2BOpJoins extends AST2BOpFilters {
                  * and injecting a column to correlate input and output
                  * solutions.
                  */
-                map.put(PipelineJoin.Annotations.SHARED_STATE, Boolean.TRUE);//
+                map.put(PipelineJoin.Annotations.SHARED_STATE, Boolean.TRUE);
                 map.put(PipelineJoin.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER);//
+                        BOpEvaluationContext.CONTROLLER);
 
             } else {
 
@@ -1264,7 +1264,7 @@ public class AST2BOpJoins extends AST2BOpFilters {
                  * for reliable computation of cutoff joins then we must use
                  * remote APs for scale-out.
                  */
-                map.put(PipelineJoin.Annotations.SHARED_STATE, Boolean.TRUE);//
+                map.put(PipelineJoin.Annotations.SHARED_STATE, Boolean.TRUE);
 
             }
 

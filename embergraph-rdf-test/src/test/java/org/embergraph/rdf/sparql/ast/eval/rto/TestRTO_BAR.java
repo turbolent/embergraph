@@ -90,7 +90,7 @@ public class TestRTO_BAR extends AbstractRTOTestCase {
      */
     public void test_BAR_Q1() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BAR-Q1", // testURI,
                 "rto/BAR-Q1.rq",// queryFileURL
                 "src/test/resources/data/barData/barData.trig.gz",// dataFileURL

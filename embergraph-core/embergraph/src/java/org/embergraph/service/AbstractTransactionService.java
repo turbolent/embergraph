@@ -1026,12 +1026,12 @@ abstract public class AbstractTransactionService extends AbstractService
                             - minReleaseAge));
 
             if (log.isDebugEnabled())
-                log.debug("releaseTime=" + releaseTime //
+                log.debug("releaseTime=" + releaseTime
                         + ", lastCommitTime=" + lastCommitTime
-                        + ", earliestActiveTx=" + txState//
-                        + ", readsOnCommitTime=" + earliestTxReadsOnCommitTime//
-                        + ", (now-minReleaseAge)=" + (now - minReleaseAge)//
-                        + ": effectiveReleaseTimeForHA=" + effectiveReleaseTimeForHA//
+                        + ", earliestActiveTx=" + txState
+                        + ", readsOnCommitTime=" + earliestTxReadsOnCommitTime
+                        + ", (now-minReleaseAge)=" + (now - minReleaseAge)
+                        + ": effectiveReleaseTimeForHA=" + effectiveReleaseTimeForHA
                         );
 
             return effectiveReleaseTimeForHA;

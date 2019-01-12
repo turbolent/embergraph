@@ -161,11 +161,11 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
     static protected ISPO getSPO(final IBindingSet bset,
             final boolean bindsC, final StatementEnum type) {
 
-        return new SPO(//
-                getIV(s, bset, false),//
-                getIV(p, bset, false),//
-                getIV(o, bset, false),//
-                (bindsC ? getIV(c, bset, false) : null),//
+        return new SPO(
+                getIV(s, bset, false),
+                getIV(p, bset, false),
+                getIV(o, bset, false),
+                (bindsC ? getIV(c, bset, false) : null),
                 type);
 
     }

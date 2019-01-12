@@ -155,29 +155,29 @@ public class TripleStoreUtility {
             //          BigdataStatementIterator it = expected.asStatementIterator(expected
             //          .getInferenceEngine().backchainIterator(
             //                  expected.getAccessPath(NULL, NULL, NULL)));
-            //
+
             //            try {
-            //
+
             //                while(it.hasNext()) {
-            //
+
             //                BigdataStatement stmt = it.next();
-            //
-            //                if (!hasStatement(actual,//
-            //                        (Resource)actual.getValueFactory().asValue(stmt.getSubject()),//
-            //                        (URI)actual.getValueFactory().asValue(stmt.getPredicate()),//
-            //                        (Value)actual.getValueFactory().asValue(stmt.getObject()))//
+
+            //                if (!hasStatement(actual,
+            //                        (Resource)actual.getValueFactory().asValue(stmt.getSubject()),
+            //                        (URI)actual.getValueFactory().asValue(stmt.getPredicate()),
+            //                        (Value)actual.getValueFactory().asValue(stmt.getObject()))
             //                        ) {
-            //
+
             //                    sameStatements2 = false;
-            //
+
             //                    log("    Expecting: " + stmt);
             //                    
             //                    expecting++;
-            //
+
             //                }
             //                
             //                expectedSize++; // counts statements actually visited.
-            //
+
             //                }
             //                
             //            } finally {
@@ -193,7 +193,7 @@ public class TripleStoreUtility {
         //        final boolean sameSize = expectedSize == actualSize;
         //        
         //        log("size of 'expected' repository: " + expectedSize);
-        //
+
         //        log("size of 'actual'   repository: " + actualSize);
 
         log("# expected but not found: " + expecting);
@@ -223,9 +223,9 @@ public class TripleStoreUtility {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public static ICloseableIterator<BigdataStatement> notFoundInTarget(//
-            final AbstractTripleStore expected,//
-            final AbstractTripleStore actual //
+    public static ICloseableIterator<BigdataStatement> notFoundInTarget(
+            final AbstractTripleStore expected,
+            final AbstractTripleStore actual
     ) throws InterruptedException, ExecutionException {
 
         /*

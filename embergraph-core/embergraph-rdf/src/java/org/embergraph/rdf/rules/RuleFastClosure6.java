@@ -36,9 +36,9 @@ public class RuleFastClosure6 extends AbstractRuleFastClosure_5_6_7_9 {
     public RuleFastClosure6(String database, String focusStore, Vocabulary vocab) {
         // Set<Long> R) {
 
-        super("fastClosure6", database, focusStore,//
-                vocab.getConstant(RDFS.SUBPROPERTYOF),//
-                vocab.getConstant(RDFS.RANGE)//
+        super("fastClosure6", database, focusStore,
+                vocab.getConstant(RDFS.SUBPROPERTYOF),
+                vocab.getConstant(RDFS.RANGE)
                 );
         // , R);
 

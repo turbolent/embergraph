@@ -125,11 +125,11 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         private static final long serialVersionUID = 1L;
 
-        public IHashJoinUtility create(//
-                final BOpContext<IBindingSet> context,//
-                final INamedSolutionSetRef namedSetRef,//
-                final PipelineOp op,//
-                final JoinTypeEnum joinType//
+        public IHashJoinUtility create(
+                final BOpContext<IBindingSet> context,
+                final INamedSolutionSetRef namedSetRef,
+                final PipelineOp op,
+                final JoinTypeEnum joinType
                 ) {
 
             return new HTreeHashJoinUtility(
@@ -504,11 +504,11 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
         
         metadata.setAddressBits(addressBits);
 
-        metadata.setRawRecords(op.getProperty(//
+        metadata.setRawRecords(op.getProperty(
                 HTreeAnnotations.RAW_RECORDS,
                 HTreeAnnotations.DEFAULT_RAW_RECORDS));
 
-        metadata.setMaxRecLen(op.getProperty(//
+        metadata.setMaxRecLen(op.getProperty(
                 HTreeAnnotations.MAX_RECLEN,
                 HTreeAnnotations.DEFAULT_MAX_RECLEN));
 
@@ -877,7 +877,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     final ByteArrayBuffer tb = t.getValueBuffer();
 
                     if (0 == BytesUtil.compareBytesWithLenAndOffset(
-                            0/* aoff */, val.length/* alen */, val,//
+                            0/* aoff */, val.length/* alen */, val,
                             0/* boff */, tb.limit()/* blen */, tb.array()/* b */
                     )) {
 
@@ -1009,10 +1009,10 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     }
     
     @Override
-    public void hashJoin(//
-            final ICloseableIterator<IBindingSet[]> leftItr,//
+    public void hashJoin(
+            final ICloseableIterator<IBindingSet[]> leftItr,
             final BOpStats stats,
-            final IBuffer<IBindingSet> outputBuffer//
+            final IBuffer<IBindingSet> outputBuffer
             ) {
 
         hashJoin2(leftItr, stats, outputBuffer, constraints);
@@ -1028,11 +1028,11 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
      * left solutions that hash into the same bucket.
      */
     @Override
-    public void hashJoin2(//
-            final ICloseableIterator<IBindingSet[]> leftItr,//
-            final BOpStats stats,//
-            final IBuffer<IBindingSet> outputBuffer,//
-            final IConstraint[] constraints//
+    public void hashJoin2(
+            final ICloseableIterator<IBindingSet[]> leftItr,
+            final BOpStats stats,
+            final IBuffer<IBindingSet> outputBuffer,
+            final IConstraint[] constraints
             ) {
         
         if (!open.get())
@@ -1228,14 +1228,14 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                                     nrejected++;
                                     
                                     if (log.isTraceEnabled())
-                                        log.trace("Does not join"//
-                                                +": hashCode="+ hashCode//
-                                                + ", sameHashCodeCount="+ sameHashCodeCount//
-                                                + ", #left=" + bucketSize//
-                                                + ", #joined=" + njoined//
-                                                + ", #rejected=" + nrejected//
-                                                + ", left=" + leftSolution//
-                                                + ", right=" + rightSolution//
+                                        log.trace("Does not join"
+                                                +": hashCode="+ hashCode
+                                                + ", sameHashCodeCount="+ sameHashCodeCount
+                                                + ", #left=" + bucketSize
+                                                + ", #joined=" + njoined
+                                                + ", #rejected=" + nrejected
+                                                + ", left=" + leftSolution
+                                                + ", right=" + rightSolution
                                                 );
 
                                 } else {
@@ -1243,13 +1243,13 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                                     njoined++;
 
                                     if (log.isDebugEnabled())
-                                        log.debug("JOIN"//
-                                            + ": hashCode=" + hashCode//
-                                            + ", sameHashCodeCount="+ sameHashCodeCount//
-                                            + ", #left="+ bucketSize//
-                                            + ", #joined=" + njoined//
-                                            + ", #rejected=" + nrejected//
-                                            + ", solution=" + outSolution//
+                                        log.debug("JOIN"
+                                            + ": hashCode=" + hashCode
+                                            + ", sameHashCodeCount="+ sameHashCodeCount
+                                            + ", #left="+ bucketSize
+                                            + ", #joined=" + njoined
+                                            + ", #rejected=" + nrejected
+                                            + ", solution=" + outSolution
                                             );
                                 
                                 }
@@ -1841,7 +1841,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
      */
     @Override
     public void mergeJoin(
-			//
+
 			final IHashJoinUtility[] others,
 			final IBuffer<IBindingSet> outputBuffer,
 			final IConstraint[] constraints, final boolean optional) {
@@ -2007,11 +2007,11 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     final IBindingSet left = in;
 					if (set[i] != null) {
 						final IBindingSet right = all[i].decodeSolution(set[i]); 
-						in = BOpContext.bind(//
+						in = BOpContext.bind(
 								left,// 
 								right,// 
 								c,// TODO constraint[][]
-								null//
+								null
 								);
 					}
 

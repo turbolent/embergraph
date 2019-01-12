@@ -245,9 +245,9 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
                     limit, capacity);
 
             // if (src instanceof IChunkedOrderedIterator<?>) {
-            //
+
             // return (IChunkedOrderedIterator<ISPO>) src;
-            //
+
             // }
 
             return new ChunkedWrappedIterator<ISPO>(src);
@@ -268,9 +268,9 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         private class InnerIterator1 implements ICloseableIterator<ISPO> {
 
             // private final long offset;
-            //
+
             // private final long limit;
-            //
+
             // private final int capacity;
 
             private final CAT nAPsWithHits = new CAT();
@@ -301,9 +301,9 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
                     final int capacity) {
 
                 // this.offset = offset;
-                //
+
                 // this.limit = limit;
-                //
+
                 // this.capacity = capacity;
 
                 this.buffer = new BlockingBuffer<ISPO>(sourceAccessPath

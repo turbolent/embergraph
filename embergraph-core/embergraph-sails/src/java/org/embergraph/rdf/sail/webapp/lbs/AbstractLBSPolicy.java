@@ -186,11 +186,11 @@ abstract public class AbstractLBSPolicy implements IHALoadBalancerPolicy,
     }
 
     @Override
-    public boolean service(//
+    public boolean service(
             final boolean isLeaderRequest,
-            final HALoadBalancerServlet servlet,//
-            final HttpServletRequest request, //
-            final HttpServletResponse response//
+            final HALoadBalancerServlet servlet,
+            final HttpServletRequest request,
+            final HttpServletResponse response
     ) throws ServletException, IOException {
 
         /*
@@ -274,8 +274,8 @@ abstract public class AbstractLBSPolicy implements IHALoadBalancerPolicy,
      */
     protected boolean conditionallyForwardReadRequest(
             final HALoadBalancerServlet servlet,
-            final HttpServletRequest request, //
-            final HttpServletResponse response//
+            final HttpServletRequest request,
+            final HttpServletResponse response
             ) throws IOException {
 
         return false;

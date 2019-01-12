@@ -168,25 +168,25 @@ public class TestIndexSegmentCheckpoint extends TestCase {
             length = offsetMetadata + sizeMetadata; 
             
             checkpoint = new IndexSegmentCheckpoint(
-                offsetBits,//
-                height,//
-                nleaves,//
-                nnodes,//
-                nentries,//
-                maxNodeOrLeafLength,//
-                offsetLeaves,extentLeaves,//
-                offsetNodes,extentNodes,//
-                offsetBlobs,extentBlobs,//
-                addrRoot,//
-                addrMetadata,//
-                addrBloom, //
-                addrFirstLeaf,//
-                addrLastLeaf,//
-                length,//
-                compactingMerge,//
-                useChecksums,//
-                segmentUUID,//
-                commitTime//
+                offsetBits,
+                height,
+                nleaves,
+                nnodes,
+                nentries,
+                maxNodeOrLeafLength,
+                offsetLeaves,extentLeaves,
+                offsetNodes,extentNodes,
+                offsetBlobs,extentBlobs,
+                addrRoot,
+                addrMetadata,
+                addrBloom,
+                addrFirstLeaf,
+                addrLastLeaf,
+                length,
+                compactingMerge,
+                useChecksums,
+                segmentUUID,
+                commitTime
                 );
         
             if(log.isInfoEnabled())

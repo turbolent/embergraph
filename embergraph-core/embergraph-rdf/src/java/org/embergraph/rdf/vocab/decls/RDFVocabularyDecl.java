@@ -43,22 +43,22 @@ public class RDFVocabularyDecl implements VocabularyDecl {
 
     static private final URI[] uris = new URI[]{
             new URIImpl(RDF.NAMESPACE),
-            RDF.ALT, //
-            RDF.BAG, //
-            RDF.FIRST, //
-            RDF.LI, //
-            RDF.LIST, //
-            RDF.NIL, //
-            RDF.OBJECT, //
-            RDF.PREDICATE, //
-            RDF.PROPERTY, //
-            RDF.REST, //
-            RDF.SEQ, //
-            RDF.STATEMENT, //
-            RDF.SUBJECT, //
-            RDF.TYPE, //
-            RDF.VALUE, //
-            RDF.XMLLITERAL, //
+            RDF.ALT,
+            RDF.BAG,
+            RDF.FIRST,
+            RDF.LI,
+            RDF.LIST,
+            RDF.NIL,
+            RDF.OBJECT,
+            RDF.PREDICATE,
+            RDF.PROPERTY,
+            RDF.REST,
+            RDF.SEQ,
+            RDF.STATEMENT,
+            RDF.SUBJECT,
+            RDF.TYPE,
+            RDF.VALUE,
+            RDF.XMLLITERAL,
     };
 
     public RDFVocabularyDecl() {

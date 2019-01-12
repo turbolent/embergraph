@@ -146,9 +146,9 @@ public class BigdataExprBuilder extends GroupGraphPatternBuilder {
 
     }
 
-    //
+
     // ASTQuery visitor methods for SELECT, ASK, DESCRIBE and CONSTRUCT.
-    //
+
     
     /**
      * This is the entry point for both a top-level SELECT and a SubSelect.
@@ -420,9 +420,9 @@ public class BigdataExprBuilder extends GroupGraphPatternBuilder {
 
     }
 
-    //
+
     // Grammar constructions below the ASTQuery node.
-    //
+
     
     @Override
     final public GroupByNode visit(final ASTGroupClause node, Object data)
@@ -497,9 +497,9 @@ public class BigdataExprBuilder extends GroupGraphPatternBuilder {
         return node.getValue();
     }
 
-    //
+
     // private helper methods.
-    //
+
 
     /**
      * Handle the optional WITH SelectQuery AS NAME clause(s).  These are a
@@ -1132,7 +1132,7 @@ public class BigdataExprBuilder extends GroupGraphPatternBuilder {
 //             */
 ////            AggregateCollector collector = new AggregateCollector();
 ////            valueExpr.visit(collector);
-////
+//
 ////            if (collector.getOperators().size() > 0) {
 ////                elem.setAggregateOperatorInExpression(true);
 //                
@@ -1141,19 +1141,19 @@ public class BigdataExprBuilder extends GroupGraphPatternBuilder {
 ////                if (!elem.hasAggregateOperatorInExpression()) {
 ////                
 ////                    final Set<String> groupNames = group.getBindingNames();
-////
+//
 ////                    ExtensionElem extElem = elem.getSourceExpression();
 ////                    if (extElem != null) {
 ////                        ValueExpr expr = extElem.getExpr();
-////
+//
 ////                        VarCollector collector = new VarCollector();
 ////                        expr.visit(collector);
-////
+//
 ////                        for (Var var : collector.getCollectedVars()) {
 ////                            if (!groupNames.contains(var.getName())) {
 ////                                throw new VisitorException("variable '" + var.getName()
 ////                                        + "' in projection not present in GROUP BY.");
-////
+//
 ////                            }
 ////                        }
 ////                    }
@@ -1165,7 +1165,7 @@ public class BigdataExprBuilder extends GroupGraphPatternBuilder {
 ////                        else if (!groupNames.contains(elem.getSourceName())) {
 ////                            throw new VisitorException("variable '" + elem.getSourceName()
 ////                                    + "' in projection not present in GROUP BY.");
-////
+//
 ////                        }
 ////                    }
 ////                }

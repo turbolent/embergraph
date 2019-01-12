@@ -49,7 +49,7 @@ public class SubstrBOp extends IVValueExpression<IV> implements INeedsMaterializ
     private static final long serialVersionUID = -7022953617164154412L;
 
     @SuppressWarnings("rawtypes")
-    public SubstrBOp(//
+    public SubstrBOp(
             final IValueExpression<? extends IV> x,
             final IValueExpression<? extends IV> start,
             final IValueExpression<? extends IV> length, 

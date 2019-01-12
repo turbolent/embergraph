@@ -61,13 +61,13 @@ public class TestSearch extends AbstractSearchTest {
      */
     final String[] docs = new String[]{
             /* Infant & Toddler First Aid */
-            "Infant Toddler",//
+            "Infant Toddler",
             /* Babies Children's Room (For Your Home) */
-            "Bab Child Home",//
+            "Bab Child Home",
             /* Child Safety at Home */
             "Child Safety Home",// 
             /* Your Baby's Health and Safety: From Infant to Toddler */
-            "Bab Health Safety Infant Toddler",//
+            "Bab Health Safety Infant Toddler",
             /* Baby Proofing Basics */
             "Bab Proofing",
             /* Your Guide To Easy Rust Proofing */
@@ -142,11 +142,11 @@ public class TestSearch extends AbstractSearchTest {
 //                                query, languageCode, 0d/* minCosine */,
 //                                Integer.MAX_VALUE/* maxRank */);
             
-            assertSameHits(new IHit[] { //
-                    new HT<Long>(5L, 0.44194173824159216d),//
-                    new HT<Long>(6L, 0.44194173824159216d),//
-                    new HT<Long>(2L, 0.35355339059327373d),//
-                    new HT<Long>(3L, 0.35355339059327373d),//
+            assertSameHits(new IHit[] {
+                    new HT<Long>(5L, 0.44194173824159216d),
+                    new HT<Long>(6L, 0.44194173824159216d),
+                    new HT<Long>(2L, 0.35355339059327373d),
+                    new HT<Long>(3L, 0.35355339059327373d),
             }, itr);
         }
 

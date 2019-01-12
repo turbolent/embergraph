@@ -1086,9 +1086,9 @@ public class TestWORMWriteCacheService extends TestCase3 {
             fixture.awaitDeque();
             
             // Verify the pipeline order.
-            assertEquals(new UUID[] {//
-                    quorum1.getClient().getServiceId(),//
-                    quorum0.getClient().getServiceId() //
+            assertEquals(new UUID[] {
+                    quorum1.getClient().getServiceId(),
+                    quorum0.getClient().getServiceId()
                     }, quorum0.getPipeline());
 
             // actor0 will become the leader.
@@ -1106,9 +1106,9 @@ public class TestWORMWriteCacheService extends TestCase3 {
             assertEquals(2,quorum0.getJoined().length);
 
             // Verify the pipeline was reorganized into the vote order.
-            assertEquals(new UUID[] {//
-                    quorum0.getClient().getServiceId(), //
-                    quorum1.getClient().getServiceId(),//
+            assertEquals(new UUID[] {
+                    quorum0.getClient().getServiceId(),
+                    quorum1.getClient().getServiceId(),
                     }, quorum0.getPipeline());
 
             final long nsend = doStressTest(nbuffers, nrecs, maxreclen,
@@ -1192,10 +1192,10 @@ public class TestWORMWriteCacheService extends TestCase3 {
             fixture.awaitDeque();
             
             // Verify the pipeline order.
-            assertEquals(new UUID[] {//
-                    quorum2.getClient().getServiceId(),//
-                    quorum1.getClient().getServiceId(), //
-                    quorum0.getClient().getServiceId(), //
+            assertEquals(new UUID[] {
+                    quorum2.getClient().getServiceId(),
+                    quorum1.getClient().getServiceId(),
+                    quorum0.getClient().getServiceId(),
                     }, quorum0.getPipeline());
 
             // actor0 will become the leader.
@@ -1232,10 +1232,10 @@ public class TestWORMWriteCacheService extends TestCase3 {
             // verify first service in the pipeline is the quorum leader.
             assertEquals(quorum0.getClient().getServiceId(), quorum0
                     .getPipeline()[0]);
-//            assertEquals(new UUID[] {//
-//                    quorum0.getClient().getServiceId(), //
-//                    quorum1.getClient().getServiceId(),//
-//                    quorum2.getClient().getServiceId(),//
+//            assertEquals(new UUID[] {
+//                    quorum0.getClient().getServiceId(),
+//                    quorum1.getClient().getServiceId(),
+//                    quorum2.getClient().getServiceId(),
 //                    }, quorum0.getPipeline());
 
             final long nsend = doStressTest(nbuffers, nrecs, maxreclen,

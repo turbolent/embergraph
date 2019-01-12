@@ -979,8 +979,8 @@ public class StressTestConcurrent extends
 
                 try {
 
-                    ndx.submit(0/* fromIndex */, nops/* toIndex */, keys, vals, //
-                            BatchInsertConstructor.RETURN_NO_VALUES, //
+                    ndx.submit(0/* fromIndex */, nops/* toIndex */, keys, vals,
+                            BatchInsertConstructor.RETURN_NO_VALUES,
                             null// handler
                             );
 
@@ -995,8 +995,8 @@ public class StressTestConcurrent extends
                          */
                         
                         groundTruth.submit(0/* fromIndex */, nops/* toIndex */,
-                                keys, vals, //
-                                BatchInsertConstructor.RETURN_NO_VALUES, //
+                                keys, vals,
+                                BatchInsertConstructor.RETURN_NO_VALUES,
                                 null// handler
                                 );
 
@@ -1031,8 +1031,8 @@ public class StressTestConcurrent extends
                 try {
 
                     ndx.submit(0/* fromIndex */, nops/* toIndex */, keys,
-                            null/* vals */,//
-                            BatchRemoveConstructor.RETURN_MUTATION_COUNT,//
+                            null/* vals */,
+                            BatchRemoveConstructor.RETURN_MUTATION_COUNT,
                             null// handler
                             );
 
@@ -1047,8 +1047,8 @@ public class StressTestConcurrent extends
                          */
 
                         groundTruth.submit(0/* fromIndex */, nops/* toIndex */,
-                                keys, null/* vals */,//
-                                BatchRemoveConstructor.RETURN_MUTATION_COUNT,//
+                                keys, null/* vals */,
+                                BatchRemoveConstructor.RETURN_MUTATION_COUNT,
                                 null// handler
                                 );
 

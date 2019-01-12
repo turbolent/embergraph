@@ -115,10 +115,10 @@ public class TestRestartSafe extends AbstractEmbeddedFederationTestCase {
 
         metadata.setDeleteMarkers(true);
         
-        final UUID indexUUID = fed.registerIndex(metadata, new byte[][]{//
+        final UUID indexUUID = fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID() });
 

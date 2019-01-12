@@ -119,7 +119,7 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
         @SuppressWarnings("rawtypes")
         final IV mikeIV = makeIV(store.getValueFactory().createLiteral("mike"));
 
-        final IBindingSet[] bsets = new IBindingSet[] { //
+        final IBindingSet[] bsets = new IBindingSet[] {
                 new ListBindingSet()
         };
 

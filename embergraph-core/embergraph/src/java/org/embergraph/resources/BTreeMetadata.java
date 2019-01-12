@@ -428,9 +428,9 @@ class BTreeMetadata {
 //        this.splitPriority = (sumSegBytes < resourceManager.nominalShardSize) ? 0
 //                : (sumSegBytes / (double) resourceManager.nominalShardSize);
 
-        this.mandatoryMerge //
-            =  sourceJournalCount >= resourceManager.maximumJournalsPerView //
-            || sourceSegmentCount >= resourceManager.maximumSegmentsPerView //
+        this.mandatoryMerge
+            =  sourceJournalCount >= resourceManager.maximumJournalsPerView
+            || sourceSegmentCount >= resourceManager.maximumSegmentsPerView
         ;
         
         // BTree's directly maintained entry count (very fast).

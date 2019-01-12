@@ -141,7 +141,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
          * into the signature of this method.
          */
         final int nuris = 2000; // number of unique subject/objects
-        final int npreds = 50; //
+        final int npreds = 50;
         // final PseudoRandom r = new PseudoRandom(2000);
         // r.next(1500);
         final Random r = new Random();

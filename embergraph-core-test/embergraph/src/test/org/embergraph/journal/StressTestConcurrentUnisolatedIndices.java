@@ -131,7 +131,7 @@ public class StressTestConcurrentUnisolatedIndices extends
              * could be observed by an application outside of a shutdownNow()
              * scenario.
              */
-            doConcurrentClientTest(journal,//
+            doConcurrentClientTest(journal,
                 30,// timeout
                 20, // 3,// nresources // 20
                 1, // minLocks
@@ -804,21 +804,21 @@ public class StressTestConcurrentUnisolatedIndices extends
             
             conditions = apply(
                     conditions,
-                    new NV[][] { //
+                    new NV[][] {
                             new NV[] { new NV(Options.BUFFER_MODE,
-                                    BufferMode.Transient.toString()), }, //
+                                    BufferMode.Transient.toString()), },
                             new NV[] { new NV(Options.BUFFER_MODE,
-                                    BufferMode.Direct.toString()), }, //
+                                    BufferMode.Direct.toString()), },
                             new NV[] {
                                     new NV(Options.BUFFER_MODE, BufferMode.Direct.toString()),
                                     new NV(Options.FORCE_ON_COMMIT, ForceEnum.No
-                                            .toString()), }, //
-                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Mapped.toString()), }, //
-                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Disk.toString()), }, //
+                                            .toString()), },
+                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Mapped.toString()), },
+                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Disk.toString()), },
                             new NV[] {
                                     new NV(Options.BUFFER_MODE, BufferMode.Disk.toString()),
                                     new NV(Options.FORCE_ON_COMMIT, ForceEnum.No
-                                            .toString()), }, //
+                                            .toString()), },
                     });
             
             final Experiment exp = new Experiment(className,defaultProperties,conditions);

@@ -215,23 +215,23 @@ public class TestIndexSegmentAddressManager extends AbstractBTreeTestCase {
             final boolean useChecksums= r.nextBoolean();
             
             checkpoint = new IndexSegmentCheckpoint(
-                offsetBits,//
+                offsetBits,
                 1, // height
                 2, // nleaves
                 1, // nnodes
                 29, // nentries
                 128,// maxNodeOrLeafLength`
-                offsetLeaves, extentLeaves,//
-                offsetNodes, extentNodes, //
-                offsetBlobs, extentBlobs, //
-                addrRoot,//
-                addrMetadata,//
-                addrBloom, //
-                addrFirstLeaf,//
-                addrLastLeaf,//
-                length,//
-                compactingMerge,//
-                useChecksums,//
+                offsetLeaves, extentLeaves,
+                offsetNodes, extentNodes,
+                offsetBlobs, extentBlobs,
+                addrRoot,
+                addrMetadata,
+                addrBloom,
+                addrFirstLeaf,
+                addrLastLeaf,
+                length,
+                compactingMerge,
+                useChecksums,
                 UUID.randomUUID(),// segmentUUID,
                 System.currentTimeMillis()//commitTime
                 );

@@ -216,13 +216,13 @@ public class TestSubqueryPatterns extends
     public void test_triplePattern_join_subSelect() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "select ?s " //
-                + "{"//
+        final String sparql = "select ?s "
+                + "{"
                 + " ?s ?x ?o "
-                + " {"//
-                + "   select ?x where { ?x ?p ?x }" //
-                +"  }"//
-                + "}"//
+                + " {"
+                + "   select ?x where { ?x ?p ?x }"
+                +"  }"
+                + "}"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -352,13 +352,13 @@ public class TestSubqueryPatterns extends
     public void test_bind_join_subSelect() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql//
-              = "select ?s" +//
-        		" where {" +//
-        		"   bind( <http://www.embergraph.org> as ?o )" +//
-        		"   {" +//
-        		"     select ?s where { ?s ?p ?o  }" +//
-        		"   }" +//
+        final String sparql
+              = "select ?s" +
+        		" where {" +
+        		"   bind( <http://www.embergraph.org> as ?o )" +
+        		"   {" +
+        		"     select ?s where { ?s ?p ?o  }" +
+        		"   }" +
         		"}";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -420,17 +420,17 @@ public class TestSubqueryPatterns extends
     public void test_subSubSelect() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql//
-              = "select ?s \n" +//
-                " where { \n" +//
-                "   bind( <http://www.embergraph.org> as ?o ) \n" +//
-                "   { \n" +//
-                "     select ?s \n" +//
-                "      where { \n" +//
-                "        ?s ?p ?o . \n" +//
-                "        { select ?o { bind( 12 as ?o ) } } \n" +//
-                "      } \n" +//
-                "   }\n" +//
+        final String sparql
+              = "select ?s \n" +
+                " where { \n" +
+                "   bind( <http://www.embergraph.org> as ?o ) \n" +
+                "   { \n" +
+                "     select ?s \n" +
+                "      where { \n" +
+                "        ?s ?p ?o . \n" +
+                "        { select ?o { bind( 12 as ?o ) } } \n" +
+                "      } \n" +
+                "   }\n" +
                 "}";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -532,14 +532,14 @@ public class TestSubqueryPatterns extends
     public void test_exists() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = ""//
-                + "PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"//
-                + "PREFIX  foaf:   <http://xmlns.com/foaf/0.1/> \n"//
-                + "SELECT ?person \n"//
-                + " WHERE { \n"//
-                + "       ?person rdf:type  foaf:Person . \n"//
-                + "       FILTER EXISTS { ?person foaf:name ?name } \n"//
-                + "}"//
+        final String sparql = ""
+                + "PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"
+                + "PREFIX  foaf:   <http://xmlns.com/foaf/0.1/> \n"
+                + "SELECT ?person \n"
+                + " WHERE { \n"
+                + "       ?person rdf:type  foaf:Person . \n"
+                + "       FILTER EXISTS { ?person foaf:name ?name } \n"
+                + "}"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -609,14 +609,14 @@ public class TestSubqueryPatterns extends
     public void test_not_exists() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = ""//
-                + "PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"//
-                + "PREFIX  foaf:   <http://xmlns.com/foaf/0.1/> \n"//
-                + "SELECT ?person \n"//
-                + " WHERE { \n"//
-                + "       ?person rdf:type  foaf:Person . \n"//
-                + "       FILTER NOT EXISTS { ?person foaf:name ?name } \n"//
-                + "}"//
+        final String sparql = ""
+                + "PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"
+                + "PREFIX  foaf:   <http://xmlns.com/foaf/0.1/> \n"
+                + "SELECT ?person \n"
+                + " WHERE { \n"
+                + "       ?person rdf:type  foaf:Person . \n"
+                + "       FILTER NOT EXISTS { ?person foaf:name ?name } \n"
+                + "}"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -694,21 +694,21 @@ public class TestSubqueryPatterns extends
     public void test_namedSubquery() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = //
-                "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" + //
-                "\nSELECT ?p2" + //
-                "\n WITH {" + //
-                "\n         SELECT DISTINCT ?p" + //
-                "\n         WHERE {" + //
-                "\n                 ?s ?p ?o" + //
-                "\n          }" + //
-                "\n } AS %namedSet1" + //
-                "\n WHERE {" + //
-                "\n        bind ( rdfs:subPropertyOf as ?x )"+//
-                "\n        ?p ?x ?p2" + //
-//                "\n        ?p rdfs:subPropertyOf ?p2" + //
-                "\n        INCLUDE %namedSet1" + //
-                "\n}"//
+        final String sparql =
+                "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "\nSELECT ?p2" +
+                "\n WITH {" +
+                "\n         SELECT DISTINCT ?p" +
+                "\n         WHERE {" +
+                "\n                 ?s ?p ?o" +
+                "\n          }" +
+                "\n } AS %namedSet1" +
+                "\n WHERE {" +
+                "\n        bind ( rdfs:subPropertyOf as ?x )"+
+                "\n        ?p ?x ?p2" +
+//                "\n        ?p rdfs:subPropertyOf ?p2" +
+                "\n        INCLUDE %namedSet1" +
+                "\n}"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -801,21 +801,21 @@ public class TestSubqueryPatterns extends
 //    public void test_namedSubquery_joinOn() throws MalformedQueryException,
 //            TokenMgrError, ParseException {
 //
-//        final String sparql = //
-//                "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" + //
-//                "\nSELECT ?p2" + //
-//                "\n WITH {" + //
-//                "\n         SELECT DISTINCT ?p" + //
-//                "\n         WHERE {" + //
-//                "\n                 ?s ?p ?o" + //
-//                "\n          }" + //
-//                "\n } AS %namedSet1" + //
-//                "\n WHERE {" + //
-//                "\n        bind ( rdfs:subPropertyOf as ?x )"+//
-//                "\n        ?p ?x ?p2" + //
-////                "\n        INCLUDE %namedSet1" + //
-//                "\n        INCLUDE %namedSet1 JOIN ON ( ?p2 )" + //
-//                "\n}"//
+//        final String sparql =
+//                "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+//                "\nSELECT ?p2" +
+//                "\n WITH {" +
+//                "\n         SELECT DISTINCT ?p" +
+//                "\n         WHERE {" +
+//                "\n                 ?s ?p ?o" +
+//                "\n          }" +
+//                "\n } AS %namedSet1" +
+//                "\n WHERE {" +
+//                "\n        bind ( rdfs:subPropertyOf as ?x )"+
+//                "\n        ?p ?x ?p2" +
+////                "\n        INCLUDE %namedSet1" +
+//                "\n        INCLUDE %namedSet1 JOIN ON ( ?p2 )" +
+//                "\n}"
 //        ;
 //
 //        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -909,21 +909,21 @@ public class TestSubqueryPatterns extends
 //    public void test_namedSubquery_joinOn_noVars() throws MalformedQueryException,
 //            TokenMgrError, ParseException {
 //
-//        final String sparql = //
-//                "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" + //
-//                "\nSELECT ?p2" + //
-//                "\n WITH {" + //
-//                "\n         SELECT DISTINCT ?p" + //
-//                "\n         WHERE {" + //
-//                "\n                 ?s ?p ?o" + //
-//                "\n          }" + //
-//                "\n } AS %namedSet1" + //
-//                "\n WHERE {" + //
-//                "\n        bind ( rdfs:subPropertyOf as ?x )"+//
-//                "\n        ?p ?x ?p2" + //
-////                "\n        INCLUDE %namedSet1" + //
-//                "\n        INCLUDE %namedSet1 JOIN ON ( )" + //
-//                "\n}"//
+//        final String sparql =
+//                "\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+//                "\nSELECT ?p2" +
+//                "\n WITH {" +
+//                "\n         SELECT DISTINCT ?p" +
+//                "\n         WHERE {" +
+//                "\n                 ?s ?p ?o" +
+//                "\n          }" +
+//                "\n } AS %namedSet1" +
+//                "\n WHERE {" +
+//                "\n        bind ( rdfs:subPropertyOf as ?x )"+
+//                "\n        ?p ?x ?p2" +
+////                "\n        INCLUDE %namedSet1" +
+//                "\n        INCLUDE %namedSet1 JOIN ON ( )" +
+//                "\n}"
 //        ;
 //
 //        final QueryRoot expected = new QueryRoot(QueryType.SELECT);

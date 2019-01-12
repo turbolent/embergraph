@@ -753,14 +753,14 @@ public class FileMetadata {
 //				final IRootBlockView rootBlock0 = new RootBlockView(true,
 //						offsetBits, nextOffset, firstCommitTime,
 //						lastCommitTime, commitCounter, commitRecordAddr,
-//						commitRecordIndexAddr, uuid, //
-//						blockSequence, quorumToken,//
+//						commitRecordIndexAddr, uuid,
+//						blockSequence, quorumToken,
 //						0L, 0L, stenum, createTime, closeTime, RootBlockView.currentVersion, checker);
 //				final IRootBlockView rootBlock1 = new RootBlockView(false,
 //						offsetBits, nextOffset, firstCommitTime,
 //						lastCommitTime, commitCounter, commitRecordAddr,
-//						commitRecordIndexAddr, uuid, //
-//						blockSequence, quorumToken,//
+//						commitRecordIndexAddr, uuid,
+//						blockSequence, quorumToken,
 //						0L, 0L, stenum, createTime, closeTime, RootBlockView.currentVersion, checker);
 
 			    // take various values from the current RB.

@@ -37,8 +37,8 @@ public class BigdataGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
 
     }
 
-    public BigdataGASState(final IGASEngine gasEngine, //
-            final BigdataGraphAccessor graphAccessor,//
+    public BigdataGASState(final IGASEngine gasEngine,
+            final BigdataGraphAccessor graphAccessor,
             final IStaticFrontier frontier,
             final IGASSchedulerImpl gasScheduler,
             final IGASProgram<VS, ES, ST> gasProgram) {

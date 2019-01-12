@@ -301,12 +301,12 @@ This case 4 appears to be misconceived: Jeremy Carroll.
             
             swap(queryBase, parent, child);
 
-        } else if (arity == 1 && //
-                op.get(0) instanceof IBindingProducerNode && //
-                op.getParent() != null && //
-                !op.isOptional() && //
-                !op.isMinus() && //
-                !isUnion(op.getParent()) && //
+        } else if (arity == 1 &&
+                op.get(0) instanceof IBindingProducerNode &&
+                op.getParent() != null &&
+                !op.isOptional() &&
+                !op.isMinus() &&
+                !isUnion(op.getParent()) &&
 //                !(((IGroupNode<?>) op.getParent()) instanceof UnionNode) &&
                 !isMinus(op.getParent()) &&
 //                !(((IGroupNode<?>) op.getParent()) instanceof JoinGroupNode && !(((JoinGroupNode) op

@@ -1394,15 +1394,15 @@ public class MockQuorumFixture {
          * visibility problems when accessing non-volatile member fields and the
          * data can be inconsistent if someone else is modifying it.
          */
-        return super.toString() + //
-        "{ lastValidToken="+lastValidToken+//
-        ", token=" + token +//
-        ", members="+Collections.unmodifiableCollection(members)+//
-        ", pipeline="+Collections.unmodifiableCollection(pipeline)+//
-        ", votes="+Collections.unmodifiableMap(votes)+//
-        ", joined="+Collections.unmodifiableCollection(joined)+//
-        ", listeners="+listeners+//
-        ", deque="+deque+//
+        return super.toString() +
+        "{ lastValidToken="+lastValidToken+
+        ", token=" + token +
+        ", members="+Collections.unmodifiableCollection(members)+
+        ", pipeline="+Collections.unmodifiableCollection(pipeline)+
+        ", votes="+Collections.unmodifiableMap(votes)+
+        ", joined="+Collections.unmodifiableCollection(joined)+
+        ", listeners="+listeners+
+        ", deque="+deque+
         "}";
     }
     

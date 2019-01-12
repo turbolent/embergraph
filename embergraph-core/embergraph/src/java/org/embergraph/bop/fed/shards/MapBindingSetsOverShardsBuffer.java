@@ -144,10 +144,10 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
 //    * @param keyOrder
 //    *            Identifies the access path for the target predicate.
     public MapBindingSetsOverShardsBuffer(
-            final IBigdataFederation<?> fed,//
-            final IPredicate<F> pred, //
-//            final IKeyOrder<F> keyOrder,//
-            final long timestamp,//
+            final IBigdataFederation<?> fed,
+            final IPredicate<F> pred,
+//            final IKeyOrder<F> keyOrder,
+            final long timestamp,
             final int capacity) {
 
         super(capacity, (Class<? extends E>) IBindingSet.class);

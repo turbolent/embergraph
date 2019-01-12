@@ -62,9 +62,9 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
             assertFalse(store.hasStatement(s.getIV(), p.getIV(), o.getIV()));
 
             // add the statement.
-            store.addStatements(new SPO[] { //
-                    new SPO(s.getIV(), p.getIV(), o.getIV(), StatementEnum.Explicit) //
-                    },//
+            store.addStatements(new SPO[] {
+                    new SPO(s.getIV(), p.getIV(), o.getIV(), StatementEnum.Explicit)
+                    },
                     1);
 
             assertTrue(store.hasStatement(s.getIV(), p.getIV(), o.getIV()));
@@ -95,9 +95,9 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
 //            final IV o = new TermId(VTE.URI, 3);
 //
 //            // add the statement.
-//            store.addStatements(new SPO[] { //
-//                    new SPO(s, p, o, StatementEnum.Explicit) //
-//                    },//
+//            store.addStatements(new SPO[] {
+//                    new SPO(s, p, o, StatementEnum.Explicit)
+//                    },
 //                    1);
 //
 //            final boolean stmtInStore = store.hasStatement(s, p, o);
@@ -172,9 +172,9 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
                     .addTerms(values, values.length, false/* readOnly */);
             
             // add the statement.
-            store.addStatements(new SPO[] { //
-                    new SPO(s.getIV(), p.getIV(), o.getIV(), StatementEnum.Explicit) //
-                    },//
+            store.addStatements(new SPO[] {
+                    new SPO(s.getIV(), p.getIV(), o.getIV(), StatementEnum.Explicit)
+                    },
                     1);
 
             // visible in the repo.

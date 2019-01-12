@@ -154,8 +154,8 @@ public class TestScatterSplit extends AbstractEmbeddedFederationTestCase {
                     .setScatterSplitConfiguration(new ScatterSplitConfiguration(
                             true,// enabled
                             .25,// percentOfSplitThreshold
-                            dataServiceCount, //
-                            expectedIndexPartitionCount//
+                            dataServiceCount,
+                            expectedIndexPartitionCount
                     ));
 
             // register the scale-out index, creating a single index partition.
@@ -297,9 +297,9 @@ public class TestScatterSplit extends AbstractEmbeddedFederationTestCase {
             int ndataService1 = 0;// #of index partitions on data service 1.
             
             final ITupleIterator itr = new RawDataServiceTupleIterator(
-                    fed.getMetadataService(),//
-                    MetadataService.getMetadataIndexName(name), //
-                    ITx.READ_COMMITTED,//
+                    fed.getMetadataService(),
+                    MetadataService.getMetadataIndexName(name),
+                    ITx.READ_COMMITTED,
                     true, // readConsistent
                     null, // fromKey
                     null, // toKey

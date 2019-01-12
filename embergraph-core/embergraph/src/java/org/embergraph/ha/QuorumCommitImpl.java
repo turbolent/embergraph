@@ -202,8 +202,8 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends
 
                         // The message used for the services that are joined.
                         final IHA2PhasePrepareMessage msgForJoinedService = new HA2PhasePrepareMessage(
-                                req.getConsensusReleaseTime(),//
-                                isGatherService,//
+                                req.getConsensusReleaseTime(),
+                                isGatherService,
                                 true, // isJoinedService
                                 rootBlock, timeout, unit);
 
@@ -240,7 +240,7 @@ public class QuorumCommitImpl<S extends HACommitGlue> extends
                     
                     // The message used for the leader.
                     final IHA2PhasePrepareMessage msgForJoinedService = new HA2PhasePrepareMessage(
-                            req.getConsensusReleaseTime(),//
+                            req.getConsensusReleaseTime(),
                             true, // isGatherService (always true for leader)
                             true, // isJoinedService (always true for leader)
                             rootBlock, timeout, unit);

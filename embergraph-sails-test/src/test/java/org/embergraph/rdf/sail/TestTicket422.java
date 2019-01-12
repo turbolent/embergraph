@@ -76,8 +76,8 @@ public class TestTicket422 extends ProxyBigdataSailTestCase {
                 if (mainTripleStore == null)
                     throw new UnsupportedOperationException();
                 
-                final TempTripleStore tempStore = new TempTripleStore(//
-                        sail.getIndexManager().getTempStore(), //
+                final TempTripleStore tempStore = new TempTripleStore(
+                        sail.getIndexManager().getTempStore(),
                         mainConn.getProperties(), mainTripleStore);
     
             try {

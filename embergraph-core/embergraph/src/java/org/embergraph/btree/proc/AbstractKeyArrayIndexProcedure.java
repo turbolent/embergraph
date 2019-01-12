@@ -566,17 +566,17 @@ abstract public class AbstractKeyArrayIndexProcedure<T> extends
 		}
 
 		// configuration parameters. followed by invocation instance data.
-		log.fatal("maxReaders=" + maxReaders //
-				+ ", skipCount=" + skipCount //
-				+ ", spannedRangeMultiplier=" + spannedRangeMultiplier //
-				+ ", batchSize=" + batchSize //
+		log.fatal("maxReaders=" + maxReaders
+				+ ", skipCount=" + skipCount
+				+ ", spannedRangeMultiplier=" + spannedRangeMultiplier
+				+ ", batchSize=" + batchSize
 				+ ", queueCapacity=" + queueCapacity
 				// invocation instance data.
-				+ ", nkeys=" + keysSize //
-				+ ", nreaders=" + stats.readerBatchCount //
-//				+ ", writerBatches=" + stats.writerBatchCount //
-//				+ ", keys/writeBatch=" + (keysSize / stats.writerBatchCount.get()) //
-				+ ", proc=" + getClass().getSimpleName()//
+				+ ", nkeys=" + keysSize
+				+ ", nreaders=" + stats.readerBatchCount
+//				+ ", writerBatches=" + stats.writerBatchCount
+//				+ ", keys/writeBatch=" + (keysSize / stats.writerBatchCount.get())
+				+ ", proc=" + getClass().getSimpleName()
 		);
 
 		return resultHandler.getResult();
@@ -776,17 +776,17 @@ abstract public class AbstractKeyArrayIndexProcedure<T> extends
 			final T ret = writerFuture.get();
 
 			// configuration parameters. followed by invocation instance data.
-			log.fatal("maxReaders=" + maxReaders //
-					+ ", skipCount=" + skipCount //
-					+ ", spannedRangeMultiplier=" + spannedRangeMultiplier //
-					+ ", batchSize=" + batchSize //
+			log.fatal("maxReaders=" + maxReaders
+					+ ", skipCount=" + skipCount
+					+ ", spannedRangeMultiplier=" + spannedRangeMultiplier
+					+ ", batchSize=" + batchSize
 					+ ", queueCapacity=" + queueCapacity
 					// invocation instance data.
-					+ ", nkeys=" + keysSize //
-					+ ", nreaders=" + stats.readerBatchCount //
-					+ ", writerBatches=" + stats.writerBatchCount //
-					+ ", keys/writeBatch=" + (keysSize / stats.writerBatchCount.get()) //
-					+ ", proc=" + getClass().getSimpleName()//
+					+ ", nkeys=" + keysSize
+					+ ", nreaders=" + stats.readerBatchCount
+					+ ", writerBatches=" + stats.writerBatchCount
+					+ ", keys/writeBatch=" + (keysSize / stats.writerBatchCount.get())
+					+ ", proc=" + getClass().getSimpleName()
 			);
 
 			return ret;
@@ -1089,7 +1089,7 @@ abstract public class AbstractKeyArrayIndexProcedure<T> extends
 //			// Start at the beginning.  Proceed until then end. Then stop.
 //			final byte[] firstKey = batch.keysView.get(0); // firstKey (inclusive)
 //			final byte[] lastKey = batch.keysView.get(batch.keysView.size() - 1); // lastKey (inclusive)
-	//
+
 			// TODO Auto-generated method stub
 //			final AbstractBTree sources[] = view.getSources();
 
@@ -1110,7 +1110,7 @@ abstract public class AbstractKeyArrayIndexProcedure<T> extends
 //			// Iterator used to seek along the index.
 //			final ITupleCursor<?> itr = (ITupleCursor<?>) ndx.rangeIterator(firstKey, null/* toKey */, 1/* capacity */,
 //					IRangeQuery.KEYS | IRangeQuery.VALS | IRangeQuery.CURSOR, null/* filterCtor */);
-	//
+
 //			// Note: itr.hasNext() will force in the page for the current key.
 //			while (itr.hasNext()) {
 

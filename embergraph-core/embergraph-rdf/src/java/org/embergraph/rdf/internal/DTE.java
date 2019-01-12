@@ -90,23 +90,23 @@ public enum DTE {
      * not preserved.
      */
     XSDBoolean((byte) 0, Bytes.SIZEOF_BYTE, Boolean.class,
-            XSD.BOOLEAN, DTEFlags.NOFLAGS), //
+            XSD.BOOLEAN, DTEFlags.NOFLAGS),
 
     /** The "inline" value is a signed byte (xsd:byte). */
     XSDByte((byte) 1, Bytes.SIZEOF_BYTE, Byte.class,
-            XSD.BYTE, DTEFlags.NUMERIC), //
+            XSD.BYTE, DTEFlags.NUMERIC),
 
     /** The "inline" value is a signed short (xsd:short). */
     XSDShort((byte) 2, Bytes.SIZEOF_SHORT, Short.class,
-            XSD.SHORT, DTEFlags.NUMERIC), //
+            XSD.SHORT, DTEFlags.NUMERIC),
 
     /** The "inline" value is a signed 4 byte integer (xsd:int). */
     XSDInt((byte) 3, Bytes.SIZEOF_INT, Integer.class,
-            XSD.INT, DTEFlags.NUMERIC), //
+            XSD.INT, DTEFlags.NUMERIC),
 
     /** The "inline" value is a signed 8 byte integer (xsd:long). */
     XSDLong((byte) 4, Bytes.SIZEOF_LONG, Long.class,
-            XSD.LONG, DTEFlags.NUMERIC), //
+            XSD.LONG, DTEFlags.NUMERIC),
 
     /*
      * unsigned byte, short, int, long.
@@ -115,22 +115,22 @@ public enum DTE {
     /** The "inline" value is an unsigned byte (xsd:unsignedByte). */
     XSDUnsignedByte((byte) 5, Bytes.SIZEOF_BYTE, Byte.class,
             XSD.UNSIGNED_BYTE,
-            DTEFlags.UNSIGNED_NUMERIC), //
+            DTEFlags.UNSIGNED_NUMERIC),
 
     /** The "inline" value is a unsigned short (xsd:unsignedShort). */
     XSDUnsignedShort((byte) 6, Bytes.SIZEOF_SHORT, Short.class,
             XSD.UNSIGNED_SHORT,
-            DTEFlags.UNSIGNED_NUMERIC), //
+            DTEFlags.UNSIGNED_NUMERIC),
 
     /** The "inline" value is an unsigned 4 byte integer (xsd:unsignedInt). */
     XSDUnsignedInt((byte) 7, Bytes.SIZEOF_INT, Integer.class,
             XSD.UNSIGNED_INT,
-            DTEFlags.UNSIGNED_NUMERIC), //
+            DTEFlags.UNSIGNED_NUMERIC),
 
     /** The "inline" value is an unsigned 8 byte integer (xsd:unsignedLong). */
     XSDUnsignedLong((byte) 8, Bytes.SIZEOF_LONG, Long.class,
             XSD.UNSIGNED_LONG,
-            DTEFlags.UNSIGNED_NUMERIC), //
+            DTEFlags.UNSIGNED_NUMERIC),
             
     /*
      * float, double.
@@ -141,14 +141,14 @@ public enum DTE {
      * (xsd:float).
      */
     XSDFloat((byte) 9, Bytes.SIZEOF_FLOAT, Float.class,
-            XSD.FLOAT, DTEFlags.NUMERIC), //
+            XSD.FLOAT, DTEFlags.NUMERIC),
             
     /**
      * The "inline" value is a double precision floating point number
      * (xsd:double).
      */
     XSDDouble((byte) 10, Bytes.SIZEOF_DOUBLE, Double.class,
-            XSD.DOUBLE, DTEFlags.NUMERIC), //
+            XSD.DOUBLE, DTEFlags.NUMERIC),
 
     /*
      * xsd:integer, xsd:decimal.
@@ -159,7 +159,7 @@ public enum DTE {
      * {@link BigInteger}.
      */
     XSDInteger((byte) 11, 0/* variable length */, BigInteger.class,
-            XSD.INTEGER, DTEFlags.NUMERIC), //
+            XSD.INTEGER, DTEFlags.NUMERIC),
 
     /**
      * The "inline" value is an xsd:decimal. This is mostly equivalent to
@@ -170,7 +170,7 @@ public enum DTE {
      * represent the precision, we could not use xsd:decimal in an index!)
      */
     XSDDecimal((byte) 12, 0/* variable length */, BigDecimal.class,
-            XSD.DECIMAL, DTEFlags.NUMERIC), //
+            XSD.DECIMAL, DTEFlags.NUMERIC),
 
     /*
      * custom intrinsic data types.
@@ -182,7 +182,7 @@ public enum DTE {
      * @see http://lists.xml.org/archives/xml-dev/201003/msg00027.html
      */
     UUID((byte) 13, Bytes.SIZEOF_UUID, UUID.class, XSD.UUID,
-            DTEFlags.NOFLAGS), //
+            DTEFlags.NOFLAGS),
 
     /**
      * The "inline" value is a compressed Unicode string. This is decodable
@@ -216,7 +216,7 @@ public enum DTE {
      * </dl>
      */
     XSDString((byte) 14, 0/* len */, String.class, XSD.STRING,
-            DTEFlags.NOFLAGS), //
+            DTEFlags.NOFLAGS),
 
 	/**
 	 * This provides an extension of the intrinsic data types. Its code

@@ -51,11 +51,11 @@ public class RuleOwlSymmetricProperty extends Rule {
      */
     public RuleOwlSymmetricProperty(String relationName, Vocabulary vocab) {
 
-        super( "owlSymmetricProperty", //
-                new SPOPredicate(relationName,var("b"), var("x"), var("a")),//
-                new SPOPredicate[] {//
-                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.SYMMETRICPROPERTY)),//
-                    new SPOPredicate(relationName,var("a"), var("x"), var("b"))//
+        super( "owlSymmetricProperty",
+                new SPOPredicate(relationName,var("b"), var("x"), var("a")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.SYMMETRICPROPERTY)),
+                    new SPOPredicate(relationName,var("a"), var("x"), var("b"))
                 },
                 new IConstraint[] {
 					Constraint.wrap(new NE(var("a"),var("b")))

@@ -1145,11 +1145,11 @@ abstract public class AbstractHTree implements ICounterSetAccess,
 	 * @throws IllegalArgumentException
 	 *             if addressBits is GT (16).
 	 */
-    protected AbstractHTree(//
-            final IRawStore store,//
-            final INodeFactory nodeFactory,//
+    protected AbstractHTree(
+            final IRawStore store,
+            final INodeFactory nodeFactory,
             final boolean readOnly,
-            final HTreeIndexMetadata metadata,//
+            final HTreeIndexMetadata metadata,
             final IRecordCompressorFactory<?> recordCompressorFactory
             ) {
 
@@ -1211,13 +1211,13 @@ abstract public class AbstractHTree implements ICounterSetAccess,
          */
         this.writeRetentionQueue = newWriteRetentionQueue(readOnly);
 
-        this.nodeSer = new NodeSerializer(//
+        this.nodeSer = new NodeSerializer(
                 store, // addressManager
-                nodeFactory,//
-                addressBits,//
+                nodeFactory,
+                addressBits,
                 0, //initialBufferCapacity
-                metadata,//
-                readOnly,//
+                metadata,
+                readOnly,
                 recordCompressorFactory
                 );
         
@@ -1335,12 +1335,12 @@ abstract public class AbstractHTree implements ICounterSetAccess,
              * the shared backing buffer in a timely manner.
              */
             
-            return new HardReferenceQueueWithBatchingUpdates<PO>(//
+            return new HardReferenceQueueWithBatchingUpdates<PO>(
                     BigdataStatics.threadLocalBuffers, // threadLocalBuffers
                     16,// concurrencyLevel
                     new HardReferenceQueue<PO>(new DefaultEvictionListener(),
                             writeRetentionQueueCapacity, 0/* nscan */),
-//                    new DefaultEvictionListener(),//
+//                    new DefaultEvictionListener(),
 //                    metadata.getWriteRetentionQueueCapacity(),// shared capacity
                     writeRetentionQueueScan,// thread local
                     128,//64, // thread-local queue capacity @todo config
@@ -1350,10 +1350,10 @@ abstract public class AbstractHTree implements ICounterSetAccess,
 
         }
         
-        return new HardReferenceQueue<PO>(//
-                new DefaultEvictionListener(),//
-                writeRetentionQueueCapacity,//
-                writeRetentionQueueScan//
+        return new HardReferenceQueue<PO>(
+                new DefaultEvictionListener(),
+                writeRetentionQueueCapacity,
+                writeRetentionQueueScan
         );
 
     }
@@ -1660,13 +1660,13 @@ abstract public class AbstractHTree implements ICounterSetAccess,
 		}
 
 		// if (useFinger && node instanceof ILeafData) {
-		//
+
 		// if (finger == null || finger.get() != node) {
-		//
+
 		// finger = new WeakReference<Leaf>((Leaf) node);
-		//
+
 		// }
-		//
+
 		// }
 
 //        final long elapsedNanos = System.nanoTime() - beginNanos;
@@ -1808,7 +1808,7 @@ abstract public class AbstractHTree implements ICounterSetAccess,
 //            if (elapsed > 5000) {
 //
 ////            	System.err.println(s);
-////
+//
 ////            } else if (elapsed > 500/*ms*/) {
 //
 //                // log at warning level when significant latency results.
@@ -2034,13 +2034,13 @@ abstract public class AbstractHTree implements ICounterSetAccess,
                                 }
 
                                 // An instance just for this thread.
-                                final NodeSerializer myNodeSer = new NodeSerializer(//
+                                final NodeSerializer myNodeSer = new NodeSerializer(
                                         store, // addressManager
-                                        nodeSer.nodeFactory,//
-                                        addressBits,//
-                                        nodeSer.getWriteBufferCapacity(),//
-                                        metadata,//
-                                        readOnly,//
+                                        nodeSer.nodeFactory,
+                                        addressBits,
+                                        nodeSer.getWriteBufferCapacity(),
+                                        metadata,
+                                        readOnly,
                                         nodeSer.recordCompressorFactory
                                         );
 

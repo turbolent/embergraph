@@ -299,11 +299,11 @@ public abstract class AbstractIV<V extends BigdataValue, T>
         // inline << 5 bits
         // extension << 4 bits
         // dte is in the low 4 bits.
-        return (byte) ((//
-                (((int) vte.v()) << VTE_SHIFT)//
-                | ((inline ? 1 : 0) << INLINE_SHIFT)//
-                | ((extension ? 1 : 0) << EXTENSION_SHIFT) //
-                | (dte.v())//
+        return (byte) ((
+                (((int) vte.v()) << VTE_SHIFT)
+                | ((inline ? 1 : 0) << INLINE_SHIFT)
+                | ((extension ? 1 : 0) << EXTENSION_SHIFT)
+                | (dte.v())
                 ) & 0xff);
 
     }
@@ -823,8 +823,8 @@ public abstract class AbstractIV<V extends BigdataValue, T>
          * the byteLength! This avoids having to compute it again since we know
          * it at the time that we encode the IV.
          */
-        final AbstractLiteralIV<?, ?> t = isExtension() //
-                ? ((LiteralExtensionIV<?>) this).getDelegate()//
+        final AbstractLiteralIV<?, ?> t = isExtension()
+                ? ((LiteralExtensionIV<?>) this).getDelegate()
                 : (AbstractLiteralIV<?, ?>) this;
 
         switch (dte) {

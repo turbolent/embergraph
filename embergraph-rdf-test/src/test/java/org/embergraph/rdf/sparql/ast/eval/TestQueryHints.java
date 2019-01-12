@@ -1022,21 +1022,21 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
             assertNotNull(subqueryRoot.getSlice().getQueryHint(PipelineOp.Annotations.CHUNK_CAPACITY));
 
 //            assertSameIteratorAnyOrder(
-//                    new Object[] { //
+//                    new Object[] {
 //                            // Main Query.
-//                            queryRoot,//
-//                            queryRoot.getProjection(), //
-//                            whereClause, //
-//                            queryRootSP,//
-//                            nsi,//
-//                            queryRoot.getSlice(),//
+//                            queryRoot,
+//                            queryRoot.getProjection(),
+//                            whereClause,
+//                            queryRootSP,
+//                            nsi,
+//                            queryRoot.getSlice(),
 //                            // Subquery.
-//                            subqueryRoot,//
-//                            subqueryRoot.getProjection(),//
-//                            subqueryRoot.getWhereClause(), //
-//                            subqueryRootSP,//
-//                            subqueryRoot.getSlice(),//
-//                    },//
+//                            subqueryRoot,
+//                            subqueryRoot.getProjection(),
+//                            subqueryRoot.getWhereClause(),
+//                            subqueryRootSP,
+//                            subqueryRoot.getSlice(),
+//                    },
 //                    visitQueryHints(queryRoot,
 //                            PipelineOp.Annotations.CHUNK_CAPACITY));
 

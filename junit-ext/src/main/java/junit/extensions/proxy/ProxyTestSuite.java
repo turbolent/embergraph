@@ -261,12 +261,12 @@ public class ProxyTestSuite
         }
         
 	// This is the default implementation from TestSuite:
-	//
+
 	// addTest(new TestSuite(testClass));
-	//
+
 	// Our implementation just substitutes new ProxyTestSuite(
 	// delegate, testClass ) for new TestSuite( testClass ).
-	//
+
 
 	ProxyTestSuite proxyTestSuite = new ProxyTestSuite
 	    ( m_delegate,

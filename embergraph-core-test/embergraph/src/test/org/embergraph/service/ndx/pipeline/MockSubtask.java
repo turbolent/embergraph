@@ -35,14 +35,14 @@ import org.embergraph.service.ndx.pipeline.AbstractKeyRangeMasterTestCase.L;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class MockSubtask<//
-H extends MockMasterStats<L, HS>, //
-O extends Object, //
-E extends KVO<O>, //
-L extends Object, //
-S extends MockSubtask, //
-HS extends MockSubtaskStats, //
-M extends MockMaster<H, O, E, S, L, HS>//
+abstract public class MockSubtask<
+H extends MockMasterStats<L, HS>,
+O extends Object,
+E extends KVO<O>,
+L extends Object,
+S extends MockSubtask,
+HS extends MockSubtaskStats,
+M extends MockMaster<H, O, E, S, L, HS>
 > extends AbstractSubtask<HS, M, E, L> {
 
     /**

@@ -179,11 +179,11 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
      *            no upper bound.
      * @param flags
      */
-    public IndexSegmentMultiBlockIterator(//
-            final IndexSegment seg,//
-            final DirectBufferPool pool,//
-            final byte[] fromKey,//
-            final byte[] toKey,//
+    public IndexSegmentMultiBlockIterator(
+            final IndexSegment seg,
+            final DirectBufferPool pool,
+            final byte[] fromKey,
+            final byte[] toKey,
             final int flags) {
 
         if (seg == null)
@@ -537,19 +537,19 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     }
 
     public String toString() {
-        return super.toString() + //
-                "{file=" + store.getFile() + //
-                ",checkpoint="+store.getCheckpoint()+//
-                ",fromKey="+BytesUtil.toString(fromKey)+//
-                ",toKey="+BytesUtil.toString(toKey)+//
-                ",firstLeafAddr=" + store.toString(firstLeafAddr) + //
-                ",lastLeafAddr=" + store.toString(lastLeafAddr) + //
-                ",currentLeaf=" + (currentLeaf!=null?store.toString(currentLeaf.identity):"N/A") + //
-                ",blockOffset="+blockOffset+//
-                ",blockLength="+blockLength+//
-                ",bufferCapacity="+pool.getBufferCapacity()+//
-                ",leafReadCount="+leafReadCount+//
-                ",blockReadCount="+blockReadCount+//
+        return super.toString() +
+                "{file=" + store.getFile() +
+                ",checkpoint="+store.getCheckpoint()+
+                ",fromKey="+BytesUtil.toString(fromKey)+
+                ",toKey="+BytesUtil.toString(toKey)+
+                ",firstLeafAddr=" + store.toString(firstLeafAddr) +
+                ",lastLeafAddr=" + store.toString(lastLeafAddr) +
+                ",currentLeaf=" + (currentLeaf!=null?store.toString(currentLeaf.identity):"N/A") +
+                ",blockOffset="+blockOffset+
+                ",blockLength="+blockLength+
+                ",bufferCapacity="+pool.getBufferCapacity()+
+                ",leafReadCount="+leafReadCount+
+                ",blockReadCount="+blockReadCount+
                 "}";
         }
 

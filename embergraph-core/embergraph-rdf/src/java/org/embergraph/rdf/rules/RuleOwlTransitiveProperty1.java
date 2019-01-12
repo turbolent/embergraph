@@ -54,12 +54,12 @@ public class RuleOwlTransitiveProperty1 extends Rule
      */
     public RuleOwlTransitiveProperty1(String relationName, Vocabulary vocab) {
 
-        super(  "owlTransitiveProperty1",//
-                new SPOPredicate(relationName,var("x"), var("a"), var("z")), //
-                new SPOPredicate[] { //
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.TRANSITIVEPROPERTY)),//
-                    new SPOPredicate(relationName,var("x"), var("a"), var("y")),//
-                    new SPOPredicate(relationName,var("y"), var("a"), var("z"))//
+        super(  "owlTransitiveProperty1",
+                new SPOPredicate(relationName,var("x"), var("a"), var("z")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.TRANSITIVEPROPERTY)),
+                    new SPOPredicate(relationName,var("x"), var("a"), var("y")),
+                    new SPOPredicate(relationName,var("y"), var("a"), var("z"))
                 }, new IConstraint[] {
         			Constraint.wrap(new NE(var("x"),var("y"))),
         			Constraint.wrap(new NE(var("y"),var("z"))),

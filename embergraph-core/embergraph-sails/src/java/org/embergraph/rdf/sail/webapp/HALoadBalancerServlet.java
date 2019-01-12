@@ -414,10 +414,10 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
             {
                 // Get the as-configured policy.
-                final IHALoadBalancerPolicy policy = newInstance(//
-                        servletConfig, //
+                final IHALoadBalancerPolicy policy = newInstance(
+                        servletConfig,
                         HALoadBalancerServlet.class,// owningClass
-                        IHALoadBalancerPolicy.class,//
+                        IHALoadBalancerPolicy.class,
                         InitParams.POLICY, InitParams.DEFAULT_POLICY);
 
                 // Set the as-configured policy.
@@ -426,10 +426,10 @@ public class HALoadBalancerServlet extends ProxyServlet {
             }
             {
 
-                final IHARequestURIRewriter rewriter = newInstance(//
-                        servletConfig,//
+                final IHARequestURIRewriter rewriter = newInstance(
+                        servletConfig,
                         HALoadBalancerServlet.class, // owningClass
-                        IHARequestURIRewriter.class,//
+                        IHARequestURIRewriter.class,
                         InitParams.REWRITER, InitParams.DEFAULT_REWRITER);
 
                 setRewriter(rewriter);
@@ -603,14 +603,14 @@ public class HALoadBalancerServlet extends ProxyServlet {
     @Override
     public String toString() {
         
-        return super.toString()//
-                + "{prefix=" + prefix//
-                + ",policy=" + policyRef.get()//
-                + ",rewriter=" + rewriterRef.get()//
-                + ",nforward=" + nforward.estimate_get()//
-                + ",nproxy=" + nproxy.estimate_get()//
-                + ",nerror=" + nerror.estimate_get()//
-                + "}"//
+        return super.toString()
+                + "{prefix=" + prefix
+                + ",policy=" + policyRef.get()
+                + ",rewriter=" + rewriterRef.get()
+                + ",nforward=" + nforward.estimate_get()
+                + ",nproxy=" + nproxy.estimate_get()
+                + ",nerror=" + nerror.estimate_get()
+                + "}"
         ;
 
     }
@@ -861,10 +861,10 @@ public class HALoadBalancerServlet extends ProxyServlet {
      * @see <a href="http://trac.blazegraph.com/ticket/965" > Cannot run queries in
      *      LBS mode with HA1 setup </a>
      */
-    public void forwardToLocalService(//
-            final boolean isLeaderRequest,//
-            final HttpServletRequest request, //
-            final HttpServletResponse response//
+    public void forwardToLocalService(
+            final boolean isLeaderRequest,
+            final HttpServletRequest request,
+            final HttpServletResponse response
     ) throws IOException {
 
         final String path = request.getRequestURI();
@@ -1100,9 +1100,9 @@ public class HALoadBalancerServlet extends ProxyServlet {
         }
         
         // Re-write requestURL.  
-        final StringBuilder uri = rewriter.rewriteURI(//
+        final StringBuilder uri = rewriter.rewriteURI(
                 isLeaderRequest,// iff request for the leader
-                full_prefix, //
+                full_prefix,
                 originalRequestURI,// old
                 proxyToRequestURI, // new
                 request // request
@@ -1181,10 +1181,10 @@ public class HALoadBalancerServlet extends ProxyServlet {
      *      a durable problem with the target host.
      */
     @Override
-    protected void onResponseFailure(//
-            final HttpServletRequest request,//
-            final HttpServletResponse response,//
-            final Response proxyResponse,//
+    protected void onResponseFailure(
+            final HttpServletRequest request,
+            final HttpServletResponse response,
+            final Response proxyResponse,
             final Throwable failure) {
         
         log.error(getRequestId(request) + " proxying failed: " + request, failure);

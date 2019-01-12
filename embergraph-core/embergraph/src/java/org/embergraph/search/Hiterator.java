@@ -168,11 +168,11 @@ public class Hiterator<A extends IHit> implements Iterator<A> {
 //        nextHit = src.next();
 //
 ////        if (rank + 1 > maxRank || nextHit.getCosine() < minCosine) {
-////
+//
 ////            exhausted = true;
-////
+//
 ////            return false;
-////
+//
 ////        }
 //
 //        return true;

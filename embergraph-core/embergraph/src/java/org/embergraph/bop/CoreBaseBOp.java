@@ -379,8 +379,8 @@ abstract public class CoreBaseBOp implements BOp {
      * @return <code>true</code> iff the annotations have the same data.
      */
     static protected final boolean annotationsEqual(
-            final Map<String, Object> m1,//
-            final Map<String, Object> m2//
+            final Map<String, Object> m1,
+            final Map<String, Object> m2
             ) {
         
         if (m1 == m2)

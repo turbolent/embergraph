@@ -811,17 +811,17 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
          * callers?
          */
         final QuorumClient<S> c = this.client;
-        return super.toString() + //
-        "{ k="+k+//
-        ", lastValidToken="+lastValidToken+//
-        ", token=" + token +//
-        ", members="+Collections.unmodifiableCollection(members)+//
-        ", pipeline="+Collections.unmodifiableCollection(pipeline)+//
-        ", votes="+Collections.unmodifiableMap(votes)+//
-        ", joined="+Collections.unmodifiableCollection(joined)+//
-        ", client=" + (c == null ? "N/A" : c.getClass().getName()) + //
-        ", serviceId="+(c instanceof QuorumMember<?>?((QuorumMember<?>)c).getServiceId():"N/A")+//
-        ", listeners="+listeners+//
+        return super.toString() +
+        "{ k="+k+
+        ", lastValidToken="+lastValidToken+
+        ", token=" + token +
+        ", members="+Collections.unmodifiableCollection(members)+
+        ", pipeline="+Collections.unmodifiableCollection(pipeline)+
+        ", votes="+Collections.unmodifiableMap(votes)+
+        ", joined="+Collections.unmodifiableCollection(joined)+
+        ", client=" + (c == null ? "N/A" : c.getClass().getName()) +
+        ", serviceId="+(c instanceof QuorumMember<?>?((QuorumMember<?>)c).getServiceId():"N/A")+
+        ", listeners="+listeners+
         "}";
     }
 
@@ -1834,7 +1834,7 @@ public abstract class AbstractQuorum<S extends Remote, C extends QuorumClient<S>
             }
         }
 
-        //
+
         // Public API "remove" methods.
         // 
         

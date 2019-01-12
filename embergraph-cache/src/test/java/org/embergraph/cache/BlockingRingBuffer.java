@@ -290,7 +290,7 @@ public class BlockingRingBuffer<E> implements BlockingQueue<E> {
         }
     }
 
-    //
+
     public Iterator<E> iterator() {
         // TODO Auto-generated method stub
         return null;

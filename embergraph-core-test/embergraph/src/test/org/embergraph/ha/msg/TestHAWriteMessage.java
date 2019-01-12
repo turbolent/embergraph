@@ -40,7 +40,7 @@ public class TestHAWriteMessage extends TestCase {
                 14L,// sequence
                 15,// size
                 16,// checksum
-                StoreTypeEnum.RW,//
+                StoreTypeEnum.RW,
                 17L,// quorumToken
                 18L,// fileExtent
                 19L // firstOffset

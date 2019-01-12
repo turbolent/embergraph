@@ -352,7 +352,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>,
         }
 
         // Slice onto the coded data record.
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         // Read-only coded IDataRecord. 
@@ -632,7 +632,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>,
         		 * min   := 8 bytes (Long)
         		 * array := BytesUtil.bitFlagByteLength((nkeys + 1)* nbits)
         		 */
-				return O_childEntryCount//
+				return O_childEntryCount
 						+ 1 // one byte whose value is [nbits]
 						+ Bytes.SIZEOF_LONG // min
 						+ BytesUtil.bitFlagByteLength((nkeys + 1)

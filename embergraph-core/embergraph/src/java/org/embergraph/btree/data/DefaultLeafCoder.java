@@ -463,7 +463,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>,
 //      }
       
         // Slice containing the coded leaf.
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         // A read-only view of the coded leaf data record.

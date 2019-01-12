@@ -82,9 +82,9 @@ public class TestLeafSplitShortestSeparatorKey extends TestCase2 {
      * As a workaround, you can replace line 802:
      * 
      * <pre>
-     * final byte[] separatorKey = BytesUtil.getSeparatorKey(//
-     *         getKeys().get(splitIndex),//
-     *         getKeys().get(splitIndex - 1)//
+     * final byte[] separatorKey = BytesUtil.getSeparatorKey(
+     *         getKeys().get(splitIndex),
+     *         getKeys().get(splitIndex - 1)
      *         );
      * </pre>
      * 

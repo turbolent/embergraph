@@ -95,7 +95,7 @@ public class RuleFastClosure3 extends AbstractRuleFastClosure_3_5_6_7_9 {
 
             return new FastClosureRuleTask(database, focusStore, rule,
                     joinNexus, buffer, /* P, */
-                    rdfsSubPropertyOf, //
+                    rdfsSubPropertyOf,
                     rdfsSubPropertyOf) {
 
                 /**

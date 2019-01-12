@@ -458,9 +458,9 @@ public class HALogWriter implements IHALogWriter {
 
 			// if (rootBlock.getLastCommitTime() != this.m_rootBlock
 			// .getLastCommitTime()) {
-			//
+
 			// throw new IllegalStateException();
-			//
+
 			// }
 
 			if (!this.m_rootBlock.getUUID().equals(rootBlock.getUUID())) {

@@ -45,7 +45,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#create
      * @see CreateGraph
      */
-    Create(false/* graphUpdate */), //
+    Create(false/* graphUpdate */),
     /**
      * The DROP operation removes the specified graph(s) from the Graph Store.
      * 
@@ -59,7 +59,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#drop
      * @see DropGraph
      */
-    Drop(false/* graphUpdate */), //
+    Drop(false/* graphUpdate */),
     /**
      * The COPY operation is a shortcut for inserting all data from an input
      * graph into a destination graph. Data from the input graph is not
@@ -73,7 +73,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#copy
      * @see CopyGraph
      */
-    Copy(false/* graphUpdate */), //
+    Copy(false/* graphUpdate */),
     /**
      * The MOVE operation is a shortcut for moving all data from an input graph
      * into a destination graph. The input graph is removed after insertion and
@@ -86,7 +86,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#move
      * @see MoveGraph
      */
-    Move(false/* graphUpdate */), //
+    Move(false/* graphUpdate */),
     /**
      * Graph management operation inserts all data from one graph into another.
      * Data from the source graph is not effected. Data already present in the
@@ -99,7 +99,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#add
      * @see AddGraph
      */
-    Add(false/* graphUpdate */), //
+    Add(false/* graphUpdate */),
     /*
      * Graph Update.
      */
@@ -114,7 +114,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#insertData
      * @see InsertData
      */
-    InsertData(false/* graphUpdate */, true/* dataOnly */), //
+    InsertData(false/* graphUpdate */, true/* dataOnly */),
     /**
      * The DELETE DATA operation removes some triples, given inline in the
      * request, if the respective graphs in the Graph Store contain those:
@@ -126,7 +126,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#deleteData
      * @see DeleteData
      */
-    DeleteData(false/* graphUpdate */, true/* dataOnly */), //
+    DeleteData(false/* graphUpdate */, true/* dataOnly */),
     /**
      * The DELETE/INSERT operation can be used to remove or add triples from/to
      * the Graph Store based on bindings for a query pattern specified in a
@@ -149,7 +149,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#deleteInsert
      * @see DeleteInsertGraph
      */
-    DeleteInsert(false/* graphUpdate */), //
+    DeleteInsert(false/* graphUpdate */),
     /**
      * The LOAD operation reads an RDF document from a IRI and inserts its
      * triples into the specified graph in the Graph Store.
@@ -161,7 +161,7 @@ public enum UpdateType {
      * @see http://www.w3.org/TR/sparql11-update/#load
      * @see LoadGraph
      */
-    Load(false/* graphUpdate */), //
+    Load(false/* graphUpdate */),
     /**
      * The CLEAR operation removes all the triples in the specified graph(s) in
      * the Graph Store.

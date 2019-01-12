@@ -907,9 +907,9 @@ abstract public class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                                     final int nreads, final int rdlen,
                                     final int rem) throws Exception {
                                 // delegate handling of incremental receive notify.
-                                QuorumPipelineImpl.this.incReceive(//
+                                QuorumPipelineImpl.this.incReceive(
                                         msg.getHASyncRequest(),
-                                        (IHAWriteMessage) msg.getHAWriteMessage(), //
+                                        (IHAWriteMessage) msg.getHAWriteMessage(),
                                         nreads, rdlen, rem);
                             }
                         });

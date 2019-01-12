@@ -103,8 +103,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
         journal.submit(
 //                SequenceTask.newSequence(new AbstractTask[]{
                 
-//                new RegisterIndexTask(journal, //
-//                                resource[0],//
+//                new RegisterIndexTask(journal,
+//                                resource[0],
 //                                new IndexMetadata(resource[0], indexUUID))
 //                                ).get();
 //                                
@@ -267,10 +267,10 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
             @Override
             protected Object doTask() throws Exception {
 
-                getJournal().registerIndex(resource[0], //
+                getJournal().registerIndex(resource[0],
                         new IndexMetadata(resource[0], indexUUID1));
 
-                getJournal().registerIndex(resource[1], //
+                getJournal().registerIndex(resource[1],
                         new IndexMetadata(resource[1], indexUUID2));
 
                 {
@@ -508,8 +508,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                         // register all indices.
                         for(int i=0; i<nindices; i++) {
                             
-                            getJournal().registerIndex(//
-                                    indices[i].name,//
+                            getJournal().registerIndex(
+                                    indices[i].name,
                                             new IndexMetadata(indices[i].name,indices[i].indexUUID)
                                 );
                             

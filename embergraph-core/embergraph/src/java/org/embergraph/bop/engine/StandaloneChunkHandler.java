@@ -81,9 +81,9 @@ public class StandaloneChunkHandler implements IChunkHandler {
         if (nativeHeap) {
 
             // See BLZG-533: Vector the query engine on the native heap.
-            msg = new LocalNativeChunkMessage(//
-                    query.getQueryController(),//
-                    query.getQueryId(),//
+            msg = new LocalNativeChunkMessage(
+                    query.getQueryController(),
+                    query.getQueryId(),
                     sinkId, // bopId
                     -1, // partitionId
                     query, // runningQuery,
@@ -93,8 +93,8 @@ public class StandaloneChunkHandler implements IChunkHandler {
         } else {
 
             // Store the chunk on the managed object heap.
-            msg = new LocalChunkMessage(//
-                query.getQueryController(), //
+            msg = new LocalChunkMessage(
+                query.getQueryController(),
                 query.getQueryId(),// 
                 sinkId,// bopId
                 -1, // partitionId

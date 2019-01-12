@@ -195,9 +195,9 @@ public abstract class TestIBindingSet extends TestCase2 {
         final Constant<Integer> val1 = new Constant<Integer>(1);
         final Constant<Integer> val2 = new Constant<Integer>(2);
 
-        final IBindingSet bs = newBindingSet(//
-                new IVariable[] { var1, var2 },//
-                new IConstant[] { val1, val2 }//
+        final IBindingSet bs = newBindingSet(
+                new IVariable[] { var1, var2 },
+                new IConstant[] { val1, val2 }
                 );
 
         int nvisited = 0 ;
@@ -222,9 +222,9 @@ public abstract class TestIBindingSet extends TestCase2 {
         assertEquals("size", 2, nvisited);
 
         // Should be empty afterwards.
-        assertEquals(newBindingSet(//
-                new IVariable[] {},//
-                new IConstant[] {}//
+        assertEquals(newBindingSet(
+                new IVariable[] {},
+                new IConstant[] {}
                 ), bs);
 
     }
@@ -277,9 +277,9 @@ public abstract class TestIBindingSet extends TestCase2 {
                                        ) ;
         
 		assertEqual(
-				bs.copy(null/* variablesToKeep */), //
+				bs.copy(null/* variablesToKeep */),
 				new IVariable[] { var1, var2, var3, var4, var5 },
-				new IConstant[] { val1, val2, val3, val4, val5 }//
+				new IConstant[] { val1, val2, val3, val4, val5 }
 		);
 
         IBindingSet bs2 = bs.copy ( new IVariable [] { var1, var3, var5 } ) ;
@@ -335,10 +335,10 @@ public abstract class TestIBindingSet extends TestCase2 {
         assertTrue ( "expected equal: same bindings, same order", bs1.hashCode () == bs2.hashCode () ) ;
         assertTrue ( "expected equal: same bindings, different order", bs1.hashCode () == bs3.hashCode () ) ;
 
-        //
+
         // After mutation. Not sure that this really proves anything, although in most cases I guess that
         // the original value of bs1.hasCode () will not equal the subsequent value or that of bs4.hashCode ()
-        //
+
         bs1.clear ( var1 ) ;
         assertTrue ( "expected equal: same bindings after mutation", bs1.hashCode () == bs4.hashCode () ) ;
     }

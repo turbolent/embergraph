@@ -262,32 +262,32 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
 		 * A statement is inserted into the [in] graph in one operation. Then
 		 * all statements in the [in] graph are copied into the [out] graph.
 		 */
-		final String s = "# Update 2\n"//
-				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"//
-				+ "INSERT DATA {\n"//
-				+ "  GRAPH <http://example/in> {\n"//
-				+ "        <http://example/president25> foaf:givenName \"William\" .\n"//
-				+ "  }\n"//
-				+ "};\n"//
-				+ "INSERT {\n"//
-				+ "   GRAPH <http://example/out> {\n"//
-				+ "       ?s ?p ?v .\n"//
-				+ "        }\n"//
-				+ "    }\n"//
-				+ "WHERE {\n"//
-				+ "   GRAPH <http://example/in> {\n"//
-				+ "       ?s ?p ?v .\n"//
-				+ "        }\n"//
-				+ "  }\n"//
+		final String s = "# Update 2\n"
+				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+				+ "INSERT DATA {\n"
+				+ "  GRAPH <http://example/in> {\n"
+				+ "        <http://example/president25> foaf:givenName \"William\" .\n"
+				+ "  }\n"
+				+ "};\n"
+				+ "INSERT {\n"
+				+ "   GRAPH <http://example/out> {\n"
+				+ "       ?s ?p ?v .\n"
+				+ "        }\n"
+				+ "    }\n"
+				+ "WHERE {\n"
+				+ "   GRAPH <http://example/in> {\n"
+				+ "       ?s ?p ?v .\n"
+				+ "        }\n"
+				+ "  }\n"
 				+ ";";
 
 //		// The query - how many statements are in the [out] graph.
-//		final String q = "# Query\n"//
-//				+ "SELECT (COUNT(*) as ?cnt) {\n"//
-//				+ "    GRAPH <http://example/out> {\n"//
-//				+ "        ?s ?p ?v .\n"//
-//				+ "  }\n"//
-//				+ "} LIMIT 10";//
+//		final String q = "# Query\n"
+//				+ "SELECT (COUNT(*) as ?cnt) {\n"
+//				+ "    GRAPH <http://example/out> {\n"
+//				+ "        ?s ?p ?v .\n"
+//				+ "  }\n"
+//				+ "} LIMIT 10";
 
 		// run update once.
         final BigdataSailUpdate update = (BigdataSailUpdate) con.prepareUpdate(QueryLanguage.SPARQL, s);
@@ -467,19 +467,19 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
          * LOAD <file:///tmp/junk.ttl> INTO GRAPH graphA: ;
          * </pre>
          */
-        con.prepareUpdate(//
-                QueryLanguage.SPARQL,//
-                "PREFIX graphA:  <http://example/graphA> \n" + //
-//                "PREFIX tempGraph:  <http://example/temp> \n"+//
-//                "DROP SILENT GRAPH tempGraph: ;\n"+//
-//                "DROP SILENT GRAPH graphA: ;\n"+//
-                "INSERT DATA { \n"+//
-                " GRAPH graphA: { \n" +//
-                "   _:bnode <http://example/p> 2 . \n"+//
-                "   _:bnode a <http://example/Foo> . \n"+//
-                "   <http://example/s> <http://example/p> 2 . \n"+//
-                "}}\n"//
-//                "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"//
+        con.prepareUpdate(
+                QueryLanguage.SPARQL,
+                "PREFIX graphA:  <http://example/graphA> \n" +
+//                "PREFIX tempGraph:  <http://example/temp> \n"+
+//                "DROP SILENT GRAPH tempGraph: ;\n"+
+//                "DROP SILENT GRAPH graphA: ;\n"+
+                "INSERT DATA { \n"+
+                " GRAPH graphA: { \n" +
+                "   _:bnode <http://example/p> 2 . \n"+
+                "   _:bnode a <http://example/Foo> . \n"+
+                "   <http://example/s> <http://example/p> 2 . \n"+
+                "}}\n"
+//                "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"
         ).execute();
         
 //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
@@ -515,16 +515,16 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
          *     ?s ?p ?v . } }
          * </pre>
          */
-        con.prepareUpdate(//
-                QueryLanguage.SPARQL, //
-                "PREFIX graphA:  <http://example/graphA> \n" + //
-                "PREFIX tempGraph:  <http://example/temp> \n" +//
-//                "DROP SILENT GRAPH tempGraph: ;\n"+//
-                "DELETE { GRAPH graphA:    { ?s ?p ?v . } } \n"+//
-                "INSERT { GRAPH tempGraph: { ?s ?p ?v . } } \n"+//
-                "WHERE { GRAPH graphA: { \n"+//
-                "    ?s a <http://example/Foo> . \n"+//
-                "    ?s ?p ?v . } }\n"//
+        con.prepareUpdate(
+                QueryLanguage.SPARQL,
+                "PREFIX graphA:  <http://example/graphA> \n" +
+                "PREFIX tempGraph:  <http://example/temp> \n" +
+//                "DROP SILENT GRAPH tempGraph: ;\n"+
+                "DELETE { GRAPH graphA:    { ?s ?p ?v . } } \n"+
+                "INSERT { GRAPH tempGraph: { ?s ?p ?v . } } \n"+
+                "WHERE { GRAPH graphA: { \n"+
+                "    ?s a <http://example/Foo> . \n"+
+                "    ?s ?p ?v . } }\n"
         ).execute();
 
 //        System.err.println("##### DATA IN DATABASE AFTER DELETE + INSERT");
@@ -599,19 +599,19 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
          * LOAD <file:///tmp/junk.ttl> INTO GRAPH graphA: ;
          * </pre>
          */
-        con.prepareUpdate(//
-                QueryLanguage.SPARQL,//
-                "PREFIX graphA:  <http://example/graphA> \n" + //
-                        // "PREFIX tempGraph:  <http://example/temp> \n"+//
-                        // "DROP SILENT GRAPH tempGraph: ;\n"+//
-                        // "DROP SILENT GRAPH graphA: ;\n"+//
-                        "INSERT DATA { \n" + //
-                        " GRAPH graphA: { \n" + //
-                        "   <http://nobnode> <http://example/p> 2 . \n" + //
-                        "   <http://nobnode> a <http://example/Foo> . \n" + //
-                        "   <http://example/s> <http://example/p> 2 . \n" + //
-                        "}}\n"//
-                        // "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"//
+        con.prepareUpdate(
+                QueryLanguage.SPARQL,
+                "PREFIX graphA:  <http://example/graphA> \n" +
+                        // "PREFIX tempGraph:  <http://example/temp> \n"+
+                        // "DROP SILENT GRAPH tempGraph: ;\n"+
+                        // "DROP SILENT GRAPH graphA: ;\n"+
+                        "INSERT DATA { \n" +
+                        " GRAPH graphA: { \n" +
+                        "   <http://nobnode> <http://example/p> 2 . \n" +
+                        "   <http://nobnode> a <http://example/Foo> . \n" +
+                        "   <http://example/s> <http://example/p> 2 . \n" +
+                        "}}\n"
+                        // "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"
         ).execute();
 
 //        System.err.println("##### DATA IN DATABASE AFTER INSERT");
@@ -647,16 +647,16 @@ public class BigdataSPARQLUpdateTest extends SPARQLUpdateTest {
          *     ?s ?p ?v . } }
          * </pre>
          */
-        con.prepareUpdate(//
-                QueryLanguage.SPARQL, //
-                "PREFIX graphA:  <http://example/graphA> \n" + //
-                        "PREFIX tempGraph:  <http://example/temp> \n" + //
-                        // "DROP SILENT GRAPH tempGraph: ;\n"+//
-                        "DELETE { GRAPH graphA:    { ?s ?p ?v . } } \n" + //
-                        "INSERT { GRAPH tempGraph: { ?s ?p ?v . } } \n" + //
-                        "WHERE { GRAPH graphA: { \n" + //
-                        "    ?s a <http://example/Foo> . \n" + //
-                        "    ?s ?p ?v . } }\n"//
+        con.prepareUpdate(
+                QueryLanguage.SPARQL,
+                "PREFIX graphA:  <http://example/graphA> \n" +
+                        "PREFIX tempGraph:  <http://example/temp> \n" +
+                        // "DROP SILENT GRAPH tempGraph: ;\n"+
+                        "DELETE { GRAPH graphA:    { ?s ?p ?v . } } \n" +
+                        "INSERT { GRAPH tempGraph: { ?s ?p ?v . } } \n" +
+                        "WHERE { GRAPH graphA: { \n" +
+                        "    ?s a <http://example/Foo> . \n" +
+                        "    ?s ?p ?v . } }\n"
         ).execute();
 
 //        System.err.println("##### DATA IN DATABASE AFTER DELETE + INSERT");

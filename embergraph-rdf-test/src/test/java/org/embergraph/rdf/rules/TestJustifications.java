@@ -122,9 +122,9 @@ public class TestJustifications extends AbstractRuleTestCase {
             final IV A = store.addTerm(new URIImpl("http://www.embergraph.org/A"));
             final IV Y = store.addTerm(new URIImpl("http://www.embergraph.org/Y"));
 
-            store.addStatements(new SPO[] {//
-                    new SPO(U, A, Y, StatementEnum.Explicit) //
-                    }, //
+            store.addStatements(new SPO[] {
+                    new SPO(U, A, Y, StatementEnum.Explicit)
+                    },
                     1);
 
             assertTrue(store.hasStatement(U, A, Y));
@@ -154,7 +154,7 @@ public class TestJustifications extends AbstractRuleTestCase {
             final Justification jst;
 
             // the expected entailment.
-            final SPO expectedEntailment = new SPO(//
+            final SPO expectedEntailment = new SPO(
                     A, vocab.get(RDF.TYPE), vocab.get(RDF.PROPERTY),
                     StatementEnum.Inferred);
 
@@ -198,8 +198,8 @@ public class TestJustifications extends AbstractRuleTestCase {
                      * left unbound for rdfs1 as a side-effect of evaluation
                      * using a distinct term scan.
                      */
-                    final SPO[] expectedTail = new SPO[] {//
-                            new SPO(NULL, A, NULL, StatementEnum.Inferred)//
+                    final SPO[] expectedTail = new SPO[] {
+                            new SPO(NULL, A, NULL, StatementEnum.Inferred)
                     };
                     
                     if(!Arrays.equals(expectedTail, jst.getTail())) {
@@ -289,9 +289,9 @@ public class TestJustifications extends AbstractRuleTestCase {
                                 .getIndexManager())));
 
                 // add the statement (U A Y) to the focusStore.
-                focusStore.addStatements(new SPO[] {//
-                        new SPO(U, A, Y, StatementEnum.Explicit) //
-                        },//
+                focusStore.addStatements(new SPO[] {
+                        new SPO(U, A, Y, StatementEnum.Explicit)
+                        },
                         1);
 
                 /*

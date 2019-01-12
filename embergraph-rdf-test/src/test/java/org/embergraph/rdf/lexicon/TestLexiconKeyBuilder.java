@@ -331,34 +331,34 @@ public class TestLexiconKeyBuilder extends TestCase2 {
      */
     public void test_disjoint_value_space() {
         
-        assertFalse(BytesUtil.bytesEqual(//
-                fixture.datatypeLiteral2key(XMLSchema.LONG, "-1"),//
-                fixture.datatypeLiteral2key(XMLSchema.INT, "-1")//
+        assertFalse(BytesUtil.bytesEqual(
+                fixture.datatypeLiteral2key(XMLSchema.LONG, "-1"),
+                fixture.datatypeLiteral2key(XMLSchema.INT, "-1")
                 ));
 
-        assertFalse(BytesUtil.bytesEqual(//
-                fixture.datatypeLiteral2key(XMLSchema.LONG, "-1"),//
-                fixture.datatypeLiteral2key(XMLSchema.SHORT, "-1")//
+        assertFalse(BytesUtil.bytesEqual(
+                fixture.datatypeLiteral2key(XMLSchema.LONG, "-1"),
+                fixture.datatypeLiteral2key(XMLSchema.SHORT, "-1")
                 ));
         
-        assertFalse(BytesUtil.bytesEqual(//
-                fixture.datatypeLiteral2key(XMLSchema.LONG, "-1"),//
-                fixture.datatypeLiteral2key(XMLSchema.BYTE, "-1")//
+        assertFalse(BytesUtil.bytesEqual(
+                fixture.datatypeLiteral2key(XMLSchema.LONG, "-1"),
+                fixture.datatypeLiteral2key(XMLSchema.BYTE, "-1")
                 ));
 
-        assertFalse(BytesUtil.bytesEqual(//
-                fixture.datatypeLiteral2key(XMLSchema.INT, "-1"),//
-                fixture.datatypeLiteral2key(XMLSchema.SHORT, "-1")//
+        assertFalse(BytesUtil.bytesEqual(
+                fixture.datatypeLiteral2key(XMLSchema.INT, "-1"),
+                fixture.datatypeLiteral2key(XMLSchema.SHORT, "-1")
                 ));
         
-        assertFalse(BytesUtil.bytesEqual(//
-                fixture.datatypeLiteral2key(XMLSchema.INT, "-1"),//
-                fixture.datatypeLiteral2key(XMLSchema.BYTE, "-1")//
+        assertFalse(BytesUtil.bytesEqual(
+                fixture.datatypeLiteral2key(XMLSchema.INT, "-1"),
+                fixture.datatypeLiteral2key(XMLSchema.BYTE, "-1")
                 ));
 
-        assertFalse(BytesUtil.bytesEqual(//
-                fixture.datatypeLiteral2key(XMLSchema.SHORT, "-1"),//
-                fixture.datatypeLiteral2key(XMLSchema.BYTE, "-1")//
+        assertFalse(BytesUtil.bytesEqual(
+                fixture.datatypeLiteral2key(XMLSchema.SHORT, "-1"),
+                fixture.datatypeLiteral2key(XMLSchema.BYTE, "-1")
                 ));
 
     }

@@ -126,16 +126,16 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
      */
     static final transient String[] names = new String[] {
         // triples
-        "SPO",//
-        "OSP",//
-        "POS",//
+        "SPO",
+        "OSP",
+        "POS",
         // quads
-        "SPOC",//
-        "POCS",//
-        "OCSP",//
-        "CSPO",//
-        "PCSO",//
-        "SOPC" //
+        "SPOC",
+        "POCS",
+        "OCSP",
+        "CSPO",
+        "PCSO",
+        "SOPC"
     };
     
     static final transient SPOKeyOrder[] values = new SPOKeyOrder[] {
@@ -159,11 +159,11 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
             new GeneralComparator(_OSP),
             new GeneralComparator(_POS),
             // quads
-            new GeneralComparator(_SPOC),//
-            new GeneralComparator(_POCS),//
-            new GeneralComparator(_OCSP),//
-            new GeneralComparator(_CSPO),//
-            new GeneralComparator(_PCSO),//
+            new GeneralComparator(_SPOC),
+            new GeneralComparator(_POCS),
+            new GeneralComparator(_OCSP),
+            new GeneralComparator(_CSPO),
+            new GeneralComparator(_PCSO),
             new GeneralComparator(_SOPC) };
 
     /*

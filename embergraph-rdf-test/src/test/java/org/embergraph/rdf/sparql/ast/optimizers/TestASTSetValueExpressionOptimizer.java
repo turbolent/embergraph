@@ -129,11 +129,11 @@ public class TestASTSetValueExpressionOptimizer extends AbstractASTEvaluationTes
                     false/* lastInvocation */, source, sink, null/* sink2 */);
         }
 
-        final IBindingSet[] bsets = new IBindingSet[] { //
-        new ContextBindingSet(context, new ListBindingSet(//
-//                new IVariable[] { Var.var("p") },//
+        final IBindingSet[] bsets = new IBindingSet[] {
+        new ContextBindingSet(context, new ListBindingSet(
+//                new IVariable[] { Var.var("p") },
 //                new IConstant[] { new Constant<IV>(mockIV) }
-                )) //
+                ))
         };
 
         // The source AST.

@@ -336,10 +336,10 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
 //        int ntries = 0;
 //        while (ninsert < ntuples) {
 //
-//            final byte[] key = keyBuilder.reset()//
-//                    .append(s[r.nextInt(s.length)])//
-//                    .append(p[r.nextInt(p.length)])//
-//                    .append(o[r.nextInt(o.length)])//
+//            final byte[] key = keyBuilder.reset()
+//                    .append(s[r.nextInt(s.length)])
+//                    .append(p[r.nextInt(p.length)])
+//                    .append(o[r.nextInt(o.length)])
 //                    .getKey();
 //            
 //            if (!btree.contains(key)) {
@@ -602,10 +602,10 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
         int ntries = 0;
         while (ninsert < ntuples) {
 
-            final byte[] key = keyBuilder.reset()//
-                    .append(s[r.nextInt(s.length)])//
-                    .append(p[r.nextInt(p.length)])//
-                    .append(o[r.nextInt(o.length)])//
+            final byte[] key = keyBuilder.reset()
+                    .append(s[r.nextInt(s.length)])
+                    .append(p[r.nextInt(p.length)])
+                    .append(o[r.nextInt(o.length)])
                     .getKey();
             
             if (!btree.contains(key)) {
@@ -660,11 +660,11 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );
@@ -762,9 +762,9 @@ public class TestFixedLengthPrefixShardSplits extends AbstractTestSegSplitter {
                 assertEquals(Bytes.SIZEOF_LONG * 3, keyAfter.length);
 
                 // Compare the first 8 bytes of those keys (unsigned byte[] comparison).
-                final int cmp = BytesUtil.compareBytesWithLenAndOffset(//
-                        0/* aoff */, Bytes.SIZEOF_LONG/* alen */, keyBefore,//
-                        0/* boff */, Bytes.SIZEOF_LONG/* blen */, keyAfter//
+                final int cmp = BytesUtil.compareBytesWithLenAndOffset(
+                        0/* aoff */, Bytes.SIZEOF_LONG/* alen */, keyBefore,
+                        0/* boff */, Bytes.SIZEOF_LONG/* blen */, keyAfter
                         );
                 
                 // The 1st key prefix must be strictly LT the 2nd key prefix.

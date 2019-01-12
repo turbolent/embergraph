@@ -135,7 +135,7 @@ public class FullyInlineURIIV<V extends BigdataURI> extends AbstractInlineIV<V, 
             // Cache the byteLength if not yet set.
 
             byteLength = 1 // flags
-                    + IVUnicode.byteLengthUnicode(uri.stringValue())//
+                    + IVUnicode.byteLengthUnicode(uri.stringValue())
                     ;
         }
 

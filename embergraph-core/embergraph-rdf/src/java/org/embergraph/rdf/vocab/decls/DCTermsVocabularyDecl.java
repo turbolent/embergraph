@@ -50,7 +50,7 @@ public class DCTermsVocabularyDecl {
     public static final URI title = new URIImpl(NAMESPACE + "title");
 
     static private final URI[] uris = new URI[]{
-            new URIImpl(NAMESPACE),//
+            new URIImpl(NAMESPACE),
             description, hasVersion, issued, modified, publisher, reviewer,
             Review, text, title, };
 

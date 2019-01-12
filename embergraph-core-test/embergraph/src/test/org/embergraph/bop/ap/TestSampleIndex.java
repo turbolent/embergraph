@@ -184,10 +184,10 @@ public class TestSampleIndex extends TestCase2 {
 //		new GetOffsetsEntireRange(),
 		
 		final IOffsetSampler[] samplers = new IOffsetSampler[] {
-				new SmartOffsetSampler(), //
-//				new BitVectorOffsetSampler(),//
-				new AcceptanceSetOffsetSampler(),//
-//				new RejectionSetOffsetSampler(), //
+				new SmartOffsetSampler(),
+//				new BitVectorOffsetSampler(),
+				new AcceptanceSetOffsetSampler(),
+//				new RejectionSetOffsetSampler(),
 				};
 
 		final Random r = new Random();
@@ -306,11 +306,11 @@ public class TestSampleIndex extends TestCase2 {
 
 		final IPredicate<E> predicate = new Predicate<E>(new BOp[] { x, y },
 				new NV(IPredicate.Annotations.RELATION_NAME,
-						new String[] { namespace }),//
-				new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)//
+						new String[] { namespace }),
+				new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)
 		);
 
-		final int[] limits = new int[] { //
+		final int[] limits = new int[] {
 		1, 9, 19, 100, 217, 900,// 
 		nrecords, 
 		nrecords + 1
@@ -336,12 +336,12 @@ public class TestSampleIndex extends TestCase2 {
 
 		final BOpContextBase context = new BOpContextBase(null/* fed */, jnl/* indexManager */);
 
-		final SampleIndex<E> sampleOp = new SampleIndex<E>( new BOp[0], //
-				NV.asMap(//
-					new NV(SampleIndex.Annotations.PREDICATE, predicate),//
-					new NV(SampleIndex.Annotations.LIMIT, limit),//
+		final SampleIndex<E> sampleOp = new SampleIndex<E>( new BOp[0],
+				NV.asMap(
+					new NV(SampleIndex.Annotations.PREDICATE, predicate),
+					new NV(SampleIndex.Annotations.LIMIT, limit),
 					new NV(SampleIndex.Annotations.SAMPLE_TYPE, sampleType
-							.name())//
+							.name())
 				));
 
 		final E[] a = sampleOp.eval(context);

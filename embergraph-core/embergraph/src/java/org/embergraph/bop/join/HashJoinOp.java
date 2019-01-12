@@ -178,10 +178,10 @@ abstract public class HashJoinOp<E> extends PipelineOp implements
      * @param joinType
      *            The type of join.
      */
-    abstract protected IHashJoinUtility newState(//
-            final BOpContext<IBindingSet> context,//
-            final INamedSolutionSetRef namedSetRef, //
-            final JoinTypeEnum joinType//
+    abstract protected IHashJoinUtility newState(
+            final BOpContext<IBindingSet> context,
+            final INamedSolutionSetRef namedSetRef,
+            final JoinTypeEnum joinType
             );
 
     /**

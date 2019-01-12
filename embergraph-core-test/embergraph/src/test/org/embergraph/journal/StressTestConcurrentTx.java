@@ -147,8 +147,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements
 
             }
 
-            doConcurrentClientTest(//
-                    journal, //
+            doConcurrentClientTest(
+                    journal,
                     30,// timeout
                     20,// nclients
                     500, // ntrials
@@ -733,21 +733,21 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements
             
 //            conditions = apply(
 //                    conditions,
-//                    new NV[][] { //
+//                    new NV[][] {
 //                            new NV[] { new NV(Options.BUFFER_MODE,
-//                                    BufferMode.Transient), }, //
+//                                    BufferMode.Transient), },
 //                            new NV[] { new NV(Options.BUFFER_MODE,
-//                                    BufferMode.Direct), }, //
+//                                    BufferMode.Direct), },
 //                            new NV[] {
 //                                    new NV(Options.BUFFER_MODE, BufferMode.Direct),
 //                                    new NV(Options.FORCE_ON_COMMIT, ForceEnum.No
-//                                            .toString()), }, //
-//                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Mapped), }, //
-//                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Disk), }, //
+//                                            .toString()), },
+//                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Mapped), },
+//                            new NV[] { new NV(Options.BUFFER_MODE, BufferMode.Disk), },
 //                            new NV[] {
 //                                    new NV(Options.BUFFER_MODE, BufferMode.Disk),
 //                                    new NV(Options.FORCE_ON_COMMIT, ForceEnum.No
-//                                            .toString()), }, //
+//                                            .toString()), },
 //                    });
                         
             Experiment exp = new Experiment(className,defaultProperties,conditions);

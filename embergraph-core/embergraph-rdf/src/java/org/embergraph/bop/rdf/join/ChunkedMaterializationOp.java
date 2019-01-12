@@ -141,10 +141,10 @@ public class ChunkedMaterializationOp extends PipelineOp {
     public ChunkedMaterializationOp(final BOp[] args,
             final IVariable<?>[] vars, final String namespace,
             final long timestamp) {
-        this(args, //
-                new NV(Annotations.VARS, vars),//
-                new NV(Annotations.RELATION_NAME, new String[] { namespace }), //
-                new NV(Annotations.TIMESTAMP, timestamp) //
+        this(args,
+                new NV(Annotations.VARS, vars),
+                new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+                new NV(Annotations.TIMESTAMP, timestamp)
         );
     }
     
@@ -275,8 +275,8 @@ public class ChunkedMaterializationOp extends PipelineOp {
      * @return a new binding set in which the chunks have been resolved
      */
     static IBindingSet[] resolveChunk(final IVariable<?>[] required,
-            final LexiconRelation lex,//
-            final IBindingSet[] chunkIn,//
+            final LexiconRelation lex,
+            final IBindingSet[] chunkIn,
             final boolean materializeInlineIVs) {
 
         if (log.isInfoEnabled())
@@ -475,7 +475,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
      *             if the {@link IBindingSet} was not materialized with the
      *             {@link IBindingSet}.
      */
-    static private IBindingSet getBindingSet(//
+    static private IBindingSet getBindingSet(
             final IVariable<?>[] required,
             final IBindingSet bindingSetIn,
             final Map<IV<?, ?>, BigdataValue> terms,

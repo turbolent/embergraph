@@ -141,7 +141,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
         // path must not be null.
         try {
-            PartitionedJoinGroup.canJoinUsingConstraints(//
+            PartitionedJoinGroup.canJoinUsingConstraints(
                     null, // path
                     p1,// vertex
                     new IConstraint[0]// constraints
@@ -154,7 +154,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
         // vertex must not be null.
         try {
-            PartitionedJoinGroup.canJoinUsingConstraints(//
+            PartitionedJoinGroup.canJoinUsingConstraints(
                     new IPredicate[]{p1}, // path
                     null,// vertex
                     new IConstraint[0]// constraints
@@ -167,7 +167,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
         // path may not be empty.
         try {
-            PartitionedJoinGroup.canJoinUsingConstraints(//
+            PartitionedJoinGroup.canJoinUsingConstraints(
                     new IPredicate[] {}, // path
                     p1,// vertex
                     new IConstraint[0]// constraints
@@ -180,7 +180,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
         // path elements may not be null.
         try {
-            PartitionedJoinGroup.canJoinUsingConstraints(//
+            PartitionedJoinGroup.canJoinUsingConstraints(
                     new IPredicate[] { p2, null }, // path
                     p1,// vertex
                     new IConstraint[0]// constraints
@@ -193,7 +193,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
         // vertex must not appear in the path.
         try {
-            PartitionedJoinGroup.canJoinUsingConstraints(//
+            PartitionedJoinGroup.canJoinUsingConstraints(
                     new IPredicate[] { p2, p1 }, // path
                     p1,// vertex
                     new IConstraint[0]// constraints
@@ -206,12 +206,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
         // constraint array may not contain null elements.
         try {
-            PartitionedJoinGroup.canJoinUsingConstraints(//
+            PartitionedJoinGroup.canJoinUsingConstraints(
                     new IPredicate[] { p2 }, // path
                     p1,// vertex
-                    new IConstraint[] { //
-                    Constraint.wrap(new NEConstant(x, new Constant<Integer>(12))), //
-                    null //
+                    new IConstraint[] {
+                    Constraint.wrap(new NEConstant(x, new Constant<Integer>(12))),
+                    null
                     }// constraints
                     );
             fail("Expecting: " + IllegalArgumentException.class);
@@ -397,48 +397,48 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     final IVariable<?> origProperty2 = Var.var("origProperty2");
 
     /** ?product rdfs:label ?productLabel . */
-    final private IPredicate<?> p0 = new Predicate(new BOp[] {//
-            product, new Constant(rdfsLabel), productLabel },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+    final private IPredicate<?> p0 = new Predicate(new BOp[] {
+            product, new Constant(rdfsLabel), productLabel },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** productInstance bsbm:productFeature ?prodFeature . */
-    final private IPredicate<?> p1 = new Predicate(new BOp[] { //
+    final private IPredicate<?> p1 = new Predicate(new BOp[] {
             new Constant(productInstance), new Constant(productFeature),
-                    prodFeature },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+                    prodFeature },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** ?product bsbm:productFeature ?prodFeature . */
-    final private IPredicate<?> p2 = new Predicate(new BOp[] { //
-            product, new Constant(productFeature), prodFeature },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+    final private IPredicate<?> p2 = new Predicate(new BOp[] {
+            product, new Constant(productFeature), prodFeature },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** productInstance bsbm:productPropertyNumeric1 ?origProperty1 . */
-    final private IPredicate<?> p3 = new Predicate(new BOp[] { //
+    final private IPredicate<?> p3 = new Predicate(new BOp[] {
             new Constant<String>(productInstance),
-                    new Constant(productPropertyNumeric1), origProperty1 },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+                    new Constant(productPropertyNumeric1), origProperty1 },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** ?product bsbm:productPropertyNumeric1 ?simProperty1 . */
-    final private IPredicate<?> p4 = new Predicate(new BOp[] { //
-            product, new Constant(productPropertyNumeric1), simProperty1 },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+    final private IPredicate<?> p4 = new Predicate(new BOp[] {
+            product, new Constant(productPropertyNumeric1), simProperty1 },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** productInstance bsbm:productPropertyNumeric2 ?origProperty2 . */
-    final private IPredicate<?> p5 = new Predicate(new BOp[] { //
+    final private IPredicate<?> p5 = new Predicate(new BOp[] {
             new Constant(productInstance),
-                    new Constant(productPropertyNumeric2), origProperty2 },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+                    new Constant(productPropertyNumeric2), origProperty2 },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** ?product bsbm:productPropertyNumeric2 ?simProperty2 . */
-    final private IPredicate<?> p6 = new Predicate(new BOp[] { //
-            product, new Constant(productPropertyNumeric2), simProperty2 },//
-            new NV(BOp.Annotations.BOP_ID, nextId++)//
+    final private IPredicate<?> p6 = new Predicate(new BOp[] {
+            product, new Constant(productPropertyNumeric2), simProperty2 },
+            new NV(BOp.Annotations.BOP_ID, nextId++)
     );
 
     /** The vertices of the join graph (the predicates). */
@@ -458,17 +458,17 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
      * that each of these is represented as its own IConstraint, but I have
      * combined them for the purposes of these unit tests.
      */
-    final IConstraint c1 = Constraint.wrap(new AND(//
+    final IConstraint c1 = Constraint.wrap(new AND(
             new MyCompareOp(
                     new BOp[] {
                             simProperty1,
                             new MathBOp(origProperty1, new Constant<Integer>(
                                     120), PLUS) }, NV.asMap(new NV[] { new NV(
-                            OP, LT) })), //
+                            OP, LT) })),
             new MyCompareOp(new BOp[] {
                     simProperty1,
                     new MathBOp(origProperty1, new Constant<Integer>(120),
-                            MINUS) }, NV.asMap(new NV[] { new NV(OP, GT) }))//
+                            MINUS) }, NV.asMap(new NV[] { new NV(OP, GT) }))
     ));
 
     /**
@@ -479,17 +479,17 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
      * that each of these is represented as its own IConstraint, but I have
      * combined them for the purposes of these unit tests.
      */
-    final IConstraint c2 = Constraint.wrap(new AND(//
+    final IConstraint c2 = Constraint.wrap(new AND(
             new MyCompareOp(
                     new BOp[] {
                             simProperty2,
                             new MathBOp(origProperty2, new Constant<Integer>(
                                     170), PLUS) }, NV.asMap(new NV[] { new NV(
-                            OP, LT) })),//
+                            OP, LT) })),
             new MyCompareOp(new BOp[] {
                     simProperty2,
                     new MathBOp(origProperty2, new Constant<Integer>(170),
-                            MINUS) }, NV.asMap(new NV[] { new NV(OP, GT) }))//
+                            MINUS) }, NV.asMap(new NV[] { new NV(OP, GT) }))
     ));
 
     /** The constraints on the join graph. */
@@ -513,12 +513,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
                      * Test join path extension, but not when the vertex used to
                      * extend the path is already present in the join path.
                      */
-                    assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
+                    assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
                             new IPredicate[] { t0 }, // path
                             t1,// vertex
                             new IConstraint[0]// constraints
                             ));
-                    assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
+                    assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
                             new IPredicate[] { t1 }, // path
                             t0,// vertex
                             new IConstraint[0]// constraints
@@ -584,9 +584,9 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
         }
         
         // Verify the extension of the path is legal.
-        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
-                path,//
-                vertex,//
+        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
+                path,
+                vertex,
                 new IConstraint[0]// constraints
                 ));
 
@@ -610,12 +610,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
          */
         assertFalse(PartitionedJoinGroup.canJoin(p3, p4));
         assertFalse(PartitionedJoinGroup.canJoin(p4, p3));
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p3 }, // path
                 p4,// vertex
                 new IConstraint[0]// constraints
                 ));
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p4 }, // path
                 p3,// vertex
                 new IConstraint[0]// constraints
@@ -625,12 +625,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
          * Verify (p3,p4) join is not permitted if we do not consider the
          * constraint which provides the shared variables.
          */
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p3 }, // path
                 p4,// vertex
                 new IConstraint[] { c2 }// constraints
                 ));
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p4 }, // path
                 p3,// vertex
                 new IConstraint[] { c2 }// constraints
@@ -640,12 +640,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
          * Verify (p3,p4) join is permitted if we consider the constraint which
          * provides the shared variables.
          */
-        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p3 }, // path
                 p4,// vertex
                 new IConstraint[] { c1 }// constraints
                 ));
-        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p4 }, // path
                 p3,// vertex
                 new IConstraint[] { c1 }// constraints
@@ -671,12 +671,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
          */
         assertFalse(PartitionedJoinGroup.canJoin(p5, p6));
         assertFalse(PartitionedJoinGroup.canJoin(p6, p5));
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p5 }, // path
                 p6,// vertex
                 new IConstraint[0]// constraints
                 ));
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p6 }, // path
                 p5,// vertex
                 new IConstraint[0]// constraints
@@ -686,12 +686,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
          * Verify (p5,p6) join is not permitted if we do not consider the
          * constraint which provides the shared variables.
          */
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p5 }, // path
                 p6,// vertex
                 new IConstraint[] { c1 }// constraints
                 ));
-        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertFalse(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p6 }, // path
                 p5,// vertex
                 new IConstraint[] { c1 }// constraints
@@ -701,12 +701,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
          * Verify (p5,p6) join is permitted if we consider the constraint which
          * provides the shared variables.
          */
-        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p5 }, // path
                 p6,// vertex
                 new IConstraint[] { c2 }// constraints
                 ));
-        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(//
+        assertTrue(PartitionedJoinGroup.canJoinUsingConstraints(
                 new IPredicate[] { p6 }, // path
                 p5,// vertex
                 new IConstraint[] { c2 }// constraints
@@ -745,7 +745,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 				.getJoinGraphConstraints(path, constraints,
 						null/* knownBoundVars */, true/* pathIsComplete */);
 
-		final Set<IConstraint>[] expected = new Set[] { //
+		final Set<IConstraint>[] expected = new Set[] {
 				NA, // p1
 				C0, // p2
 				NA, // p4
@@ -768,7 +768,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 				.getJoinGraphConstraints(path, constraints,
 						null/* knownBoundVars */, true/* pathIsComplete */);
 
-		final Set<IConstraint>[] expected = new Set[] { //
+		final Set<IConstraint>[] expected = new Set[] {
 				NA, // p5
 				NA, // p3
 				NA, // p1
@@ -791,7 +791,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 				.getJoinGraphConstraints(path, constraints,
 						null/* knownBoundVars */, true/* pathIsComplete */);
 
-		final Set<IConstraint>[] expected = new Set[] { //
+		final Set<IConstraint>[] expected = new Set[] {
 				NA, // p3
 				asSet(new IConstraint[]{c0,c1}), // p4
 				NA, // p5
@@ -834,7 +834,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 				.getJoinGraphConstraints(path, constraints,
 						null/* knownBoundVars */, true/* pathIsComplete */);
 
-		final Set<IConstraint>[] expected = new Set[] { //
+		final Set<IConstraint>[] expected = new Set[] {
 				NA, // p5
 				asSet(new IConstraint[] { c0, c2 }), // p6
 				NA, // p0

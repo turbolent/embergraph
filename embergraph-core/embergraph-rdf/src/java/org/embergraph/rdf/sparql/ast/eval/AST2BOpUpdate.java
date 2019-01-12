@@ -357,11 +357,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
             if (runOnQueryEngine) {
             
                 left = new CommitOp(leftOrEmpty(left), NV.asMap(
-                        //
-                        new NV(BOp.Annotations.BOP_ID, context.nextId()),//
+
+                        new NV(BOp.Annotations.BOP_ID, context.nextId()),
                         new NV(CommitOp.Annotations.TIMESTAMP, context
-                                .getTimestamp()),//
-                        new NV(CommitOp.Annotations.PIPELINED, false)//
+                                .getTimestamp()),
+                        new NV(CommitOp.Annotations.PIPELINED, false)
                         ));
             
             } else {
@@ -827,7 +827,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 							}
 
                             final ASTConstructIterator itr = new ASTConstructIterator(
-                                    context,//
+                                    context,
                                     context.conn.getTripleStore(), template,
                                     op.getWhereClause(), null/* bnodesMap */,
                                     result);
@@ -907,7 +907,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 							}
 
                             final ASTConstructIterator itr = new ASTConstructIterator(
-                                    context,//
+                                    context,
                                     context.conn.getTripleStore(), template,
                                     op.getWhereClause(), null/* bnodesMap */,
                                     result);
@@ -1197,11 +1197,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         final BigdataURI targetGraph = (BigdataURI) (op.getTargetGraph() == null ? null
                 : op.getTargetGraph().getValue());
         
-        copyStatements(//
-                context, //
-                op.isSilent(), //
-                sourceGraph,//
-                targetGraph//
+        copyStatements(
+                context,
+                op.isSilent(),
+                sourceGraph,
+                targetGraph
                 );
 
         return null;
@@ -1380,11 +1380,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 								p.getProperty(RDFParserOptions.Options.DATATYPE_HANDLING,
 										RDFParserOptions.Options.DEFAULT_DATATYPE_HANDLING)));
 
-				final RDFParserOptions parserOptions = new RDFParserOptions(//
-                		verifyData,//
-                		preserveBlankNodeIDs,//
-                		stopAtFirstError,//
-                		dataTypeHandling//
+				final RDFParserOptions parserOptions = new RDFParserOptions(
+                		verifyData,
+                		preserveBlankNodeIDs,
+                		stopAtFirstError,
+                		dataTypeHandling
                 		);
                 
                 doLoad(context.conn.getSailConnection(), sourceURL,
@@ -1697,12 +1697,12 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             try {
 
-                conn.addStatement(//
-                        stmt.getSubject(), //
-                        stmt.getPredicate(), //
-                        stmt.getObject(), //
+                conn.addStatement(
+                        stmt.getSubject(),
+                        stmt.getPredicate(),
+                        stmt.getObject(),
                         (Resource[]) (stmt.getContext() == null ?  defaultContexts
-                                : new Resource[] { stmt.getContext() })//
+                                : new Resource[] { stmt.getContext() })
                         );
 
             } catch (SailException e) {
@@ -1792,8 +1792,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * @throws RepositoryException
      * @throws SailException
      */
-    private static final void clearOneGraph(final URI targetGraph, //
-            final AST2BOpUpdateContext context//
+    private static final void clearOneGraph(final URI targetGraph,
+            final AST2BOpUpdateContext context
     ) throws RepositoryException, SailException {
 
         clearGraph(true/* silent */, null/* targetSolutionSet */, targetGraph,
@@ -1830,14 +1830,14 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * @throws SailException
      */
     // CLEAR/DROP ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS %VARNAME)
-    private static void clearGraph(//
-            final boolean silent,//
-            final String solutionSet,//
-            final URI targetGraph, //
-            final Scope scope,//
-            final boolean allGraphs,//
-            final boolean allSolutionSets,//
-            final AST2BOpUpdateContext context//
+    private static void clearGraph(
+            final boolean silent,
+            final String solutionSet,
+            final URI targetGraph,
+            final Scope scope,
+            final boolean allGraphs,
+            final boolean allSolutionSets,
+            final AST2BOpUpdateContext context
     ) throws RepositoryException, SailException {
 
         if (log.isDebugEnabled())
@@ -2326,12 +2326,12 @@ public class AST2BOpUpdate extends AST2BOpUtility {
          * annotation. See StatementBuffer.
          */
         left = new ChunkedResolutionOp(leftOrEmpty(left), NV.asMap(
-                //
-                new NV(BOp.Annotations.BOP_ID, context.nextId()),//
+
+                new NV(BOp.Annotations.BOP_ID, context.nextId()),
                 new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, context
-                        .getTimestamp()),//
+                        .getTimestamp()),
                 new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                        new String[] { context.getLexiconNamespace() })//
+                        new String[] { context.getLexiconNamespace() })
                 ));
 
         /*
@@ -2349,19 +2349,19 @@ public class AST2BOpUpdate extends AST2BOpUtility {
          */
         if (insert) {
             left = new InsertStatementsOp(leftOrEmpty(left), NV.asMap(
-                    new NV(BOp.Annotations.BOP_ID, context.nextId()),//
+                    new NV(BOp.Annotations.BOP_ID, context.nextId()),
                     new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, context
-                            .getTimestamp()),//
+                            .getTimestamp()),
                     new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                            new String[] { context.getNamespace() })//
+                            new String[] { context.getNamespace() })
                     ));
         } else {
             left = new RemoveStatementsOp(leftOrEmpty(left), NV.asMap(
-                    new NV(BOp.Annotations.BOP_ID, context.nextId()),//
+                    new NV(BOp.Annotations.BOP_ID, context.nextId()),
                     new NV(ChunkedResolutionOp.Annotations.TIMESTAMP, context
-                            .getTimestamp()),//
+                            .getTimestamp()),
                     new NV(ChunkedResolutionOp.Annotations.RELATION_NAME,
-                            new String[] { context.getNamespace() })//
+                            new String[] { context.getNamespace() })
                     ));
         }
 

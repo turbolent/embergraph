@@ -526,7 +526,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
      */
     static private class MyVocabularyDecl implements VocabularyDecl {
 
-        static private final URI[] myVocabURIs = new URI[] {//
+        static private final URI[] myVocabURIs = new URI[] {
             ColorsEnumExtension.COLOR,
             EpochExtension.EPOCH
         };

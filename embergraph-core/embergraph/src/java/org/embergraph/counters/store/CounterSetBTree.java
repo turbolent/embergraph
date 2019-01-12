@@ -196,10 +196,10 @@ public class CounterSetBTree extends BTree {
         
         public String toString() {
             
-            return getClass().getName()+//
-            "{ path="+path+//
-            ", value="+value+//
-            ", timestamp="+timestamp+//
+            return getClass().getName()+
+            "{ path="+path+
+            ", value="+value+
+            ", timestamp="+timestamp+
             "}";
             
         }
@@ -292,20 +292,20 @@ public class CounterSetBTree extends BTree {
 
             final long timestamp = c.lastModified();
 
-            return getKeyBuilder().reset()//
-                    .append(TimeUnit.MILLISECONDS.toMinutes(timestamp))//
-                    .appendASCII(c.getPath())//
-                    .append(timestamp)//
+            return getKeyBuilder().reset()
+                    .append(TimeUnit.MILLISECONDS.toMinutes(timestamp))
+                    .appendASCII(c.getPath())
+                    .append(timestamp)
                     .getKey();
 
         }
         
         public byte[] serializeKey(final Entry e) {
 
-            return getKeyBuilder().reset()//
-                    .append(TimeUnit.MILLISECONDS.toMinutes(e.timestamp))//
-                    .appendASCII(e.path)//
-                    .append(e.timestamp)//
+            return getKeyBuilder().reset()
+                    .append(TimeUnit.MILLISECONDS.toMinutes(e.timestamp))
+                    .appendASCII(e.path)
+                    .append(e.timestamp)
                     .getKey();
             
         }

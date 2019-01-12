@@ -122,12 +122,12 @@ public class TestHTreeUtil extends TestCase2 {
 
 		final Formatter f = new Formatter(sb);
 
-		f.format("\n%12s %12s %12s %12s %12s %12s %5s %10s %12s",// %4s %12s", //
-				"addressBits", "globalDepth", //
-				"nbuddies", "#slots/buddy", //
-				"npointers", "localDepth", //
-				"nbits", "hashBits", "buddyOffset"//
-//				"chk", "pass"//
+		f.format("\n%12s %12s %12s %12s %12s %12s %5s %10s %12s",// %4s %12s",
+				"addressBits", "globalDepth",
+				"nbuddies", "#slots/buddy",
+				"npointers", "localDepth",
+				"nbits", "hashBits", "buddyOffset"
+//				"chk", "pass"
 				);
 
 		int nfail = 0;
@@ -210,11 +210,11 @@ public class TestHTreeUtil extends TestCase2 {
 					}
 
 					f.format(
-							"\n%12d %12d %12d %12d %12d %12d %5d %10d %12d",// %12d %4s", //
+							"\n%12d %12d %12d %12d %12d %12d %5d %10d %12d",// %12d %4s",
 							addressBits, globalDepth, nbuddies, slotsPerBuddy,
-							npointers, localDepth,//
+							npointers, localDepth,
 							/*childSlots,*/ nbits, hashBits, buddyOffset
-//							chk, chk == npointers ? "yes" : "no"//
+//							chk, chk == npointers ? "yes" : "no"
 					);
 
 				}

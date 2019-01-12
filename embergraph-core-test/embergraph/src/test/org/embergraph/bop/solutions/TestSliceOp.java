@@ -164,14 +164,14 @@ public class TestSliceOp extends TestCase2 {
         final long limit = 3L;
         
         final SliceOp query = new SliceOp(new BOp[]{},
-                NV.asMap(new NV[]{//
-                    new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                    new NV(SliceOp.Annotations.OFFSET, offset),//
-                    new NV(SliceOp.Annotations.LIMIT, limit),//
+                NV.asMap(new NV[]{
+                    new NV(SliceOp.Annotations.BOP_ID, bopId),
+                    new NV(SliceOp.Annotations.OFFSET, offset),
+                    new NV(SliceOp.Annotations.LIMIT, limit),
                     new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                    new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                    new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
         
         assertEquals("offset", offset, query.getOffset());
@@ -179,36 +179,36 @@ public class TestSliceOp extends TestCase2 {
         assertEquals("limit", limit, query.getLimit());
 
         // the expected solutions
-        final IBindingSet[] expected = new IBindingSet[] {//
-//                new ListBindingSet(//
-//                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+//                new ListBindingSet(
+//                        new IVariable[] { x, y },
 //                        new IConstant[] { new Constant<String>("John"),
-//                                new Constant<String>("Mary"), }//
+//                                new Constant<String>("Mary"), }
 //                ),
-//                new ListBindingSet(//
-//                        new IVariable[] { x, y },//
+//                new ListBindingSet(
+//                        new IVariable[] { x, y },
 //                        new IConstant[] { new Constant<String>("Mary"),
-//                                new Constant<String>("Paul"), }//
+//                                new Constant<String>("Paul"), }
 //                ),
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Mary"),
-                                new Constant<String>("Jane") }//
+                                new Constant<String>("Jane") }
                 ),
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Paul"),
-                                new Constant<String>("Leon") }//
+                                new Constant<String>("Leon") }
                 ),
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Paul"),
-                                new Constant<String>("John") }//
+                                new Constant<String>("John") }
                 ),
-//                new ListBindingSet(//
-//                        new IVariable[] { x, y },//
+//                new ListBindingSet(
+//                        new IVariable[] { x, y },
 //                        new IConstant[] { new Constant<String>("Leon"),
-//                                new Constant<String>("Paul") }//
+//                                new Constant<String>("Paul") }
 //                ),ne
         };
 
@@ -276,14 +276,14 @@ public class TestSliceOp extends TestCase2 {
         final long limit = 3;
         
         final SliceOp query = new SliceOp(new BOp[]{},
-                NV.asMap(new NV[]{//
-                    new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                    new NV(SliceOp.Annotations.OFFSET, offset),//
-                    new NV(SliceOp.Annotations.LIMIT, limit),//
+                NV.asMap(new NV[]{
+                    new NV(SliceOp.Annotations.BOP_ID, bopId),
+                    new NV(SliceOp.Annotations.OFFSET, offset),
+                    new NV(SliceOp.Annotations.LIMIT, limit),
                     new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                    new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                    new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
         
         assertEquals("offset", offset, query.getOffset());
@@ -291,21 +291,21 @@ public class TestSliceOp extends TestCase2 {
         assertEquals("limit", limit, query.getLimit());
 
         // the expected solutions
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Mary"),
-                                new Constant<String>("Paul"), }//
+                                new Constant<String>("Paul"), }
                 ),
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Mary"),
-                                new Constant<String>("Jane") }//
+                                new Constant<String>("Jane") }
                 ),
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Paul"),
-                                new Constant<String>("Leon") }//
+                                new Constant<String>("Leon") }
                 ), };
 
         final SliceStats stats = query.newStats();
@@ -356,14 +356,14 @@ public class TestSliceOp extends TestCase2 {
         final long offset = 100L;
         final long limit = 3L;
         
-        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                new NV(SliceOp.Annotations.OFFSET, offset),//
-                new NV(SliceOp.Annotations.LIMIT, limit),//
+        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         assertEquals("offset", offset, query.getOffset());
@@ -432,14 +432,14 @@ public class TestSliceOp extends TestCase2 {
         final long offset = 2L;
         final long limit = 10L;
         
-        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                new NV(SliceOp.Annotations.OFFSET, offset),//
-                new NV(SliceOp.Annotations.LIMIT, limit),//
+        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         assertEquals("offset", offset, query.getOffset());
@@ -447,27 +447,27 @@ public class TestSliceOp extends TestCase2 {
         assertEquals("limit", limit, query.getLimit());
 
         // the expected solutions
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Mary"),
-                                new Constant<String>("Jane") }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                                new Constant<String>("Jane") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Paul"),
-                                new Constant<String>("Leon") }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                                new Constant<String>("Leon") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Paul"),
-                                new Constant<String>("John") }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                                new Constant<String>("John") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Leon"),
-                                new Constant<String>("Paul") }//
-                ),//
+                                new Constant<String>("Paul") }
+                ),
         };
 
         final SliceStats stats = query.newStats();
@@ -521,14 +521,14 @@ public class TestSliceOp extends TestCase2 {
 
         final int bopId = 1;
 
-        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                // new NV(SliceOp.Annotations.OFFSET, 1L),//
-                // new NV(SliceOp.Annotations.LIMIT, 3L),//
+        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                // new NV(SliceOp.Annotations.OFFSET, 1L),
+                // new NV(SliceOp.Annotations.LIMIT, 3L),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         assertEquals("offset", 0L, query.getOffset());
@@ -583,14 +583,14 @@ public class TestSliceOp extends TestCase2 {
 
         final int bopId = 1;
 
-        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                        new NV(SliceOp.Annotations.OFFSET, -1L),//
-                        new NV(SliceOp.Annotations.LIMIT, 3L),//
+        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                        new NV(SliceOp.Annotations.OFFSET, -1L),
+                        new NV(SliceOp.Annotations.LIMIT, 3L),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         assertEquals("offset", -1L, query.getOffset());
@@ -625,14 +625,14 @@ public class TestSliceOp extends TestCase2 {
 
         final int bopId = 1;
 
-        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                new NV(SliceOp.Annotations.OFFSET, 1L),//
-                new NV(SliceOp.Annotations.LIMIT, -1L),//
+        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, 1L),
+                new NV(SliceOp.Annotations.LIMIT, -1L),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         assertEquals("offset", 1L, query.getOffset());
@@ -703,14 +703,14 @@ public class TestSliceOp extends TestCase2 {
             }
         }
         final int bopId = 1;
-        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, bopId),//
-                new NV(SliceOp.Annotations.OFFSET, offset),//
-                new NV(SliceOp.Annotations.LIMIT, limit),//
+        final SliceOp query = new SliceOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         final SliceStats stats = query.newStats();

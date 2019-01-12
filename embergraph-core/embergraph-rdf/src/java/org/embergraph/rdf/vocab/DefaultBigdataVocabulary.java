@@ -67,7 +67,7 @@ public class DefaultBigdataVocabulary extends RDFSVocabulary {
          * Some new URIs for inline URI handling.
          */
         addDecl(new BaseVocabularyDecl(
-                XSD.IPV4,//
+                XSD.IPV4,
                 InlineIPv4URIHandler.NAMESPACE,
                 XSD.UUID,
                 InlineUUIDURIHandler.NAMESPACE

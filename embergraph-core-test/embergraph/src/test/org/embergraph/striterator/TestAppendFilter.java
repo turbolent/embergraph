@@ -58,7 +58,7 @@ public class TestAppendFilter extends TestCase2 {
                         new ChunkedWrappedIterator<Long>(Arrays.asList(
                                 new Long[] { 2L, 3L, 4L }).iterator())));
 
-        assertEquals(new Long[] { //
+        assertEquals(new Long[] {
                 1L, 3L, 5L,  // src1
                 2L, 3L, 4L,  // src2
                 }, actual.nextChunk());

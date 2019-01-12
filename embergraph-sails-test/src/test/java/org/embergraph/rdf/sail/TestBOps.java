@@ -120,7 +120,7 @@ public class TestBOps extends ProxyBigdataSailTestCase {
              * that go around the sail.
              */
             cxn.flush();//commit();
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isInfoEnabled()) {
                 log.info("\n" + cxn.getTripleStore().dumpStore());
@@ -217,7 +217,7 @@ public class TestBOps extends ProxyBigdataSailTestCase {
              * that go around the sail.
              */
             cxn.flush();//commit();
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isInfoEnabled()) {
                 log.info("\n" + cxn.getTripleStore().dumpStore());
@@ -306,7 +306,7 @@ public class TestBOps extends ProxyBigdataSailTestCase {
              * that go around the sail.
              */
             cxn.flush();//commit();
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isInfoEnabled()) {
                 log.info("\n" + cxn.getTripleStore().dumpStore());
@@ -400,7 +400,7 @@ public class TestBOps extends ProxyBigdataSailTestCase {
              * that go around the sail.
              */
             cxn.flush();//commit();
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isInfoEnabled()) {
                 log.info("\n" + cxn.getTripleStore().dumpStore());
@@ -504,7 +504,7 @@ public class TestBOps extends ProxyBigdataSailTestCase {
              * that go around the sail.
              */
             cxn.flush();//commit();
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isInfoEnabled()) {
                 log.info("\n" + cxn.getTripleStore().dumpStore());
@@ -596,7 +596,7 @@ public class TestBOps extends ProxyBigdataSailTestCase {
 //             * that go around the sail.
 //             */
 //            cxn.flush();//commit();
-//            cxn.commit();//
+//            cxn.commit();
 //            
 //            if (log.isInfoEnabled()) {
 //                log.info("\n" + sail.getDatabase().dumpStore());

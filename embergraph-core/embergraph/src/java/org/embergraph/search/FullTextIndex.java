@@ -687,10 +687,10 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 //                log.info(Options.DOUBLE_PRECISION + "=" + doublePrecision);
 
             indexMetadata.setTupleSerializer(new FullTextIndexTupleSerializer<V>(
-                    keyBuilderFactory,//
-                    DefaultTupleSerializer.getDefaultLeafKeysCoder(),//
-                    EmptyRabaValueCoder.INSTANCE,//
-                    fieldsEnabled//
+                    keyBuilderFactory,
+                    DefaultTupleSerializer.getDefaultLeafKeysCoder(),
+                    EmptyRabaValueCoder.INSTANCE,
+                    fieldsEnabled
             ));
             
             indexManager.registerIndex(indexMetadata);
@@ -1037,12 +1037,12 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
              */
             final boolean filterStopwords = !prefixMatch;
 
-            index(buffer, //
+            index(buffer,
                     null, // docId // was Long.MIN_VALUE
                     Integer.MIN_VALUE, // fieldId
-                    languageCode,//
-                    new StringReader(q), //
-                    filterStopwords//
+                    languageCode,
+                    new StringReader(q),
+                    filterStopwords
             );
 
             if (buffer.size() == 0) {

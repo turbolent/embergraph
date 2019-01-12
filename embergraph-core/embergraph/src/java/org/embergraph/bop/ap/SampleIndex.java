@@ -905,7 +905,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 			final long [] offsets = new long [limit];
 
 			// create a cleared bit vector of the stated capacity.
-			final BitVector v = LongArrayBitVector.ofLength(//
+			final BitVector v = LongArrayBitVector.ofLength(
 					rangeCount// capacity (in bits)
 					);
 

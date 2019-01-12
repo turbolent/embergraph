@@ -200,9 +200,9 @@ public class SPOAccessPath extends AccessPath<ISPO> {
 //             * that variable in the predicate with the desired constant.
 //             */
 //
-//            p = getPredicate().asBound(new ListBindingSet(//
-//                    new IVariable[] { (IVariable<IV>) var },//
-//                    new IConstant[] { new Constant<IV>(v) }//
+//            p = getPredicate().asBound(new ListBindingSet(
+//                    new IVariable[] { (IVariable<IV>) var },
+//                    new IConstant[] { new Constant<IV>(v) }
 //                    ));
 //        } else {
 //

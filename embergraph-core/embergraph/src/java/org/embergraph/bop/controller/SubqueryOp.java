@@ -410,21 +410,21 @@ public class SubqueryOp extends PipelineOp {
                             .getRunningQuery().getQueryEngine();
 
                     if(log.isDebugEnabled())
-                        log.debug("\nRunning subquery:" //
+                        log.debug("\nRunning subquery:"
                             + "\n        selectVars: "
-                            + Arrays.toString(selectVars) //
+                            + Arrays.toString(selectVars)
                             + "\nparentSolution(in): "
-                            + parentSolutionIn //
+                            + parentSolutionIn
                             + "\n childSolution(in): "
-                            + childSolutionIn//
+                            + childSolutionIn
                     );
-//                    System.out.println("Running subquery" //
+//                    System.out.println("Running subquery"
 //                            + ": selectVars: "
-//                            + Arrays.toString(selectVars) //
+//                            + Arrays.toString(selectVars)
 //                            + ", parentSolution(in): "
-//                            + parentSolutionIn //
+//                            + parentSolutionIn
 //                            + ", childSolution(in): "
-//                            + childSolutionIn//
+//                            + childSolutionIn
 //                    );
                     
                     runningSubquery = queryEngine.eval(subQueryOp,
@@ -472,16 +472,16 @@ public class SubqueryOp extends PipelineOp {
                         } else {
 
                             // Copy solutions from the subquery to the query.
-                            ncopied = BOpUtility.copy(//
+                            ncopied = BOpUtility.copy(
                                     subquerySolutionItr,// subquery solutions.
-                                    parentContext.getSink(), //
+                                    parentContext.getSink(),
                                     null, // sink2
                                     parentSolutionIn,// original bindings from
                                                      // parent query.
                                     selectVars, // variables projected by
                                                 // subquery.
-                                    constraints, //
-                                    parentContext.getStats()//
+                                    constraints,
+                                    parentContext.getStats()
                                     );
                         }
 

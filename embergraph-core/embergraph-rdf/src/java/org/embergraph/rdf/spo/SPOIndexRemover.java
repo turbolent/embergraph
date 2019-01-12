@@ -169,12 +169,12 @@ public class SPOIndexRemover implements Callable<Long> {
                     numStmts);
 
             // batch remove.
-            ndx.submit(//
+            ndx.submit(
                     0,// fromIndex,
                     numStmts, // toIndex,
-                    keys,//
+                    keys,
                     null, // vals
-                    BatchRemoveConstructor.RETURN_BIT_MASK,//
+                    BatchRemoveConstructor.RETURN_BIT_MASK,
                     aggregator // handler
                     );
 
@@ -209,12 +209,12 @@ public class SPOIndexRemover implements Callable<Long> {
             final LongAggregator aggregator = new LongAggregator();
 
             // batch remove.
-            ndx.submit(//
+            ndx.submit(
                     0,// fromIndex,
                     numStmts, // toIndex,
-                    keys,//
+                    keys,
                     null, // vals
-                    BatchRemoveConstructor.RETURN_MUTATION_COUNT,//
+                    BatchRemoveConstructor.RETURN_MUTATION_COUNT,
                     aggregator // handler
                     );
 

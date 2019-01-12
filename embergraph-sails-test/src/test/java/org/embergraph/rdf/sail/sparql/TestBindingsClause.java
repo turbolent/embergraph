@@ -89,16 +89,16 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_001() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book {\n" + //
-                "  (:book1)\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book {\n" +
+                "  (:book1)\n" +
+                "}"
                 ;
 
         final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
@@ -172,16 +172,16 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_002() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book {\n" + //
-                "  (UNDEF)\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book {\n" +
+                "  (UNDEF)\n" +
+                "}"
                 ;
 
         final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
@@ -257,17 +257,17 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_003() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book {\n" + //
-                "  (:book1)\n" + //
-                "  (UNDEF)\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book {\n" +
+                "  (:book1)\n" +
+                "  (UNDEF)\n" +
+                "}"
                 ;
 
         final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
@@ -347,17 +347,17 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_004() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book ?title {\n" + //
-                "  (:book1 :title1)\n" + //
-                "  (:book2   UNDEF)\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book ?title {\n" +
+                "  (:book1 :title1)\n" +
+                "  (:book2   UNDEF)\n" +
+                "}"
                 ;
 
         final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
@@ -441,15 +441,15 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_005() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS {\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS {\n" +
+                "}"
                 ;
 
         final IV<?,?> title = makeIV(valueFactory.createURI("http://example.org/book/title"));
@@ -520,16 +520,16 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_006() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS {\n" + //
-                "  (:book1)\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS {\n" +
+                "  (:book1)\n" +
+                "}"
                 ;
 
         try {
@@ -565,16 +565,16 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_007() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book ?book {\n" + //
-                "  (:book1 :book2)\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book ?book {\n" +
+                "  (:book1 :book2)\n" +
+                "}"
                 ;
 
         try {
@@ -609,15 +609,15 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_008() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book ?book {\n" + //
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book ?book {\n" +
+                "}"
                 ;
 
         try {
@@ -654,17 +654,17 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_009() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book {\n" + //
-                " (:book1) \n"+//
-                " (:book1 :book2) \n"+//
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book {\n" +
+                " (:book1) \n"+
+                " (:book1 :book2) \n"+
+                "}"
                 ;
 
         try {
@@ -701,17 +701,17 @@ public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
     public void test_bindings_010() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
+        final String sparql = "" +
                 "PREFIX :     <http://example.org/book/>\n"+// 
-                "SELECT ?title ?price\n" + //
-                "{\n" + //
-                "    ?book :title ?title ; \n" + //
-                "          :price ?price . \n" + //
-                "}\n" + //
-                "BINDINGS ?book ?title {\n" + //
-                " (:book1 :title1) \n"+//
-                " (:book1) \n"+//
-                "}"//
+                "SELECT ?title ?price\n" +
+                "{\n" +
+                "    ?book :title ?title ; \n" +
+                "          :price ?price . \n" +
+                "}\n" +
+                "BINDINGS ?book ?title {\n" +
+                " (:book1 :title1) \n"+
+                " (:book1) \n"+
+                "}"
                 ;
 
         try {

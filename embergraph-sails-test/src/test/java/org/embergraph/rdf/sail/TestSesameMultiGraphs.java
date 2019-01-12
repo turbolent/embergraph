@@ -73,7 +73,7 @@ public class TestSesameMultiGraphs {
              * statement buffers to the database before executing any operations
              * that go around the sail.
              */
-            cxn.commit();//
+            cxn.commit();
             
             {
                 

@@ -342,11 +342,11 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
             final long chunkTimeout, final TimeUnit chunkTimeoutUnit) {
 
         this(capacity == 0 ? new SynchronousQueue<E>()
-                : new LinkedBlockingDeque<E>(capacity),//
-//                    new ArrayBlockingQueue<E>(capacity), //
-                minimumChunkSize,//
-                chunkTimeout,//
-                chunkTimeoutUnit,//
+                : new LinkedBlockingDeque<E>(capacity),
+//                    new ArrayBlockingQueue<E>(capacity),
+                minimumChunkSize,
+                chunkTimeout,
+                chunkTimeoutUnit,
                 false// ordered
                 ); 
 
@@ -2359,9 +2359,9 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
         final int chunkSize = e1.length + e2.length;
         
         // Dynamic instantiation of array of the same component type.
-        final Object[] a = (Object[]) java.lang.reflect.Array.newInstance(//
+        final Object[] a = (Object[]) java.lang.reflect.Array.newInstance(
 //                e1[0].getClass(),
-                e1.getClass().getComponentType(),//
+                e1.getClass().getComponentType(),
                 chunkSize);
         
         // copy first chunk onto the new array.

@@ -49,7 +49,7 @@ public class TestLeafDataRecord_Simple_Simple extends AbstractLeafDataRecordTest
         
         super.setUp();
 
-        coder = new DefaultLeafCoder(//
+        coder = new DefaultLeafCoder(
                 SimpleRabaCoder.INSTANCE,// keys
                 SimpleRabaCoder.INSTANCE // vals
         );

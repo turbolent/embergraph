@@ -429,13 +429,13 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
         final int porder[] = getRandomOrder( pspace.length );
         final int oorder[] = getRandomOrder( ospace.length );
 
-        //
+
         // Generate and insert random statements.
-        //
+
         // @todo This has a strong order effect bias since all statements
         // about the same subject are inserted at once, hence [randomOrder]
         // does not truely randomize the presentation of triples to the store.
-        //
+
         
         long begin = System.currentTimeMillis();
 

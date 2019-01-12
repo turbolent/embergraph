@@ -306,11 +306,11 @@ public class FastRangeCountOp<E> extends PipelineOp {
 							new XSDIntegerIV(BigInteger.valueOf(rangeCount))));
 
 					// See if the solutions join.
-					final IBindingSet outSolution = BOpContext.bind(//
+					final IBindingSet outSolution = BOpContext.bind(
 							bindingSet,// left
-							right,//
-							constraints,//
-							selectVars//
+							right,
+							constraints,
+							selectVars
 							);
 
 					if (outSolution != null) {

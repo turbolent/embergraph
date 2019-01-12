@@ -102,8 +102,8 @@ abstract public class AbstractDistributedFederation<T> extends AbstractScaleOutF
      *             if the iterator is <code>null</code>.
      */
     public abstract <E> IAsynchronousIterator<E> getProxy(
-            IAsynchronousIterator<E> src,//
-            IStreamSerializer<E> serializer, //
+            IAsynchronousIterator<E> src,
+            IStreamSerializer<E> serializer,
             int capacity
     );
 

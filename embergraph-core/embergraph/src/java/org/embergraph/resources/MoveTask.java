@@ -189,9 +189,9 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
      * @param targetDataServiceUUID
      *            The UUID for the target data service.
      */
-    public MoveTask(//
-            final ViewMetadata vmd,//
-            final UUID targetDataServiceUUID//
+    public MoveTask(
+            final ViewMetadata vmd,
+            final UUID targetDataServiceUUID
             ) {
         
         super(vmd.resourceManager, TimestampUtility
@@ -360,12 +360,12 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
      * @throws InterruptedException
      */
     static protected MoveResult doAtomicUpdate(
-            final ResourceManager resourceManager,//
-            final String sourceIndexName,//
-            final BuildResult historicalWritesBuildResult,//
-            final UUID targetDataServiceUUID, //
-            final int targetIndexPartitionId,//
-            final Event parentEvent//
+            final ResourceManager resourceManager,
+            final String sourceIndexName,
+            final BuildResult historicalWritesBuildResult,
+            final UUID targetDataServiceUUID,
+            final int targetIndexPartitionId,
+            final Event parentEvent
             ) throws InterruptedException, ExecutionException {
 
         return resourceManager.getConcurrencyManager().submit(
@@ -448,13 +448,13 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
          *            partition.
          * @param parentEvent
          */
-        protected AtomicUpdate(//
-                final ResourceManager resourceManager,//
-                final String sourceIndexName,//
-                final BuildResult historicalWritesBuildResult,//
-                final UUID targetDataServiceUUID,//
-                final int targetIndexPartitionId,//
-                final Event parentEvent//
+        protected AtomicUpdate(
+                final ResourceManager resourceManager,
+                final String sourceIndexName,
+                final BuildResult historicalWritesBuildResult,
+                final UUID targetDataServiceUUID,
+                final int targetIndexPartitionId,
+                final Event parentEvent
                 ) {
 
             super(resourceManager, ITx.UNISOLATED, sourceIndexName);
@@ -516,19 +516,19 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                         .getPartitionMetadata();
 
                 // The current locator for the source index partition.
-                final PartitionLocator oldLocator = new PartitionLocator(//
-                        pmd.getPartitionId(),//
-                        resourceManager.getDataServiceUUID(),//
-                        pmd.getLeftSeparatorKey(),//
-                        pmd.getRightSeparatorKey()//
+                final PartitionLocator oldLocator = new PartitionLocator(
+                        pmd.getPartitionId(),
+                        resourceManager.getDataServiceUUID(),
+                        pmd.getLeftSeparatorKey(),
+                        pmd.getRightSeparatorKey()
                 );
 
                 // The locator for the target index partition.
                 final PartitionLocator newLocator = new PartitionLocator(
-                        targetIndexPartitionId,//
-                        targetDataServiceUUID,//
-                        pmd.getLeftSeparatorKey(),//
-                        pmd.getRightSeparatorKey()//
+                        targetIndexPartitionId,
+                        targetDataServiceUUID,
+                        pmd.getLeftSeparatorKey(),
+                        pmd.getRightSeparatorKey()
                 );
 
                 /*
@@ -584,14 +584,14 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                             targetDataService
                                     .submit(
                                             new ReceiveIndexPartitionTask(
-                                                    indexMetadata,//
+                                                    indexMetadata,
                                                     resourceManager
-                                                            .getDataServiceUUID(),//
-                                                    targetIndexPartitionId,//
-                                                    historicalWritesBuildResult.segmentMetadata,//
-                                                    bufferedWritesBuildResult.segmentMetadata,//
+                                                            .getDataServiceUUID(),
+                                                    targetIndexPartitionId,
+                                                    historicalWritesBuildResult.segmentMetadata,
+                                                    bufferedWritesBuildResult.segmentMetadata,
                                                     resourceManager
-                                                            .getResourceService().getAddr()//
+                                                            .getResourceService().getAddr()
                                             )).get();
 
                         } catch (ExecutionException ex) {
@@ -714,13 +714,13 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
          * @throws Exception
          *             the caller's {@link Throwable}, wrapped iff necessary.
          */
-        private void rollbackMove(//
-                final Throwable t,//
-                final String scaleOutIndexName,//
-                final String targetIndexName,//
-                final IDataService targetDataService,//
-                final PartitionLocator oldLocator,//
-                final PartitionLocator newLocator//
+        private void rollbackMove(
+                final Throwable t,
+                final String scaleOutIndexName,
+                final String targetIndexName,
+                final IDataService targetDataService,
+                final PartitionLocator oldLocator,
+                final PartitionLocator newLocator
                 ) throws Exception {
 
             /*
@@ -930,12 +930,12 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
          *            (the one from which the resources will be copied during
          *            the move).
          */
-        ReceiveIndexPartitionTask(//
-                final IndexMetadata sourceIndexMetadata,//
-                final UUID sourceDataServiceUUID,//
-                final int targetIndexPartitionId,//
-                final SegmentMetadata historyIndexSegmentMetadata,//
-                final SegmentMetadata bufferedWritesIndexSegmentMetadata,//
+        ReceiveIndexPartitionTask(
+                final IndexMetadata sourceIndexMetadata,
+                final UUID sourceDataServiceUUID,
+                final int targetIndexPartitionId,
+                final SegmentMetadata historyIndexSegmentMetadata,
+                final SegmentMetadata bufferedWritesIndexSegmentMetadata,
                 final InetSocketAddress addr
                 ) {
 
@@ -984,15 +984,15 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
             try {
 
                 getDataService().getConcurrencyManager().submit(
-                        new InnerReceiveIndexPartitionTask(//
-                                resourceManager,//
-                                targetIndexName,//
-                                sourceIndexMetadata,//
-                                sourceDataServiceUUID,//
-                                targetIndexPartitionId,//
-                                historyIndexSegmentMetadata,//
-                                bufferedWritesIndexSegmentMetadata,//
-                                addr//
+                        new InnerReceiveIndexPartitionTask(
+                                resourceManager,
+                                targetIndexName,
+                                sourceIndexMetadata,
+                                sourceDataServiceUUID,
+                                targetIndexPartitionId,
+                                historyIndexSegmentMetadata,
+                                bufferedWritesIndexSegmentMetadata,
+                                addr
                         )).get();
 
                 // update the index partition receive counter.
@@ -1339,21 +1339,21 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                  * allow a gap when the move is in progress since it runs as a
                  * single unisolated task rather than a series of such tasks.
                  */
-                newMetadata.setPartitionMetadata(new LocalPartitionMetadata(//
+                newMetadata.setPartitionMetadata(new LocalPartitionMetadata(
                         targetIndexPartitionId, // the new partition identifier.
                         -1, // The source partition identifier (unused here).
-                        oldpmd.getLeftSeparatorKey(),//
-                        oldpmd.getRightSeparatorKey(),//
+                        oldpmd.getLeftSeparatorKey(),
+                        oldpmd.getRightSeparatorKey(),
                         /*
                          * Define the view for the target index partition.
                          */
-                        new IResourceMetadata[] {//
+                        new IResourceMetadata[] {
                             // The live journal (no data for this index partition yet).
-                            getJournal().getResourceMetadata(), //
+                            getJournal().getResourceMetadata(),
                             // Buffered writes from the live journal of the source DS.
-                            bufferedWritesSegmentMetadata,//
+                            bufferedWritesSegmentMetadata,
                             // Historical writes from the source DS.
-                            historySegmentMetadata//
+                            historySegmentMetadata
                         },
                         IndexPartitionCause.move(resourceManager)
 //                        // history line.
@@ -1386,18 +1386,18 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                 final LocalPartitionMetadata pmd = sourceIndexMetadata
                         .getPartitionMetadata();
 
-                final PartitionLocator oldLocator = new PartitionLocator(//
-                        sourceIndexPartitionId,//
-                        sourceDataServiceUUID,//
-                        pmd.getLeftSeparatorKey(),//
-                        pmd.getRightSeparatorKey()//
+                final PartitionLocator oldLocator = new PartitionLocator(
+                        sourceIndexPartitionId,
+                        sourceDataServiceUUID,
+                        pmd.getLeftSeparatorKey(),
+                        pmd.getRightSeparatorKey()
                 );
 
                 final PartitionLocator newLocator = new PartitionLocator(
-                        targetIndexPartitionId,//
-                        targetDataServiceUUID,//
-                        pmd.getLeftSeparatorKey(),//
-                        pmd.getRightSeparatorKey()//
+                        targetIndexPartitionId,
+                        targetDataServiceUUID,
+                        pmd.getLeftSeparatorKey(),
+                        pmd.getRightSeparatorKey()
                 );
 
                 return new MoveResult(sourceIndexName, sourceIndexMetadata,

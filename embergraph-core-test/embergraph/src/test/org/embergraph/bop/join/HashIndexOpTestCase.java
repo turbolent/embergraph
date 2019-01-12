@@ -172,31 +172,31 @@ abstract public class HashIndexOpTestCase extends TestCase2 {
         final INamedSolutionSetRef namedSolutionSet = NamedSolutionSetRefUtility
                 .newInstance(queryId, solutionSetName, joinVars);
 
-        final HashIndexOp op = newHashIndexOp(setup.namespace, BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        final HashIndexOp op = newHashIndexOp(setup.namespace, BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                new NV(HashIndexOp.Annotations.SELECT, selectVars),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                new NV(HashIndexOp.Annotations.SELECT, selectVars),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
 
         final SolutionSetHashJoinOp op2 = newSolutionSetHashJoinOp(
-                new BOp[] { op },//
-                new NV(BOp.Annotations.BOP_ID, 2),//
+                new BOp[] { op },
+                new NV(BOp.Annotations.BOP_ID, 2),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-//                new NV(SolutionSetHashJoinOp.Annotations.OPTIONAL, op.isOptional()),//
-//                new NV(SolutionSetHashJoinOp.Annotations.JOIN_VARS, joinVars),//
-//                new NV(SolutionSetHashJoinOp.Annotations.SELECT, selectVars),//
-                new NV(SolutionSetHashJoinOp.Annotations.RELEASE, true),//
-                new NV(SolutionSetHashJoinOp.Annotations.LAST_PASS, true),//
-                new NV(SolutionSetHashJoinOp.Annotations.NAMED_SET_REF, namedSolutionSet)//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+//                new NV(SolutionSetHashJoinOp.Annotations.OPTIONAL, op.isOptional()),
+//                new NV(SolutionSetHashJoinOp.Annotations.JOIN_VARS, joinVars),
+//                new NV(SolutionSetHashJoinOp.Annotations.SELECT, selectVars),
+                new NV(SolutionSetHashJoinOp.Annotations.RELEASE, true),
+                new NV(SolutionSetHashJoinOp.Annotations.LAST_PASS, true),
+                new NV(SolutionSetHashJoinOp.Annotations.NAMED_SET_REF, namedSolutionSet)
         );
 
         final PipelineOp query = op2;
@@ -221,16 +221,16 @@ abstract public class HashIndexOpTestCase extends TestCase2 {
         }
         
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-        new ListBindingSet(//
-            new IVariable[] { x },//
-            new IConstant[] { new Constant<IV>(setup.leon) }//
-            ), //
-        new ListBindingSet(//
-            new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+        new ListBindingSet(
+            new IVariable[] { x },
+            new IConstant[] { new Constant<IV>(setup.leon) }
+            ),
+        new ListBindingSet(
+            new IVariable[] { x, y },
             new IConstant[] { new Constant<IV>(setup.mary), 
-                new Constant<IV>(setup.john) }//
-        ),//
+                new Constant<IV>(setup.john) }
+        ),
         };
 
         final IRunningQuery runningQuery = queryEngine.eval(queryId, query,
@@ -266,31 +266,31 @@ abstract public class HashIndexOpTestCase extends TestCase2 {
         final INamedSolutionSetRef namedSolutionSet = NamedSolutionSetRefUtility
                 .newInstance(queryId, solutionSetName, joinVars);
 
-        final HashIndexOp op = newHashIndexOp(setup.namespace,BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        final HashIndexOp op = newHashIndexOp(setup.namespace,BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                new NV(HashIndexOp.Annotations.SELECT, selectVars),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                new NV(HashIndexOp.Annotations.SELECT, selectVars),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
 
         final SolutionSetHashJoinOp op2 = newSolutionSetHashJoinOp(
-                new BOp[] { op },//
-                new NV(BOp.Annotations.BOP_ID, 2),//
+                new BOp[] { op },
+                new NV(BOp.Annotations.BOP_ID, 2),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-//                new NV(SolutionSetHashJoinOp.Annotations.OPTIONAL, op.isOptional()),//
-//                new NV(SolutionSetHashJoinOp.Annotations.JOIN_VARS, joinVars),//
-//                new NV(SolutionSetHashJoinOp.Annotations.SELECT, selectVars),//
-                new NV(SolutionSetHashJoinOp.Annotations.RELEASE, true),//
-                new NV(SolutionSetHashJoinOp.Annotations.LAST_PASS, true),//
-                new NV(SolutionSetHashJoinOp.Annotations.NAMED_SET_REF, namedSolutionSet)//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+//                new NV(SolutionSetHashJoinOp.Annotations.OPTIONAL, op.isOptional()),
+//                new NV(SolutionSetHashJoinOp.Annotations.JOIN_VARS, joinVars),
+//                new NV(SolutionSetHashJoinOp.Annotations.SELECT, selectVars),
+                new NV(SolutionSetHashJoinOp.Annotations.RELEASE, true),
+                new NV(SolutionSetHashJoinOp.Annotations.LAST_PASS, true),
+                new NV(SolutionSetHashJoinOp.Annotations.NAMED_SET_REF, namedSolutionSet)
         );
 
         final PipelineOp query = op2;
@@ -315,16 +315,16 @@ abstract public class HashIndexOpTestCase extends TestCase2 {
         }
         
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-        new ListBindingSet(//
-            new IVariable[] { x },//
-            new IConstant[] { new Constant<IV>(setup.leon) }//
-            ), //
-        new ListBindingSet(//
-            new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+        new ListBindingSet(
+            new IVariable[] { x },
+            new IConstant[] { new Constant<IV>(setup.leon) }
+            ),
+        new ListBindingSet(
+            new IVariable[] { x, y },
             new IConstant[] { new Constant<IV>(setup.mary), 
-                new Constant<IV>(setup.john) }//
-        ),//
+                new Constant<IV>(setup.john) }
+        ),
         };
 
         final IRunningQuery runningQuery = queryEngine.eval(queryId, query,
@@ -414,36 +414,36 @@ abstract public class HashIndexOpTestCase extends TestCase2 {
         }
         
         // Add operator to build the hash index.
-        final HashIndexOp op = newHashIndexOp(setup.namespace,BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        final HashIndexOp op = newHashIndexOp(setup.namespace,BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                new NV(HashIndexOp.Annotations.SELECT, selectVars),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_SOURCE_REF, namedSolutionSetSource),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                new NV(HashIndexOp.Annotations.SELECT, selectVars),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
+                new NV(HashIndexOp.Annotations.NAMED_SET_SOURCE_REF, namedSolutionSetSource),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
 
         // Add operator to validate the hash index build.
         final ValidateIndexOp op2 = new ValidateIndexOp(
                 new BOp[] { op },
-                NV.asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, 2),//
+                NV.asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, 2),
                         new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-//                        new NV(PipelineOp.Annotations.LAST_PASS, true),//
-//                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),//
-                        new NV(PipelineOp.Annotations.PIPELINED, false),//
+                                BOpEvaluationContext.CONTROLLER),
+//                        new NV(PipelineOp.Annotations.LAST_PASS, true),
+//                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
+                        new NV(PipelineOp.Annotations.PIPELINED, false),
                         new NV(ValidateIndexOp.Annotations.EXPECTED_SOLUTIONS,
-                               solutionsToIndex),//
+                               solutionsToIndex),
                         new NV(ValidateIndexOp.Annotations.NAMED_SET_SOURCE_REF,
-                               namedSolutionSetSource),//
+                               namedSolutionSetSource),
                         new NV(ValidateIndexOp.Annotations.NAMED_SET_REF,
-                               namedSolutionSet),//
+                               namedSolutionSet),
                 }));
 
         final PipelineOp query = op2;

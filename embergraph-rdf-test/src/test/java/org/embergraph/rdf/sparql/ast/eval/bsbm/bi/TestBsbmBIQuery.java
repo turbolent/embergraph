@@ -62,7 +62,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query1", // name
                 "bsbm/bi/query1.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -72,7 +72,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query2", // name
                 "bsbm/bi/query2.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -82,7 +82,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query3", // name
                 "bsbm/bi/query3.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -92,7 +92,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query4", // name
                 "bsbm/bi/query4.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -102,7 +102,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query5", // name
                 "bsbm/bi/query5.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -112,7 +112,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query6", // name
                 "bsbm/bi/query6.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -122,7 +122,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query7", // name
                 "bsbm/bi/query7.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 
@@ -132,7 +132,7 @@ public class TestBsbmBIQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query8", // name
                 "bsbm/bi/query8.rq",// query
-                dataset,//
+                dataset,
                 "bsbm/bi/empty.srx"// result
         ).runTest();
 

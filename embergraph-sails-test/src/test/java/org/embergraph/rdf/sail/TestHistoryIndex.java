@@ -245,11 +245,11 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                         }
                     });
 
-                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {//
+                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {
                             new HistoryChangeRecord(stmt0,
-                                    ChangeAction.INSERTED, revisionTime0),//
+                                    ChangeAction.INSERTED, revisionTime0),
                             new HistoryChangeRecord(stmt1,
-                                    ChangeAction.INSERTED, revisionTime0),//
+                                    ChangeAction.INSERTED, revisionTime0),
                     };
 
                     // for (HistoryChangeRecord r : a) {
@@ -323,13 +323,13 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                         }
                     });
 
-                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {//
+                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {
                             new HistoryChangeRecord(stmt0,
-                                    ChangeAction.INSERTED, revisionTime0),//
+                                    ChangeAction.INSERTED, revisionTime0),
                             new HistoryChangeRecord(stmt1,
-                                    ChangeAction.INSERTED, revisionTime0),//
+                                    ChangeAction.INSERTED, revisionTime0),
                             new HistoryChangeRecord(stmt0,
-                                    ChangeAction.REMOVED, revisionTime1),//
+                                    ChangeAction.REMOVED, revisionTime1),
                     };
 
 //                     for (HistoryChangeRecord r : a) {
@@ -454,11 +454,11 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                         }
                     });
 
-                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {//
+                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {
                             new HistoryChangeRecord(stmt0,
-                                    ChangeAction.INSERTED, revisionTime0),//
+                                    ChangeAction.INSERTED, revisionTime0),
                             new HistoryChangeRecord(stmt1,
-                                    ChangeAction.INSERTED, revisionTime0),//
+                                    ChangeAction.INSERTED, revisionTime0),
                     };
 
                     // for (HistoryChangeRecord r : a) {
@@ -535,13 +535,13 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                     /*
                      * The older entries should have been pruned out.
                      */
-                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {//
+                    final HistoryChangeRecord[] a = new HistoryChangeRecord[] {
 //                            new HistoryChangeRecord(stmt0,
-//                                    ChangeAction.INSERTED, revisionTime0),//
+//                                    ChangeAction.INSERTED, revisionTime0),
 //                            new HistoryChangeRecord(stmt1,
-//                                    ChangeAction.INSERTED, revisionTime0),//
+//                                    ChangeAction.INSERTED, revisionTime0),
                             new HistoryChangeRecord(stmt0,
-                                    ChangeAction.REMOVED, revisionTime1),//
+                                    ChangeAction.REMOVED, revisionTime1),
                     };
 
 //                     for (HistoryChangeRecord r : a) {

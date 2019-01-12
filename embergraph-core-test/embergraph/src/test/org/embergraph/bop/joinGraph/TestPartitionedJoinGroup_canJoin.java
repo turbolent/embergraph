@@ -132,10 +132,10 @@ public class TestPartitionedJoinGroup_canJoin extends TestCase2 {
         final IVariable<?> y = Var.var("y");
         final IVariable<?> z = Var.var("z");
 
-        final IPredicate<?> p1 = new Predicate(new BOp[] { x, },//
-                new NV("foo", y)//
+        final IPredicate<?> p1 = new Predicate(new BOp[] { x, },
+                new NV("foo", y)
                 );
-        final IPredicate<?> p2 = new Predicate(new BOp[] { z },//
+        final IPredicate<?> p2 = new Predicate(new BOp[] { z },
                 new NV("foo", y)
                 );
 

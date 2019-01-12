@@ -67,8 +67,8 @@ public class TestTicket1893 extends
     
     private final static RDFFormat DATA_FORMAT = RDFFormat.TURTLE;
     
-    private final static String INSERT_SPARQL = "INSERT DATA {" //
-    		+ DATA //
+    private final static String INSERT_SPARQL = "INSERT DATA {"
+    		+ DATA
     		+ "}";
 
     public TestTicket1893() {
@@ -581,7 +581,7 @@ public class TestTicket1893 extends
         
     }
     
-    //////////////////////
+    ////////////////////
     
     /**
      * case 17:

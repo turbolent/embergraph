@@ -64,9 +64,9 @@ final class NativeDistinctQueryHint extends AbstractBooleanQueryHint {
         }
 
         // if (op instanceof QueryBase) {
-        //
+
         // super.attach(context, scope, op, value);
-        //
+
         // }
 
         throw new QueryHintException(scope, op, getName(), value);

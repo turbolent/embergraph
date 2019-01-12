@@ -1153,12 +1153,12 @@ public class FusedView implements IIndex, ILocalBTreeView {//, IValueAge {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public ITupleIterator rangeIterator(//
-            byte[] fromKey,//
-            byte[] toKey, //
-            final int capacity, //
-            final int flags,//
-            final IFilter filter//
+    public ITupleIterator rangeIterator(
+            byte[] fromKey,
+            byte[] toKey,
+            final int capacity,
+            final int flags,
+            final IFilter filter
             ) {
 
         if (fromKey == null || toKey == null) {
@@ -1243,10 +1243,10 @@ public class FusedView implements IIndex, ILocalBTreeView {//, IValueAge {
          * Note: The REMOVEALL flag is NOT passed through to the source
          * iterators. It is handled below by laying on a filter.
          */
-        final int sourceFlags = (//
-                (flags | KEYS | DELETED)//
-                | (reverseScan || removeAll ? CURSOR : 0) //
-                )//
+        final int sourceFlags = (
+                (flags | KEYS | DELETED)
+                | (reverseScan || removeAll ? CURSOR : 0)
+                )
                 & (~REMOVEALL)// turn off
                 & (~REVERSE)// turn off
                 ;

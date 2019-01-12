@@ -168,13 +168,13 @@ public class Test_REST_DESCRIBE<S extends IIndexManager> extends
       // Run the DESCRIBE query and verify the results (non-empty).
       {
 
-         final String queryStr = "prefix bd: <" + BD.NAMESPACE + "> " + //
-               "prefix rdf: <" + RDF.NAMESPACE + "> " + //
-               "prefix rdfs: <" + RDFS.NAMESPACE + "> " + //
-               "DESCRIBE ?x " + //
-               "WHERE { " + //
-               "  ?x rdf:type bd:Person . " + //
-               "  ?x bd:likes bd:RDF " + //
+         final String queryStr = "prefix bd: <" + BD.NAMESPACE + "> " +
+               "prefix rdf: <" + RDF.NAMESPACE + "> " +
+               "prefix rdfs: <" + RDFS.NAMESPACE + "> " +
+               "DESCRIBE ?x " +
+               "WHERE { " +
+               "  ?x rdf:type bd:Person . " +
+               "  ?x bd:likes bd:RDF " +
                "}";
 
          final AtomicInteger errorCount = new AtomicInteger();

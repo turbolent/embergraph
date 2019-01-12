@@ -50,9 +50,9 @@ public class TypeErrorLog {
      */
     static public void handleTypeError(
             // final Logger log,
-            final Throwable t,//
-            final IValueExpression<?> expr,//
-            final BOpStats stats//
+            final Throwable t,
+            final IValueExpression<?> expr,
+            final BOpStats stats
             ) {
 
         stats.typeErrors.increment();

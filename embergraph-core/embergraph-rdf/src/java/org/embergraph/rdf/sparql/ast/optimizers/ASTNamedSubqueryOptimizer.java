@@ -328,10 +328,10 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
      * 
      * @see https://sourceforge.net/apps/trac/bigdata/ticket/405
      */
-    static private void assignJoinVars(//
-            final QueryRoot queryRoot,//
-            final AST2BOpContext context,//
-            final NamedSubqueriesNode namedSubqueries,//
+    static private void assignJoinVars(
+            final QueryRoot queryRoot,
+            final AST2BOpContext context,
+            final NamedSubqueriesNode namedSubqueries,
             final NamedSubqueryInclude[] allIncludes) {
 
         final StaticAnalysis sa = new StaticAnalysis(queryRoot, context);

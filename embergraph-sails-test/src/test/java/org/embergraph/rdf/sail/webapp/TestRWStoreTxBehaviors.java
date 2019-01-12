@@ -86,12 +86,12 @@ public class TestRWStoreTxBehaviors<S extends IIndexManager> extends
       if (log.isInfoEnabled())
          log.info("activeTxBefore=" + activeTxBefore);
 
-		final IPreparedSparqlUpdate preparedUpdate = m_repo.prepareUpdate("PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"//
-+"INSERT DATA\n"//
-+"{\n"//
-+"  <http://example/book1> dc:title \"A new book\" ; \n"//
-+"                          dc:creator \"A.N.Other\" .\n"//
-+"}\n"//
+		final IPreparedSparqlUpdate preparedUpdate = m_repo.prepareUpdate("PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
++"INSERT DATA\n"
++"{\n"
++"  <http://example/book1> dc:title \"A new book\" ; \n"
++"                          dc:creator \"A.N.Other\" .\n"
++"}\n"
 );
 		preparedUpdate.evaluate();
 		

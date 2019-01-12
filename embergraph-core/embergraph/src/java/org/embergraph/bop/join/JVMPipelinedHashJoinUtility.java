@@ -128,11 +128,11 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
 
         private static final long serialVersionUID = 1L;
         
-        public IHashJoinUtility create(//
-                final BOpContext<IBindingSet> context,//
-                final INamedSolutionSetRef namedSetRef,//
-                final PipelineOp op,//
-                final JoinTypeEnum joinType//
+        public IHashJoinUtility create(
+                final BOpContext<IBindingSet> context,
+                final INamedSolutionSetRef namedSetRef,
+                final PipelineOp op,
+                final JoinTypeEnum joinType
                 ) {
 
             return new JVMPipelinedHashJoinUtility(
@@ -406,11 +406,11 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
      * Executes the hash join for the chunk of solutions that is passed in
      * over rightSolutions and outputs the solutions.
      */
-    public void hashJoinAndEmit(//
-            final IBindingSet[] chunk,//
+    public void hashJoinAndEmit(
+            final IBindingSet[] chunk,
             final BOpStats stats,
-            final IBuffer<IBindingSet> outputBuffer,//
-            final IConstraint[] joinConstraints,//
+            final IBuffer<IBindingSet> outputBuffer,
+            final IConstraint[] joinConstraints,
             final IVariable<?> askVar) {
 
         final JVMHashIndex rightSolutions = getRightSolutions();
@@ -457,11 +457,11 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
                   }
                      
                   // See if the solutions join.
-                  final IBindingSet outSolution = BOpContext.bind(//
-                     right.solution,//
-                     left,//
-                     joinConstraints,//
-                     getSelectVars()//
+                  final IBindingSet outSolution = BOpContext.bind(
+                     right.solution,
+                     left,
+                     joinConstraints,
+                     getSelectVars()
                   );
                      
                   // record that we've seen a solution, if so

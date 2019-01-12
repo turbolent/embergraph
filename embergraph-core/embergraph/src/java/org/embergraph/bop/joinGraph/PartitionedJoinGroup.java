@@ -266,10 +266,10 @@ public class PartitionedJoinGroup {
 	 *             <code>null</code>.
 	 */
     static public IConstraint[][] getJoinGraphConstraints(
-            final IPredicate<?>[] path,//
-            final IConstraint[] joinGraphConstraints,//
-            final IVariable<?>[] knownBoundVars,//
-            final boolean pathIsComplete//
+            final IPredicate<?>[] path,
+            final IConstraint[] joinGraphConstraints,
+            final IVariable<?>[] knownBoundVars,
+            final boolean pathIsComplete
             ) {
 
         if (path == null)
@@ -788,9 +788,9 @@ public class PartitionedJoinGroup {
      *             if any element of the source predicates array is
      *             <code>null</code>.
      */
-    public PartitionedJoinGroup(//
+    public PartitionedJoinGroup(
 //            final Set<IVariable<?>> knownBound,
-            final IPredicate<?>[] sourcePreds,//
+            final IPredicate<?>[] sourcePreds,
             IConstraint[] constraints) {
 
         if (sourcePreds == null)
@@ -1057,7 +1057,7 @@ public class PartitionedJoinGroup {
 //                    .nextId()));
 //
 ////          anns.add(new NV(PipelineJoin.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY));
-////
+//
 ////          anns.add(new NV(PipelineJoin.Annotations.SELECT, vars.toArray(new IVariable[vars.size()])));
 //
 //			if (assignedConstraints[i] != null
@@ -1102,9 +1102,9 @@ public class PartitionedJoinGroup {
 //				anns.add(new NV(PipelineOp.Annotations.PIPELINED, false));
 //			}
 //
-//			final PipelineJoin<?> joinOp = new PipelineJoin(//
-//					lastOp == null ? new BOp[0] : new BOp[] { lastOp }, //
-//					anns.toArray(new NV[anns.size()])//
+//			final PipelineJoin<?> joinOp = new PipelineJoin(
+//					lastOp == null ? new BOp[0] : new BOp[] { lastOp },
+//					anns.toArray(new NV[anns.size()])
 //			);
 //
 //			// Add predicate argument variables to [knownBound].
@@ -1118,13 +1118,13 @@ public class PartitionedJoinGroup {
 //			lastOp = new JVMDistinctBindingSetsOp(new BOp[] { lastOp }, NV
 //					.asMap(new NV[] {
 //							new NV(PipelineOp.Annotations.BOP_ID, idFactory
-//									.nextId()), //
+//									.nextId()),
 //							new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-//									BOpEvaluationContext.CONTROLLER),//
-//							new NV(PipelineOp.Annotations.SHARED_STATE, true),//
+//									BOpEvaluationContext.CONTROLLER),
+//							new NV(PipelineOp.Annotations.SHARED_STATE, true),
 //							new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES,
-//									selected),//
-//					})//
+//									selected),
+//					})
 //			);
 //		}
 //

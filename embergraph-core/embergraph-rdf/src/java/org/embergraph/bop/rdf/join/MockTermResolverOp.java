@@ -135,10 +135,10 @@ public class MockTermResolverOp extends PipelineOp {
     */
    public MockTermResolverOp(final BOp[] args, final IVariable<?>[] vars,
          final String namespace, final long timestamp) {
-      this(args, //
-            new NV(Annotations.VARS, vars),//
-            new NV(Annotations.RELATION_NAME, new String[] { namespace }), //
-            new NV(Annotations.TIMESTAMP, timestamp) //
+      this(args,
+            new NV(Annotations.VARS, vars),
+            new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+            new NV(Annotations.TIMESTAMP, timestamp)
       );
    }
 
@@ -247,8 +247,8 @@ public class MockTermResolverOp extends PipelineOp {
     *           The chunk of solutions whose variables will be materialized.
     */
    private static void handleChunk(final IVariable<?>[] required,
-         final LexiconRelation lex,//
-         final IBindingSet[] chunk//
+         final LexiconRelation lex,
+         final IBindingSet[] chunk
    ) {
 
       if (log.isInfoEnabled())
@@ -440,7 +440,7 @@ public class MockTermResolverOp extends PipelineOp {
     *           A map from {@link IV}s to resolved {@link BigdataValue}s.
     */
    static private void replaceInBindingSet(
-         //
+
          final IVariable<?>[] required, final IBindingSet bindingSet,
          final Map<IV<?, ?>, BigdataValue> ivMap) {
 

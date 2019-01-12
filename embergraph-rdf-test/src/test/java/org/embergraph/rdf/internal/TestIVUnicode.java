@@ -137,8 +137,8 @@ public class TestIVUnicode extends TestCase2 {
 
     public void test_encodeDecode2() throws IOException {
 
-        doEncodeDecodeTest(new String[] { //
-        "en", "embergraph" //
+        doEncodeDecodeTest(new String[] {
+        "en", "embergraph"
         });
 
     }

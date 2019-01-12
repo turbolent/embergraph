@@ -65,7 +65,7 @@ public class RootBlockView implements IRootBlockView {
      * This is a chunk of reserved bytes from which new fields in the root block
      * are allocated from time to time.
      */
-    static final transient short SIZEOF_UNUSED = 256 - (//
+    static final transient short SIZEOF_UNUSED = 256 - (
             SIZEOF_BLOCKSEQ   + // block sequence since version 0x03.
             SIZEOF_QTOKEN     + // quorum token since version 0x02.
             SIZEOF_ADDR       + // metaBitsAddr since version 0x01.
@@ -354,7 +354,7 @@ public class RootBlockView implements IRootBlockView {
      *            superseded by another journal).
      * @param version
      */
-    public RootBlockView(//
+    public RootBlockView(
             final boolean rootBlock0, final int offsetBits,
             final long nextOffset, final long firstCommitTime,
             final long lastCommitTime, final long commitCounter,
@@ -877,7 +877,7 @@ public class RootBlockView implements IRootBlockView {
 
     public UUID getUUID() {
         
-        return new UUID(//
+        return new UUID(
                 buf.getLong(OFFSET_UUID), // MSB
                 buf.getLong(OFFSET_UUID + Bytes.SIZEOF_LONG) //LSB
                 );

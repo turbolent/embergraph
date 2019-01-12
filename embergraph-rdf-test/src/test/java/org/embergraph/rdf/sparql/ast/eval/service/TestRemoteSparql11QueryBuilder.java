@@ -911,9 +911,9 @@ public class TestRemoteSparql11QueryBuilder extends
             final JoinGroupNode whereClause = new JoinGroupNode();
             
             // A FILTER to enforce variable correlation.
-            whereClause.addChild(new FilterNode(FunctionNode.AND(//
-                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o")),//
-                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o1"))//
+            whereClause.addChild(new FilterNode(FunctionNode.AND(
+                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o")),
+                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o1"))
                     )));
             
             whereClause.addChild(new StatementPatternNode(new VarNode("s"),

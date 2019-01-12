@@ -241,9 +241,9 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V> implements
          */
         this(queue,
             Math.max(16, queue.capacity() / 2),// initialCapacity
-            loadFactor, //
-            concurrencyLevel, //
-            removeClearedReferences //
+            loadFactor,
+            concurrencyLevel,
+            removeClearedReferences
             );
         
     }
@@ -273,7 +273,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V> implements
         if (queue == null)
             throw new IllegalArgumentException();
         
-        this.queue = new HardReferenceQueueWithBatchingUpdates<V>(//
+        this.queue = new HardReferenceQueueWithBatchingUpdates<V>(
                 BigdataStatics.threadLocalBuffers,// threadLocalBuffers
                 16,  // concurrencyLevel
                 queue, // sharedQueue
@@ -443,7 +443,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V> implements
             
             // new reference.
             final WeakReference<V> ref = newWeakRef(k, v, referenceQueue);
-//            final WeakReference<V> ref = referenceQueue == null //
+//            final WeakReference<V> ref = referenceQueue == null
 //                ? new WeakReference<V>(v)
 //                : new WeakRef<K, V>(k, v, referenceQueue);
 
@@ -501,7 +501,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V> implements
 
             // new reference.
             final WeakReference<V> ref = newWeakRef(k, v, referenceQueue);
-//            final WeakReference<V> ref = referenceQueue == null //
+//            final WeakReference<V> ref = referenceQueue == null
 //                ? new WeakReference<V>(v)
 //                : new WeakRef<K, V>(k, v, referenceQueue);
 

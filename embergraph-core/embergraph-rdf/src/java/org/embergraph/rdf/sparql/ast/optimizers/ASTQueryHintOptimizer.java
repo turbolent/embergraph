@@ -640,13 +640,13 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
      * @param s The subject position of the query hint.
      * @param o The object position of the query hint.
      */
-    private void applyQueryHint(//
-            final AST2BOpContext context,//
+    private void applyQueryHint(
+            final AST2BOpContext context,
             final QueryRoot queryRoot,// top-level query
             final QueryBase queryBase,// either top-level query or subquery.
-            final GraphPatternGroup<IGroupMemberNode> group,//
+            final GraphPatternGroup<IGroupMemberNode> group,
             final ASTBase prior, // MAY be null IFF scope != Prior
-            final StatementPatternNode hint //
+            final StatementPatternNode hint
             ) {
         
         if(context == null)

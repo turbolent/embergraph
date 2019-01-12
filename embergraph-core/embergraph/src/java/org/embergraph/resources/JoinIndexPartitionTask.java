@@ -281,15 +281,15 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
                 summary = OverflowActionEnum.Join + "("
                         + Arrays.toString(resources) + "->" + partitionId + ")";
                 
-                newMetadata.setPartitionMetadata(new LocalPartitionMetadata(//
-                        partitionId,//
+                newMetadata.setPartitionMetadata(new LocalPartitionMetadata(
+                        partitionId,
                         -1, // Note: join not allowed during move.
-                        oldpmd[0].getLeftSeparatorKey(),//
-                        oldpmd[resources.length - 1].getRightSeparatorKey(),//
-                        new IResourceMetadata[] {//
+                        oldpmd[0].getLeftSeparatorKey(),
+                        oldpmd[resources.length - 1].getRightSeparatorKey(),
+                        new IResourceMetadata[] {
                         // Note: the live journal.
-                        getJournal().getResourceMetadata() //
-                        },//
+                        getJournal().getResourceMetadata()
+                        },
                         IndexPartitionCause.join(resourceManager)
 //                        // new history line.
 //                        , summary+" "

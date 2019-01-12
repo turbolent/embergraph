@@ -247,19 +247,19 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 	 * The default set of metrics used when generating a host report. This set
 	 * of metrics is the same as the metrics reported by <code>gstat</code>.
 	 */
-	private static final String[] defaultHostReportOn = new String[] {//
-			"cpu_num",//
-			"procs_total",//
-			"procs_run",//
-			"load_one",//
-			"load_five",//
-			"load_fifteen",//
-			"cpu_user",//
-			"cpu_nice",//
-			"cpu_system",//
-			"cpu_idle",//
-			"cpu_wio",//
-			"gexec"//
+	private static final String[] defaultHostReportOn = new String[] {
+			"cpu_num",
+			"procs_total",
+			"procs_run",
+			"load_one",
+			"load_five",
+			"load_fifteen",
+			"cpu_user",
+			"cpu_nice",
+			"cpu_system",
+			"cpu_idle",
+			"cpu_wio",
+			"gexec"
 	};
 
     /**
@@ -300,29 +300,29 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 					getCanonicalHostName(),// host name
 					serviceName, // embedded service name.
 					new InetSocketAddress[] {//metricsServers
-							new InetSocketAddress(//
-									IGangliaDefaults.DEFAULT_GROUP,//
-									IGangliaDefaults.DEFAULT_PORT//
-									)},//
+							new InetSocketAddress(
+									IGangliaDefaults.DEFAULT_GROUP,
+									IGangliaDefaults.DEFAULT_PORT
+									)},
 					InetAddress.getByName(//listenGroup
-							IGangliaDefaults.DEFAULT_GROUP//
+							IGangliaDefaults.DEFAULT_GROUP
 							),
 					IGangliaDefaults.DEFAULT_PORT,//listenPort
 					true,// listen
 					true,// report
 					false,// mock (does not transmit when true).
-					IGangliaDefaults.QUIET_PERIOD,//
-					IGangliaDefaults.INITIAL_DELAY,//
+					IGangliaDefaults.QUIET_PERIOD,
+					IGangliaDefaults.INITIAL_DELAY,
 					0,// heartbeat => NO HEARTBEAT BY DEFAULT!
-					//IGangliaDefaults.HEARTBEAT_INTERVAL,//
-					IGangliaDefaults.MONITORING_INTERVAL, //
-					IGangliaDefaults.DEFAULT_DMAX,//
+					//IGangliaDefaults.HEARTBEAT_INTERVAL,
+					IGangliaDefaults.MONITORING_INTERVAL,
+					IGangliaDefaults.DEFAULT_DMAX,
 					new GangliaMetadataFactory(//metadataFactory
-							new DefaultMetadataFactory(//
-									IGangliaDefaults.DEFAULT_UNITS,//
-									IGangliaDefaults.DEFAULT_SLOPE,//
-									IGangliaDefaults.DEFAULT_TMAX,//
-									IGangliaDefaults.DEFAULT_DMAX//
+							new DefaultMetadataFactory(
+									IGangliaDefaults.DEFAULT_UNITS,
+									IGangliaDefaults.DEFAULT_SLOPE,
+									IGangliaDefaults.DEFAULT_TMAX,
+									IGangliaDefaults.DEFAULT_DMAX
 									)));
 	}
 	
@@ -369,21 +369,21 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
      * @see IGangliaDefaults
      */
 	public GangliaService(
-			final String hostName,//
-			final String serviceName,//
+			final String hostName,
+			final String serviceName,
 			// socket(s) to send on.
-			final InetSocketAddress[] metricsServers,//
+			final InetSocketAddress[] metricsServers,
 			// multicast IP address and port to listen on
-			final InetAddress listenGroup, final int listenPort,//
-			final boolean listen,//
-			final boolean report,//
+			final InetAddress listenGroup, final int listenPort,
+			final boolean listen,
+			final boolean report,
 			final boolean mock,
-			final int quietPeriod,//
-			final int initialDelay,//
-			final int heartbeatInterval,//
-			final int monitoringInterval,//
+			final int quietPeriod,
+			final int initialDelay,
+			final int heartbeatInterval,
+			final int monitoringInterval,
 			final int globalDMax,
-			final IGangliaMetadataFactory metadataFactory//
+			final IGangliaMetadataFactory metadataFactory
 			) {
 
 		if (hostName == null)
@@ -593,9 +593,9 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 				}
 
 				// metric collection and reporting.
-				scheduledService.scheduleAtFixedRate(//
-						new GatherMetricsTask(),//
-						initialDelay,//
+				scheduledService.scheduleAtFixedRate(
+						new GatherMetricsTask(),
+						initialDelay,
 						monitoringInterval,// period
 						TimeUnit.SECONDS// units
 						);
@@ -1552,9 +1552,9 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
 		final int defaultDMax = IGangliaDefaults.DEFAULT_DMAX;
 		
-		final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(//
-				IGangliaDefaults.DEFAULT_GROUP,//
-				IGangliaDefaults.DEFAULT_PORT//
+		final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(
+				IGangliaDefaults.DEFAULT_GROUP,
+				IGangliaDefaults.DEFAULT_PORT
 		) };
 
 		/*
@@ -1566,11 +1566,11 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 		 * counters of interest.
 		 */
 		final GangliaMetadataFactory metadataFactory = new GangliaMetadataFactory(
-				new DefaultMetadataFactory(//
-						defaultUnits,//
-						defaultSlope,//
-						defaultTMax,//
-						defaultDMax//
+				new DefaultMetadataFactory(
+						defaultUnits,
+						defaultSlope,
+						defaultTMax,
+						defaultDMax
 						));
 
 		// The embedded ganglia service.
@@ -1578,20 +1578,20 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
 		try {
 
-			service = new GangliaService(//
-					hostName,//
-					serviceName, //
-					metricsServers, //
-					listenGroup, listenPort,//
+			service = new GangliaService(
+					hostName,
+					serviceName,
+					metricsServers,
+					listenGroup, listenPort,
 					true,// listen
 					true,// report
 					false,// mock (does not transmit when true).
-					quietPeriod,//
-					initialDelay,//
-					heartbeatInterval,//
-					monitoringInterval, //
-					defaultDMax,//
-					metadataFactory//
+					quietPeriod,
+					initialDelay,
+					heartbeatInterval,
+					monitoringInterval,
+					defaultDMax,
+					metadataFactory
 			);
 			
 			/*

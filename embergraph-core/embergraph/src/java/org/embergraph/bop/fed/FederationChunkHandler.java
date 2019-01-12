@@ -225,10 +225,10 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
                 @Override
                 protected IBuffer<IBindingSet[]> newBuffer(final PartitionLocator locator) {
                     return new BlockingBuffer<IBindingSet[]>(
-                            chunkOfChunksCapacity,//
-                            chunkSize,//
-                            BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT,//
-                            BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT//
+                            chunkOfChunksCapacity,
+                            chunkSize,
+                            BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT,
+                            BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT
                     );
                 }
             };
@@ -472,10 +472,10 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
              */
 
             final IChunkMessage<IBindingSet> msg = new LocalChunkMessage(
-                    q.getQueryController(), //
-                    q.getQueryId(), //
-                    sinkId, //
-                    partitionId, //
+                    q.getQueryController(),
+                    q.getQueryId(),
+                    sinkId,
+                    partitionId,
                     source);
 
             if (log.isDebugEnabled())

@@ -305,10 +305,10 @@ public class IndexSegment extends AbstractBTree {//implements ILocalBTreeView {
      */
     public IndexSegment(final IndexSegmentStore fileStore) {
 
-        super(fileStore,//
-                ImmutableNodeFactory.INSTANCE,//
+        super(fileStore,
+                ImmutableNodeFactory.INSTANCE,
                 true, // always read-only
-                fileStore.getIndexMetadata(),//
+                fileStore.getIndexMetadata(),
                 fileStore.getIndexMetadata().getIndexSegmentRecordCompressorFactory()
                 );
 
@@ -984,10 +984,10 @@ public class IndexSegment extends AbstractBTree {//implements ILocalBTreeView {
                  * data object that is double-linked.  This is only used for
                  * the empty, immutable root leaf of an IndexSegment.
                  */
-                this.data = new EmptyReadOnlyLeafData(//
-                        btree.getIndexMetadata().getDeleteMarkers(), //
-                        btree.getIndexMetadata().getVersionTimestamps(),//
-                        btree.getIndexMetadata().getRawRecords()//
+                this.data = new EmptyReadOnlyLeafData(
+                        btree.getIndexMetadata().getDeleteMarkers(),
+                        btree.getIndexMetadata().getVersionTimestamps(),
+                        btree.getIndexMetadata().getRawRecords()
                         );
 
 //                super(btree);
@@ -1120,8 +1120,8 @@ public class IndexSegment extends AbstractBTree {//implements ILocalBTreeView {
 //
 //                super(  (IndexSegment) btree,
 //                        0L/* selfAddr */,
-//                        new EmptyReadOnlyLeafData(//
-//                                btree.getIndexMetadata().getDeleteMarkers(), //
+//                        new EmptyReadOnlyLeafData(
+//                                btree.getIndexMetadata().getDeleteMarkers(),
 //                                btree.getIndexMetadata().getVersionTimestamps()) {
 //                            /**
 //                             * Overridden to use the priorAddr field passed to
@@ -1299,24 +1299,24 @@ public class IndexSegment extends AbstractBTree {//implements ILocalBTreeView {
 ////            final long addr;
 ////            
 ////            if (toKey == null) {
-////
+//
 ////                addr = getStore().getCheckpoint().addrLastLeaf;
-////
+//
 ////            } else {
-////
+//
 ////                // find leaf for toKey
 ////                addr = getIndex().findLeafAddr(toKey);
-////
+//
 ////            }
-////
+//
 ////            assert addr != 0L;
 ////            
 ////            final ImmutableLeaf leaf = getIndex().readLeaf(addr);
-////
+//
 ////            assert leaf != null;
 ////            
 ////            return leaf;
-////
+//
 ////        }
 //
 //        /**

@@ -112,7 +112,7 @@ public class PurgeResult implements Serializable, Params {
      */
     final long elapsedPurgeResourcesTime;
 
-    public PurgeResult(//
+    public PurgeResult(
             final long firstCommitTime,
             final long lastCommitTime,
             final long givenReleaseTime,

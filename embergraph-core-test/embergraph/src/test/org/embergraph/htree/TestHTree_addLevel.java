@@ -89,7 +89,7 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
              * this test. The post-condition of this insert sequence is:
              * 
              * <pre>
-             * root := [2] (a,a,a,a)   //
+             * root := [2] (a,a,a,a)
              * a    := [2]   (x10,x11,x20,x21) // Note: depth(root) == depth(a) !
              * </pre>
              */
@@ -107,11 +107,11 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
             assertEquals(2, root.globalDepth);
             assertEquals(0, a.globalDepth);
             assertEquals(4, a.getKeyCount());
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(4, new byte[][] { // keys
-                            k1, k2, k3, k4 }),//
+                            k1, k2, k3, k4 }),
                     new ReadOnlyValuesRaba(4, new byte[][] { // vals
-                            v1, v2, v3, v4 })),//
+                            v1, v2, v3, v4 })),
                     a);
             assertEquals(v1, htree.lookupFirst(k1));
             assertEquals(v2, htree.lookupFirst(k2));
@@ -134,7 +134,7 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
 			 * in (a) are redistributed between (e,f) based on their hash codes. 
 			 * 
 			 * <pre>
-			 * root := [2] (d,c,b,b)     //
+			 * root := [2] (d,c,b,b)
 			 * d    := [2]   (e,e;f,f)   // replace (a) with (d).  
 			 * e    := [1]     (-,-;x10,x11) // new bucket page child of (d)
 			 * f    := [1]     (x20,x21;-,-) // new bucket page child of (d)
@@ -169,17 +169,17 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
             assertEquals(2, e.getKeyCount());
             assertEquals(2, f.getKeyCount());
 
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(2, new byte[][] { // keys
-                            k1, k2, null, null }),//
+                            k1, k2, null, null }),
                     new ReadOnlyValuesRaba(2, new byte[][] { // vals
-                            v1, v2, null, null })),//
+                            v1, v2, null, null })),
                     e);
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(2, new byte[][] { // keys
-                            k3, k4, null, null }),//
+                            k3, k4, null, null }),
                     new ReadOnlyValuesRaba(2, new byte[][] { // vals
-                            v3, v4, null, null })),//
+                            v3, v4, null, null })),
                     f);
 			assertSameIteratorAnyOrder(new byte[][] { v1, v2, v3, v4 },
 					htree.values());

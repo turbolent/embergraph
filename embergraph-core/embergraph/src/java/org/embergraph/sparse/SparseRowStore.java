@@ -1032,9 +1032,9 @@ public class SparseRowStore implements IRowStoreConstants {
          * a filter that aggregates logical rows into chunks.
          */
         
-        return new Striterator(ndx.rangeIterator(//
-                (byte[]) fromKey, //
-                (byte[]) toKey, //
+        return new Striterator(ndx.rangeIterator(
+                (byte[]) fromKey,
+                (byte[]) toKey,
                 capacity, // max #of rows to fetch at a time.
                 flags, // 
                 new AtomicRowFilter(schema, fromTime, toTime, nameFilter)))

@@ -1279,9 +1279,9 @@ public class BOpUtility {
             final IBlockingBuffer<IBindingSet[]> sink,
             final IBlockingBuffer<IBindingSet[]> sink2,
             final IBindingSet mergeSolution,
-            final IVariable<?>[] selectVars,//
-            final IConstraint[] constraints, //
-            final BOpStats stats//
+            final IVariable<?>[] selectVars,
+            final IConstraint[] constraints,
+            final BOpStats stats
             ) {
 
     	long nout = 0;
@@ -1343,11 +1343,11 @@ public class BOpUtility {
      * @return The dense chunk of binding sets.
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    static private IBindingSet[] applyConstraints(//
-            final IBindingSet[] chunk,//
-            final IBindingSet mergeSolution,//
-            final IVariable<?>[] selectVars,//
-            final IConstraint[] constraints//
+    static private IBindingSet[] applyConstraints(
+            final IBindingSet[] chunk,
+            final IBindingSet mergeSolution,
+            final IVariable<?>[] selectVars,
+            final IConstraint[] constraints
             ) {
 
         if (constraints == null && selectVars == null && mergeSolution == null) {
@@ -1421,10 +1421,10 @@ public class BOpUtility {
 
                 }
 
-//                log.error("\n    selectVars: " + Arrays.toString(selectVars)//
-//                        + "\n mergeSolution: " + mergeSolution//
-//                        + "\nsourceSolution: " + bindingSet//
-//                        + "\noutputSolution: " + bindingSet//
+//                log.error("\n    selectVars: " + Arrays.toString(selectVars)
+//                        + "\n mergeSolution: " + mergeSolution
+//                        + "\nsourceSolution: " + bindingSet
+//                        + "\noutputSolution: " + bindingSet
 //                        );
 
             }

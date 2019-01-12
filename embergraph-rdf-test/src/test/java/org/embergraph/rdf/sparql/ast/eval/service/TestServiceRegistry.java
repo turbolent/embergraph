@@ -274,9 +274,9 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
                     .createURI("http://www.embergraph.org/myService2/" + getName()
                             + "/" + UUID.randomUUID());
 
-            final BigdataValue[] values = new BigdataValue[] { //
-                    serviceURI1,//
-                    serviceURI2,//
+            final BigdataValue[] values = new BigdataValue[] {
+                    serviceURI1,
+                    serviceURI2,
             };
 
             store.getLexiconRelation()

@@ -874,27 +874,27 @@ public class IVUtility {
         final FullyInlineTypedLiteralIV<BigdataLiteral> iv;
         switch (termCode) {
         case ITermIndexCodes.TERM_CODE_LIT:
-            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(//
-                    str1,//
+            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                    str1,
                     null, // language
                     null, // datatype
-                    byteLength//
+                    byteLength
                     );
             break;
         case ITermIndexCodes.TERM_CODE_LCL:
-            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(//
-                    str2,//
+            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                    str2,
                     str1, // language
                     null, // datatype
-                    byteLength//
+                    byteLength
                     );
             break;
         case ITermIndexCodes.TERM_CODE_DTL:
-            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(//
-                    str2,//
+            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                    str2,
                     null, // language
                     new URIImpl(str1), // datatype
-                    byteLength//
+                    byteLength
                     );
             break;
         default:

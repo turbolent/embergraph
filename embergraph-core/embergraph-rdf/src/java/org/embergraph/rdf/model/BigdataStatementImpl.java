@@ -209,9 +209,9 @@ public class BigdataStatementImpl implements BigdataStatement {
      */
     public boolean equals(final Statement stmt) {
 
-        return s.equals(stmt.getSubject()) && //
-               p.equals(stmt.getPredicate()) && //
-               o.equals(stmt.getObject())//
+        return s.equals(stmt.getSubject()) &&
+               p.equals(stmt.getPredicate()) &&
+               o.equals(stmt.getObject())
         ;
         
     }

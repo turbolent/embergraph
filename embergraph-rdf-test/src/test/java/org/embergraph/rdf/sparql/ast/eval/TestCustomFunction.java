@@ -83,9 +83,9 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
 
             @Override
             public IValueExpression<? extends IV> create(
-                    final BOpContextBase context,//
-                    final GlobalAnnotations globals,//
-                    final Map<String, Object> scalarValues,//
+                    final BOpContextBase context,
+                    final GlobalAnnotations globals,
+                    final Map<String, Object> scalarValues,
                     final ValueExpressionNode... args) {
 
                 FunctionRegistry.checkArgs(args, ValueExpressionNode.class);
@@ -146,9 +146,9 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
 
         @Override
         public IValueExpression<? extends IV> create(
-                final BOpContextBase context,//
-                final GlobalAnnotations globals,//
-                final Map<String, Object> scalarValues,//
+                final BOpContextBase context,
+                final GlobalAnnotations globals,
+                final Map<String, Object> scalarValues,
                 final ValueExpressionNode... args) {
 
             FunctionRegistry.checkArgs(args, ValueExpressionNode.class);
@@ -262,9 +262,9 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
 
         @Override
         public IValueExpression<? extends IV> create(
-                final BOpContextBase context,//
-                final GlobalAnnotations globals,//
-                final Map<String, Object> scalarValues,//
+                final BOpContextBase context,
+                final GlobalAnnotations globals,
+                final Map<String, Object> scalarValues,
                 final ValueExpressionNode... args) {
             
             FunctionRegistry.checkArgs(args, ValueExpressionNode.class);

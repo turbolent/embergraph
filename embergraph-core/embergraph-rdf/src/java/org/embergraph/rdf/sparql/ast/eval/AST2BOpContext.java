@@ -612,7 +612,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
      */
     private static IExternalAST2BOp initGPUEvaluation() {
     	
-		return ClassPathUtil.classForName(//
+		return ClassPathUtil.classForName(
 				"org.embergraph.rdf.gpu.sparql.ast.eval.GPUEvaluation", // preferredClassName,
 				null, // defaultClass,
 				IExternalAST2BOp.class, // sharedInterface,
@@ -911,13 +911,13 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
          * found. Handles case where [solutionSetManager == null] gracefully.
          */
 
-        return NamedSolutionSetRefUtility.getSolutionSetStats(//
-                solutionSetManager,//
+        return NamedSolutionSetRefUtility.getSolutionSetStats(
+                solutionSetManager,
                 (IBTreeManager) queryEngine.getIndexManager(),// localIndexManager
-                getNamespace(),//
-                getTimestamp(),//
-                localName,//
-                joinVars//
+                getNamespace(),
+                getTimestamp(),
+                localName,
+                joinVars
                 );
 
     }
@@ -926,14 +926,14 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
 //    public ICloseableIterator<IBindingSet[]> getSolutionSet(
 //            final String localName) {
 //
-//        return NamedSolutionSetRefUtility.getSolutionSet(//
-//                sparqlCache,//
+//        return NamedSolutionSetRefUtility.getSolutionSet(
+//                sparqlCache,
 //                (AbstractJournal) queryEngine.getIndexManager(),// localIndexManager
-//                getNamespace(),//
-//                getTimestamp(),//
-//                localName,//
-//                joinVars,//
-//                chunkCapacity//
+//                getNamespace(),
+//                getTimestamp(),
+//                localName,
+//                joinVars,
+//                chunkCapacity
 //                );
 //
 //    }

@@ -97,13 +97,13 @@ public class MIMEType
     // Each parameter must specify an attribute and a
     // value.  No LWS between the attribute and the value.
     // type/subtype [ ';' parameter ]*
-    //
+
     // type      := token
     // subtype   := token
     // parameter := attribute '=' value
     // attribute := token
     // value     := token | quoted-string
-    //
+
     
     /**
      * An empty NVPair[] used by the parser when there are no MIME

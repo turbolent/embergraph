@@ -674,11 +674,11 @@ abstract public class AbstractBTreeTestCase extends TestCase2 {
 
                     if (actualIndex != expectedIndex) {
 
-                        fail("search(" + BytesUtil.toString(key) + ")" + //
-                                ": expectedIndex=" + expectedIndex + //
-                                ", actualIndex=" + actualIndex + //
-                                ",\nexpected=" + expected + //
-                                ",\nactual=" + actual//
+                        fail("search(" + BytesUtil.toString(key) + ")" +
+                                ": expectedIndex=" + expectedIndex +
+                                ", actualIndex=" + actualIndex +
+                                ",\nexpected=" + expected +
+                                ",\nactual=" + actual
                         );
 
                     }
@@ -1013,10 +1013,10 @@ abstract public class AbstractBTreeTestCase extends TestCase2 {
         @Override
         protected HardReferenceQueue<PO> newWriteRetentionQueue(boolean readOnly) {
 
-            return new HardReferenceQueue<PO>(//
-                    new NoEvictionListener(),//
-                    10000,//
-                    10//
+            return new HardReferenceQueue<PO>(
+                    new NoEvictionListener(),
+                    10000,
+                    10
             );
 
         }
@@ -2144,12 +2144,12 @@ abstract public class AbstractBTreeTestCase extends TestCase2 {
          */
         {
             
-            final long actualTupleCount = doEntryIteratorTest(//
+            final long actualTupleCount = doEntryIteratorTest(
                     expected.rangeIterator(null/* fromKey */, null/* toKey */,
                             0/* capacity */, IRangeQuery.KEYS
                                     | IRangeQuery.VALS | IRangeQuery.REVERSE,
                             null/* filter */),
-                    //
+
                     actual.rangeIterator(null/* fromKey */, null/* toKey */,
                             0/* capacity */, IRangeQuery.KEYS
                                     | IRangeQuery.VALS | IRangeQuery.REVERSE,

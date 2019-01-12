@@ -472,21 +472,21 @@ public class GroupByState implements IGroupByState, Serializable {
             }
             if (log.isTraceEnabled())
                 log.trace("op=" + op.getClass()
-                        + //
+                        +
                         ", isSelectClause="
-                        + isSelectClause //
+                        + isSelectClause
                         + ", isSelectDependency="
-                        + isSelectDependency //
+                        + isSelectDependency
                         + ", isNestedAggregates="
-                        + isNestedAggregates//
+                        + isNestedAggregates
                         + ", isAnyDistinct="
-                        + isAnyDistinct //
+                        + isAnyDistinct
                         + ", withinAggregateFunction="
-                        + withinAggregateFunction //
-                        + ", aggregationContext=" + aggregationContext //
-                        + ", groupByVars=" + groupByVars//
-                        + ", selectVars=" + selectVars //
-                        + ", arg=" + arg//
+                        + withinAggregateFunction
+                        + ", aggregationContext=" + aggregationContext
+                        + ", groupByVars=" + groupByVars
+                        + ", selectVars=" + selectVars
+                        + ", arg=" + arg
                 );
             // recursion through child value expression.
             isAggregate |= isAggregate(arg, isSelectClause, isSelectDependency,

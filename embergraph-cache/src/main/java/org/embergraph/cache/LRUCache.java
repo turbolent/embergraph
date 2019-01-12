@@ -227,14 +227,14 @@ public class LRUCache<K,T> implements ICachePolicy<K,T>
 
     public String getStatistics() {
 
-        return "LRUCache" + //
-                ": capacity=" + capacity + //
-                ", loadFactor=" + loadFactor + //
-                ", highTide=" + highTide + //
-                ", ninserts=" + ninserts + //
-                ", ntests=" + ntests + //
-                ", nsuccess=" + nsuccess + //
-                ", hitRatio=" + ((double) nsuccess / ntests)//
+        return "LRUCache" +
+                ": capacity=" + capacity +
+                ", loadFactor=" + loadFactor +
+                ", highTide=" + highTide +
+                ", ninserts=" + ninserts +
+                ", ntests=" + ntests +
+                ", nsuccess=" + nsuccess +
+                ", hitRatio=" + ((double) nsuccess / ntests)
         ;
         
     }

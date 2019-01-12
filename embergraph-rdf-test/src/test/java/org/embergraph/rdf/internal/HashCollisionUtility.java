@@ -1361,18 +1361,18 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 			md.setNodeKeySerializer(new FrontCodedRabaCoder(ratio));
 			
 			final DefaultTupleSerializer tupleSer = new DefaultTupleSerializer(
-					new DefaultKeyBuilderFactory(new Properties()),//
+					new DefaultKeyBuilderFactory(new Properties()),
 					/*
 					 * leaf keys
 					 */
-//					DefaultFrontCodedRabaCoder.INSTANCE,//
-					new FrontCodedRabaCoder(ratio),//
+//					DefaultFrontCodedRabaCoder.INSTANCE,
+					new FrontCodedRabaCoder(ratio),
 //					CanonicalHuffmanRabaCoder.INSTANCE,
 					/*
 					 * leaf values
 					 */
 					CanonicalHuffmanRabaCoder.INSTANCE
-//					new SimpleRabaCoder()//
+//					new SimpleRabaCoder()
 			);
 			
 			md.setTupleSerializer(tupleSer);
@@ -1650,7 +1650,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
     	/** The size of the {@link #values} buffer when it is allocated. */
     	private final int valueBufSize;
     	
-		public StatementHandler(//
+		public StatementHandler(
     			final int valueBufSize,
 				final Counters c,
 				final LexiconConfiguration<BigdataValue> conf,

@@ -330,11 +330,11 @@ public class SampleServiceFactory extends AbstractServiceFactory
 					SampleParams.SAMPLE_TYPE, SampleParams.DEFAULT_SAMPLE_TYPE);
 			
 	        @SuppressWarnings({ "unchecked", "rawtypes" })
-			final SampleIndex<?> sampleOp = new SampleIndex(new BOp[] {}, //
-	                NV.asMap(//
-	                        new NV(SampleIndex.Annotations.PREDICATE, pred),//
-	                        new NV(SampleIndex.Annotations.LIMIT, limit),//
-	                        new NV(SampleIndex.Annotations.SEED, seed),//
+			final SampleIndex<?> sampleOp = new SampleIndex(new BOp[] {},
+	                NV.asMap(
+	                        new NV(SampleIndex.Annotations.PREDICATE, pred),
+	                        new NV(SampleIndex.Annotations.LIMIT, limit),
+	                        new NV(SampleIndex.Annotations.SEED, seed),
 	                        new NV(SampleIndex.Annotations.SAMPLE_TYPE, type)
 	                        ));
 	        

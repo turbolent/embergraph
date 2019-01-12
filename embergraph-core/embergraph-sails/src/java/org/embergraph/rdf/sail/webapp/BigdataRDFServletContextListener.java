@@ -256,9 +256,9 @@ public class BigdataRDFServletContextListener implements
                     ConfigParams.PROPERTY_FILE);
 
             // The effective location of the property file.
-            final String propertyFile = System.getProperty(//
-                    FQN_PROPERTY_FILE,//
-                    defaultValue//
+            final String propertyFile = System.getProperty(
+                    FQN_PROPERTY_FILE,
+                    defaultValue
                     );
 
             if (propertyFile == null)

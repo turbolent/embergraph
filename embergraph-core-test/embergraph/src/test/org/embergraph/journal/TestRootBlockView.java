@@ -139,7 +139,7 @@ public class TestRootBlockView extends TestCase2 {
             RootBlockView rootBlock = new RootBlockView(rootBlock0, offsetBits,
                     nextOffset, firstCommitTime, lastCommitTime, commitCounter,
                     commitRecordAddr, commitRecordIndexAddr, uuid, 
-                    blockSequence, quorum,//
+                    blockSequence, quorum,
                     metaStartAddr, metaBitsAddr, storeType, createTime,
                     closeTime, RootBlockView.currentVersion, checker);
 
@@ -327,64 +327,64 @@ public class TestRootBlockView extends TestCase2 {
     public void test_ctor_correctRejection() {
         
         final boolean rootBlock0 = true; // all values are legal.
-        //
+
 //        final int segmentId = 0; // no constraint
-        //
+
         final int offsetBitsOk = WormAddressManager.SCALE_UP_OFFSET_BITS;
         final int offsetBitsBad = WormAddressManager.MIN_OFFSET_BITS - 1;
         final int offsetBitsBad2 = WormAddressManager.MAX_OFFSET_BITS + 1;
         // used to form valid addresses.
         WormAddressManager am = new WormAddressManager(offsetBitsOk);
-        //
+
         final long nextOffsetOk = 100;
         final long nextOffsetBad = -1;
         // note: choose timestamps in named sets (first,last,commit) for tests.
         final long firstCommitTimeOk = 0L;
         final long lastCommitTimeOk = 0L;
 //        final long commitTimeOk = 0L;
-        //
+
         final long firstCommitTimeOk2 = nextTimestamp();
         final long lastCommitTimeOk2 = nextTimestamp();
 //        final long commitTimeOk2 = TimestampFactory.nextNanoTime();
-        //
+
         final long firstCommitTimeBad1 = nextTimestamp();
         final long lastCommitTimeBad1 = 0L;
 //        final long commitTimeBad1 = TimestampFactory.nextNanoTime();
-        //
+
         final long firstCommitTimeBad2 = 0L;
         final long lastCommitTimeBad2 = nextTimestamp();
 //        final long commitTimeBad2 = TimestampFactory.nextNanoTime();
-        //
+
         final long lastCommitTimeBad3 = nextTimestamp(); // note: out of order.
         final long firstCommitTimeBad3 = nextTimestamp(); // note: out of order.
 //        final long commitTimeBad3 = TimestampFactory.nextNanoTime();
-        //
+
 //        final long commitTimeBad4 = TimestampFactory.nextNanoTime(); // note: out of order.
         final long lastCommitTimeBad4 = nextTimestamp(); // note: out of order.
         final long firstCommitTimeBad4 = nextTimestamp();
-        //
+
         // @todo present bad combinations of {commitCounter, rootsAddr, and commitRecordIndex}.
-        //
+
         final long commitCounterOkZero = 0;
         final long commitCounterOk2 = 1012;
         final long commitCounterBad = -1; // negative
         final long commitCounterBad2 = Long.MAX_VALUE; // too large.
-        //
+
         final long commitRecordAddrOkZero = 0L; // null reference
         final long commitRecordAddrOk2 = am.toAddr(3, 12L); // non-null reference.
         final long commitRecordAddrBad = -1;
-        //
+
         final long commitRecordIndexOkZero = 0L; // null reference.
         final long commitRecordIndexOk2 = am.toAddr(30,23L); // non-null reference.
         final long commitRecordIndexBad = -1L;
-        //
+
         final UUID uuidOk = UUID.randomUUID();
         final UUID uuidBad = null;
-        //
+
         final long blockSeqOk = IRootBlockView.NO_BLOCK_SEQUENCE;
         final long blockSeqOk2 = 12;
         final long blockSeqBad = -1;
-        //
+
         final long quorumOk = commitCounterOkZero;
         final long quorumOk2 = commitCounterOk2;
         final long quorumOk3 = Quorum.NO_QUORUM;
@@ -396,14 +396,14 @@ public class TestRootBlockView extends TestCase2 {
         final StoreTypeEnum storeTypeOk = StoreTypeEnum.WORM;
         final StoreTypeEnum storeTypeOk2 = StoreTypeEnum.RW;
         final StoreTypeEnum storeTypeBad = null;
-        //
+
         final long createTimeOk = nextTimestamp();
         final long createTimeBad = 0L;
-        //
+
         final long closeTimeOk = 0L;
         final long closeTimeOk2 = createTimeOk + 1;
         final long closeTimeBad = createTimeOk - 1;
-        //
+
         final ChecksumUtility checkerOk = new ChecksumUtility();
         final ChecksumUtility checkerBad = null;
         

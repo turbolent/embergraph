@@ -60,7 +60,7 @@ public class KVOC<O> extends KVOList<O> {
      * down a client stall related to a hang waiting on the inner Lock for
      * the tidsLatch in AsynchronousStatementBufferFactory.
      */
-    synchronized//
+    synchronized
     public void done() {
 
         super.done();

@@ -70,10 +70,10 @@ public class HostScore {
     @Override
     public String toString() {
 
-        return "HostScore"//
-                + "{hostname=" + hostname //
-                + ", thisHost=" + thisHost//
-                + ", availabilty=" + availability //
+        return "HostScore"
+                + "{hostname=" + hostname
+                + ", thisHost=" + thisHost
+                + ", availabilty=" + availability
                 + "}";
 
     }
@@ -85,8 +85,8 @@ public class HostScore {
      * @param availability
      *            The normalized availability score for this host.
      */
-    public HostScore(//
-            final String hostname,//
+    public HostScore(
+            final String hostname,
             final double availability
     ) {
 

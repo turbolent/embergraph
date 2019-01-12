@@ -408,35 +408,35 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
         if (log.isInfoEnabled()) {
 
-            log.info("\ntotal"//
+            log.info("\ntotal"
                     + ": fontierSize="
-                    + f.size() //
+                    + f.size()
                     + ", ms="
-                    + TimeUnit.NANOSECONDS.toMillis(totalElapsed)//
+                    + TimeUnit.NANOSECONDS.toMillis(totalElapsed)
                     + ", edges="
-                    + totalEdges//
+                    + totalEdges
                     + ", teps="
-                    + GASUtil.getTEPS(totalEdges, totalElapsed)//
-                    + "\ngather"//
+                    + GASUtil.getTEPS(totalEdges, totalElapsed)
+                    + "\ngather"
                     + ": ms="
-                    + TimeUnit.NANOSECONDS.toMillis(elapsedGather)//
+                    + TimeUnit.NANOSECONDS.toMillis(elapsedGather)
                     + ", nedges="
-                    + gatherEdgeCount//
+                    + gatherEdgeCount
                     + ", fanIn="
-                    + GASUtil.fanOut(f.size(), gatherEdgeCount)//
+                    + GASUtil.fanOut(f.size(), gatherEdgeCount)
                     + ", teps="
-                    + GASUtil.getTEPS(gatherEdgeCount, elapsedGather) //
+                    + GASUtil.getTEPS(gatherEdgeCount, elapsedGather)
                     + (runApplyStage ? ", apply="
-                            + TimeUnit.NANOSECONDS.toMillis(elapsedApply) : "")//
-                    + "\nscatter"//
+                            + TimeUnit.NANOSECONDS.toMillis(elapsedApply) : "")
+                    + "\nscatter"
                     + ": ms="
-                    + TimeUnit.NANOSECONDS.toMillis(elapsedScatter)//
+                    + TimeUnit.NANOSECONDS.toMillis(elapsedScatter)
                     + ", nedges="
-                    + scatterEdgeCount //
+                    + scatterEdgeCount
                     + ", fanOut="
-                    + GASUtil.fanOut(f.size(), scatterEdgeCount) //
+                    + GASUtil.fanOut(f.size(), scatterEdgeCount)
                     + ", teps="
-                    + GASUtil.getTEPS(scatterEdgeCount, elapsedScatter)//
+                    + GASUtil.getTEPS(scatterEdgeCount, elapsedScatter)
             );
 
         }

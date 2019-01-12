@@ -284,13 +284,13 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                     .getScatterSplitConfiguration();
             
             if ( // only a single index partitions?
-                (vmd.getIndexPartitionCount() == 1L)//
+                (vmd.getIndexPartitionCount() == 1L)
                 // scatter splits enabled for service
-                && resourceManager.scatterSplitEnabled//
+                && resourceManager.scatterSplitEnabled
                 // scatter splits enabled for index
-                && ssc.isEnabled()//
+                && ssc.isEnabled()
                 // The view is compact (only one segment).
-                && vmd.compactView//
+                && vmd.compactView
                 // trigger scatter split before too much data builds up in one place.
                 && vmd.getPercentOfSplit() >= ssc.getPercentOfSplitThreshold()
             ) {
@@ -301,9 +301,9 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                 if (moveTargets != null) {
 
                     // #of splits.
-                    final int nsplits = ssc.getIndexPartitionCount() == 0//
+                    final int nsplits = ssc.getIndexPartitionCount() == 0
                             ? (2 * moveTargets.length) // two per data service.
-                            : ssc.getIndexPartitionCount()//
+                            : ssc.getIndexPartitionCount()
                             ;
 
                     if (log.isInfoEnabled())
@@ -482,9 +482,9 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                         }
                         
                         log.info("willMoveToJoinWithRightSibling" + "( "
-                                + vmd.name + " -> " + targetDataServiceName //
-                                + ", leftSibling=" + resources[0] //
-                                + ", rightSibling=" + resources[1] //
+                                + vmd.name + " -> " + targetDataServiceName
+                                + ", leftSibling=" + resources[0]
+                                + ", rightSibling=" + resources[1]
                                 + ")");
                     }
 
@@ -651,7 +651,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
          */
         final ResourceScores resourceScores = resourceManager.getResourceScores();
 
-        final boolean shouldMove = //
+        final boolean shouldMove =
             // heavy CPU utilization.
             (resourceScores.percentCPUTime >= resourceManager.movePercentCpuTimeThreshold) ||
             // swapping heavily.
@@ -688,7 +688,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
         try {
 
             // request under utilized data service UUIDs (RMI).
-            final UUID[] uuids = loadBalancerService.getUnderUtilizedDataServices(//
+            final UUID[] uuids = loadBalancerService.getUnderUtilizedDataServices(
                     0, // minCount - no lower bound.
                     1, // maxCount - no upper bound.
                     sourceServiceUUID // exclude this data service.
@@ -1135,7 +1135,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                     // "name="
                     // + getOnlyResource() + ", old pmd=" + oldpmd
                     // + ", segmentMetadata=" + buildResult.segmentMetadata;
-                    //
+
                     // // live journal must be newer.
                     // assert journal.getRootBlockView().getCreateTime() >
                     // oldJournalMetadata
@@ -1149,17 +1149,17 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                             + ", journal: " + getJournal().getRootBlockView();
 
                     // if (oldResources.length == 3) {
-                    //
+
                     // // the old index segment's resource metadata.
                     // final IResourceMetadata oldSegmentMetadata =
                     // oldResources[2];
                     // assert oldSegmentMetadata != null;
                     // assert oldSegmentMetadata instanceof SegmentMetadata;
-                    //
+
                     // assert oldSegmentMetadata.getCreateTime() <=
                     // oldJournalMetadata
                     // .getCreateTime();
-                    //
+
                     // }
 
                 }
@@ -1172,25 +1172,25 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                         segmentMetadata };
 
                 // describe the index partition.
-                indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(//
-                        currentpmd.getPartitionId(),//
-                        currentpmd.getSourcePartitionId(),//
-                        currentpmd.getLeftSeparatorKey(),//
-                        currentpmd.getRightSeparatorKey(),//
-                        newResources, //
+                indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(
+                        currentpmd.getPartitionId(),
+                        currentpmd.getSourcePartitionId(),
+                        currentpmd.getLeftSeparatorKey(),
+                        currentpmd.getRightSeparatorKey(),
+                        newResources,
                         currentpmd.getIndexPartitionCause()
 //                        currentpmd.getHistory()
-//                                + OverflowActionEnum.Merge//
+//                                + OverflowActionEnum.Merge
 //                                + "(lastCommitTime="
-//                                + segmentMetadata.getCreateTime()//
+//                                + segmentMetadata.getCreateTime()
 //                                + ",btreeEntryCount="
-//                                + btree.getEntryCount()//
+//                                + btree.getEntryCount()
 //                                + ",segmentEntryCount="
-//                                + buildResult.builder.getCheckpoint().nentries//
+//                                + buildResult.builder.getCheckpoint().nentries
 //                                + ",segment="
-//                                + segmentMetadata.getUUID()//
+//                                + segmentMetadata.getUUID()
 //                                + ",counter="
-//                                + btree.getCounter().get()//
+//                                + btree.getCounter().get()
 //                                + ",oldResources="
 //                                + Arrays.toString(currentResources) + ") "
                 ));

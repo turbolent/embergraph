@@ -594,7 +594,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
                 {
 
                     // name the output file.
-                    final File outFile = File.createTempFile(//
+                    final File outFile = File.createTempFile(
                             indexMetadata.getName()+"_"+partitionId, // prefix 
                             Options.SEG, // suffix
                             segmentsDir // directory
@@ -624,7 +624,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
                 
                 // describe the index partition.
                 indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(
-                        partitionId,//
+                        partitionId,
                         -1, // not a move.
                         new byte[]{}, // left separator (first valid key)
                         null,         // right separator (no upper bound)
@@ -637,9 +637,9 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
                          * index segment.
                          */
                         new IResourceMetadata[]{// resource metadata[].
-                                journal.getResourceMetadata(),//
-                                segmentMetadata //
-                        },//
+                                journal.getResourceMetadata(),
+                                segmentMetadata
+                        },
                         /*
                          * Note: using fake data here since the resource manager
                          * has not been instantiated yet.

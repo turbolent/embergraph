@@ -100,7 +100,7 @@ public class TestDistinctTermScanOp extends TestCase2 {
         rel.create();
 
         // data to insert.
-        final E[] a = {//
+        final E[] a = {
                 new E("John", "Mary"),// 
                 new E("Mary", "Paul"),// 
                 new E("Paul", "Leon"),// 
@@ -158,31 +158,31 @@ public class TestDistinctTermScanOp extends TestCase2 {
 //
 //		final Predicate<E> predOp = new Predicate<E>(new IVariableOrConstant[] {
 //				new Constant<String>("Mary"), Var.var("x") }, NV
-//				.asMap(new NV[] {//
+//				.asMap(new NV[] {
 //						new NV(Predicate.Annotations.RELATION_NAME,
-//								new String[] { namespace }),//
-//						new NV(Predicate.Annotations.BOP_ID, predId),//
+//								new String[] { namespace }),
+//						new NV(Predicate.Annotations.BOP_ID, predId),
 //						new NV(Annotations.TIMESTAMP,
-//								ITx.READ_COMMITTED),//
+//								ITx.READ_COMMITTED),
 //				}));
 //
 //		final DistinctTermScanOp<E> query = new DistinctTermScanOp<E>(
 //				new BOp[] {},// args
-//				new NV(DistinctTermScanOp.Annotations.BOP_ID, joinId),//
-//				new NV(DistinctTermScanOp.Annotations.PREDICATE, predOp),//
-//				new NV(DistinctTermScanOp.Annotations.DISTINCT_VAR, Var.var("x"))//
+//				new NV(DistinctTermScanOp.Annotations.BOP_ID, joinId),
+//				new NV(DistinctTermScanOp.Annotations.PREDICATE, predOp),
+//				new NV(DistinctTermScanOp.Annotations.DISTINCT_VAR, Var.var("x"))
 //				);
 //
 //        // the expected solutions.
-//        final IBindingSet[] expected = new IBindingSet[] {//
-//                new ListBindingSet(//
-//                        new IVariable[] { Var.var("x") },//
-//                        new IConstant[] { new Constant<String>("Paul") }//
-//                ),//
-//                new ListBindingSet(//
-//                        new IVariable[] { Var.var("x") },//
-//                        new IConstant[] { new Constant<String>("John") }//
-//                ),//
+//        final IBindingSet[] expected = new IBindingSet[] {
+//                new ListBindingSet(
+//                        new IVariable[] { Var.var("x") },
+//                        new IConstant[] { new Constant<String>("Paul") }
+//                ),
+//                new ListBindingSet(
+//                        new IVariable[] { Var.var("x") },
+//                        new IConstant[] { new Constant<String>("John") }
+//                ),
 //        };
 //
 //        final BOpStats stats = query.newStats();

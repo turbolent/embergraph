@@ -89,7 +89,7 @@ public class MapgraphServletProxy extends BigdataRDFServlet {
 		
 		public MapgraphServletProxy getInstance(final String provider) {
 
-		    return ClassPathUtil.classForName(//
+		    return ClassPathUtil.classForName(
 		                provider, // preferredClassName,
 		                MapgraphServletProxy.class, // defaultClass,
 		                MapgraphServletProxy.class, // sharedInterface,

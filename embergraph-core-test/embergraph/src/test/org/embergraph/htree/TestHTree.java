@@ -120,8 +120,8 @@ public class TestHTree extends AbstractHTreeTestCase {
              * verify preconditions.
              * 
              * <pre>
-             * root := [2] (a,a,a,a)   //
-             * a    := [0]   (-;-;-;-) //
+             * root := [2] (a,a,a,a)
+             * a    := [0]   (-;-;-;-)
              * </pre>
              */
             assertEquals("nnodes", 1, htree.getNodeCount());
@@ -132,19 +132,19 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(0, a.getGlobalDepth());
             assertEquals(0, a.getKeyCount());
             assertEquals(0, a.getValueCount());
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(0, new byte[][] { // keys
-                            null, null, null, null }),//
+                            null, null, null, null }),
                     new ReadOnlyValuesRaba(0, new byte[][] { // vals
-                            null, null, null, null})),//
+                            null, null, null, null})),
                     a);
             assertFalse(htree.contains(k1));
             assertFalse(htree.contains(unused));
             assertEquals(null, htree.lookupFirst(k1));
             assertEquals(null, htree.lookupFirst(unused));
-            AbstractBTreeTestCase.assertSameIterator(//
+            AbstractBTreeTestCase.assertSameIterator(
                     new byte[][] {}, htree.lookupAll(k1));
-            AbstractBTreeTestCase.assertSameIterator(//
+            AbstractBTreeTestCase.assertSameIterator(
                     new byte[][] {}, htree.lookupAll(unused));
 
             /**
@@ -152,8 +152,8 @@ public class TestHTree extends AbstractHTreeTestCase {
              * goes into an empty buddy bucket with a capacity of one.
              * 
              * <pre>
-             * root := [2] (a,a,a,a)   //
-             * a    := [0]   (1;-;-;-) //
+             * root := [2] (a,a,a,a)
+             * a    := [0]   (1;-;-;-)
              * </pre>
              */
             htree.insert(k1, v1);
@@ -165,19 +165,19 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(0, a.getGlobalDepth());
             assertEquals(1, a.getKeyCount());
             assertEquals(1, a.getValueCount());
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(1, new byte[][] { // keys
-                            k1, null, null, null }),//
+                            k1, null, null, null }),
                     new ReadOnlyValuesRaba(1, new byte[][] { // vals
-                            v1, null, null, null})),//
+                            v1, null, null, null})),
                     a);
             assertTrue(htree.contains(k1));
             assertFalse(htree.contains(unused));
             assertEquals(v1, htree.lookupFirst(k1));
             assertEquals(null,htree.lookupFirst(unused));
-            AbstractBTreeTestCase.assertSameIterator(//
+            AbstractBTreeTestCase.assertSameIterator(
                     new byte[][] { v1 }, htree.lookupAll(k1));
-            AbstractBTreeTestCase.assertSameIterator(//
+            AbstractBTreeTestCase.assertSameIterator(
                     new byte[][] {}, htree.lookupAll(unused));
             //assertSameIterator(new AbstractPage[]{a}); // TODO Verify the direct and recursive iterators.
             assertSameIterator(new byte[][]{v1}, htree.values());
@@ -193,9 +193,9 @@ public class TestHTree extends AbstractHTreeTestCase {
              * the buddy buckets will be redistributed among the old and new
              * bucket page.
              * <pre> 
-             * root := [2] (a,a,b,b)   //
-             * a    := [1]   (1,2;-,-) //
-             * b    := [1]   (-,-;-,-) //
+             * root := [2] (a,a,b,b)
+             * a    := [1]   (1,2;-,-)
+             * b    := [1]   (-,-;-,-)
              * </pre>
              */
             htree.insert(k2, v2);
@@ -213,11 +213,11 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(0, a.getGlobalDepth());// localDepth has increased.
             assertEquals(2, a.getKeyCount());
             assertEquals(2, a.getValueCount());
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(2, new byte[][] { // keys
-                            k1, k2, null, null }),//
+                            k1, k2, null, null }),
                     new ReadOnlyValuesRaba(2, new byte[][] { // vals
-                            v1, k2, null, null})),//
+                            v1, k2, null, null})),
                     a);
             assertTrue(htree.contains(k1));
             assertTrue(htree.contains(k2));
@@ -236,8 +236,8 @@ public class TestHTree extends AbstractHTreeTestCase {
             /**
              * 3. Insert 0x03. This forces another split.
              * <pre> 
-             * root := [2] (a,a,a,a)   //
-             * a    := [2]   (1,2,3,-) //
+             * root := [2] (a,a,a,a)
+             * a    := [2]   (1,2,3,-)
              * </pre>
              */
             htree.insert(k3, v3);
@@ -254,11 +254,11 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(0, a.getGlobalDepth());// localDepth has increased.
             assertEquals(0, c.getGlobalDepth());// localDepth is same as [a].
             assertEquals(3, a.getKeyCount());
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(3, new byte[][] { // keys
-                            k1, k2, k3, null }),//
+                            k1, k2, k3, null }),
                     new ReadOnlyValuesRaba(3, new byte[][] { // vals
-                            v1, k2, k3, null})),//
+                            v1, k2, k3, null})),
                     a);
             assertTrue(htree.contains(k1));
             assertTrue(htree.contains(k2));
@@ -288,10 +288,10 @@ public class TestHTree extends AbstractHTreeTestCase {
              * page into the hash tree.
              * 
              * <pre> 
-             * root := [2] (a,c,b,b)   //
-             * a    := [2]   (1,2,3,4) //
-             * c    := [2]   (-,-,-,-) //
-             * b    := [1]   (-,-;-,-) //
+             * root := [2] (a,c,b,b)
+             * a    := [2]   (1,2,3,4)
+             * c    := [2]   (-,-,-,-)
+             * b    := [1]   (-,-;-,-)
              * </pre>
              */
             htree.insert(k4, v4);
@@ -306,11 +306,11 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(0, a.getGlobalDepth());// localDepth has increased.
             assertEquals(4, a.getKeyCount());
             assertEquals(4, a.getValueCount());
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(4, new byte[][] { // keys
-                            k1, k2, k3, k4 }),//
+                            k1, k2, k3, k4 }),
                     new ReadOnlyValuesRaba(4, new byte[][] { // vals
-                            v1, k2, k3, k4 })),//
+                            v1, k2, k3, k4 })),
                     a);
             assertTrue(htree.contains(k1));
             assertTrue(htree.contains(k2));
@@ -600,10 +600,10 @@ public class TestHTree extends AbstractHTreeTestCase {
              * this test. The post-condition of this insert sequence is:
              * 
              * <pre>
-             * root := [2] (a,c,b,b)   //
+             * root := [2] (a,c,b,b)
              * a    := [2]   (1,2,3,4) // Note: depth(root) == depth(a) !
-             * c    := [2]   (-,-,-,-) //
-             * b    := [1]   (-,-;-,-) //
+             * c    := [2]   (-,-,-,-)
+             * b    := [1]   (-,-;-,-)
              * </pre>
              */
             htree.insert(k1, v1);
@@ -626,11 +626,11 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(0, a.globalDepth);
             assertEquals(4, a.getKeyCount());
 
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(4, new byte[][] { // keys
-                            k1, k2, k3, k4 }),//
+                            k1, k2, k3, k4 }),
                     new ReadOnlyValuesRaba(4, new byte[][] { // vals
-                            v1, v2, v3, v4 })),//
+                            v1, v2, v3, v4 })),
                     a);
 
             // verify that [a] will not accept an insert.
@@ -646,12 +646,12 @@ public class TestHTree extends AbstractHTreeTestCase {
              * to split (a).
              * 
              * <pre>
-             * root := [2]  (d,c,b,b)     //
+             * root := [2]  (d,c,b,b)
              * d    := [2]    (e,e;f,f)   // new directory page replaces (a) 
              * e    := [1]      (1,2;3,4) // 
              * f    := [1]      (-,-;-,-) // 
              * c    := [0]    (-;-;-;-)   // 
-             * b    := [1]    (-,-;-,-)   //
+             * b    := [1]    (-,-;-,-)
              * </pre>
              */
 
@@ -696,11 +696,11 @@ public class TestHTree extends AbstractHTreeTestCase {
             assertEquals(1, e.globalDepth);
             assertEquals(4, e.getKeyCount());
 
-            assertSameBucketData(new MockBucketData(//
+            assertSameBucketData(new MockBucketData(
                     new ReadOnlyKeysRaba(4, new byte[][] { // keys
-                            k1, k2, k3, k4 }),//
+                            k1, k2, k3, k4 }),
                     new ReadOnlyValuesRaba(4, new byte[][] { // vals
-                            v1, v2, v3, v4 })),//
+                            v1, v2, v3, v4 })),
                     e);
 
             // verify that [e] will not accept an insert.
@@ -904,7 +904,7 @@ public class TestHTree extends AbstractHTreeTestCase {
 					final ByteArrayBuffer tb = t.getValueBuffer();
 
 					if (0 == BytesUtil.compareBytesWithLenAndOffset(
-							0/* aoff */, val.length/* alen */, val, //
+							0/* aoff */, val.length/* alen */, val,
 							0/* boff */, tb.limit()/* blen */, tb.array()/* b */
 					)) {
 

@@ -245,11 +245,11 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 
 		super(htree, true/* dirty */, globalDepth);
 		
-		data = new MutableBucketData(//
+		data = new MutableBucketData(
 				htree.bucketSlots, // fan-out
-				htree.versionTimestamps,//
-				htree.deleteMarkers,//
-				htree.rawRecords//
+				htree.versionTimestamps,
+				htree.deleteMarkers,
+				htree.rawRecords
 		);
 
 	}
@@ -326,7 +326,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 ////        /*
 ////         * Steal the values[].
 ////         */
-////
+//
 ////        // steal reference and clear reference on the source node.
 ////        values = src.values;
 //
@@ -1055,7 +1055,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 		sb.append(", nkeys=" + getKeyCount());
 
 		// sb.append(", minKeys=" + minKeys());
-		//
+
 		// sb.append(", maxKeys=" + maxKeys());
 
 		DefaultLeafCoder.toString(this, sb);

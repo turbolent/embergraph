@@ -190,10 +190,10 @@ public interface IHashJoinUtility {
      * @param outputBuffer
      *            Where to write the solutions which join.
      */
-    void hashJoin(//
-            ICloseableIterator<IBindingSet[]> leftItr,//
-            BOpStats stats,//
-            IBuffer<IBindingSet> outputBuffer//
+    void hashJoin(
+            ICloseableIterator<IBindingSet[]> leftItr,
+            BOpStats stats,
+            IBuffer<IBindingSet> outputBuffer
     );
 
     /**
@@ -220,11 +220,11 @@ public interface IHashJoinUtility {
      *            specified here are combined with those specified in the
      *            constructor.
      */
-    void hashJoin2(//
-            ICloseableIterator<IBindingSet[]> leftItr,//
-            BOpStats stats,//
-            IBuffer<IBindingSet> outputBuffer,//
-            IConstraint[] constraints//
+    void hashJoin2(
+            ICloseableIterator<IBindingSet[]> leftItr,
+            BOpStats stats,
+            IBuffer<IBindingSet> outputBuffer,
+            IConstraint[] constraints
     );
 
     /**
@@ -273,11 +273,11 @@ public interface IHashJoinUtility {
      * @param optional
      *            <code>true</code> iff the join is optional.
      */
-    void mergeJoin(//
-            IHashJoinUtility[] others,//
-            IBuffer<IBindingSet> outputBuffer,//
-            IConstraint[] constraints,//
-            boolean optional//
+    void mergeJoin(
+            IHashJoinUtility[] others,
+            IBuffer<IBindingSet> outputBuffer,
+            IConstraint[] constraints,
+            boolean optional
     );
     
     /**

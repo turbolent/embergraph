@@ -366,7 +366,7 @@ public class TestAST extends TestCase {
         public Filter(final int id) {
     		super(BOp.NOARGS, 
         			NV.asMap(
-                            new NV(BOp.Annotations.BOP_ID, id)//
+                            new NV(BOp.Annotations.BOP_ID, id)
         			        ));
     	}
     	

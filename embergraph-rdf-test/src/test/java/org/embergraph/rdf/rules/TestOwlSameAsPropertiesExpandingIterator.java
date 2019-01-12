@@ -134,12 +134,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
             
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(y,NULL,NULL);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 /*
@@ -174,12 +174,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(y,b,NULL);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 /*
@@ -208,12 +208,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(NULL,NULL,w);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 /*
@@ -248,12 +248,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(NULL,a,w);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 
@@ -277,12 +277,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(x,NULL,z);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 
@@ -306,12 +306,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(x,b,z);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 
@@ -333,12 +333,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(NULL,a,NULL);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 /*
@@ -371,12 +371,12 @@ public class TestOwlSameAsPropertiesExpandingIterator extends AbstractInferenceE
                 
                 SPOAccessPath accessPath = (SPOAccessPath)db.getAccessPath(NULL,NULL,NULL);
                 
-                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(//
+                IChunkedOrderedIterator<ISPO> itr = new OwlSameAsPropertiesExpandingIterator(
                         getValue(accessPath,0/*S*/),
                         getValue(accessPath,1/*P*/),
                         getValue(accessPath,2/*O*/),
-                        db, //
-                        same,//
+                        db,
+                        same,
                         accessPath.getKeyOrder()
                         );
 /*

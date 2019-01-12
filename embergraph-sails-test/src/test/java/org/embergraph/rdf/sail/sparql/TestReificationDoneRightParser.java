@@ -142,12 +142,12 @@ public class TestReificationDoneRightParser extends
 	public void test_triple_ref_pattern_var_const_const()
 			throws MalformedQueryException, TokenMgrError, ParseException {
 
-		final String sparql //
-				= "prefix : <http://example.com/>\n" //
-				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n" //
-				+ "select ?src ?who {\n"//
-				+ "  BIND( <<?who :bought :sybase>> AS ?sid ) . \n"//
-				+ "  ?sid dc:source ?src .\n"//
+		final String sparql
+				= "prefix : <http://example.com/>\n"
+				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n"
+				+ "select ?src ?who {\n"
+				+ "  BIND( <<?who :bought :sybase>> AS ?sid ) . \n"
+				+ "  ?sid dc:source ?src .\n"
 				+ "}";
 
 		final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -178,21 +178,21 @@ public class TestReificationDoneRightParser extends
 			final JoinGroupNode whereClause = new JoinGroupNode();
 			expected.setWhereClause(whereClause);
 
-			final StatementPatternNode sp1 = new StatementPatternNode(//
-					new VarNode("who"),//
-					new ConstantNode(bought),//
-					new ConstantNode(sybase),//
-					null/* c */,//
+			final StatementPatternNode sp1 = new StatementPatternNode(
+					new VarNode("who"),
+					new ConstantNode(bought),
+					new ConstantNode(sybase),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			final VarNode sid1 = new VarNode("sid");
 //			sid1.setSID(true);
 			sp1.setSid(sid1);
 			
-			final StatementPatternNode sp2 = new StatementPatternNode(//
-					new VarNode("sid"),//
-					new ConstantNode(dcSource),//
-					new VarNode("src"),//
-					null/* c */,//
+			final StatementPatternNode sp2 = new StatementPatternNode(
+					new VarNode("sid"),
+					new ConstantNode(dcSource),
+					new VarNode("src"),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 
 			whereClause.addChild(sp1);
@@ -215,12 +215,12 @@ public class TestReificationDoneRightParser extends
 	public void test_triple_ref_pattern_blankNodesAreNotAllowed_subjectPosition()
 			throws MalformedQueryException, TokenMgrError, ParseException {
 
-		final String sparql //
-			    = "prefix : <http://example.com/>\n" //
-				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n" //
-				+ "select ?src ?who {\n"//
-				+ "  BIND( <<_:a :bought :sybase>> AS ?sid ) . \n"//
-				+ "  ?sid dc:source ?src .\n"//
+		final String sparql
+			    = "prefix : <http://example.com/>\n"
+				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n"
+				+ "select ?src ?who {\n"
+				+ "  BIND( <<_:a :bought :sybase>> AS ?sid ) . \n"
+				+ "  ?sid dc:source ?src .\n"
 				+ "}";
 
 		try {
@@ -241,12 +241,12 @@ public class TestReificationDoneRightParser extends
 	public void test_triple_ref_pattern_blankNodesAreNotAllowed_objectPosition()
 			throws MalformedQueryException, TokenMgrError, ParseException {
 
-		final String sparql //
-			    = "prefix : <http://example.com/>\n" //
-				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n" //
-				+ "select ?src ?who {\n"//
-				+ "  BIND( <<:SAP :bought _:c>> AS ?sid ) . \n"//
-				+ "  ?sid dc:source ?src .\n"//
+		final String sparql
+			    = "prefix : <http://example.com/>\n"
+				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n"
+				+ "select ?src ?who {\n"
+				+ "  BIND( <<:SAP :bought _:c>> AS ?sid ) . \n"
+				+ "  ?sid dc:source ?src .\n"
 				+ "}";
 
 		try {
@@ -288,11 +288,11 @@ public class TestReificationDoneRightParser extends
     public void test_triple_ref_pattern_no_vars()
             throws MalformedQueryException, TokenMgrError, ParseException {
     
-		final String sparql = //
-				  "prefix : <http://example.com/>\n" //
-				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n" //
-				+ "select ?src ?who {\n"//
-				+ "  <<:SAP :bought :sybase>> dc:source ?src \n"//
+		final String sparql =
+				  "prefix : <http://example.com/>\n"
+				+ "prefix dc: <http://purl.org/dc/elements/1.1/>\n"
+				+ "select ?src ?who {\n"
+				+ "  <<:SAP :bought :sybase>> dc:source ?src \n"
 				+ "}";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -329,22 +329,22 @@ public class TestReificationDoneRightParser extends
             expected.setWhereClause(whereClause);
 
 			// SP(:SAP :bought :sybase) as ?sid1) .
-            final StatementPatternNode sp1 = new StatementPatternNode(//
-					new ConstantNode(SAP),//
-					new ConstantNode(bought),//
-					new ConstantNode(sybase),//
-					null/* c */,//
+            final StatementPatternNode sp1 = new StatementPatternNode(
+					new ConstantNode(SAP),
+					new ConstantNode(bought),
+					new ConstantNode(sybase),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
             final VarNode sid1 = new VarNode("-sid-1");
 //            sid1.setSID(true);
             sp1.setSid(sid1);
 
 			// SP(?sid1 dc:source ?src) .
-            final StatementPatternNode sp2 = new StatementPatternNode(//
-					sid1,//
-					new ConstantNode(dcSource),//
-					new VarNode("src"),//
-					null/* c */,//
+            final StatementPatternNode sp2 = new StatementPatternNode(
+					sid1,
+					new ConstantNode(dcSource),
+					new VarNode("src"),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS); 
 
 			whereClause.addChild(sp1);
@@ -380,10 +380,10 @@ public class TestReificationDoneRightParser extends
 	public void test_triple_ref_pattern_nested_in_subject_position()
 			throws MalformedQueryException, TokenMgrError, ParseException {
 
-		final String sparql //
-				= "prefix : <http://example.com/>\n" //
-				+ "select ?a ?e {\n"//
-				+ " BIND( << <<?a :b :c>> :d ?e>> AS ?sid) \n"//
+		final String sparql
+				= "prefix : <http://example.com/>\n"
+				+ "select ?a ?e {\n"
+				+ " BIND( << <<?a :b :c>> :d ?e>> AS ?sid) \n"
 				+ "}";
 
 		final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -419,19 +419,19 @@ public class TestReificationDoneRightParser extends
 			final JoinGroupNode whereClause = new JoinGroupNode();
 			expected.setWhereClause(whereClause);
 
-			final StatementPatternNode sp1 = new StatementPatternNode(//
-					new VarNode("a"),//
-					new ConstantNode(b),//
-					new ConstantNode(c),//
-					null/* c */,//
+			final StatementPatternNode sp1 = new StatementPatternNode(
+					new VarNode("a"),
+					new ConstantNode(b),
+					new ConstantNode(c),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			sp1.setSid(sid1);
 			
-			final StatementPatternNode sp2 = new StatementPatternNode(//
-					sid1,//
-					new ConstantNode(d),//
-					new VarNode("e"),//
-					null/* c */,//
+			final StatementPatternNode sp2 = new StatementPatternNode(
+					sid1,
+					new ConstantNode(d),
+					new VarNode("e"),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			sp2.setSid(sid2);
 			
@@ -469,10 +469,10 @@ public class TestReificationDoneRightParser extends
 	public void test_triple_ref_pattern_nested_in_object_position()
 			throws MalformedQueryException, TokenMgrError, ParseException {
 
-		final String sparql //
-				= "prefix : <http://example.com/>\n" //
-				+ "select ?a ?e {\n"//
-				+ " BIND( << ?a :d <<?e :b :c>> >> AS ?sid) \n"//
+		final String sparql
+				= "prefix : <http://example.com/>\n"
+				+ "select ?a ?e {\n"
+				+ " BIND( << ?a :d <<?e :b :c>> >> AS ?sid) \n"
 				+ "}";
 
 		final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -509,20 +509,20 @@ public class TestReificationDoneRightParser extends
 			expected.setWhereClause(whereClause);
 
 			// SP(?e, :b, :c) as ?sid1 .
-			final StatementPatternNode sp1 = new StatementPatternNode(//
-					new VarNode("e"),//
-					new ConstantNode(b),//
-					new ConstantNode(c),//
-					null/* c */,//
+			final StatementPatternNode sp1 = new StatementPatternNode(
+					new VarNode("e"),
+					new ConstantNode(b),
+					new ConstantNode(c),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			sp1.setSid(sid1);
 			
 			// SP(?a, :d, ?sid1) as ?sid .
-			final StatementPatternNode sp2 = new StatementPatternNode(//
-					new VarNode("a"),//
-					new ConstantNode(d),//
-					sid1,//
-					null/* c */,//
+			final StatementPatternNode sp2 = new StatementPatternNode(
+					new VarNode("a"),
+					new ConstantNode(d),
+					sid1,
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			sp2.setSid(sid2);
 			
@@ -563,10 +563,10 @@ public class TestReificationDoneRightParser extends
 	public void test_triple_ref_pattern_is_constant()
 			throws MalformedQueryException, TokenMgrError, ParseException {
 
-		final String sparql //
-				= "prefix : <http://example.com/>\n" //
-				+ "select ?a {\n"//
-				+ "  BIND( <<:e :b :c>> AS ?sid) .\n"//
+		final String sparql
+				= "prefix : <http://example.com/>\n"
+				+ "select ?a {\n"
+				+ "  BIND( <<:e :b :c>> AS ?sid) .\n"
 				+ "  ?a :d ?sid.\n"
 				+ "}";
 
@@ -603,20 +603,20 @@ public class TestReificationDoneRightParser extends
 			expected.setWhereClause(whereClause);
 
 			// SP(:e, :b, :c) as ?sid .
-			final StatementPatternNode sp1 = new StatementPatternNode(//
-					new ConstantNode(e),//
-					new ConstantNode(b),//
-					new ConstantNode(c),//
-					null/* c */,//
+			final StatementPatternNode sp1 = new StatementPatternNode(
+					new ConstantNode(e),
+					new ConstantNode(b),
+					new ConstantNode(c),
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			sp1.setSid(sid);
 			
 			// SP(?a, :d, ?sid) as ?-sid-1.
-			final StatementPatternNode sp2 = new StatementPatternNode(//
-					new VarNode("a"),//
-					new ConstantNode(d),//
-					sid,//
-					null/* c */,//
+			final StatementPatternNode sp2 = new StatementPatternNode(
+					new VarNode("a"),
+					new ConstantNode(d),
+					sid,
+					null/* c */,
 					Scope.DEFAULT_CONTEXTS);
 			
 			whereClause.addChild(sp1);
@@ -658,9 +658,9 @@ public class TestReificationDoneRightParser extends
         if (!BigdataStatics.runKnownBadTests) // FIXME RDR TEST KNOWN TO FAIL.
             return;
 
-        final String sparql //
-                = "prefix : <http://example.com/>\n" //
-                + "select ?a {\n"//
+        final String sparql
+                = "prefix : <http://example.com/>\n"
+                + "select ?a {\n"
                 + "  ?d ?e <<?a ?b ?c>> .\n"
                 + "}";
 
@@ -689,20 +689,20 @@ public class TestReificationDoneRightParser extends
             expected.setWhereClause(whereClause);
 
             // SP(?a, ?b, ?c) as ?sid .
-            final StatementPatternNode sp1 = new StatementPatternNode(//
-                    a,//
-                    b,//
-                    c,//
-                    null/* c */,//
+            final StatementPatternNode sp1 = new StatementPatternNode(
+                    a,
+                    b,
+                    c,
+                    null/* c */,
                     Scope.DEFAULT_CONTEXTS);
             sp1.setSid(sid);
             
             // SP(?d, ?e, ?sid).
-            final StatementPatternNode sp2 = new StatementPatternNode(//
-                    d,//
-                    e,//
-                    sid,//
-                    null/* c */,//
+            final StatementPatternNode sp2 = new StatementPatternNode(
+                    d,
+                    e,
+                    sid,
+                    null/* c */,
                     Scope.DEFAULT_CONTEXTS);
             
             whereClause.addChild(sp1);
@@ -741,9 +741,9 @@ public class TestReificationDoneRightParser extends
     public void test_triple_ref_pattern_all_vars2()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql //
-                = "prefix : <http://example.com/>\n" //
-                + "select ?a {\n"//
+        final String sparql
+                = "prefix : <http://example.com/>\n"
+                + "select ?a {\n"
                 + "  <<?a ?b ?c>> ?d ?e .\n"
                 + "}";
 
@@ -772,20 +772,20 @@ public class TestReificationDoneRightParser extends
             expected.setWhereClause(whereClause);
 
             // SP(?a, ?b, ?c) as ?sid .
-            final StatementPatternNode sp1 = new StatementPatternNode(//
-                    a,//
-                    b,//
-                    c,//
-                    null/* c */,//
+            final StatementPatternNode sp1 = new StatementPatternNode(
+                    a,
+                    b,
+                    c,
+                    null/* c */,
                     Scope.DEFAULT_CONTEXTS);
             sp1.setSid(sid);
             
             // SP(?sid, ?d, ?e).
-            final StatementPatternNode sp2 = new StatementPatternNode(//
-                    sid,//
-                    d,//
-                    e,//
-                    null/* c */,//
+            final StatementPatternNode sp2 = new StatementPatternNode(
+                    sid,
+                    d,
+                    e,
+                    null/* c */,
                     Scope.DEFAULT_CONTEXTS);
             
             whereClause.addChild(sp1);
@@ -825,10 +825,10 @@ public class TestReificationDoneRightParser extends
     public void test_triple_ref_pattern_all_vars_with_explicit_bind()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql //
-                = "prefix : <http://example.com/>\n" //
-                + "select ?a {\n"//
-                + "  BIND( <<?a ?b ?c>> AS ?sid) .\n"//
+        final String sparql
+                = "prefix : <http://example.com/>\n"
+                + "select ?a {\n"
+                + "  BIND( <<?a ?b ?c>> AS ?sid) .\n"
                 + "  ?d ?e ?sid.\n"
                 + "}";
 
@@ -857,20 +857,20 @@ public class TestReificationDoneRightParser extends
             expected.setWhereClause(whereClause);
 
             // SP(?a, ?b, ?c) as ?sid .
-            final StatementPatternNode sp1 = new StatementPatternNode(//
-                    a,//
-                    b,//
-                    c,//
-                    null/* c */,//
+            final StatementPatternNode sp1 = new StatementPatternNode(
+                    a,
+                    b,
+                    c,
+                    null/* c */,
                     Scope.DEFAULT_CONTEXTS);
             sp1.setSid(sid);
             
             // SP(?d, ?e, ?sid).
-            final StatementPatternNode sp2 = new StatementPatternNode(//
-                    d,//
-                    e,//
-                    sid,//
-                    null/* c */,//
+            final StatementPatternNode sp2 = new StatementPatternNode(
+                    d,
+                    e,
+                    sid,
+                    null/* c */,
                     Scope.DEFAULT_CONTEXTS);
             
             whereClause.addChild(sp1);
@@ -901,10 +901,10 @@ public class TestReificationDoneRightParser extends
     public void test_update_insert_data_RDR() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-      final String sparql = "PREFIX : <http://example/>\n"//
-            + "INSERT DATA {\n"//
-            + "   :s :p \"d\" . \n"//
-            + "   << :s :p \"d\" >> :order \"5\"^^xsd:int . \n"//
+      final String sparql = "PREFIX : <http://example/>\n"
+            + "INSERT DATA {\n"
+            + "   :s :p \"d\" . \n"
+            + "   << :s :p \"d\" >> :order \"5\"^^xsd:int . \n"
             + "}";
 
         final UpdateRoot expected = new UpdateRoot();
@@ -929,18 +929,18 @@ public class TestReificationDoneRightParser extends
           */
             
             // SP(:s :p d) as ?sid1) .
-            final BigdataStatement s1 = valueFactory.createStatement(//
-                  (BigdataResource)s,//
-                  (BigdataURI)p,//
+            final BigdataStatement s1 = valueFactory.createStatement(
+                  (BigdataResource)s,
+                  (BigdataURI)p,
                   (BigdataValue)d);
             final BigdataBNode sid1 = valueFactory.createBNode(s1);
 
             // SP(?sid, :p, 5).
-            final BigdataStatement s2 = valueFactory.createStatement(//
-                  (Resource)sid1, //
-                  (BigdataURI)order, //
+            final BigdataStatement s2 = valueFactory.createStatement(
+                  (Resource)sid1,
+                  (BigdataURI)order,
                   (BigdataValue) five);
-            final BigdataStatement[] data = new BigdataStatement[] { //
+            final BigdataStatement[] data = new BigdataStatement[] {
                   s1, s2
             };
             op.setData(data);

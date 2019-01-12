@@ -1296,24 +1296,24 @@ abstract public class AbstractScaleOutClientIndexView implements IScaleOutClient
         final BlockingBuffer<KVO<O>[]> writeBuffer = new BlockingBuffer<KVO<O>[]>(
                 // @todo array vs linked w/ capacity and fair vs unfair.
                 new ArrayBlockingQueue<KVO<O>[]>(conf.getMasterQueueCapacity()),
-                conf.getMasterChunkSize(),//
+                conf.getMasterChunkSize(),
                 conf.getMasterChunkTimeoutNanos(),// 
-                TimeUnit.NANOSECONDS,//
+                TimeUnit.NANOSECONDS,
                 true// ordered
         );
         
         final IndexWriteTask.M<T, O, R, A> task = new IndexWriteTask.M<T, O, R, A>(
-                this, //
-                conf.getSinkIdleTimeoutNanos(),//
-                conf.getSinkPollTimeoutNanos(),//
-                conf.getSinkQueueCapacity(), //
-                conf.getSinkChunkSize(), //
-                conf.getSinkChunkTimeoutNanos(),//
-                duplicateRemover,//
-                ctor,//
-                resultHandler,//
+                this,
+                conf.getSinkIdleTimeoutNanos(),
+                conf.getSinkPollTimeoutNanos(),
+                conf.getSinkQueueCapacity(),
+                conf.getSinkChunkSize(),
+                conf.getSinkChunkTimeoutNanos(),
+                duplicateRemover,
+                ctor,
+                resultHandler,
                 fed.getIndexCounters(name).asynchronousStats,
-                writeBuffer//
+                writeBuffer
                 );
 
         /**

@@ -1420,13 +1420,13 @@ the clear/dirty list threshold)
 
                 assert quorumMember != null : "Not quorum member?";
 
-                final WriteCache.HAPackage pkg = cache.newHAPackage(//
-                        quorumMember.getStoreUUID(),//
-                        quorumToken,//
-                        quorumMember.getLastCommitCounter(),//
-                        quorumMember.getLastCommitTime(),//
-                        thisSequence,//
-                        replicationFactor,//
+                final WriteCache.HAPackage pkg = cache.newHAPackage(
+                        quorumMember.getStoreUUID(),
+                        quorumToken,
+                        quorumMember.getLastCommitCounter(),
+                        quorumMember.getLastCommitTime(),
+                        thisSequence,
+                        replicationFactor,
                         checksumBuffer
                         );
 
@@ -3334,7 +3334,7 @@ the clear/dirty list threshold)
                     return ret;
 
                 // May have been transferred to another Cache!
-                //
+
                 // Fall through.
                 continue;
                 

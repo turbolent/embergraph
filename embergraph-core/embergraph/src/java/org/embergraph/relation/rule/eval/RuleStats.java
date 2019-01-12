@@ -413,25 +413,25 @@ public class RuleStats {
      */
     public String getHeadings() {
      
-        return "startTime"//
-                + sep + "rule"//
-                + sep + "elapsed"//
-                //
-                + sep + "solutionCount"//
+        return "startTime"
+                + sep + "rule"
+                + sep + "elapsed"
+
+                + sep + "solutionCount"
                 + sep + "solutions/sec"
-                + sep + "mutationCount" //
-                + sep + "mutations/sec"//
-                //
-                + sep + "evalOrder" //
-                + sep + "keyOrder" //
+                + sep + "mutationCount"
+                + sep + "mutations/sec"
+
+                + sep + "evalOrder"
+                + sep + "keyOrder"
                 + sep + "nvars"
-                + sep + "rangeCount" //
-                + sep + "chunkCount" //
-                + sep + "elementCount"//
-                + sep + "subqueryCount"//
-                //
+                + sep + "rangeCount"
+                + sep + "chunkCount"
+                + sep + "elementCount"
+                + sep + "subqueryCount"
+
                 + sep + "tailIndex"// 
-                + sep + "tailPredicate"//
+                + sep + "tailPredicate"
                 ;
 
     }
@@ -467,16 +467,16 @@ public class RuleStats {
         
         final String solutionCountStr = solutionCount == 0 ? ZE : "" + solutionCount;
 
-        final String solutionsPerSec = (solutionCount == 0 ? NA //
-                : (elapsed == 0L ? DZ //
+        final String solutionsPerSec = (solutionCount == 0 ? NA
+                : (elapsed == 0L ? DZ
                         : "" + (long) (solutionCount * 1000d / elapsed)));
 
         final long mutationCount = this.mutationCount.get();
 
         final String mutationCountStr = mutationCount == 0 ? ZE : "" + mutationCount;
 
-        final String mutationsPerSec = (mutationCount == 0 ? NA //
-                : (elapsed == 0L ? DZ //
+        final String mutationsPerSec = (mutationCount == 0 ? NA
+                : (elapsed == 0L ? DZ
                         : "" + (long) (mutationCount * 1000d / elapsed)));
 
         final String q = ""; // '\"';

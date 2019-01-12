@@ -900,9 +900,9 @@ public class NanoHTTPD implements IServiceShutdown
 
                 if (log.isInfoEnabled()) { // optionally log the status and content type.
                     log.info("status: [HTTP/1.0 " + status
-                            + "]"//
+                            + "]"
                             + (mime == null ? "" : "[Content-Type: " + mime
-                                    + "]")//
+                                    + "]")
                     );
                 }
 

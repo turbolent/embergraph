@@ -534,11 +534,11 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
             final int partitionId = locator.getPartitionId();
             
             if (log.isInfoEnabled())
-                log.info("name=" + ndx.getName() //
-                        + ", tx=" + ts //
-                        + ", reverseScan=" + reverseScan //
-                        + ", partition=" + partitionId //
-                        + ", fromKey=" + BytesUtil.toString(_fromKey) //
+                log.info("name=" + ndx.getName()
+                        + ", tx=" + ts
+                        + ", reverseScan=" + reverseScan
+                        + ", partition=" + partitionId
+                        + ", fromKey=" + BytesUtil.toString(_fromKey)
                         + ", toKey=" + BytesUtil.toString(_toKey));
             
             /*

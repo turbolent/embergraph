@@ -186,7 +186,7 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
 
         final String[] reportOn = scoringRule.getMetricNames();
         
-        final IHostReport[] hostReport = gangliaService.getHostReport(//
+        final IHostReport[] hostReport = gangliaService.getHostReport(
                 hosts,// the hosts for our joined services.
                 reportOn,// metrics to be reported.
                 null // comparator (unused)

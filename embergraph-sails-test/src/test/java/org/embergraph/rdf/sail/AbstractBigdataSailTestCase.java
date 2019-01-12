@@ -51,9 +51,9 @@ import org.embergraph.rdf.sail.BigdataSail.Options;
  */
 abstract public class AbstractBigdataSailTestCase extends TestCase2 {
 
-    //
+
     // Constructors.
-    //
+
     
     /**
      * 
@@ -102,9 +102,9 @@ abstract public class AbstractBigdataSailTestCase extends TestCase2 {
     
     private long begin;
 
-    //
+
     // Properties
-    //
+
     
     private Properties m_properties;
     
@@ -196,9 +196,9 @@ abstract public class AbstractBigdataSailTestCase extends TestCase2 {
     //************************************************************
     //************************************************************
     //************************************************************
-    //
+
     // Test helpers.
-    //
+
 
 //    protected static final long N = IRawTripleStore.N;
 

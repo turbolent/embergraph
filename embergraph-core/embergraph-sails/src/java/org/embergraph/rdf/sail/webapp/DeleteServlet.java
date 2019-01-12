@@ -146,10 +146,10 @@ public class DeleteServlet extends BigdataRDFServlet {
              */
 
             submitApiTask(
-                  new DeleteWithQueryMaterializedTask(req, resp, namespace, ITx.UNISOLATED, //
-                        queryStr,//
-                        baseURI,//
-                        suppressTruthMaintenance, bindings//
+                  new DeleteWithQueryMaterializedTask(req, resp, namespace, ITx.UNISOLATED,
+                        queryStr,
+                        baseURI,
+                        suppressTruthMaintenance, bindings
                   )).get();
 
          } else {
@@ -162,10 +162,10 @@ public class DeleteServlet extends BigdataRDFServlet {
              */
             
             submitApiTask(
-                  new DeleteWithQuerySteamingTask(req, resp, namespace, ITx.UNISOLATED, //
-                        queryStr,//
-                        baseURI,//
-                        suppressTruthMaintenance, bindings//
+                  new DeleteWithQuerySteamingTask(req, resp, namespace, ITx.UNISOLATED,
+                        queryStr,
+                        baseURI,
+                        suppressTruthMaintenance, bindings
                   )).get();
 
          }
@@ -216,7 +216,7 @@ public class DeleteServlet extends BigdataRDFServlet {
         public DeleteWithQuerySteamingTask(final HttpServletRequest req,
                 final HttpServletResponse resp,
                 final String namespace, final long timestamp,
-                final String queryStr,//
+                final String queryStr,
                 final String baseURI,
                 final boolean suppressTruthMaintenance,
                 final Map<String, Value> bindings
@@ -326,7 +326,7 @@ public class DeleteServlet extends BigdataRDFServlet {
                   rdfParser
                         .setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
 
-                  rdfParser.setRDFHandler(new RemoveStatementHandler(conn, //
+                  rdfParser.setRDFHandler(new RemoveStatementHandler(conn,
                         nmodified /*, defaultDeleteContext*/));
 
                   // Wrap as Future.
@@ -428,9 +428,9 @@ public class DeleteServlet extends BigdataRDFServlet {
        */
       public DeleteWithQueryMaterializedTask(final HttpServletRequest req,
             final HttpServletResponse resp, final String namespace,
-            final long timestamp, final String queryStr,//
-            final String baseURI, //
-            final boolean suppressTruthMaintenance, //
+            final long timestamp, final String queryStr,
+            final String baseURI,
+            final boolean suppressTruthMaintenance,
             final Map<String, Value> bindings) {
          super(req, resp, namespace, timestamp);
          this.queryStr = queryStr;
@@ -525,7 +525,7 @@ public class DeleteServlet extends BigdataRDFServlet {
 
                rdfParser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
 
-               final BufferStatementHandler buffer = new BufferStatementHandler(conn, //
+               final BufferStatementHandler buffer = new BufferStatementHandler(conn,
                     nmodified /*, defaultDeleteContext*/);
                
                rdfParser.setRDFHandler(buffer);
@@ -738,8 +738,8 @@ public class DeleteServlet extends BigdataRDFServlet {
         public DeleteWithBodyTask(final HttpServletRequest req,
                 final HttpServletResponse resp,
                 final String namespace, final long timestamp,
-                final String baseURI, //
-                final boolean suppressTruthMaintenance, //
+                final String baseURI,
+                final boolean suppressTruthMaintenance,
                 final Resource[] defaultContext,
                 final RDFParserFactory rdfParserFactory) {
             super(req, resp, namespace, timestamp);
@@ -790,7 +790,7 @@ public class DeleteServlet extends BigdataRDFServlet {
                 rdfParser
                         .setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
 
-                rdfParser.setRDFHandler(new RemoveStatementHandler(conn, //
+                rdfParser.setRDFHandler(new RemoveStatementHandler(conn,
                         nmodified, defaultContext));
 
                 /*
@@ -886,10 +886,10 @@ public class DeleteServlet extends BigdataRDFServlet {
          final Resource[] c = (Resource[]) (stmt.getContext() == null ? defaultContext
                : new Resource[] { stmt.getContext() });
 
-         conn.removeStatements(//
-               stmt.getSubject(), //
-               stmt.getPredicate(), //
-               stmt.getObject(), //
+         conn.removeStatements(
+               stmt.getSubject(),
+               stmt.getPredicate(),
+               stmt.getObject(),
                c);
 
          if (c.length >= 2) {
@@ -936,10 +936,10 @@ public class DeleteServlet extends BigdataRDFServlet {
         	
             try {
 
-                conn.removeStatements(//
-                        stmt.getSubject(), //
-                        stmt.getPredicate(), //
-                        stmt.getObject(), //
+                conn.removeStatements(
+                        stmt.getSubject(),
+                        stmt.getPredicate(),
+                        stmt.getObject(),
                         c
                         );
 
@@ -1033,9 +1033,9 @@ public class DeleteServlet extends BigdataRDFServlet {
          *            appropriate content type.
          */
         public DeleteWithAccessPathTask(final HttpServletRequest req,
-                final HttpServletResponse resp, //
-                final String namespace, final long timestamp,//
-                final boolean suppressTruthMaintenance, //
+                final HttpServletResponse resp,
+                final String namespace, final long timestamp,
+                final boolean suppressTruthMaintenance,
                 final Resource s, final URI p, final Value o, final Resource[] c) {
             super(req, resp, namespace, timestamp);
             this.suppressTruthMaintenance = suppressTruthMaintenance;

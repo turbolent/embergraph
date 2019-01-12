@@ -109,17 +109,17 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
                 new Constant<String>("x")).isEmpty());
 
         // nothing shared.
-        assertTrue(BOpUtility.getSharedVars(//
-                Var.var("x"),//
-                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                        (Map) null/* annotations */)//
+        assertTrue(BOpUtility.getSharedVars(
+                Var.var("x"),
+                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                        (Map) null/* annotations */)
                 ).isEmpty());
 
         // nothing shared.
-        assertTrue(BOpUtility.getSharedVars(//
-                Var.var("x"),//
-                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                        new NV("name", "value")//
+        assertTrue(BOpUtility.getSharedVars(
+                Var.var("x"),
+                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                        new NV("name", "value")
                 )).isEmpty());
 
     }
@@ -134,104 +134,104 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
     public void test_getSharedVariables_somethingShared() {
 
         // two variables
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                        Var.var("x"), //
-                        Var.var("x")//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                        Var.var("x"),
+                        Var.var("x")
                         ));
 
         // variable and expression.
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                        Var.var("x"), //
-                        new BOpBase(//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                        Var.var("x"),
+                        new BOpBase(
                                 new BOp[] { new Constant<String>("x"),
-                                        Var.var("x") },//
+                                        Var.var("x") },
                                 null// annotations
-                        )//
+                        )
                         ));
 
         // expression and variable.
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                        new BOpBase(//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                        new BOpBase(
                                 new BOp[] { new Constant<String>("x"),
-                                        Var.var("x") },//
+                                        Var.var("x") },
                                 null// annotations
-                        ),//
-                        Var.var("x") //
+                        ),
+                        Var.var("x")
                         ));
 
         // variable and predicate w/o annotations.
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                        Var.var("x"),//
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("x") },//
-                                (Map) null/* annotations */)//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                        Var.var("x"),
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("x") },
+                                (Map) null/* annotations */)
                         ));
 
         // predicate w/o annotations and variable.
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("x") },//
-                                (Map) null/* annotations */),//
-                        Var.var("x")//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("x") },
+                                (Map) null/* annotations */),
+                        Var.var("x")
                         ));
 
         // variable and predicate w/ annotations (w/o var).
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                Var.var("x"),//
-                new Predicate(new BOp[] { Var.var("x"), Var.var("z") },//
-                        new NV("name", "value")//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                Var.var("x"),
+                new Predicate(new BOp[] { Var.var("x"), Var.var("z") },
+                        new NV("name", "value")
                 )));
 
         // variable and predicate w/ annotations (w/ same var).
-        assertSameVariables(//
-                new IVariable[] { Var.var("x") }, //
-                BOpUtility.getSharedVars(//
-                Var.var("x"),//
-                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                        new NV("name", Var.var("x"))//
+        assertSameVariables(
+                new IVariable[] { Var.var("x") },
+                BOpUtility.getSharedVars(
+                Var.var("x"),
+                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                        new NV("name", Var.var("x"))
                 )));
 
         // variable and predicate w/ annotations (w/ another var).
-        assertSameVariables(//
-                new IVariable[] { /*Var.var("x")*/ }, //
-                BOpUtility.getSharedVars(//
-                Var.var("x"),//
-                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                        new NV("name", Var.var("z"))//
+        assertSameVariables(
+                new IVariable[] { /*Var.var("x")*/ },
+                BOpUtility.getSharedVars(
+                Var.var("x"),
+                new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                        new NV("name", Var.var("z"))
                 )));
 
         // two predicates
-        assertSameVariables(//
-                new IVariable[] { Var.var("y"), Var.var("z") }, //
-                BOpUtility.getSharedVars(//
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                                new NV("name", Var.var("z"))//
-                        ), //
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                                new NV("name", Var.var("x"))//
-                        )//
+        assertSameVariables(
+                new IVariable[] { Var.var("y"), Var.var("z") },
+                BOpUtility.getSharedVars(
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                                new NV("name", Var.var("z"))
+                        ),
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                                new NV("name", Var.var("x"))
+                        )
                         ));
 
         // two predicates
-        assertSameVariables(//
-                new IVariable[] { Var.var("x"), Var.var("y"), Var.var("z") }, //
-                BOpUtility.getSharedVars(//
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("x") },//
-                                new NV("name", Var.var("z"))//
-                        ), //
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") },//
-                                new NV("name", Var.var("x"))//
-                        )//
+        assertSameVariables(
+                new IVariable[] { Var.var("x"), Var.var("y"), Var.var("z") },
+                BOpUtility.getSharedVars(
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("x") },
+                                new NV("name", Var.var("z"))
+                        ),
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") },
+                                new NV("name", Var.var("x"))
+                        )
                         ));
 
     }

@@ -52,7 +52,7 @@ public class TestCoordinateDDM extends AbstractCoordinateTestCase {
      * @todo test in all quadrants.
      */
     public void test_ctor() {
-        CoordinateDDM c = new CoordinateDDM(//
+        CoordinateDDM c = new CoordinateDDM(
                 32, 18385,// northSouth
                 -122, -36875 // eastWest
         );

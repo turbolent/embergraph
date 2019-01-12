@@ -79,12 +79,12 @@ public interface IHARequestURIRewriter extends IHAPolicyLifeCycle {
      * 
      * @see ServiceScore#getRequestURI()
      */
-    public StringBuilder rewriteURI(//
+    public StringBuilder rewriteURI(
             boolean isLeaderRequest,
-            String full_prefix,//
-            String originalRequestURI, //
-            String proxyToRequestURI,//
-            HttpServletRequest request//
+            String full_prefix,
+            String originalRequestURI,
+            String proxyToRequestURI,
+            HttpServletRequest request
             );
 
 }

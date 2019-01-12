@@ -196,8 +196,8 @@ public class PipelinedAggregationOp extends GroupByOp implements
 
         @Override
         public String toString() {
-            return super.toString() + //
-                    "{group=" + Arrays.toString(vals) + //
+            return super.toString() +
+                    "{group=" + Arrays.toString(vals) +
                     "}";
         }
 

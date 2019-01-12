@@ -152,24 +152,24 @@ public class Example2 implements Callable<Void> {
                 "http://example.org/connectionCount");
 
         final ICloseableIterator<BindingSet> itr = om
-                .evaluate("PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n" + //
+                .evaluate("PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n" +
                         "SELECT ?x ?z (count(?y) as ?connectionCount) \n"+
-                        "       (sample(?xname2) as ?xname) \n" + //
-                        "       (sample(?zname2) as ?zname) \n" + //
-                        "WHERE {\n" + //
-                        "  ?x foaf:knows ?y . \n" + //
-                        "  ?y foaf:knows ?z . \n" + //
-                        "  FILTER NOT EXISTS { ?x foaf:knows ?z } . \n" + //
-                        "  FILTER ( !sameTerm(?x,?z)) . \n"+//
-                        "  OPTIONAL { ?x rdfs:label ?xname2 } .\n"+//
-                        "  OPTIONAL { ?z rdfs:label ?zname2 } .\n"+//
-                        "} \n" + //
-                        "GROUP BY ?x ?z \n"//
+                        "       (sample(?xname2) as ?xname) \n" +
+                        "       (sample(?zname2) as ?zname) \n" +
+                        "WHERE {\n" +
+                        "  ?x foaf:knows ?y . \n" +
+                        "  ?y foaf:knows ?z . \n" +
+                        "  FILTER NOT EXISTS { ?x foaf:knows ?z } . \n" +
+                        "  FILTER ( !sameTerm(?x,?z)) . \n"+
+                        "  OPTIONAL { ?x rdfs:label ?xname2 } .\n"+
+                        "  OPTIONAL { ?z rdfs:label ?zname2 } .\n"+
+                        "} \n" +
+                        "GROUP BY ?x ?z \n"
                         /*
                          * Optionally, only see friends of a friend with more
                          * than one indirect connection.
                          */
-//                        +"HAVING (?connectionCount > 1)\n"//
+//                        +"HAVING (?connectionCount > 1)\n"
                 );
 
         /*

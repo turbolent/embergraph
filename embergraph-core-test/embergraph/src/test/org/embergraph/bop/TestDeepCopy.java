@@ -76,30 +76,30 @@ public class TestDeepCopy extends TestCase2 {
      * through the jars in the classpath. Therefore this list needs to be
      * maintained by hand.
      */
-    static final Class<?>[] all = { //
+    static final Class<?>[] all = {
         // org.embergraph.bop
-            BOp.class,//
-            BOpBase.class,//
-            Predicate.class,//
-            Constant.class,//
-            Var.class,//
-            Bind.class,//
+            BOp.class,
+            BOpBase.class,
+            Predicate.class,
+            Constant.class,
+            Var.class,
+            Bind.class,
             // org.embergraph.bop.constraint
-            EQ.class,//
-            NE.class,//
-            EQConstant.class,//
-            NEConstant.class,//
-            OR.class,//
-            INBinarySearch.class,//
+            EQ.class,
+            NE.class,
+            EQConstant.class,
+            NEConstant.class,
+            OR.class,
+            INBinarySearch.class,
             // org.embergraph.rdf.spo
-            SPOPredicate.class,//
-            SPOStarJoin.class,//
-//            org.embergraph.rdf.magic.MagicPredicate.class,//
+            SPOPredicate.class,
+            SPOStarJoin.class,
+//            org.embergraph.rdf.magic.MagicPredicate.class,
             // org.embergraph.rdf.internal.constraint
-            CompareBOp.class,//
-            IsInlineBOp.class,//
-            IsLiteralBOp.class,//
-            MathBOp.class,//
+            CompareBOp.class,
+            IsInlineBOp.class,
+            IsLiteralBOp.class,
+            MathBOp.class,
             AndBOp.class,
             EBVBOp.class,
             IsBoundBOp.class,
@@ -120,16 +120,16 @@ public class TestDeepCopy extends TestCase2 {
              * semantics since it imposes a canonizaling mapping from names to
              * object references.
              */
-            Var.class, //
+            Var.class,
             }));
 
     /**
      * Exclusion list for classes which do not support shallow copy semantics.
      */
     static final Set<Class<?>> noShallowCopy = new LinkedHashSet<Class<?>>(
-            Arrays.asList(new Class<?>[] {//
-                    Var.class,//
-                    Constant.class //
+            Arrays.asList(new Class<?>[] {
+                    Var.class,
+                    Constant.class
                     }));
 
     /**

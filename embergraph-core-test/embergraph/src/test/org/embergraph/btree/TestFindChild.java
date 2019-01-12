@@ -69,10 +69,10 @@ public class TestFindChild extends AbstractBTreeTestCase {
         final long[] childAddrs = new long[] { 1, 2, 3, 4, 0 };
         final long[] childEntryCounts = new long[]{m2,m2,m2,m2,0};
         
-        final IRaba keys = new MutableKeyBuffer(3, new byte[][] {//
-                new byte[] { 5 }, //
-                new byte[] { 9 }, //
-                new byte[] { 12 }, //
+        final IRaba keys = new MutableKeyBuffer(3, new byte[][] {
+                new byte[] { 5 },
+                new byte[] { 9 },
+                new byte[] { 12 },
                 null });
 
         final Node node = new Node(btree, 1, new MutableNodeData(nentries,
@@ -116,11 +116,11 @@ public class TestFindChild extends AbstractBTreeTestCase {
 //        final long[] childAddrs = new long[] { 1, 2, 3, 4, 0 };
 //        final int[] childEntryCounts = new int[] { m2, m2, m2, m2, 0 };
 //
-//        IKeyBuffer keys = new MutableKeyBuffer(3, new byte[][] {//
-//                new byte[] { 1, 5 }, //
-//                new byte[] { 1, 5, 9 }, //
-//                new byte[] { 1, 5, 9, 12 }, //
-//                null //
+//        IKeyBuffer keys = new MutableKeyBuffer(3, new byte[][] {
+//                new byte[] { 1, 5 },
+//                new byte[] { 1, 5, 9 },
+//                new byte[] { 1, 5, 9, 12 },
+//                null
 //                });
 //
 //        Node node = new Node(btree, 1, m, nentries, keys, childAddrs,

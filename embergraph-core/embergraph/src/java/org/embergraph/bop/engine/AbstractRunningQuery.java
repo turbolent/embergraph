@@ -625,7 +625,7 @@ abstract public class AbstractRunningQuery implements IRunningQuery {
                         queryBuffer.iterator());
 
                 // } else {
-                //
+
                 // // Note: Not used for mutation queries.
                 // queryBuffer = null;
                 // queryIterator = null;
@@ -1453,26 +1453,26 @@ abstract public class AbstractRunningQuery implements IRunningQuery {
 
     // {
     // boolean cancelled = false;
-    //
+
     // final Iterator<ConcurrentHashMap<ChunkFutureTask,ChunkFutureTask>> fitr =
     // operatorFutures.values().iterator();
-    //
+
     // while (fitr.hasNext()) {
-    //
+
     // final ConcurrentHashMap<ChunkFutureTask,ChunkFutureTask> set =
     // fitr.next();
-    //
+
     // for(ChunkFutureTask f : set.keySet()) {
-    //
+
     // if (f.cancel(mayInterruptIfRunning))
     // cancelled = true;
     //        
     // }
     //    
     // }
-    //
+
     // return cancelled;
-    //
+
     // }
 
     /**

@@ -123,7 +123,7 @@ extends AbstractASTEvaluationTestCase {
             makeIV(store.getValueFactory().createLiteral("URI"));
 
 
-        final IBindingSet[] bsets = new IBindingSet[] { //
+        final IBindingSet[] bsets = new IBindingSet[] {
                 new ListBindingSet()
         };
 

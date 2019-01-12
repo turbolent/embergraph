@@ -426,9 +426,9 @@ public class CompactTask implements Callable<Journal> {
                 final long oldCounter = oldBTree.getCounter().get();
 
                 if (INFO)
-                    log.info("name=" + name //
-                            + ", entryCount=" + entryCount//
-                            + ", checkpoint=" + oldBTree.getCheckpoint()//
+                    log.info("name=" + name
+                            + ", entryCount=" + entryCount
+                            + ", checkpoint=" + oldBTree.getCheckpoint()
                     );
 
                 // Create checkpoint for the new B+Tree.

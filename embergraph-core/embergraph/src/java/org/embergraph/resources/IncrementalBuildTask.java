@@ -546,25 +546,25 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
                 }
 
                 // describe the index partition.
-                indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(//
-                        currentpmd.getPartitionId(),//
-                        currentpmd.getSourcePartitionId(),//
-                        currentpmd.getLeftSeparatorKey(),//
-                        currentpmd.getRightSeparatorKey(),//
-                        newResources, //
+                indexMetadata.setPartitionMetadata(new LocalPartitionMetadata(
+                        currentpmd.getPartitionId(),
+                        currentpmd.getSourcePartitionId(),
+                        currentpmd.getLeftSeparatorKey(),
+                        currentpmd.getRightSeparatorKey(),
+                        newResources,
                         currentpmd.getIndexPartitionCause()
 //                        , currentpmd.getHistory()
-//                                + OverflowActionEnum.Build//
+//                                + OverflowActionEnum.Build
 //                                + "(lastCommitTime="
-//                                + segmentMetadata.getCreateTime()//
+//                                + segmentMetadata.getCreateTime()
 //                                + ",segment="
-//                                + segmentMetadata.getUUID()//
+//                                + segmentMetadata.getUUID()
 //                                + ",#buildSources="
-//                                + buildResult.sourceCount//
+//                                + buildResult.sourceCount
 //                                + ",merge="
-//                                + buildResult.compactingMerge//
+//                                + buildResult.compactingMerge
 //                                + ",counter="
-//                                + btree.getCounter().get()//
+//                                + btree.getCounter().get()
 //                                + ",oldResources="
 //                                + Arrays.toString(currentResources) + ") "
                                 ));

@@ -496,9 +496,9 @@ public class TestCounters extends TestCase {
             assertEquals(availableProcessors.lastModified(), ((ICounter) tmp
                     .getPath(availableProcessors.getPath())).lastModified());
 
-            assertEquals(//
+            assertEquals(
                     ((Integer)((Instrument) availableProcessors.getInstrument())
-                            .getCurrentValue()).intValue(),//
+                            .getCurrentValue()).intValue(),
                             ((Long)((Instrument) ((ICounter) tmp
                             .getPath(availableProcessors.getPath()))
                             .getInstrument()).getCurrentValue()).intValue());

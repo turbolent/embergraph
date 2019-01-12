@@ -211,8 +211,8 @@ public class TestGather extends AbstractSailGraphTestCase {
         // gather in-edges for :mike
         {
             
-            final Set<StatementImpl> expected = set(//
-            new StatementImpl(p.getBryan(), p.getFoafKnows(), p.getMike())//
+            final Set<StatementImpl> expected = set(
+            new StatementImpl(p.getBryan(), p.getFoafKnows(), p.getMike())
             );
 
             doGatherTest(EdgesEnum.InEdges, expected, p.getMike()/* startingVertex */);
@@ -222,9 +222,9 @@ public class TestGather extends AbstractSailGraphTestCase {
         // gather out-edges for :mike
         {
             
-            final Set<StatementImpl> expected = set(//
-                    new StatementImpl(p.getMike(), p.getRdfType(), p.getFoafPerson()),//
-                    new StatementImpl(p.getMike(), p.getFoafKnows(), p.getBryan())//
+            final Set<StatementImpl> expected = set(
+                    new StatementImpl(p.getMike(), p.getRdfType(), p.getFoafPerson()),
+                    new StatementImpl(p.getMike(), p.getFoafKnows(), p.getBryan())
             );
 
             doGatherTest(EdgesEnum.OutEdges, expected, p.getMike() /* startingVertex */);
@@ -234,10 +234,10 @@ public class TestGather extends AbstractSailGraphTestCase {
         // gather all-edges for :mike 
         {
             
-            final Set<StatementImpl> expected = set(//
-                    new StatementImpl(p.getBryan(), p.getFoafKnows(), p.getMike()),//
-                    new StatementImpl(p.getMike(), p.getRdfType(), p.getFoafPerson()),//
-                    new StatementImpl(p.getMike(), p.getFoafKnows(), p.getBryan())//
+            final Set<StatementImpl> expected = set(
+                    new StatementImpl(p.getBryan(), p.getFoafKnows(), p.getMike()),
+                    new StatementImpl(p.getMike(), p.getRdfType(), p.getFoafPerson()),
+                    new StatementImpl(p.getMike(), p.getFoafKnows(), p.getBryan())
             );
 
             doGatherTest(EdgesEnum.AllEdges, expected, p.getMike()/* startingVertex */);

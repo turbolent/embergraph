@@ -50,9 +50,9 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
     // * graticule used by trig functions.
     // */
     // public void test_toTransverseGraticule() {
-    //
+
     // assertEquals(90d,CoordinateUtility.toTransverseGraticule(0));
-    //
+
     // assertEquals(0d,CoordinateUtility.toTransverseGraticule(90));
     //        
     // }

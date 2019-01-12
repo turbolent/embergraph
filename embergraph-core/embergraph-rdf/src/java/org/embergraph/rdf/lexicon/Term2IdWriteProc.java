@@ -442,11 +442,11 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result> imp
 //            }
 //            
 //            log.warn("after task"+
-//            ": nnew="+nnew+//
-//            ", partitionId="+ndx.getIndexMetadata().getPartitionMetadata().getPartitionId()+//
-//            ", pid="+pid+//
-//            ", ctr="+ctr+//
-//            ", counter="+counter.getClass().getName()+//
+//            ": nnew="+nnew+
+//            ", partitionId="+ndx.getIndexMetadata().getPartitionMetadata().getPartitionId()+
+//            ", pid="+pid+
+//            ", ctr="+ctr+
+//            ", counter="+counter.getClass().getName()+
 //            ", sourceCheckpoint="+btree.getCheckpoint()// btree was loaded from here.
 //            );
 //            
@@ -481,10 +481,10 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result> imp
              * not stable.
              */
             
-            throw new AssertionError("different termId assigned"+//
-                    ": oldId=" + oldId + //
-                    ", newId=" + termId + //
-                    ", key=" + BytesUtil.toString(key)+//
+            throw new AssertionError("different termId assigned"+
+                    ": oldId=" + oldId +
+                    ", newId=" + termId +
+                    ", key=" + BytesUtil.toString(key)+
                     ", pmd="+ndx.getIndexMetadata().getPartitionMetadata());
 
         }
@@ -504,13 +504,13 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result> imp
 //                        final long mask = 0xffffffffL;
 //                        final int ctr = (int) (id0 & mask);
             
-            throw new AssertionError("assignment not unique"+//
-                    ": termId=" + termId +//
-                    ", oldKey=" + BytesUtil.toString(oldKey) + //
-                    ", newKey=" + BytesUtil.toString(key)+//
-                    ", pmd="+ndx.getIndexMetadata().getPartitionMetadata()+//
-//                                ", pid="+pid+", ctr="+ctr+//
-                    ", counter="+counter+//
+            throw new AssertionError("assignment not unique"+
+                    ": termId=" + termId +
+                    ", oldKey=" + BytesUtil.toString(oldKey) +
+                    ", newKey=" + BytesUtil.toString(key)+
+                    ", pmd="+ndx.getIndexMetadata().getPartitionMetadata()+
+//                                ", pid="+pid+", ctr="+ctr+
+                    ", counter="+counter+
                     ", counter="+counter.getClass().getName());
             
         }

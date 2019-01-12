@@ -258,11 +258,11 @@ public class Tx implements ITx {
      *      cache for access to historical index views on the Journal by name
      *      and commitTime. </a>
      */
-    public Tx(//
-            final AbstractLocalTransactionManager localTransactionManager,//
-            final IResourceManager resourceManager, //
+    public Tx(
+            final AbstractLocalTransactionManager localTransactionManager,
+            final IResourceManager resourceManager,
             final long startTime,
-            final long readsOnCommitTime//
+            final long readsOnCommitTime
     ) {
 
         if (localTransactionManager == null)

@@ -328,9 +328,9 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
              * index partition boundary then we use the prior index partition).
              */
 
-            itr = mdi.rangeIterator(//
-                    fromKey,//
-                    toKey, //
+            itr = mdi.rangeIterator(
+                    fromKey,
+                    toKey,
                     0, // capacity
                     flags | IRangeQuery.REVERSE,
                     null // filter
@@ -347,16 +347,16 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
              * the index partition which would contain that fromKey.
              */
 
-            final byte[] _fromKey = fromKey == null //
-                ? null //
-                : mdi.find(fromKey).getLeftSeparatorKey()//
+            final byte[] _fromKey = fromKey == null
+                ? null
+                : mdi.find(fromKey).getLeftSeparatorKey()
                 ;
 
-            itr = mdi.rangeIterator(//
-                    _fromKey,//
-                    toKey, //
+            itr = mdi.rangeIterator(
+                    _fromKey,
+                    toKey,
                     0, // capacity
-                    flags,//
+                    flags,
                     null // filter
                     );
 

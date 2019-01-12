@@ -341,9 +341,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.FLOAT,// metricType
 						"mem_free",// metric name (again)
 						"KB", // units
-						slope,//
-						tmax,//
-						dmax,//
+						slope,
+						tmax,
+						dmax,
 						getMap(GROUP_MEMORY, "Free Memory",
 								"Amount of available memory")) {
 					/**
@@ -366,9 +366,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						"mem_faults_major",// metric name (again)
 						"faults/sec", // units
-						slope,//
-						tmax,//
-						dmax,//
+						slope,
+						tmax,
+						dmax,
 						getMap(GROUP_MEMORY, "Major page faults",
 								"Faults which required loading a page from disk.")));
 
@@ -383,9 +383,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						"mem_faults_minor",// metric name (again)
 						"faults/sec", // units
-						slope,//
-						tmax,//
-						dmax,//
+						slope,
+						tmax,
+						dmax,
 						getMap(GROUP_MEMORY, "Minor page faults",
 								"Faults that did not require loading a page from disk.")));
 
@@ -414,9 +414,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 							GangliaMessageTypeEnum.DOUBLE,// metricType
 							"disk_reads",// metric name (again)
 							"reads/sec", // units
-							slope,//
-							tmax,//
-							dmax,//
+							slope,
+							tmax,
+							dmax,
 							getMap(GROUP_DISK, "Disk Reads Per Second",
 									"The #of disk read operations per second.")));
 
@@ -431,9 +431,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 							GangliaMessageTypeEnum.DOUBLE,// metricType
 							"disk_writes",// metric name (again)
 							"writes/sec", // units
-							slope,//
-							tmax,//
-							dmax,//
+							slope,
+							tmax,
+							dmax,
 							getMap(GROUP_DISK, "Disk Writes Per Second",
 									"The #of disk write operations per second.")));
 
@@ -448,9 +448,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 							GangliaMessageTypeEnum.DOUBLE,// metricType
 							"disk_xfers",// metric name (again)
 							"xfers/sec", // units
-							slope,//
-							tmax,//
-							dmax,//
+							slope,
+							tmax,
+							dmax,
 							getMap(GROUP_DISK,
 									"Disk Transfers Per Second",
 									"Disk operations per second for the host (total of disk reads per second and disk writes per second)")));
@@ -473,9 +473,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 							GangliaMessageTypeEnum.DOUBLE,// metricType
 							"disk_bytes_read",// metric name (again)
 							"bytes/sec", // units
-							slope,//
-							tmax,//
-							dmax,//
+							slope,
+							tmax,
+							dmax,
 							getMap(GROUP_DISK, "Disk Bytes Read Per Second",
 									"Disk bytes read per second for the host")));
 
@@ -490,9 +490,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 							GangliaMessageTypeEnum.DOUBLE,// metricType
 							"disk_bytes_written",// metric name (again)
 							"bytes/sec", // units
-							slope,//
-							tmax,//
-							dmax,//
+							slope,
+							tmax,
+							dmax,
 							getMap(GROUP_DISK, "Disk Bytes Written Per Second",
 									"Disk bytes written per second for the host")));
 
@@ -507,9 +507,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 							GangliaMessageTypeEnum.DOUBLE,// metricType
 							"disk_bytes",// metric name (again)
 							"bytes/sec", // units
-							slope,//
-							tmax,//
-							dmax,//
+							slope,
+							tmax,
+							dmax,
 							getMap(GROUP_DISK,
 									"Disk Bytes Per Second",
 									"Disk bytes per second for the host (total of bytes read and bytes written per second)")));
@@ -560,9 +560,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						getServiceMetricName("cpu","cpu_total"),// metric name (again)
 						"%", // units
-						GangliaSlopeEnum.both,// slope,//
+						GangliaSlopeEnum.both,// slope,
 						90,// tmax
-						dmax,// dmax,//
+						dmax,// dmax,
 						getMap(GROUP_CPU, "CPU Total",
 								"Percentage of the time the processor is not idle")));
 
@@ -577,9 +577,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						getServiceMetricName("cpu","cpu_system"),//metric name
 						"%", // units
-						GangliaSlopeEnum.both,// slope,//
+						GangliaSlopeEnum.both,// slope,
 						90,// tmax
-						dmax,// dmax,//
+						dmax,// dmax,
 						getMap(GROUP_CPU,
 								"System Time",
 								"Percentage of the time the processor is not idle that it is executing at the system (aka kernel) level (normalized to 100% in single CPU and SMP environments)")));
@@ -595,9 +595,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						getServiceMetricName("cpu","cpu_user"),//metric name
 						"%", // units
-						GangliaSlopeEnum.both,// slope,//
+						GangliaSlopeEnum.both,// slope,
 						90,// tmax
-						dmax,// dmax,//
+						dmax,// dmax,
 						getMap(GROUP_CPU,
 								"User Time",
 								"Percentage of the time the processor is not idle that it is executing at the user level (normalized to 100% in single CPU and SMP environments)")));
@@ -619,9 +619,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						getServiceMetricName("memory","mem_faults_major"),//metric name
 						"faults/sec", // units
-						slope,//
-						tmax,//
-						dmax,//
+						slope,
+						tmax,
+						dmax,
 						getMap(GROUP_MEMORY, "Major Page Faults",
 								"Faults which required loading a page from disk")));
 
@@ -636,9 +636,9 @@ public class BigdataMetadataFactory extends GangliaCoreMetricDecls implements
 						GangliaMessageTypeEnum.DOUBLE,// metricType
 						getServiceMetricName("memory","mem_faults_minor"),//metric name
 						"faults/sec", // units
-						slope,//
-						tmax,//
-						dmax,//
+						slope,
+						tmax,
+						dmax,
 						getMap(GROUP_MEMORY, "Minor Page Faults",
 								"Faults that did not require loading a page from disk")));
 

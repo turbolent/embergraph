@@ -441,8 +441,8 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
                 }
             }
 
-            this.vars = new IVariable[] {//
-                    searchVar,//
+            this.vars = new IVariable[] {
+                    searchVar,
                     relVar == null ? Var.var() : relVar,// must be non-null.
                     rankVar == null ? Var.var() : rankVar // must be non-null.
             };
@@ -480,9 +480,9 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
             }
 
             return (Hiterator) textIndex.search(new FullTextQuery(
-        		s,//
+        		s,
                 query.getLanguage(),// 
-                prefixMatch,//
+                prefixMatch,
                 matchRegex == null ? null : matchRegex.stringValue(),
                 matchAllTerms,
                 matchExact,

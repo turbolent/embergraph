@@ -213,7 +213,7 @@ public class ManagedIntArray implements IManagedIntArray {
      */
 
     @Override
-    final public void put(final int pos, //
+    final public void put(final int pos,
             final int[] b) {
 
         put(pos, b, 0, b.length);
@@ -221,7 +221,7 @@ public class ManagedIntArray implements IManagedIntArray {
     }
 
     @Override
-    final public void put(final int pos,//
+    final public void put(final int pos,
             final int[] b, final int off, final int len) {
 
         ensureCapacity(pos + len);
@@ -400,7 +400,7 @@ public class ManagedIntArray implements IManagedIntArray {
         }
 
         @Override
-        final public void put(final int dstoff,//
+        final public void put(final int dstoff,
                 final int[] src, final int srcoff, final int srclen) {
 
             assert rangeCheck(dstoff, srclen);

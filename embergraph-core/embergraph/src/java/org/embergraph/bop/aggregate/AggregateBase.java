@@ -155,9 +155,9 @@ abstract public class AggregateBase<E> extends ImmutableBOp implements IAggregat
 	public AggregateBase(//final FunctionCode functionCode,
 			final boolean distinct, final IValueExpression<E>...expr) {
 
-		this(expr, NV.asMap(//
-//				new NV(Annotations.FUNCTION_CODE, functionCode), //
-				new NV(Annotations.DISTINCT, distinct))//
+		this(expr, NV.asMap(
+//				new NV(Annotations.FUNCTION_CODE, functionCode),
+				new NV(Annotations.DISTINCT, distinct))
 		);
 
 	}

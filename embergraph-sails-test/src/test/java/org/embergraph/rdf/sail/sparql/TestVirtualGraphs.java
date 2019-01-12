@@ -114,18 +114,18 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
     public void test_virtualGraphs_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
-                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + //
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT ?who ?g ?mbox\n" + //
-                "FROM <http://example.org/dft.ttl>\n" + //
-                "FROM NAMED VIRTUAL GRAPH <http://example.org/vg>\n" + //
-//                "FROM NAMED <http://example.org/alice>\n" + //
-//                "FROM NAMED <http://example.org/bob>\n" + //
-                "WHERE {\n" + //
-                "    ?g dc:publisher ?who .\n" + //
-                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" + //
-                "}"//
+        final String sparql = "" +
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT ?who ?g ?mbox\n" +
+                "FROM <http://example.org/dft.ttl>\n" +
+                "FROM NAMED VIRTUAL GRAPH <http://example.org/vg>\n" +
+//                "FROM NAMED <http://example.org/alice>\n" +
+//                "FROM NAMED <http://example.org/bob>\n" +
+                "WHERE {\n" +
+                "    ?g dc:publisher ?who .\n" +
+                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" +
+                "}"
         ;
 
         /*
@@ -270,16 +270,16 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
     public void test_virtualGraphs_02() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
-                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + //
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT ?who ?g ?mbox\n" + //
-                "FROM <http://example.org/dft.ttl>\n" + //
-                "FROM VIRTUAL GRAPH <http://example.org/vg>\n" + //
-                "WHERE {\n" + //
-                "    ?g dc:publisher ?who .\n" + //
-                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" + //
-                "}"//
+        final String sparql = "" +
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT ?who ?g ?mbox\n" +
+                "FROM <http://example.org/dft.ttl>\n" +
+                "FROM VIRTUAL GRAPH <http://example.org/vg>\n" +
+                "WHERE {\n" +
+                "    ?g dc:publisher ?who .\n" +
+                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" +
+                "}"
         ;
 
         /*

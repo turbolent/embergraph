@@ -271,7 +271,7 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
 
         assert buf.pos() == buf.limit() : buf.toString() + " : src=" + raba;
 
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         return new CodedRabaImpl(len, slice, size);

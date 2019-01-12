@@ -52,7 +52,7 @@ final class ConstructDistinctSPOHint extends AbstractBooleanQueryHint {
             return;
 
             // } else {
-            //
+
             // super.attach(context, scope, op, value);
 
         }

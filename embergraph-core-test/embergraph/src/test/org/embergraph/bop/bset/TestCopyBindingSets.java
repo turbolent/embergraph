@@ -138,8 +138,8 @@ public class TestCopyBindingSets extends TestCase2 {
         final int bopId = 1;
 
         final CopyOp query = new CopyOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(BOp.Annotations.BOP_ID, bopId),//
+                .asMap(new NV[] {
+                new NV(BOp.Annotations.BOP_ID, bopId),
                 }));
 
         // the expected solutions (default sink).
@@ -186,8 +186,8 @@ public class TestCopyBindingSets extends TestCase2 {
         final int bopId = 1;
 
         final Tee query = new Tee(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(BOp.Annotations.BOP_ID, bopId),//
+                .asMap(new NV[] {
+                new NV(BOp.Annotations.BOP_ID, bopId),
                 new NV(CopyOp.Annotations.ALT_SINK_REF, 2),
                 }));
 
@@ -241,12 +241,12 @@ public class TestCopyBindingSets extends TestCase2 {
         final int bopId = 1;
 
         final CopyOp query = new CopyOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, bopId),//
+                .asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, bopId),
                         new NV(CopyOp.Annotations.CONSTRAINTS,
                                 new IConstraint[] {
                         		Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))
-                        }),//
+                        }),
                 }));
 
         // the expected solutions (default sink).

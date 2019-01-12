@@ -288,9 +288,9 @@ public class RootBlockUtility {
              * root block.
              */
 
-            rootBlock = (cc0 > cc1 //
-                    ? (alternateRootBlock ? rootBlock1 : rootBlock0) //
-                    : (alternateRootBlock ? rootBlock0 : rootBlock1)//
+            rootBlock = (cc0 > cc1
+                    ? (alternateRootBlock ? rootBlock1 : rootBlock0)
+                    : (alternateRootBlock ? rootBlock0 : rootBlock1)
                     );
 
         }
@@ -353,15 +353,15 @@ public class RootBlockUtility {
         rootBlock0 = new RootBlockView(true,
                 offsetBits, nextOffset, firstCommitTime,
                 lastCommitTime, commitCounter, commitRecordAddr,
-                commitRecordIndexAddr, storeUUID, //
-                blockSequence, quorumToken,//
+                commitRecordIndexAddr, storeUUID,
+                blockSequence, quorumToken,
                 0L, 0L, stenum, createTime, closeTime, RootBlockView.currentVersion, checker);
         
         rootBlock1 = new RootBlockView(false,
                 offsetBits, nextOffset, firstCommitTime,
                 lastCommitTime, commitCounter, commitRecordAddr,
-                commitRecordIndexAddr, storeUUID, //
-                blockSequence, quorumToken,//
+                commitRecordIndexAddr, storeUUID,
+                blockSequence, quorumToken,
                 0L, 0L, stenum, createTime, closeTime, RootBlockView.currentVersion, checker);
 
         this.rootBlock = rootBlock0;

@@ -130,12 +130,12 @@ public class WarmUpTask implements Callable<Map<String,BaseIndexStats>> {
     *           read (the recommended warm up procedure does not read the
     *           leaves).
     */
-   public WarmUpTask(//
-         final Journal journal,//
-         final List<String> namespaces, //
-         final long timestamp,//
-         final int nparallel,//
-         final boolean visitLeaves//
+   public WarmUpTask(
+         final Journal journal,
+         final List<String> namespaces,
+         final long timestamp,
+         final int nparallel,
+         final boolean visitLeaves
    ) {
       if (journal == null)
          throw new IllegalArgumentException();

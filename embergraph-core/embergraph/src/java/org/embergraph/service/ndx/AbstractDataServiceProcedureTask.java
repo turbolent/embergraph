@@ -279,7 +279,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
             throw new RuntimeException("DataService not found: " + locator);
 
         // the name of the index partition.
-        final String name = DataService.getIndexPartitionName(//
+        final String name = DataService.getIndexPartitionName(
                 ndx.getName(), // the name of the scale-out index.
                 split.pmd.getPartitionId() // the index partition identifier.
                 );

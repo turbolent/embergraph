@@ -219,7 +219,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         /*
          * The data to insert (in key order).
          */
-        final E[] a = {//
+        final E[] a = {
                 // partition0
                 new E("John", "Mary"),// 
                 new E("Leon", "Paul"),// 
@@ -232,15 +232,15 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         // The separator key between the two index partitions.
         separatorKey = KeyBuilder.newUnicodeInstance().append("Mary").getKey();
 
-        final byte[][] separatorKeys = new byte[][] {//
-                new byte[] {}, //
-                separatorKey //
+        final byte[][] separatorKeys = new byte[][] {
+                new byte[] {},
+                separatorKey
         };
 
         // two partitions on the same data service.
-        final UUID[] dataServices = new UUID[] {//
-                dataService0.getServiceUUID(),//
-                dataService0.getServiceUUID(),//
+        final UUID[] dataServices = new UUID[] {
+                dataService0.getServiceUUID(),
+                dataService0.getServiceUUID(),
         };
 
         /*
@@ -285,15 +285,15 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
 
         final Predicate<E> pred = new Predicate<E>(new IVariableOrConstant[] {
                 Var.var("name"), Var.var("value") }, NV
-                .asMap(new NV[] {//
-                        new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),//
-                        new NV(Annotations.REMOTE_ACCESS_PATH, true),//
+                .asMap(new NV[] {
+                        new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                        new NV(Annotations.REMOTE_ACCESS_PATH, true),
                         // Note: turns off shard-wise parallelism!
-                        new NV(Annotations.FLAGS,IRangeQuery.DEFAULT),//
+                        new NV(Annotations.FLAGS,IRangeQuery.DEFAULT),
                 }));
 
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 // partition0
                 new E("John", "Mary"),// 
                 new E("Leon", "Paul"),// 
@@ -351,13 +351,13 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
 
         final Predicate<E> pred = new Predicate<E>(new IVariableOrConstant[] {
                 new Constant<String>("John"), Var.var("value") }, NV
-                .asMap(new NV[] {//
-                        new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),//
-                        new NV(Annotations.REMOTE_ACCESS_PATH, true),//
+                .asMap(new NV[] {
+                        new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                        new NV(Annotations.REMOTE_ACCESS_PATH, true),
                 }));
 
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("John", "Mary"),// 
         };
         
@@ -409,13 +409,13 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
 
         final Predicate<E> pred = new Predicate<E>(new IVariableOrConstant[] {
                 new Constant<String>("Mary"), Var.var("value") }, NV
-                .asMap(new NV[] {//
-                        new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),//
-                        new NV(Annotations.REMOTE_ACCESS_PATH, true),//
+                .asMap(new NV[] {
+                        new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                        new NV(Annotations.REMOTE_ACCESS_PATH, true),
                 }));
 
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("Mary", "John"),// 
                 new E("Mary", "Paul"),// 
         };

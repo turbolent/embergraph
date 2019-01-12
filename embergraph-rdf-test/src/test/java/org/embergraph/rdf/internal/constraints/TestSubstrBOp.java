@@ -92,11 +92,11 @@ public class TestSubstrBOp extends ProxyTestCase {
                 // Cache the value on the IV.
                 plain_text.getIV().setValue(plain_text);
 
-                final IV actual = new SubstrBOp(//
-                        new Constant<IV>(plain_text.getIV()), //
-                        new Constant<IV>(_1), //
-                        new Constant<IV>(_3),//
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new SubstrBOp(
+                        new Constant<IV>(plain_text.getIV()),
+                        new Constant<IV>(_1),
+                        new Constant<IV>(_3),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -110,11 +110,11 @@ public class TestSubstrBOp extends ProxyTestCase {
                 // Cache the value on the IV.
                 plain_text.getIV().setValue(plain_text);
 
-                final IV actual = new SubstrBOp(//
-                        new Constant<IV>(plain_text.getIV()), //
-                        new Constant<IV>(_1), //
-                        new Constant<IV>(_9999),//
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new SubstrBOp(
+                        new Constant<IV>(plain_text.getIV()),
+                        new Constant<IV>(_1),
+                        new Constant<IV>(_9999),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -128,11 +128,11 @@ public class TestSubstrBOp extends ProxyTestCase {
                 // Cache the value on the IV.
                 plain_text.getIV().setValue(plain_text);
 
-                final IV actual = new SubstrBOp(//
-                        new Constant<IV>(plain_text.getIV()), //
-                        new Constant<IV>(_0), //
-                        new Constant<IV>(_3),//
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new SubstrBOp(
+                        new Constant<IV>(plain_text.getIV()),
+                        new Constant<IV>(_0),
+                        new Constant<IV>(_3),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);

@@ -99,9 +99,9 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
      * The #of bytes required by the current {@link IndexSegmentCheckpoint}
      * record format.
      */
-    static final int SIZE = //
-            SIZEOF_MAGIC + //
-            SIZEOF_VERSION + //
+    static final int SIZE =
+            SIZEOF_MAGIC +
+            SIZEOF_VERSION +
             Bytes.SIZEOF_LONG + // timestamp0
             Bytes.SIZEOF_UUID + // segment UUID.
             SIZEOF_OFFSET_BITS + // #of bits used to represent a byte offset.
@@ -546,32 +546,32 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
      * 
      * @todo javadoc.
      */
-    public IndexSegmentCheckpoint(//
-            //
-            final int offsetBits,//
+    public IndexSegmentCheckpoint(
+
+            final int offsetBits,
             // basic checkpoint record.
-            final int height, //
-            final int nleaves,//
-            final int nnodes,//
-            final long nentries,//
-            //
-            final int maxNodeOrLeafLength,//
+            final int height,
+            final int nleaves,
+            final int nnodes,
+            final long nentries,
+
+            final int maxNodeOrLeafLength,
             // region extents
-            final long offsetLeaves, final long extentLeaves,//
+            final long offsetLeaves, final long extentLeaves,
             final long offsetNodes, final long extentNodes,// 
-            final long offsetBlobs, final long extentBlobs,//
+            final long offsetBlobs, final long extentBlobs,
             // simple addresses
-            final long addrRoot, //
-            final long addrMetadata, //
-            final long addrBloom,//
-            final long addrFirstLeaf,//
-            final long addrLastLeaf,//
+            final long addrRoot,
+            final long addrMetadata,
+            final long addrBloom,
+            final long addrFirstLeaf,
+            final long addrLastLeaf,
             // misc.
-            final long length,//
-            final boolean compactingMerge,//
+            final long length,
+            final boolean compactingMerge,
             final boolean useChecksums,
-            final UUID segmentUUID,//
-            final long commitTime//
+            final UUID segmentUUID,
+            final long commitTime
     ) {
         
         /*

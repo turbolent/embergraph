@@ -243,32 +243,32 @@ abstract public class AbstractDistinctSolutionsTestCase extends TestCase2 {
         final int distinctId = 1;
 
         final PipelineOp query = newDistinctBindingSetsOp(new BOp[]{},
-                    new NV(HTreeDistinctBindingSetsOp.Annotations.BOP_ID,distinctId),//
-                    new NV(HTreeDistinctBindingSetsOp.Annotations.VARIABLES,vars),//
+                    new NV(HTreeDistinctBindingSetsOp.Annotations.BOP_ID,distinctId),
+                    new NV(HTreeDistinctBindingSetsOp.Annotations.VARIABLES,vars),
                     new NV(HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
-                            NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),//
+                            NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
                     new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.SHARED_STATE, true),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                     new NV(IPredicate.Annotations.RELATION_NAME,  new String[]{"dummy"})              
                     );
         
         // the expected solutions
-        final IBindingSet[] expected = new IBindingSet[] {//
-        new ListBindingSet(//
-                new IVariable[] { x },//
-                new IConstant[] { new Constant<IV>(setup.john) }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.mary) }//
-                ), new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.paul) }//
-                ), new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<IV>(setup.leon) }//
+        final IBindingSet[] expected = new IBindingSet[] {
+        new ListBindingSet(
+                new IVariable[] { x },
+                new IConstant[] { new Constant<IV>(setup.john) }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.mary) }
+                ), new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.paul) }
+                ), new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<IV>(setup.leon) }
                 ), };
 
         final MockQueryContext queryContext = new MockQueryContext(queryId);

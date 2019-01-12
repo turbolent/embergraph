@@ -79,11 +79,11 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
         private static final long serialVersionUID = 1L;
 
-        public IHashJoinUtility create(//
-                final BOpContext<IBindingSet> context,//
-                final INamedSolutionSetRef namedSetRef,//
-                final PipelineOp op,//
-                final JoinTypeEnum joinType//
+        public IHashJoinUtility create(
+                final BOpContext<IBindingSet> context,
+                final INamedSolutionSetRef namedSetRef,
+                final PipelineOp op,
+                final JoinTypeEnum joinType
                 ) {
 
             return new JVMHashJoinUtility(op, joinType);
@@ -326,16 +326,16 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         final IVariable<?>[] keyVars = filter ? (IVariable<?>[]) op
                 .getProperty(JoinAnnotations.SELECT) : joinVars;
                 
-        rightSolutionsRef.set(//
-            new JVMHashIndex(//
-                keyVars,//
-                indexSolutionsHavingUnboundJoinVars,//
+        rightSolutionsRef.set(
+            new JVMHashIndex(
+                keyVars,
+                indexSolutionsHavingUnboundJoinVars,
                 new LinkedHashMap<Key, Bucket>(op.getProperty(
                     HashMapAnnotations.INITIAL_CAPACITY,
-                    HashMapAnnotations.DEFAULT_INITIAL_CAPACITY),//
+                    HashMapAnnotations.DEFAULT_INITIAL_CAPACITY),
                     op.getProperty(HashMapAnnotations.LOAD_FACTOR,
-                    HashMapAnnotations.DEFAULT_LOAD_FACTOR)//
-                )//
+                    HashMapAnnotations.DEFAULT_LOAD_FACTOR)
+                )
         ));
     }
     
@@ -520,10 +520,10 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     }
 
     @Override
-    public void hashJoin(//
-            final ICloseableIterator<IBindingSet[]> leftItr,//
-            final BOpStats stats,//
-            final IBuffer<IBindingSet> outputBuffer//
+    public void hashJoin(
+            final ICloseableIterator<IBindingSet[]> leftItr,
+            final BOpStats stats,
+            final IBuffer<IBindingSet> outputBuffer
             ) {
 
         hashJoin2(leftItr, stats, outputBuffer, constraints);
@@ -539,11 +539,11 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
      * OPTIONAL joins.
      */
     @Override
-    public void hashJoin2(//
-            final ICloseableIterator<IBindingSet[]> leftItr,//
+    public void hashJoin2(
+            final ICloseableIterator<IBindingSet[]> leftItr,
             final BOpStats stats,
-            final IBuffer<IBindingSet> outputBuffer,//
-            final IConstraint[] constraints//
+            final IBuffer<IBindingSet> outputBuffer,
+            final IConstraint[] constraints
             ) {
 
         if (!open.get())
@@ -608,11 +608,11 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                         }
 
                         // See if the solutions join.
-                        final IBindingSet outSolution = BOpContext.bind(//
-                                right.solution,//
-                                left,//
-                                constraints,//
-                                selectVars//
+                        final IBindingSet outSolution = BOpContext.bind(
+                                right.solution,
+                                left,
+                                constraints,
+                                selectVars
                                 );
 
                         switch (joinType) {
@@ -1083,11 +1083,11 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
      *         immediately advance to the next bucket from the first source
      *         without attempting a join.
      */
-    static private boolean advanceOtherSources(//
-            final Bucket[][] sortedSourceBuckets,//
-            final int[] sourceIndex,//
-            final Bucket[] currentBucket,//
-            final boolean optional//
+    static private boolean advanceOtherSources(
+            final Bucket[][] sortedSourceBuckets,
+            final int[] sourceIndex,
+            final Bucket[] currentBucket,
+            final boolean optional
             ) {
 
         // The next collision bucket in hash code order from the 1st source.
@@ -1161,11 +1161,11 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     }
     
     @Override
-    public void mergeJoin(//
-            final IHashJoinUtility[] others,//
-            final IBuffer<IBindingSet> outputBuffer, //
-            final IConstraint[] constraints,//
-            final boolean optional//
+    public void mergeJoin(
+            final IHashJoinUtility[] others,
+            final IBuffer<IBindingSet> outputBuffer,
+            final IConstraint[] constraints,
+            final boolean optional
             ) {
 
         /*
@@ -1292,10 +1292,10 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
      *            <code>true</code> iff the join is optional.
      * @param outputBuffer
      */
-    static private void mergeJoin(//
-            final Bucket[] currentBucket,//
-            final IConstraint[] constraints,//
-            final boolean optional,//
+    static private void mergeJoin(
+            final Bucket[] currentBucket,
+            final IConstraint[] constraints,
+            final boolean optional,
             final IBuffer<IBindingSet> outputBuffer) {
 
 		final int nsources = currentBucket.length;
@@ -1372,11 +1372,11 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                 // See if the solutions join. 
             	if (set[i] != null) {
                 in = 
-                BOpContext.bind(//
+                BOpContext.bind(
                 		in,// 
                         set[i].solution,// 
                         constraints,// TODO constraint[][]
-                        null//
+                        null
                         );
             	}
 

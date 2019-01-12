@@ -356,7 +356,7 @@ public class ParseOp extends PipelineOp {
          * DATA, DELETE/INSERT, CLEAR, COPY, ADD, etc). TM is only available for
          * triples and SIDS on a Journal.
          */
-        //
+
 //        /** StatementBuffer capacity. */
 //        private final int bufferCapacity;
 //        

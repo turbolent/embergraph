@@ -340,10 +340,10 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
 //        int ntries = 0;
 //        while (ninsert < ntuples) {
 //
-//            final byte[] key = keyBuilder.reset()//
-//                    .append(s[r.nextInt(s.length)])//
-//                    .append(p[r.nextInt(p.length)])//
-//                    .append(o[r.nextInt(o.length)])//
+//            final byte[] key = keyBuilder.reset()
+//                    .append(s[r.nextInt(s.length)])
+//                    .append(p[r.nextInt(p.length)])
+//                    .append(o[r.nextInt(o.length)])
 //                    .getKey();
 //            
 //            if (!btree.contains(key)) {
@@ -572,11 +572,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    , null // history
             );
@@ -708,11 +708,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    , null // history
             );
@@ -818,11 +818,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );
@@ -912,11 +912,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );
@@ -1014,11 +1014,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
             final byte[] fromKey = new byte[0];
             final byte[] toKey = null;
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );
@@ -1184,11 +1184,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );
@@ -1273,11 +1273,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );
@@ -1363,11 +1363,11 @@ public class TestSegSplitter extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    ,null // history
             );

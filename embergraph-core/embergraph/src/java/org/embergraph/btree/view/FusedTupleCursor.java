@@ -176,9 +176,9 @@ public class FusedTupleCursor<E> extends FusedTupleIterator<ITupleCursor<E>, E>
                     
                     while (tuple != null) {
 
-                        final int ret = BytesUtil.compareBytes(//
-                                tuple.getKey(), //
-                                lastKeyVisited  //
+                        final int ret = BytesUtil.compareBytes(
+                                tuple.getKey(),
+                                lastKeyVisited
                                 );
 
                         final boolean ok = forward ? ret > 0 : ret < 0;

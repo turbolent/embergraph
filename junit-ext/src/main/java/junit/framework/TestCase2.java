@@ -2469,7 +2469,7 @@ abstract public class TestCase2
 //    
 //    // Make sure maxUlps is non-negative and small enough that the
 //    // default NAN won't compare as equal to anything.
-//    //
+//
 //    // TODO The range check here is for float.  The max possible
 //    // legal range is larger for double.
 //    

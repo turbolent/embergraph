@@ -120,10 +120,10 @@ public class TestTicket1388 extends ProxyBigdataSailTestCase {
             cxn.commit();
 
            final String query = "SELECT ?myDate (count(?doc) as ?countDoc) \n " + // 
-       			"{ ?doc rdf:type <http://www.example.com/Document> . \n " + //
-    			" ?doc <http://www.example.com/created> ?date . \n " + //
-    			" filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) >= \"2014-04-11\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n " + //
-    			" filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) < \"2014-05-30\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n " + //
+       			"{ ?doc rdf:type <http://www.example.com/Document> . \n " +
+    			" ?doc <http://www.example.com/created> ?date . \n " +
+    			" filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) >= \"2014-04-11\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n " +
+    			" filter((<http://www.w3.org/2001/XMLSchema#date>(?date)) < \"2014-05-30\"^^<http://www.w3.org/2001/XMLSchema#date>) .\n " +
     			" bind((<http://www.w3.org/2001/XMLSchema#date>(?date)) as ?myDate) .\n " + // 
     			"} group by ?myDate";
             

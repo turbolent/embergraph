@@ -138,8 +138,8 @@ public class TestBOpUtility extends TestCase2 {
 //
 //        // @todo make the returned set distinct?
 //        
-//        final Object[] expected = new Object[]{//
-//                a,//
+//        final Object[] expected = new Object[]{
+//                a,
 //        };
 //        // @todo verify the actual data visited.
 //		assertSameIterator(expected, BOpUtility.getSpannedVariables(bop));

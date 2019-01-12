@@ -57,7 +57,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		long configTimeout = 1;
 		
 		
-		final HttpServletRequest req = new MockRequest(//
+		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
@@ -75,7 +75,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		final String timeout = "1"; 
 		long configTimeout = 1000;
 		
-		final HttpServletRequest req = new MockRequest(//
+		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         final long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
@@ -95,7 +95,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		long configTimeout = 1000;
 		
 		
-		final HttpServletRequest req = new MockRequest(//
+		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         final long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
@@ -115,7 +115,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		long configTimeout = 10000;
 		
 		
-		final HttpServletRequest req = new MockRequest(//
+		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         final long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);

@@ -98,9 +98,9 @@ abstract public class AbstractTestCase
     @SuppressWarnings("rawtypes")
     protected final IV NULL = null;
     
-    //
+
     // Constructors.
-    //
+
 
     public AbstractTestCase() {}
     
@@ -152,9 +152,9 @@ abstract public class AbstractTestCase
     
     private long begin;
     
-    //
+
     // Properties
-    //
+
     
     private Properties m_properties;
     
@@ -259,9 +259,9 @@ abstract public class AbstractTestCase
     //************************************************************
     //************************************************************
     //************************************************************
-    //
+
     // Test helpers.
-    //
+
 
 //    protected static final long N = IRawTripleStore.N;
 
@@ -791,11 +791,11 @@ abstract public class AbstractTestCase
      * @param nerrs
      *            Used to report the #of errors.
      */
-    static private void assertSameStatements(//
-            final AbstractTripleStore db,//
-            final SPOKeyOrder keyOrderExpected,//
-            final SPOKeyOrder keyOrderActual,//
-            final AtomicInteger nerrs,//
+    static private void assertSameStatements(
+            final AbstractTripleStore db,
+            final SPOKeyOrder keyOrderExpected,
+            final SPOKeyOrder keyOrderActual,
+            final AtomicInteger nerrs,
             final int maxerrors
     ) {
 

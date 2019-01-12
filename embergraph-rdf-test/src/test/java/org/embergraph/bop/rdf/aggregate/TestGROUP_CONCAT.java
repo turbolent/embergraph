@@ -182,11 +182,11 @@ public class TestGROUP_CONCAT extends TestCase2 {
         };
         
         final GROUP_CONCAT op = new GROUP_CONCAT(new BOp[]{lprice},
-                NV.asMap(new NV[]{//
-                        new NV(GROUP_CONCAT.Annotations.DISTINCT,false),//
-                        new NV(GROUP_CONCAT.Annotations.NAMESPACE,namespace),//
-                        new NV(GROUP_CONCAT.Annotations.SEPARATOR,"."),//
-                        new NV(GROUP_CONCAT.Annotations.VALUE_LIMIT,3),//
+                NV.asMap(new NV[]{
+                        new NV(GROUP_CONCAT.Annotations.DISTINCT,false),
+                        new NV(GROUP_CONCAT.Annotations.NAMESPACE,namespace),
+                        new NV(GROUP_CONCAT.Annotations.SEPARATOR,"."),
+                        new NV(GROUP_CONCAT.Annotations.VALUE_LIMIT,3),
                 }));
         assertFalse(op.isDistinct());
         assertFalse(op.isWildcard());
@@ -254,11 +254,11 @@ public class TestGROUP_CONCAT extends TestCase2 {
         };
         
         final GROUP_CONCAT op = new GROUP_CONCAT(new BOp[]{lprice},
-                NV.asMap(new NV[]{//
-                        new NV(GROUP_CONCAT.Annotations.DISTINCT,false),//
-                        new NV(GROUP_CONCAT.Annotations.NAMESPACE,namespace),//
-                        new NV(GROUP_CONCAT.Annotations.SEPARATOR,"."),//
-                        new NV(GROUP_CONCAT.Annotations.CHARACTER_LIMIT,3),//
+                NV.asMap(new NV[]{
+                        new NV(GROUP_CONCAT.Annotations.DISTINCT,false),
+                        new NV(GROUP_CONCAT.Annotations.NAMESPACE,namespace),
+                        new NV(GROUP_CONCAT.Annotations.SEPARATOR,"."),
+                        new NV(GROUP_CONCAT.Annotations.CHARACTER_LIMIT,3),
                 }));
         assertFalse(op.isDistinct());
         assertFalse(op.isWildcard());
@@ -341,7 +341,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
                    false, // distinct
                    new StrBOp(
                            new MathBOp(lprice, new Constant<IV>(new XSDNumericIV(1)),
-                                   MathBOp.MathOp.PLUS, globals), globals), //
+                                   MathBOp.MathOp.PLUS, globals), globals),
                    namespace,// namespace
                    ","// separator
            );
@@ -426,7 +426,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
            };
    
            // GROUP_CONCAT(lprice+1)
-           final GROUP_CONCAT op = new GROUP_CONCAT(//
+           final GROUP_CONCAT op = new GROUP_CONCAT(
                    false,// distinct
                    new MathBOp(lprice, new Constant<IV>(new XSDNumericIV(1)),
                            MathBOp.MathOp.PLUS, globals), namespace, // namespace

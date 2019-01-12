@@ -1112,23 +1112,23 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
                 final IRootBlockView rootBlock0 = new RootBlockView(true,
                         offsetBits, nextOffset, firstCommitTime,
                         lastCommitTime, commitCounter, commitRecordAddr,
-                        commitRecordIndexAddr, uuid, //
-                        blockSequence,//
-                        quorumToken,//
+                        commitRecordIndexAddr, uuid,
+                        blockSequence,
+                        quorumToken,
                         0L, // metaStartAddr
                         0L, // metaStartBits
-                        storeType,//
+                        storeType,
                         createTime, closedTime, RootBlockView.currentVersion,
                         checker);
                 final IRootBlockView rootBlock1 = new RootBlockView(false,
                         offsetBits, nextOffset, firstCommitTime,
                         lastCommitTime, commitCounter, commitRecordAddr,
-                        commitRecordIndexAddr, uuid, //
-                        blockSequence,//
-                        quorumToken,//
+                        commitRecordIndexAddr, uuid,
+                        blockSequence,
+                        quorumToken,
                         0L, // metaStartAddr
                         0L, // metaStartBits
-                        storeType,//
+                        storeType,
                         createTime, closedTime, RootBlockView.currentVersion,
                         checker);
                 
@@ -1239,9 +1239,9 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 
 					_bufferStrategy = new WORMStrategy(
 					        0L,// soft limit for maximumExtent
-					        minimumExtension,//
-                            fileMetadata, //
-                            quorum//
+					        minimumExtension,
+                            fileMetadata,
+                            quorum
                             );
 
 					this._rootBlock = fileMetadata.rootBlock;
@@ -2148,19 +2148,19 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 			 */
 			final long metaStartAddr = _bufferStrategy.getMetaStartAddr();
 			final long metaBitsAddr = _bufferStrategy.getMetaBitsAddr();
-			final IRootBlockView newRootBlock = new RootBlockView(//
+			final IRootBlockView newRootBlock = new RootBlockView(
 					!old.isRootBlock0(), old.getOffsetBits(), old.getNextOffset(), old.getFirstCommitTime(), old
-							.getLastCommitTime(), //
-					old.getCommitCounter() + 1, //
-					old.getCommitRecordAddr(), //
-					old.getCommitRecordIndexAddr(), //
-					old.getUUID(), //
+							.getLastCommitTime(),
+					old.getCommitCounter() + 1,
+					old.getCommitRecordAddr(),
+					old.getCommitRecordIndexAddr(),
+					old.getUUID(),
 					0L, // blockSequence (writes are discarded)
-					quorumToken, //
-					metaStartAddr, //
-					metaBitsAddr, //
-					old.getStoreType(), //
-					old.getCreateTime(), closeTime, //
+					quorumToken,
+					metaStartAddr,
+					metaBitsAddr,
+					old.getStoreType(),
+					old.getCreateTime(), closeTime,
 					old.getVersion(), checker);
 
 			/*
@@ -2219,49 +2219,49 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 			// * uncommitted writes.
 			// */
 			// synchronized (_name2Addr) {
-			//
+
 			// final Iterator<Map.Entry<String, WeakReference<BTree>>> itr =
 			// _name2Addr
 			// .indexCacheEntryIterator();
-			//
+
 			// while (itr.hasNext()) {
-			//
+
 			// final java.util.Map.Entry<String, WeakReference<BTree>> entry =
 			// itr
 			// .next();
-			//
+
 			// final String name = entry.getKey();
-			//
+
 			// final BTree btree = entry.getValue().get();
-			//
+
 			// if (btree == null) {
-			//
+
 			// // Note: Weak reference was cleared.
 			// continue;
-			//
+
 			// }
-			//
+
 			// if (btree.needsCheckpoint()) {
-			//
+
 			// // Note: Don't convert a dirty BTree.
 			// continue;
-			//
+
 			// }
-			//
+
 			// // Recover the Entry which has the last checkpointAddr.
 			// final Name2Addr.Entry _entry = _name2Addr.getEntry(name);
-			//
+
 			// if (_entry == null) {
-			//
+
 			// /*
 			// * There must be an Entry for each index in Name2Addr's
 			// * cache.
 			// */
-			//
+
 			// throw new AssertionError("No entry: name=" + name);
-			//
+
 			// }
-			//
+
 			// /*
 			// * Mark the index as read-only (the whole journal no longer
 			// * accepts writes) before placing it in the historical index
@@ -2269,9 +2269,9 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 			// * obtain a BTree that is not marked as read-only from the
 			// * historical index cache).
 			// */
-			//
+
 			// btree.convertToReadOnly();
-			//
+
 			// /*
 			// * Put the BTree into the historical index cache under that
 			// * checkpointAddr.
@@ -2279,15 +2279,15 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 			// * Note: putIfAbsent() avoids the potential problem of
 			// * having more than one object for the same checkpointAddr.
 			// */
-			//
+
 			// historicalIndexCache.putIfAbsent(_entry.checkpointAddr,
 			// btree);
-			//
+
 			// } // next index.
-			//
+
 			// // discard since no writers are allowed.
 			// _name2Addr = null;
-			//
+
 			// }
 			// close();
 		} finally {
@@ -3187,9 +3187,9 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
          */
         private final CAT elapsedTotalCommitNanos = new CAT();
 
-        //
+
         // HA counters
-        //
+
         
         /**
          * Elapsed nanoseconds for GATHER (consensus release time protocol : HA
@@ -3250,9 +3250,9 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
                 }
             });
             
-            //
+
             // HA
-            //
+
             
             root.addCounter("gatherSecs", new Instrument<Double>() {
                 @Override
@@ -3639,9 +3639,9 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
                     old.getOffsetBits(), nextOffset, firstCommitTime,
                     lastCommitTime, newCommitCounter, commitRecordAddr,
                     commitRecordIndexAddr,
-                    old.getUUID(), //
+                    old.getUUID(),
                     blockSequence,
-                    commitToken,//
+                    commitToken,
                     metaStartAddr, metaBitsAddr, old.getStoreType(),
                     old.getCreateTime(), old.getCloseTime(), old.getVersion(),
                     store.checker);
@@ -3873,13 +3873,13 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
                 prepareJoinedAndNonJoinedServices = new JoinedAndNonJoinedServices(
                         quorum);
 
-                prepareRequest = new PrepareRequest(//
-                        consensusReleaseTime,//
-                        gatherJoinedAndNonJoinedServices,//
-                        prepareJoinedAndNonJoinedServices,//
-                        newRootBlock,//
+                prepareRequest = new PrepareRequest(
+                        consensusReleaseTime,
+                        gatherJoinedAndNonJoinedServices,
+                        prepareJoinedAndNonJoinedServices,
+                        newRootBlock,
                         quorumService.getPrepareTimeout(), // timeout
-                        TimeUnit.MILLISECONDS//
+                        TimeUnit.MILLISECONDS
                 );
 
                 // issue prepare request.
@@ -7463,8 +7463,8 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
             private final boolean isLeader;
             private final IHA2PhasePrepareMessage prepareMessage;
 
-            public Prepare2PhaseTask(//
-                    final boolean isLeader,//
+            public Prepare2PhaseTask(
+                    final boolean isLeader,
                     final IHA2PhasePrepareMessage prepareMessage) {
 
                 if (prepareMessage == null)
@@ -8205,7 +8205,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 					// final ILRUCache<Long, Object> cache = (LRUNexus.INSTANCE
 					// == null) ? null
 					// : LRUNexus.getCache(jnl);
-					//
+
 					// Object obj = cache.get(addr);
 					//                    
 					// if(obj != null && obj instanceof IDataRecordAccess) {

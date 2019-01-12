@@ -89,7 +89,7 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
             
             final String update = "INSERT DATA  {" + // 
             		
-            		"GRAPH <http://graphA> {<s:s1> <p:p1> <o:o1> .} " + //
+            		"GRAPH <http://graphA> {<s:s1> <p:p1> <o:o1> .} " +
        			
     			"} ";
 
@@ -139,7 +139,7 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
          
             final String update = "DELETE DATA  {" + // 
             
-						"GRAPH <http://graphA> {<s:s1> <p:p1> <o:o1> .} " + //
+						"GRAPH <http://graphA> {<s:s1> <p:p1> <o:o1> .} " +
        			
     			"} ";
 
@@ -187,7 +187,7 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
             
             cxn.begin();
            
-            final String update = "with <c:graphA> " + //
+            final String update = "with <c:graphA> " +
             					 "INSERT { <s:s1> <p:p1> <o:o1> . } where {}";
 
             final Update  q = cxn.prepareUpdate(QueryLanguage.SPARQL, update);
@@ -236,7 +236,7 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
             
             
            
-            final String query = "SELECT ?g ?s ?p ?o" + //
+            final String query = "SELECT ?g ?s ?p ?o" +
 								"WHERE { GRAPH ?g { ?s ?p ?o }}";
 								
 

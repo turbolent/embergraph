@@ -112,8 +112,8 @@ public class CacheOnceMetadataIndex implements IMetadataIndex {
         /*
          * Allocate a cache for the defined index partitions.
          */
-        this.mdi = MetadataIndex.create(//
-                fed.getTempStore(),//
+        this.mdi = MetadataIndex.create(
+                fed.getTempStore(),
                 mdmd.getIndexUUID(),// UUID of the metadata index.
                 mdmd.getManagedIndexMetadata()// the managed index's metadata.
                 );
@@ -151,14 +151,14 @@ public class CacheOnceMetadataIndex implements IMetadataIndex {
          * Read the locators from the remote metadata service.
          */
         final ITupleIterator<?> itr = new RawDataServiceTupleIterator(fed
-                .getMetadataService(),//
-                MetadataService.getMetadataIndexName(name), //
-                timestamp,//
+                .getMetadataService(),
+                MetadataService.getMetadataIndexName(name),
+                timestamp,
                 true, // readConsistent
-                fromKey, //
-                toKey, //
+                fromKey,
+                toKey,
                 0, // capacity
-                IRangeQuery.KEYS | IRangeQuery.VALS | IRangeQuery.READONLY, //
+                IRangeQuery.KEYS | IRangeQuery.VALS | IRangeQuery.READONLY,
                 null // filter
         );
 

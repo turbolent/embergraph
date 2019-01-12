@@ -214,7 +214,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
 //                        new BindingImpl("a", brad),
 //                        new BindingImpl("b", john)
 //                        ));
-  //
+
 //                final TupleQueryResult result = tupleQuery.evaluate();
 //                compare(result, answer);
 
@@ -299,7 +299,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
 //                        new BindingImpl("a", brad),
 //                        new BindingImpl("b", john)
 //                        ));
-  //
+
 //                final TupleQueryResult result = tupleQuery.evaluate();
 //                compare(result, answer);
 

@@ -155,9 +155,9 @@ public class URIExtensionIV<V extends BigdataURI>
     		return getValue().stringValue();
     }
     
-    ////////////////////////
+    //////////////////////
     // OpenRDF URI methods
-    ////////////////////////
+    //////////////////////
     
     @Override
     public String stringValue() {
@@ -178,9 +178,9 @@ public class URIExtensionIV<V extends BigdataURI>
         return getValue().getLocalName();
     }
     
-    //
+
     // End of OpenRDF URI methods.
-    //
+
     
     @Override
     @SuppressWarnings("rawtypes")

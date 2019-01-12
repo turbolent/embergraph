@@ -55,10 +55,10 @@ public class SailGraphLoader extends GraphLoader {
 
             try {
 
-                cxn.addStatement(//
-                        stmt.getSubject(), //
-                        stmt.getPredicate(), //
-                        stmt.getObject(), //
+                cxn.addStatement(
+                        stmt.getSubject(),
+                        stmt.getPredicate(),
+                        stmt.getObject(),
                         c);
 
                 if (c == null || c.length == 0)

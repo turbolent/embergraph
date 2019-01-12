@@ -72,10 +72,10 @@ public class TestURIExtensionIV extends TestCase2 {
     
     private static class MockVocabularyDecl implements VocabularyDecl {
 
-        static private final URI[] uris = new URI[]{//
-            new URIImpl("http://www.embergraph.org/"), //
-            new URIImpl(RDFS.NAMESPACE), //
-            new URIImpl("http://www.Department0.University0.edu/"),//
+        static private final URI[] uris = new URI[]{
+            new URIImpl("http://www.embergraph.org/"),
+            new URIImpl(RDFS.NAMESPACE),
+            new URIImpl("http://www.Department0.University0.edu/"),
         };
         
         @Override

@@ -884,10 +884,10 @@ public class DataLoader {
         if (rdfFormat == null)
             throw new IllegalArgumentException();
 
-        return loadData(//
-                new String[] { resource }, //
-                new String[] { baseURL },//
-                new RDFFormat[] { rdfFormat }//
+        return loadData(
+                new String[] { resource },
+                new String[] { baseURL },
+                new RDFFormat[] { rdfFormat }
                 );
 
     }
@@ -928,12 +928,12 @@ public class DataLoader {
 
             final boolean endOfBatch = i + 1 == resource.length;
 
-            loadData2(//
-                    totals,//
-                    resource[i],//
-                    baseURL[i],//
-                    rdfFormat[i],//
-                    endOfBatch//
+            loadData2(
+                    totals,
+                    resource[i],
+                    baseURL[i],
+                    rdfFormat[i],
+                    endOfBatch
                     );
             
         }
@@ -1553,11 +1553,11 @@ public class DataLoader {
 					final String msg = e.getStatementsProcessed() + " stmts buffered in "
 							+ (e.getTimeElapsed() / 1000d) + " secs, rate= "
 							+ e.getInsertRate()
-							+ (baseURI != null ? ", baseURL=" + baseURI : "") + //
-							(", totalStatementsSoFar="//
-							+ (e.getStatementsProcessed()//
-							+ totals.toldTriples.get())//
-							);//
+							+ (baseURI != null ? ", baseURL=" + baseURI : "") +
+							(", totalStatementsSoFar="
+							+ (e.getStatementsProcessed()
+							+ totals.toldTriples.get())
+							);
 
 					if (log.isInfoEnabled())
 						log.info(msg);

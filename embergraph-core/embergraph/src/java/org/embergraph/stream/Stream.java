@@ -93,12 +93,12 @@ abstract public class Stream implements ICheckpointProtocol {
     // * A parameter was less than zero.
     // */
     // protected static final String ERROR_LESS_THAN_ZERO = "Less than zero";
-    //
+
     // /**
     // * A parameter was too large.
     // */
     // protected static final String ERROR_TOO_LARGE = "Too large";
-    //
+
     /**
      * The index is read-only but a mutation operation was requested.
      */
@@ -223,9 +223,9 @@ abstract public class Stream implements ICheckpointProtocol {
         this.checkpoint = checkpoint; // save reference.
 
         // this.height = checkpoint.getHeight();
-        //
+
         // this.nnodes = checkpoint.getNodeCount();
-        //
+
         // this.nleaves = checkpoint.getLeafCount();
 
         this.entryCount = checkpoint.getEntryCount();
@@ -653,17 +653,17 @@ abstract public class Stream implements ICheckpointProtocol {
              */
             @SuppressWarnings("rawtypes")
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    IRawStore.class,//
-                    Checkpoint.class,//
-                    IndexMetadata.class, //
+                    IRawStore.class,
+                    Checkpoint.class,
+                    IndexMetadata.class,
                     Boolean.TYPE
                     });
 
             final SolutionSetStream solutions = (SolutionSetStream) ctor
-                    .newInstance(new Object[] { //
-                            store,//
-                            checkpoint, //
-                            metadata, //
+                    .newInstance(new Object[] {
+                            store,
+                            checkpoint,
+                            metadata,
                             readOnly
                     });
 
@@ -1014,10 +1014,10 @@ abstract public class Stream implements ICheckpointProtocol {
      
      return false;
      
-//     if (metadata.getMetadataAddr() != 0L && //
-//             (root == null || //
-//                     ( !root.dirty //
-//                     && checkpoint.getRootAddr() == root.identity //
+//     if (metadata.getMetadataAddr() != 0L &&
+//             (root == null ||
+//                     ( !root.dirty
+//                     && checkpoint.getRootAddr() == root.identity
 //                     && checkpoint.getCounter() == counter.get())
 //             )
 //     ) {
@@ -1139,12 +1139,12 @@ abstract public class Stream implements ICheckpointProtocol {
 
             @SuppressWarnings("rawtypes")
             final Constructor ctor = cl
-                    .getConstructor(new Class[] { Stream.class //
+                    .getConstructor(new Class[] { Stream.class
                     });
 
             final Checkpoint checkpoint = (Checkpoint) ctor
-                    .newInstance(new Object[] { //
-                    this //
+                    .newInstance(new Object[] {
+                    this
                     });
 
             return checkpoint;

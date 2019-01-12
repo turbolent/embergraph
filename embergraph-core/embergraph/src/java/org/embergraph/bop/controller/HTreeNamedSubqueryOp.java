@@ -292,15 +292,15 @@ public class HTreeNamedSubqueryOp extends PipelineOp implements
                 // default sink
                 final IBlockingBuffer<IBindingSet[]> sink = context.getSink();
 
-                BOpUtility.copy(//
-                        source, //
-                        sink,//
+                BOpUtility.copy(
+                        source,
+                        sink,
                         null, // sink2
                         null, // mergeSolution (aka parent's source solution).
                         null, // selectVars (aka projection).
                         null, // constraints
                         null  // stats were updated above.
-                        //context.getStats()//
+                        //context.getStats()
                         );
 
                 sink.flush();

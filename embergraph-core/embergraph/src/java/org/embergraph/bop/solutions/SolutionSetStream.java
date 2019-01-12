@@ -402,8 +402,8 @@ public final class SolutionSetStream extends Stream implements
          */
 
         if (solutionSetStats != null
-                && (solutionSetStats.addr == IRawStore.NULL //
-                 || solutionSetStats.addr != getCheckpoint().getBloomFilterAddr())//
+                && (solutionSetStats.addr == IRawStore.NULL
+                 || solutionSetStats.addr != getCheckpoint().getBloomFilterAddr())
                  ) {
 
             solutionSetStats.addr = getStore()

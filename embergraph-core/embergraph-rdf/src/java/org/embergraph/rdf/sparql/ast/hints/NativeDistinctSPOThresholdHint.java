@@ -49,7 +49,7 @@ final class NativeDistinctSPOThresholdHint extends AbstractLongQueryHint {
             return;
 
             // } else {
-            //
+
             // super.attach(context, scope, op, value);
 
         }

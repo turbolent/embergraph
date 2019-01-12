@@ -292,14 +292,14 @@ public class Depends {
     
     static private final Dep[] depends;
     static {
-        depends = new Dep[] { //
+        depends = new Dep[] {
             // standalone
-            log4j,//
-            lucene,//
-            colt,//
-            dsiutils,//
-            fastutil,//
-            highScaleLib,//
+            log4j,
+            lucene,
+            colt,
+            dsiutils,
+            fastutil,
+            highScaleLib,
             apacheCommonsCodec,
             apacheCommonsFileUpload,
             apacheCommonsIO,
@@ -309,30 +309,30 @@ public class Depends {
             apacheHttpCore,
             apacheHttpMime,
             // webapp
-//            cweb,//
-            slf4j,//
-            sesame,//
-            semargl,//
-            icu,//
-//            nxparser,//
-            nanohttp,//
-            jetty,//
-            jsonld,//
-            servletApi,//
-            jacksonCore,//
-            blueprintsCore,//
-            rexsterCore,//
-            bigdataGanglia,//
+//            cweb,
+            slf4j,
+            sesame,
+            semargl,
+            icu,
+//            nxparser,
+            nanohttp,
+            jetty,
+            jsonld,
+            servletApi,
+            jacksonCore,
+            blueprintsCore,
+            rexsterCore,
+            bigdataGanglia,
             // scale-out
-            jini,//
-            zookeeper,//
+            jini,
+            zookeeper,
             // javascript
-            flot,//
-            jquery,//
+            flot,
+            jquery,
             // linked, but not used.
-//            iris,//
-//            jgrapht,//
-//            tuprolog,//
+//            iris,
+//            jgrapht,
+//            tuprolog,
         };
         Arrays.sort(depends, new OrderByName());
     }

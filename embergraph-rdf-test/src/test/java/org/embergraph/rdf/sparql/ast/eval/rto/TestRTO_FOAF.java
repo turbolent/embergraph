@@ -58,10 +58,10 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
      * card.
      */
     private static final String[] dataFiles = new String[] { // data files
-            "src/test/resources/data/foaf/data-0.nq.gz",//
-            "src/test/resources/data/foaf/data-1.nq.gz",//
-            "src/test/resources/data/foaf/data-2.nq.gz",//
-    };//
+            "src/test/resources/data/foaf/data-0.nq.gz",
+            "src/test/resources/data/foaf/data-1.nq.gz",
+            "src/test/resources/data/foaf/data-2.nq.gz",
+    };
     
     @Override
     public Properties getProperties() {
@@ -105,10 +105,10 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
      */
     public void test_FOAF_Q1() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/FOAF-Q1", // testURI,
                 "rto/FOAF-Q1.rq",// queryFileURL
-                dataFiles,//
+                dataFiles,
                 "rto/FOAF-Q1.srx"// resultFileURL
         );
         
@@ -150,10 +150,10 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
      */
     public void test_FOAF_Q2() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/FOAF-Q2", // testURI,
                 "rto/FOAF-Q2.rq",// queryFileURL
-                dataFiles,//
+                dataFiles,
                 "rto/FOAF-Q2.srx"// resultFileURL
         );
         
@@ -202,10 +202,10 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
      */
     public void test_FOAF_Q10() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/FOAF-Q10", // testURI,
                 "rto/FOAF-Q10.rq",// queryFileURL
-                dataFiles,//
+                dataFiles,
                 "rto/FOAF-Q10.srx"// resultFileURL
         );
         

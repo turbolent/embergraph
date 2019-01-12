@@ -138,14 +138,14 @@ public class HA2PhasePrepareMessage implements IHA2PhasePrepareMessage, Serializ
     
     @Override
     public String toString() {
-        return super.toString()+"{"//
-                +"consensusReleaseTime="+getConsensusReleaseTime()//
-                +",isGatherService="+isGatherService()//
-                +",isPrepareService="+isJoinedService()//
-                +",isRootBlock0="+isRootBlock0()//
-                +",rootBlock()="+getRootBlock()//
-                +",timeout="+getTimeout()//
-                +",unit="+getUnit()//
+        return super.toString()+"{"
+                +"consensusReleaseTime="+getConsensusReleaseTime()
+                +",isGatherService="+isGatherService()
+                +",isPrepareService="+isJoinedService()
+                +",isRootBlock0="+isRootBlock0()
+                +",rootBlock()="+getRootBlock()
+                +",timeout="+getTimeout()
+                +",unit="+getUnit()
                 +"}";
     }
     

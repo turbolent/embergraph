@@ -107,7 +107,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
 	//	able to check the minimum number of bits for all tag sizes.  No
 	//	SectorAllocator should be on the free list unless there are free bits
 	//	available for all tags.
-	//
+
 	// In order to return a SectorAllocator to the free list we can check not
 	//	only the total number of bits, but the average number of bits for the
 	//	tag, dividing the numebr of free bits by the total (number of blocks)

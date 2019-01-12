@@ -514,13 +514,13 @@ public class KeyDecoder {
         
         return "KeyDecoder{"
                 + (SparseRowStore.schemaNameUnicodeClean ? "schema="
-                        + getSchemaName() + "," : "")//
-                + "primaryKeyType="+ primaryKeyType//
+                        + getSchemaName() + "," : "")
+                + "primaryKeyType="+ primaryKeyType
                 + (SparseRowStore.primaryKeyUnicodeClean ? ",primaryKey="
-                        + getPrimaryKey() : "")//
-                + ",col=" + col //
-                + ",timestamp=" + timestamp //
-                + ",key=" + BytesUtil.toString(key) //
+                        + getPrimaryKey() : "")
+                + ",col=" + col
+                + ",timestamp=" + timestamp
+                + ",key=" + BytesUtil.toString(key)
                 + "}";
 
     }

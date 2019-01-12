@@ -559,9 +559,9 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //
 //            // de-serialize the value.
 //            final BigdataValue value = valueSer
-//                    .deserialize(//
-//                            new DataInputBuffer(buf.array(), 0/* off */, nbytes/* len */), //
-//                            tmp//
+//                    .deserialize(
+//                            new DataInputBuffer(buf.array(), 0/* off */, nbytes/* len */),
+//                            tmp
 //                    );
 //
 //            // #of bytes in the serialized IV.

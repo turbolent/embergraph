@@ -9,7 +9,7 @@ import org.openrdf.model.impl.URIImpl;
 
 public class TestVocabularyDecl_BLZG1591 implements VocabularyDecl {
 
-    static private final URI[] uris = new URI[]{//
+    static private final URI[] uris = new URI[]{
     	// two named graphs
         new URIImpl("http://test.com/P")
     };

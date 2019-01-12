@@ -125,9 +125,9 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
                     -1, // not a move.
                     new byte[] {}, // leftSeparator
                     null, // rightSeparator
-                    new IResourceMetadata[] {//
-                            resourceManager.getLiveJournal().getResourceMetadata(), //
-                    }, //
+                    new IResourceMetadata[] {
+                            resourceManager.getLiveJournal().getResourceMetadata(),
+                    },
                     IndexPartitionCause.register(resourceManager)
 //                    "" // history
                     ));
@@ -315,9 +315,9 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
                     -1, // not a move.
                     new byte[] {}, // leftSeparator
                     null, // rightSeparator
-                    new IResourceMetadata[] {//
-                            resourceManager.getLiveJournal().getResourceMetadata(), //
-                    }, //
+                    new IResourceMetadata[] {
+                            resourceManager.getLiveJournal().getResourceMetadata(),
+                    },
                     IndexPartitionCause.register(resourceManager)
 //                    ,"" // history
                     ));

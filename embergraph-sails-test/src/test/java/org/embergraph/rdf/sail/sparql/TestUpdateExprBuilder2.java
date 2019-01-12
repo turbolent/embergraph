@@ -92,16 +92,16 @@ public class TestUpdateExprBuilder2 extends AbstractBigdataExprBuilderTestCase {
     public void test_delete_insert__insertInto_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
        
-        final String sparql = //
-                  "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"//
-                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"//
-                + "INSERT INTO %cached_solution_set\n"//
-                + "SELECT ?book ?date\n"//
-                + "WHERE\n"//
-                + "   { GRAPH  <http://example/bookStore>\n"//
-                + "        { ?book dc:date ?date .\n"//
-                + "          FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"//
-                + "          ?book ?p ?v\n"//
+        final String sparql =
+                  "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
+                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+                + "INSERT INTO %cached_solution_set\n"
+                + "SELECT ?book ?date\n"
+                + "WHERE\n"
+                + "   { GRAPH  <http://example/bookStore>\n"
+                + "        { ?book dc:date ?date .\n"
+                + "          FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"
+                + "          ?book ?p ?v\n"
                 + "} }";
         
         final IV dcDate = makeIV(valueFactory.createURI("http://purl.org/dc/elements/1.1/date"));
@@ -189,16 +189,16 @@ public class TestUpdateExprBuilder2 extends AbstractBigdataExprBuilderTestCase {
     public void test_delete_insert__deleteFrom_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
        
-        final String sparql = //
-                  "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"//
-                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"//
-                + "DELETE FROM %cached_solution_set\n"//
-                + "SELECT ?book ?date\n"//
-                + "WHERE\n"//
-                + "   { GRAPH  <http://example/bookStore>\n"//
-                + "        { ?book dc:date ?date .\n"//
-                + "          FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"//
-                + "          ?book ?p ?v\n"//
+        final String sparql =
+                  "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
+                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+                + "DELETE FROM %cached_solution_set\n"
+                + "SELECT ?book ?date\n"
+                + "WHERE\n"
+                + "   { GRAPH  <http://example/bookStore>\n"
+                + "        { ?book dc:date ?date .\n"
+                + "          FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"
+                + "          ?book ?p ?v\n"
                 + "} }";
         
         final IV dcDate = makeIV(valueFactory.createURI("http://purl.org/dc/elements/1.1/date"));
@@ -342,7 +342,7 @@ public class TestUpdateExprBuilder2 extends AbstractBigdataExprBuilderTestCase {
             throws MalformedQueryException, TokenMgrError, ParseException {
 
         //CREATE ( SILENT )? SOLUTIONS SolutionSetName { TriplesTemplate }
-        final String sparql = "create silent solutions %solutionSet {\n"//
+        final String sparql = "create silent solutions %solutionSet {\n"
                 +"  hint:Query hint:engine \"cache\" .\n"
                 +"  hint:Query hint:expireAge \"100000\"^^<http://www.w3.org/2001/XMLSchema#long> .\n"
         		+"}"
@@ -382,18 +382,18 @@ public class TestUpdateExprBuilder2 extends AbstractBigdataExprBuilderTestCase {
           final BigdataLiteral millis = valueFactory.createLiteral("100000",XSD.LONG);
 
             final BigdataStatement[] params = new BigdataStatement[] {
-                    valueFactory.createStatement(//
-                            (BigdataResource)hintQuery, //
-                            (BigdataURI)hintEngine,//
-                            (BigdataValue)cache, //
+                    valueFactory.createStatement(
+                            (BigdataResource)hintQuery,
+                            (BigdataURI)hintEngine,
+                            (BigdataValue)cache,
                             null, // c
-                            StatementEnum.Explicit),//
-                    valueFactory.createStatement(//
-                            (BigdataResource)hintQuery,//
-                            (BigdataURI)hintExpireAge,//
-                            (BigdataValue)millis,//
+                            StatementEnum.Explicit),
+                    valueFactory.createStatement(
+                            (BigdataResource)hintQuery,
+                            (BigdataURI)hintExpireAge,
+                            (BigdataValue)millis,
                             null,// c 
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
             };
             
             op.setParams(params);

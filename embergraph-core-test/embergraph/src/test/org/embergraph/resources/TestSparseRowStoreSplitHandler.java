@@ -173,11 +173,11 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
         try {
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    pidFactory.nextPartitionId(getName()),//
+                    pidFactory.nextPartitionId(getName()),
                     -1, // sourcePartitionId
-                    fromKey, //
-                    toKey,//
-                    new IResourceMetadata[] { store.getResourceMetadata() }, //
+                    fromKey,
+                    toKey,
+                    new IResourceMetadata[] { store.getResourceMetadata() },
                     null // cause
 //                    null // history
             );
@@ -275,9 +275,9 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
 
                 // Compare the first prefix.length bytes of those keys (unsigned
                 // byte[] comparison).
-                final int cmp = BytesUtil.compareBytesWithLenAndOffset(//
-                        0/* aoff */, prefix.length/* alen */, keyBefore,//
-                        0/* boff */, prefix.length/* blen */, keyAfter//
+                final int cmp = BytesUtil.compareBytesWithLenAndOffset(
+                        0/* aoff */, prefix.length/* alen */, keyBefore,
+                        0/* boff */, prefix.length/* blen */, keyAfter
                         );
                 
                 // The 1st key prefix must be strictly LT the 2nd key prefix.

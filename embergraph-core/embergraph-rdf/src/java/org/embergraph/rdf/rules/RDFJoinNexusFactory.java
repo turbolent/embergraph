@@ -93,19 +93,19 @@ public class RDFJoinNexusFactory extends AbstractJoinNexusFactory {
      *            <code>true</code> iff {@link Axioms#isOwlSameAs()} AND
      *            <code>(x owl:sameAs y)</code> is not empty in the data.
      */
-	public RDFJoinNexusFactory(//
-	        final ActionEnum action,//
-            final long writeTimestamp,//
-            final long readTimestamp,//
-            final Properties properties,//
-            final int solutionFlags, //
-            final IElementFilter<?> filter,//
-            final IEvaluationPlanFactory planFactory,//
-            final IRuleTaskFactory defaultRuleTaskFactory,//
+	public RDFJoinNexusFactory(
+	        final ActionEnum action,
+            final long writeTimestamp,
+            final long readTimestamp,
+            final Properties properties,
+            final int solutionFlags,
+            final IElementFilter<?> filter,
+            final IEvaluationPlanFactory planFactory,
+            final IRuleTaskFactory defaultRuleTaskFactory,
             // RDF specific parameters.
-            final RuleContextEnum ruleContext,//
-            final boolean justify, //
-            final boolean backchain, //
+            final RuleContextEnum ruleContext,
+            final boolean justify,
+            final boolean backchain,
             final boolean isOwlSameAsUsed// 
             ) {
 

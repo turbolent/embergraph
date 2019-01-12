@@ -107,8 +107,8 @@ public class SPOPredicate extends Predicate<ISPO> {
 //        this(new String[] { relationName }, -1/* partitionId */, s, p, o,
 //                null/* c */, false/* optional */, null/* constraint */, null/* expander */);
         super(
-                new IVariableOrConstant[] { s, p, o }, //
-                new NV(Annotations.RELATION_NAME, new String[] { relationName }) //
+                new IVariableOrConstant[] { s, p, o },
+                new NV(Annotations.RELATION_NAME, new String[] { relationName })
         );
 
     }
@@ -132,8 +132,8 @@ public class SPOPredicate extends Predicate<ISPO> {
 
 //        this(new String[] { relationName }, -1/* partitionId */, s, p, o, c,
 //                false/* optional */, null/* constraint */, null/* expander */);
-        super(new IVariableOrConstant[] { s, p, o, c }, //
-                new NV(Annotations.RELATION_NAME, relationName) //
+        super(new IVariableOrConstant[] { s, p, o, c },
+                new NV(Annotations.RELATION_NAME, relationName)
         );
 
     }
@@ -156,7 +156,7 @@ public class SPOPredicate extends Predicate<ISPO> {
 
 //        this(relationName, -1/* partitionId */, s, p, o,
 //                null/* c */, false/* optional */, null/* constraint */, null/* expander */);
-        super(new IVariableOrConstant[] { s, p, o }, //
+        super(new IVariableOrConstant[] { s, p, o },
                 new NV(Annotations.RELATION_NAME, relationName));
 
     }
@@ -180,8 +180,8 @@ public class SPOPredicate extends Predicate<ISPO> {
 
 //        this(new String[] { relationName }, -1/* partitionId */, s, p, o,
 //                null/* c */, optional, null/* constraint */, null/* expander */);
-        super(new IVariableOrConstant[] { s, p, o }, //
-                new NV(Annotations.RELATION_NAME, new String[]{relationName}), //
+        super(new IVariableOrConstant[] { s, p, o },
+                new NV(Annotations.RELATION_NAME, new String[]{relationName}),
                 new NV(Annotations.OPTIONAL, optional));
 
     }
@@ -207,8 +207,8 @@ public class SPOPredicate extends Predicate<ISPO> {
 //        this(new String[] { relationName }, -1/* partitionId */, s, p, o,
 //                null/* c */, false/* optional */, null/* constraint */,
 //                expander);
-        super(new IVariableOrConstant[] { s, p, o }, //
-                new NV(Annotations.RELATION_NAME, new String[]{relationName}), //
+        super(new IVariableOrConstant[] { s, p, o },
+                new NV(Annotations.RELATION_NAME, new String[]{relationName}),
                 new NV(Annotations.ACCESS_PATH_EXPANDER, expander));
 
     }
@@ -234,9 +234,9 @@ public class SPOPredicate extends Predicate<ISPO> {
 
 //        this(new String[] { relationName }, -1/* partitionId */, s, p, o,
 //                null/* c */, optional, null/* constraint */, expander);
-        super(new IVariableOrConstant[] { s, p, o }, //
-                new NV(Annotations.RELATION_NAME, new String[]{relationName}), //
-                new NV(Annotations.OPTIONAL, optional), //
+        super(new IVariableOrConstant[] { s, p, o },
+                new NV(Annotations.RELATION_NAME, new String[]{relationName}),
+                new NV(Annotations.OPTIONAL, optional),
                 new NV(Annotations.ACCESS_PATH_EXPANDER, expander));
     
     }

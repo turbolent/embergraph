@@ -76,8 +76,8 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
         // should sum to 1.0
         assertEquals(1d, hostScore1.getAvailability());
 
-        final HostScore[] hostScores = new HostScore[] { //
-        hostScore1 //
+        final HostScore[] hostScores = new HostScore[] {
+        hostScore1
         };
 
         {
@@ -151,8 +151,8 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
                 // Run with a known seed.
                 final Random rand = new Random(1L);
 
-                final ServiceScore[] serviceScores = new ServiceScore[] { //
-                serviceA //
+                final ServiceScore[] serviceScores = new ServiceScore[] {
+                serviceA
                 };
 
                 final ServiceScore actualService = AbstractHostLBSPolicy
@@ -167,7 +167,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
                 // Run with a known seed.
                 final Random rand = new Random(1L);
 
-                final ServiceScore[] serviceScores = new ServiceScore[] { //
+                final ServiceScore[] serviceScores = new ServiceScore[] {
                 serviceA, serviceB, serviceC
                 };
 
@@ -328,8 +328,8 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
 //                // Run with a known seed.
 //                final Random rand = new Random(1L);
 //
-//                final ServiceScore[] serviceScores = new ServiceScore[] { //
-//                serviceA //
+//                final ServiceScore[] serviceScores = new ServiceScore[] {
+//                serviceA
 //                };
 //
 //                final ServiceScore actualService = AbstractHostLBSPolicy
@@ -344,7 +344,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
 //                // Run with a known seed.
 //                final Random rand = new Random(1L);
 //
-//                final ServiceScore[] serviceScores = new ServiceScore[] { //
+//                final ServiceScore[] serviceScores = new ServiceScore[] {
 //                serviceA, serviceB, serviceC
 //                };
 //

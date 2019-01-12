@@ -39,11 +39,11 @@ public class QCE implements QuorumStateChangeEvent {
 
     }
 
-    public QCE(final QuorumStateChangeEventEnum eventType,//
-            final UUID[] downstreamOldAndNew,//
-            final Long lastCommitTimeConsensus,//
-            final Long token,//
-            final UUID leaderId//
+    public QCE(final QuorumStateChangeEventEnum eventType,
+            final UUID[] downstreamOldAndNew,
+            final Long lastCommitTimeConsensus,
+            final Long token,
+            final UUID leaderId
     ) {
         if (eventType == null)
             throw new IllegalArgumentException();
@@ -128,11 +128,11 @@ public class QCE implements QuorumStateChangeEvent {
                         : "")
                 + (eventType == QuorumStateChangeEventEnum.CONSENSUS ? ",lastCommitTime="
                         + lastCommitTimeConsensus
-                        : "") //
+                        : "")
                 + (eventType == QuorumStateChangeEventEnum.QUORUM_MEET ? ",token="
                         + token + ",leaderId=" + leaderId
-                        : "") //
-                + "}"//
+                        : "")
+                + "}"
         ;
     }
 

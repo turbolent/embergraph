@@ -201,19 +201,19 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     @Override
     public final String toString() {
 
-        return "Checkpoint" + //
-        		"{indexType=" + indexType + //
+        return "Checkpoint" +
+        		"{indexType=" + indexType +
 				(indexType == IndexTypeEnum.BTree ? ",height=" + height
 						: (indexType == IndexTypeEnum.HTree ? ",globalDepth="
 								+ height : "")) +
-                ",nnodes=" + nnodes + //
-                ",nleaves=" + nleaves + //
-                ",nentries=" + nentries + //
-                ",counter=" + counter + //
-                ",addrRoot=" + addrRoot + //
-                ",addrMetadata=" + addrMetadata + //
-                ",addrBloomFilter=" + addrBloomFilter + //
-                ",addrCheckpoint=" + addrCheckpoint + //
+                ",nnodes=" + nnodes +
+                ",nleaves=" + nleaves +
+                ",nentries=" + nentries +
+                ",counter=" + counter +
+                ",addrRoot=" + addrRoot +
+                ",addrMetadata=" + addrMetadata +
+                ",addrBloomFilter=" + addrBloomFilter +
+                ",addrCheckpoint=" + addrCheckpoint +
                 "}";
         
     }
@@ -237,8 +237,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
      */
     public Checkpoint(final IndexMetadata metadata ) {
 
-        this( //
-                metadata.getMetadataAddr(), //
+        this(
+                metadata.getMetadataAddr(),
                 0L,// No root yet.
                 0L,// No bloom filter yet.
                 0, // height 
@@ -268,17 +268,17 @@ public class Checkpoint implements ICheckpoint, Externalizable {
      */
     public Checkpoint(final IndexMetadata metadata, final Checkpoint oldCheckpoint ) {
 
-        this( //
-                metadata.getMetadataAddr(), //
+        this(
+                metadata.getMetadataAddr(),
                 0L,// No root yet.
                 0L,// No bloom filter yet.
                 0, // height 
                 0L, // nnodes
                 0L, // nleaves
                 0L, // nentries
-                oldCheckpoint.counter,//
+                oldCheckpoint.counter,
                 0L, // recordVersion 
-                metadata.getIndexType()//
+                metadata.getIndexType()
         );
         
     }
@@ -304,7 +304,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
      */
     public Checkpoint(final BTree btree) {
         
-        this(btree.getMetadataAddr(),//
+        this(btree.getMetadataAddr(),
                 /*
                  * root node or leaf.
                  * 
@@ -313,9 +313,9 @@ public class Checkpoint implements ICheckpoint, Externalizable {
                  * there is no root and a new root leaf will be created on
                  * demand.
                  */
-        		btree.getRootAddr(),//
+        		btree.getRootAddr(),
 //                (btree.root == null ? btree.getCheckpoint().getRootAddr()
-//                        : btree.root.getIdentity()),//
+//                        : btree.root.getIdentity()),
                 /*
                  * optional bloom filter.
                  * 
@@ -329,11 +329,11 @@ public class Checkpoint implements ICheckpoint, Externalizable {
                 (btree.bloomFilter == null ? btree.getCheckpoint()
                         .getBloomFilterAddr()
                         : btree.bloomFilter.isEnabled() ? btree.bloomFilter
-                                .getAddr() : 0L),//
-                btree.height,//
-                btree.nnodes,//
-                btree.nleaves,//
-                btree.nentries,//
+                                .getAddr() : 0L),
+                btree.height,
+                btree.nnodes,
+                btree.nleaves,
+                btree.nentries,
 				/*
 				 * Note: This MUST access the raw counter in scale-out or the
 				 * logic in PartitionedCounter.wrap(long) will observe the
@@ -342,8 +342,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 				 * to verify that the underlying index local counter has not
 				 * overflowed, which is what we are saving out here.
 				 */
-                btree.counter.get(),//
-                btree.getRecordVersion(),//
+                btree.counter.get(),
+                btree.getRecordVersion(),
                 IndexTypeEnum.BTree // IndexTypeEnum
                 );
            
@@ -370,7 +370,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
      */
     public Checkpoint(final HTree htree) {
         
-        this(htree.getMetadataAddr(),//
+        this(htree.getMetadataAddr(),
                 /*
                  * root node or leaf.
                  * 
@@ -379,7 +379,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
                  * there is no root and a new root leaf will be created on
                  * demand.
                  */
-        		htree.getRootAddr(),//
+        		htree.getRootAddr(),
                 /*
                  * optional bloom filter.
                  * 
@@ -393,14 +393,14 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 //                (htree.bloomFilter == null ? htree.getCheckpoint()
 //                        .getBloomFilterAddr()
 //                        : htree.bloomFilter.isEnabled() ? htree.bloomFilter
-//                                .getAddr() : 0L),//
+//                                .getAddr() : 0L),
                 0L, // TODO No bloom filter yet. Do we want to support this?
                 0, // htree.height,// Note: HTree is not balanced (height not uniform)
-                htree.getNodeCount(),//
-                htree.getLeafCount(),//
-                htree.getEntryCount(),//
-                htree.getCounter().get(),//
-                htree.getRecordVersion(),//
+                htree.getNodeCount(),
+                htree.getLeafCount(),
+                htree.getEntryCount(),
+                htree.getCounter().get(),
+                htree.getRecordVersion(),
                 IndexTypeEnum.HTree // IndexTypeEnum
                 );
            
@@ -427,7 +427,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
      */
     public Checkpoint(final Stream stream) {
         
-        this(stream.getMetadataAddr(),//
+        this(stream.getMetadataAddr(),
                 /*
                  * root node or leaf.
                  * 
@@ -436,7 +436,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
                  * there is no root and a new root leaf will be created on
                  * demand.
                  */
-                stream.getRootAddr(),//
+                stream.getRootAddr(),
                 /*
                  * optional bloom filter.
                  * 
@@ -450,14 +450,14 @@ public class Checkpoint implements ICheckpoint, Externalizable {
                  * FIXME GIST : The SolutionSetStats are hacked into the
                  * bloom filter addr for the Stream.
                  */
-                ((SolutionSetStream)stream).getStatsAddr(),//
+                ((SolutionSetStream)stream).getStatsAddr(),
                 // 
                 0, // htree.height,// Note: HTree is not balanced (height not uniform)
-                0L,//stream.getNodeCount(),//
-                0L,//stream.getLeafCount(),//
-                stream.rangeCount(),//
-                0L,//stream.getCounter().get(),//
-                stream.getRecordVersion(),//
+                0L,//stream.getNodeCount(),
+                0L,//stream.getLeafCount(),
+                stream.rangeCount(),
+                0L,//stream.getCounter().get(),
+                stream.getRecordVersion(),
                 IndexTypeEnum.Stream // IndexTypeEnum
                 );
            

@@ -175,11 +175,11 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
 
     }
     
-    public RDFParserOptions(//
+    public RDFParserOptions(
             final boolean verifyData,
-            final boolean preserveBlankNodeIDs, //
-            final boolean stopAtFirstError,//
-            final DatatypeHandling datatypeHandling//
+            final boolean preserveBlankNodeIDs,
+            final boolean stopAtFirstError,
+            final DatatypeHandling datatypeHandling
             ) {
 
         if (datatypeHandling == null)
@@ -194,11 +194,11 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     
     @Override
     public synchronized String toString() {
-        return super.toString() + //
-                "{verifyData=" + verifyData + //
-                ",preserveBNodeIDs=" + preserveBNodeIDs + //
-                ",stopAtFirstError=" + stopAtFirstError + //
-                ",datatypeHandling=" + datatypeHandling + //
+        return super.toString() +
+                "{verifyData=" + verifyData +
+                ",preserveBNodeIDs=" + preserveBNodeIDs +
+                ",stopAtFirstError=" + stopAtFirstError +
+                ",datatypeHandling=" + datatypeHandling +
                 "}";
     }
 

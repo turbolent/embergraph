@@ -788,33 +788,33 @@ public class TestKeyBuilder extends TestCase2 {
 //        
 //        KeyBuilder keyBuilder = (KeyBuilder)KeyBuilder.newInstance();
 //        
-//        assertEquals(//
-//                keyBuilder.normalizeText(""),//
-//                keyBuilder.normalizeText(" ")//
+//        assertEquals(
+//                keyBuilder.normalizeText(""),
+//                keyBuilder.normalizeText(" ")
 //                );
-//        assertEquals(//
-//                keyBuilder.normalizeText(""),//
-//                keyBuilder.normalizeText("  ")//
+//        assertEquals(
+//                keyBuilder.normalizeText(""),
+//                keyBuilder.normalizeText("  ")
 //                );
-//        assertEquals(//
-//                keyBuilder.normalizeText(""),//
-//                keyBuilder.normalizeText("      ")//
+//        assertEquals(
+//                keyBuilder.normalizeText(""),
+//                keyBuilder.normalizeText("      ")
 //                );
-//        assertEquals(//
-//                keyBuilder.normalizeText(" "),//
-//                keyBuilder.normalizeText("      ")//
+//        assertEquals(
+//                keyBuilder.normalizeText(" "),
+//                keyBuilder.normalizeText("      ")
 //                );
-//        assertEquals(//
-//                keyBuilder.normalizeText("abc"),//
-//                keyBuilder.normalizeText("abc      ")//
+//        assertEquals(
+//                keyBuilder.normalizeText("abc"),
+//                keyBuilder.normalizeText("abc      ")
 //                );
-//        assertEquals(//
-//                keyBuilder.normalizeText("   abc"),//
-//                keyBuilder.normalizeText("   abc      ")//
+//        assertEquals(
+//                keyBuilder.normalizeText("   abc"),
+//                keyBuilder.normalizeText("   abc      ")
 //                );
-//        assertNotSame(//
-//                keyBuilder.normalizeText("abc"),//
-//                keyBuilder.normalizeText("   abc      ")//
+//        assertNotSame(
+//                keyBuilder.normalizeText("abc"),
+//                keyBuilder.normalizeText("   abc      ")
 //                );
 //        
 //    }
@@ -831,9 +831,9 @@ public class TestKeyBuilder extends TestCase2 {
 //
 //        final String text = getMaximumLengthText();
 //
-//        assertEquals(//
-//                keyBuilder.normalizeText(text),//
-//                keyBuilder.normalizeText(text+"abc")//
+//        assertEquals(
+//                keyBuilder.normalizeText(text),
+//                keyBuilder.normalizeText(text+"abc")
 //                );
 //        
 //    }
@@ -1444,52 +1444,52 @@ public class TestKeyBuilder extends TestCase2 {
             
         }
 
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)-1)),
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)0))
                 )<0);
         
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)0)),
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)1))
                 )<0);
 
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.MAX_VALUE-1),
                 TestKeyBuilder.asSortKey(Byte.MAX_VALUE)
                 )<0);
 
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.MIN_VALUE),
                 TestKeyBuilder.asSortKey(Byte.MIN_VALUE+1)
                 )<0);
      
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.MIN_VALUE),
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)-1))
                 )<0);
         
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.MIN_VALUE),
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)0))
                 )<0);
         
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.MIN_VALUE),
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)1))
                 )<0);
 
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)-1)),
                 TestKeyBuilder.asSortKey(Byte.MAX_VALUE)
                 )<0);
         
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)0)),
                 TestKeyBuilder.asSortKey(Byte.MAX_VALUE)
                 )<0);
         
-        assertTrue(BytesUtil.compareBytes(//
+        assertTrue(BytesUtil.compareBytes(
                 TestKeyBuilder.asSortKey(Byte.valueOf((byte)1)),
                 TestKeyBuilder.asSortKey(Byte.MAX_VALUE)
                 )<0);
@@ -1617,17 +1617,17 @@ public class TestKeyBuilder extends TestCase2 {
 
         if (cause != null || !expected.equals(actual)) {
 
-            final String msg = "BigInteger" + //
-                    "\nexpected=" + expected + //
-                    "\nsigned  =" + Arrays.toString(expected.toByteArray())+//
-                    "\nunsigned=" + BytesUtil.toString(expected.toByteArray())+//
-                    "\nencoded =" + BytesUtil.toString(encoded) + //
-                    "\nactual  =" + actual+//
+            final String msg = "BigInteger" +
+                    "\nexpected=" + expected +
+                    "\nsigned  =" + Arrays.toString(expected.toByteArray())+
+                    "\nunsigned=" + BytesUtil.toString(expected.toByteArray())+
+                    "\nencoded =" + BytesUtil.toString(encoded) +
+                    "\nactual  =" + actual+
                     (actual != null ? "\nactualS ="
                             + Arrays.toString(actual.toByteArray())
-                            + //
+                            +
                             "\nactualU ="
-                            + BytesUtil.toString(actual.toByteArray()) //
+                            + BytesUtil.toString(actual.toByteArray())
                     : "")
                     ;
 
@@ -1664,17 +1664,17 @@ public class TestKeyBuilder extends TestCase2 {
 
         if (cause != null || !(expected.compareTo(actual) == 0)) {
 
-            final String msg = "BigDecimal" + //
-                    "\nexpected=" + expected + //
-//                    "\nsigned  =" + Arrays.toString(expected.toByteArray())+//
-//                    "\nunsigned=" + BytesUtil.toString(expected.toByteArray())+//
-                    "\nencoded =" + BytesUtil.toString(encoded) + //
-                    "\nactual  =" + actual//
+            final String msg = "BigDecimal" +
+                    "\nexpected=" + expected +
+//                    "\nsigned  =" + Arrays.toString(expected.toByteArray())+
+//                    "\nunsigned=" + BytesUtil.toString(expected.toByteArray())+
+                    "\nencoded =" + BytesUtil.toString(encoded) +
+                    "\nactual  =" + actual
 //                    +(actual != null ? "\nactualS ="
 //                            + Arrays.toString(actual.toByteArray())
-//                            + //
+//                            +
 //                            "\nactualU ="
-//                            + BytesUtil.toString(actual.toByteArray()) //
+//                            + BytesUtil.toString(actual.toByteArray())
 //                    : "")
                     ;
 
@@ -1702,16 +1702,16 @@ public class TestKeyBuilder extends TestCase2 {
 
         if (ret >= 0) {
 
-            fail("BigInteger" + //
-                    "\ni1=" + i1 + //
-                    "\ni2=" + i2 + //
-                    "\ns1=" + Arrays.toString(i1.toByteArray())+//
-                    "\ns2=" + Arrays.toString(i2.toByteArray())+//
-                    "\nu1=" + BytesUtil.toString(i1.toByteArray())+//
-                    "\nu2=" + BytesUtil.toString(i2.toByteArray())+//
-                    "\nk1=" + BytesUtil.toString(k1) + //
-                    "\nk2=" + BytesUtil.toString(k2) + //
-                    "\nret=" + (ret == 0 ? "EQ" : (ret < 0 ? "LT" : "GT"))//
+            fail("BigInteger" +
+                    "\ni1=" + i1 +
+                    "\ni2=" + i2 +
+                    "\ns1=" + Arrays.toString(i1.toByteArray())+
+                    "\ns2=" + Arrays.toString(i2.toByteArray())+
+                    "\nu1=" + BytesUtil.toString(i1.toByteArray())+
+                    "\nu2=" + BytesUtil.toString(i2.toByteArray())+
+                    "\nk1=" + BytesUtil.toString(k1) +
+                    "\nk2=" + BytesUtil.toString(k2) +
+                    "\nret=" + (ret == 0 ? "EQ" : (ret < 0 ? "LT" : "GT"))
             );
 
         }
@@ -1728,16 +1728,16 @@ public class TestKeyBuilder extends TestCase2 {
 
         if (ret != 0) {
 
-            fail("BigDecimal" + //
-                    "\ni1=" + i1 + //
-                    "\ni2=" + i2 + //
-//                    "\ns1=" + Arrays.toString(i1.toByteArray())+//
-//                    "\ns2=" + Arrays.toString(i2.toByteArray())+//
-//                    "\nu1=" + BytesUtil.toString(i1.toByteArray())+//
-//                    "\nu2=" + BytesUtil.toString(i2.toByteArray())+//
-                    "\nk1=" + BytesUtil.toString(k1) + //
-                    "\nk2=" + BytesUtil.toString(k2) + //
-                    "\nret=" + (ret == 0 ? "EQ" : (ret < 0 ? "LT" : "GT"))//
+            fail("BigDecimal" +
+                    "\ni1=" + i1 +
+                    "\ni2=" + i2 +
+//                    "\ns1=" + Arrays.toString(i1.toByteArray())+
+//                    "\ns2=" + Arrays.toString(i2.toByteArray())+
+//                    "\nu1=" + BytesUtil.toString(i1.toByteArray())+
+//                    "\nu2=" + BytesUtil.toString(i2.toByteArray())+
+                    "\nk1=" + BytesUtil.toString(k1) +
+                    "\nk2=" + BytesUtil.toString(k2) +
+                    "\nret=" + (ret == 0 ? "EQ" : (ret < 0 ? "LT" : "GT"))
             );
 
         }
@@ -1754,16 +1754,16 @@ public class TestKeyBuilder extends TestCase2 {
 
         if (ret >= 0) {
 
-            fail("BigDecimal" + //
-                    "\ni1=" + i1 + //
-                    "\ni2=" + i2 + //
-//                    "\ns1=" + Arrays.toString(i1.toByteArray())+//
-//                    "\ns2=" + Arrays.toString(i2.toByteArray())+//
-//                    "\nu1=" + BytesUtil.toString(i1.toByteArray())+//
-//                    "\nu2=" + BytesUtil.toString(i2.toByteArray())+//
-                    "\nk1=" + BytesUtil.toString(k1) + //
-                    "\nk2=" + BytesUtil.toString(k2) + //
-                    "\nret=" + (ret == 0 ? "EQ" : (ret < 0 ? "LT" : "GT"))//
+            fail("BigDecimal" +
+                    "\ni1=" + i1 +
+                    "\ni2=" + i2 +
+//                    "\ns1=" + Arrays.toString(i1.toByteArray())+
+//                    "\ns2=" + Arrays.toString(i2.toByteArray())+
+//                    "\nu1=" + BytesUtil.toString(i1.toByteArray())+
+//                    "\nu2=" + BytesUtil.toString(i2.toByteArray())+
+                    "\nk1=" + BytesUtil.toString(k1) +
+                    "\nk2=" + BytesUtil.toString(k2) +
+                    "\nret=" + (ret == 0 ? "EQ" : (ret < 0 ? "LT" : "GT"))
             );
 
         }
@@ -2450,13 +2450,13 @@ public class TestKeyBuilder extends TestCase2 {
         final BigInteger unscaled = i.unscaledValue();
 
         final String msg = i.toString() + ", scale=" + i.scale()
-                + //
+                +
                 ", precision=" + i.precision()
-                + //
+                +
                 ", unscaled=" + unscaled
-                + //
+                +
                 ", unscaled_byte[]="
-                + BytesUtil.toString(unscaled.toByteArray())//
+                + BytesUtil.toString(unscaled.toByteArray())
         ;
 
           return msg;
@@ -2489,17 +2489,17 @@ public class TestKeyBuilder extends TestCase2 {
 //
 //          if (cause != null || !expected.equals(actual)) {
 //
-//              final String msg = "BigDecimal" + //
-//                      "\nexpected=" + expected + //
-//                      "\nsigned  =" + Arrays.toString(expected.unscaledValue().toByteArray())+//
-//                      "\nunsigned=" + BytesUtil.toString(expected.unscaledValue().toByteArray())+//
-//                      "\nencoded =" + BytesUtil.toString(encoded) + //
-//                      "\nactual  =" + actual+//
+//              final String msg = "BigDecimal" +
+//                      "\nexpected=" + expected +
+//                      "\nsigned  =" + Arrays.toString(expected.unscaledValue().toByteArray())+
+//                      "\nunsigned=" + BytesUtil.toString(expected.unscaledValue().toByteArray())+
+//                      "\nencoded =" + BytesUtil.toString(encoded) +
+//                      "\nactual  =" + actual+
 //                      (actual != null ? "\nactualS ="
 //                              + Arrays.toString(actual.unscaledValue().toByteArray())
-//                              + //
+//                              +
 //                              "\nactualU ="
-//                              + BytesUtil.toString(actual.unscaledValue().toByteArray()) //
+//                              + BytesUtil.toString(actual.unscaledValue().toByteArray())
 //                      : "")
 //                      ;
 //
@@ -2550,12 +2550,12 @@ public class TestKeyBuilder extends TestCase2 {
 
         if (cmp2 != cmp) {
 
-              fail("BigDecimal" + //
-                      "\ni1=" + dumpBigDecimal(i1) + //
-                      "\ni2=" + dumpBigDecimal(i2) + //
-                      "\nk1=" + BytesUtil.toString(k1) + //
-                      "\nk2=" + BytesUtil.toString(k2) + //
-                      "\nret=" + cmp2 +", but expected="+cmp//
+              fail("BigDecimal" +
+                      "\ni1=" + dumpBigDecimal(i1) +
+                      "\ni2=" + dumpBigDecimal(i2) +
+                      "\nk1=" + BytesUtil.toString(k1) +
+                      "\nk2=" + BytesUtil.toString(k2) +
+                      "\nret=" + cmp2 +", but expected="+cmp
               );
 
           }

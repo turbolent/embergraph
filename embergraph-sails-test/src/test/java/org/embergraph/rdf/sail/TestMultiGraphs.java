@@ -149,7 +149,7 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
              * statement buffers to the database before executing any operations
              * that go around the sail.
              */
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isInfoEnabled()) {
                 if (sail instanceof BigdataSail)

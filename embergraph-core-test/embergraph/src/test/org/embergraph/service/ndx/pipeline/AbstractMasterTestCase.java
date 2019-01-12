@@ -323,13 +323,13 @@ public class AbstractMasterTestCase extends TestCase2 {
 
             return new BlockingBuffer<KVO<O>[]>(
                     (isDeque() ? new LinkedBlockingDeque<KVO<O>[]>(
-                            subtaskQueueCapacity) //
+                            subtaskQueueCapacity)
                             : new ArrayBlockingQueue<KVO<O>[]>(
-                                    subtaskQueueCapacity)//
-                    ), //
+                                    subtaskQueueCapacity)
+                    ),
                     BlockingBuffer.DEFAULT_MINIMUM_CHUNK_SIZE,// 
-                    BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT,//
-                    BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT,//
+                    BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT,
+                    BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT,
                     true // ordered
             );
 

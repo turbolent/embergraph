@@ -65,16 +65,16 @@ public class TestJoinGraph extends TestCase2 {
         // correct acceptance.
         {
             final IPredicate[] vertices = new IPredicate[] {
-                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),//
-                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),//
+                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),
+                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),
             };
             final IConstraint[] constraints = null;
-            final JoinGraph joinGraph = new JoinGraph(new BOp[0],//
-//                    new NV(JoinGraph.Annotations.SELECTED, new IVariable[]{}),//
-                    new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            final JoinGraph joinGraph = new JoinGraph(new BOp[0],
+//                    new NV(JoinGraph.Annotations.SELECTED, new IVariable[]{}),
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             assertEquals("vertices", vertices, joinGraph.getVertices());
             assertEquals("constraints", constraints, joinGraph.getConstraints());
@@ -87,18 +87,18 @@ public class TestJoinGraph extends TestCase2 {
         // correct acceptance, different arguments.
         {
             final IPredicate[] vertices = new IPredicate[] {
-                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),//
-                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),//
+                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),
+                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),
             };
-            final IConstraint[] constraints = new IConstraint[] { //
-            		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L))) //
+            final IConstraint[] constraints = new IConstraint[] {
+            		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
             };
-            final JoinGraph joinGraph = new JoinGraph(new BOp[0],//
-                    new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                    new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),//
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            final JoinGraph joinGraph = new JoinGraph(new BOp[0],
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             assertEquals("vertices", vertices, joinGraph.getVertices());
             assertEquals("constraints", constraints, joinGraph.getConstraints());
@@ -111,22 +111,22 @@ public class TestJoinGraph extends TestCase2 {
         // correct acceptance, different arguments.
         {
             final IPredicate[] vertices = new IPredicate[] {
-                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),//
-                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),//
+                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),
+                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),
             };
-            final IConstraint[] constraints = new IConstraint[] { //
-            		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L))) //
+            final IConstraint[] constraints = new IConstraint[] {
+            		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
             };
             final int limit = 50;
             final int nedges = 1;
-            final JoinGraph joinGraph = new JoinGraph(new BOp[0],//
-                    new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                    new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),//
-                    new NV(JoinGraph.Annotations.LIMIT, limit),//
-                    new NV(JoinGraph.Annotations.NEDGES, nedges),//
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            final JoinGraph joinGraph = new JoinGraph(new BOp[0],
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),
+                    new NV(JoinGraph.Annotations.LIMIT, limit),
+                    new NV(JoinGraph.Annotations.NEDGES, nedges),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             assertEquals("vertices", vertices, joinGraph.getVertices());
             assertEquals("constraints", constraints, joinGraph.getConstraints());
@@ -143,11 +143,11 @@ public class TestJoinGraph extends TestCase2 {
          * annotation is required).
          */
         try {
-            new JoinGraph(new BOp[0], //
-                    new NV("foo", "bar"), //
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            new JoinGraph(new BOp[0],
+                    new NV("foo", "bar"),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -158,11 +158,11 @@ public class TestJoinGraph extends TestCase2 {
         // correct rejection when vertices array is null.
         try {
             final IPredicate[] vertices = null;
-            new JoinGraph(new BOp[0], //
-                    new NV(JoinGraph.Annotations.VERTICES, vertices), //
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            new JoinGraph(new BOp[0],
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -175,11 +175,11 @@ public class TestJoinGraph extends TestCase2 {
             final IPredicate[] vertices = new IPredicate[] {
 
             };
-            new JoinGraph(new BOp[0],//
-                    new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            new JoinGraph(new BOp[0],
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -190,14 +190,14 @@ public class TestJoinGraph extends TestCase2 {
         // correct rejection when CONTROLLER is not specified.
         try {
             final IPredicate[] vertices = new IPredicate[] {
-                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),//
-                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),//
+                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),
+                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),
             };
-            new JoinGraph(new BOp[0],//
-                    new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                    //new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            new JoinGraph(new BOp[0],
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    //new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER)//
+                            BOpEvaluationContext.CONTROLLER)
             );
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -208,14 +208,14 @@ public class TestJoinGraph extends TestCase2 {
         // correct rejection when EVALUATION_CONTEXT is not specified/wrong.
         try {
             final IPredicate[] vertices = new IPredicate[] {
-                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),//
-                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),//
+                    new Predicate(new BOp[]{Var.var("x"),Var.var("y")}),
+                    new Predicate(new BOp[]{Var.var("y"),Var.var("z")}),
             };
-            new JoinGraph(new BOp[0],//
-                    new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                    new NV(JoinGraph.Annotations.CONTROLLER, true), //
+            new JoinGraph(new BOp[0],
+                    new NV(JoinGraph.Annotations.VERTICES, vertices),
+                    new NV(JoinGraph.Annotations.CONTROLLER, true),
                     new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.ANY)//
+                            BOpEvaluationContext.ANY)
             );
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -227,22 +227,22 @@ public class TestJoinGraph extends TestCase2 {
         {
             try {
                 final IPredicate[] vertices = new IPredicate[] {
-                        new Predicate(new BOp[] { Var.var("x"), Var.var("y") }),//
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") }),//
+                        new Predicate(new BOp[] { Var.var("x"), Var.var("y") }),
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") }),
                 };
-                final IConstraint[] constraints = new IConstraint[] { //
-                		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L))) //
+                final IConstraint[] constraints = new IConstraint[] {
+                		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
                 };
                 final int limit = 0;
                 final int nedges = 1;
-                new JoinGraph(new BOp[0],//
-                        new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                        new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),//
-                        new NV(JoinGraph.Annotations.LIMIT, limit),//
-                        new NV(JoinGraph.Annotations.NEDGES, nedges),//
-                        new NV(JoinGraph.Annotations.CONTROLLER, true), //
+                new JoinGraph(new BOp[0],
+                        new NV(JoinGraph.Annotations.VERTICES, vertices),
+                        new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),
+                        new NV(JoinGraph.Annotations.LIMIT, limit),
+                        new NV(JoinGraph.Annotations.NEDGES, nedges),
+                        new NV(JoinGraph.Annotations.CONTROLLER, true),
                         new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER)//
+                                BOpEvaluationContext.CONTROLLER)
                 );
                 fail("Expecting: " + IllegalArgumentException.class);
             } catch (IllegalArgumentException ex) {
@@ -255,22 +255,22 @@ public class TestJoinGraph extends TestCase2 {
         {
             try {
                 final IPredicate[] vertices = new IPredicate[] {
-                        new Predicate(new BOp[] { Var.var("x"), Var.var("y") }),//
-                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") }),//
+                        new Predicate(new BOp[] { Var.var("x"), Var.var("y") }),
+                        new Predicate(new BOp[] { Var.var("y"), Var.var("z") }),
                 };
-                final IConstraint[] constraints = new IConstraint[] { //
-                		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L))) //
+                final IConstraint[] constraints = new IConstraint[] {
+                		Constraint.wrap(new NEConstant(Var.var("x"), new Constant<Long>(12L)))
                 };
                 final int limit = 10;
                 final int nedges = 0;
-                new JoinGraph(new BOp[0],//
-                        new NV(JoinGraph.Annotations.VERTICES, vertices),//
-                        new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),//
-                        new NV(JoinGraph.Annotations.LIMIT, limit),//
-                        new NV(JoinGraph.Annotations.NEDGES, nedges),//
-                        new NV(JoinGraph.Annotations.CONTROLLER, true), //
+                new JoinGraph(new BOp[0],
+                        new NV(JoinGraph.Annotations.VERTICES, vertices),
+                        new NV(JoinGraph.Annotations.CONSTRAINTS, constraints),
+                        new NV(JoinGraph.Annotations.LIMIT, limit),
+                        new NV(JoinGraph.Annotations.NEDGES, nedges),
+                        new NV(JoinGraph.Annotations.CONTROLLER, true),
                         new NV(JoinGraph.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER)//
+                                BOpEvaluationContext.CONTROLLER)
                 );
                 fail("Expecting: " + IllegalArgumentException.class);
             } catch (IllegalArgumentException ex) {

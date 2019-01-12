@@ -184,7 +184,7 @@ public abstract class ProxyTestCase<S extends IIndexManager>
 
                 final String failMessage = "Threads left active after task"
                         + ": test="
-                        + getName()//
+                        + getName()
                         + ", delegate=" + getOurDelegate().getClass().getName()
                         + ", startupCount=" + startupActiveThreads
                         + ", teardownCount=" + nremaining + ", thisThread="

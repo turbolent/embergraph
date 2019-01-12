@@ -210,7 +210,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
 
         // properties.setProperty(AbstractTripleStore.Options.TEXT_INDEX,
         // "false");
-        //
+
         // properties.setProperty(
         // AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
 

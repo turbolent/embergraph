@@ -1042,11 +1042,11 @@ abstract public class AbstractJoinNexus implements IJoinNexus {
 //           /*
 //            * Could be a relation on a temporary store.
 //            */
-//           if (       relationName.charAt( 8) == '-' //
-//                   && relationName.charAt(13) == '-' //
-//                   && relationName.charAt(18) == '-' //
-//                   && relationName.charAt(23) == '-' //
-//                   && relationName.charAt(38) == '.' //
+//           if (       relationName.charAt( 8) == '-'
+//                   && relationName.charAt(13) == '-'
+//                   && relationName.charAt(18) == '-'
+//                   && relationName.charAt(23) == '-'
+//                   && relationName.charAt(38) == '.'
 //           ) {
 //               
 //               /*
@@ -1084,7 +1084,7 @@ abstract public class AbstractJoinNexus implements IJoinNexus {
 //           return readTimestamp;
 //
 ////       } else {
-////
+//
 ////           /*
 ////            * When the relation is the focusStore choose {@link ITx#UNISOLATED}.
 ////            * Otherwise choose whatever was specified to the
@@ -1095,25 +1095,25 @@ abstract public class AbstractJoinNexus implements IJoinNexus {
 ////            */
 ////           
 ////           if (isTempStore(relationName)) {
-////
+//
 ////               return ITx.UNISOLATED;
-////
+//
 ////           }
-////
+//
 ////           if (lastCommitTime != 0L && action.isMutation()) {
-////
+//
 ////               /*
 ////                * Note: This advances the read-behind timestamp for a local
 ////                * Journal configuration without the ConcurrencyManager (the
 ////                * only scenario where we do an explicit commit).
 ////                */
-////
+//
 ////               return TimestampUtility.asHistoricalRead(lastCommitTime);
-////
+//
 ////           }
-////
+//
 ////           return readTimestamp;
-////
+//
 ////       }
 //       
 //   }

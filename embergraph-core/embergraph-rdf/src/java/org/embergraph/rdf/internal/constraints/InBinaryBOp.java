@@ -89,9 +89,9 @@ public class InBinaryBOp extends InBOp {
      *            allowable values for that variable.
      */
     @SuppressWarnings("rawtypes")
-    public InBinaryBOp(//
-            final boolean not,//
-            final IValueExpression<? extends IV> var,//
+    public InBinaryBOp(
+            final boolean not,
+            final IValueExpression<? extends IV> var,
             final IConstant<? extends IV>... set) {
      
         super(not, var, set);

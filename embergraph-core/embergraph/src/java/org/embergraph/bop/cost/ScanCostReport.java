@@ -80,10 +80,10 @@ public class ScanCostReport implements Serializable {
      * Human readable representation.
      */
     public String toString() {
-        return super.toString() + //
-                "{rangeCount=" + rangeCount + //
-                ",shardCount=" + shardCount + //
-                ",cost=" + cost + //
+        return super.toString() +
+                "{rangeCount=" + rangeCount +
+                ",shardCount=" + shardCount +
+                ",cost=" + cost +
                 "}";
     }
 

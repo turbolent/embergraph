@@ -42,22 +42,22 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 public class RDFSVocabularyDecl implements VocabularyDecl {
 
     static private final URI[] uris = new URI[]{
-        new URIImpl(RDFS.NAMESPACE),//
-        RDFS.CLASS,//
-        RDFS.COMMENT,//
-        RDFS.CONTAINER,//
-        RDFS.CONTAINERMEMBERSHIPPROPERTY,//
-        RDFS.DATATYPE,//
-        RDFS.DOMAIN,//
-        RDFS.ISDEFINEDBY,//
-        RDFS.LABEL,//
-        RDFS.LITERAL,//
-        RDFS.MEMBER,//
-        RDFS.RANGE,//
-        RDFS.RESOURCE,//
-        RDFS.SEEALSO,//
-        RDFS.SUBCLASSOF,//
-        RDFS.SUBPROPERTYOF,//
+        new URIImpl(RDFS.NAMESPACE),
+        RDFS.CLASS,
+        RDFS.COMMENT,
+        RDFS.CONTAINER,
+        RDFS.CONTAINERMEMBERSHIPPROPERTY,
+        RDFS.DATATYPE,
+        RDFS.DOMAIN,
+        RDFS.ISDEFINEDBY,
+        RDFS.LABEL,
+        RDFS.LITERAL,
+        RDFS.MEMBER,
+        RDFS.RANGE,
+        RDFS.RESOURCE,
+        RDFS.SEEALSO,
+        RDFS.SUBCLASSOF,
+        RDFS.SUBPROPERTYOF,
     };
 
     public RDFSVocabularyDecl() {

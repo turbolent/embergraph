@@ -141,7 +141,7 @@ public class TestUnsignedIVs extends TestCase2 {
          * array SHOULD NOT be reordered by the sort.
          */
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 MIN_VALUE,
                 MINUS_ONE,
                 ZERO,
@@ -224,7 +224,7 @@ public class TestUnsignedIVs extends TestCase2 {
          * array SHOULD NOT be reordered by the sort.
          */
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 MIN_VALUE,
                 MINUS_ONE,
                 ZERO,
@@ -271,7 +271,7 @@ public class TestUnsignedIVs extends TestCase2 {
         assertEquals(((long) Integer.MAX_VALUE) + 1, ZERO.promote());
         assertEquals(((long) Integer.MAX_VALUE) + 2, ONE.promote());
         assertEquals(0xffffffffL, MAX_VALUE.promote());
-        //
+
         assertEquals(0x00000000L, MIN_VALUE.promote());
         assertEquals(0x7fffffffL, MINUS_ONE.promote());
         assertEquals(0x80000000L, ZERO.promote());
@@ -294,7 +294,7 @@ public class TestUnsignedIVs extends TestCase2 {
          * array SHOULD NOT be reordered by the sort.
          */
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 MIN_VALUE,
                 MINUS_ONE,
                 ZERO,
@@ -359,7 +359,7 @@ public class TestUnsignedIVs extends TestCase2 {
          * array SHOULD NOT be reordered by the sort.
          */
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 MIN_VALUE,
                 MINUS_ONE,
                 ZERO,

@@ -42,51 +42,51 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 public class XMLSchemaVocabularyDecl implements VocabularyDecl {
 
     static private final URI[] uris = new URI[]{
-        new URIImpl(XMLSchema.NAMESPACE), //
-        XMLSchema.ANYURI, //
-        XMLSchema.BASE64BINARY, //
-        XMLSchema.BOOLEAN, //
-        XMLSchema.BYTE, //
-        XMLSchema.DATE, //
-        XMLSchema.DATETIME, //
-        XMLSchema.DECIMAL, //
-        XMLSchema.DOUBLE, //
-        XMLSchema.DURATION, //
-        XMLSchema.ENTITIES, //
-        XMLSchema.ENTITY, //
-        XMLSchema.FLOAT, //
-        XMLSchema.GDAY, //
-        XMLSchema.GMONTH, //
-        XMLSchema.GMONTHDAY, //
-        XMLSchema.GYEAR, //
-        XMLSchema.GYEARMONTH, //
-        XMLSchema.HEXBINARY, //
-        XMLSchema.ID, //
-        XMLSchema.IDREF, //
-        XMLSchema.IDREFS, //
-        XMLSchema.INT, //
-        XMLSchema.INTEGER, //
-        XMLSchema.LANGUAGE, //
-        XMLSchema.LONG, //
-        XMLSchema.NAME, //
-        XMLSchema.NCNAME, //
-        XMLSchema.NEGATIVE_INTEGER, //
-        XMLSchema.NMTOKEN, //
-        XMLSchema.NMTOKENS, //
-        XMLSchema.NON_NEGATIVE_INTEGER, //
-        XMLSchema.NON_POSITIVE_INTEGER, //
-        XMLSchema.NORMALIZEDSTRING, //
-        XMLSchema.NOTATION, //
-        XMLSchema.POSITIVE_INTEGER, //
-        XMLSchema.QNAME, //
-        XMLSchema.SHORT, //
-        XMLSchema.STRING, //
-        XMLSchema.TIME, //
-        XMLSchema.TOKEN, //
-        XMLSchema.UNSIGNED_BYTE, //
-        XMLSchema.UNSIGNED_INT, //
-        XMLSchema.UNSIGNED_LONG, //
-        XMLSchema.UNSIGNED_SHORT, //
+        new URIImpl(XMLSchema.NAMESPACE),
+        XMLSchema.ANYURI,
+        XMLSchema.BASE64BINARY,
+        XMLSchema.BOOLEAN,
+        XMLSchema.BYTE,
+        XMLSchema.DATE,
+        XMLSchema.DATETIME,
+        XMLSchema.DECIMAL,
+        XMLSchema.DOUBLE,
+        XMLSchema.DURATION,
+        XMLSchema.ENTITIES,
+        XMLSchema.ENTITY,
+        XMLSchema.FLOAT,
+        XMLSchema.GDAY,
+        XMLSchema.GMONTH,
+        XMLSchema.GMONTHDAY,
+        XMLSchema.GYEAR,
+        XMLSchema.GYEARMONTH,
+        XMLSchema.HEXBINARY,
+        XMLSchema.ID,
+        XMLSchema.IDREF,
+        XMLSchema.IDREFS,
+        XMLSchema.INT,
+        XMLSchema.INTEGER,
+        XMLSchema.LANGUAGE,
+        XMLSchema.LONG,
+        XMLSchema.NAME,
+        XMLSchema.NCNAME,
+        XMLSchema.NEGATIVE_INTEGER,
+        XMLSchema.NMTOKEN,
+        XMLSchema.NMTOKENS,
+        XMLSchema.NON_NEGATIVE_INTEGER,
+        XMLSchema.NON_POSITIVE_INTEGER,
+        XMLSchema.NORMALIZEDSTRING,
+        XMLSchema.NOTATION,
+        XMLSchema.POSITIVE_INTEGER,
+        XMLSchema.QNAME,
+        XMLSchema.SHORT,
+        XMLSchema.STRING,
+        XMLSchema.TIME,
+        XMLSchema.TOKEN,
+        XMLSchema.UNSIGNED_BYTE,
+        XMLSchema.UNSIGNED_INT,
+        XMLSchema.UNSIGNED_LONG,
+        XMLSchema.UNSIGNED_SHORT,
     };
 
     public XMLSchemaVocabularyDecl() {

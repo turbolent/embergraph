@@ -977,7 +977,7 @@ public class GASService extends CustomServiceFactoryBase {
              *            caller wants to extract). Any position that will not
              *            be extracted is a <code>null</code>.
              */
-            public BindingSetReducer(//
+            public BindingSetReducer(
                     final IVariable<?>[] outVars,
                     final AbstractTripleStore store,
                     final IGASProgram<VS, ES, ST> gasProgram,

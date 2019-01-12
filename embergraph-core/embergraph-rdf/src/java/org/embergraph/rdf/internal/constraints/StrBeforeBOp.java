@@ -45,7 +45,7 @@ public class StrBeforeBOp extends IVValueExpression<IV> implements INeedsMateria
      * @see http://www.w3.org/2009/sparql/docs/query-1.1/rq25.xml#func-strbefore
      */
     @SuppressWarnings("rawtypes")
-    public StrBeforeBOp(//
+    public StrBeforeBOp(
             final IValueExpression<? extends IV> arg1,
             final IValueExpression<? extends IV> arg2,
             final GlobalAnnotations globals) {

@@ -45,7 +45,7 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 public class PubChemVocabularyDecl implements VocabularyDecl {
 
     
-    static private final URI[] uris = new URI[]{//
+    static private final URI[] uris = new URI[]{
 
     	// all predicates in dataset
     	new URIImpl("http://semanticscience.org/resource/has-attribute"), // rank=1, count=1767498034
@@ -2872,35 +2872,35 @@ public class PubChemVocabularyDecl implements VocabularyDecl {
     	
     	// Table 1. The prefixes and corresponding namespaces of standardized ontologies 
     	//          used in PubChemRDF.  (excluding those already added via PubChemVocabulary)
-        new URIImpl("http://evs.nci.nih.gov/ftp1/NDF-RT/NDF-RT.owl# "),//
-        new URIImpl("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl# "),//
-        new URIImpl("http://semanticscience.org/resource/"),//
-        new URIImpl("http://purl.obolibrary.org/obo/"),//
-        new URIImpl("http://www.bioassayontology.org/bao#"),//
-        new URIImpl("http://www.biopax.org/release/biopax-level3.owl#"),//
-        new URIImpl("http://purl.org/spar/cito/"),//
-        new URIImpl("http://purl.org/spar/fabio/"),//
-        new URIImpl("http://rdf.wwpdb.org/schema/pdbx-v40.owl#"),//
-        new URIImpl("http://purl.org/pav/"),//
+        new URIImpl("http://evs.nci.nih.gov/ftp1/NDF-RT/NDF-RT.owl# "),
+        new URIImpl("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl# "),
+        new URIImpl("http://semanticscience.org/resource/"),
+        new URIImpl("http://purl.obolibrary.org/obo/"),
+        new URIImpl("http://www.bioassayontology.org/bao#"),
+        new URIImpl("http://www.biopax.org/release/biopax-level3.owl#"),
+        new URIImpl("http://purl.org/spar/cito/"),
+        new URIImpl("http://purl.org/spar/fabio/"),
+        new URIImpl("http://rdf.wwpdb.org/schema/pdbx-v40.owl#"),
+        new URIImpl("http://purl.org/pav/"),
         
         // Table 2. The prefixes and corresponding namespaces of subdomains used in PubChemRDF. 
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/substance/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/descriptor/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/inchikey/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/synonym/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/bioassay/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/measuregroup/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/endpoint/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/protein/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/conserveddomain/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/biosystem/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/gene/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/reference/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/neighbor/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/source/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/concept/"),//
-        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/vocabulary#"),//
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/substance/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/descriptor/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/inchikey/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/synonym/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/bioassay/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/measuregroup/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/endpoint/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/protein/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/conserveddomain/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/biosystem/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/gene/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/reference/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/neighbor/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/source/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/concept/"),
+        new URIImpl("http://rdf.ncbi.nlm.nih.gov/pubchem/vocabulary#"),
 
     };
 

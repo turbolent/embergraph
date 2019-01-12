@@ -202,14 +202,14 @@ public class NoCacheMetadataIndexView implements IMetadataIndex {
     public ITupleIterator rangeIterator(byte[] fromKey, byte[] toKey,
             int capacity, int flags, IFilter filter) {
 
-        return new RawDataServiceTupleIterator(getMetadataService(),//
-                MetadataService.getMetadataIndexName(name), //
-                (timestamp==ITx.UNISOLATED?ITx.READ_COMMITTED:timestamp),//
+        return new RawDataServiceTupleIterator(getMetadataService(),
+                MetadataService.getMetadataIndexName(name),
+                (timestamp==ITx.UNISOLATED?ITx.READ_COMMITTED:timestamp),
                 true, // read-consistent semantics.
-                fromKey,//
-                toKey,//
-                capacity,//
-                flags, //
+                fromKey,
+                toKey,
+                capacity,
+                flags,
                 filter
         );
 

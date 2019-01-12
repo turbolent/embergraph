@@ -83,12 +83,12 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 //GROUP BY ?o 
 //ORDER BY (count(?s))
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT  ?o \n" + //
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT  ?o \n" +
                 "WHERE { ?s :p ?o } \n" + // 
                 "GROUP BY ?o \n" + // 
-                "ORDER BY (count(?s))" //
+                "ORDER BY (count(?s))"
                 ;
 
 
@@ -240,14 +240,14 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 //GROUP BY ?x ?y
 //ORDER BY DESC(max(?z)) ?x (count(?z)) DESC(?y) 
 
-        final String queryStr = "" + //
-                "PREFIX ex: <http://example.org/>\n" + //
-                "SELECT ?x ?y\n" + //
-                "WHERE {\n" + //
-                "  ?x ex:r ?y .\n" + //
-                "  ?y ex:q ?z }\n" + //
-                "GROUP BY ?x ?y\n" + //
-                "ORDER BY DESC(max(?z)) ?x (count(?z)) DESC(?y)" //
+        final String queryStr = "" +
+                "PREFIX ex: <http://example.org/>\n" +
+                "SELECT ?x ?y\n" +
+                "WHERE {\n" +
+                "  ?x ex:r ?y .\n" +
+                "  ?y ex:q ?z }\n" +
+                "GROUP BY ?x ?y\n" +
+                "ORDER BY DESC(max(?z)) ?x (count(?z)) DESC(?y)"
                 ;
 
 

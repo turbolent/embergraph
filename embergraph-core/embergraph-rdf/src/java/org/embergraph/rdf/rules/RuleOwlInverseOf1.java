@@ -52,10 +52,10 @@ public class RuleOwlInverseOf1 extends Rule {
      */
     public RuleOwlInverseOf1(String relationName, Vocabulary vocab) {
 
-        super(  "owlInverseOf1",//
-                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.INVERSEOF), var("a")), //
-                new SPOPredicate[] { //
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.INVERSEOF), var("b")),//
+        super(  "owlInverseOf1",
+                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.INVERSEOF), var("a")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.INVERSEOF), var("b")),
                 },
                 new IConstraint[] {
         			Constraint.wrap(new NE(var("a"),var("b")))

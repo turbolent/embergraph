@@ -129,14 +129,14 @@ public class AbstractConnectOptions implements IMimeTypes {
     @Override
     public String toString() {
 
-        return getClass().getName()//
-                + "{method=" + method//
-                + ",serviceURL=" + serviceURL//
-                + ",update=" + update//
-                + ",requestParams=" + requestParams//
-                + ",requestHeaders=" + requestHeaders//
-                 + ",requestHeaders=" + requestHeaders//
-                + "}";//
+        return getClass().getName()
+                + "{method=" + method
+                + ",serviceURL=" + serviceURL
+                + ",update=" + update
+                + ",requestParams=" + requestParams
+                + ",requestHeaders=" + requestHeaders
+                 + ",requestHeaders=" + requestHeaders
+                + "}";
 
     }
     

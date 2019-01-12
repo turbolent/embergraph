@@ -53,11 +53,11 @@ public class RuleOwlSameAs1b extends Rule
      */
     public RuleOwlSameAs1b(String relationName, Vocabulary vocab) {
 
-        super(  "owlSameAs1b",//
-                new SPOPredicate(relationName,var("x"), vocab.getConstant(OWL.SAMEAS), var("z")), //
-                new SPOPredicate[] { //
-                    new SPOPredicate(relationName,var("x"), vocab.getConstant(OWL.SAMEAS), var("y")),//
-                    new SPOPredicate(relationName,var("y"), vocab.getConstant(OWL.SAMEAS), var("z"))//
+        super(  "owlSameAs1b",
+                new SPOPredicate(relationName,var("x"), vocab.getConstant(OWL.SAMEAS), var("z")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("x"), vocab.getConstant(OWL.SAMEAS), var("y")),
+                    new SPOPredicate(relationName,var("y"), vocab.getConstant(OWL.SAMEAS), var("z"))
                 }, new IConstraint[] {
         			Constraint.wrap(new NE(var("x"),var("y"))),
         			Constraint.wrap(new NE(var("y"),var("z"))),

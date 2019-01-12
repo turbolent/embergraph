@@ -4293,10 +4293,10 @@ public class BigdataSail extends SailBase implements Sail {
                 @SuppressWarnings("rawtypes")
                 @Override
                 protected Iterator expand(final Object c) {
-                    return getStatements(//
-                            s, p, o,//
-                            (Resource) ((c == null && quads) ? NULL_GRAPH :c),//
-                            includeInferred//
+                    return getStatements(
+                            s, p, o,
+                            (Resource) ((c == null && quads) ? NULL_GRAPH :c),
+                            includeInferred
                             );
                 }
             })));
@@ -4624,10 +4624,10 @@ public class BigdataSail extends SailBase implements Sail {
          *             <em>always</em>.
          */
         public CloseableIteration<? extends BindingSet, QueryEvaluationException> evaluate(
-                final TupleExpr tupleExpr, //
-                final Dataset dataset,//
-                final BindingSet bindings,//
-                final boolean includeInferred//
+                final TupleExpr tupleExpr,
+                final Dataset dataset,
+                final BindingSet bindings,
+                final boolean includeInferred
         ) throws SailException {
 
             throw new SailException(ERR_OPENRDF_QUERY_MODEL);
@@ -4660,10 +4660,10 @@ public class BigdataSail extends SailBase implements Sail {
          *             {@link ASTEvalHelper}.
          */
         public CloseableIteration<? extends BindingSet, QueryEvaluationException> evaluate(
-                final QueryRoot queryRoot, //
-                final Dataset dataset,//
-                final BindingSet bindings,//
-                final boolean includeInferred//
+                final QueryRoot queryRoot,
+                final Dataset dataset,
+                final BindingSet bindings,
+                final boolean includeInferred
         ) throws SailException {
 
             final ASTContainer astContainer = new ASTContainer(queryRoot);
@@ -5291,20 +5291,20 @@ public class BigdataSail extends SailBase implements Sail {
 ////                     */
 ////                    final long readsOnCommitTime;
 ////                    if (database.getIndexManager() instanceof Journal) {
-////
+//
 ////                        final Journal journal = (Journal) database
 ////                                .getIndexManager();
-////
+//
 ////                        final ITx txObj = journal.getTransactionManager()
 ////                                .getTx(this.tx);
-////
+//
 ////                        if (txObj != null) {
-////
+//
 ////                            // found it.
 ////                            readsOnCommitTime = txObj.getReadsOnCommitTime();
 ////                            
 ////                        } else {
-////
+//
 ////                            /**
 ////                             * TODO This can happen in HA because the TxState is
 ////                             * not available yet on the followers.
@@ -5316,7 +5316,7 @@ public class BigdataSail extends SailBase implements Sail {
 ////                            readsOnCommitTime = this.tx;
 ////                            
 ////                        }
-////
+//
 ////                    } else {
 ////                        
 ////                        readsOnCommitTime = timestamp;

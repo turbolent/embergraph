@@ -39,25 +39,25 @@ public class MatchRule extends Rule<SPO> {
             IVariable<IV> lit, IConstant<IV>[] preds,
             IConstant<IV> cls) {
 
-    super(  "matchRule", //
-            new SPOPredicate(relationName, var("s"), var("t"), lit), //
+    super(  "matchRule",
+            new SPOPredicate(relationName, var("s"), var("t"), lit),
             new SPOPredicate[] {
-                //
+
                 new SPOPredicate(relationName, var("s"), var("p"), lit),
-                //
+
                 new SPOPredicate(
-                        new BOp[] { var("s"), //
-                                vocab.getConstant(RDF.TYPE),//
-                                var("t") }, //
+                        new BOp[] { var("s"),
+                                vocab.getConstant(RDF.TYPE),
+                                var("t") },
                         new NV(IPredicate.Annotations.RELATION_NAME,
                                 new String[] { relationName }),
                         new NV(
                                 IPredicate.Annotations.INDEX_LOCAL_FILTER,
                                 ElementFilter
                                         .newInstance(ExplicitSPOFilter.INSTANCE))),
-                //
+
                 new SPOPredicate(relationName, var("t"), vocab
-                                .getConstant(RDFS.SUBCLASSOF), cls) //
+                                .getConstant(RDFS.SUBCLASSOF), cls)
                 },
             new IConstraint[] {
     			Constraint.wrap(new INBinarySearch(var("p"), preds)) // p IN preds

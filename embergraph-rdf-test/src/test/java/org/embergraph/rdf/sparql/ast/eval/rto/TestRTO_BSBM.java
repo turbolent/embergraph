@@ -118,7 +118,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q1_noSolutions() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q1", // testURI,
                 "rto/BSBM-Q1.rq",// queryFileURL
                 new String[]{},// data files.
@@ -141,7 +141,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q1_pc100() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q1", // testURI,
                 "rto/BSBM-Q1.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -174,7 +174,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q2_pc100() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q2", // testURI,
                 "rto/BSBM-Q2.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -195,7 +195,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q3_pc100() throws Exception {
 
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q3", // testURI,
                 "rto/BSBM-Q3.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -223,7 +223,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q4_pc100() throws Exception {
        
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q4", // testURI,
                 "rto/BSBM-Q4.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -247,7 +247,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q5_pc100() throws Exception {
         
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q5", // testURI,
                 "rto/BSBM-Q5.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -271,7 +271,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q7_pc100() throws Exception {
         
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q7", // testURI,
                 "rto/BSBM-Q7.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -336,7 +336,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q7b_pc100() throws Exception {
         
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q7b", // testURI,
                 "rto/BSBM-Q7b.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -364,7 +364,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q8_pc100() throws Exception {
         
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q8", // testURI,
                 "rto/BSBM-Q8.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -386,7 +386,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
      */
     public void test_BSBM_Q10_pc100() throws Exception {
         
-        final TestHelper helper = new TestHelper(//
+        final TestHelper helper = new TestHelper(
                 "rto/BSBM-Q10", // testURI,
                 "rto/BSBM-Q10.rq",// queryFileURL
                 "src/test/resources/data/bsbm/dataset_pc100.nt",// dataFileURL
@@ -412,7 +412,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
 //     */
 //    public void _test_BSBM_Q1_pc1000() throws Exception {
 //
-//        final TestHelper helper = new TestHelper(//
+//        final TestHelper helper = new TestHelper(
 //                "rto/BSBM-Q1", // testURI,
 //                "rto/BSBM-Q1.rq",// queryFileURL
 //                "src/test/resources/data/bsbm/dataset_pc1000.nt.gz",// dataFileURL

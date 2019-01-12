@@ -238,9 +238,9 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
         if (o instanceof SidIV) {
         		final ISPO stmt2 = ((SidIV<?>) o).spo;
         		return
-                        IVUtility.equals(spo.s(), stmt2.s()) && //
-                        IVUtility.equals(spo.p(), stmt2.p()) && //
-                        IVUtility.equals(spo.o(), stmt2.o())//
+                        IVUtility.equals(spo.s(), stmt2.s()) &&
+                        IVUtility.equals(spo.p(), stmt2.p()) &&
+                        IVUtility.equals(spo.o(), stmt2.o())
                         ;
 //            return spo.equals(spo2);
         }

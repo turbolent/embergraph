@@ -990,11 +990,11 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 	 *            Object that knows how to (de-)compress the serialized data
 	 *            records.
 	 */
-    protected AbstractBTree(//
-            final IRawStore store,//
-            final INodeFactory nodeFactory,//
+    protected AbstractBTree(
+            final IRawStore store,
+            final INodeFactory nodeFactory,
             final boolean readOnly,
-            final IndexMetadata metadata,//
+            final IndexMetadata metadata,
             final IRecordCompressorFactory<?> recordCompressorFactory
             ) {
 
@@ -1053,13 +1053,13 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
          */
         this.writeRetentionQueue = newWriteRetentionQueue(readOnly);
 
-        this.nodeSer = new NodeSerializer(//
+        this.nodeSer = new NodeSerializer(
                 store, // addressManager
-                nodeFactory,//
-                branchingFactor,//
+                nodeFactory,
+                branchingFactor,
                 0, //initialBufferCapacity
-                metadata,//
-                readOnly,//
+                metadata,
+                readOnly,
                 recordCompressorFactory
                 );
         
@@ -1170,12 +1170,12 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
              * the shared backing buffer in a timely manner.
              */
             
-            return new HardReferenceQueueWithBatchingUpdates<PO>(//
+            return new HardReferenceQueueWithBatchingUpdates<PO>(
                     BigdataStatics.threadLocalBuffers, // threadLocalBuffers
                     16,// concurrencyLevel
                     new HardReferenceQueue<PO>(new DefaultEvictionListener(),
                             metadata.getWriteRetentionQueueCapacity(), 0/* nscan */),
-//                    new DefaultEvictionListener(),//
+//                    new DefaultEvictionListener(),
 //                    metadata.getWriteRetentionQueueCapacity(),// shared capacity
                     metadata.getWriteRetentionQueueScan(),// thread local
                     128,//64, // thread-local queue capacity @todo config
@@ -1185,10 +1185,10 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 
         }
         
-        return new HardReferenceQueue<PO>(//
-                new DefaultEvictionListener(),//
-                metadata.getWriteRetentionQueueCapacity(),//
-                metadata.getWriteRetentionQueueScan()//
+        return new HardReferenceQueue<PO>(
+                new DefaultEvictionListener(),
+                metadata.getWriteRetentionQueueCapacity(),
+                metadata.getWriteRetentionQueueScan()
         );
 
     }
@@ -1203,9 +1203,9 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 //        
 //        return (capacity != 0
 //
-//        ? new HardReferenceQueue<PO>(//
-//                NOPEvictionListener.INSTANCE,//
-//                capacity, //
+//        ? new HardReferenceQueue<PO>(
+//                NOPEvictionListener.INSTANCE,
+//                capacity,
 //                getReadRetentionQueueScan())
 //
 //        : null
@@ -1614,11 +1614,11 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
         
     }
 
-   static private void dumpPages(//
-         final AbstractBTree ndx,//
-         final AbstractNode<?> node, //
-         final boolean visitLeaves,//
-         final BTreePageStats stats//
+   static private void dumpPages(
+         final AbstractBTree ndx,
+         final AbstractNode<?> node,
+         final boolean visitLeaves,
+         final BTreePageStats stats
          ) {
 
         //node.dump(System.out);
@@ -2858,9 +2858,9 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
      * @return
      */
     final public ITupleIterator rangeIterator(Object fromKey, Object toKey,
-            final int capacity,//
-            final int flags,//
-            final IFilter filter//
+            final int capacity,
+            final int flags,
+            final IFilter filter
     ) {
 
         fromKey = fromKey == null ? null : metadata.getTupleSerializer()
@@ -2899,12 +2899,12 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 	 *       revision timestamp range.
 	 */
     @Override
-    public ITupleIterator rangeIterator(//
-            final byte[] fromKey,//
-            final byte[] toKey,//
-            final int capacityIsIgnored,//
-            final int flags,//
-            final IFilter filter//
+    public ITupleIterator rangeIterator(
+            final byte[] fromKey,
+            final byte[] toKey,
+            final int capacityIsIgnored,
+            final int flags,
+            final IFilter filter
             ) {
 
         btreeCounters.nrangeIterator.increment();
@@ -3789,13 +3789,13 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
         }
 
 //      if (useFinger && node instanceof ILeafData) {
-        //
+
 //                    if (finger == null || finger.get() != node) {
-        //
+
 //                        finger = new WeakReference<Leaf>((Leaf) node);
-        //
+
 //                    }
-        //
+
 //                }
 
 //        final long elapsedNanos = System.nanoTime() - beginNanos;
@@ -3939,7 +3939,7 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 //            if (elapsed > 5000) {
 //
 ////            	System.err.println(s);
-////
+//
 ////            } else if (elapsed > 500/*ms*/) {
 //
 //                // log at warning level when significant latency results.
@@ -4163,13 +4163,13 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
                                 }
 
                                 // An instance just for this thread.
-                                final NodeSerializer myNodeSer = new NodeSerializer(//
+                                final NodeSerializer myNodeSer = new NodeSerializer(
                                         store, // addressManager
-                                        nodeSer.nodeFactory, //
-                                        branchingFactor, //
-                                        nodeSer.getWriteBufferCapacity(),//
-                                        metadata, //
-                                        readOnly, //
+                                        nodeSer.nodeFactory,
+                                        branchingFactor,
+                                        nodeSer.getWriteBufferCapacity(),
+                                        metadata,
+                                        readOnly,
                                         nodeSer.recordCompressorFactory);
 
                                 // write dirty node on store (non-recursive)

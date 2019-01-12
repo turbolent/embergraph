@@ -243,15 +243,15 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
      *            combine smaller chunks so that it can satisify the desired
      *            <i>sinkChunkSize</i>.
      */
-    public AsynchronousIndexWriteConfiguration(//
-            final int masterQueueCapacity,//
-            final int masterChunkSize,//
-            final long masterChunkTimeoutNanos,//
-            final long sinkIdleTimeoutNanos,//
-            final long sinkPollTimeoutNanos,//
-            final int sinkQueueCapacity,//
-            final int sinkChunkSize,//
-            final long sinkChunkTimeoutNanos//
+    public AsynchronousIndexWriteConfiguration(
+            final int masterQueueCapacity,
+            final int masterChunkSize,
+            final long masterChunkTimeoutNanos,
+            final long sinkIdleTimeoutNanos,
+            final long sinkPollTimeoutNanos,
+            final int sinkQueueCapacity,
+            final int sinkChunkSize,
+            final long sinkChunkTimeoutNanos
             ) {
 
         if (masterQueueCapacity <= 0)

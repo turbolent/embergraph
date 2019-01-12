@@ -156,19 +156,19 @@ public class HAWriteMessage extends HAWriteMessageBase implements
     @Override
  	public String toString() {
 
-        return getClass().getName() //
-                + "{size=" + getSize() //
-                + ",chksum=" + getChk() //
+        return getClass().getName()
+                + "{size=" + getSize()
+                + ",chksum=" + getChk()
                 + ",uuid="+getUUID() // 
-                + ",commitCounter=" + commitCounter //
-                + ",commitTime=" + lastCommitTime //
-                + ",sequence=" + sequence //
-                + ",storeType=" + getStoreType() //
-                + ",compressorKey=" + getCompressorKey() //
-                + ",quorumToken=" + getQuorumToken()//
-                + ",replicationFactor=" + getReplicationFactor() //
-                + ",fileExtent=" + getFileExtent() //
-                + ",firstOffset=" + getFirstOffset() //
+                + ",commitCounter=" + commitCounter
+                + ",commitTime=" + lastCommitTime
+                + ",sequence=" + sequence
+                + ",storeType=" + getStoreType()
+                + ",compressorKey=" + getCompressorKey()
+                + ",quorumToken=" + getQuorumToken()
+                + ",replicationFactor=" + getReplicationFactor()
+                + ",fileExtent=" + getFileExtent()
+                + ",firstOffset=" + getFirstOffset()
                 + "}";
 
     }
@@ -363,7 +363,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
 
         return ((uuid == null && other.getUUID() == null) || uuid.equals(other.getUUID()))
                 && commitCounter == other.getCommitCounter()
-                && lastCommitTime == other.getLastCommitTime() //
+                && lastCommitTime == other.getLastCommitTime()
                 && sequence == other.getSequence()
                 && storeType == other.getStoreType()
                 && quorumToken == other.getQuorumToken()
@@ -390,7 +390,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements
             // fall through.
         }
         case VERSION1:
-            uuid = new UUID(//
+            uuid = new UUID(
                     in.readLong(), // MSB
                     in.readLong() // LSB
             );

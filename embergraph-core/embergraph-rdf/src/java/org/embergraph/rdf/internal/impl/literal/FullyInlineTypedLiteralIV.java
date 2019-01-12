@@ -299,13 +299,13 @@ public class FullyInlineTypedLiteralIV<V extends BigdataLiteral> extends
              */
             byteLength = 1 // flags
                     + 1 // termCode
-                    + ((termCode == ITermIndexCodes.TERM_CODE_LCL) //
-                    ? IVUnicode.byteLengthUnicode(language)//
-                            : (termCode == ITermIndexCodes.TERM_CODE_DTL) //
+                    + ((termCode == ITermIndexCodes.TERM_CODE_LCL)
+                    ? IVUnicode.byteLengthUnicode(language)
+                            : (termCode == ITermIndexCodes.TERM_CODE_DTL)
                             ? IVUnicode.byteLengthUnicode(datatype
-                                    .stringValue()) //
-                                    : 0) + //
-                    IVUnicode.byteLengthUnicode(label)//
+                                    .stringValue())
+                                    : 0) +
+                    IVUnicode.byteLengthUnicode(label)
             ;
 
         }

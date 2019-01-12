@@ -105,22 +105,22 @@ public class ICUVersionRecord implements Externalizable {
      */
     public static ICUVersionRecord newInstance() {
         
-        final ICUVersionRecord r = new ICUVersionRecord(//
-                VersionInfo.ICU_VERSION,//
-                VersionInfo.UCOL_RUNTIME_VERSION,//
-                VersionInfo.UCOL_BUILDER_VERSION,//
-                VersionInfo.UCOL_TAILORINGS_VERSION//
+        final ICUVersionRecord r = new ICUVersionRecord(
+                VersionInfo.ICU_VERSION,
+                VersionInfo.UCOL_RUNTIME_VERSION,
+                VersionInfo.UCOL_BUILDER_VERSION,
+                VersionInfo.UCOL_TAILORINGS_VERSION
                 );
 
         return r;
 
     }
 
-    ICUVersionRecord(//
-            VersionInfo icuVersion,//
-            VersionInfo ucolRuntimeVesion,//
-            VersionInfo ucolBuilderVersion,//
-            VersionInfo ucolTailoringsVersion//
+    ICUVersionRecord(
+            VersionInfo icuVersion,
+            VersionInfo ucolRuntimeVesion,
+            VersionInfo ucolBuilderVersion,
+            VersionInfo ucolTailoringsVersion
     ) {
 
         this.icuVersion = icuVersion;

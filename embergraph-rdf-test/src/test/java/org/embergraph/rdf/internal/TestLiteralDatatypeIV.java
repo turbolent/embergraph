@@ -60,23 +60,23 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 		final IV<?,?> datatypeIV = newTermId(VTE.URI);
 
 		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>(""), datatypeIV)//
+				new FullyInlineTypedLiteralIV<BigdataLiteral>(""), datatypeIV)
 				);
 
 		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>("abc"), datatypeIV)//
+				new FullyInlineTypedLiteralIV<BigdataLiteral>("abc"), datatypeIV)
 				);
 
 		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>(" "), datatypeIV)//
+				new FullyInlineTypedLiteralIV<BigdataLiteral>(" "), datatypeIV)
 				);
 
 		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV)//
+				new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV)
 				);
 
 		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV)//
+				new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV)
 				);
 		
 		final IV<?,?>[] e;
@@ -86,27 +86,27 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 
             ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
                     new FullyInlineTypedLiteralIV<BigdataLiteral>(""),
-                    datatypeIV)//
+                    datatypeIV)
             );
 
             ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
                     new FullyInlineTypedLiteralIV<BigdataLiteral>("abc"),
-                    datatypeIV)//
+                    datatypeIV)
             );
 
             ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
                     new FullyInlineTypedLiteralIV<BigdataLiteral>(" "),
-                    datatypeIV)//
+                    datatypeIV)
             );
 
             ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
                     new FullyInlineTypedLiteralIV<BigdataLiteral>("1"),
-                    datatypeIV)//
+                    datatypeIV)
             );
 
             ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
                     new FullyInlineTypedLiteralIV<BigdataLiteral>("12"),
-                    datatypeIV)//
+                    datatypeIV)
             );
 
 	        e = ivs.toArray(new IV[0]);

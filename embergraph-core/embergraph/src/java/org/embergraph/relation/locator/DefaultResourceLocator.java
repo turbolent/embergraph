@@ -121,7 +121,7 @@ import org.embergraph.util.NT;
  * @param <T>
  *            The generic type of the [R]elation.
  */
-public class DefaultResourceLocator<T extends ILocatableResource<T>> //
+public class DefaultResourceLocator<T extends ILocatableResource<T>>
         implements IResourceLocator<T> {
 
     protected static final transient Logger log = Logger
@@ -987,8 +987,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>> //
         final Constructor<? extends T> ctor;
         try {
 
-            ctor = cls.getConstructor(new Class[] {//
-                            IIndexManager.class,//
+            ctor = cls.getConstructor(new Class[] {
+                            IIndexManager.class,
                             String.class,// relation namespace
                             Long.class, // timestamp of the view
                             Properties.class // configuration properties.
@@ -1004,11 +1004,11 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>> //
         final T r;
         try {
 
-            r = ctor.newInstance(new Object[] {//
-                    indexManager,//
-                    nt.getName(), //
-                    nt.getTimestamp(), //
-                    properties //
+            r = ctor.newInstance(new Object[] {
+                    indexManager,
+                    nt.getName(),
+                    nt.getTimestamp(),
+                    properties
                     });
 
             r.init();

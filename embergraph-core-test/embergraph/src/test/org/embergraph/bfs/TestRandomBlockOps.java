@@ -336,7 +336,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
      */
     public void test_stress() {
 
-        Op gen = new Op(//
+        Op gen = new Op(
                 .20f, // append
                 .01f, // delete
                 .05f, // deleteH

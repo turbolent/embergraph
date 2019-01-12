@@ -790,9 +790,9 @@ public class TestMIMEType
 
     }
 
-    //
+
     // Testing correct acceptance of equal MIME type expressions.
-    //
+
 
     public void test_equals_1()
     {
@@ -826,9 +826,9 @@ public class TestMIMEType
 	      );
     }
 
-    //
+
     // Testing correct rejection of non-equal MIME type expressions.
-    //
+
 
     public void test_not_equals_1()
     {
@@ -972,10 +972,10 @@ public class TestMIMEType
 
     }
 
-    //
+
     // Testing correct acceptance and correct rejection of spanned
     // (and not-spanned) MIME type expressions.
-    //
+
     
     /**
      * Tests that <code>A spans B</code> when <code>A == B</code>.

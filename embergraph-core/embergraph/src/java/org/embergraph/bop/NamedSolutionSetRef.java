@@ -159,10 +159,10 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
      *            The join variables (required, but may be an empty array).
      */
     @SuppressWarnings("rawtypes")
-    NamedSolutionSetRef(//
-            final UUID queryId, //
-            final String namedSet,//
-            final IVariable[] joinVars//
+    NamedSolutionSetRef(
+            final UUID queryId,
+            final String namedSet,
+            final IVariable[] joinVars
             ) {
 
 //    	See BLZG-1493
@@ -201,11 +201,11 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
      *            The join variables (required, but may be an empty array).
      */
     @SuppressWarnings("rawtypes")
-    NamedSolutionSetRef(//
-            final String namespace, //
-            final long timestamp,//
-            final String localName,//
-            final IVariable[] joinVars//
+    NamedSolutionSetRef(
+            final String namespace,
+            final long timestamp,
+            final String localName,
+            final IVariable[] joinVars
             ) {
 
         if (namespace == null)

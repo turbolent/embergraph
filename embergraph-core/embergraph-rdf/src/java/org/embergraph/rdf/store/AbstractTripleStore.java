@@ -508,9 +508,9 @@ abstract public class AbstractTripleStore extends
     
     public Iterator<IRelation> relations() {
         
-        return Collections.unmodifiableList(Arrays.asList(new IRelation[] { //
-                getSPORelation(), //
-                getLexiconRelation() //
+        return Collections.unmodifiableList(Arrays.asList(new IRelation[] {
+                getSPORelation(),
+                getLexiconRelation()
                 })).iterator();
         
     }
@@ -2580,8 +2580,8 @@ abstract public class AbstractTripleStore extends
 
         {
 
-            final byte[] fromKey = new byte[] {//
-            KeyBuilder.encodeByte(BlobIV.toFlags(VTE.URI)) //
+            final byte[] fromKey = new byte[] {
+            KeyBuilder.encodeByte(BlobIV.toFlags(VTE.URI))
             };
 
             final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
@@ -2624,8 +2624,8 @@ abstract public class AbstractTripleStore extends
         }
 
         {
-            final byte[] fromKey = new byte[] {//
-            KeyBuilder.encodeByte(BlobIV.toFlags(VTE.LITERAL)) //
+            final byte[] fromKey = new byte[] {
+            KeyBuilder.encodeByte(BlobIV.toFlags(VTE.LITERAL))
             };
 
             final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
@@ -2676,8 +2676,8 @@ abstract public class AbstractTripleStore extends
         }
         {
         
-            final byte[] fromKey = new byte[] {//
-            KeyBuilder.encodeByte(BlobIV.toFlags(VTE.BNODE)) //
+            final byte[] fromKey = new byte[] {
+            KeyBuilder.encodeByte(BlobIV.toFlags(VTE.BNODE))
             };
 
             final byte[] toKey = SuccessorUtil.successor(fromKey.clone());
@@ -2702,9 +2702,9 @@ abstract public class AbstractTripleStore extends
 
     public IV addTerm(final Value value) {
 
-        final BigdataValue[] terms = new BigdataValue[] {//
+        final BigdataValue[] terms = new BigdataValue[] {
 
-            getValueFactory().asValue(value) //
+            getValueFactory().asValue(value)
 
         };
 
@@ -3185,12 +3185,12 @@ abstract public class AbstractTripleStore extends
          * Expose as a Sesame compatible Statement object.
          */
 
-        return getValueFactory().createStatement(//
-                (BigdataResource)  terms.get(spo.s()),//
-                (BigdataURI)       terms.get(spo.p()),//
-                (BigdataValue)     terms.get(spo.o()),//
-                (BigdataResource)  (c != null ? terms.get(c) : null),//
-                spo.getStatementType(),//
+        return getValueFactory().createStatement(
+                (BigdataResource)  terms.get(spo.s()),
+                (BigdataURI)       terms.get(spo.p()),
+                (BigdataValue)     terms.get(spo.o()),
+                (BigdataResource)  (c != null ? terms.get(c) : null),
+                spo.getStatementType(),
                 spo.getUserFlag());
         
     }
@@ -3325,12 +3325,12 @@ abstract public class AbstractTripleStore extends
          * Return the access path.
          */
 
-        return getSPORelation().getAccessPath(//
-                s == null ? null : _s.getIV(), //
-                p == null ? null : _p.getIV(),//
-                o == null ? null : _o.getIV(),//
-                (c == null || !quads) ? null : _c.getIV(),//
-                filter, range//
+        return getSPORelation().getAccessPath(
+                s == null ? null : _s.getIV(),
+                p == null ? null : _p.getIV(),
+                o == null ? null : _o.getIV(),
+                (c == null || !quads) ? null : _c.getIV(),
+                filter, range
         );
 
     }
@@ -3452,12 +3452,12 @@ abstract public class AbstractTripleStore extends
          * Return the access path.
          */
 
-        return getSPORelation().getPredicate(//
-                s == null ? null : _s.getIV(), //
-                p == null ? null : _p.getIV(),//
-                o == null ? null : _o.getIV(),//
-                (c == null || !quads) ? null : _c.getIV(),//
-                filter, range//
+        return getSPORelation().getPredicate(
+                s == null ? null : _s.getIV(),
+                p == null ? null : _p.getIV(),
+                o == null ? null : _o.getIV(),
+                (c == null || !quads) ? null : _c.getIV(),
+                filter, range
         );
 
     }
@@ -3520,34 +3520,34 @@ abstract public class AbstractTripleStore extends
         final SPORelation r = getSPORelation();
         final SPOPredicate p = new SPOPredicate(
         		quads ?
-                new BOp[]{//
-                      Var.var("s"),//
-                      Var.var("p"),//
-                      Var.var("o"),//
-                      Var.var("c")//
+                new BOp[]{
+                      Var.var("s"),
+                      Var.var("p"),
+                      Var.var("o"),
+                      Var.var("c")
                 }: new BOp[]{
-                      Var.var("s"),//
-                      Var.var("p"),//
-                      Var.var("o"),//
-                      },//
-                NV.asMap(new NV[] {//
+                      Var.var("s"),
+                      Var.var("p"),
+                      Var.var("o"),
+                      },
+                NV.asMap(new NV[] {
                         new NV(IPredicate.Annotations.RELATION_NAME,
-                                new String[] { r.getNamespace() }),//
+                                new String[] { r.getNamespace() }),
 //                        new NV(IPredicate.Annotations.KEY_ORDER,
-//                                keyOrder),//
+//                                keyOrder),
                         new NV(IPredicate.Annotations.INDEX_LOCAL_FILTER,
-                               ElementFilter.newInstance(filter)),//
+                               ElementFilter.newInstance(filter)),
                         new NV(SPOPredicate.Annotations.INCLUDE_HISTORY, true),
                         }));
-//        final SPOPredicate p = new SPOPredicate(//
-//                new String[] { r.getNamespace() },//
+//        final SPOPredicate p = new SPOPredicate(
+//                new String[] { r.getNamespace() },
 //                -1, // partitionId
-//                Var.var("s"),//
-//                Var.var("p"),//
-//                Var.var("o"),//
-//                quads ? Var.var("c") : null,//
+//                Var.var("s"),
+//                Var.var("p"),
+//                Var.var("o"),
+//                quads ? Var.var("c") : null,
 //                false, // optional
-//                filter,//
+//                filter,
 //                null // expander
 //        );
 
@@ -3723,7 +3723,7 @@ abstract public class AbstractTripleStore extends
         // final int index = uriString.lastIndexOf('#');
         //        
         // if(index==-1) return uriString;
-        //
+
         // final String namespace = uriString.substring(0, index);
 
         final String namespace = uri.getNamespace();
@@ -4076,10 +4076,10 @@ abstract public class AbstractTripleStore extends
      * @todo method signature could be changed to accept the source access path
      *       for the read and then just write on the database
      */
-    public long copyStatements(//
-            final AbstractTripleStore dst,//
-            final IElementFilter<ISPO> filter,//
-            final boolean copyJustifications//
+    public long copyStatements(
+            final AbstractTripleStore dst,
+            final IElementFilter<ISPO> filter,
+            final boolean copyJustifications
             ) {        
             
         return copyStatements(dst, filter, copyJustifications,
@@ -4087,10 +4087,10 @@ abstract public class AbstractTripleStore extends
         
     }
     
-    public long copyStatements(//
-            final AbstractTripleStore dst,//
-            final IElementFilter<ISPO> filter,//
-            final boolean copyJustifications,//
+    public long copyStatements(
+            final AbstractTripleStore dst,
+            final IElementFilter<ISPO> filter,
+            final boolean copyJustifications,
             final IChangeLog changeLog
             ) {
 
@@ -4425,9 +4425,9 @@ abstract public class AbstractTripleStore extends
                             + numWritten
                             + ")"
                             + (statementStore != this ? "; truthMaintenance"
-                                    : "") //
+                                    : "")
                             + (statementIdentifiers ? "; sid="
-                                    + statementIdentifierTime + "ms" : "") //
+                                    + statementIdentifierTime + "ms" : "")
                     );
 
                 }
@@ -4494,9 +4494,9 @@ abstract public class AbstractTripleStore extends
      *       enabled since you have to serialize incremental TM operations
      *       anyway.)
      */
-    public long removeStatements(//
+    public long removeStatements(
             IChunkedOrderedIterator<ISPO> itr,
-            final boolean computeClosureForStatementIdentifiers//
+            final boolean computeClosureForStatementIdentifiers
             ) {
 
         if (itr == null)
@@ -4835,14 +4835,14 @@ abstract public class AbstractTripleStore extends
      * @return
      */
     public IJoinNexusFactory newJoinNexusFactory(
-            final RuleContextEnum ruleContext, //
-            final ActionEnum action,//
-            final int solutionFlags,//
-            final IElementFilter filter,//
-            final boolean justify, //
-            final boolean backchain,//
-            final IEvaluationPlanFactory planFactory,//
-            final Properties overrides//
+            final RuleContextEnum ruleContext,
+            final ActionEnum action,
+            final int solutionFlags,
+            final IElementFilter filter,
+            final boolean justify,
+            final boolean backchain,
+            final IEvaluationPlanFactory planFactory,
+            final Properties overrides
             ) {
         
         if (ruleContext == null)
@@ -4965,9 +4965,9 @@ abstract public class AbstractTripleStore extends
                         .isEmpty();
 
         final IRuleTaskFactory defaultRuleTaskFactory = DefaultRuleTaskFactory.PIPELINE;
-//        = isNestedSubquery() //
-//                ? DefaultRuleTaskFactory.SUBQUERY//
-//                : DefaultRuleTaskFactory.PIPELINE//
+//        = isNestedSubquery()
+//                ? DefaultRuleTaskFactory.SUBQUERY
+//                : DefaultRuleTaskFactory.PIPELINE
 //                ;
 
         // Note: returns a Properties wrapping the resource's properties.
@@ -4987,18 +4987,18 @@ abstract public class AbstractTripleStore extends
         }
         
         return new RDFJoinNexusFactory(
-                action, //
-                writeTimestamp,//
-                readTimestamp, //
-                tmp,//
-                solutionFlags, //
-                filter, //
-                planFactory, //
-                defaultRuleTaskFactory,//
-                ruleContext,//
-                justify,//
-                backchain, //
-                isOwlSameAsUsed //
+                action,
+                writeTimestamp,
+                readTimestamp,
+                tmp,
+                solutionFlags,
+                filter,
+                planFactory,
+                defaultRuleTaskFactory,
+                ruleContext,
+                justify,
+                backchain,
+                isOwlSameAsUsed
                 );
 
     }
@@ -5135,10 +5135,10 @@ abstract public class AbstractTripleStore extends
         
         final int solutionFlags = IJoinNexus.BINDINGS;
 
-		final IJoinNexus joinNexus = newJoinNexusFactory(//
+		final IJoinNexus joinNexus = newJoinNexusFactory(
 				RuleContextEnum.HighLevelQuery,// 
-				ActionEnum.Query,//
-				solutionFlags,//
+				ActionEnum.Query,
+				solutionFlags,
                 null // filter
                 ).newInstance(getIndexManager());
 

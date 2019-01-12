@@ -126,8 +126,8 @@ public class RemoteServiceCallImpl implements RemoteServiceCall {
         * instance uses the existing HTTPClient and Executor and is basically
         * flyweight as a result.
         */
-        final RemoteRepositoryManager repo = new RemoteRepositoryManager(//
-                uriStr,//
+        final RemoteRepositoryManager repo = new RemoteRepositoryManager(
+                uriStr,
                 params.getServiceOptions().isBigdataLBS(),// useLBS
                 client,
                 params.getTripleStore().getExecutorService()

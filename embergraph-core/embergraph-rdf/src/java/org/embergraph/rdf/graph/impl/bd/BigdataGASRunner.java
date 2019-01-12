@@ -376,7 +376,7 @@ public class BigdataGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
         @Override
         public void report(final StringBuilder sb) {
             sb.append(", edges(kb)=" + nedges);
-            sb.append(", namespace=" + namespace);//
+            sb.append(", namespace=" + namespace);
             sb.append(", bufferMode=" + jnl.getBufferStrategy().getBufferMode());
         }
     }

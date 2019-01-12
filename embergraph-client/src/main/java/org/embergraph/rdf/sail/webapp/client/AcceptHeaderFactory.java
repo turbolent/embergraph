@@ -69,9 +69,9 @@ public class AcceptHeaderFactory {
      * @return
      */
     public static List<String> getAcceptParams(
-            final Iterable<RDFFormat> rdfFormats, //
-            final boolean requireContext,//
-            final RDFFormat preferredFormat//
+            final Iterable<RDFFormat> rdfFormats,
+            final boolean requireContext,
+            final RDFFormat preferredFormat
             ) {
         
         final List<String> acceptParams = new LinkedList<String>();

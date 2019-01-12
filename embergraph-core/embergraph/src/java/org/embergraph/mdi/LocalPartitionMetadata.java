@@ -202,12 +202,12 @@ public class LocalPartitionMetadata implements IPartitionMetadata,
 //    *            more or less the form <code>foo(x,y,z)</code>. The history
 //    *            gets truncated when the {@link LocalPartitionMetadata} is
 //    *            serialized in order to prevent it from growing without bound.
-    public LocalPartitionMetadata(//
-            final int partitionId,//
-            final int sourcePartitionId,//
-            final byte[] leftSeparatorKey,//
+    public LocalPartitionMetadata(
+            final int partitionId,
+            final int sourcePartitionId,
+            final byte[] leftSeparatorKey,
             final byte[] rightSeparatorKey,// 
-            final IResourceMetadata[] resources,//
+            final IResourceMetadata[] resources,
             final IndexPartitionCause cause
 //            final String history
             ) {
@@ -616,9 +616,9 @@ public class LocalPartitionMetadata implements IPartitionMetadata,
                 
             }
             
-            resources[j] = (isIndexSegment //
-                    ? new SegmentMetadata(filename, /*nbytes,*/ uuid, createTime) //
-                    : new JournalMetadata(filename, /*nbytes,*/ uuid, createTime, commitTime) //
+            resources[j] = (isIndexSegment
+                    ? new SegmentMetadata(filename, /*nbytes,*/ uuid, createTime)
+                    : new JournalMetadata(filename, /*nbytes,*/ uuid, createTime, commitTime)
                     );
 
         }

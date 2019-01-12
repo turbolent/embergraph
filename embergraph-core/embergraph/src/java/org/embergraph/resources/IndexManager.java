@@ -1699,10 +1699,10 @@ abstract public class IndexManager extends StoreManager {
                 }
 
                 // Describe the index segment.
-                segmentMetadata = new SegmentMetadata(//
-                        outFile, //
-                        builder.segmentUUID, //
-                        commitTime //
+                segmentMetadata = new SegmentMetadata(
+                        outFile,
+                        builder.segmentUUID,
+                        commitTime
                 );
 
                 /*
@@ -2072,9 +2072,9 @@ abstract public class IndexManager extends StoreManager {
             // + ex, ex);
             // // fall through - [view] will be null.
             // }
-            //
+
             // if (view == null) {
-            //
+
             // /*
             // * Note: the view can be unavailable either because the
             // * index was concurrently registered and has not been
@@ -2083,12 +2083,12 @@ abstract public class IndexManager extends StoreManager {
             // * Note: an index partition that moved, split, or joined is
             // * handled above.
             // */
-            //
+
             // // t.addCounter("No data", new OneShotInstrument<String>(
             // // "Read committed view not available"));
-            //
+
             // continue;
-            //
+
             // }
             // create counter set for this index / index partition.
             final CounterSet t = tmp.makePath(path);

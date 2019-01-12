@@ -106,7 +106,7 @@ public class MemStrategy implements IBufferStrategy, IRWStrategy, IAllocationMan
 		m_rb0 = new RootBlockView(true, 0,
 	            0, 0, 0, 0, 0, 0,
 	            uuid,
-	            IRootBlockView.NO_BLOCK_SEQUENCE,//
+	            IRootBlockView.NO_BLOCK_SEQUENCE,
 	            0, 0, 0,
 	            StoreTypeEnum.RW,
 	            createTime, 0, RootBlockView.currentVersion, checker);
@@ -114,7 +114,7 @@ public class MemStrategy implements IBufferStrategy, IRWStrategy, IAllocationMan
 		m_rb1 = new RootBlockView(false, 0,
 	            0, 0, 0, 0, 0, 0,
 	            uuid,
-                IRootBlockView.NO_BLOCK_SEQUENCE,//
+                IRootBlockView.NO_BLOCK_SEQUENCE,
 	            0, 0, 0,
 	            StoreTypeEnum.RW,
 	            createTime, 0, RootBlockView.currentVersion, checker);	

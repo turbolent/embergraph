@@ -256,7 +256,7 @@ public interface QueryHints {
     String QUERY_ENGINE_CHUNK_HANDLER = "queryEngineChunkHandler";
 
     IChunkHandler DEFAULT_QUERY_ENGINE_CHUNK_HANDLER = 
-            ClassPathUtil.classForName(//
+            ClassPathUtil.classForName(
                     System.getProperty(QueryHints.class.getName() + "."+QUERY_ENGINE_CHUNK_HANDLER,
                           org.embergraph.bop.engine.ManagedHeapStandloneChunkHandler.class.getName()
 //                            org.embergraph.bop.engine.NativeHeapStandloneChunkHandler.class.getName()

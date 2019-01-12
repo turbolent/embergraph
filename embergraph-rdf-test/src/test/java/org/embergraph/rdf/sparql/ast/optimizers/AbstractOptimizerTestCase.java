@@ -663,7 +663,7 @@ public abstract class AbstractOptimizerTestCase extends
 		 * @param more
 		 * @return
 		 */
-		protected StatementPatternNode statementPatternNode(//
+		protected StatementPatternNode statementPatternNode(
 				final TermNode s,
 				final TermNode p, 
 				final TermNode o, 
@@ -810,9 +810,9 @@ public abstract class AbstractOptimizerTestCase extends
 		 */
 		// * @param scalarValues
 		// * One or more scalar values that are passed to the function
-		protected IValueExpressionNode functionNode(//
-				final String uri,//
-				final ValueExpressionNode... args//
+		protected IValueExpressionNode functionNode(
+				final String uri,
+				final ValueExpressionNode... args
 				) {
 
 			return functionNode(new URIImpl(uri), args);
@@ -830,18 +830,18 @@ public abstract class AbstractOptimizerTestCase extends
 		 */
 		// * @param scalarValues
 		// * One or more scalar values that are passed to the function
-		protected IValueExpressionNode functionNode(//
-				final URI uri,//
-				final ValueExpressionNode... args//
+		protected IValueExpressionNode functionNode(
+				final URI uri,
+				final ValueExpressionNode... args
 				) {
 
 			return new FunctionNode(uri, null, args);
 
 		}
 
-		protected ServiceNode service(//
+		protected ServiceNode service(
 				final TermNode serviceRef,
-				final GraphPatternGroup<IGroupMemberNode> groupNode//
+				final GraphPatternGroup<IGroupMemberNode> groupNode
 				) {
 
 			return new ServiceNode(serviceRef, groupNode);
@@ -871,8 +871,8 @@ public abstract class AbstractOptimizerTestCase extends
 
 			final FunctionNode rslt = FunctionNode.OR(v1, v2);
 
-			rslt.setValueExpression(new OrBOp(//
-					v1.getValueExpression(), //
+			rslt.setValueExpression(new OrBOp(
+					v1.getValueExpression(),
 					v2.getValueExpression()));
 
 			return rslt;

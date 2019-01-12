@@ -124,7 +124,7 @@ public class HAStatusServletUtilProxy {
          */
 		public HAStatusServletUtilProxy getInstance(final String provider, IIndexManager indexManager) {
 			
-//            return ClassPathUtil.classForName(//
+//            return ClassPathUtil.classForName(
 //                    provider, // preferredClassName,
 //                    HAStatusServletUtilProxy.class, // defaultClass,
 //                    HAStatusServletUtilProxy.class, // sharedInterface,

@@ -120,7 +120,7 @@ public class CachingMetadataIndex extends CacheOnceMetadataIndex {
              * key-range partition associated with the stale locator.
              */
 
-            cacheLocators(//
+            cacheLocators(
                     locator.getLeftSeparatorKey(), // fromKey
                     locator.getRightSeparatorKey() // toKey
             );

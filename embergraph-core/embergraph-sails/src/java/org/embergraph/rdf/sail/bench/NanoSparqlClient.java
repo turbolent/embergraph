@@ -262,9 +262,9 @@ public class NanoSparqlClient {
 			// Fully formed and encoded URL @todo use */* for ASK.
 			final String urlString = opts.serviceURL
 					+ "?query="
-					+ URLEncoder.encode(opts.queryStr, "UTF-8")//
-					+ (opts.explain?"&explain=":"")//
-					+ (opts.analytic!=null?"&analytic="+opts.analytic:"")//
+					+ URLEncoder.encode(opts.queryStr, "UTF-8")
+					+ (opts.explain?"&explain=":"")
+					+ (opts.analytic!=null?"&analytic="+opts.analytic:"")
 					+ (opts.defaultGraphUri == null ? ""
 							: ("&default-graph-uri=" + URLEncoder.encode(
 									opts.defaultGraphUri, "UTF-8")));

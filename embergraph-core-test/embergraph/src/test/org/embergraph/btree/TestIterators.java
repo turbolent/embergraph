@@ -476,7 +476,7 @@ public class TestIterators extends AbstractBTreeTestCase {
 //                new Tuple(btree,IRangeQuery.DEFAULT), null, null, null));
         
         // visit everything except v3.
-        assertSameIterator(new byte[][] { v5, v7 },//
+        assertSameIterator(new byte[][] { v5, v7 },
                 btree.rangeIterator(null/* fromKey */, null/* toKey */,
                         0/* capacity */, flags, new TupleFilter() {
                                     private static final long serialVersionUID = 1L;
@@ -488,7 +488,7 @@ public class TestIterators extends AbstractBTreeTestCase {
                                 }));
         
         // visit everything except v5.
-        assertSameIterator(new byte[][] { v3, v7 },//
+        assertSameIterator(new byte[][] { v3, v7 },
                 btree.rangeIterator(null/* fromKey */, null/* toKey */,
                         0/* capacity */, flags, new TupleFilter() {
                                     private static final long serialVersionUID = 1L;
@@ -500,7 +500,7 @@ public class TestIterators extends AbstractBTreeTestCase {
                                 }));
         
         // visit everything except v7.
-        assertSameIterator(new byte[][] { v3, v5 },//
+        assertSameIterator(new byte[][] { v3, v5 },
                 btree.rangeIterator(null/* fromKey */, null/* toKey */,
                         0/* capacity */, flags, new TupleFilter() {
                                     private static final long serialVersionUID = 1L;

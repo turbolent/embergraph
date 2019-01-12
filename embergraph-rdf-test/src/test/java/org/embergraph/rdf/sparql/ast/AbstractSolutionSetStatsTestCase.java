@@ -171,7 +171,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         
         final IBindingSet[] bsets = new IBindingSet[] {};
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
         		0, // nsolutions
         		emptySet,// usedVars
         		emptySet,// notAlwaysBound
@@ -205,7 +205,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 1,// nsolutions
                 asSet(x),// usedVars
                 emptySet,// notAlwaysBound
@@ -241,7 +241,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 1,// nsolutions
                 asSet(x),// usedVars
                 emptySet,// notAlwaysBound
@@ -282,7 +282,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 1,// nsolutions
                 asSet(x, y),// usedVars
                 emptySet,// notAlwaysBound
@@ -338,7 +338,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 2,// nsolutions
                 asSet(x, y),// usedVars
                 emptySet,// notAlwaysBound
@@ -394,7 +394,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 2,// nsolutions
                 asSet(x, y),// usedVars
                 emptySet,// notAlwaysBound
@@ -457,7 +457,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
 				2,// nsolutions
 				asSet(x, y, z),// usedVars
 				asSet(z),// notAlwaysBound
@@ -520,7 +520,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
 				2,// nsolutions
 				asSet(x, y, z),// usedVars
 				asSet(z),// notAlwaysBound
@@ -584,7 +584,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 2,// nsolutions
                 asSet(x, y, z),// usedVars
                 asSet(z),// notAlwaysBound
@@ -649,7 +649,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 2,// nsolutions
                 asSet(x, y, z),// usedVars
                 asSet(z),// notAlwaysBound
@@ -714,7 +714,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 3,// nsolutions
                 asSet(x, y, z),// usedVars
                 asSet(x, y, z),// notAlwaysBound
@@ -792,7 +792,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
             bsets.add(bset);
         }
 
-        final ISolutionSetStats expected = new MySolutionStats(//
+        final ISolutionSetStats expected = new MySolutionStats(
                 3,// nsolutions
                 asSet(x, y, z),// usedVars
                 asSet(),// notAlwaysBound

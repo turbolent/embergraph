@@ -32,9 +32,9 @@
 
   // bracketRegex is used to specify which type of bracket to scan
   // should be a regexp, e.g. /[[\]]/
-  //
+
   // Note: If "where" is on an open bracket, then this bracket is ignored.
-  //
+
   // Returns false when no bracket was found, null when it reached
   // maxScanLines and gave up
   function scanForBracket(cm, where, dir, style, config) {

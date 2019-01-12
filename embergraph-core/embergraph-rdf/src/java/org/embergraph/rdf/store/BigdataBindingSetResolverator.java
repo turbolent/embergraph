@@ -71,7 +71,7 @@ public class BigdataBindingSetResolverator
      */
     public BigdataBindingSetResolverator(final AbstractTripleStore db,
             final IChunkedOrderedIterator<IBindingSet> src,
-            final UUID queryId,//
+            final UUID queryId,
             final IVariable[] required, final int chunkOfChunksCapacity,
             final int chunkCapacity, final long chunkTimeout,
             final int termsChunkSize,
@@ -129,8 +129,8 @@ public class BigdataBindingSetResolverator
      *         materialized.
      */
     private IBindingSet[] resolveChunk(//final IVariable<?>[] required,
-            final LexiconRelation lex,//
-            final IBindingSet[] chunk//
+            final LexiconRelation lex,
+            final IBindingSet[] chunk
             ) {
         
         return resolveChunk(queryId, lex, chunk, required, termsChunkSize,
@@ -165,11 +165,11 @@ public class BigdataBindingSetResolverator
      */
     static private IBindingSet[] resolveChunk(
             final UUID queryId,
-            final LexiconRelation lex,//
-            final IBindingSet[] chunk,//
-            final IVariable<?>[] required,//
-            final int termsChunkSize,//
-            final int blobsChunkSize//
+            final LexiconRelation lex,
+            final IBindingSet[] chunk,
+            final IVariable<?>[] required,
+            final int termsChunkSize,
+            final int blobsChunkSize
             ) {
     
         final long begin = System.currentTimeMillis();

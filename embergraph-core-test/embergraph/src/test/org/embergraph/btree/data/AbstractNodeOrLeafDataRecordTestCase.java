@@ -445,11 +445,11 @@ abstract public class AbstractNodeOrLeafDataRecordTestCase extends
     /**
      * Generates a leaf node with random data.
      */
-    public ILeafData getRandomLeaf(//
-    		final int m,//
+    public ILeafData getRandomLeaf(
+    		final int m,
             final boolean isDeleteMarkers,// 
-            final boolean isVersionTimestamps,//
-            final boolean isRawRecords//
+            final boolean isVersionTimestamps,
+            final boolean isRawRecords
             ) {
 
         // #of keys per node.
@@ -523,12 +523,12 @@ abstract public class AbstractNodeOrLeafDataRecordTestCase extends
 
         }
 
-        return mockLeafFactory(//
-                new ReadOnlyKeysRaba(nkeys, keys),//
-                new ReadOnlyValuesRaba(nkeys, values),//
-                deleteMarkers,//
-                versionTimestamps,//
-                rawRecords//
+        return mockLeafFactory(
+                new ReadOnlyKeysRaba(nkeys, keys),
+                new ReadOnlyValuesRaba(nkeys, values),
+                deleteMarkers,
+                versionTimestamps,
+                rawRecords
         );
 
     }

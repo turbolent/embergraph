@@ -212,33 +212,33 @@ abstract public class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
         final KeyBuilder keyBuilder = (KeyBuilder) KeyBuilder
                 .newUnicodeInstance(getProperties());
     
-        assertEquals(//
-                keyBuilder.normalizeText(""),//
-                keyBuilder.normalizeText(" ")//
+        assertEquals(
+                keyBuilder.normalizeText(""),
+                keyBuilder.normalizeText(" ")
                 );
-        assertEquals(//
-                keyBuilder.normalizeText(""),//
-                keyBuilder.normalizeText("  ")//
+        assertEquals(
+                keyBuilder.normalizeText(""),
+                keyBuilder.normalizeText("  ")
                 );
-        assertEquals(//
-                keyBuilder.normalizeText(""),//
-                keyBuilder.normalizeText("      ")//
+        assertEquals(
+                keyBuilder.normalizeText(""),
+                keyBuilder.normalizeText("      ")
                 );
-        assertEquals(//
-                keyBuilder.normalizeText(" "),//
-                keyBuilder.normalizeText("      ")//
+        assertEquals(
+                keyBuilder.normalizeText(" "),
+                keyBuilder.normalizeText("      ")
                 );
-        assertEquals(//
-                keyBuilder.normalizeText("abc"),//
-                keyBuilder.normalizeText("abc      ")//
+        assertEquals(
+                keyBuilder.normalizeText("abc"),
+                keyBuilder.normalizeText("abc      ")
                 );
-        assertEquals(//
-                keyBuilder.normalizeText("   abc"),//
-                keyBuilder.normalizeText("   abc      ")//
+        assertEquals(
+                keyBuilder.normalizeText("   abc"),
+                keyBuilder.normalizeText("   abc      ")
                 );
-        assertNotSame(//
-                keyBuilder.normalizeText("abc"),//
-                keyBuilder.normalizeText("   abc      ")//
+        assertNotSame(
+                keyBuilder.normalizeText("abc"),
+                keyBuilder.normalizeText("   abc      ")
                 );
         
     }
@@ -255,9 +255,9 @@ abstract public class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
 
         final String text = TestKeyBuilder.getMaximumLengthText();
 
-        assertEquals(//
-                keyBuilder.normalizeText(text),//
-                keyBuilder.normalizeText(text+"abc")//
+        assertEquals(
+                keyBuilder.normalizeText(text),
+                keyBuilder.normalizeText(text+"abc")
                 );
         
     }

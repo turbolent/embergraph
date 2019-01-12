@@ -40,9 +40,9 @@ public class StrcontainsBOp extends XSDBooleanIVValueExpression implements INeed
     private static final long serialVersionUID = -8277059116677497632L;
 
     @SuppressWarnings("rawtypes")
-    public StrcontainsBOp(//
-            final IValueExpression<? extends IV> x,//
-            final IValueExpression<? extends IV> y//
+    public StrcontainsBOp(
+            final IValueExpression<? extends IV> x,
+            final IValueExpression<? extends IV> y
             ) {
 
         this(new BOp[] { x, y }, BOp.NOANNS);

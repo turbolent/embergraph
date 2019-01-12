@@ -312,9 +312,9 @@ public class NanoSparqlServer {
          * use a different jetty.xml file, just override this property on the
          * command line.
          */
-        String jettyXml = System.getProperty(//
-                SystemProperties.JETTY_XML,//
-                "jetty.xml"//
+        String jettyXml = System.getProperty(
+                SystemProperties.JETTY_XML,
+                "jetty.xml"
 //                SystemProperties.DEFAULT_JETTY_XML
                 );
         
@@ -723,10 +723,10 @@ public class NanoSparqlServer {
      *      Allow configuration of embedded NSS jetty server using jetty-web.xml
      *      </a>
      */
-    static public Server newInstance(//
-            final String jettyXml,//
-            final IIndexManager indexManager,//
-            final Map<String, String> initParams//
+    static public Server newInstance(
+            final String jettyXml,
+            final IIndexManager indexManager,
+            final Map<String, String> initParams
     ) throws Exception {
 
         if (jettyXml == null)
@@ -1011,7 +1011,7 @@ public class NanoSparqlServer {
         }
 
         if (log.isInfoEnabled())
-            log.info("jetty configuration"//
+            log.info("jetty configuration"
                     + ": resourceBaseStr=" + resourceBaseStr
                     + ", isDeclared="
                     + isDeclared + ", isFile=" + isFile
@@ -1051,10 +1051,10 @@ public class NanoSparqlServer {
      * mechanism is required because you can not otherwise override the
      * init-params without editing <code>web.xml</code>.
      */
-    private static void configureWebAppOverrides(//
-            final Server server,//
-            final IIndexManager indexManager,//
-            final Map<String, String> initParams//
+    private static void configureWebAppOverrides(
+            final Server server,
+            final IIndexManager indexManager,
+            final Map<String, String> initParams
     ) {
 
         final WebAppContext wac = getWebApp(server);

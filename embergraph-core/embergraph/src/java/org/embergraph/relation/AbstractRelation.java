@@ -330,9 +330,9 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     @Override
     @SuppressWarnings("unchecked")
     final public IAccessPath<E> getAccessPath(
-            final IIndexManager localIndexManager, //
-            final IKeyOrder<E> keyOrder,//
-            final IPredicate<E> predicate//
+            final IIndexManager localIndexManager,
+            final IKeyOrder<E> keyOrder,
+            final IPredicate<E> predicate
             ) {
 
         // The optional expander.
@@ -379,8 +379,8 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 //     *             {@link IPredicate.Annotations#PARTITION_ID}.
 //     */
 //    public IAccessPath<E> getAccessPathForIndexPartition(
-//            final IIndexManager indexManager, //
-//            final IPredicate<E> predicate//
+//            final IIndexManager indexManager,
+//            final IPredicate<E> predicate
 //            ) {
 //
 //        return getAccessPath(indexManager,getKeyOrder(predicate),predicate);
@@ -394,12 +394,12 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 ////         * objects so we can directly read on the shard.
 ////         */
 //////        final IIndexManager indexManager = getIndexManager();
-////
+//
 ////        if (indexManager == null)
 ////            throw new IllegalArgumentException();
-////
+//
 ////        if (indexManager instanceof IBigdataFederation<?>) {
-////
+//
 ////            /*
 ////             * This will happen if you fail to re-create the JoinNexus within
 ////             * the target execution environment.
@@ -411,30 +411,30 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 ////             * using the IndexManager exposed by the ConcurrencyManager to its
 ////             * tasks.
 ////             */
-////
+//
 ////            throw new IllegalArgumentException(
 ////                    "Expecting a local index manager, not: "
 ////                            + indexManager.getClass().toString());
-////
+//
 ////        }
 ////        
 ////        if (predicate == null)
 ////            throw new IllegalArgumentException();
-////
+//
 ////        final int partitionId = predicate.getPartitionId();
-////
+//
 ////        if (partitionId == -1) // must be a valid partition identifier.
 ////            throw new IllegalArgumentException();
-////
+//
 ////        /*
 ////         * @todo This condition should probably be an error since the expander
 ////         * will be ignored.
 ////         */
 //////        if (predicate.getSolutionExpander() != null)
 //////            throw new IllegalArgumentException();
-////
+//
 ////        if (predicate.getRelationCount() != 1) {
-////
+//
 ////            /*
 ////             * This is disallowed. The predicate must be reading on a single
 ////             * local index partition, not a view comprised of more than one
@@ -454,16 +454,16 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 ////        }
 ////        
 ////        final String namespace = getNamespace();//predicate.getOnlyRelationName();
-////
+//
 ////        /*
 ////         * Find the best access path for that predicate.
 ////         */
 ////        final IKeyOrder<E> keyOrder = getKeyOrder(predicate);
-////
+//
 ////        // The name of the desired index partition.
 ////        final String name = DataService.getIndexPartitionName(namespace + "."
 ////                + keyOrder.getIndexName(), predicate.getPartitionId());
-////
+//
 ////        /*
 ////         * Note: whether or not we need both keys and values depends on the
 ////         * specific index/predicate.
@@ -474,13 +474,13 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 //////      * Note: We can specify READ_ONLY here since the tail predicates are not
 //////      * mutable for rule execution.
 ////        final int flags = IRangeQuery.KEYS | IRangeQuery.VALS;// | IRangeQuery.READONLY;
-////
+//
 ////        final long timestamp = getTimestamp();//getReadTimestamp();
 ////        
 ////        // MUST be a local index view.
 ////        final ILocalBTreeView ndx = (ILocalBTreeView) indexManager
 ////                .getIndex(name, timestamp);
-////
+//
 ////        return new AccessPath<E>(this/* relation */, indexManager, timestamp,
 ////                predicate, keyOrder
 //////                , ndx, flags, getChunkOfChunksCapacity(),

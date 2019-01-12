@@ -140,7 +140,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
 //            final HardReferenceQueueEvictionListener<T> listener,
 //            final int capacity) {
 //
-//            this(//
+//            this(
 //                    new HardReferenceQueue<T>(listener, capacity, 0/* nscan */),
 ////                    listener, capacity,
 //                IHardReferenceQueue.DEFAULT_NSCAN,// threadLocalNScan
@@ -171,11 +171,11 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
     public HardReferenceQueueWithBatchingUpdates(
             final IHardReferenceQueue<T> sharedQueue,
 //            final HardReferenceQueueEvictionListener<T> listener,
-//            final int capacity,//
-            final int threadLocalQueueNScan,//
-            final int threadLocalQueueCapacity,//
-            final int threadLocalTryLockSize,//
-            final IBatchedUpdateListener<T> batchedUpdateListener//
+//            final int capacity,
+            final int threadLocalQueueNScan,
+            final int threadLocalQueueCapacity,
+            final int threadLocalTryLockSize,
+            final IBatchedUpdateListener<T> batchedUpdateListener
     ) {
         this(true/* threadLocalBuffers */, 16/* concurrencyLevel */,
                 sharedQueue, threadLocalQueueNScan, threadLocalQueueCapacity,
@@ -187,11 +187,11 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
             final int concurrencyLevel,
             final IHardReferenceQueue<T> sharedQueue,
 //            final HardReferenceQueueEvictionListener<T> listener,
-//            final int capacity,//
-            final int threadLocalQueueNScan,//
-            final int threadLocalQueueCapacity,//
-            final int threadLocalTryLockSize,//
-            final IBatchedUpdateListener<T> batchedUpdateListener//
+//            final int capacity,
+            final int threadLocalQueueNScan,
+            final int threadLocalQueueCapacity,
+            final int threadLocalTryLockSize,
+            final IBatchedUpdateListener<T> batchedUpdateListener
             ) {
 
         if (sharedQueue == null)
@@ -244,7 +244,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
             threadLocalQueues = new ConcurrentHashMap<Thread, BatchQueue<T>>(
                     16,// initialCapacity
                     0.75f,// load factor (default is .75f)
-                    concurrencyLevel//
+                    concurrencyLevel
             );
         } else {
             /*
@@ -257,12 +257,12 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
             for (int i = 0; i < concurrencyLevel; i++) {
 //                permits[i] = new Semaphore(1, false/* fair */);
                 permits[i] = new ReentrantLock(false/*fair*/);
-                buffers[i] = new BatchQueue<T>(//
+                buffers[i] = new BatchQueue<T>(
                         i,// id
-                        threadLocalQueueNScan, threadLocalQueueCapacity,//
-                        threadLocalTryLockSize, lock,//
-                        threadLocalQueueEvictionListener,//
-                        batchedUpdatedListener//
+                        threadLocalQueueNScan, threadLocalQueueCapacity,
+                        threadLocalTryLockSize, lock,
+                        threadLocalQueueEvictionListener,
+                        batchedUpdatedListener
                         );
             }
         }
@@ -299,7 +299,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
 
         if (tmp == null) {
 
-            if (threadLocalQueues.put(t, tmp = new BatchQueue<T>(//
+            if (threadLocalQueues.put(t, tmp = new BatchQueue<T>(
                     0/* idIsIgnored */,
                     threadLocalQueueNScan, threadLocalQueueCapacity,
                     threadLocalTryLockSize, lock,
@@ -640,13 +640,13 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements
          * @param batchedUpdateListener
          */
         public BatchQueue(
-                final int id,//
-                final int nscan,//
-                final int capacity,//
-                final int tryLockSize, //
-                final ReentrantLock lock,//
-                final HardReferenceQueueEvictionListener<T> listener,//
-                final IBatchedUpdateListener<T> batchedUpdateListener//
+                final int id,
+                final int nscan,
+                final int capacity,
+                final int tryLockSize,
+                final ReentrantLock lock,
+                final HardReferenceQueueEvictionListener<T> listener,
+                final IBatchedUpdateListener<T> batchedUpdateListener
                 ) {
 
             super(capacity);

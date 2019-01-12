@@ -96,12 +96,12 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>> extends
      *            <code>false</code> it will not be present in the generated
      *            key.
      */
-    public FullTextIndexTupleSerializer(//
-            final IKeyBuilderFactory keyBuilderFactory,//
-            final IRabaCoder leafKeysCoder, //
-            final IRabaCoder leafValsCoder,//
-            final boolean fieldsEnabled//
-//            final boolean doublePrecision//
+    public FullTextIndexTupleSerializer(
+            final IKeyBuilderFactory keyBuilderFactory,
+            final IRabaCoder leafKeysCoder,
+            final IRabaCoder leafValsCoder,
+            final boolean fieldsEnabled
+//            final boolean doublePrecision
             ) {
    
         super(keyBuilderFactory, leafKeysCoder, leafValsCoder);

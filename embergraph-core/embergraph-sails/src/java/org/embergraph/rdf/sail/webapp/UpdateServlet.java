@@ -220,14 +220,14 @@ public class UpdateServlet extends BigdataRDFServlet {
 		      // compatible with group commit serializability semantics.
 		      submitApiTask(
 					new UpdateWithQueryMaterializedTask(req, resp, namespace,
-							ITx.UNISOLATED, //
-							queryStr,//
-							baseURI,//
-							suppressTruthMaintenance, //
-							bindings,//
-							rdfParserFactory,//
-							defaultContextDelete,//
-							defaultContextInsert//
+							ITx.UNISOLATED,
+							queryStr,
+							baseURI,
+							suppressTruthMaintenance,
+							bindings,
+							rdfParserFactory,
+							defaultContextDelete,
+							defaultContextInsert
 					)).get();
 
 		   } else {
@@ -235,14 +235,14 @@ public class UpdateServlet extends BigdataRDFServlet {
 		      // streaming implementation. not compatible with group commit.
 		      submitApiTask(
 	               new UpdateWithQueryStreamingTask(req, resp, namespace,
-	                     ITx.UNISOLATED, //
-	                     queryStr,//
-	                     baseURI,//
-	                     suppressTruthMaintenance, //
-	                     bindings,//
-	                     rdfParserFactory,//
-	                     defaultContextDelete,//
-	                     defaultContextInsert//
+	                     ITx.UNISOLATED,
+	                     queryStr,
+	                     baseURI,
+	                     suppressTruthMaintenance,
+	                     bindings,
+	                     rdfParserFactory,
+	                     defaultContextDelete,
+	                     defaultContextInsert
 	               )).get();
 		      
 		   }
@@ -310,13 +310,13 @@ public class UpdateServlet extends BigdataRDFServlet {
         public UpdateWithQueryStreamingTask(final HttpServletRequest req,
                 final HttpServletResponse resp,
                 final String namespace, final long timestamp,
-                final String queryStr,//
+                final String queryStr,
                 final String baseURI,
-                final boolean suppressTruthMaintenance,//
+                final boolean suppressTruthMaintenance,
                 final Map<String, Value> bindings,
                 final RDFParserFactory parserFactory,
-                final Resource[] defaultContextDelete,//
-                final Resource[] defaultContextInsert//
+                final Resource[] defaultContextDelete,
+                final Resource[] defaultContextInsert
                 ) {
             super(req, resp, namespace, timestamp);
             this.queryStr = queryStr;
@@ -575,13 +575,13 @@ public class UpdateServlet extends BigdataRDFServlet {
       public UpdateWithQueryMaterializedTask(final HttpServletRequest req,
             final HttpServletResponse resp, final String namespace,
             final long timestamp,
-            final String queryStr,//
+            final String queryStr,
             final String baseURI,
-            final boolean suppressTruthMaintenance, //
+            final boolean suppressTruthMaintenance,
             final Map<String, Value> bindings,
             final RDFParserFactory parserFactory,
-            final Resource[] defaultContextDelete,//
-            final Resource[] defaultContextInsert//
+            final Resource[] defaultContextDelete,
+            final Resource[] defaultContextInsert
       ) {
          super(req, resp, namespace, timestamp);
          this.queryStr = queryStr;
@@ -908,13 +908,13 @@ public class UpdateServlet extends BigdataRDFServlet {
         
             submitApiTask(
                     new UpdateWithBodyTask(req, resp, namespace,
-                            ITx.UNISOLATED, //
-                            baseURI,//
-                            suppressTruthMaintenance, //
-                            remove,//
-                            defaultContextDelete,//
-                            add,//
-                            defaultContextInsert//
+                            ITx.UNISOLATED,
+                            baseURI,
+                            suppressTruthMaintenance,
+                            remove,
+                            defaultContextDelete,
+                            add,
+                            defaultContextInsert
                             )).get();
 
         } catch (Throwable t) {
@@ -971,11 +971,11 @@ public class UpdateServlet extends BigdataRDFServlet {
                 final HttpServletResponse resp,
                 final String namespace, final long timestamp,
                 final String baseURI,
-                final boolean suppressTruthMaintenance,//
+                final boolean suppressTruthMaintenance,
                 final FileItem remove,
-                final Resource[] defaultContextDelete,//
+                final Resource[] defaultContextDelete,
                 final FileItem add,
-                final Resource[] defaultContextInsert//
+                final Resource[] defaultContextInsert
                 ) {
             super(req, resp, namespace, timestamp);
             this.baseURI = baseURI;

@@ -71,8 +71,8 @@ public class TestAltHALogWriter extends TestCase {
 	 * RootBlockView(// final boolean rootBlock0, final int offsetBits, final
 	 * long nextOffset, final long firstCommitTime, final long lastCommitTime,
 	 * final long commitCounter, final long commitRecordAddr, final long
-	 * commitRecordIndexAddr, final UUID uuid, final long blockSequence, //
-	 * VERSION3 final long quorumToken, // VERSION2 final long metaStartAddr, //
+	 * commitRecordIndexAddr, final UUID uuid, final long blockSequence,
+	 * VERSION3 final long quorumToken, // VERSION2 final long metaStartAddr,
 	 * VERSION1 final long metaBitsAddr, // VERSION1 final StoreTypeEnum
 	 * storeTypeEnum, // VERSION1 final long createTime, final long closeTime,
 	 * final int version, final ChecksumUtility checker)
@@ -80,7 +80,7 @@ public class TestAltHALogWriter extends TestCase {
 	@SuppressWarnings("deprecation")
 	private IRootBlockView openRBV(final StoreTypeEnum st) {
 		return new RootBlockView(
-				//
+
 				true /* rb0 */, 0, 0, 
 				0 /* commitTime */, 0,
 				0 /* commitCounter */, 0, 0, new UUID(1, 2),
@@ -96,7 +96,7 @@ public class TestAltHALogWriter extends TestCase {
 	@SuppressWarnings("deprecation")
 	private static IRootBlockView closeRBV(final IRootBlockView rbv) {
 		return new RootBlockView(
-				//
+
 				!rbv.isRootBlock0(), 0, 0,
 				System.currentTimeMillis() /* commitTime */, 0, rbv
 						.getCommitCounter() + 1 /* commitCounter */, 100,

@@ -83,8 +83,8 @@ public class TestEQ extends TestCase2 {
 
         final EQ op = new EQ(Var.var("x"), Var.var("y"));
 
-        final IBindingSet bs1 = new ListBindingSet(//
-                new IVariable[] { Var.var("x"), Var.var("y") }, //
+        final IBindingSet bs1 = new ListBindingSet(
+                new IVariable[] { Var.var("x"), Var.var("y") },
                 new IConstant[] { new Constant<String>("1"),
                         new Constant<String>("1") });
 
@@ -99,8 +99,8 @@ public class TestEQ extends TestCase2 {
 
         final EQ op = new EQ(Var.var("x"), Var.var("y"));
 
-        final IBindingSet bs1 = new ListBindingSet(//
-                new IVariable[] { Var.var("x"), Var.var("y") }, //
+        final IBindingSet bs1 = new ListBindingSet(
+                new IVariable[] { Var.var("x"), Var.var("y") },
                 new IConstant[] { new Constant<String>("1"),
                         new Constant<String>("2") });
 
@@ -112,8 +112,8 @@ public class TestEQ extends TestCase2 {
 
         final EQ op = new EQ(Var.var("x"), Var.var("y"));
 
-        final IBindingSet bs1 = new ListBindingSet(//
-                new IVariable[] { Var.var("x") }, //
+        final IBindingSet bs1 = new ListBindingSet(
+                new IVariable[] { Var.var("x") },
                 new IConstant[] { new Constant<String>("1") });
 
         assertTrue(op.get(bs1));

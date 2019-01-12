@@ -58,7 +58,7 @@ public class DCElementsVocabularyDecl implements VocabularyDecl {
     public static final URI rights = new URIImpl(NAMESPACE + "rights");
         
     static private final URI[] uris = new URI[]{
-            new URIImpl(NAMESPACE),//
+            new URIImpl(NAMESPACE),
             title, creator, subject, description, publisher, contributor, date,
             type, format, identifier, source, language, relation, coverage,
             rights

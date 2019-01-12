@@ -894,19 +894,19 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
             final BigdataResource s = (BigdataResource) toValue(sp.s());
             final BigdataValue o = toValue(sp.o());
             
-            final BigdataStatement spo = context.valueFactory.createStatement(//
-                (BigdataResource) s, //
-                (BigdataURI) sp.p().getValue(), //
-                (BigdataValue) o,//
-                (BigdataResource) (sp.c() != null ? sp.c().getValue(): null),//
-                StatementEnum.Explicit//
+            final BigdataStatement spo = context.valueFactory.createStatement(
+                (BigdataResource) s,
+                (BigdataURI) sp.p().getValue(),
+                (BigdataValue) o,
+                (BigdataResource) (sp.c() != null ? sp.c().getValue(): null),
+                StatementEnum.Explicit
                 );
-//            final ISPO spo = new SPO(//
-//                    sp.s().getValue().getIV(), //
-//                    sp.p().getValue().getIV(), //
-//                    sp.o().getValue().getIV(),//
-//                    (sp.c() != null ? sp.c().getValue().getIV() : null),//
-//                    StatementEnum.Explicit//
+//            final ISPO spo = new SPO(
+//                    sp.s().getValue().getIV(),
+//                    sp.p().getValue().getIV(),
+//                    sp.o().getValue().getIV(),
+//                    (sp.c() != null ? sp.c().getValue().getIV() : null),
+//                    StatementEnum.Explicit
 //            );
 
             stmts.add(spo);

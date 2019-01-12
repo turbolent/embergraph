@@ -2487,8 +2487,8 @@ abstract public class OverflowManager extends IndexManager {
                  */
                 final long entryCount = bm.entryCount;
                 final boolean copyIndex = (entryCount == 0)
-                        || ((copyIndexThreshold > 0 && entryCount <= copyIndexThreshold) //
-                                && numIndicesNonZeroCopy < maxNonZeroCopy //
+                        || ((copyIndexThreshold > 0 && entryCount <= copyIndexThreshold)
+                                && numIndicesNonZeroCopy < maxNonZeroCopy
                                 && !hasOverflowHandler // must be applied
                         && !bm.mandatoryMerge // 
                         );
@@ -2517,12 +2517,12 @@ abstract public class OverflowManager extends IndexManager {
                     // describe the index partition.
                     indexMetadata
                             .setPartitionMetadata(new LocalPartitionMetadata(
-                                    oldpmd.getPartitionId(),//
-                                    oldpmd.getSourcePartitionId(),//
-                                    oldpmd.getLeftSeparatorKey(),//
-                                    oldpmd.getRightSeparatorKey(),//
-                                    newResources, //
-                                    oldpmd.getIndexPartitionCause()//
+                                    oldpmd.getPartitionId(),
+                                    oldpmd.getSourcePartitionId(),
+                                    oldpmd.getLeftSeparatorKey(),
+                                    oldpmd.getRightSeparatorKey(),
+                                    newResources,
+                                    oldpmd.getIndexPartitionCause()
 //                                    , oldpmd
 //                                            .getHistory()
 //                                            + OverflowActionEnum.Copy
@@ -2568,12 +2568,12 @@ abstract public class OverflowManager extends IndexManager {
                     // describe the index partition.
                     indexMetadata
                             .setPartitionMetadata(new LocalPartitionMetadata(
-                                    oldpmd.getPartitionId(),//
-                                    oldpmd.getSourcePartitionId(),//
-                                    oldpmd.getLeftSeparatorKey(),//
-                                    oldpmd.getRightSeparatorKey(),//
-                                    newResources, //
-                                    oldpmd.getIndexPartitionCause()//
+                                    oldpmd.getPartitionId(),
+                                    oldpmd.getSourcePartitionId(),
+                                    oldpmd.getLeftSeparatorKey(),
+                                    oldpmd.getRightSeparatorKey(),
+                                    newResources,
+                                    oldpmd.getIndexPartitionCause()
 //                                    , oldpmd
 //                                            .getHistory()
 //                                            + "overflow(lastCommitTime="
@@ -2607,13 +2607,13 @@ abstract public class OverflowManager extends IndexManager {
                     final long oldCounter = oldBTree.getCounter().get();
 
                     if (log.isInfoEnabled())
-                        log.info("Re-defining view on new journal"//
-                                + ": name=" + bm.name //
-                                + ", copyIndex=" + copyIndex//
-                                + ", entryCount=" + entryCount//
-                                + ", counter=" + oldCounter//
-                                + ", partitionId=" + oldpmd.getPartitionId()//
-                                + ", checkpoint=" + oldBTree.getCheckpoint()//
+                        log.info("Re-defining view on new journal"
+                                + ": name=" + bm.name
+                                + ", copyIndex=" + copyIndex
+                                + ", entryCount=" + entryCount
+                                + ", counter=" + oldCounter
+                                + ", partitionId=" + oldpmd.getPartitionId()
+                                + ", checkpoint=" + oldBTree.getCheckpoint()
                         );
 
                     // Create checkpoint for the new B+Tree.

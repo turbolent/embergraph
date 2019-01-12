@@ -259,12 +259,12 @@ public class MathUtility implements IMathOpHandler {
 ////        if (dte1 == DTE.XSDDecimal || dte2 == DTE.XSDDecimal) {
 ////            return numericalMath(num1.decimalValue(), num2.decimalValue(), op);
 ////        }
-////
+//
 ////        // same for BigInteger
 ////        if (dte1 == DTE.XSDInteger || dte2 == DTE.XSDInteger) {
 ////            return numericalMath(num1.integerValue(), num2.integerValue(), op);
 ////        }
-////
+//
 ////        // fixed length numerics
 ////        if (dte1.isFloatingPointNumeric() || dte2.isFloatingPointNumeric()) {
 ////            // non-BigDecimal floating points

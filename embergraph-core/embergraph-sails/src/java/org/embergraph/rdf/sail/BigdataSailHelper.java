@@ -351,10 +351,10 @@ public class BigdataSailHelper {
     public Properties setProperties(final BigdataSail sail,
             final Properties properties) {
 
-        return setProperties(//
-                sail.getIndexManager(), //
-                sail.getNamespace(), //
-                properties//
+        return setProperties(
+                sail.getIndexManager(),
+                sail.getNamespace(),
+                properties
         );
         
     }

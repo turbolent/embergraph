@@ -542,9 +542,9 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
         final int compareLen = (searchKeyLen <= prefixLength) ? searchKeyLen
                 : prefixLength;
 
-        int ret = BytesUtil.compareBytesWithLenAndOffset(//
-                0, compareLen, searchKey,//
-                0, compareLen, keys[0]//
+        int ret = BytesUtil.compareBytesWithLenAndOffset(
+                0, compareLen, searchKey,
+                0, compareLen, keys[0]
                 );
 
         if (ret < 0) {
@@ -598,9 +598,9 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
 
             // skip the first offset bytes, then compare no more bytes than
             // remain in the key.
-            final int ret = BytesUtil.compareBytesWithLenAndOffset(//
-                    searchKeyOffset, keyLen, key,//
-                    searchKeyOffset, searchKeyLen, searchKey//
+            final int ret = BytesUtil.compareBytesWithLenAndOffset(
+                    searchKeyOffset, keyLen, key,
+                    searchKeyOffset, searchKeyLen, searchKey
                     );
 
             if (ret == 0)
@@ -638,9 +638,9 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
 
             // skip the first offset bytes, then compare no more bytes than
             // remain in the key.
-            final int ret = BytesUtil.compareBytesWithLenAndOffset(//
-                    searchKeyOffset, keyLen, key,//
-                    searchKeyOffset, searchKeyLen, searchKey//
+            final int ret = BytesUtil.compareBytesWithLenAndOffset(
+                    searchKeyOffset, keyLen, key,
+                    searchKeyOffset, searchKeyLen, searchKey
                     );
 
             if (ret < 0) {

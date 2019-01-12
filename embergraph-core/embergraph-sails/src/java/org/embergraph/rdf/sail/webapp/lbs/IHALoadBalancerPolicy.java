@@ -56,11 +56,11 @@ public interface IHALoadBalancerPolicy extends IHAPolicyLifeCycle {
      * 
      * @return <code>true</code> iff the request was handled.
      */
-    boolean service(//
+    boolean service(
             final boolean isLeaderRequest,
-            final HALoadBalancerServlet servlet,//
-            final HttpServletRequest request, //
-            final HttpServletResponse response//
+            final HALoadBalancerServlet servlet,
+            final HttpServletRequest request,
+            final HttpServletResponse response
     ) throws ServletException, IOException;
 
     /**

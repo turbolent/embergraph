@@ -242,7 +242,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
 
         }
 
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         return new CodedRabaImpl(slice, decoder);

@@ -105,10 +105,10 @@ public class TestContextAdvancer extends TestCase2 {
             final BigdataURI rdfType = f.createURI(RDF.TYPE.stringValue());
 
             final BigdataValue[] terms = new BigdataValue[] {
-                    u1,u2,//
-                    v1,v2,//
-                    c1,c2,//
-                    rdfType//
+                    u1,u2,
+                    v1,v2,
+                    c1,c2,
+                    rdfType
             };
 
             db.getLexiconRelation()
@@ -144,11 +144,11 @@ public class TestContextAdvancer extends TestCase2 {
             // predicate using the SPOC index.
             Predicate<ISPO> pred = new SPOPredicate(new BOp[] { Var.var("s"),
                     Var.var("p"), Var.var("o"), Var.var("c") }, NV
-                    .asMap(new NV[] {//
+                    .asMap(new NV[] {
 //                            new NV(Predicate.Annotations.KEY_ORDER,
-//                                    SPOKeyOrder.SPOC), //
+//                                    SPOKeyOrder.SPOC),
                             new NV(Annotations.TIMESTAMP,
-                                    ITx.UNISOLATED),//
+                                    ITx.UNISOLATED),
                     }));
 
 //            final BOpContextBase context = new BOpContextBase(null/* fed */,

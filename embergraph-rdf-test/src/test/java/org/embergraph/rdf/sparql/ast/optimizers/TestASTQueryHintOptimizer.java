@@ -192,7 +192,7 @@ public class TestASTQueryHintOptimizer extends
                 given.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("_var1"),// var
                                 new FunctionNode(
                                         // expr
@@ -284,7 +284,7 @@ public class TestASTQueryHintOptimizer extends
             expected.setProjection(projection);
 
             projection
-                    .addProjectionExpression(new AssignmentNode(//
+                    .addProjectionExpression(new AssignmentNode(
                             new VarNode("_var1"),// var
                             new FunctionNode(
                                     // expr
@@ -403,7 +403,7 @@ public class TestASTQueryHintOptimizer extends
                 given.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("count"),// var
                                 new FunctionNode(
                                         // expr
@@ -464,7 +464,7 @@ public class TestASTQueryHintOptimizer extends
                 expected.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("count"),// var
                                 new FunctionNode(
                                         // expr
@@ -566,7 +566,7 @@ public class TestASTQueryHintOptimizer extends
                 given.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("count"),// var
                                 new FunctionNode(
                                         // expr
@@ -608,7 +608,7 @@ public class TestASTQueryHintOptimizer extends
                 expected.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("count"),// var
                                 new FunctionNode(
                                         // expr
@@ -708,7 +708,7 @@ public class TestASTQueryHintOptimizer extends
                 given.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("count"),// var
                                 new FunctionNode(
                                         // expr
@@ -760,7 +760,7 @@ public class TestASTQueryHintOptimizer extends
                 expected.setProjection(projection);
 
                 projection
-                        .addProjectionExpression(new AssignmentNode(//
+                        .addProjectionExpression(new AssignmentNode(
                                 new VarNode("count"),// var
                                 new FunctionNode(
                                         // expr

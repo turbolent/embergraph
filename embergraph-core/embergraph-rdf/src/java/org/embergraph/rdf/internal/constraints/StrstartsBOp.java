@@ -31,9 +31,9 @@ public class StrstartsBOp extends XSDBooleanIVValueExpression implements INeedsM
     private static final long serialVersionUID = 7680098071087046784L;
 
     @SuppressWarnings("rawtypes")
-    public StrstartsBOp(//
-            final IValueExpression<? extends IV> x,//
-            final IValueExpression<? extends IV> y//
+    public StrstartsBOp(
+            final IValueExpression<? extends IV> x,
+            final IValueExpression<? extends IV> y
             ) {
 
         this(new BOp[] { x, y }, BOp.NOANNS);

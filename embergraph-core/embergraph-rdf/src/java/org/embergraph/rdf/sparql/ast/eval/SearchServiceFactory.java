@@ -472,14 +472,14 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
             }
 
             if (search == null) {
-	            this.vars = new IVariable[] {//
-	                    searchVar,//
+	            this.vars = new IVariable[] {
+	                    searchVar,
 	                    relVar == null ? Var.var() : relVar,// must be non-null.
 	                    rankVar == null ? Var.var() : rankVar // must be non-null.
 	            };
             } else {
-	            this.vars = new IVariable[] {//
-	                    searchVar,//
+	            this.vars = new IVariable[] {
+	                    searchVar,
 	                    relVar == null ? Var.var() : relVar,// must be non-null.
 	                    rankVar == null ? Var.var() : rankVar, // must be non-null.
 	                    search
@@ -523,9 +523,9 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
             }
 
             return (Hiterator) textIndex.search(new FullTextQuery(
-        		s,//
+        		s,
                 query.getLanguage(),// 
-                prefixMatch,//
+                prefixMatch,
                 matchRegex == null ? null : matchRegex.stringValue(),
                 matchAllTerms,
                 matchExact,
@@ -563,9 +563,9 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
             }
 
             return textIndex.count(new FullTextQuery(
-        		s,//
+        		s,
                 query.getLanguage(),// 
-                prefixMatch,//
+                prefixMatch,
                 matchRegex == null ? null : matchRegex.stringValue(),
                 matchAllTerms,
                 matchExact,

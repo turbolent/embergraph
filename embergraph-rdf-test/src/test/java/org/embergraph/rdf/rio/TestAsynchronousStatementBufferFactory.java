@@ -528,10 +528,10 @@ public class TestAsynchronousStatementBufferFactory extends
         parserOptions.setVerifyData(false);
         
         final AsynchronousStatementBufferFactory<BigdataStatement,File> statementBufferFactory = new AsynchronousStatementBufferFactory<BigdataStatement,File>(
-                (ScaleOutTripleStore) store,//
-                chunkSize, //
-                valuesInitialCapacity,//
-                bnodesInitialCapacity,//
+                (ScaleOutTripleStore) store,
+                chunkSize,
+                valuesInitialCapacity,
+                bnodesInitialCapacity,
                 RDFFormat.RDFXML, // defaultFormat
                 null, // defaultGraph
                 parserOptions, // 

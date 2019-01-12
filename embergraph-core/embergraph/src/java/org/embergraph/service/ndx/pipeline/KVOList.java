@@ -57,7 +57,7 @@ public class KVOList<O> extends KVO<O> {
      *            A duplicate of this object.
      */
     // Note: MUTUX with done().
-    synchronized//
+    synchronized
     public void add(final KVO<O> o) {
 
         if (o == null)
@@ -149,7 +149,7 @@ public class KVOList<O> extends KVO<O> {
      */
     @Override
     // Note: MUTEX with add(o)
-    synchronized//
+    synchronized
     public void done() {
 
         if(done)

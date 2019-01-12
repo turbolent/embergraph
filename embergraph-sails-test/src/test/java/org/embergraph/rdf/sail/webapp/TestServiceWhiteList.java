@@ -59,7 +59,7 @@ public class TestServiceWhiteList extends TestCase2 {
 
     public void testServiceWhiteList() throws Exception {
 
-        TupleQueryResult res = m_repo.getRepositoryForNamespace(namespace). //
+        TupleQueryResult res = m_repo.getRepositoryForNamespace(namespace).
         		prepareTupleQuery("SELECT ?b { ?b <http://purl.org/dc/elements/1.1/title> ?title . " + 
         							"SERVICE <" + SOME_SERVICE_ENDPOINT + "> { } }").evaluate();
         
@@ -74,7 +74,7 @@ public class TestServiceWhiteList extends TestCase2 {
         boolean exceptionThrown = false;
         
         try {
-        	res = m_repo.getRepositoryForNamespace(namespace). //
+        	res = m_repo.getRepositoryForNamespace(namespace).
 				prepareTupleQuery("SELECT ?b { ?b <http://purl.org/dc/elements/1.1/title> ?title . " + 
 						"SERVICE <" + SOME_SERVICE_ENDPOINT + "1> { } }").evaluate();
         	

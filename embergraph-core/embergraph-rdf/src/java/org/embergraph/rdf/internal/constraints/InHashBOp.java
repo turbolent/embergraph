@@ -94,7 +94,7 @@ public class InHashBOp extends InBOp {
      */
     @SuppressWarnings("rawtypes")
     public InHashBOp(
-            final boolean not, //
+            final boolean not,
             final IValueExpression<? extends IV> var,
             final IConstant<? extends IV>... set) {
      

@@ -104,11 +104,11 @@ public class GASStats implements IGASStats {
     @Override
     public String toString() {
 
-        return "nrounds=" + getNRounds()//
-                + ", fontierSize=" + getFrontierSize() //
-                + ", ms=" + TimeUnit.NANOSECONDS.toMillis(getElapsedNanos())//
-                + ", edges=" + getNEdges()//
-                + ", teps=" + GASUtil.getTEPS(getNEdges(), getElapsedNanos())//
+        return "nrounds=" + getNRounds()
+                + ", fontierSize=" + getFrontierSize()
+                + ", ms=" + TimeUnit.NANOSECONDS.toMillis(getElapsedNanos())
+                + ", edges=" + getNEdges()
+                + ", teps=" + GASUtil.getTEPS(getNEdges(), getElapsedNanos())
         ;
     }
     

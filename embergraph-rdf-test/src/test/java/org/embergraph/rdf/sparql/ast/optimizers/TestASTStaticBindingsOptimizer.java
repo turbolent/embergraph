@@ -107,10 +107,10 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
        final IV mockIV = TermId.mockIV(VTE.URI);
        
-       final IBindingSet[] bsets = new IBindingSet[] { //
-       new ListBindingSet(//
-               new IVariable[] { Var.var("p") },//
-               new IConstant[] { new Constant<IV>(mockIV) }) //
+       final IBindingSet[] bsets = new IBindingSet[] {
+       new ListBindingSet(
+               new IVariable[] { Var.var("p") },
+               new IConstant[] { new Constant<IV>(mockIV) })
        };
 
        // The source AST.
@@ -201,10 +201,10 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
-       final IBindingSet[] bsets = new IBindingSet[] { //
-       new ListBindingSet(//
-               new IVariable[] { Var.var("s") },//
-               new IConstant[] { new Constant<IV>(c12)}) //
+       final IBindingSet[] bsets = new IBindingSet[] {
+       new ListBindingSet(
+               new IVariable[] { Var.var("s") },
+               new IConstant[] { new Constant<IV>(c12)})
        };
 
        // The source AST.
@@ -232,12 +232,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
            expected.setProjection(projection);
 
            final JoinGroupNode whereClause = new JoinGroupNode();
-           whereClause.addChild(new StatementPatternNode(//
+           whereClause.addChild(new StatementPatternNode(
                    new ConstantNode(
-                           new Constant((IVariable) Var.var("s"), c12)), //
-                   new VarNode("p"),//
+                           new Constant((IVariable) Var.var("s"), c12)),
+                   new VarNode("p"),
                    new ConstantNode(
-                           new Constant((IVariable) Var.var("s"), c12)), //
+                           new Constant((IVariable) Var.var("s"), c12)),
                    null/* c */, Scope.DEFAULT_CONTEXTS));
            expected.setWhereClause(whereClause);
 
@@ -782,10 +782,10 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
-      final IBindingSet[] bsetsGiven = new IBindingSet[] { //
-            new ListBindingSet(//
-                    new IVariable[] { Var.var("s") },//
-                    new IConstant[] { new Constant<IV>(cFalse)}) //
+      final IBindingSet[] bsetsGiven = new IBindingSet[] {
+            new ListBindingSet(
+                    new IVariable[] { Var.var("s") },
+                    new IConstant[] { new Constant<IV>(cFalse)})
       };      
 
       // The source AST.
@@ -1064,8 +1064,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               .addTerms(values, values.length, false/* readOnly */);
       
 
-      final IBindingSet[] bsets = new IBindingSet[] { //
-      new ListBindingSet()//
+      final IBindingSet[] bsets = new IBindingSet[] {
+      new ListBindingSet()
       };
 
       // The source AST.
@@ -1102,11 +1102,11 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           final JoinGroupNode whereClause = new JoinGroupNode();
           expected.setWhereClause(whereClause);
 
-          whereClause.addChild(new StatementPatternNode(//
-                  new VarNode("s"), //
-                  new VarNode("p"),//
+          whereClause.addChild(new StatementPatternNode(
+                  new VarNode("s"),
+                  new VarNode("p"),
                   new ConstantNode(
-                          new Constant((IVariable) Var.var("o"), c12)), //
+                          new Constant((IVariable) Var.var("o"), c12)),
                   null/* c */, Scope.DEFAULT_CONTEXTS));
 
           whereClause.addChild(new FilterNode(FunctionNode.sameTerm(
@@ -1159,8 +1159,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
-      final IBindingSet[] bsets = new IBindingSet[] { //
-      new ListBindingSet()//
+      final IBindingSet[] bsets = new IBindingSet[] {
+      new ListBindingSet()
       };
 
       // The source AST.
@@ -1196,11 +1196,11 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           final JoinGroupNode whereClause = new JoinGroupNode();
           expected.setWhereClause(whereClause);
 
-          whereClause.addChild(new StatementPatternNode(//
-                  new VarNode("s"), //
-                  new VarNode("p"),//
+          whereClause.addChild(new StatementPatternNode(
+                  new VarNode("s"),
+                  new VarNode("p"),
                   new ConstantNode(
-                          new Constant((IVariable) Var.var("o"), foo)), //
+                          new Constant((IVariable) Var.var("o"), foo)),
                   null/* c */, Scope.DEFAULT_CONTEXTS));
 
           whereClause.addChild(new FilterNode(FunctionNode.EQ(
@@ -1252,8 +1252,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
-      final IBindingSet[] bsets = new IBindingSet[] { //
-      new ListBindingSet()//
+      final IBindingSet[] bsets = new IBindingSet[] {
+      new ListBindingSet()
       };
 
       // The source AST.
@@ -1290,11 +1290,11 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           final JoinGroupNode whereClause = new JoinGroupNode();
           expected.setWhereClause(whereClause);
 
-          whereClause.addChild(new StatementPatternNode(//
-                  new VarNode("s"), //
-                  new VarNode("p"),//
+          whereClause.addChild(new StatementPatternNode(
+                  new VarNode("s"),
+                  new VarNode("p"),
                   new ConstantNode(
-                          new Constant((IVariable) Var.var("o"), foo)), //
+                          new Constant((IVariable) Var.var("o"), foo)),
                   null/* c */, Scope.DEFAULT_CONTEXTS));
           whereClause.addChild(new FilterNode(
                 new FunctionNode(FunctionRegistry.IN, null/* scalarValues */,
@@ -1329,8 +1329,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
-      final IBindingSet[] bsets = new IBindingSet[] { //
-      new ListBindingSet()//
+      final IBindingSet[] bsets = new IBindingSet[] {
+      new ListBindingSet()
       };
 
       // The source AST.
@@ -1366,11 +1366,11 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           final JoinGroupNode whereClause = new JoinGroupNode();
           expected.setWhereClause(whereClause);
 
-          whereClause.addChild(new StatementPatternNode(//
-                  new VarNode("s"), //
-                  new VarNode("p"),//
+          whereClause.addChild(new StatementPatternNode(
+                  new VarNode("s"),
+                  new VarNode("p"),
                   new ConstantNode(
-                          new Constant((IVariable) Var.var("o"), foo)), //
+                          new Constant((IVariable) Var.var("o"), foo)),
                   null/* c */, Scope.DEFAULT_CONTEXTS));
 
           whereClause.addChild(new FilterNode(FunctionNode.EQ(
@@ -1417,8 +1417,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
-       final IBindingSet[] bsets = new IBindingSet[] { //
-       new ListBindingSet()//
+       final IBindingSet[] bsets = new IBindingSet[] {
+       new ListBindingSet()
        };
 
        // The source AST.
@@ -1492,8 +1492,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               .addTerms(values, values.length, false/* readOnly */);
       
       
-      final IBindingSet[] bsets = new IBindingSet[] { //
-      new ListBindingSet()//
+      final IBindingSet[] bsets = new IBindingSet[] {
+      new ListBindingSet()
       };
 
       // The source AST.
@@ -2146,10 +2146,10 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
-      final IBindingSet[] bsetsGiven = new IBindingSet[] { //
-            new ListBindingSet(//
-                    new IVariable[] { Var.var("s") },//
-                    new IConstant[] { new Constant<IV>(c3)}) //
+      final IBindingSet[] bsetsGiven = new IBindingSet[] {
+            new ListBindingSet(
+                    new IVariable[] { Var.var("s") },
+                    new IConstant[] { new Constant<IV>(c3)})
       };   
       
       // The source AST.

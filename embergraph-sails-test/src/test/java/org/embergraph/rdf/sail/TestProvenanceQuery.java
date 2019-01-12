@@ -203,15 +203,15 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
     
     //            final TupleExpr tupleExpr = 
     //                new Projection(
-    //                new Join(//
-    //                    new StatementPattern(//
-    //                            new Var("X", y),//
-    //                            new Var("1", RDF.TYPE),//
-    //                            new Var("2", B),//
+    //                new Join(
+    //                    new StatementPattern(
+    //                            new Var("X", y),
+    //                            new Var("1", RDF.TYPE),
+    //                            new Var("2", B),
     //                            new Var("SID")),// unbound.
-    //                    new StatementPattern(//
-    //                            new Var("SID"),//
-    //                            new Var("3", dcCreator),//
+    //                    new StatementPattern(
+    //                            new Var("SID"),
+    //                            new Var("3", dcCreator),
     //                            new Var("Y"))),
     //                new ProjectionElemList(new ProjectionElem[] { new ProjectionElem( "Y" )}));
     
@@ -225,9 +225,9 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
                  * query is processed.
                  */
     //            final DatasetImpl dataSet = null; //new DatasetImpl();
-    //
+
     //            final BindingSet bindingSet = new QueryBindingSet();
-    //
+
     //            final CloseableIteration<? extends BindingSet, QueryEvaluationException> itr = conn
     //                    .evaluate(tupleExpr, dataSet, bindingSet, true/* includeInferred */);
     

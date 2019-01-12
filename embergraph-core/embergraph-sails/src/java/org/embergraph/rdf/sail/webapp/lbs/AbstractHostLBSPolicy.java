@@ -301,7 +301,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
         {
 
             final String s = HALoadBalancerServlet.getConfigParam(
-                    servletConfig, //
+                    servletConfig,
                     AbstractHostLBSPolicy.class,// owningClass
                     InitParams.LOCAL_FORWARD_THRESHOLD,
                     InitParams.DEFAULT_LOCAL_FORWARD_THRESHOLD);
@@ -317,8 +317,8 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
 
         {
 
-            scoringRuleRef.set(HALoadBalancerServlet.newInstance(//
-                    servletConfig,//
+            scoringRuleRef.set(HALoadBalancerServlet.newInstance(
+                    servletConfig,
                     AbstractHostLBSPolicy.class,// owningClass
                     IHostScoringRule.class, InitParams.HOST_SCORING_RULE,
                     getDefaultScoringRule()));
@@ -332,7 +332,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
         {
 
             final String s = HALoadBalancerServlet.getConfigParam(
-                    servletConfig, //
+                    servletConfig,
                     AbstractHostLBSPolicy.class,// owningClass
                     InitParams.HOST_DISCOVERY_INITIAL_DELAY,
                     InitParams.DEFAULT_HOST_DISCOVERY_INITIAL_DELAY);
@@ -347,10 +347,10 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
 
         {
 
-            final String s = HALoadBalancerServlet.getConfigParam(//
-                    servletConfig, //
+            final String s = HALoadBalancerServlet.getConfigParam(
+                    servletConfig,
                     AbstractHostLBSPolicy.class,// owningClass
-                    InitParams.HOST_DISCOVERY_DELAY,//
+                    InitParams.HOST_DISCOVERY_DELAY,
                     InitParams.DEFAULT_HOST_DISCOVERY_DELAY);
 
             hostDiscoveryDelay = Long.valueOf(s);
@@ -542,8 +542,8 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      * @return The normalized host workload.
      */
     private static HostTable normalizeHostScores(
-            final IHostScoringRule scoringRule,//
-            final Map<String/* hostname */, IHostMetrics> hostMetricsMap//
+            final IHostScoringRule scoringRule,
+            final Map<String/* hostname */, IHostMetrics> hostMetricsMap
     ) {
 
         /*
@@ -794,8 +794,8 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      * 
      * @see bigdata/src/resources/architecture/HA_LBS.xls
      */
-    static HostScore getHost(//
-            final double d, //
+    static HostScore getHost(
+            final double d,
             final HostScore[] hostScores
             ) {
         
@@ -876,10 +876,10 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      *         host. For that case, this loop wastes the maximum effort since it
      *         scans all services.
      */
-    static ServiceScore getService(//
-            final Random rand, //
-            final HostScore hostScore,//
-            final ServiceScore[] serviceScores//
+    static ServiceScore getService(
+            final Random rand,
+            final HostScore hostScore,
+            final ServiceScore[] serviceScores
     ) {
 
         // The set of services on the given host.
@@ -934,9 +934,9 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      */
     @Override
     protected boolean conditionallyForwardReadRequest(
-            final HALoadBalancerServlet servlet,//
-            final HttpServletRequest request, //
-            final HttpServletResponse response//
+            final HALoadBalancerServlet servlet,
+            final HttpServletRequest request,
+            final HttpServletResponse response
     ) throws IOException {
 
         final HostTable hostTable = hostTableRef.get();

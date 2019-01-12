@@ -475,14 +475,14 @@ public class QueryServlet extends BigdataRDFServlet {
          * @param timestamp
          *            The timestamp used to obtain a mutable connection.
          */
-        public SparqlUpdateTask(//
-        		final HttpServletRequest req,//
-                final HttpServletResponse resp,//
-                final String namespace, //
-                final long timestamp,//
-                final String updateStr,//
-                final Map<String, Value> bindings,//
-                final BigdataRDFContext context//
+        public SparqlUpdateTask(
+        		final HttpServletRequest req,
+                final HttpServletResponse resp,
+                final String namespace,
+                final long timestamp,
+                final String updateStr,
+                final Map<String, Value> bindings,
+                final BigdataRDFContext context
                 ) {
             super(req, resp, namespace, timestamp);
             this.updateStr = updateStr;
@@ -743,16 +743,16 @@ public class QueryServlet extends BigdataRDFServlet {
 					// * Test the cache.
 					// */
 					// {
-					//
+
 					// req.setAttribute(ATTR_QUERY_TASK, queryTask);
-					//
+
 					// doCache(req, resp);
-					//
+
 					// if (resp.isCommitted()) {
 					// // Answered by the cache.
 					// return;
 					// }
-					//
+
 					// }
 
 					final FutureTask<Void> ft = new FutureTask<Void>(queryTask);
@@ -1341,11 +1341,11 @@ public class QueryServlet extends BigdataRDFServlet {
                 final String chunksOut = stats == null ? NA : Long
                         .toString(stats.chunksOut.get());
 
-                current.node("p")//
-                        .text("solutions=" + solutionsOut)//
-                        .text(", chunks=" + chunksOut)//
-                        .text(", subqueries=" + children.length)//
-                        .text(", elapsed=" + elapsedMillis + "ms")//
+                current.node("p")
+                        .text("solutions=" + solutionsOut)
+                        .text(", chunks=" + chunksOut)
+                        .text(", subqueries=" + children.length)
+                        .text(", elapsed=" + elapsedMillis + "ms")
                         .text(q.isCancelled()?", CANCELLED.":".")
                         .close();
                 
@@ -1414,8 +1414,8 @@ public class QueryServlet extends BigdataRDFServlet {
             
             submitApiTask(
                     new EstCardTask(req, resp, getNamespace(req),
-                            getTimestamp(req), //
-                            exact,//
+                            getTimestamp(req),
+                            exact,
                             s, p, o, c)).get();
 
         } catch (Throwable t) {
@@ -1549,8 +1549,8 @@ public class QueryServlet extends BigdataRDFServlet {
       try {
 
          submitApiTask(
-               new HasStmtTask(req, resp, getNamespace(req), getTimestamp(req), //
-                     includeInferred,//
+               new HasStmtTask(req, resp, getNamespace(req), getTimestamp(req),
+                     includeInferred,
                      s, p, o, c)).get();
 
       } catch (Throwable t) {
@@ -1673,8 +1673,8 @@ public class QueryServlet extends BigdataRDFServlet {
       try {
 
          submitApiTask(
-               new GetStmtsTask(req, resp, getNamespace(req), getTimestamp(req), //
-                     includeInferred,//
+               new GetStmtsTask(req, resp, getNamespace(req), getTimestamp(req),
+                     includeInferred,
                      s, p, o, c, mimeTypes)).get();
 
       } catch (Throwable t) {

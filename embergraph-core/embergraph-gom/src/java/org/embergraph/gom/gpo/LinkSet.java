@@ -193,10 +193,10 @@ public class LinkSet implements ILinkSet {
              */
 			final IObjectManager om = m_owner.getObjectManager();
 			
-            final String query = "SELECT ?x\n" //
-                    + "WHERE {\n"//
-                    + "  ?x <"+ encode(m_linkProperty) + "> <" + encode(m_owner.getId())+ ">\n"//
-                    +"}";//
+            final String query = "SELECT ?x\n"
+                    + "WHERE {\n"
+                    + "  ?x <"+ encode(m_linkProperty) + "> <" + encode(m_owner.getId())+ ">\n"
+                    +"}";
 			final ICloseableIterator<BindingSet> res = om.evaluate(query);
 			
 			return new Iterator<IGPO>() {

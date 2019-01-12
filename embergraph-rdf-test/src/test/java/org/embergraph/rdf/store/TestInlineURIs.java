@@ -216,48 +216,48 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 
     public void testSignedInteger() throws Exception {
         uriRoundtripTestCase(
-                SIGNED_INT_NAMESPACE + "1", true,//
-                SIGNED_INT_NAMESPACE + "-123", true,//
-                SIGNED_INT_NAMESPACE + "-123342343214", true,//
-                SIGNED_INT_NAMESPACE + "123342343214", true,//
-                SIGNED_INT_NAMESPACE + Byte.MAX_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Byte.MIN_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Short.MAX_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Short.MIN_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Integer.MAX_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Integer.MIN_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Long.MAX_VALUE, true,//
-                SIGNED_INT_NAMESPACE + Long.MIN_VALUE, true,//
-                SIGNED_INT_NAMESPACE + "19223372036854775807", true,//
+                SIGNED_INT_NAMESPACE + "1", true,
+                SIGNED_INT_NAMESPACE + "-123", true,
+                SIGNED_INT_NAMESPACE + "-123342343214", true,
+                SIGNED_INT_NAMESPACE + "123342343214", true,
+                SIGNED_INT_NAMESPACE + Byte.MAX_VALUE, true,
+                SIGNED_INT_NAMESPACE + Byte.MIN_VALUE, true,
+                SIGNED_INT_NAMESPACE + Short.MAX_VALUE, true,
+                SIGNED_INT_NAMESPACE + Short.MIN_VALUE, true,
+                SIGNED_INT_NAMESPACE + Integer.MAX_VALUE, true,
+                SIGNED_INT_NAMESPACE + Integer.MIN_VALUE, true,
+                SIGNED_INT_NAMESPACE + Long.MAX_VALUE, true,
+                SIGNED_INT_NAMESPACE + Long.MIN_VALUE, true,
+                SIGNED_INT_NAMESPACE + "19223372036854775807", true,
                 SIGNED_INT_NAMESPACE + "foo", false);
     }
 
     public void testUnsignedInteger() throws Exception {
-        uriRoundtripTestCase(UNSIGNED_INT_NAMESPACE + "1", true,//
-                UNSIGNED_INT_NAMESPACE + "-123", false,//
-                UNSIGNED_INT_NAMESPACE + "-123342343214", false,//
-                UNSIGNED_INT_NAMESPACE + "123342343214", true,//
-                UNSIGNED_INT_NAMESPACE + Byte.MAX_VALUE, true,//
-                UNSIGNED_INT_NAMESPACE + Short.MAX_VALUE, true,//
-                UNSIGNED_INT_NAMESPACE + Integer.MAX_VALUE, true,//
-                UNSIGNED_INT_NAMESPACE + Long.MAX_VALUE, true,//
-                UNSIGNED_INT_NAMESPACE + "19223372036854775807", true,//
+        uriRoundtripTestCase(UNSIGNED_INT_NAMESPACE + "1", true,
+                UNSIGNED_INT_NAMESPACE + "-123", false,
+                UNSIGNED_INT_NAMESPACE + "-123342343214", false,
+                UNSIGNED_INT_NAMESPACE + "123342343214", true,
+                UNSIGNED_INT_NAMESPACE + Byte.MAX_VALUE, true,
+                UNSIGNED_INT_NAMESPACE + Short.MAX_VALUE, true,
+                UNSIGNED_INT_NAMESPACE + Integer.MAX_VALUE, true,
+                UNSIGNED_INT_NAMESPACE + Long.MAX_VALUE, true,
+                UNSIGNED_INT_NAMESPACE + "19223372036854775807", true,
                 UNSIGNED_INT_NAMESPACE + "foo", false);
     }
 
     public void testSuffixedInteger() throws Exception {
-        uriRoundtripTestCase(SUFFIXED_INT_NAMESPACE + "1-suffix", true,//
-                SUFFIXED_INT_NAMESPACE + "1", false,//
-                SUFFIXED_INT_NAMESPACE + "foo-suffix", false,//
-                SUFFIXED_INT_NAMESPACE + "-suffix", false,//
+        uriRoundtripTestCase(SUFFIXED_INT_NAMESPACE + "1-suffix", true,
+                SUFFIXED_INT_NAMESPACE + "1", false,
+                SUFFIXED_INT_NAMESPACE + "foo-suffix", false,
+                SUFFIXED_INT_NAMESPACE + "-suffix", false,
                 SUFFIXED_INT_NAMESPACE + "foo", false);
     }
 
     public void testPrefixedInteger() throws Exception {
-        uriRoundtripTestCase(PREFIXED_INT_NAMESPACE + "prefix-1", true,//
-                PREFIXED_INT_NAMESPACE + "1", false,//
-                PREFIXED_INT_NAMESPACE + "prefix-foo", false,//
-                PREFIXED_INT_NAMESPACE + "prefix-", false,//
+        uriRoundtripTestCase(PREFIXED_INT_NAMESPACE + "prefix-1", true,
+                PREFIXED_INT_NAMESPACE + "1", false,
+                PREFIXED_INT_NAMESPACE + "prefix-foo", false,
+                PREFIXED_INT_NAMESPACE + "prefix-", false,
                 PREFIXED_INT_NAMESPACE + "foo", false);
     }
 

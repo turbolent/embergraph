@@ -574,21 +574,21 @@ abstract public class AbstractTupleCursorTestCase extends TestCase2 {
         
         // Verify the expected keys in the 1st leaf.
         AbstractBTreeTestCase.assertKeys(
-                //
-                new ReadOnlyKeysRaba(new byte[][] {//
-                        TestKeyBuilder.asSortKey(10), //
-                        TestKeyBuilder.asSortKey(20), //
-                        }),//
+
+                new ReadOnlyKeysRaba(new byte[][] {
+                        TestKeyBuilder.asSortKey(10),
+                        TestKeyBuilder.asSortKey(20),
+                        }),
                 ((Node) btree.getRoot()).getChild(0/* 1st leaf */).getKeys());
 
         // Verify the expected keys in the 2nd leaf.
         AbstractBTreeTestCase.assertKeys(
-                //
-                new ReadOnlyKeysRaba(new byte[][] {//
-                        TestKeyBuilder.asSortKey(30), //
-                        TestKeyBuilder.asSortKey(40), //
-                        TestKeyBuilder.asSortKey(50),//
-                        }),//
+
+                new ReadOnlyKeysRaba(new byte[][] {
+                        TestKeyBuilder.asSortKey(30),
+                        TestKeyBuilder.asSortKey(40),
+                        TestKeyBuilder.asSortKey(50),
+                        }),
                 ((Node) btree.getRoot()).getChild(1/* 2nd leaf */).getKeys());
 
     }
@@ -711,11 +711,11 @@ abstract public class AbstractTupleCursorTestCase extends TestCase2 {
             // The #of leaves has not been changed.
             assertEquals(2, btree.getLeafCount());
             // Verify the expected keys in the 2nd leaf.
-            AbstractBTreeTestCase.assertKeys(//
-                    new ReadOnlyKeysRaba(new byte[][]{//
-                            TestKeyBuilder.asSortKey(40),//
-                            TestKeyBuilder.asSortKey(50),//
-                            }),//
+            AbstractBTreeTestCase.assertKeys(
+                    new ReadOnlyKeysRaba(new byte[][]{
+                            TestKeyBuilder.asSortKey(40),
+                            TestKeyBuilder.asSortKey(50),
+                            }),
                     ((Node) btree.getRoot()).getChild(1/*2nd leaf*/).getKeys());
             
             final byte[] fromKey = TestKeyBuilder.asSortKey(10);
@@ -1380,28 +1380,28 @@ abstract public class AbstractTupleCursorTestCase extends TestCase2 {
                 ((expected.flags() & IRangeQuery.VALS) != 0),
                 ((actual.flags() & IRangeQuery.VALS) != 0));
 
-        assertEquals("flags.DELETED",//
-                ((expected.flags() & IRangeQuery.DELETED) != 0),//
+        assertEquals("flags.DELETED",
+                ((expected.flags() & IRangeQuery.DELETED) != 0),
                 ((actual.flags() & IRangeQuery.DELETED) != 0));
 
-        assertEquals("flags.REMOVEALL",//
-                ((expected.flags() & IRangeQuery.REMOVEALL) != 0),//
+        assertEquals("flags.REMOVEALL",
+                ((expected.flags() & IRangeQuery.REMOVEALL) != 0),
                 ((actual.flags() & IRangeQuery.REMOVEALL) != 0));
 
-        assertEquals("flags.CURSOR",//
-                ((expected.flags() & IRangeQuery.CURSOR) != 0),//
+        assertEquals("flags.CURSOR",
+                ((expected.flags() & IRangeQuery.CURSOR) != 0),
                 ((actual.flags() & IRangeQuery.CURSOR) != 0));
         
-        assertEquals("flags.REVERSE",//
-                ((expected.flags() & IRangeQuery.REVERSE) != 0),//
+        assertEquals("flags.REVERSE",
+                ((expected.flags() & IRangeQuery.REVERSE) != 0),
                 ((actual.flags() & IRangeQuery.REVERSE) != 0));
         
-        assertEquals("flags.READONLY",//
-                ((expected.flags() & IRangeQuery.READONLY) != 0),//
+        assertEquals("flags.READONLY",
+                ((expected.flags() & IRangeQuery.READONLY) != 0),
                 ((actual.flags() & IRangeQuery.READONLY) != 0));
         
-        assertEquals("flags.PARALLEL",//
-                ((expected.flags() & IRangeQuery.PARALLEL) != 0),//
+        assertEquals("flags.PARALLEL",
+                ((expected.flags() & IRangeQuery.PARALLEL) != 0),
                 ((actual.flags() & IRangeQuery.PARALLEL) != 0));
 
         assertEquals("flags", expected.flags(), actual.flags());

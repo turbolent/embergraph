@@ -240,11 +240,11 @@ public class SplitUtility {
                 .getLeftSeparatorKey(), splits[0].pmd.getLeftSeparatorKey())) {
     
             throw new AssertionError("leftSeparator[0]"
-                    + //
+                    +
                     ": expected="
                     + BytesUtil.toString(originalPartitionMetadata
                             .getLeftSeparatorKey())
-                    + //
+                    +
                     ", actual="
                     + BytesUtil.toString(splits[0].pmd.getLeftSeparatorKey()));
             
@@ -408,18 +408,18 @@ public class SplitUtility {
             final byte[] fromKey = oldpmd.getLeftSeparatorKey();
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    partitionId, //
+                    partitionId,
                     -1, // Note: split not allowed during move.
-                    fromKey,//
-                    separatorKey,//
+                    fromKey,
+                    separatorKey,
                     /*
                      * Note: no resources for an index segment
                      */
-                    null,//
+                    null,
                     /*
                      * Note: cause will be set by the atomic update task.
                      */
-                    null//
+                    null
 //                    , oldpmd.getHistory()
 //                            + "chooseTailSplitPoint(oldPartitionId="
 //                            + oldpmd.getPartitionId() + ",nsplits=" + 2
@@ -445,19 +445,19 @@ public class SplitUtility {
             final byte[] toKey = oldpmd.getRightSeparatorKey();
 
             final LocalPartitionMetadata pmd = new LocalPartitionMetadata(
-                    partitionId,//
+                    partitionId,
                     -1, // Note: split not allowed during move.
-                    separatorKey,//
-                    toKey,//
+                    separatorKey,
+                    toKey,
                     /*
                      * Note: no resources for an index segment
                      */
-                    null,//
+                    null,
                     /*
                      * Note: Cause will be set by the atomic update for the
                      * split task.
                      */
-                    null//
+                    null
 //                    , oldpmd.getHistory()
 //                            + "chooseTailSplitPoint(oldPartitionId="
 //                            + oldpmd.getPartitionId() + ",nsplits=" + 2
@@ -1060,18 +1060,18 @@ public class SplitUtility {
                  * Describe the partition metadata for the new split.
                  */
                 final LocalPartitionMetadata newpmd = new LocalPartitionMetadata(
-                        partitionId,//
+                        partitionId,
                         -1, // Note: split not allowed during move.
                         fromKey, // leftSeparatorKey
                         toKey, // rightSeparatorKey
                         /*
                          * Note: no resources for an index segment.
                          */
-                        null,//
+                        null,
                         /*
                          * Note: cause will be set by the atomic update task.
                          */
-                        null //
+                        null
 //                        , oldpmd.getHistory()
 //                                + "chooseSplitPoint(oldPartitionId="
 //                                + oldpmd.getPartitionId() + ",nsplits=" + N

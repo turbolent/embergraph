@@ -97,8 +97,8 @@ public double nextDouble(double k) {
 		c = k*(r-w);
 	} while ((c*(2.0-c) < v) && (Math.log(c/v)+1.0 < c));         // Acceptance/Rejection 
 		
-	return (randomGenerator.raw() > 0.5)? Math.acos(w): -Math.acos(w);        // Random sign //
-					// 0 <= x <= Pi : -Pi <= x <= 0 //
+	return (randomGenerator.raw() > 0.5)? Math.acos(w): -Math.acos(w);        // Random sign
+					// 0 <= x <= Pi : -Pi <= x <= 0
 }
 /**
  * Sets the distribution parameter.

@@ -125,7 +125,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         rel.create();
 
         // data to insert (in key order for convenience).
-        final E[] a = {//
+        final E[] a = {
                 new E("Paul", "Mary"),// [0]
                 new E("Paul", "Brad"),// [1]
                 
@@ -174,47 +174,47 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         final IVariable<?> x = Var.var("x");
         final IVariable<?> y = Var.var("y");
         
-        final Predicate<E> predOp = new Predicate<E>(//
-                new IVariableOrConstant[] { //
-                new Constant<String>("John"), x }, //
-                NV.asMap(new NV[] {//
+        final Predicate<E> predOp = new Predicate<E>(
+                new IVariableOrConstant[] {
+                new Constant<String>("John"), x },
+                NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                 }));
 
         // the subquery (basically, an access path read with "x" unbound).
         final PipelineJoin<E> subquery = new PipelineJoin<E>(
-                new BOp[] { },//
-                new NV(Predicate.Annotations.BOP_ID, joinId),//
+                new BOp[] { },
+                new NV(Predicate.Annotations.BOP_ID, joinId),
                 new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
         // the hash-join against the subquery.
         final SubqueryOp subqueryOp = new SubqueryOp(
-                new BOp[] {},//
-                new NV(Predicate.Annotations.BOP_ID, subqueryId),//
-                new NV(SubqueryOp.Annotations.SUBQUERY, subquery),//
-                new NV(SubqueryOp.Annotations.JOIN_TYPE,JoinTypeEnum.Normal),//
+                new BOp[] {},
+                new NV(Predicate.Annotations.BOP_ID, subqueryId),
+                new NV(SubqueryOp.Annotations.SUBQUERY, subquery),
+                new NV(SubqueryOp.Annotations.JOIN_TYPE,JoinTypeEnum.Normal),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
                 );
 
         final PipelineOp query = subqueryOp;
         
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Mary") }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Mary") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Brad"),
                                           new Constant<String>("Fred"),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -280,55 +280,55 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         final IVariable<?> x = Var.var("x");
         final IVariable<?> y = Var.var("y");
 
-//        final IConstant<String>[] set = new IConstant[] {//
-//                new Constant<String>("Fred"),//
+//        final IConstant<String>[] set = new IConstant[] {
+//                new Constant<String>("Fred"),
 //        };
 
-        final Predicate<E> predOp = new Predicate<E>(//
-                new IVariableOrConstant[] { //
-                new Constant<String>("John"), x }, //
-                NV.asMap(new NV[] {//
+        final Predicate<E> predOp = new Predicate<E>(
+                new IVariableOrConstant[] {
+                new Constant<String>("John"), x },
+                NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                 }));
 
         // the subquery (basically, an access path read with "x" unbound).
         final PipelineJoin<E> subquery = new PipelineJoin<E>(
-                new BOp[] { },//
-                new NV(Predicate.Annotations.BOP_ID, joinId),//
+                new BOp[] { },
+                new NV(Predicate.Annotations.BOP_ID, joinId),
                 new NV(PipelineJoin.Annotations.PREDICATE, predOp));
 
         // the hash-join against the subquery.
         final SubqueryOp subqueryOp = new SubqueryOp(
-                new BOp[] {},//
-                new NV(Predicate.Annotations.BOP_ID, subqueryId),//
-                new NV(SubqueryOp.Annotations.SUBQUERY, subquery),//
-                new NV(SubqueryOp.Annotations.JOIN_TYPE,JoinTypeEnum.Normal),//
+                new BOp[] {},
+                new NV(Predicate.Annotations.BOP_ID, subqueryId),
+                new NV(SubqueryOp.Annotations.SUBQUERY, subquery),
+                new NV(SubqueryOp.Annotations.JOIN_TYPE,JoinTypeEnum.Normal),
                 new NV(SubqueryOp.Annotations.CONSTRAINTS,
                         new IConstraint[] { Constraint
-                                .wrap(new EQConstant(x, new Constant<String>("Brad"))),//
+                                .wrap(new EQConstant(x, new Constant<String>("Brad"))),
                         }),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
                         );
 
         final PipelineOp query = subqueryOp;
         
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-//                new ListBindingSet(//
-//                        new IVariable[] { x },//
-//                        new IConstant[] { new Constant<String>("Mary") }//
-//                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+//                new ListBindingSet(
+//                        new IVariable[] { x },
+//                        new IConstant[] { new Constant<String>("Mary") }
+//                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Brad"),
                                           new Constant<String>("Fred"),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -395,50 +395,50 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         final IVariable<?> x = Var.var("x");
         final IVariable<?> y = Var.var("y");
         
-        final Predicate<E> predOp = new Predicate<E>(//
-                new IVariableOrConstant[] { //
-                new Constant<String>("John"), x }, //
-                NV.asMap(new NV[] {//
+        final Predicate<E> predOp = new Predicate<E>(
+                new IVariableOrConstant[] {
+                new Constant<String>("John"), x },
+                NV.asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                 }));
 
         // the subquery (basically, an access path read with "x" unbound).
         final PipelineJoin<E> subquery = new PipelineJoin<E>(
-                new BOp[] { },//
-                new NV(Predicate.Annotations.BOP_ID, joinId),//
-                new NV(PipelineJoin.Annotations.PREDICATE, predOp),//
-                new NV(SubqueryOp.Annotations.JOIN_TYPE,JoinTypeEnum.Normal)//
+                new BOp[] { },
+                new NV(Predicate.Annotations.BOP_ID, joinId),
+                new NV(PipelineJoin.Annotations.PREDICATE, predOp),
+                new NV(SubqueryOp.Annotations.JOIN_TYPE,JoinTypeEnum.Normal)
                 );
 
         // the hash-join against the subquery.
         final SubqueryOp subqueryOp = new SubqueryOp(
-                new BOp[] {},//
-                new NV(Predicate.Annotations.BOP_ID, subqueryId),//
-                new NV(SubqueryOp.Annotations.SELECT, new IVariable[]{x}),//
-                new NV(SubqueryOp.Annotations.SUBQUERY, subquery),//
-                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
+                new BOp[] {},
+                new NV(Predicate.Annotations.BOP_ID, subqueryId),
+                new NV(SubqueryOp.Annotations.SELECT, new IVariable[]{x}),
+                new NV(SubqueryOp.Annotations.SUBQUERY, subquery),
+                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
                 );
 
         final PipelineOp query = subqueryOp;
         
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Mary") }//
-                ),//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Mary") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Brad"),
                                           new Constant<String>("Fred"),
-                                }//
-                ),//
+                                }
+                ),
         };
 
         /*
@@ -553,66 +553,66 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         final IVariable<?> d = Var.var("d");
 
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
         
         final Predicate<?> pred1Op = new Predicate<E>(
                 new IVariableOrConstant[] { a, b }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId1),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId1),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred2Op = new Predicate<E>(
                 new IVariableOrConstant[] { b, c }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId2),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId2),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred3Op = new Predicate<E>(
                 new IVariableOrConstant[] { c, d }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId3),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId3),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
-        final PipelineOp join1Op = new PipelineJoin<E>(//
+        final PipelineOp join1Op = new PipelineJoin<E>(
                 new BOp[]{startOp},// 
-                        new NV(Predicate.Annotations.BOP_ID, joinId1),//
+                        new NV(Predicate.Annotations.BOP_ID, joinId1),
                         new NV(PipelineJoin.Annotations.PREDICATE,pred1Op));
 
         final PipelineOp subQuery;
         {
-        final PipelineOp join2Op = new PipelineJoin<E>(//
-                new BOp[] { /*join1Op*/ },//
-                new NV(Predicate.Annotations.BOP_ID, joinId2),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-                new NV(PipelineJoin.Annotations.PREDICATE, pred2Op)//
+        final PipelineOp join2Op = new PipelineJoin<E>(
+                new BOp[] { /*join1Op*/ },
+                new NV(Predicate.Annotations.BOP_ID, joinId2),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+                new NV(PipelineJoin.Annotations.PREDICATE, pred2Op)
 //                // join is optional.
-//                new NV(PipelineJoin.Annotations.OPTIONAL, true),//
+//                new NV(PipelineJoin.Annotations.OPTIONAL, true),
 //                // optional target is the same as the default target.
 //                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
                 );
 
-        final PipelineOp join3Op = new PipelineJoin<E>(//
-                new BOp[] { join2Op },//
-                new NV(Predicate.Annotations.BOP_ID, joinId3),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-                new NV(PipelineJoin.Annotations.PREDICATE, pred3Op),//
+        final PipelineOp join3Op = new PipelineJoin<E>(
+                new BOp[] { join2Op },
+                new NV(Predicate.Annotations.BOP_ID, joinId3),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+                new NV(PipelineJoin.Annotations.PREDICATE, pred3Op),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
 //                // join is optional.
-//                new NV(PipelineJoin.Annotations.OPTIONAL, true),//
+//                new NV(PipelineJoin.Annotations.OPTIONAL, true),
 //                // optional target is the same as the default target.
 //                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
                 );
@@ -620,28 +620,28 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         }
 
         final PipelineOp joinGroup1Op = new SubqueryOp(new BOp[]{join1Op}, 
-                new NV(Predicate.Annotations.BOP_ID, joinGroup1),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-                new NV(SubqueryOp.Annotations.SUBQUERY, subQuery),//
-//                , new NV(BOp.Annotations.CONTROLLER,true)//
+                new NV(Predicate.Annotations.BOP_ID, joinGroup1),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+                new NV(SubqueryOp.Annotations.SUBQUERY, subQuery),
+//                , new NV(BOp.Annotations.CONTROLLER,true)
 //                new NV(BOp.Annotations.EVALUATION_CONTEXT,
-//                        BOpEvaluationContext.CONTROLLER)//
+//                        BOpEvaluationContext.CONTROLLER)
                 // join is optional.
-                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional)//
+                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional)
 //                // optional target is the same as the default target.
 //                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
         );
         
-        final PipelineOp sliceOp = new SliceOp(//
+        final PipelineOp sliceOp = new SliceOp(
                 new BOp[]{joinGroup1Op},
-                NV.asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, sliceId),
                         new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                StandaloneChunkHandler.TEST_INSTANCE),//
+                                StandaloneChunkHandler.TEST_INSTANCE),
                         }));
 
         final PipelineOp query = sliceOp;
@@ -657,7 +657,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
 //            initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
 
 //            initialChunkMessage = new LocalChunkMessage<IBindingSet>(queryEngine,
-//                    queryId, startId,//
+//                    queryId, startId,
 //                    -1, // partitionId
 //                    newBindingSetIterator(initialBindings));
         }
@@ -669,62 +669,62 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         {
 
             // the expected solutions.
-            final IBindingSet[] expected = new IBindingSet[] {//
+            final IBindingSet[] expected = new IBindingSet[] {
             // four solutions where the optional join succeeds.
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("Paul"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Fred") }//
+                    		new Constant<String>("Fred") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("Paul"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Leon") }//
+                    		new Constant<String>("Leon") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("John"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Fred") }//
+                    		new Constant<String>("Fred") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("John"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Leon") }//
+                    		new Constant<String>("Leon") }
             ),
             // plus anything we read from the first access path which did not 
             // pass the optional join
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Paul"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("John"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Mary"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Brad"),
-                            new Constant<String>("Fred") }//
+                            new Constant<String>("Fred") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Brad"),
-                            new Constant<String>("Leon") }//
+                            new Constant<String>("Leon") }
             )
             };
 
@@ -821,69 +821,69 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         final IVariable<?> d = Var.var("d");
 
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
         
         final Predicate<?> pred1Op = new Predicate<E>(
                 new IVariableOrConstant[] { a, b }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId1),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId1),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred2Op = new Predicate<E>(
                 new IVariableOrConstant[] { b, c }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId2),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId2),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred3Op = new Predicate<E>(
                 new IVariableOrConstant[] { c, d }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId3),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId3),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
-        final PipelineOp join1Op = new PipelineJoin<E>(//
+        final PipelineOp join1Op = new PipelineJoin<E>(
                 new BOp[]{startOp},// 
-                        new NV(Predicate.Annotations.BOP_ID, joinId1),//
+                        new NV(Predicate.Annotations.BOP_ID, joinId1),
                         new NV(PipelineJoin.Annotations.PREDICATE,pred1Op));
 
         final PipelineOp subQuery;
         {
-		final PipelineOp join2Op = new PipelineJoin<E>(//
-				new BOp[] { /*join1Op*/ },//
-				new NV(Predicate.Annotations.BOP_ID, joinId2),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op)//
+		final PipelineOp join2Op = new PipelineJoin<E>(
+				new BOp[] { /*join1Op*/ },
+				new NV(Predicate.Annotations.BOP_ID, joinId2),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op)
 //				// join is optional.
-//				new NV(PipelineJoin.Annotations.OPTIONAL, true),//
+//				new NV(PipelineJoin.Annotations.OPTIONAL, true),
 //				// optional target is the same as the default target.
 //				new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
 				);
 
-		final PipelineOp join3Op = new PipelineJoin<E>(//
-				new BOp[] { join2Op },//
-				new NV(Predicate.Annotations.BOP_ID, joinId3),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred3Op),//
+		final PipelineOp join3Op = new PipelineJoin<E>(
+				new BOp[] { join2Op },
+				new NV(Predicate.Annotations.BOP_ID, joinId3),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred3Op),
 				// constraint d != Leon
 				new NV(PipelineJoin.Annotations.CONSTRAINTS,
 						new IConstraint[] { Constraint.wrap(new NEConstant(d, new Constant<String>("Leon"))) }),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
 //				// join is optional.
-//				new NV(PipelineJoin.Annotations.OPTIONAL, true),//
+//				new NV(PipelineJoin.Annotations.OPTIONAL, true),
 //				// optional target is the same as the default target.
 //				new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
 				);
@@ -892,28 +892,28 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         }
         
         final PipelineOp joinGroup1Op = new SubqueryOp(new BOp[]{join1Op}, 
-                new NV(Predicate.Annotations.BOP_ID, joinGroup1),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-                new NV(SubqueryOp.Annotations.SUBQUERY, subQuery),//
-//                new NV(BOp.Annotations.CONTROLLER,true)//
+                new NV(Predicate.Annotations.BOP_ID, joinGroup1),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+                new NV(SubqueryOp.Annotations.SUBQUERY, subQuery),
+//                new NV(BOp.Annotations.CONTROLLER,true)
 //                new NV(BOp.Annotations.EVALUATION_CONTEXT,
-//                        BOpEvaluationContext.CONTROLLER)//
+//                        BOpEvaluationContext.CONTROLLER)
                 // join is optional.
-                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional)//
+                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional)
 //                // optional target is the same as the default target.
 //                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
         );
 
-        final PipelineOp sliceOp = new SliceOp(//
+        final PipelineOp sliceOp = new SliceOp(
                 new BOp[]{joinGroup1Op},
-                NV.asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, sliceId),
                         new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                StandaloneChunkHandler.TEST_INSTANCE),//
+                                StandaloneChunkHandler.TEST_INSTANCE),
                         }));
 
         final PipelineOp query = sliceOp;
@@ -929,7 +929,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
 //            initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
 
 //            initialChunkMessage = new LocalChunkMessage<IBindingSet>(queryEngine,
-//                    queryId, startId,//
+//                    queryId, startId,
 //                    -1, // partitionId
 //                    newBindingSetIterator(initialBindings));
         }
@@ -941,48 +941,48 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         {
 
             // the expected solutions.
-            final IBindingSet[] expected = new IBindingSet[] {//
+            final IBindingSet[] expected = new IBindingSet[] {
             // two solutions where the optional join succeeds.
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("Paul"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Fred") }//
+                    		new Constant<String>("Fred") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("John"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Fred") }//
+                    		new Constant<String>("Fred") }
             ),
             // plus anything we read from the first access path which did not 
             // pass the optional join
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Paul"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("John"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Mary"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Brad"),
-                            new Constant<String>("Fred") }//
+                            new Constant<String>("Fred") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Brad"),
-                            new Constant<String>("Leon") }//
+                            new Constant<String>("Leon") }
             )
             };
 
@@ -1083,48 +1083,48 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
          */
         
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
         
         final Predicate<?> pred1Op = new Predicate<E>(
                 new IVariableOrConstant[] { a, b }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId1),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId1),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred2Op = new Predicate<E>(
                 new IVariableOrConstant[] { b, c }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId2),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId2),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred3Op = new Predicate<E>(
                 new IVariableOrConstant[] { c, d }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId3),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId3),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
-        final PipelineOp join1Op = new PipelineJoin<E>(//
+        final PipelineOp join1Op = new PipelineJoin<E>(
                 new BOp[]{startOp},// 
-                        new NV(Predicate.Annotations.BOP_ID, joinId1),//
+                        new NV(Predicate.Annotations.BOP_ID, joinId1),
                         new NV(PipelineJoin.Annotations.PREDICATE,pred1Op));
 
         final IConstraint condition = Constraint.wrap(new NEConstant(a, new Constant<String>("Paul")));
         
         final ConditionalRoutingOp condOp = new ConditionalRoutingOp(new BOp[]{join1Op},
-                NV.asMap(new NV[]{//
+                NV.asMap(new NV[]{
                     new NV(BOp.Annotations.BOP_ID,condId),
                     new NV(PipelineOp.Annotations.SINK_REF, joinGroup1), // a != Paul
                     new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId), // a == Paul
@@ -1133,26 +1133,26 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
 
         final PipelineOp subQuery;
         {
-		final PipelineOp join2Op = new PipelineJoin<E>(//
-				new BOp[] { /*condOp*/ },//
-				new NV(Predicate.Annotations.BOP_ID, joinId2),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op)//
+		final PipelineOp join2Op = new PipelineJoin<E>(
+				new BOp[] { /*condOp*/ },
+				new NV(Predicate.Annotations.BOP_ID, joinId2),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op)
 //				// join is optional.
-//				new NV(PipelineJoin.Annotations.OPTIONAL, true),//
+//				new NV(PipelineJoin.Annotations.OPTIONAL, true),
 //				// optional target is the same as the default target.
 //				new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
 				);
 
-		final PipelineOp join3Op = new PipelineJoin<E>(//
-				new BOp[] { join2Op },//
-				new NV(Predicate.Annotations.BOP_ID, joinId3),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred3Op),//
+		final PipelineOp join3Op = new PipelineJoin<E>(
+				new BOp[] { join2Op },
+				new NV(Predicate.Annotations.BOP_ID, joinId3),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred3Op),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        StandaloneChunkHandler.TEST_INSTANCE)//
+                        StandaloneChunkHandler.TEST_INSTANCE)
 //				// join is optional.
-//				new NV(PipelineJoin.Annotations.OPTIONAL, true),//
+//				new NV(PipelineJoin.Annotations.OPTIONAL, true),
 //				// optional target is the same as the default target.
 //				new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
 				);
@@ -1160,28 +1160,28 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         }
         
         final PipelineOp joinGroup1Op = new SubqueryOp(new BOp[]{condOp}, 
-                new NV(Predicate.Annotations.BOP_ID, joinGroup1),//
-//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),//
-                new NV(SubqueryOp.Annotations.SUBQUERY, subQuery),//
-//                new NV(BOp.Annotations.CONTROLLER,true)//
+                new NV(Predicate.Annotations.BOP_ID, joinGroup1),
+//                new NV(PipelineOp.Annotations.CONDITIONAL_GROUP, joinGroup1),
+                new NV(SubqueryOp.Annotations.SUBQUERY, subQuery),
+//                new NV(BOp.Annotations.CONTROLLER,true)
 //                new NV(BOp.Annotations.EVALUATION_CONTEXT,
-//                        BOpEvaluationContext.CONTROLLER)//
+//                        BOpEvaluationContext.CONTROLLER)
                 // join is optional.
-                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional)//
+                new NV(SubqueryOp.Annotations.JOIN_TYPE, JoinTypeEnum.Optional)
 //                // optional target is the same as the default target.
 //                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId)
         );
         
-        final PipelineOp sliceOp = new SliceOp(//
+        final PipelineOp sliceOp = new SliceOp(
                 new BOp[]{joinGroup1Op},
-                NV.asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, sliceId),
                         new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                StandaloneChunkHandler.TEST_INSTANCE),//
+                                StandaloneChunkHandler.TEST_INSTANCE),
                         }));
 
         final PipelineOp query = sliceOp;
@@ -1197,7 +1197,7 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
 //            initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
 
 //            initialChunkMessage = new LocalChunkMessage<IBindingSet>(queryEngine,
-//                    queryId, startId,//
+//                    queryId, startId,
 //                    -1, // partitionId
 //                    newBindingSetIterator(initialBindings));
         }
@@ -1209,53 +1209,53 @@ public class TestSubqueryOp extends AbstractSubqueryTestCase {
         {
 
             // the expected solutions.
-            final IBindingSet[] expected = new IBindingSet[] {//
+            final IBindingSet[] expected = new IBindingSet[] {
             // two solutions where the optional join succeeds.
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("John"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Leon") }//
+                    		new Constant<String>("Leon") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b, c, d },//
+            new ListBindingSet(
+                    new IVariable[] { a, b, c, d },
                     new IConstant[] { new Constant<String>("John"),
                             new Constant<String>("Mary"),
                             new Constant<String>("Brad"),
-                    		new Constant<String>("Fred") }//
+                    		new Constant<String>("Fred") }
             ),
             // plus anything we read from the first access path which did not 
             // pass the optional join
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Paul"),
-                            new Constant<String>("Mary") }//
+                            new Constant<String>("Mary") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Paul"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("John"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Mary"),
-                            new Constant<String>("Brad") }//
+                            new Constant<String>("Brad") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Brad"),
-                            new Constant<String>("Fred") }//
+                            new Constant<String>("Fred") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { a, b },//
+            new ListBindingSet(
+                    new IVariable[] { a, b },
                     new IConstant[] { new Constant<String>("Brad"),
-                            new Constant<String>("Leon") }//
+                            new Constant<String>("Leon") }
             )
             };
 

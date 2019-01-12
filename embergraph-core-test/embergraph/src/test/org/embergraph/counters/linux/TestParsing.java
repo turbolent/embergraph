@@ -133,10 +133,10 @@ public class TestParsing extends TestCase2 {
        
         final Pattern pattern = VMStatCollector.pattern;
 
-        final String header =//
+        final String header =
             "  r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st";
 
-        final String data =//
+        final String data =
             "  1  0     96 178580 206520 1170604   56   12     0     7    1    0  1  0 99  3  0";
 
         // test header parse.

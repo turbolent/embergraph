@@ -219,8 +219,8 @@ public class TestCase3 extends TestCase2 {
                 // success.
                 return;
             } catch (final Throwable e) {
-//                final boolean interesting = //
-//                InnerCause.isInnerCause(e, AssertionFailedError.class) || //
+//                final boolean interesting =
+//                InnerCause.isInnerCause(e, AssertionFailedError.class) ||
 //                        InnerCause.isInnerCause(e, TimeoutException.class);
                 remaining = nanos - (System.nanoTime() - begin);
                 if (remaining < 0) {

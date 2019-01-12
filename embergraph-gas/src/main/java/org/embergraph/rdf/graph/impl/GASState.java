@@ -119,11 +119,11 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
      */
     private final Comparator<Value> valueComparator;
     
-    public GASState(final IGASEngine gasEngine,//
-            final IGraphAccessor graphAccessor, //
-            final IStaticFrontier frontier,//
-            final IGASSchedulerImpl gasScheduler,//
-            final IGASProgram<VS, ES, ST> gasProgram//
+    public GASState(final IGASEngine gasEngine,
+            final IGraphAccessor graphAccessor,
+            final IStaticFrontier frontier,
+            final IGASSchedulerImpl gasScheduler,
+            final IGASProgram<VS, ES, ST> gasProgram
     ) {
 
         if (gasEngine == null)

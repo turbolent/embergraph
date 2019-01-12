@@ -434,9 +434,9 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     public void test_static_analysis_filter_nested_1() throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT ?v \n" +//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT ?v \n" +
                 "{ :x :p ?v . FILTER(?v = 1) }";
 
         final QueryRoot queryRoot = new Bigdata2ASTSPARQLParser()
@@ -485,9 +485,9 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     public void test_static_analysis_filter_nested_2()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT ?v \n" +//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT ?v \n" +
                 "{ :x :p ?v . { FILTER(?v = 1) } }";
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(
@@ -634,15 +634,15 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     public void test_static_analysis_filter_scope_1()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    :x :p ?v . \n" + //
-                "    { :x :q ?w \n" + //
-                "      OPTIONAL {  :x :p ?v2 FILTER(?v = 1) } \n" + //
-                "    } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    :x :p ?v . \n" +
+                "    { :x :q ?w \n" +
+                "      OPTIONAL {  :x :p ?v2 FILTER(?v = 1) } \n" +
+                "    } \n" +
+                "}"
         ;
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -839,13 +839,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     public void test_static_analysis_join_scope_1()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    ?X  :name \"paul\" . \n" + //
-                "    {?Y :name \"george\" . OPTIONAL { ?X :email ?Z } } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    ?X  :name \"paul\" . \n" +
+                "    {?Y :name \"george\" . OPTIONAL { ?X :email ?Z } } \n" +
+                "}"
         ;
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -1004,13 +1004,13 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     public void test_static_analysis_serviceCall() throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX bd: <http://www.embergraph.org/rdf/search#>\n" + //
-                "SELECT ?subj ?score\n" + //
-                "WHERE {\n" + //
-                "   ?lit bd:search \"mike\" .\n" + //
-                "   ?lit bd:relevance ?score .\n" + //
-                "   ?subj ?p ?lit .\n" + //
+        final String queryStr = "" +
+                "PREFIX bd: <http://www.embergraph.org/rdf/search#>\n" +
+                "SELECT ?subj ?score\n" +
+                "WHERE {\n" +
+                "   ?lit bd:search \"mike\" .\n" +
+                "   ?lit bd:relevance ?score .\n" +
+                "   ?subj ?p ?lit .\n" +
                 "}";
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -1097,14 +1097,14 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     public void test_static_analysis_serviceCall2() throws MalformedQueryException {
 
-        final String queryStr = "SELECT ?s ?o1 ?o2\n"//
-                + "{\n"//
-                + "  SERVICE <http://localhost:18080/openrdf/repositories/endpoint1> {\n"//
-                + "  ?s ?p ?o1 . }\n"//
-                + "  OPTIONAL {\n"//
-                + "    SERVICE <http://localhost:18080/openrdf/repositories/endpoint2> {\n"//
-                + "    ?s ?p2 ?o2 }\n"//
-                + "  }\n"//
+        final String queryStr = "SELECT ?s ?o1 ?o2\n"
+                + "{\n"
+                + "  SERVICE <http://localhost:18080/openrdf/repositories/endpoint1> {\n"
+                + "  ?s ?p ?o1 . }\n"
+                + "  OPTIONAL {\n"
+                + "    SERVICE <http://localhost:18080/openrdf/repositories/endpoint2> {\n"
+                + "    ?s ?p2 ?o2 }\n"
+                + "  }\n"
                 + "}";
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -1306,24 +1306,24 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      */
     public void test_static_analysis_filters() throws MalformedQueryException {
         
-        final String queryStr = ""+//
-        "PREFIX : <http://www.embergraph.org/>\n" +//
-        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+//
-        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"+//
-        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"+//
-        "SELECT ?a ?b \n" +//
-        " WHERE {\n" +//
-        "   ?a rdf:type foaf:Person . \n" +//
-        "   ?a foaf:knows ?b .\n"+//
-        "   { \n"+//
-        "     ?a :age ?ageA .\n"+//
-        "     ?b :age ?ageB .\n"+//
+        final String queryStr = ""+
+        "PREFIX : <http://www.embergraph.org/>\n" +
+        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+
+        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"+
+        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"+
+        "SELECT ?a ?b \n" +
+        " WHERE {\n" +
+        "   ?a rdf:type foaf:Person . \n" +
+        "   ?a foaf:knows ?b .\n"+
+        "   { \n"+
+        "     ?a :age ?ageA .\n"+
+        "     ?b :age ?ageB .\n"+
         "     FILTER ( ?a != ?b ) .\n"+// pre-filter (can be lifted)
         "     FILTER ( ?ageA > ?ageB) .\n"+// join-filter
         "     FILTER ( ?x < 100 ) .\n"+// prune-filter (can be pruned)
-        "   }\n"+//
+        "   }\n"+
         "   FILTER ( ?ageA > 20 ) .\n"+//post-filter (depends on subgroup)
-        "   "+//
+        "   "+
         "}";
         
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -1420,7 +1420,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 //        "     FILTER ( ?ageA > ?ageB) .\n"+// join-filter
 //        "     FILTER ( ?a != ?b ) .\n"+// pre-filter
 //        "     FILTER ( ?x < 100 ) .\n"+// prune-filter
-//        "   }\n"+//
+//        "   }\n"+
 //        "   FILTER ( ?ageA > 20 ) .\n"+//post-filter
         
         // Inner group.

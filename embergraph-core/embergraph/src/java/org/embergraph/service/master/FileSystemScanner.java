@@ -44,10 +44,10 @@ public class FileSystemScanner extends AbstractResourceScanner<File> {
 
     public String toString() {
 
-        return getClass() + //
-                "{acceptCount=" + super.getAcceptCount() + //
-                ",fileOrDir=" + fileOrDir + //
-                ",filter=" + (filter == null ? "N/A" : filter) + //
+        return getClass() +
+                "{acceptCount=" + super.getAcceptCount() +
+                ",fileOrDir=" + fileOrDir +
+                ",filter=" + (filter == null ? "N/A" : filter) +
                 "}";
         
     }

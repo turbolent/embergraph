@@ -402,26 +402,26 @@ public class AST2BOpRTO extends AST2BOpJoins {
         final int nedges = joinGroup.getProperty(QueryHints.RTO_NEDGES,
                 QueryHints.DEFAULT_RTO_NEDGES);
         
-        left = new JoinGraph(leftOrEmpty(left),//
-                new NV(BOp.Annotations.BOP_ID, ctx.nextId()),//
+        left = new JoinGraph(leftOrEmpty(left),
+                new NV(BOp.Annotations.BOP_ID, ctx.nextId()),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 new NV(BOp.Annotations.CONTROLLER, true),// Drop "CONTROLLER" annotation?
-                // new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                // new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                 // new NV(PipelineOp.Annotations.LAST_PASS, true),// required
 //                new NV(JoinGraph.Annotations.SELECTED, selectVars
-//                        .toArray(new IVariable[selectVars.size()])),//
+//                        .toArray(new IVariable[selectVars.size()])),
                 new NV(JoinGraph.Annotations.VERTICES,
-                        preds.toArray(new Predicate[preds.size()])),//
+                        preds.toArray(new Predicate[preds.size()])),
                 new NV(JoinGraph.Annotations.CONSTRAINTS, constraints
-                        .toArray(new IConstraint[constraints.size()])),//
-                new NV(JoinGraph.Annotations.JOIN_GROUP, rtoJoinGroup),//
-                new NV(JoinGraph.Annotations.LIMIT, limit),//
-                new NV(JoinGraph.Annotations.NEDGES, nedges),//
-                new NV(JoinGraph.Annotations.SAMPLE_TYPE, sampleType.name()),//
-                new NV(JoinGraph.Annotations.DONE_SET, doneSetIn),//
+                        .toArray(new IConstraint[constraints.size()])),
+                new NV(JoinGraph.Annotations.JOIN_GROUP, rtoJoinGroup),
+                new NV(JoinGraph.Annotations.LIMIT, limit),
+                new NV(JoinGraph.Annotations.NEDGES, nedges),
+                new NV(JoinGraph.Annotations.SAMPLE_TYPE, sampleType.name()),
+                new NV(JoinGraph.Annotations.DONE_SET, doneSetIn),
                 new NV(JoinGraph.Annotations.NT, new NT(ctx.getNamespace(),
-                        ctx.getTimestamp()))//
+                        ctx.getTimestamp()))
         );
 
         // These joins were consumed.
@@ -519,14 +519,14 @@ public class AST2BOpRTO extends AST2BOpJoins {
             // Lookup the AST node for that predicate.
             final StatementPatternNode sp = index.get(pred.getId());
             
-            left = join(left, //
-                    pred, //
+            left = join(left,
+                    pred,
                     optional ? new LinkedHashSet<IVariable<?>>(doneSet)
-                            : doneSet, //
+                            : doneSet,
                     attachedJoinConstraints == null ? null : Arrays
-                            .asList(attachedJoinConstraints),//
+                            .asList(attachedJoinConstraints),
                     null, // cutoff join limit
-                    sp.getQueryHints(),//
+                    sp.getQueryHints(),
                     ctx);
 
         }
@@ -534,10 +534,10 @@ public class AST2BOpRTO extends AST2BOpJoins {
 //        if (selected != null && selected.length != 0) {
 //
 //            // Drop variables that are not projected out.
-//            left = applyQueryHints(new ProjectionOp(//
-//                    leftOrEmpty(left), //
-//                    new NV(ProjectionOp.Annotations.BOP_ID, idFactory.nextId()),//
-//                    new NV(ProjectionOp.Annotations.SELECT, selected)//
+//            left = applyQueryHints(new ProjectionOp(
+//                    leftOrEmpty(left),
+//                    new NV(ProjectionOp.Annotations.BOP_ID, idFactory.nextId()),
+//                    new NV(ProjectionOp.Annotations.SELECT, selected)
 //                    ), rtoJoinGroup, ctx);
 //
 //        }
@@ -678,14 +678,14 @@ public class AST2BOpRTO extends AST2BOpJoins {
      * @return The result of sampling that edge.
      */
     //synchronized// FIXME REMOVE synchronized. This forces single threading for debugging purposes when chasing out-of-order evaluation exceptions.
-    static public EdgeSample cutoffJoin(//
-            final QueryEngine queryEngine,//
-            final JoinGraph joinGraph,//
-            final int limit,//
-            final IPredicate<?>[] predicates,//
-            final IConstraint[] constraints,//
-            final boolean pathIsComplete,//
-            final SampleBase sourceSample//
+    static public EdgeSample cutoffJoin(
+            final QueryEngine queryEngine,
+            final JoinGraph joinGraph,
+            final int limit,
+            final IPredicate<?>[] predicates,
+            final IConstraint[] constraints,
+            final boolean pathIsComplete,
+            final SampleBase sourceSample
     ) throws Exception {
 
         if (predicates == null)
@@ -778,14 +778,14 @@ public class AST2BOpRTO extends AST2BOpJoins {
      * @see AST2BOpJoins#join(PipelineOp, Predicate, Set, Collection,
      *      Properties, AST2BOpContext)
      */
-    private static PipelineOp getCutoffJoinQuery(//
-            final QueryEngine queryEngine,//
-            final JoinGraph joinGraph,//
-            final int limit,//
-            final IPredicate<?>[] predicates,//
-            final IConstraint[] constraints,//
-            final boolean pathIsComplete,//
-            final SampleBase sourceSample//
+    private static PipelineOp getCutoffJoinQuery(
+            final QueryEngine queryEngine,
+            final JoinGraph joinGraph,
+            final int limit,
+            final IPredicate<?>[] predicates,
+            final IConstraint[] constraints,
+            final boolean pathIsComplete,
+            final SampleBase sourceSample
     ) throws Exception {
 
         // Note: Arguments are checked by caller : cutoffJoin().
@@ -864,14 +864,14 @@ public class AST2BOpRTO extends AST2BOpJoins {
          * directly by the JOIN (because they depend on variable bindings that
          * are not known to be materialized.)
          */
-        left = join(left, //
-                pred, //
+        left = join(left,
+                pred,
                 optional ? new LinkedHashSet<IVariable<?>>(doneSet)
-                        : doneSet, //
+                        : doneSet,
                 attachedJoinConstraints == null ? null : Arrays
-                        .asList(attachedJoinConstraints),//
+                        .asList(attachedJoinConstraints),
                 Long.valueOf(limit),// cutoff join limit.
-                sp.getQueryHints(),//
+                sp.getQueryHints(),
                 ctx);
 
         /*
@@ -888,16 +888,16 @@ public class AST2BOpRTO extends AST2BOpJoins {
              * Add a SLICE to terminate the query when we have [limit] solution
              * out.
              */
-            left = applyQueryHints(new SliceOp(leftOrEmpty(left),//
-                    new NV(SliceOp.Annotations.BOP_ID, ctx.nextId()),//
-                    new NV(SliceOp.Annotations.OFFSET, "0"),//
-                    new NV(SliceOp.Annotations.LIMIT, Integer.toString(limit)),//
+            left = applyQueryHints(new SliceOp(leftOrEmpty(left),
+                    new NV(SliceOp.Annotations.BOP_ID, ctx.nextId()),
+                    new NV(SliceOp.Annotations.OFFSET, "0"),
+                    new NV(SliceOp.Annotations.LIMIT, Integer.toString(limit)),
                     new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(SliceOp.Annotations.PIPELINED, true),//
-                    new NV(SliceOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(SliceOp.Annotations.REORDER_SOLUTIONS,false),//
-                    new NV(SliceOp.Annotations.SHARED_STATE, true)//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(SliceOp.Annotations.PIPELINED, true),
+                    new NV(SliceOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(SliceOp.Annotations.REORDER_SOLUTIONS,false),
+                    new NV(SliceOp.Annotations.SHARED_STATE, true)
                     ), rtoJoinGroup, ctx);
 
         }
@@ -1035,10 +1035,10 @@ public class AST2BOpRTO extends AST2BOpJoins {
      * 
      * @return The sample from the cutoff join of that edge.
      */
-    private static EdgeSample runSimpleJoin(//
-            final QueryEngine queryEngine,//
-            final SampleBase sourceSample,//
-            final int limit,//
+    private static EdgeSample runSimpleJoin(
+            final QueryEngine queryEngine,
+            final SampleBase sourceSample,
+            final int limit,
             final PipelineJoin<?> joinOp) throws Exception {
 
         if (log.isInfoEnabled())
@@ -1056,9 +1056,9 @@ public class AST2BOpRTO extends AST2BOpJoins {
         
         // run the cutoff sampling of the edge.
         final UUID queryId = UUID.randomUUID();
-        final IRunningQuery runningQuery = queryEngine.eval(//
-                queryId,//
-                queryOp,//
+        final IRunningQuery runningQuery = queryEngine.eval(
+                queryId,
+                queryOp,
                 null,// attributes
 //                new LocalChunkMessage(queryEngine, queryId,
 //                        joinOp.getId()/* startId */, -1 /* partitionId */,
@@ -1173,10 +1173,10 @@ public class AST2BOpRTO extends AST2BOpJoins {
      *             will incur more overhead than injecting a rowid column into
      *             the source solutions.
      */
-    private static EdgeSample runComplexJoin(//
-            final QueryEngine queryEngine,//
-            final SampleBase sourceSample,//
-            final int limit,//
+    private static EdgeSample runComplexJoin(
+            final QueryEngine queryEngine,
+            final SampleBase sourceSample,
+            final int limit,
             final PipelineOp query) throws Exception {
         
         if (log.isInfoEnabled())
@@ -1192,9 +1192,9 @@ public class AST2BOpRTO extends AST2BOpJoins {
         
         // run the cutoff sampling of the edge.
         final UUID queryId = UUID.randomUUID();
-        final IRunningQuery runningQuery = queryEngine.eval(//
-                queryId,//
-                query,//
+        final IRunningQuery runningQuery = queryEngine.eval(
+                queryId,
+                query,
                 null,// attributes
                 in// bindingSet[]
 //                new LocalChunkMessage(queryEngine, queryId,
@@ -1439,19 +1439,19 @@ public class AST2BOpRTO extends AST2BOpJoins {
          */
         final long estRead = (long) (sumRangeCount * f);
 
-        final EdgeSample edgeSample = new EdgeSample(//
-                sourceSample,//
-                inputCount,//
-                tuplesRead,//
-                sumRangeCount,//
-                outputCount, //
-                adjustedCard,//
-                f, //
+        final EdgeSample edgeSample = new EdgeSample(
+                sourceSample,
+                inputCount,
+                tuplesRead,
+                sumRangeCount,
+                outputCount,
+                adjustedCard,
+                f,
                 // args to SampleBase
                 estCard, // estimated output cardinality if fully executed.
                 estRead, // estimated tuples read if fully executed.
-                limit, //
-                estimateEnum,//
+                limit,
+                estimateEnum,
                 result.toArray(new IBindingSet[result.size()]));
 
         if (log.isDebugEnabled())

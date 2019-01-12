@@ -461,9 +461,9 @@ public class TestNSSHealthCheck extends TestCase2 {
 	// * The <code>/namespace/</code> servlet responds (multi-tenancy API).
 	// */
 	// public void test_webapp_structure_namespace() throws Exception {
-	//
+
 	// doGET(m_serviceURL + "/namespace/");
-	//
+
 	// }
 
 	/**

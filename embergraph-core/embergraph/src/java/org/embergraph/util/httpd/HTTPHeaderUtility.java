@@ -49,22 +49,22 @@ public class HTTPHeaderUtility
 
     // quoted-string
     //           :=
-    //
+
     // token     := One of more of any CHAR except CTLs or separators.
-    //
+
     // CTL       := <any US-ASCII control character (octets 0 - 31) and
     //               DEL (127)>
-    //
+
     // separators := "(" | ")" | "<" | ">" | "@"
     //             | "," | ";" | ":" | "\" | <">
     //             | "/" | "[" | "]" | "?" | "="
     //             | "{" | "}" | SP | HT
 
     // token     := One of more of any CHAR except CTLs or separators.
-    //
+
     // CTL       := <any US-ASCII control character (octets 0 - 31) and
     //               DEL (127)>
-    //
+
     // separators := "(" | ")" | "<" | ">" | "@"
     //             | "," | ";" | ":" | "\" | <">
     //             | "/" | "[" | "]" | "?" | "="

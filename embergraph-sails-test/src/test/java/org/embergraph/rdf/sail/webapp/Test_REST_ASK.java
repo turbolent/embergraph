@@ -108,20 +108,20 @@ public class Test_REST_ASK<S extends IIndexManager> extends
 	// * "ASK" query using POST with an empty KB.
 	// */
 	// public void test_POST_ASK() throws Exception {
-	//
+
 	// final String queryStr = "ASK where {?s ?p ?o}";
-	//
+
 	// final QueryOptions opts = new QueryOptions();
 	// opts.serviceURL = m_serviceURL;
 	// opts.queryStr = queryStr;
 	// opts.method = "POST";
-	//
+
 	// opts.acceptHeader = BooleanQueryResultFormat.SPARQL.getDefaultMIMEType();
 	// assertEquals(false, askResults(doSparqlQuery(opts, requestPath)));
-	//
+
 	// opts.acceptHeader = BooleanQueryResultFormat.TEXT.getDefaultMIMEType();
 	// assertEquals(false, askResults(doSparqlQuery(opts, requestPath)));
-	//
+
 	// }
 
 }

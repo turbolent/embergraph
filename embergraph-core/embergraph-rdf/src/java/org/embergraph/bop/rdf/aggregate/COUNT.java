@@ -161,9 +161,9 @@ public class COUNT extends AggregateBase<IV> {
     // */
     // @Override
     // final public boolean isWildcardAllowed() {
-    //
+
     // return true;
-    //
+
     // }
 
 }

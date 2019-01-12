@@ -56,13 +56,13 @@ public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecode_URIByteIV() {
 
-        final IV<?, ?>[] e = {//
-//                new VocabURIByteIV<BigdataURI>((byte) Byte.MIN_VALUE),//
-//                new VocabURIByteIV<BigdataURI>((byte) -1),//
-                new VocabURIByteIV<BigdataURI>((byte) 0),//
-                new VocabURIByteIV<BigdataURI>((byte) KeyBuilder.encodeByte(14)),//
-                new VocabURIByteIV<BigdataURI>((byte) 14),//
-//                new VocabURIByteIV<BigdataURI>((byte) Byte.MAX_VALUE),//
+        final IV<?, ?>[] e = {
+//                new VocabURIByteIV<BigdataURI>((byte) Byte.MIN_VALUE),
+//                new VocabURIByteIV<BigdataURI>((byte) -1),
+                new VocabURIByteIV<BigdataURI>((byte) 0),
+                new VocabURIByteIV<BigdataURI>((byte) KeyBuilder.encodeByte(14)),
+                new VocabURIByteIV<BigdataURI>((byte) 14),
+//                new VocabURIByteIV<BigdataURI>((byte) Byte.MAX_VALUE),
         };
 
         final KeyBuilder keyBuilder = new KeyBuilder();

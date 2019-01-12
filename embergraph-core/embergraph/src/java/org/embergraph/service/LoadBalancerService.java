@@ -1604,16 +1604,16 @@ abstract public class LoadBalancerService extends AbstractService
 
             if (log.isInfoEnabled()) {
              
-                log.info("serviceName=" + serviceName//
-                        + ", serviceUUID=" + serviceUUID //
-//                        + ", averageQueueLength=" + averageQueueLength//
-                        + ", averageQueueingTime=" + millisFormat.format(averageQueueingTime)//
-                        + ", dataDirBytesAvail="+bytesFormat.format(dataDirBytesAvailable)//
-                        + ", tmpDirBytesAvail="+bytesFormat.format(tmpDirBytesAvailable)//
-                        + ", adjustedRawStore="+adjustedRawScore//
-                        + ", rawScore(" + scoreFormat.format(rawScore) + ") "//
-                        + "= (averageQueueingTime("+ averageQueueingTime+ ") + 1) "//
-                        + "* (hostScore("+ scoreFormat.format(hostScore.score) + ") + 1)"//
+                log.info("serviceName=" + serviceName
+                        + ", serviceUUID=" + serviceUUID
+//                        + ", averageQueueLength=" + averageQueueLength
+                        + ", averageQueueingTime=" + millisFormat.format(averageQueueingTime)
+                        + ", dataDirBytesAvail="+bytesFormat.format(dataDirBytesAvailable)
+                        + ", tmpDirBytesAvail="+bytesFormat.format(tmpDirBytesAvailable)
+                        + ", adjustedRawStore="+adjustedRawScore
+                        + ", rawScore(" + scoreFormat.format(rawScore) + ") "
+                        + "= (averageQueueingTime("+ averageQueueingTime+ ") + 1) "
+                        + "* (hostScore("+ scoreFormat.format(hostScore.score) + ") + 1)"
                         );
                 
             }

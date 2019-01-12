@@ -474,9 +474,9 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
             if (historyService) {
 
-                final SPOKeyOrder keyOrder = triples //
-                        ? SPOKeyOrder.POS//
-                        : SPOKeyOrder.PCSO//
+                final SPOKeyOrder keyOrder = triples
+                        ? SPOKeyOrder.POS
+                        : SPOKeyOrder.PCSO
                 ;
 
                 indexManager.registerIndex(getHistoryIndexMetadata(keyOrder));
@@ -1287,7 +1287,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 //         */
 //
 ////        if (predicate.getPartitionId() != -1) {
-////
+//
 ////            /*
 ////             * Note: This handles a read against a local index partition.
 ////             * 
@@ -1299,9 +1299,9 @@ public class SPORelation extends AbstractRelation<ISPO> {
 ////             * "relation shard" accessed the metadata via a catalog and which
 ////             * was aware that only one index shard could be resolved locally.
 ////             */
-////
+//
 ////            return getAccessPathForIndexPartition(predicate);
-////
+//
 ////        }
 //
 //        return _getAccessPath(predicate);
@@ -1382,8 +1382,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
 //     */
 //    @Override
 //    public IAccessPath<ISPO> getAccessPathForIndexPartition(
-//            final IIndexManager indexManager, //
-//            final IPredicate<ISPO> predicate//
+//            final IIndexManager indexManager,
+//            final IPredicate<ISPO> predicate
 //            ) {
 //
 //        return getAccessPath(indexManager,getKeyOrder(predicate),predicate);
@@ -1397,12 +1397,12 @@ public class SPORelation extends AbstractRelation<ISPO> {
 ////         * objects so we can directly read on the shard.
 ////         */
 //////        final IIndexManager indexManager = getIndexManager();
-////
+//
 ////        if (indexManager == null)
 ////            throw new IllegalArgumentException();
-////
+//
 ////        if (indexManager instanceof IBigdataFederation<?>) {
-////
+//
 ////            /*
 ////             * This will happen if you fail to re-create the JoinNexus within
 ////             * the target execution environment.
@@ -1414,30 +1414,30 @@ public class SPORelation extends AbstractRelation<ISPO> {
 ////             * using the IndexManager exposed by the ConcurrencyManager to its
 ////             * tasks.
 ////             */
-////
+//
 ////            throw new IllegalArgumentException(
 ////                    "Expecting a local index manager, not: "
 ////                            + indexManager.getClass().toString());
-////
+//
 ////        }
 ////        
 ////        if (predicate == null)
 ////            throw new IllegalArgumentException();
-////
+//
 ////        final int partitionId = predicate.getPartitionId();
-////
+//
 ////        if (partitionId == -1) // must be a valid partition identifier.
 ////            throw new IllegalArgumentException();
-////
+//
 ////        /*
 ////         * @todo This condition should probably be an error since the expander
 ////         * will be ignored.
 ////         */
 //////        if (predicate.getSolutionExpander() != null)
 //////            throw new IllegalArgumentException();
-////
+//
 ////        if (predicate.getRelationCount() != 1) {
-////
+//
 ////            /*
 ////             * This is disallowed. The predicate must be reading on a single
 ////             * local index partition, not a view comprised of more than one
@@ -1457,16 +1457,16 @@ public class SPORelation extends AbstractRelation<ISPO> {
 ////        }
 ////        
 ////        final String namespace = getNamespace();//predicate.getOnlyRelationName();
-////
+//
 ////        /*
 ////         * Find the best access path for that predicate.
 ////         */
 ////        final SPOKeyOrder keyOrder = getKeyOrder(predicate);
-////
+//
 ////        // The name of the desired index partition.
 ////        final String name = DataService.getIndexPartitionName(namespace + "."
 ////                + keyOrder.getIndexName(), predicate.getPartitionId());
-////
+//
 ////        /*
 ////         * Note: whether or not we need both keys and values depends on the
 ////         * specific index/predicate.
@@ -1477,13 +1477,13 @@ public class SPORelation extends AbstractRelation<ISPO> {
 //////      * Note: We can specify READ_ONLY here since the tail predicates are not
 //////      * mutable for rule execution.
 ////        final int flags = IRangeQuery.KEYS | IRangeQuery.VALS;// | IRangeQuery.READONLY;
-////
+//
 ////        final long timestamp = getTimestamp();//getReadTimestamp();
 ////        
 ////        // MUST be a local index view.
 ////        final ILocalBTreeView ndx = (ILocalBTreeView) indexManager
 ////                .getIndex(name, timestamp);
-////
+//
 ////        return newAccessPath(this/* relation */, indexManager, timestamp,
 ////                predicate, keyOrder, ndx, flags, getChunkOfChunksCapacity(),
 ////                getChunkCapacity(), getFullyBufferedReadThreshold());
@@ -1775,7 +1775,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
         @SuppressWarnings("unchecked")
         final Iterator<IV> itr = new Striterator(getIndex(keyOrder)
-                .rangeIterator(fromKey, toKey,//
+                .rangeIterator(fromKey, toKey,
                         0/* capacity */, IRangeQuery.KEYS | IRangeQuery.CURSOR,
                         filter)).addFilter(new Resolver() {
                     
@@ -1916,7 +1916,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
             
         });
 
-        return new ChunkedWrappedIterator<IV>(itr,//
+        return new ChunkedWrappedIterator<IV>(itr,
                 ChunkedWrappedIterator.DEFAULT_CHUNK_SIZE,// chunkSize
                 IV.class// elementClass
         );
@@ -2227,7 +2227,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
         }
 
         // if(numStmts>1000) {
-        //
+
         // log.info("Writing " + numStmts + " statements...");
         //                    
         // }
@@ -2273,12 +2273,12 @@ public class SPORelation extends AbstractRelation<ISPO> {
         if (log.isInfoEnabled() && numStmts > 1000) {
 
             log.info("Wrote " + numStmts + " statements (mutationCount="
-                    + mutationCount + ") in " + elapsed + "ms" //
-                    + "; sort=" + sortTime + "ms" //
-                    + ", keyGen+insert=" + insertTime + "ms" //
-//                    + "; spo=" + elapsed_SPO + "ms" //
-//                    + ", pos=" + elapsed_POS + "ms" //
-//                    + ", osp=" + elapsed_OSP + "ms" //
+                    + mutationCount + ") in " + elapsed + "ms"
+                    + "; sort=" + sortTime + "ms"
+                    + ", keyGen+insert=" + insertTime + "ms"
+//                    + "; spo=" + elapsed_SPO + "ms"
+//                    + ", pos=" + elapsed_POS + "ms"
+//                    + ", osp=" + elapsed_OSP + "ms"
             );
 
         }
@@ -2617,28 +2617,28 @@ public class SPORelation extends AbstractRelation<ISPO> {
         final StringBuilder sb = new StringBuilder();
 
         final IPredicate<ISPO> pred = new SPOPredicate(
-                keyArity==4?new BOp[]{//
-                      Var.var("s"),//
-                      Var.var("p"),//
-                      Var.var("o"),//
-                      Var.var("c"),//
+                keyArity==4?new BOp[]{
+                      Var.var("s"),
+                      Var.var("p"),
+                      Var.var("o"),
+                      Var.var("c"),
                 }:new BOp[] {
-                      Var.var("s"),//
-                      Var.var("p"),//
-                      Var.var("o"),//
-                      },//
-                NV.asMap(new NV[] {//
+                      Var.var("s"),
+                      Var.var("p"),
+                      Var.var("o"),
+                      },
+                NV.asMap(new NV[] {
                         new NV(IPredicate.Annotations.RELATION_NAME,
-                                new String[] { getNamespace() }),//
+                                new String[] { getNamespace() }),
 //                        new NV(IPredicate.Annotations.KEY_ORDER,
-//                                keyOrder),//
+//                                keyOrder),
                         }));
 //        final IPredicate<ISPO> pred = new SPOPredicate(
 //                new String[] { getNamespace() }, -1, // partitionId
-//                Var.var("s"),//
-//                Var.var("p"),//
-//                Var.var("o"),//
-//                keyArity == 3 ? null : Var.var("c"),//
+//                Var.var("s"),
+//                Var.var("p"),
+//                Var.var("o"),
+//                keyArity == 3 ? null : Var.var("c"),
 //                false, // optional
 //                null, // filter,
 //                null // expander

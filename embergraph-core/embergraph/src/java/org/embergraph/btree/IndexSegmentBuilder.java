@@ -840,16 +840,16 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         final IndexMetadata indexMetadata = src.getIndexMetadata();
 
         // Setup the index segment build operation.
-        return IndexSegmentBuilder.newInstance(//
-                outFile, //
-                tmpDir, //
+        return IndexSegmentBuilder.newInstance(
+                outFile,
+                tmpDir,
                 nentries, // exact range count
                 itr,     // source iterator
                 m, // the output branching factor.
-                indexMetadata,//
-                createTime,//
-                compactingMerge,//
-                bufferNodes//
+                indexMetadata,
+                createTime,
+                compactingMerge,
+                bufferNodes
         );
 
     }
@@ -1018,16 +1018,16 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         final ITupleIterator<?> itr = new MyTupleIterator(tleaf, flags);
 
         // Setup the index segment build operation.
-        return IndexSegmentBuilder.newInstance(//
-                outFile, //
-                tmpDir, //
+        return IndexSegmentBuilder.newInstance(
+                outFile,
+                tmpDir,
                 nentries, // exact range count
                 itr,     // source iterator
                 m, // the output branching factor.
-                indexMetadata,//
-                createTime,//
-                compactingMerge,//
-                bufferNodes//
+                indexMetadata,
+                createTime,
+                compactingMerge,
+                bufferNodes
         );
 
     }
@@ -1252,16 +1252,16 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         final ITupleIterator<?> itr = new MyTupleIterator(tleaf, flags);
 
         // Setup the index segment build operation.
-        return IndexSegmentBuilder.newInstance(//
-                outFile, //
-                tmpDir, //
+        return IndexSegmentBuilder.newInstance(
+                outFile,
+                tmpDir,
                 nentries, // exact range count
                 itr,     // source iterator
                 m, // the output branching factor.
-                indexMetadata,//
-                createTime,//
-                compactingMerge,//
-                bufferNodes//
+                indexMetadata,
+                createTime,
+                compactingMerge,
+                bufferNodes
         );
 
     }
@@ -1338,16 +1338,16 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
      * 
      * @throws IOException
      */
-    public static IndexSegmentBuilder newInstance(//
-            final File outFile,//
-            final File tmpDir,//
-            final long entryCount,//
-            final ITupleIterator<?> entryIterator, //
-            final int m,//
-            final IndexMetadata metadata,//
-            final long commitTime,//
-            final boolean compactingMerge,//
-            final boolean bufferNodes//
+    public static IndexSegmentBuilder newInstance(
+            final File outFile,
+            final File tmpDir,
+            final long entryCount,
+            final ITupleIterator<?> entryIterator,
+            final int m,
+            final IndexMetadata metadata,
+            final long commitTime,
+            final boolean compactingMerge,
+            final boolean bufferNodes
             )
             throws IOException {
 
@@ -1428,16 +1428,16 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
      * 
      * @throws IOException
      */
-    protected IndexSegmentBuilder(//
-            final File outFile,//
-            final File tmpDir,//
-            final long entryCount,//
-            final ITupleIterator<?> entryIterator, //
-            final int m,//
-            IndexMetadata metadata,//
-            final long commitTime,//
-            final boolean compactingMerge,//
-            final boolean bufferNodes//
+    protected IndexSegmentBuilder(
+            final File outFile,
+            final File tmpDir,
+            final long entryCount,
+            final ITupleIterator<?> entryIterator,
+            final int m,
+            IndexMetadata metadata,
+            final long commitTime,
+            final boolean compactingMerge,
+            final boolean bufferNodes
             )
             throws IOException {
 
@@ -1488,7 +1488,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         this.entryIterator = entryIterator;
 
         // the name of the index or the index partition.
-        name = (metadata.getPartitionMetadata() == null)//
+        name = (metadata.getPartitionMetadata() == null)
                 // local index name (if any).
                 ? metadata.getName() == null ? "N/A" : metadata.getName()
                 // index partition name
@@ -1517,11 +1517,11 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
                  */
 
                 this.metadata.setPartitionMetadata(
-                        new LocalPartitionMetadata(//
-                                pmd.getPartitionId(),//
-                                pmd.getSourcePartitionId(),//
-                                pmd.getLeftSeparatorKey(),//
-                                pmd.getRightSeparatorKey(),//
+                        new LocalPartitionMetadata(
+                                pmd.getPartitionId(),
+                                pmd.getSourcePartitionId(),
+                                pmd.getLeftSeparatorKey(),
+                                pmd.getRightSeparatorKey(),
                                 null, // No resource metadata for indexSegment.
                                 pmd.getIndexPartitionCause()
 //                                ,pmd.getHistory()+
@@ -1562,7 +1562,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 		this.recordAddrBuf = rawRecords ? new ByteArrayBuffer(Bytes.SIZEOF_LONG)
 				: null;
         
-        //
+
         this.commitTime = commitTime;
 
         this.compactingMerge = compactingMerge;
@@ -1606,9 +1606,9 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         // TODO BLZG-1501 (remove LRUNexus)
         storeCache = null;
 //        storeCache = (LRUNexus.INSTANCE != null && LRUNexus
-//                .getIndexSegmentBuildPopulatesCache()) //
-//                ? LRUNexus.INSTANCE.getCache(segmentUUID, addressManager)//
-//                : null//
+//                .getIndexSegmentBuildPopulatesCache())
+//                ? LRUNexus.INSTANCE.getCache(segmentUUID, addressManager)
+//                : null
 //                ;
 
         /*
@@ -1682,7 +1682,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
             /*
              * Used to serialize the nodes and leaves for the output tree.
              */
-            nodeSer = new NodeSerializer(//
+            nodeSer = new NodeSerializer(
                     /*
                      * Note: it does not seem like there should be any
                      * interaction between various IAddressSerializer strategies
@@ -1697,11 +1697,11 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
                      * offsets are essentially 4x larger than they would be
                      * otherwise.
                      */
-                    addressManager,//
-                    NOPNodeFactory.INSTANCE,//
+                    addressManager,
+                    NOPNodeFactory.INSTANCE,
                     plan.m,// the output branching factor.
                     0, // initialBufferCapacity - will be estimated.
-                    metadata, //
+                    metadata,
                     false, // NOT read-only (we are using it for writing).
                     metadata.getIndexSegmentRecordCompressorFactory()
                     );
@@ -1800,7 +1800,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 			 * Open buffer for blobs if an overflow handler was specified -or-
 			 * if the index is using raw records.
 			 */
-			blobBuffer = (rawRecords || overflowHandler != null) //
+			blobBuffer = (rawRecords || overflowHandler != null)
 					? new TemporaryRawStore(offsetBits)
 					: null;
 
@@ -1857,16 +1857,16 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
                 fpf.setMaximumFractionDigits(2);
 
                 log.info("finished"
-                    + ": total(ms)="+ elapsed//
-                    + "= setup("+ elapsed_setup +")"//
-                    + "+ build("+ elapsed_build + ")"//
-                    + "+ write("+ elapsed_write +")"//
-                    + "; branchingFactor=" + plan.m//
-                    + ", nentries=("+ ntuplesWritten+ " actual, "+plan.nentries+ " plan)"//
-                    + ", nnodes=("+ nnodesWritten+" actual, "+plan.nnodes+" plan)"//
-                    + ", nleaves=("+ nleavesWritten+" actual, "+plan.nleaves+" plan)"//
-                    + ", length="+ fpf.format(((double) checkpoint.length / Bytes.megabyte32))+ "MB" //
-                    + ", rate=" + fpf.format(mbPerSec) + "MB/sec"//
+                    + ": total(ms)="+ elapsed
+                    + "= setup("+ elapsed_setup +")"
+                    + "+ build("+ elapsed_build + ")"
+                    + "+ write("+ elapsed_write +")"
+                    + "; branchingFactor=" + plan.m
+                    + ", nentries=("+ ntuplesWritten+ " actual, "+plan.nentries+ " plan)"
+                    + ", nnodes=("+ nnodesWritten+" actual, "+plan.nnodes+" plan)"
+                    + ", nleaves=("+ nleavesWritten+" actual, "+plan.nleaves+" plan)"
+                    + ", length="+ fpf.format(((double) checkpoint.length / Bytes.megabyte32))+ "MB"
+                    + ", rate=" + fpf.format(mbPerSec) + "MB/sec"
                     );
 
             }
@@ -2647,7 +2647,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
             addr = encodeLeafAddr(addr1);
             
             if (log.isDebugEnabled())
-                log.debug("allocated storage for leaf data record"//
+                log.debug("allocated storage for leaf data record"
                         + ": addr=" + addressManager.toString(addr));
 
             if (nleavesWritten > 0) {
@@ -2657,10 +2657,10 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
                  */
 
                 if (log.isDebugEnabled())
-                    log.debug("updating previous leaf"//
-                            + ": addr="+addressManager.toString(encodeLeafAddr(bufLastLeafAddr))//
-                            + ", priorAddr="+ addressManager.toString(addrPriorLeaf)//
-                            + ", nextAddr=" + addressManager.toString(addr)//
+                    log.debug("updating previous leaf"
+                            + ": addr="+addressManager.toString(encodeLeafAddr(bufLastLeafAddr))
+                            + ", priorAddr="+ addressManager.toString(addrPriorLeaf)
+                            + ", nextAddr=" + addressManager.toString(addr)
 //                            + ", exhausted=" + exhausted
                             );
                 else if (log.isInfoEnabled()) {
@@ -2744,10 +2744,10 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
             assert plan.nentries == 0 || lastLeafData.getKeyCount() > 0 : "Last leaf is empty?";
 
             if (log.isDebugEnabled())
-                log.debug("updating last leaf"//
-                        + ": addr="+addressManager.toString(encodeLeafAddr(bufLastLeafAddr))//
-                        + ", priorAddr="+ addressManager.toString(addrPriorLeaf)//
-                        + ", nextAddr=0L"//
+                log.debug("updating last leaf"
+                        + ": addr="+addressManager.toString(encodeLeafAddr(bufLastLeafAddr))
+                        + ", priorAddr="+ addressManager.toString(addrPriorLeaf)
+                        + ", nextAddr=0L"
 //                        + ", exhausted="+exhausted
                         );
 //                log.debug("Writing leaf: priorLeaf=" + addrPriorLeaf
@@ -3507,12 +3507,12 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
             	throw new AssertionError();
             
             final IndexSegmentCheckpoint md = new IndexSegmentCheckpoint(
-                    addressManager.getOffsetBits(), //
+                    addressManager.getOffsetBits(),
                     plan.height, // will always be correct.
                     (int)nleavesWritten, // actual #of leaves written.
                     (int)nnodesWritten, // actual #of nodes written.
                     ntuplesWritten, // actual #of tuples written.
-                    maxNodeOrLeafLength,//
+                    maxNodeOrLeafLength,
                     offsetLeaves, extentLeaves, offsetNodes, extentNodes,
                     offsetBlobs, extentBlobs, addrRoot, addrMetadata,
                     addrBloom, addrFirstLeaf, addrLastLeaf, out.length(),

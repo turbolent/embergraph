@@ -107,12 +107,12 @@ public class RDFFullTextIndexTupleSerializer extends
      *            <code>false</code> it will not be present in the generated
      *            key.
      */
-    public RDFFullTextIndexTupleSerializer(//
-            final IKeyBuilderFactory keyBuilderFactory,//
-            final IRabaCoder leafKeysCoder, //
-            final IRabaCoder leafValsCoder,//
-            final boolean fieldsEnabled//
-//            final boolean doublePrecision//
+    public RDFFullTextIndexTupleSerializer(
+            final IKeyBuilderFactory keyBuilderFactory,
+            final IRabaCoder leafKeysCoder,
+            final IRabaCoder leafValsCoder,
+            final boolean fieldsEnabled
+//            final boolean doublePrecision
     ) {
 
         super(keyBuilderFactory, leafKeysCoder, leafValsCoder);

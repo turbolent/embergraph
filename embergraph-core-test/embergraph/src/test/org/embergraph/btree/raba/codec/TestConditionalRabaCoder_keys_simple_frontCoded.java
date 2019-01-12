@@ -50,9 +50,9 @@ public class TestConditionalRabaCoder_keys_simple_frontCoded extends
 
         super.setUp();
 
-        rabaCoder = new ConditionalRabaCoder( //
-                SimpleRabaCoder.INSTANCE,//
-                new FrontCodedRabaCoder(8/* ratio */), //
+        rabaCoder = new ConditionalRabaCoder(
+                SimpleRabaCoder.INSTANCE,
+                new FrontCodedRabaCoder(8/* ratio */),
                 32 // bigsize
         );
 

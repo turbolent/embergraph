@@ -154,10 +154,10 @@ public class HistoryIndexTupleSerializer extends
         final StatementEnum type = spo.getStatementType();
 
         // optionally set the override and user flag bits on the value.
-        final byte lowNibble = (byte) //
+        final byte lowNibble = (byte)
             (type.code()// statement type
-                | (override ? StatementEnum.MASK_OVERRIDE : 0x0) //
-                | (userFlag ? StatementEnum.MASK_USER_FLAG : 0x0)//
+                | (override ? StatementEnum.MASK_OVERRIDE : 0x0)
+                | (userFlag ? StatementEnum.MASK_USER_FLAG : 0x0)
                 );
                 
         final byte highNibble = (byte) changeRecord.getChangeAction().ordinal();

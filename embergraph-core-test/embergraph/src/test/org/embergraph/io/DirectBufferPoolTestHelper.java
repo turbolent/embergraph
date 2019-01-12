@@ -75,12 +75,12 @@ public class DirectBufferPoolTestHelper {
              * At least one buffer was acquired which was never released.
              */
 
-            log.error("Test did not release buffer(s)"//
-                    + ": nacquired=" + nacquired //
-                    + ", nreleased=" + nreleased //
-                    + ", test=" + test.getClass() + "." + test.getName()//
+            log.error("Test did not release buffer(s)"
+                    + ": nacquired=" + nacquired
+                    + ", nreleased=" + nreleased
+                    + ", test=" + test.getClass() + "." + test.getName()
                     + (testClass == null ? "" : ", testClass="
-                            + testClass.getClass().getName())//
+                            + testClass.getClass().getName())
             );
 
         }

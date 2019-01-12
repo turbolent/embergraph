@@ -113,19 +113,19 @@ public class EdgeSample extends SampleBase {
 	 *            <i>outputCount</i> as adjusted for a variety of edge
 	 *            conditions).
 	 */
-    public EdgeSample(final SampleBase sourceSample,//
-            final int inputCount, //
-            final long tuplesRead,//
-            final long sumRangeCount,//
-            final long outputCount,//
-            final long adjustedCard,//
-            final double f, //
+    public EdgeSample(final SampleBase sourceSample,
+            final int inputCount,
+            final long tuplesRead,
+            final long sumRangeCount,
+            final long outputCount,
+            final long adjustedCard,
+            final double f,
             // args to SampleBase
-            final long estCard,//
-            final long estRead,//
-            final int limit,//
-            final EstimateEnum estimateEnum,//
-            final IBindingSet[] sample//
+            final long estCard,
+            final long estRead,
+            final int limit,
+            final EstimateEnum estimateEnum,
+            final IBindingSet[] sample
     ) {
 
         super(estCard, limit, estimateEnum, sample);

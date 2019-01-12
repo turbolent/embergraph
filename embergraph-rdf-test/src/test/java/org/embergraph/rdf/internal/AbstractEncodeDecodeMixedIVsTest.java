@@ -180,13 +180,13 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                 }
 
                 // blank nodes with numeric IDs.
-                ivs.add(new NumericBNodeIV<BigdataBNode>(-1));//
-                ivs.add(new NumericBNodeIV<BigdataBNode>(0));//
-                ivs.add(new NumericBNodeIV<BigdataBNode>(1));//
-                ivs.add(new NumericBNodeIV<BigdataBNode>(-52));//
-                ivs.add(new NumericBNodeIV<BigdataBNode>(52));//
-                ivs.add(new NumericBNodeIV<BigdataBNode>(Integer.MAX_VALUE));//
-                ivs.add(new NumericBNodeIV<BigdataBNode>(Integer.MIN_VALUE));//
+                ivs.add(new NumericBNodeIV<BigdataBNode>(-1));
+                ivs.add(new NumericBNodeIV<BigdataBNode>(0));
+                ivs.add(new NumericBNodeIV<BigdataBNode>(1));
+                ivs.add(new NumericBNodeIV<BigdataBNode>(-52));
+                ivs.add(new NumericBNodeIV<BigdataBNode>(52));
+                ivs.add(new NumericBNodeIV<BigdataBNode>(Integer.MAX_VALUE));
+                ivs.add(new NumericBNodeIV<BigdataBNode>(Integer.MIN_VALUE));
 
                 // blank nodes with UUID IDs.
                 for (int i = 0; i < 100; i++) {
@@ -359,8 +359,8 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                 ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null, datatype));
 
                 // xsd:boolean
-                ivs.add(new XSDBooleanIV<BigdataLiteral>(true));//
-                ivs.add(new XSDBooleanIV<BigdataLiteral>(false));//
+                ivs.add(new XSDBooleanIV<BigdataLiteral>(true));
+                ivs.add(new XSDBooleanIV<BigdataLiteral>(false));
 
                 // xsd:byte
                 ivs.add(new XSDNumericIV<BigdataLiteral>((byte)Byte.MIN_VALUE));
@@ -446,43 +446,43 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                 ivs.add(new XSDUnsignedLongIV<BigdataLiteral>(Long.MAX_VALUE));
 
                 // xsd:integer
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)));//
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)));
     
                 // xsd:decimal
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(2.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(2.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-2.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(10.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(11.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(11.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(258.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(3.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)));
                 ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.01)));
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.02)));//
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("1.5")));//
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("1.51")));//
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("-1.5")));//
-                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("-1.51")));//
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.02)));
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("1.5")));
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("1.51")));
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("-1.5")));
+                ivs.add(new XSDDecimalIV<BigdataLiteral>(new BigDecimal("-1.51")));
                 
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("15")));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("151")));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("-15")));//
-                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("-151")));//
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("15")));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("151")));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("-15")));
+                ivs.add(new XSDIntegerIV<BigdataLiteral>(new BigInteger("-151")));
 
                 // byte vocabulary IVs.
                 ivs.add(new VocabURIByteIV<BigdataURI>((byte) Byte.MIN_VALUE));
@@ -537,24 +537,24 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                     final SPO spo17 = new SPO(spo1.getStatementIdentifier(), p1, spo15
                             .getStatementIdentifier(), StatementEnum.Explicit);
 
-                    final IV<?, ?>[] e = {//
-                            new SidIV<BigdataBNode>(spo1),//
-                            new SidIV<BigdataBNode>(spo2),//
-                            new SidIV<BigdataBNode>(spo3),//
-                            new SidIV<BigdataBNode>(spo4),//
-                            new SidIV<BigdataBNode>(spo5),//
-                            new SidIV<BigdataBNode>(spo6),//
-                            new SidIV<BigdataBNode>(spo7),//
-                            new SidIV<BigdataBNode>(spo8),//
-                            new SidIV<BigdataBNode>(spo9),//
-                            new SidIV<BigdataBNode>(spo10),//
-                            new SidIV<BigdataBNode>(spo11),//
-                            new SidIV<BigdataBNode>(spo12),//
-                            new SidIV<BigdataBNode>(spo13),//
-                            new SidIV<BigdataBNode>(spo14),//
-                            new SidIV<BigdataBNode>(spo15),//
-                            new SidIV<BigdataBNode>(spo16),//
-                            new SidIV<BigdataBNode>(spo17),//
+                    final IV<?, ?>[] e = {
+                            new SidIV<BigdataBNode>(spo1),
+                            new SidIV<BigdataBNode>(spo2),
+                            new SidIV<BigdataBNode>(spo3),
+                            new SidIV<BigdataBNode>(spo4),
+                            new SidIV<BigdataBNode>(spo5),
+                            new SidIV<BigdataBNode>(spo6),
+                            new SidIV<BigdataBNode>(spo7),
+                            new SidIV<BigdataBNode>(spo8),
+                            new SidIV<BigdataBNode>(spo9),
+                            new SidIV<BigdataBNode>(spo10),
+                            new SidIV<BigdataBNode>(spo11),
+                            new SidIV<BigdataBNode>(spo12),
+                            new SidIV<BigdataBNode>(spo13),
+                            new SidIV<BigdataBNode>(spo14),
+                            new SidIV<BigdataBNode>(spo15),
+                            new SidIV<BigdataBNode>(spo16),
+                            new SidIV<BigdataBNode>(spo17),
                     };
                     ivs.addAll(Arrays.asList(e));
                 }
@@ -862,19 +862,19 @@ public abstract class AbstractEncodeDecodeMixedIVsTest extends AbstractEncodeDec
                     final XSDStringExtension<BigdataValue> ext = new XSDStringExtension<BigdataValue>(
                             resolver, maxInlineStringLength);
 
-                    final IV<?, ?>[] e = {//
-                    ext.createIV(new LiteralImpl("", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl(" ", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("  ", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("1", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("12", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("123", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("234", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("34", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("4", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("a", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("ab", XSD.STRING)), //
-                            ext.createIV(new LiteralImpl("abc", XSD.STRING)), //
+                    final IV<?, ?>[] e = {
+                    ext.createIV(new LiteralImpl("", XSD.STRING)),
+                            ext.createIV(new LiteralImpl(" ", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("  ", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("1", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("12", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("123", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("234", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("34", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("4", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("a", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("ab", XSD.STRING)),
+                            ext.createIV(new LiteralImpl("abc", XSD.STRING)),
                     };
                     ivs.addAll(Arrays.asList(e));
                 }

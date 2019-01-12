@@ -59,11 +59,11 @@ public class CoordinateDD implements ICoordinate {
         FMT_DECIMAL_DEGREES = new DecimalFormat();
         // DecimalFormatSymbols symbols = new DecimalFormatSymbols(
         // Locale.ENGLISH);
-        //
+
         // // override so that the grouping character looks like a decimal
         // // point.
         // symbols.setGroupingSeparator('.');
-        //
+
         // // override so that the decimal point will not be confused with the
         // // grouping character during parsing.
         // symbols.setDecimalSeparator(':');
@@ -185,7 +185,7 @@ public class CoordinateDD implements ICoordinate {
      * <dd>decimal degrees</dd>
      * </dl>
      */
-    static final String regex_long = //
+    static final String regex_long =
     "([-+]?\\d{1,3}\\.\\d{3,})[�*]?" // decimal degrees longitude.
     ;
 
@@ -201,9 +201,9 @@ public class CoordinateDD implements ICoordinate {
      * @see #regex_lat
      * @see #regex_long
      */
-    static final Pattern pattern_dd = Pattern.compile("^(" + //
-            "(" + regex_lat + "(\\s?[/,]?\\s?)" + regex_long + ")" + //
-            ")$"//
+    static final Pattern pattern_dd = Pattern.compile("^(" +
+            "(" + regex_lat + "(\\s?[/,]?\\s?)" + regex_long + ")" +
+            ")$"
     );
 
     /*

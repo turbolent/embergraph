@@ -804,7 +804,7 @@ public class SplitIndexPartitionTask extends
                      * form locator for the new index partition for this split..
                      */
                     final PartitionLocator locator = new PartitionLocator(pmd
-                            .getPartitionId(),//
+                            .getPartitionId(),
                             /*
                              * The (logical) data service.
                              * 
@@ -817,9 +817,9 @@ public class SplitIndexPartitionTask extends
                              * @todo Once the index partition data is fully
                              * replicated we update the metadata index.
                              */
-                            resourceManager.getDataServiceUUID(),//
-                            pmd.getLeftSeparatorKey(),//
-                            pmd.getRightSeparatorKey()//
+                            resourceManager.getDataServiceUUID(),
+                            pmd.getLeftSeparatorKey(),
+                            pmd.getRightSeparatorKey()
                     );
 
                     locators[i] = locator;
@@ -832,11 +832,11 @@ public class SplitIndexPartitionTask extends
                      */
                     md
                             .setPartitionMetadata(new LocalPartitionMetadata(
-                                    pmd.getPartitionId(),//
+                                    pmd.getPartitionId(),
                                     -1, // Note: Split not allowed during move.
-                                    pmd.getLeftSeparatorKey(),//
-                                    pmd.getRightSeparatorKey(),//
-                                    new IResourceMetadata[] {//
+                                    pmd.getLeftSeparatorKey(),
+                                    pmd.getRightSeparatorKey(),
+                                    new IResourceMetadata[] {
                                             /*
                                              * Resources are (a) the new btree;
                                              * and (b) the new index segment.
@@ -848,7 +848,7 @@ public class SplitIndexPartitionTask extends
 //                                    /*
 //                                     * Note: history is record of the split.
 //                                     */
-//                                    , pmd.getHistory() + summary + " "//
+//                                    , pmd.getHistory() + summary + " "
                             ));
 
                     /*
@@ -921,12 +921,12 @@ public class SplitIndexPartitionTask extends
                  * split.
                  */
                 resourceManager.getFederation().getMetadataService()
-                        .splitIndexPartition(src.getIndexMetadata().getName(),//
-                                new PartitionLocator(//
-                                        oldpmd.getPartitionId(), //
-                                        resourceManager.getDataServiceUUID(), //
-                                        oldpmd.getLeftSeparatorKey(),//
-                                        oldpmd.getRightSeparatorKey()//
+                        .splitIndexPartition(src.getIndexMetadata().getName(),
+                                new PartitionLocator(
+                                        oldpmd.getPartitionId(),
+                                        resourceManager.getDataServiceUUID(),
+                                        oldpmd.getLeftSeparatorKey(),
+                                        oldpmd.getRightSeparatorKey()
                                 ), locators);
 
                 if (INFO)

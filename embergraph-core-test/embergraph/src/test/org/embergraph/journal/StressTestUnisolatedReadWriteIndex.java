@@ -131,7 +131,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
              * increase the number of trials, it attempts to schedule them all
              * concurrently and hits an out of memory error (too many native threads).
              */
-            doConcurrentClientTest(journal,//
+            doConcurrentClientTest(journal,
                 Long.MAX_VALUE,// timeout : MUST BE INFINITE OR WILL HIT FALSE ERRORS.
                 3, // 3,// nresources // 20
                 1, // minLocks

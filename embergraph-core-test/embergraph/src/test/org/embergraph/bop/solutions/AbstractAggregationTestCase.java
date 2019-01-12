@@ -179,7 +179,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> org1 = new Constant<String>("org1");
         final IConstant<String> org2 = new Constant<String>("org2");
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { org }, // select
                 new IValueExpression[] { org }, // groupBy
                 null // having.
@@ -279,7 +279,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> org1 = new Constant<String>("org1");
         final IConstant<String> org2 = new Constant<String>("org2");
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { new Bind(newVar,org) }, // select
                 new IValueExpression[] { org }, // groupBy
                 null // having.
@@ -439,7 +439,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IValueExpression<?> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { org, totalPriceExpr }, // select
                 new IValueExpression[] { org }, // groupBy
                 null // having
@@ -611,7 +611,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
 
         final IValueExpression<?> zExpr = new Bind(z, price12);
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { org, totalPriceExpr, zExpr }, // select
                 new IValueExpression[] { org }, // groupBy
                 null // having
@@ -790,7 +790,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                         new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
                         CompareOp.GT));
         
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { org, totalPriceExpr }, // select
                 new IValueExpression[] { org }, // groupBy
                 new IConstraint[] { totalPriceConstraint } // having
@@ -964,7 +964,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                         new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(5)),
                         CompareOp.GT));
         
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { org, totalPriceExpr }, // select
                 new IValueExpression[] { org }, // groupBy
                 new IConstraint[] { totalPriceConstraint } // having
@@ -1131,7 +1131,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { org, totalPriceExpr }, // select
                 new IValueExpression[] { org }, // groupBy
                 null // having
@@ -1302,7 +1302,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                         new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
                         CompareOp.GT));
         
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { totalPriceExpr }, // select
                 null, // groupBy
                 new IConstraint[] { totalPriceConstraint } // having
@@ -1465,7 +1465,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                         new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(50)),
                         CompareOp.GT));
         
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { totalPriceExpr }, // select
                 null, // groupBy
                 new IConstraint[] { totalPriceConstraint } // having
@@ -1620,7 +1620,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
         
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { totalPriceExpr }, // select
                 null, // groupBy
                 null // having
@@ -1786,7 +1786,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(true/* distinct */, (IValueExpression<IV>) lprice));
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { totalPriceExpr }, // select
                 null, // groupBy
                 null // having
@@ -1964,7 +1964,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IValueExpression<IV> totalCountExpr = new Bind(totalCount,
                 new COUNT(false/* distinct */, star));
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { totalCountExpr }, // select
                 null, // groupBy
                 null // having
@@ -2130,7 +2130,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IValueExpression<IV> totalCountExpr = new Bind(totalCount,
                 new COUNT(true/* distinct */, star));
 
-        final GroupByOp query = newFixture(//
+        final GroupByOp query = newFixture(
                 new IValueExpression[] { totalCountExpr }, // select
                 null, // groupBy
                 null // having
@@ -2331,7 +2331,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                            new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
                            CompareOp.GT));
            
-           final GroupByOp query = newFixture(//
+           final GroupByOp query = newFixture(
                        new IValueExpression[] { totalPriceExpr }, // select
                        null, // groupBy
                        new IConstraint[] { totalPriceConstraint } // having
@@ -2532,7 +2532,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                            new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
                            CompareOp.GT));
            
-           final GroupByOp query = newFixture(//
+           final GroupByOp query = newFixture(
                        new IValueExpression[] { org, totalPriceExpr }, // select
                        new IValueExpression[] { org }, // groupBy
                        new IConstraint[] { totalPriceConstraint } // having
@@ -2741,7 +2741,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
                            new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
                            CompareOp.GT));
            
-           final GroupByOp query = newFixture(//
+           final GroupByOp query = newFixture(
                        new IValueExpression[] { totalPriceExpr, inflatedPriceExpr }, // select
                        null, // groupBy
                        new IConstraint[] { totalPriceConstraint } // having
@@ -2935,7 +2935,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
    //                        new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
    //                        CompareOp.GT));
            
-           final GroupByOp query = newFixture(//
+           final GroupByOp query = newFixture(
                        new IValueExpression[] { org, totalPriceExpr, inflatedPriceExpr }, // select
                        new IValueExpression[] { org }, // groupBy
                        null // having
@@ -3104,7 +3104,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
    
    
            
-           final GroupByOp query = newFixture(//
+           final GroupByOp query = newFixture(
                        new IValueExpression[] { w, sampleVAsS }, // select
                        new IValueExpression[] { w }, // groupBy
                        null // having
@@ -3267,7 +3267,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            
    
            
-           final GroupByOp query = newFixture(//
+           final GroupByOp query = newFixture(
                        new IValueExpression[] { s, w }, // select
                        new IValueExpression[] { s, w }, // groupBy
                        null // having

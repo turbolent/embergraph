@@ -554,10 +554,10 @@ public class PIDStatCollector extends AbstractProcessCollector implements
                  * Issue warning for parsing problems.
                  */
                 
-                log.warn(ex.getMessage() //
-                            + "\nheader: " + header //
-                            + "\n  data: " + data   //
-                            //, ex//
+                log.warn(ex.getMessage()
+                            + "\nheader: " + header
+                            + "\n  data: " + data
+                            //, ex
                             );
                 
             }

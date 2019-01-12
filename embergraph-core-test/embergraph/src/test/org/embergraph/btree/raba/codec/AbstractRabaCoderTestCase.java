@@ -353,17 +353,17 @@ abstract public class AbstractRabaCoderTestCase extends TestCase2 {
         final byte b146 = KeyBuilder.encodeByte(146);
         final byte b207 = KeyBuilder.encodeByte(207);
         
-        final byte[][] a = new byte[][] {//
-        new byte[]{121, b187, b146, b207, 99, 112, 24, 116},//
-        new byte[]{121, b187, b146, b207, 99, 112, 43, 68},//
-        new byte[]{121, b187, b146, b207, 99, 112, 46, 78},//
-        new byte[]{121, b187, b146, b207, 99, 112, 54, KeyBuilder.encodeByte(176)},//
-        new byte[]{121, b187, b146, b207, 99, 112, 54, KeyBuilder.encodeByte(236)},//
-        new byte[]{121, b187, b146, b207, 99, 112, 55, KeyBuilder.encodeByte(209)},//
-        new byte[]{121, b187, b146, b207, 99, 112, 62, 85},//
-        new byte[]{121, b187, b146, b207, 99, 112, 63, KeyBuilder.encodeByte(238)},//
-        new byte[]{121, b187, b146, b207, 99, 112, 71, 124},//
-        new byte[]{121, b187, b146, b207, 99, 112, 73, 49}//
+        final byte[][] a = new byte[][] {
+        new byte[]{121, b187, b146, b207, 99, 112, 24, 116},
+        new byte[]{121, b187, b146, b207, 99, 112, 43, 68},
+        new byte[]{121, b187, b146, b207, 99, 112, 46, 78},
+        new byte[]{121, b187, b146, b207, 99, 112, 54, KeyBuilder.encodeByte(176)},
+        new byte[]{121, b187, b146, b207, 99, 112, 54, KeyBuilder.encodeByte(236)},
+        new byte[]{121, b187, b146, b207, 99, 112, 55, KeyBuilder.encodeByte(209)},
+        new byte[]{121, b187, b146, b207, 99, 112, 62, 85},
+        new byte[]{121, b187, b146, b207, 99, 112, 63, KeyBuilder.encodeByte(238)},
+        new byte[]{121, b187, b146, b207, 99, 112, 71, 124},
+        new byte[]{121, b187, b146, b207, 99, 112, 73, 49}
         };
         
         if(rabaCoder.isKeyCoder()) {
@@ -1188,16 +1188,16 @@ abstract public class AbstractRabaCoderTestCase extends TestCase2 {
             if (count[i] == 0)
                 continue;
             
-            System.out.println(//
+            System.out.println(
                     op.getName(i) + "\t"
                     + count[i]
                     + "\t"
                     + elapsed[i]
                     + "\t"
-                    + percentF.format(elapsed[i] / totalNS)//
+                    + percentF.format(elapsed[i] / totalNS)
                     + "\t"
                     + (elapsed[i] == 0 ? "N/A" : rateF.format(count[i]
-                                    / (elapsed[i] * scalingFactor))) //
+                                    / (elapsed[i] * scalingFactor)))
                     );
 
         }

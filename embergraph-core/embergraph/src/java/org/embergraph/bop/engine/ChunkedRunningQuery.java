@@ -301,7 +301,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
                         : Integer.MAX_VALUE;
 
                 // Create a new queue using [lock].
-                queue = new org.embergraph.jsr166.LinkedBlockingDeque<IChunkMessage<IBindingSet>>(//
+                queue = new org.embergraph.jsr166.LinkedBlockingDeque<IChunkMessage<IBindingSet>>(
                         capacity,
                         lock);
 
@@ -676,9 +676,9 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
                  * 
                  * @see https://sourceforge.net/apps/trac/bigdata/ticket/475
                  */
-                final IMultiSourceCloseableIterator<IBindingSet[]> source = new MultiSourceSequentialCloseableIterator<IBindingSet[]>(//
-    //                  accepted.remove(0).getChunkAccessor().iterator()//
-                        firstChunk.getChunkAccessor().iterator()//
+                final IMultiSourceCloseableIterator<IBindingSet[]> source = new MultiSourceSequentialCloseableIterator<IBindingSet[]>(
+    //                  accepted.remove(0).getChunkAccessor().iterator()
+                        firstChunk.getChunkAccessor().iterator()
                         );
     //            for (IChunkMessage<IBindingSet> msg : accepted) {
     //          source.add(msg.getChunkAccessor().iterator());
@@ -989,7 +989,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
         final IHaltOpMessage msg = new HaltOpMessage(getQueryId(), t.bopId,
                 t.partitionId, serviceId, cause, //t.sinkId,
                 t.sinkMessagesOut.get(), //t.altSinkId,
-                t.altSinkMessagesOut.get(),//
+                t.altSinkMessagesOut.get(),
                 t.context.getStats());
 
         if (asynchronousHaltMessage) {
@@ -1105,12 +1105,12 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
          */
         @Override
         public String toString() {
-            return "ChunkTask" + //
-                    "{query=" + getQueryId() + //
-                    ",bopId=" + bopId + //
-                    ",partitionId=" + partitionId + //
-                    ",sinkId=" + sinkId + //
-                    ",altSinkId=" + altSinkId + //
+            return "ChunkTask" +
+                    "{query=" + getQueryId() +
+                    ",bopId=" + bopId +
+                    ",partitionId=" + partitionId +
+                    ",sinkId=" + sinkId +
+                    ",altSinkId=" + altSinkId +
                     "}";
         }
 
@@ -1319,9 +1319,9 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
          *         target that sink.
          */
         private IBlockingBuffer<IBindingSet[]> newBuffer(final PipelineOp op,
-                final int sinkId,//
-                final AtomicInteger sinkMessagesOut, //
-                final BOpStats stats//
+                final int sinkId,
+                final AtomicInteger sinkMessagesOut,
+                final BOpStats stats
                 ) {
 
             return new HandleChunkBuffer(ChunkedRunningQuery.this, bopId,

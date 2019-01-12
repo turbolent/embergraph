@@ -273,12 +273,12 @@ public class TestTicket473 extends TestCase {
 
             try {
 
-                conn.addStatement(//
-                        stmt.getSubject(), //
-                        stmt.getPredicate(), //
-                        stmt.getObject(), //
+                conn.addStatement(
+                        stmt.getSubject(),
+                        stmt.getPredicate(),
+                        stmt.getObject(),
                         (Resource[]) (stmt.getContext() == null ?  defaultContexts
-                                : new Resource[] { stmt.getContext() })//
+                                : new Resource[] { stmt.getContext() })
                         );
 
             } catch (SailException e) {

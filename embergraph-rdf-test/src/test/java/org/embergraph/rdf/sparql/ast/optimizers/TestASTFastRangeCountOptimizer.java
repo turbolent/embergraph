@@ -267,7 +267,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
 													.stringValue(),
 											// expression list
 											new VarNode(s), new VarNode(p),
-											new VarNode(o)//
+											new VarNode(o)
 									), varNode(w) // BIND(COUNT() as ?w)
 							)),
 							where(newStatementPatternNode(new VarNode(s),
@@ -281,7 +281,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
 													.stringValue(),
 											// expression list
 											new VarNode(s), new VarNode(p),
-											new VarNode(o)//
+											new VarNode(o)
 									), varNode(w) // BIND(COUNT() as ?w)
 							)),
 							where(newStatementPatternNode(new VarNode(s),
@@ -352,7 +352,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
 											FunctionRegistry.COUNT,
 											// expression list
 											new VarNode(s), new VarNode(p),
-											new VarNode(o)//
+											new VarNode(o)
 									), varNode(w) // BIND(COUNT() as ?w)
 							)),
 							where(newStatementPatternNode(new VarNode(s),

@@ -242,7 +242,7 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
 
         assert buf.pos() == buf.limit() : buf.toString() + " : src=" + raba;
 
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         return new CodedRabaImpl(slice, isKeys, size, capacity, CURRENT_VERSION);
@@ -564,8 +564,8 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
                         - aoff;
 
                 // compare actual data vs probe key.
-                final int tmp = BytesUtil.compareBytesWithLenAndOffset(//
-                        data.off() + aoff, alen, data.array(), //
+                final int tmp = BytesUtil.compareBytesWithLenAndOffset(
+                        data.off() + aoff, alen, data.array(),
                         0, key.length, key);
 
                 if (tmp < 0) {

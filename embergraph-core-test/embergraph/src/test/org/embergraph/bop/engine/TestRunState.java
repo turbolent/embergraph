@@ -293,10 +293,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -329,10 +329,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -402,18 +402,18 @@ public class TestRunState extends TestCase2 {
         final int joinId2 = 4;
         
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(PipelineOp.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(PipelineOp.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
                 
         final PipelineOp join1Op = new MockPipelineOp(new BOp[] { startOp },
-                new NV(PipelineOp.Annotations.BOP_ID, joinId1)//
+                new NV(PipelineOp.Annotations.BOP_ID, joinId1)
         );
 
-        final PipelineOp join2Op = new MockPipelineOp(new BOp[] { join1Op }, //
-                new NV(PipelineOp.Annotations.BOP_ID, joinId2)//
+        final PipelineOp join2Op = new MockPipelineOp(new BOp[] { join1Op },
+                new NV(PipelineOp.Annotations.BOP_ID, joinId2)
         );
 
         final PipelineOp query = join2Op;
@@ -600,24 +600,24 @@ public class TestRunState extends TestCase2 {
         final int orderId = 6;
         
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(PipelineOp.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(PipelineOp.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
         
         final PipelineOp join1Op = new MockPipelineOp(new BOp[] { startOp },
-                new NV(PipelineOp.Annotations.BOP_ID, joinId1)//
+                new NV(PipelineOp.Annotations.BOP_ID, joinId1)
         );
 
-        final PipelineOp join2Op = new MockPipelineOp(new BOp[] { join1Op }, //
-                new NV(PipelineOp.Annotations.BOP_ID, joinId2)//
+        final PipelineOp join2Op = new MockPipelineOp(new BOp[] { join1Op },
+                new NV(PipelineOp.Annotations.BOP_ID, joinId2)
         );
 
-        final PipelineOp orderOp = new MockPipelineOp(new BOp[] { join2Op }, //
-                new NV(PipelineOp.Annotations.BOP_ID, orderId),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1) //
+        final PipelineOp orderOp = new MockPipelineOp(new BOp[] { join2Op },
+                new NV(PipelineOp.Annotations.BOP_ID, orderId),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)
         );
 
         final PipelineOp query = orderOp;
@@ -917,23 +917,23 @@ public class TestRunState extends TestCase2 {
         final int countId = 6;
 
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(PipelineOp.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(PipelineOp.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp join1Op = new MockPipelineOp(new BOp[] { startOp },
-                new NV(PipelineOp.Annotations.BOP_ID, joinId1)//
+                new NV(PipelineOp.Annotations.BOP_ID, joinId1)
         );
 
-        final PipelineOp join2Op = new MockPipelineOp(new BOp[] { join1Op }, //
-                new NV(PipelineOp.Annotations.BOP_ID, joinId2)//
+        final PipelineOp join2Op = new MockPipelineOp(new BOp[] { join1Op },
+                new NV(PipelineOp.Annotations.BOP_ID, joinId2)
         );
 
-        final PipelineOp countOp = new MockPipelineOp(new BOp[] { join2Op }, //
-                new NV(PipelineOp.Annotations.BOP_ID, countId),//
-                new NV(PipelineOp.Annotations.PIPELINED, false),//
+        final PipelineOp countOp = new MockPipelineOp(new BOp[] { join2Op },
+                new NV(PipelineOp.Annotations.BOP_ID, countId),
+                new NV(PipelineOp.Annotations.PIPELINED, false),
                 new NV(PipelineOp.Annotations.MAX_MEMORY, 0)
         );
 
@@ -1241,10 +1241,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -1344,17 +1344,17 @@ public class TestRunState extends TestCase2 {
         final int otherId = 2;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp otherOp = new StartOp(new BOp[] { startOp },
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, otherId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, otherId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
 
         final PipelineOp query = otherOp;
@@ -1490,10 +1490,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -1563,10 +1563,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -1642,10 +1642,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -1728,10 +1728,10 @@ public class TestRunState extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = startOp;
@@ -1774,7 +1774,7 @@ public class TestRunState extends TestCase2 {
         // step2 : start operator.
         runState.startOp(new StartOpMessage(queryId, startId,
                 -1/* partitionId */, serviceId, 1/* nmessages */
-                //,startOp.getEvaluationContext(),//
+                //,startOp.getEvaluationContext(),
                 //,startOp.isLastPassRequested()
                 ));
 
@@ -1834,26 +1834,26 @@ public class TestRunState extends TestCase2 {
         final int orderId = 3;
 
         final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp otherOp = new StartOp(new BOp[] { startOp },
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, otherId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, otherId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
 
         final PipelineOp orderOp = new StartOp(new BOp[] { otherOp },
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, orderId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, orderId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.LAST_PASS,true),//
-                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.LAST_PASS,true),
+                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
                         }));
 
         final PipelineOp query = orderOp;
@@ -2089,28 +2089,28 @@ public class TestRunState extends TestCase2 {
 //        final int orderId = 3;
 //
 //        final PipelineOp startOp = new StartOp(new BOp[] {}, NV
-//                .asMap(new NV[] {//
-//                new NV(Predicate.Annotations.BOP_ID, startId),//
+//                .asMap(new NV[] {
+//                new NV(Predicate.Annotations.BOP_ID, startId),
 //                new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-//                        BOpEvaluationContext.CONTROLLER),//
+//                        BOpEvaluationContext.CONTROLLER),
 //                }));
 //
 //        // Note: For this test, we will simulate dropping all solutions which 
 //        // are passed to [otherOp].
 //        final PipelineOp otherOp = new StartOp(new BOp[] { startOp },
-//                NV.asMap(new NV[] {//
-//                        new NV(Predicate.Annotations.BOP_ID, otherId),//
+//                NV.asMap(new NV[] {
+//                        new NV(Predicate.Annotations.BOP_ID, otherId),
 //                        new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-//                                BOpEvaluationContext.CONTROLLER),//
+//                                BOpEvaluationContext.CONTROLLER),
 //                        }));
 //
 //        final PipelineOp orderOp = new StartOp(new BOp[] { otherOp },
-//                NV.asMap(new NV[] {//
-//                        new NV(Predicate.Annotations.BOP_ID, orderId),//
+//                NV.asMap(new NV[] {
+//                        new NV(Predicate.Annotations.BOP_ID, orderId),
 //                        new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-//                                BOpEvaluationContext.CONTROLLER),//
-//                        new NV(PipelineOp.Annotations.LAST_PASS,true),//
-//                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),//
+//                                BOpEvaluationContext.CONTROLLER),
+//                        new NV(PipelineOp.Annotations.LAST_PASS,true),
+//                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
 //                        }));
 //
 //        final PipelineOp query = orderOp;
@@ -2382,9 +2382,9 @@ public class TestRunState extends TestCase2 {
      * @param expected
      * @param actual
      */
-    private void assertEquals(//
-            final Map<Integer, AtomicLong> expected,//
-            final Map<Integer, AtomicLong> actual//
+    private void assertEquals(
+            final Map<Integer, AtomicLong> expected,
+            final Map<Integer, AtomicLong> actual
             ) {
         
         assertEquals("", expected, actual);
@@ -2451,9 +2451,9 @@ public class TestRunState extends TestCase2 {
      * @param expected
      * @param actual
      */
-    private <T> void assertSameMap(//
-            final Map<Integer, T> expected,//
-            final Map<Integer, T> actual//
+    private <T> void assertSameMap(
+            final Map<Integer, T> expected,
+            final Map<Integer, T> actual
             ) {
         
         assertEquals("", expected, actual);

@@ -129,7 +129,7 @@ public class TestPredicateAccessPath extends TestCase2 {
         rel.create();
 
         // data to insert.
-        final E[] a = {//
+        final E[] a = {
                 new E("John", "Mary"),// 
                 new E("Mary", "Paul"),// 
                 new E("Paul", "Leon"),// 
@@ -188,12 +188,12 @@ public class TestPredicateAccessPath extends TestCase2 {
         // visit that access path, verifying the elements and order.
         if (log.isInfoEnabled())
             log.info("accessPath=" + accessPath);
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("John", "Mary"),// 
                 new E("Leon", "Paul"),// 
-                new E("Mary", "John"),//
+                new E("Mary", "John"),
                 new E("Mary", "Paul"),// 
-                new E("Paul", "Leon"),//
+                new E("Paul", "Leon"),
         };
         final IChunkedOrderedIterator<E> itr = accessPath.iterator();
         try {
@@ -232,7 +232,7 @@ public class TestPredicateAccessPath extends TestCase2 {
         if (log.isInfoEnabled())
             log.info("accessPath=" + accessPath);
         
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("Mary", "John"),// 
                 new E("Mary", "Paul"),// 
         };
@@ -261,13 +261,13 @@ public class TestPredicateAccessPath extends TestCase2 {
 
         final Predicate<E> pred = new Predicate<E>(new IVariableOrConstant[] {
                 new Constant<String>("Mary"), Var.var("value") }, 
-                NV.asMap(new NV[] {//
-                        new NV(Annotations.RELATION_NAME,new String[]{namespace}),//
-                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
-                        new NV(Annotations.REMOTE_ACCESS_PATH, false),//
+                NV.asMap(new NV[] {
+                        new NV(Annotations.RELATION_NAME,new String[]{namespace}),
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                        new NV(Annotations.REMOTE_ACCESS_PATH, false),
                 }));
 
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("Mary", "John"),// 
                 new E("Mary", "Paul"),// 
         };
@@ -339,13 +339,13 @@ public class TestPredicateAccessPath extends TestCase2 {
         };
         
         final Predicate<E> pred = new Predicate<E>(new IVariableOrConstant[] {
-                x, y }, NV.asMap(new NV[] {//
-                new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
-                        new NV(Annotations.INDEX_LOCAL_FILTER, filter),//
+                x, y }, NV.asMap(new NV[] {
+                new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                        new NV(Annotations.INDEX_LOCAL_FILTER, filter),
                 }));
 
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("Mary", "John"),// 
                 new E("Mary", "Paul"),// 
         };
@@ -438,14 +438,14 @@ public class TestPredicateAccessPath extends TestCase2 {
                 new BOp[] { stripper /* filters */}, null/* annotations */);
 
         final Predicate<E> pred = new Predicate<E>(new IVariableOrConstant[] {
-                x, y }, NV.asMap(new NV[] {//
-                new NV(Annotations.RELATION_NAME, new String[] { namespace }),//
-                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
-                        new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter),//
+                x, y }, NV.asMap(new NV[] {
+                new NV(Annotations.RELATION_NAME, new String[] { namespace }),
+                        new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                        new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter),
                 }));
 
         // the distinct values from the name column in index order.
-        final E[] expected = new E[] {//
+        final E[] expected = new E[] {
                 new E("John", ""),// 
                 new E("Leon", ""),// 
                 new E("Mary", ""),// 

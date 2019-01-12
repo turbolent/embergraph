@@ -859,14 +859,14 @@ public class ConcurrencyManager implements IConcurrencyManager {
                 queue = new ArrayBlockingQueue<Runnable>(
                         writeServiceQueueCapacity);
             }
-            writeService = new WriteExecutorService(//
-                    resourceManager,//
-                    writeServiceCorePoolSize,//
-                    synchronousQueue?Integer.MAX_VALUE:writeServiceMaximumPoolSize,//
+            writeService = new WriteExecutorService(
+                    resourceManager,
+                    writeServiceCorePoolSize,
+                    synchronousQueue?Integer.MAX_VALUE:writeServiceMaximumPoolSize,
                     keepAliveTime, TimeUnit.MILLISECONDS, // keepAliveTime
-                    queue, //
-                    new DaemonThreadFactory(getClass().getName()+".writeService"), //
-                    groupCommitTimeout,//
+                    queue,
+                    new DaemonThreadFactory(getClass().getName()+".writeService"),
+                    groupCommitTimeout,
                     overflowLockRequestTimeout
             );
 

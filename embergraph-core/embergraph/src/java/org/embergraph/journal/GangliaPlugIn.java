@@ -259,11 +259,11 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
             // Note: Factory is extensible (application can add its own
             // delegates).
             final GangliaMetadataFactory metadataFactory = new GangliaMetadataFactory(
-                    new DefaultMetadataFactory(//
-                            defaultUnits,//
-                            defaultSlope,//
-                            defaultTMax,//
-                            defaultDMax//
+                    new DefaultMetadataFactory(
+                            defaultUnits,
+                            defaultSlope,
+                            defaultTMax,
+                            defaultDMax
                     ));
 
             /*
@@ -278,18 +278,18 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
             // The embedded ganglia peer.
             final BigdataGangliaService gangliaService = new BigdataGangliaService(
-                    hostName, //
-                    serviceName, //
-                    metricsServers,//
-                    listenGroup,//
-                    listenPort, //
+                    hostName,
+                    serviceName,
+                    metricsServers,
+                    listenGroup,
+                    listenPort,
                     listen,// listen
                     report,// report
                     false,// mock,
-                    quietPeriod, //
-                    initialDelay, //
-                    heartbeatInterval,//
-                    monitoringInterval, //
+                    quietPeriod,
+                    initialDelay,
+                    heartbeatInterval,
+                    monitoringInterval,
                     defaultDMax,// globalDMax
                     metadataFactory);
 

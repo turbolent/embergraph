@@ -220,7 +220,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
 
             Rule rule = new MyRuleFastClosure6("myFastClosure6", store
                     .getSPORelation().getNamespace(), null/* focusStore */,
-                    vocab.getConstant(RDFS.SUBPROPERTYOF), //
+                    vocab.getConstant(RDFS.SUBPROPERTYOF),
                     vocab.getConstant(RDFS.RANGE), R);
             
             applyRule(store, rule, -1/*@todo 2? solutionCount*/,1/*mutationCount*/);

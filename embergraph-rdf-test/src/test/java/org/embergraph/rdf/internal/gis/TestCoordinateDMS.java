@@ -79,7 +79,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
      * @todo test ctor in all quadrants.
      */
     public void test_ctor() throws ParseException {
-        CoordinateDMS c = new CoordinateDMS(//
+        CoordinateDMS c = new CoordinateDMS(
                 32, 18, 231,// northSouth
                 -122, -36, -525 // eastWest
         );
@@ -99,11 +99,11 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
      * @todo test rounding in all quadrants.
      */
     public void test_roundSeconds() {
-        CoordinateDMS c = new CoordinateDMS(//
+        CoordinateDMS c = new CoordinateDMS(
                 32, 18, 231,// northSouth
                 -122, -36, -525 // eastWest
         );
-        CoordinateDMS c1 = new CoordinateDMS(//
+        CoordinateDMS c1 = new CoordinateDMS(
                 32, 18, 230,// northSouth
                 -122, -36, -530 // eastWest
         );
@@ -116,11 +116,11 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
      * @todo test rounding in all quadrants.
      */
     public void test_roundMinutes() {
-        CoordinateDMS c = new CoordinateDMS(//
+        CoordinateDMS c = new CoordinateDMS(
                 32, 18, 231,// northSouth
                 -122, -36, -525 // eastWest
         );
-        CoordinateDMS expected = new CoordinateDMS(//
+        CoordinateDMS expected = new CoordinateDMS(
                 32, 18, 0,// northSouth
                 -122, -37, 0 // eastWest
         );
@@ -399,9 +399,9 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // CoordinateDMS#regex_latLong_minutes}.
     // */
     // public void test_regex_latLong_minutes() {
-    //
+
     // Pattern p = Pattern.compile(CoordinateDMS.regex_latLong_minutes);
-    //
+
     // {
     //            
     // String text = "3218N/12236W";
@@ -413,7 +413,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // {
     //            
     // String text = "3218N / 12236W";
@@ -425,7 +425,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // {
     //            
     // String text = "3218N12236W";
@@ -437,7 +437,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // {
     //            
     // String text = "3218N 12236W";
@@ -449,7 +449,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // }
     //    
     // /**
@@ -459,7 +459,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // public void test_regex_latLong_seconds() {
     //        
     // Pattern p = Pattern.compile(CoordinateDMS.regex_latLong_seconds);
-    //
+
     // {
     //            
     // String text = "321823N/1223652W";
@@ -471,7 +471,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // {
     //            
     // String text = "321823N / 1223652W";
@@ -483,7 +483,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // {
     //            
     // String text = "321823N 1223652W";
@@ -495,7 +495,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // {
     //            
     // String text = "321823N1223652W";
@@ -507,7 +507,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // assertEquals("W",m.group(6));
     //            
     // }
-    //
+
     // }
     /**
      * Test groups satisified by {@link CoordinateDMS#pattern_dms1}.
@@ -534,7 +534,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
      * @throws ParseException
      */
     public void test_parse01() throws ParseException {
-        CoordinateDMS c = new CoordinateDMS(//
+        CoordinateDMS c = new CoordinateDMS(
                 32, 18, 231,// northSouth
                 -122, -36, -525 // eastWest
         );
@@ -545,7 +545,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
         assertEquals(c, CoordinateDMS
                 .parse("32 * 18 ' 23.1 \" N 122 * 36 ' 52.5 \" W"));
         // @todo accept "deg" for degrees - this will change the group indices.
-        //
+
         // assertEquals(c, CoordinateDMS.parse("32 deg 18' 23.1\" N 122� 36'
         // 52.5\" W"));
         /*
@@ -622,45 +622,45 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // * Verify that 180W (-18000000) is normalized to 180E by the constructor.
     // */
     // public void test_ctor_180W() {
-    //
+
     // CoordinateDD c = new CoordinateDD(0, -18000000);
     //        
     // assertEquals(c.eastWest, 18000000);
     //        
     // }
-    //
+
     // /**
     // * Test for correct rejection of decimal degrees that are out of range.
     // */
     // public void test_ctor_correctRejection() {
-    //
+
     // try {
     // new CoordinateDD(9000001, 0);
     // fail("Expecting " + IllegalArgumentException.class);
     // } catch (IllegalArgumentException ex) {
     // System.err.println("Ignoring expected exception: " + ex);
     // }
-    //
+
     // try {
     // new CoordinateDD(-9000001, 0);
     // fail("Expecting " + IllegalArgumentException.class);
     // } catch (IllegalArgumentException ex) {
     // System.err.println("Ignoring expected exception: " + ex);
     // }
-    //
+
     // try {
     // new CoordinateDD(0, 18000001);
     // fail("Expecting " + IllegalArgumentException.class);
     // } catch (IllegalArgumentException ex) {
     // System.err.println("Ignoring expected exception: " + ex);
     // }
-    //
+
     // try {
     // new CoordinateDD(0, -18000001);
     // fail("Expecting " + IllegalArgumentException.class);
     // } catch (IllegalArgumentException ex) {
     // System.err.println("Ignoring expected exception: " + ex);
     // }
-    //
+
     // }
 }

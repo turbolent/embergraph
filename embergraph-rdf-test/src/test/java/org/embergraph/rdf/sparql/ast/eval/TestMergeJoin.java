@@ -116,7 +116,7 @@ public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_merge_join_01a() throws Exception {
 
-        final ASTContainer astContainer = new TestHelper(//
+        final ASTContainer astContainer = new TestHelper(
                 "merge-join-01a", // testURI,
                 "merge-join-01a.rq",// queryFileURL
                 "merge-join-01.trig",// dataFileURL

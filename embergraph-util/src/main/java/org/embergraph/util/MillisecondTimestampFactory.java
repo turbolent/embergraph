@@ -187,9 +187,9 @@ public class MillisecondTimestampFactory {
 
         //        // spin looking for a distinct timestamp.
         //        for(int i=0; i<1000 && timestamp == lastMillisTime; i++) {
-        //
+
         //            timestamp = System.currentTimeMillis();
-        //
+
         //        }
 
         // if not distinct, then sleep waiting for a distinct timestamp.

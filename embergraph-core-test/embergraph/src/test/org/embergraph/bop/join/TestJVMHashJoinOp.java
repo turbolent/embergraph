@@ -72,16 +72,16 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         
         final Map<String,Object> tmp = NV.asMap(
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER), //
-                new NV(Predicate.Annotations.BOP_ID, joinId),//
-                new NV(PipelineJoin.Annotations.PREDICATE, predOp),//
-                new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-//                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.PIPELINED, false),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(Predicate.Annotations.BOP_ID, joinId),
+                new NV(PipelineJoin.Annotations.PREDICATE, predOp),
+                new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+//                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.PIPELINED, false),
                 new NV(NamedSetAnnotations.NAMED_SET_REF,
                         NamedSolutionSetRefUtility.newInstance(queryId,
-                                getName(), joinVars))//
+                                getName(), joinVars))
                 );
 
         if (annotations != null) {
@@ -121,25 +121,25 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
 
         final Predicate<IV> pred = new Predicate<IV>(new IVariableOrConstant[] {
                 new Constant<String>("Mary"), Var.var("x") }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { setup.spoNamespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { setup.spoNamespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                 }));
         
         // w/o variables.
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-//                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+//                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.CONTROLLER),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                            namedSet,//
+                                    BOpEvaluationContext.CONTROLLER),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalStateException.class);
         } catch (IllegalStateException ex) {
@@ -149,15 +149,15 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // bad evaluation context.
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.ANY),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                            namedSet,//
+                                    BOpEvaluationContext.ANY),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                            namedSet,
                     }));
             fail("Expecting: " + UnsupportedOperationException.class);
         } catch (UnsupportedOperationException ex) {
@@ -167,15 +167,15 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // missing predicate.
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-//                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                            namedSet,//
+                                    BOpEvaluationContext.SHARDED),
+//                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalStateException.class);
         } catch (IllegalStateException ex) {
@@ -185,15 +185,15 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // maxParallel not set to ONE (1).
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 2),//
-                            namedSet,//
+                                    BOpEvaluationContext.SHARDED),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 2),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -203,17 +203,17 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // maxMemory is specified.
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                            namedSet,//
+                                    BOpEvaluationContext.SHARDED),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                            namedSet,
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
+                                    Bytes.megabyte),
                     }));
             fail("Expecting: " + UnsupportedOperationException.class);
         } catch (UnsupportedOperationException ex) {
@@ -223,15 +223,15 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // must be at once evaluation (pipelined:=true here).
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.CONTROLLER),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                            namedSet,//
+                                    BOpEvaluationContext.CONTROLLER),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                            namedSet,
                     }));
             fail("Expecting: " + UnsupportedOperationException.class);
         } catch (UnsupportedOperationException ex) {
@@ -241,15 +241,15 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
                 
         // w/o namedSet.
         try {
-            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new JVMHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.CONTROLLER),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.PIPELINED, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-//                            namedSet,//
+                                    BOpEvaluationContext.CONTROLLER),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.PIPELINED, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+//                            namedSet,
                     }));
             fail("Expecting: " + IllegalStateException.class);
         } catch (IllegalStateException ex) {

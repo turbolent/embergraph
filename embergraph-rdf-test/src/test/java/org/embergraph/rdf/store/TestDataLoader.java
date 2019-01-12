@@ -367,41 +367,41 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
 			final File failFile = new File(tmpDir, "fail.ttl");
 			{
 
-				final String goodData = ""+//
-				"@prefix bd: <http://www.embergraph.org/> .\n"+//
-				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+//
-				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+//
-				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+//
-				"bd:Mike rdf:type foaf:Person .\n"+//
-				"bd:Bryan rdf:type foaf:Person .\n"+//
-				"bd:Martyn rdf:type foaf:Person .\n"+//
-				"bd:Mike rdfs:label \"Mike\" .\n"+//
-				"bd:Bryan rdfs:label \"Bryan\" .\n"+//
-				"bd:DC rdfs:label \"DC\" .\n"+//
-				"bd:Mike foaf:knows bd:Bryan .\n"+//
-				"bd:Bryan foaf:knows bd:Mike .\n"+//
-				"bd:Bryan foaf:knows bd:Martyn .\n"+//
-				"bd:Martyn foaf:knows bd:Bryan .\n"+//
+				final String goodData = ""+
+				"@prefix bd: <http://www.embergraph.org/> .\n"+
+				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+
+				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+
+				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+
+				"bd:Mike rdf:type foaf:Person .\n"+
+				"bd:Bryan rdf:type foaf:Person .\n"+
+				"bd:Martyn rdf:type foaf:Person .\n"+
+				"bd:Mike rdfs:label \"Mike\" .\n"+
+				"bd:Bryan rdfs:label \"Bryan\" .\n"+
+				"bd:DC rdfs:label \"DC\" .\n"+
+				"bd:Mike foaf:knows bd:Bryan .\n"+
+				"bd:Bryan foaf:knows bd:Mike .\n"+
+				"bd:Bryan foaf:knows bd:Martyn .\n"+
+				"bd:Martyn foaf:knows bd:Bryan .\n"+
 				"";
 
 				writeOnFile(goodFile, goodData);
 				
 				// Note: has a Literal in the Subject position.
-				final String failData = ""+//
-				"@prefix bd: <http://www.embergraph.org/> .\n"+//
-				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+//
-				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+//
-				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+//
-				"\"Mike\" rdf:type foaf:Person .\n"+//
-				"bd:Bryan rdf:type foaf:Person .\n"+//
-				"bd:Martyn rdf:type foaf:Person .\n"+//
-				"bd:Mike rdfs:label \"Mike\" .\n"+//
-				"bd:Bryan rdfs:label \"Bryan\" .\n"+//
-				"bd:DC rdfs:label \"DC\" .\n"+//
-				"bd:Mike foaf:knows bd:Bryan .\n"+//
-				"bd:Bryan foaf:knows bd:Mike .\n"+//
-				"bd:Bryan foaf:knows bd:Martyn .\n"+//
-				"bd:Martyn foaf:knows bd:Bryan .\n"+//
+				final String failData = ""+
+				"@prefix bd: <http://www.embergraph.org/> .\n"+
+				"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n"+
+				"@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"+
+				"@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n"+
+				"\"Mike\" rdf:type foaf:Person .\n"+
+				"bd:Bryan rdf:type foaf:Person .\n"+
+				"bd:Martyn rdf:type foaf:Person .\n"+
+				"bd:Mike rdfs:label \"Mike\" .\n"+
+				"bd:Bryan rdfs:label \"Bryan\" .\n"+
+				"bd:DC rdfs:label \"DC\" .\n"+
+				"bd:Mike foaf:knows bd:Bryan .\n"+
+				"bd:Bryan foaf:knows bd:Mike .\n"+
+				"bd:Bryan foaf:knows bd:Martyn .\n"+
+				"bd:Martyn foaf:knows bd:Bryan .\n"+
 				"";
 
 				writeOnFile(failFile, failData);

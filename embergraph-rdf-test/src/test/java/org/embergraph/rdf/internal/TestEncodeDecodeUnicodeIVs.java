@@ -88,19 +88,19 @@ public class TestEncodeDecodeUnicodeIVs extends
                     }
                 }, maxInlineStringLength);
         
-        final IV<?, ?>[] e = {//
-                ext.createIV(new LiteralImpl("", XSD.STRING)), //
-                ext.createIV(new LiteralImpl(" ", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("  ", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("1", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("12", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("123", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("234", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("34", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("4", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("a", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("ab", XSD.STRING)), //
-                ext.createIV(new LiteralImpl("abc", XSD.STRING)), //
+        final IV<?, ?>[] e = {
+                ext.createIV(new LiteralImpl("", XSD.STRING)),
+                ext.createIV(new LiteralImpl(" ", XSD.STRING)),
+                ext.createIV(new LiteralImpl("  ", XSD.STRING)),
+                ext.createIV(new LiteralImpl("1", XSD.STRING)),
+                ext.createIV(new LiteralImpl("12", XSD.STRING)),
+                ext.createIV(new LiteralImpl("123", XSD.STRING)),
+                ext.createIV(new LiteralImpl("234", XSD.STRING)),
+                ext.createIV(new LiteralImpl("34", XSD.STRING)),
+                ext.createIV(new LiteralImpl("4", XSD.STRING)),
+                ext.createIV(new LiteralImpl("a", XSD.STRING)),
+                ext.createIV(new LiteralImpl("ab", XSD.STRING)),
+                ext.createIV(new LiteralImpl("abc", XSD.STRING)),
         };
 
         doEncodeDecodeTest(e);
@@ -117,12 +117,12 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_URI() {
         
-        final IV<?, ?>[] e = {//
-                new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")),//
-                new FullyInlineURIIV<BigdataURI>(RDF.TYPE),//
-                new FullyInlineURIIV<BigdataURI>(RDF.SUBJECT),//
-                new FullyInlineURIIV<BigdataURI>(RDF.BAG),//
-                new FullyInlineURIIV<BigdataURI>(RDF.OBJECT),//
+        final IV<?, ?>[] e = {
+                new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")),
+                new FullyInlineURIIV<BigdataURI>(RDF.TYPE),
+                new FullyInlineURIIV<BigdataURI>(RDF.SUBJECT),
+                new FullyInlineURIIV<BigdataURI>(RDF.BAG),
+                new FullyInlineURIIV<BigdataURI>(RDF.OBJECT),
         };
 
         doEncodeDecodeTest(e);
@@ -139,19 +139,19 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_Extension_URI() {
 
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new URIExtensionIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>(
                                 "http://www.example.com/"),
-                        new VocabURIByteIV<BigdataURI>((byte) 1)),//
+                        new VocabURIByteIV<BigdataURI>((byte) 1)),
                 new URIExtensionIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>(
                                 "http://www.example.com/foo"),
-                        new VocabURIByteIV<BigdataURI>((byte) 1)),//
+                        new VocabURIByteIV<BigdataURI>((byte) 1)),
                 new URIExtensionIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>(
                                 "http://www.example.com/foobar"),
-                        new VocabURIByteIV<BigdataURI>((byte) 1)),//
+                        new VocabURIByteIV<BigdataURI>((byte) 1)),
         };
 
         doEncodeDecodeTest(e);
@@ -165,15 +165,15 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_BNode_UnicodeID() {
 
-        final IV<?, ?>[] e = {//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("FOO"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("_bar"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("bar"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("baz"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("12"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("1298"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("asassdao"),//
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("1"),//
+        final IV<?, ?>[] e = {
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("FOO"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("_bar"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("bar"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("baz"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("12"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("1298"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("asassdao"),
+                new FullyInlineUnicodeBNodeIV<BigdataBNode>("1"),
         };
 
         doEncodeDecodeTest(e);
@@ -192,21 +192,21 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_Literal_plainLiteral() {
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
         };
 
         doEncodeDecodeTest(e);
@@ -225,51 +225,51 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_Literal_languageCodeLiteral() {
 
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("1", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("1", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("12", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("12", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("2", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("2", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("23", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("23", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("123", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("123", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("3", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("3", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
         };
 
         doEncodeDecodeTest(e);
@@ -293,35 +293,35 @@ public class TestEncodeDecodeUnicodeIVs extends
         final URI dt1 = new URIImpl("http://www.embergraph.org/mock-datatype-1");
         final URI dt2 = new URIImpl("http://www.embergraph.org/mock-datatype-2");
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        dt2),//
+                        dt2),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        dt2),//
+                        dt2),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        dt2),//
+                        dt2),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
-                        dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */, dt2),//
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */, dt2),//
+                        dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */, dt2),
         };
 
         doEncodeDecodeTest(e);
@@ -341,60 +341,60 @@ public class TestEncodeDecodeUnicodeIVs extends
         final URI dt1 = new URIImpl("http://www.embergraph.org/mock-datatype-1");
         final URI dt2 = new URIImpl("http://www.embergraph.org/mock-datatype-2");
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 /*
                  * Plain literals.
                  */
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 /*
                  * Language code literals.
                  */
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "en"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "de"/* language */,
-                        null/* datatype */),//
+                        null/* datatype */),
                 /*
                  * Datatype literals.
                  */
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
-                        dt1),//
+                        dt1),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        dt2),//
+                        dt2),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        dt2),//
+                        dt2),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        dt2),//
+                        dt2),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
-                        dt2),//
+                        dt2),
         };
         
         doEncodeDecodeTest(e);
@@ -416,13 +416,13 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_Inline_Literal_XSDString_DeconflictionTest() {
     
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
-                        XSD.STRING/* datatype */),//
+                        XSD.STRING/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
-                        XSD.STRING/* datatype */),//
+                        XSD.STRING/* datatype */),
                 new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
-                        XSD.STRING/* datatype */),//
+                        XSD.STRING/* datatype */),
         };
 
         doEncodeDecodeTest(e);
@@ -441,17 +441,17 @@ public class TestEncodeDecodeUnicodeIVs extends
 
         final IV<?,?> namespaceIV = newTermId(VTE.URI);
         
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), namespaceIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), namespaceIV),
                 new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), namespaceIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), namespaceIV),
                 new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), namespaceIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), namespaceIV),
                 new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), namespaceIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), namespaceIV),
                 new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), namespaceIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), namespaceIV),
         };
 
         doEncodeDecodeTest(e);
@@ -471,39 +471,39 @@ public class TestEncodeDecodeUnicodeIVs extends
         final IV<?,?> datatypeIV = newTermId(VTE.URI);
         final IV<?,?> datatypeIV2 = newTermId(VTE.URI);
 
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(""), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>(""), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(" "), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>(" "), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV2),
         };
 
         doEncodeDecodeTest(e);
@@ -518,47 +518,47 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_URINamespaceIV() {
 
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 1) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 1) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("123"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("123"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("23"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("23"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("3"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
                 new PartlyInlineURIIV<BigdataURI>(
                         new FullyInlineTypedLiteralIV<BigdataLiteral>("3"),// localName
                         new VocabURIShortIV<BigdataURI>((short) 2) // namespace
-                ),//
+                ),
         };
 
         doEncodeDecodeTest(e);
@@ -577,27 +577,27 @@ public class TestEncodeDecodeUnicodeIVs extends
         final IV<?,?> datatypeIV = new VocabURIShortIV<BigdataURI>((short) 1);
         final IV<?,?> datatypeIV2 = new VocabURIShortIV<BigdataURI>((short) 2);
 
-        final IV<?, ?>[] e = {//
+        final IV<?, ?>[] e = {
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV2),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV),
                 new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV2),//
+                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV2),
         };
 
         doEncodeDecodeTest(e);

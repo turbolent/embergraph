@@ -181,20 +181,20 @@ public class TestQueryEngine_Slice extends TestCase2 {
 		 * Note: The StartOp breaks up the initial set of chunks into multiple
 		 * IChunkMessages, which results in multiple invocations of the StartOp.
 		 */
-    	final PipelineOp startOp = new StartOp(new BOp[]{}, NV.asMap(new NV[]{//
-                new NV(SliceOp.Annotations.BOP_ID, startId),//
+    	final PipelineOp startOp = new StartOp(new BOp[]{}, NV.asMap(new NV[]{
+                new NV(SliceOp.Annotations.BOP_ID, startId),
                 new NV(MemorySortOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
     	}));
 
-        final SliceOp query = new SliceOp(new BOp[] {startOp}, NV.asMap(new NV[] {//
-                new NV(SliceOp.Annotations.BOP_ID, sliceId),//
-            	new NV(SliceOp.Annotations.SHARED_STATE,true),//
-                        new NV(SliceOp.Annotations.OFFSET, offset),//
-                        new NV(SliceOp.Annotations.LIMIT, limit),//
+        final SliceOp query = new SliceOp(new BOp[] {startOp}, NV.asMap(new NV[] {
+                new NV(SliceOp.Annotations.BOP_ID, sliceId),
+            	new NV(SliceOp.Annotations.SHARED_STATE,true),
+                        new NV(SliceOp.Annotations.OFFSET, offset),
+                        new NV(SliceOp.Annotations.LIMIT, limit),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                 }));
 
         final UUID queryId = UUID.randomUUID();

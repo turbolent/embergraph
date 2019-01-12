@@ -219,9 +219,9 @@ abstract public class AbstractRawStoreTestCase extends TestCase3 {
 //        // @todo this test disabled until a RW store is implemented.
 //        
 ////        final IRawStore store = getStore();
-////
+//
 ////        try {
-////
+//
 ////            final int nbytes = 100;
 ////            
 ////            final int offset = 0;
@@ -235,7 +235,7 @@ abstract public class AbstractRawStoreTestCase extends TestCase3 {
 ////            System.err.println("Ignoring expected exception: "+ex);
 ////            
 ////        } finally {
-////
+//
 ////        store.destroy();
 ////        
 ////    }

@@ -94,8 +94,8 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
          * Note: This turns off the REMOVEALL flag unless CURSOR was also
          * specified.
          */
-        final int tmpFlags = (removeAll && !cursor) //
-                ? flags & ~IRangeQuery.REMOVEALL //
+        final int tmpFlags = (removeAll && !cursor)
+                ? flags & ~IRangeQuery.REMOVEALL
                 : flags;
         
         /*

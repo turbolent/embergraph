@@ -87,7 +87,7 @@ public class JournalMetadata extends AbstractResourceMetadata {
     public JournalMetadata(final AbstractJournal journal) {
 
         this(getFileString(journal), //journal.getBufferStrategy().getExtent(),
-                journal.getRootBlockView().getUUID(), //
+                journal.getRootBlockView().getUUID(),
                 journal.getRootBlockView().getCreateTime(), // createTime.
                 0L // commitTime
                 );
@@ -106,8 +106,8 @@ public class JournalMetadata extends AbstractResourceMetadata {
     public JournalMetadata(final AbstractJournal journal, final long commitTime) {
      
         this(getFileString(journal), //journal.getBufferStrategy().getExtent(),
-                journal.getRootBlockView().getUUID(),//
-                journal.getRootBlockView().getCreateTime(),//
+                journal.getRootBlockView().getUUID(),
+                journal.getRootBlockView().getCreateTime(),
                 commitTime
                 );
 

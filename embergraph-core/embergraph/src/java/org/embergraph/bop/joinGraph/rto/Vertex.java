@@ -227,12 +227,12 @@ public class Vertex implements Serializable {
              * Materialize a sample from the access path.
              */
 
-            final SampleIndex<?> sampleOp = new SampleIndex(new BOp[] {}, //
-                    NV.asMap(//
-                            new NV(SampleIndex.Annotations.PREDICATE, pred),//
-                            new NV(SampleIndex.Annotations.LIMIT, limit),//
+            final SampleIndex<?> sampleOp = new SampleIndex(new BOp[] {},
+                    NV.asMap(
+                            new NV(SampleIndex.Annotations.PREDICATE, pred),
+                            new NV(SampleIndex.Annotations.LIMIT, limit),
                             new NV(SampleIndex.Annotations.SAMPLE_TYPE,
-                                    sampleType.name())//
+                                    sampleType.name())
                             ));
 
             sample = new VertexSample(rangeCount, limit, EstimateEnum.Normal,

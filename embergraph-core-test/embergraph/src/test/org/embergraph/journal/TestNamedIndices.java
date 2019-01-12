@@ -199,8 +199,8 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
 //
 //            Stream stream = (Stream) journal.getUnisolatedIndex(name);
 //
-//            final byte[][] expected = new byte[][] {//
-//                    new byte[] { 0 },//
+//            final byte[][] expected = new byte[][] {
+//                    new byte[] { 0 },
 //                    new byte[] { 1, 2, 3 },
 //            };
 //

@@ -126,10 +126,10 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
 
         metadata.setDeleteMarkers(true);
 
-        UUID indexUUID = fed.registerIndex(metadata, new byte[][]{//
+        UUID indexUUID = fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -223,10 +223,10 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
         /*
          * Register and statically partition an index.
          */
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{}, // keys less than 5...
                 new byte[]{5} // keys GTE 5....
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -258,7 +258,7 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
          */
         {
             
-            final byte[][] keys = new byte[][] {//
+            final byte[][] keys = new byte[][] {
             new byte[]{1}, // [0]
             new byte[]{2}, // [1]
             new byte[]{5}, // [2]
@@ -289,7 +289,7 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
          */
         {
             
-            final byte[][] keys = new byte[][] {//
+            final byte[][] keys = new byte[][] {
             new byte[]{1}, // [0]
             new byte[]{5}, // [1]
             new byte[]{5}, // [2]
@@ -320,7 +320,7 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
          */
         {
             
-            final byte[][] keys = new byte[][] {//
+            final byte[][] keys = new byte[][] {
             new byte[]{1}, // [0]
             new byte[]{2}, // [1]
             new byte[]{4}, // [2]
@@ -353,10 +353,10 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
         /*
          * Register and statically partition an index.
          */
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{}, // keys less than 5...
                 new byte[]{5} // keys GTE 5....
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });

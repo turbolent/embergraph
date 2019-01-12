@@ -764,7 +764,7 @@ public class SD {
      */
     boolean isMapgraphCompatible() {
 
-        final IFeatureSupported obj = ClassPathUtil.classForName(//
+        final IFeatureSupported obj = ClassPathUtil.classForName(
                 "org.embergraph.rdf.gpu.MapgraphCompatibleNamespace", // preferredClassName,
                 null, // defaultClass,
                 IFeatureSupported.class, // sharedInterface,
@@ -786,7 +786,7 @@ public class SD {
      */
     boolean isMapgraphAccelerated() {
 
-        final IFeatureSupported obj = ClassPathUtil.classForName(//
+        final IFeatureSupported obj = ClassPathUtil.classForName(
                 "org.embergraph.rdf.gpu.MapgraphAcceleratedNamespace", // preferredClassName,
                 null, // defaultClass,
                 IFeatureSupported.class, // sharedInterface,

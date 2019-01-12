@@ -1083,8 +1083,8 @@ abstract public class MetadataService extends DataService implements
                 final byte[] rightSeparator = i + 1 < npartitions ? separatorKeys[i + 1]
                         : null;
 
-                final PartitionLocator pmd = new PartitionLocator(//
-                        mdi.incrementAndGetNextPartitionId(),//
+                final PartitionLocator pmd = new PartitionLocator(
+                        mdi.incrementAndGetNextPartitionId(),
                         dataServiceUUIDs[i],
                         leftSeparator,
                         rightSeparator
@@ -1104,10 +1104,10 @@ abstract public class MetadataService extends DataService implements
                 
                 // override the partition metadata.
                 md.setPartitionMetadata(new LocalPartitionMetadata(
-                        pmd.getPartitionId(),//
+                        pmd.getPartitionId(),
                         -1, // we are creating a new index, not moving an index partition.
-                        leftSeparator,//
-                        rightSeparator,//
+                        leftSeparator,
+                        rightSeparator,
                         /*
                          * Note: By setting this to null we are indicating to
                          * the RegisterIndexTask on the data service that it

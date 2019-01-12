@@ -442,9 +442,9 @@ public class JGraph {
      *             allocations associated with the map are released no later
      *             than when we leave the lexicon scope of that clause.
      */
-    public Path runtimeOptimizer(//
-            final QueryEngine queryEngine,//
-            final Map<PathIds, EdgeSample> edgeSamples//
+    public Path runtimeOptimizer(
+            final QueryEngine queryEngine,
+            final Map<PathIds, EdgeSample> edgeSamples
     ) throws Exception, NoSolutionsException {
 
         if (queryEngine == null)
@@ -1052,10 +1052,10 @@ public class JGraph {
                          * cardinality vertex.
                          */
 
-                        edgeSample = AST2BOpRTO.cutoffJoin(//
-                                queryEngine, //
-                                joinGraph, //
-                                limit,//
+                        edgeSample = AST2BOpRTO.cutoffJoin(
+                                queryEngine,
+                                joinGraph,
+                                limit,
                                 x.getPathSegment(2),// 1st edge.
                                 C,// constraints
                                 V.length == 2,// pathIsComplete
@@ -1092,14 +1092,14 @@ public class JGraph {
                          * edge of the path.
                          */
 
-                        edgeSample = AST2BOpRTO.cutoffJoin(//
-                                queryEngine,//
-                                joinGraph,//
-                                limit,//
-                                x.getPathSegment(ids.length()),//
+                        edgeSample = AST2BOpRTO.cutoffJoin(
+                                queryEngine,
+                                joinGraph,
+                                limit,
+                                x.getPathSegment(ids.length()),
                                 C, // constraints
                                 V.length == ids.length(), // pathIsComplete
-                                priorEdgeSample//
+                                priorEdgeSample
                                 );
 
                         if (log.isTraceEnabled())
@@ -1339,7 +1339,7 @@ public class JGraph {
                 }
 
                 // FIXME RTO: Replace with StaticAnalysis.
-                if (!PartitionedJoinGroup.canJoinUsingConstraints(//
+                if (!PartitionedJoinGroup.canJoinUsingConstraints(
                         x.getPredicates(),// path
                         tVertex.pred,// vertex
                         C// constraints
@@ -1361,12 +1361,12 @@ public class JGraph {
                 used.add(tVertex);
 
                 // Extend the path to the new vertex.
-                final Path p = x.addEdge(//
-                        queryEngine, //
-                        joinGraph, //
-                        limit,//
-                        tVertex,//
-                        C, //
+                final Path p = x.addEdge(
+                        queryEngine,
+                        joinGraph,
+                        limit,
+                        tVertex,
+                        C,
                         x.getVertexCount() + 1 == V.length// pathIsComplete
                         );
 
@@ -1405,12 +1405,12 @@ public class JGraph {
                 final Vertex tVertex = nothingShared.iterator().next();
                 
                 // Extend the path to the new vertex.
-                final Path p = x.addEdge(//
-                        queryEngine, //
-                        joinGraph,//
-                        limit, //
-                        tVertex, //
-                        C,//
+                final Path p = x.addEdge(
+                        queryEngine,
+                        joinGraph,
+                        limit,
+                        tVertex,
+                        C,
                         x.getVertexCount() + 1 == V.length// pathIsComplete
                         );
 
@@ -1766,13 +1766,13 @@ public class JGraph {
             final IPredicate<?>[] preds = new IPredicate[] { v.pred, vp.pred };
 
             // cutoff join of the edge (v,vp)
-            final EdgeSample edgeSample = AST2BOpRTO.cutoffJoin(//
+            final EdgeSample edgeSample = AST2BOpRTO.cutoffJoin(
                     queryEngine,// 
-                    joinGraph,//
+                    joinGraph,
                     limit, // sample limit
                     preds, // ordered path segment.
                     C, // constraints
-                    pathIsComplete,//
+                    pathIsComplete,
                     v.sample // sourceSample
                     );
 
@@ -2027,24 +2027,24 @@ public class JGraph {
         final List<Path> underflowPaths = new LinkedList<Path>();
         final Formatter f = new Formatter(sb);
         f.format("%-4s %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s %10s %10s",
-                "path",//
-                "srcCard",//
+                "path",
+                "srcCard",
                 "",// sourceSampleExact
-                "f",//
+                "f",
                 // (
-                "in",//
+                "in",
                 "sumRgCt",//sumRangeCount
-                "tplsRead",//
-                "out",//
-                "limit",//
-                "adjCard",//
+                "tplsRead",
+                "out",
+                "limit",
+                "adjCard",
                 // ) =
-                "estRead",//
-                "estCard",//
+                "estRead",
+                "estCard",
                 "",// estimateIs(Exact|LowerBound|UpperBound)
-                "sumEstRead",//
-                "sumEstCard",//
-                "sumEstCost",//
+                "sumEstRead",
+                "sumEstCard",
+                "sumEstCost",
                 "joinPath\n"
                 );
         for (int i = 0; i < a.length; i++) {
@@ -2062,27 +2062,27 @@ public class JGraph {
             }
             final EdgeSample edgeSample = x.edgeSample;
             if (edgeSample == null) {
-                f.format("%4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s %10s",//
+                f.format("%4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s %10s",
                             i, NA, "", NA, NA, NA, NA, NA, NA, NA, NA, NA, "", NA, NA,
                                 NA);
             } else {
-                f.format("%4d %10d%1s * % 10.2f (%8d %8d %8d %8d %8d %8d) = %10d % 10d%1s : % 10d % 10d % 10d", //
-                        i,//
-                        edgeSample.sourceSample.estCard,//
-                        edgeSample.sourceSample.estimateEnum.getCode(),//
-                        edgeSample.f,//
-                        edgeSample.inputCount,//
-                        edgeSample.sumRangeCount,//
-                        edgeSample.tuplesRead,//
-                        edgeSample.outputCount,//
-                        edgeSample.limit,//
-                        edgeSample.adjCard,//
+                f.format("%4d %10d%1s * % 10.2f (%8d %8d %8d %8d %8d %8d) = %10d % 10d%1s : % 10d % 10d % 10d",
+                        i,
+                        edgeSample.sourceSample.estCard,
+                        edgeSample.sourceSample.estimateEnum.getCode(),
+                        edgeSample.f,
+                        edgeSample.inputCount,
+                        edgeSample.sumRangeCount,
+                        edgeSample.tuplesRead,
+                        edgeSample.outputCount,
+                        edgeSample.limit,
+                        edgeSample.adjCard,
                         // =
-                        edgeSample.estRead,//
-                        edgeSample.estCard,//
-                        edgeSample.estimateEnum.getCode(),//
-                        x.sumEstRead,//
-                        x.sumEstCard,//
+                        edgeSample.estRead,
+                        edgeSample.estCard,
+                        edgeSample.estimateEnum.getCode(),
+                        x.sumEstRead,
+                        x.sumEstCard,
                         x.sumEstCost
                         );
             }
@@ -2145,24 +2145,24 @@ public class JGraph {
             /*
              * @todo show limit on samples?
              */
-            f.format("%4s %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s",// %10s %10s",//
+            f.format("%4s %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s",// %10s %10s",
                     "vert",
-                    "srcCard",//
+                    "srcCard",
                     "",// sourceSampleExact
-                    "f",//
+                    "f",
                     // (
-                    "in",//
+                    "in",
                     "sumRgCt",// sumRangeCount
                     "tplsRead",// tuplesRead
-                    "out",//
-                    "limit",//
-                    "adjCard",//
+                    "out",
+                    "limit",
+                    "adjCard",
                     // ) =
-                    "estRead",//
-                    "estCard",//
+                    "estRead",
+                    "estCard",
                     "",// estimateIs(Exact|LowerBound|UpperBound)
-                    "sumEstRead",//
-                    "sumEstCard"//
+                    "sumEstRead",
+                    "sumEstCard"
                     );
             long sumEstRead = 0; // sum(estRead), where estRead := tuplesRead*f
             long sumEstCard = 0; // sum(estCard)
@@ -2188,8 +2188,8 @@ public class JGraph {
 				}
                 sb.append("\n");
                 if (sample == null) {
-                    f.format("% 4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s",// %10s %10s",//
-                            predId,//
+                    f.format("% 4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = %10s %10s%1s : %10s %10s",// %10s %10s",
+                            predId,
                             NA, "", NA, NA, NA, NA, NA, NA, NA, NA, NA, "", NA, NA);//,NA,NA);
                 } else if(sample instanceof VertexSample) {
 					                    /*
@@ -2206,42 +2206,42 @@ public class JGraph {
                     final long tuplesRead = Math.min(sample.estCard, sample.limit);
                     final long outputCount = Math.min(sample.estCard, sample.limit);
                     final long adjCard = Math.min(sample.estCard, sample.limit);
-                    f.format("% 4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = % 10d % 10d%1s : %10d %10d",// %10d %10s",//
-                            predId,//
+                    f.format("% 4d %10s%1s * %10s (%8s %8s %8s %8s %8s %8s) = % 10d % 10d%1s : %10d %10d",// %10d %10s",
+                            predId,
                             " ",//srcSample.estCard
                             " ",//srcSample.estimateEnum
-                            " ",//sample.f,//
+                            " ",//sample.f,
                             " ",//sample.inputCount,
-                            sumRangeCount,//
-                            tuplesRead,//
-                            outputCount,//
+                            sumRangeCount,
+                            tuplesRead,
+                            outputCount,
                             sample.limit,// limit
                             adjCard,// adjustedCard
                             estRead,// estRead
                             sample.estCard,// estCard
-                            sample.estimateEnum.getCode(),//
-                            sumEstRead,//
-                            sumEstCard//
+                            sample.estimateEnum.getCode(),
+                            sumEstRead,
+                            sumEstCard
                             );
                 } else {
                     // Show the sample for a cutoff join with the 2nd+ vertex.
                     final EdgeSample edgeSample = (EdgeSample)sample;
-                    f.format("% 4d %10d%1s * % 10.2f (%8d %8d %8d %8d %8d %8d) = % 10d % 10d%1s : %10d %10d",// %10d %10",//
-                            predId,//
-                            edgeSample.sourceSample.estCard,//
-                            edgeSample.sourceSample.estimateEnum.getCode(),//
-                            edgeSample.f,//
-                            edgeSample.inputCount,//
-                            edgeSample.sumRangeCount,//
-                            edgeSample.tuplesRead,//
-                            edgeSample.outputCount,//
-                            edgeSample.limit,//
-                            edgeSample.adjCard,//
-                            edgeSample.estRead,//
-                            edgeSample.estCard,//
-                            edgeSample.estimateEnum.getCode(),//
-                            sumEstRead,//
-                            sumEstCard//
+                    f.format("% 4d %10d%1s * % 10.2f (%8d %8d %8d %8d %8d %8d) = % 10d % 10d%1s : %10d %10d",// %10d %10",
+                            predId,
+                            edgeSample.sourceSample.estCard,
+                            edgeSample.sourceSample.estimateEnum.getCode(),
+                            edgeSample.f,
+                            edgeSample.inputCount,
+                            edgeSample.sumRangeCount,
+                            edgeSample.tuplesRead,
+                            edgeSample.outputCount,
+                            edgeSample.limit,
+                            edgeSample.adjCard,
+                            edgeSample.estRead,
+                            edgeSample.estCard,
+                            edgeSample.estimateEnum.getCode(),
+                            sumEstRead,
+                            sumEstCard
                             );
                 }
             }

@@ -146,9 +146,9 @@ public class BigdataSailUpdate extends SailUpdate implements
 
         return ASTEvalHelper.executeUpdate(
                 ((BigdataSailRepositoryConnection) getConnection()),
-                astContainer,//
-                dataset,//
-                getIncludeInferred(),//
+                astContainer,
+                dataset,
+                getIncludeInferred(),
                 new QueryBindingSet(getBindings())
                 );
 

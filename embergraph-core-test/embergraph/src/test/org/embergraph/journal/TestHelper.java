@@ -76,13 +76,13 @@ public class TestHelper {
              * At least one journal was opened which was never closed.
              */
 
-            log.error("Test did not close journal(s)"//
-                    + ": nopen=" + nopen //
-                    + ", nclose=" + nclose//
-                    + ", ndestroy=" + ndestroy //
-                    + ", test=" + test.getClass() + "." + test.getName()//
+            log.error("Test did not close journal(s)"
+                    + ": nopen=" + nopen
+                    + ", nclose=" + nclose
+                    + ", ndestroy=" + ndestroy
+                    + ", test=" + test.getClass() + "." + test.getName()
                     + (testClass == null ? "" : ", testClass="
-                            + testClass.getClass().getName())//
+                            + testClass.getClass().getName())
             );
 
         }
@@ -94,13 +94,13 @@ public class TestHelper {
              * destroyed.
              */
 
-            log.error("Test did not destroy journal(s)"//
-                    + ": nopen=" + nopen //
-                    + ", nclose=" + nclose//
-                    + ", ndestroy=" + ndestroy //
-                    + ", test=" + test.getClass() + "." + test.getName()//
+            log.error("Test did not destroy journal(s)"
+                    + ": nopen=" + nopen
+                    + ", nclose=" + nclose
+                    + ", ndestroy=" + ndestroy
+                    + ", test=" + test.getClass() + "." + test.getName()
                     + (testClass == null ? "" : ", testClass="
-                            + testClass.getClass().getName())//
+                            + testClass.getClass().getName())
 
             );
 
@@ -139,12 +139,12 @@ public class TestHelper {
              * At least one temporary store was opened which was never closed.
              */
 
-            log.error("Test did not close temp store(s)"//
-                    + ": nopen=" + nopen //
-                    + ", nclose=" + nclose//
-                    + ", test=" + test.getClass() + "." + test.getName()//
+            log.error("Test did not close temp store(s)"
+                    + ": nopen=" + nopen
+                    + ", nclose=" + nclose
+                    + ", test=" + test.getClass() + "." + test.getName()
                     + (testClass == null ? "" : ", testClass="
-                            + testClass.getClass().getName())//
+                            + testClass.getClass().getName())
             );
 
         }

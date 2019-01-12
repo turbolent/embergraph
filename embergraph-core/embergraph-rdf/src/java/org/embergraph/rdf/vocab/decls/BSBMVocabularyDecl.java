@@ -54,19 +54,19 @@ public class BSBMVocabularyDecl implements VocabularyDecl {
 
     public static final URI USD = new URIImpl(VOCABULARY + "USD");
     
-    static private final URI[] uris = new URI[]{//
+    static private final URI[] uris = new URI[]{
         // namespace for instance data.
-        new URIImpl(INSTANCES),//
+        new URIImpl(INSTANCES),
         // namespace for vocabulary
-        new URIImpl(VOCABULARY),//
-        new URIImpl(VOCABULARY + "reviewDate"),//
-        new URIImpl(VOCABULARY + "reviewFor"),//
-        new URIImpl(VOCABULARY + "ProductType"),//
-        new URIImpl(VOCABULARY + "rating1"),//
-        new URIImpl(VOCABULARY + "rating2"),//
-        new URIImpl(VOCABULARY + "rating3"),//
-        new URIImpl(VOCABULARY + "rating4"),//
-        USD,//
+        new URIImpl(VOCABULARY),
+        new URIImpl(VOCABULARY + "reviewDate"),
+        new URIImpl(VOCABULARY + "reviewFor"),
+        new URIImpl(VOCABULARY + "ProductType"),
+        new URIImpl(VOCABULARY + "rating1"),
+        new URIImpl(VOCABULARY + "rating2"),
+        new URIImpl(VOCABULARY + "rating3"),
+        new URIImpl(VOCABULARY + "rating4"),
+        USD,
     };
 
     public BSBMVocabularyDecl() {

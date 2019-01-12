@@ -785,10 +785,10 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
             protected BlockingBuffer<KVO<O>[]> newSubtaskBuffer() {
 
                 return new BlockingBuffer<KVO<O>[]>(
-                        new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity), //
+                        new ArrayBlockingQueue<KVO<O>[]>(subtaskQueueCapacity),
                         subtaskChunkSize,// 
-                        subtaskChunkTimeoutNanos,//
-                        TimeUnit.NANOSECONDS,//
+                        subtaskChunkTimeoutNanos,
+                        TimeUnit.NANOSECONDS,
                         true // ordered
                 );
 
@@ -810,7 +810,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
             
             final DS dataService = dataServices.get(dataServiceUUID);
             
-            final L locator = new L(//
+            final L locator = new L(
                     // the initial partitionId
                     master.mdi.incrementAndGetNextPartitionId(),
                     // the initial data service.

@@ -1051,8 +1051,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      * @return The caller's set.
      */
     public Set<IVariable<?>> getMaybeProducedBindings(
-            final IBindingProducerNode node,//
-            final Set<IVariable<?>> vars,//
+            final IBindingProducerNode node,
+            final Set<IVariable<?>> vars,
             final boolean recursive) {
 
         if (node instanceof GraphPatternGroup<?>) {
@@ -2462,9 +2462,9 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
      */
     public Set<IVariable<?>> getProjectedVars(
             final IGroupMemberNode proxy,
-            final GraphPatternGroup<?> groupToLift,//
+            final GraphPatternGroup<?> groupToLift,
             final QueryBase query,// 
-            final Set<IVariable<?>> exogenousVars,//
+            final Set<IVariable<?>> exogenousVars,
             final Set<IVariable<?>> projectedVars) {
 
         // All variables which are used within the WHERE clause.

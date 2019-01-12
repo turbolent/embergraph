@@ -248,11 +248,11 @@ public class ArbitraryLengthPathTask implements Callable<Void> {
          * The distinct var filter is responsible for removing duplicate
          * solutions.
          */
-        distinctVarFilter = new JVMDistinctFilter(varsToRetainList, //
+        distinctVarFilter = new JVMDistinctFilter(varsToRetainList,
                 controllerOp.getProperty(Annotations.INITIAL_CAPACITY,
-                        Annotations.DEFAULT_INITIAL_CAPACITY),//
+                        Annotations.DEFAULT_INITIAL_CAPACITY),
                 controllerOp.getProperty(Annotations.LOAD_FACTOR,
-                        Annotations.DEFAULT_LOAD_FACTOR),//
+                        Annotations.DEFAULT_LOAD_FACTOR),
                 ConcurrentHashMapAnnotations.DEFAULT_CONCURRENCY_LEVEL);
         
         this.dropVars = (List<IVariable<?>>) controllerOp.getProperty(

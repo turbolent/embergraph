@@ -338,11 +338,11 @@ public class TestTermIdEncoder extends TestCase2 {
     }
 
     static private void fail(final TermIdEncoder encoder, final long v0, final long v1) {
-        final String msg = encoder + "\n" + //
-                ", expected=" + v0 + " (0x" + Long.toHexString(v0) + ")\n" + //
-                ", actual=" + v1 + " (0x" + Long.toHexString(v1) + ")\n" + //
-                Long.toBinaryString(v0) + "\n" + //
-                Long.toBinaryString(v1)//
+        final String msg = encoder + "\n" +
+                ", expected=" + v0 + " (0x" + Long.toHexString(v0) + ")\n" +
+                ", actual=" + v1 + " (0x" + Long.toHexString(v1) + ")\n" +
+                Long.toBinaryString(v0) + "\n" +
+                Long.toBinaryString(v1)
         ;
         log.error(msg);
         fail(msg);

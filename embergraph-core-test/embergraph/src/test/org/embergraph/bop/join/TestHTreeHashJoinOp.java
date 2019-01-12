@@ -74,18 +74,18 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
 
         final Map<String,Object> tmp = NV.asMap(
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER), //
-                new NV(Predicate.Annotations.BOP_ID, joinId),//
-                new NV(PipelineJoin.Annotations.PREDICATE, predOp),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(Predicate.Annotations.BOP_ID, joinId),
+                new NV(PipelineJoin.Annotations.PREDICATE, predOp),
                 new NV(HTreeHashJoinAnnotations.RELATION_NAME,
-                       predOp.getRequiredProperty(Predicate.Annotations.RELATION_NAME)),//
-                new NV(HashJoinAnnotations.JOIN_VARS, joinVars),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.MAX_MEMORY, Bytes.megabyte),//
+                       predOp.getRequiredProperty(Predicate.Annotations.RELATION_NAME)),
+                new NV(HashJoinAnnotations.JOIN_VARS, joinVars),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.MAX_MEMORY, Bytes.megabyte),
                 new NV(NamedSetAnnotations.NAMED_SET_REF,
                         NamedSolutionSetRefUtility.newInstance(queryId,
-                                getName(), joinVars))//
+                                getName(), joinVars))
                 );
 
         if (predOp.isOptional()) {
@@ -130,27 +130,27 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
 
         final Predicate<IV> pred = new Predicate<IV>(new IVariableOrConstant[] {
                 new Constant<String>("Mary"), Var.var("x") }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { setup.spoNamespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { setup.spoNamespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                 }));
         
         // w/o variables.
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-//                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+//                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.CONTROLLER),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.CONTROLLER),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-                            namedSet,//
+                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalStateException.class);
         } catch (IllegalStateException ex) {
@@ -160,17 +160,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // bad evaluation context.
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.ANY),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.ANY),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-                            namedSet,//
+                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + UnsupportedOperationException.class);
         } catch (UnsupportedOperationException ex) {
@@ -180,17 +180,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // missing predicate.
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-//                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.SHARDED),
+//                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-                            namedSet,//
+                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalStateException.class);
         } catch (IllegalStateException ex) {
@@ -200,17 +200,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
 
         // last pass evaluation not requested.
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, false),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.SHARDED),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, false),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-                            namedSet,//
+                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -220,17 +220,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // maxParallel not set to ONE (1).
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 2),//
+                                    BOpEvaluationContext.SHARDED),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 2),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-                            namedSet,//
+                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + IllegalArgumentException.class);
         } catch (IllegalArgumentException ex) {
@@ -240,17 +240,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
         
         // maxMemory not overridden.
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.SHARDED),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
 //                            new NV(PipelineOp.Annotations.MAX_MEMORY,
-//                                    Bytes.megabyte),//
-                            namedSet,//
+//                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + UnsupportedOperationException.class);
         } catch (UnsupportedOperationException ex) {
@@ -263,17 +263,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
             @SuppressWarnings("unchecked")
             final Predicate<IV> pred2 = (Predicate<IV>) pred.setProperty(
                     IPredicate.Annotations.OPTIONAL, true);
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.SHARDED),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred2),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.SHARDED),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred2),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-                            namedSet,//
+                                    Bytes.megabyte),
+                            namedSet,
                     }));
             fail("Expecting: " + UnsupportedOperationException.class);
         } catch (UnsupportedOperationException ex) {
@@ -283,17 +283,17 @@ public class TestHTreeHashJoinOp extends AbstractHashJoinOpTestCase {
 
         // w/o named set
         try {
-            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {//
-                    new NV(BOp.Annotations.BOP_ID, joinId),//
-                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),//
+            new HTreeHashJoinOp<IV>(emptyArgs, NV.asMap(new NV[] {
+                    new NV(BOp.Annotations.BOP_ID, joinId),
+                            new NV(HashJoinAnnotations.JOIN_VARS,new IVariable[]{x}),
                             new NV(PipelineOp.Annotations.EVALUATION_CONTEXT,
-                                    BOpEvaluationContext.CONTROLLER),//
-                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),//
-                            new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+                                    BOpEvaluationContext.CONTROLLER),
+                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+                            new NV(PipelineOp.Annotations.LAST_PASS, true),
+                            new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                             new NV(PipelineOp.Annotations.MAX_MEMORY,
-                                    Bytes.megabyte),//
-//                            namedSet,//
+                                    Bytes.megabyte),
+//                            namedSet,
                     }));
             fail("Expecting: " + IllegalStateException.class);
         } catch (IllegalStateException ex) {

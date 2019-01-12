@@ -218,13 +218,13 @@ public class NodeSerializer {
      * @todo the {@link IAddressManager} is not used any more. It was used by
      *       the {@link IAddressSerializer}.
      */
-    public NodeSerializer(//
+    public NodeSerializer(
             final IAddressManager addressManager,
-            final INodeFactory nodeFactory,//
-            final int addressBits,//
-            final int initialBufferCapacity, //
-            final IndexMetadata indexMetadata,//
-            final boolean readOnly,//
+            final INodeFactory nodeFactory,
+            final int addressBits,
+            final int initialBufferCapacity,
+            final IndexMetadata indexMetadata,
+            final boolean readOnly,
             final IRecordCompressorFactory<?> recordCompressorFactory
             ) {
         

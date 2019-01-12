@@ -135,7 +135,7 @@ public class TestSlice extends AbstractRuleTestCase {
              * 
              * Note: The SLICE tests below *DEPEND* on this order constraint!!!
              */
-            store.addTerms(new BigdataValue[] {//
+            store.addTerms(new BigdataValue[] {
                     
                     foo, bar,
 
@@ -177,22 +177,22 @@ public class TestSlice extends AbstractRuleTestCase {
             final IVariable[] vars = new IVariable[] { Var.var("x"),
                     Var.var("y"), Var.var("z") };
             
-            final IBindingSet bs0 = new ListBindingSet(vars, new IConstant[] {//
-                    new Constant<IV>(x0.getIV()),//
-                    new Constant<IV>(y0.getIV()),//
-                    new Constant<IV>(z0.getIV())//
+            final IBindingSet bs0 = new ListBindingSet(vars, new IConstant[] {
+                    new Constant<IV>(x0.getIV()),
+                    new Constant<IV>(y0.getIV()),
+                    new Constant<IV>(z0.getIV())
                     }
             ); 
-            final IBindingSet bs1 = new ListBindingSet(vars, new IConstant[] {//
-                    new Constant<IV>(x1.getIV()),//
-                    new Constant<IV>(y1.getIV()),//
-                    new Constant<IV>(z1.getIV())//
+            final IBindingSet bs1 = new ListBindingSet(vars, new IConstant[] {
+                    new Constant<IV>(x1.getIV()),
+                    new Constant<IV>(y1.getIV()),
+                    new Constant<IV>(z1.getIV())
                     }
             ); 
-            final IBindingSet bs2 = new ListBindingSet(vars, new IConstant[] {//
-                    new Constant<IV>(x2.getIV()),//
-                    new Constant<IV>(y2.getIV()),//
-                    new Constant<IV>(z2.getIV())//
+            final IBindingSet bs2 = new ListBindingSet(vars, new IConstant[] {
+                    new Constant<IV>(x2.getIV()),
+                    new Constant<IV>(y2.getIV()),
+                    new Constant<IV>(z2.getIV())
                     }
             ); 
             
@@ -282,17 +282,17 @@ public class TestSlice extends AbstractRuleTestCase {
         
         return new Rule<ISPO>(getName(),
                 null/* head */, new SPOPredicate[] {
-                //
+
                 new SPOPredicate(store.getSPORelation()
                     .getNamespace(), Var.var("x"), new Constant<IV>(foo
                     .getIV()), Var.var("y")),
-                //
+
                 new SPOPredicate(store.getSPORelation()
                             .getNamespace(), Var.var("y"), new Constant<IV>(bar
                             .getIV()), Var.var("z")),
-                },//
+                },
                 new QueryOptions(false/* distinct */, true/* stable */,
-                        null/* orderBy */, slice),//
+                        null/* orderBy */, slice),
                 null// constraints
         );
 

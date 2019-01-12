@@ -295,12 +295,12 @@ public class Path {
 	 * @param sumEstRead
 	 *            The cumulative estimated tuples read of the new path.
 	 */
-    private Path(//
-            final Vertex[] vertices,//
-            final IPredicate<?>[] preds,//
-            final EdgeSample edgeSample,//
-            final long sumEstCard,//
-            final long sumEstRead//
+    private Path(
+            final Vertex[] vertices,
+            final IPredicate<?>[] preds,
+            final EdgeSample edgeSample,
+            final long sumEstCard,
+            final long sumEstRead
             ) {
 
         if (vertices == null)
@@ -679,22 +679,22 @@ public class Path {
             
         }
 
-        final EdgeSample edgeSample2 = AST2BOpRTO.cutoffJoin(//
-                queryEngine,//
-                joinGraph,//
-                limit, //
-                preds2,//
-                constraints,//
-                pathIsComplete,//
+        final EdgeSample edgeSample2 = AST2BOpRTO.cutoffJoin(
+                queryEngine,
+                joinGraph,
+                limit,
+                preds2,
+                constraints,
+                pathIsComplete,
                 this.edgeSample // the source sample.
                 );
 
 
 		// Extend the path.
-		final Path tmp = new Path(//
-				vertices2,//
-				preds2,//
-				edgeSample2,//
+		final Path tmp = new Path(
+				vertices2,
+				preds2,
+				edgeSample2,
 				this.sumEstCard + edgeSample2.estCard,// sumEstCard
 				this.sumEstRead + edgeSample2.estRead // sumEstRead
 		);
@@ -741,14 +741,14 @@ public class Path {
      * 
      * @throws Exception
      */
-    static public EdgeSample cutoffJoin(//
-            final QueryEngine queryEngine,//
-            final JoinGraph joinGraph,//
-            final int limit,//
-            final IPredicate<?>[] path,//
-            final IConstraint[] constraints,//
-            final boolean pathIsComplete,//
-            final SampleBase sourceSample//
+    static public EdgeSample cutoffJoin(
+            final QueryEngine queryEngine,
+            final JoinGraph joinGraph,
+            final int limit,
+            final IPredicate<?>[] path,
+            final IConstraint[] constraints,
+            final boolean pathIsComplete,
+            final SampleBase sourceSample
     ) throws Exception {
 
         // Note: Delegated to the AST/RTO integration class.

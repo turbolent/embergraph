@@ -214,8 +214,8 @@ public class BackchainTypeResourceIterator implements
 			// resourceIds =
 			// db.getSPORelation().distinctTermScan(SPOKeyOrder.SPO);
 
-			resourceIds = new PushbackIterator<IV>(new MergedOrderedIterator(//
-					db.getSPORelation().distinctTermScan(SPOKeyOrder.SPO), //
+			resourceIds = new PushbackIterator<IV>(new MergedOrderedIterator(
+					db.getSPORelation().distinctTermScan(SPOKeyOrder.SPO),
 					db.getSPORelation().distinctTermScan(SPOKeyOrder.OSP,
 							new ITermIVFilter() {
 								private static final long serialVersionUID = 1L;
@@ -328,12 +328,12 @@ public class BackchainTypeResourceIterator implements
 	 *      AbstractTripleStore, long, long)
 	 */
 	@SuppressWarnings( "rawtypes" )
-	private BackchainTypeResourceIterator(IChunkedOrderedIterator<ISPO> _src,//
-			Iterator<ISPO> src,//
-			PushbackIterator<IV> resourceIds,//
-			PushbackIterator<IV> posItr,//
-			final IV rdfType,//
-			final IV rdfsResource//
+	private BackchainTypeResourceIterator(IChunkedOrderedIterator<ISPO> _src,
+			Iterator<ISPO> src,
+			PushbackIterator<IV> resourceIds,
+			PushbackIterator<IV> posItr,
+			final IV rdfType,
+			final IV rdfsResource
 	) {
 
 		// the raw source - we pass close() through to this.

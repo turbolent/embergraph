@@ -472,12 +472,12 @@ public class TestTriplePatternBuilder extends
     public void test_predicate_list_where_predicate_is_constant()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql //
-                = "select ?s \n"//
-                + " where { \n"//
-                + "  ?s <http://www.embergraph.org/foo> ?o "//
-                + "   ; <http://www.embergraph.org/bar> ?o2"//
-                + " }"//
+        final String sparql
+                = "select ?s \n"
+                + " where { \n"
+                + "  ?s <http://www.embergraph.org/foo> ?o "
+                + "   ; <http://www.embergraph.org/bar> ?o2"
+                + " }"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -991,12 +991,12 @@ public class TestTriplePatternBuilder extends
     public void test_bnode_bracket_syntax_05() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
-                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + //
-                " SELECT * {\n" + //
-                "   [ foaf:name ?name ;\n" + //
-                "     foaf:mbox <mailto:alice@example.org>\n" + //
-                "   ]\n" + //
+        final String sparql = "" +
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+                " SELECT * {\n" +
+                "   [ foaf:name ?name ;\n" +
+                "     foaf:mbox <mailto:alice@example.org>\n" +
+                "   ]\n" +
                 " }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1091,9 +1091,9 @@ public class TestTriplePatternBuilder extends
     public void test_rdf_collections_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = ""//
-                + "PREFIX  : <http://example.org/ns#>\n"//
-                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"//
+        final String sparql = ""
+                + "PREFIX  : <http://example.org/ns#>\n"
+                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                 + "SELECT * { (1 ?x 3 4) :p \"w\" . }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1206,9 +1206,9 @@ public class TestTriplePatternBuilder extends
     public void test_rdf_collections_02() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = ""//
-                + "PREFIX  : <http://example.org/ns#>\n"//
-                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"//
+        final String sparql = ""
+                + "PREFIX  : <http://example.org/ns#>\n"
+                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                 + "SELECT * { ( 1 [:p :q] ( 2 ) ) }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1638,10 +1638,10 @@ public class TestTriplePatternBuilder extends
     public void test_base_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
-                "BASE <http://example.org/book/>\n"+//
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT $title\n" +//
+        final String sparql = "" +
+                "BASE <http://example.org/book/>\n"+
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT $title\n" +
                 "WHERE { <book1> dc:title ?title }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1718,10 +1718,10 @@ public class TestTriplePatternBuilder extends
         if (baseURIBusted)
             return;
         
-        final String sparql = "" + //
-                "BASE <http://example.org/book#>\n"+//
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT $title\n" +//
+        final String sparql = "" +
+                "BASE <http://example.org/book#>\n"+
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT $title\n" +
                 "WHERE { <book1> dc:title ?title }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1790,10 +1790,10 @@ public class TestTriplePatternBuilder extends
         if (baseURIBusted)
             return;
 
-        final String sparql = "" + //
-                "BASE <http://example.org/book#abc>\n"+//
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT $title\n" +//
+        final String sparql = "" +
+                "BASE <http://example.org/book#abc>\n"+
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT $title\n" +
                 "WHERE { <book1> dc:title ?title }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1861,10 +1861,10 @@ public class TestTriplePatternBuilder extends
         if (baseURIBusted)
             return;
 
-        final String sparql = "" + //
-                "BASE <http://example.org/book>\n"+//
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT $title\n" +//
+        final String sparql = "" +
+                "BASE <http://example.org/book>\n"+
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT $title\n" +
                 "WHERE { <book1> dc:title ?title }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);

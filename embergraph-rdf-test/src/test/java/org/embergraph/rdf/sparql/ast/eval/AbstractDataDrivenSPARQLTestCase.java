@@ -323,13 +323,13 @@ abstract public class AbstractDataDrivenSPARQLTestCase extends
                         store, astContainer, new QueryBindingSet(), null /* dataset */);
                 
 //                final GraphQueryResult gqr = ASTEvalHelper.evaluateGraphQuery(
-//                        store, //
-//                        queryPlan, //
-//                        new QueryBindingSet(),//
-//                        context.queryEngine, //
+//                        store,
+//                        queryPlan,
+//                        new QueryBindingSet(),
+//                        context.queryEngine,
 //                        queryRoot.getProjection().getProjectionVars(),
-//                        queryRoot.getPrefixDecls(), //
-//                        queryRoot.getConstruct()//
+//                        queryRoot.getPrefixDecls(),
+//                        queryRoot.getConstruct()
 //                        );
 
                 final Set<Statement> queryResult = Iterations.asSet(gqr);

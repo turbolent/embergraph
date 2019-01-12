@@ -204,11 +204,11 @@ public class NestedLoopJoinOp extends PipelineOp {
 						for (IBindingSet left : leftSolutions) {
 
 		                    // See if the solutions join. 
-		                    final IBindingSet outSolution = BOpContext.bind(//
-		                            right,//
-		                            left,//
-		                            constraints,//
-		                            selectVars//
+		                    final IBindingSet outSolution = BOpContext.bind(
+		                            right,
+		                            left,
+		                            constraints,
+		                            selectVars
 		                            );
 
 							if (outSolution != null) {

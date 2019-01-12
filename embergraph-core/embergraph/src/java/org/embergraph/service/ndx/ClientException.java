@@ -100,9 +100,9 @@ public class ClientException extends RuntimeException {
     //         * @param cause
     //         */
     //        public ClientException(Throwable cause, List<Throwable> causes) {
-    //
+
     //            super((causes==null?"":", causes="+causes),cause);
-    //
+
     //            this.causes = causes;
     //            
     //        }

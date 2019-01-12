@@ -115,19 +115,19 @@ public class TestKeyBufferSearch extends TestCase2 {
     private void doSearchTest01(AbstractKeyBuffer kbuf) {
         
         // The general formula for the record offset is:
-        //
+
         //    offset := sizeof(record) * ( index - 1 )
-        //
+
         // The general formula for the insertion point is:
-        //
+
         //    insert := - ( offset + 1 )
-        //
+
         // where [offset] is the offset of the record before which the
         // new record should be inserted.
 
-        //
+
         // verify offset of record found.
-        //
+
 
         // Verify finds the first record in the array.
         assertEquals(0, search(kbuf, new byte[]{5}));
@@ -141,9 +141,9 @@ public class TestKeyBufferSearch extends TestCase2 {
         // Verify finds the last record in the array.
         assertEquals(4, search(kbuf, new byte[]{13}));
 
-        //
+
         // verify insertion points (key not found).
-        //
+
 
         // Verify insertion point for key less than any value in the
         // array.

@@ -219,7 +219,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
                 IndexAnnotations.DEFAULT_WRITE_RETENTION_QUEUE_CAPACITY));
 
         metadata.setTupleSerializer(new Id2TermTupleSerializer(namespace,
-                valueFactory, new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG),//
+                valueFactory, new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG),
                 new FrontCodedRabaCoder(ratio), SimpleRabaCoder.INSTANCE));
 
         // a bloom filter should help avoid lookups when IVs do not have cached
@@ -267,7 +267,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
                 IndexAnnotations.DEFAULT_WRITE_RETENTION_QUEUE_CAPACITY));
 
         metadata.setTupleSerializer(new Id2TermTupleSerializer(namespace,
-                valueFactory, new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG),//
+                valueFactory, new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG),
                 new FrontCodedRabaCoder(ratio), SimpleRabaCoder.INSTANCE));
 
         // a bloom filter should help avoid lookups when IVs do not have cached

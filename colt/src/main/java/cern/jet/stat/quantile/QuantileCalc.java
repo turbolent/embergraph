@@ -194,7 +194,7 @@ protected static long[] known_N_compute_B_and_K_slow(long N, double epsilon, dou
 	final double N_double = N;
 
 	// One possibility is to use one buffer of size N
-	//
+
 	long ret_b = 1;
 	long ret_k = N;
 	double sampling_rate = 1.0;
@@ -203,10 +203,10 @@ protected static long[] known_N_compute_B_and_K_slow(long N, double epsilon, dou
 
 	// Otherwise, there are at least two buffers (b >= 2)
 	// and the height of the tree is at least three (h >= 3)
-	//
+
 	// We restrict the search for b and h to MAX_BINOM, a large enough value for
 	// practical values of    epsilon >= 0.001   and    delta >= 0.00001
-	//
+
 	final double logarithm = Math.log(2.0*quantiles/delta);
 	final double c = 2.0 * epsilon * N_double;
 	for (long b=2 ; b<maxBuffers ; b++)
@@ -230,7 +230,7 @@ protected static long[] known_N_compute_B_and_K_slow(long N, double epsilon, dou
 				// From our SIGMOD 98 paper, we have two equantions to satisfy:
 				// t  <= u * alpha/(1-alpha)^2
 				// kv >= w/(1-alpha)^2
-				//
+
 				// Denoting 1/(1-alpha)    by x,
 				// we see that the first inequality is equivalent to
 				// t/u <= x^2 - x

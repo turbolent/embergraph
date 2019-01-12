@@ -398,9 +398,9 @@ abstract public class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     protected int getPartitionCount(final String name) {
         
         final ITupleIterator<?> itr = new RawDataServiceTupleIterator(
-                fed.getMetadataService(),//
-                MetadataService.getMetadataIndexName(name), //
-                ITx.READ_COMMITTED,//
+                fed.getMetadataService(),
+                MetadataService.getMetadataIndexName(name),
+                ITx.READ_COMMITTED,
                 true, // readConsistent
                 null, // fromKey
                 null, // toKey

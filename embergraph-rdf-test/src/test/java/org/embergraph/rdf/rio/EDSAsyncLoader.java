@@ -151,10 +151,10 @@ public class EDSAsyncLoader {
             }
 
             final AsynchronousStatementBufferFactory<BigdataStatement, File> statementBufferFactory = new AsynchronousStatementBufferFactory<BigdataStatement, File>(
-                    (ScaleOutTripleStore) tripleStore,//
-                    producerChunkSize, //
-                    valuesInitialCapacity,//
-                    bnodesInitialCapacity,//
+                    (ScaleOutTripleStore) tripleStore,
+                    producerChunkSize,
+                    valuesInitialCapacity,
+                    bnodesInitialCapacity,
                     RDFFormat.RDFXML, // defaultFormat
                     null, // defaultGraph
                     parserOptions, // parserOptions

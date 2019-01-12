@@ -148,29 +148,29 @@ public class TestBytesUtil extends TestCase2 {
          * test version with no offsets.
          */
         
-        assertEquals(0, BytesUtil.compareBytes(//
+        assertEquals(0, BytesUtil.compareBytes(
                 new byte[] { 1, 3, 2 },
                 new byte[] { 1, 3, 2 }));
 
         // differ at index := 2 and a<b.
-        assertTrue(BytesUtil.compareBytes(//
-                new byte[] { 1, 3 }, //
-                new byte[] { 1, 3, 2 }//
+        assertTrue(BytesUtil.compareBytes(
+                new byte[] { 1, 3 },
+                new byte[] { 1, 3, 2 }
                 ) < 0);
 
         // differ at index := 2 and a>b.
-        assertTrue(BytesUtil.compareBytes(//
-                new byte[] { 1, 3, 2 },//
-                new byte[] { 1, 3 }//
+        assertTrue(BytesUtil.compareBytes(
+                new byte[] { 1, 3, 2 },
+                new byte[] { 1, 3 }
                 ) > 0);
 
         /*
          * validate comparator treat bytes as unsigned. -1 expressed as a
          * unsigned byte is larger than the largest signed byte.
          */
-        assertTrue(BytesUtil.compareBytes(//
-                new byte[] { -1 },//
-                new byte[] { Byte.MAX_VALUE }//
+        assertTrue(BytesUtil.compareBytes(
+                new byte[] { -1 },
+                new byte[] { Byte.MAX_VALUE }
                 ) > 0);
 
     }
@@ -185,75 +185,75 @@ public class TestBytesUtil extends TestCase2 {
          * test with zero offsets and true lengths.
          */
         
-        assertEquals(0, BytesUtil.compareBytesWithLenAndOffset(//
-                0, 3, new byte[] { 1, 3, 2 },//
-                0, 3, new byte[] { 1, 3, 2 }//
+        assertEquals(0, BytesUtil.compareBytesWithLenAndOffset(
+                0, 3, new byte[] { 1, 3, 2 },
+                0, 3, new byte[] { 1, 3, 2 }
                 ));
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
-                0, 2, new byte[] { 1, 3 },//
-                0, 3, new byte[] { 1, 3, 2 }//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
+                0, 2, new byte[] { 1, 3 },
+                0, 3, new byte[] { 1, 3, 2 }
                 ) < 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
-                0, 3, new byte[] { 1, 3, 2 },//
-                0, 2, new byte[] { 1, 3 }//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
+                0, 3, new byte[] { 1, 3, 2 },
+                0, 2, new byte[] { 1, 3 }
                 ) > 0);
 
         /*
          * test with non-zero offsets and all remaining bytes are compared.
          */
         
-        assertEquals(0, BytesUtil.compareBytesWithLenAndOffset(//
-                1, 3, new byte[] { 9, 1, 3, 2 },//
-                0, 3, new byte[] { 1, 3, 2 }//
+        assertEquals(0, BytesUtil.compareBytesWithLenAndOffset(
+                1, 3, new byte[] { 9, 1, 3, 2 },
+                0, 3, new byte[] { 1, 3, 2 }
                 ));
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
-                1, 2, new byte[] { 9, 1, 3 },//
-                0, 3, new byte[] { 1, 3, 2 }//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
+                1, 2, new byte[] { 9, 1, 3 },
+                0, 3, new byte[] { 1, 3, 2 }
                 ) < 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
-                1, 3, new byte[] { -9, 1, 3, 2 },//
-                0, 2, new byte[] { 1, 3 }//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
+                1, 3, new byte[] { -9, 1, 3, 2 },
+                0, 2, new byte[] { 1, 3 }
                 ) > 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
-                1, 3, new byte[] { 9, 1, 3, 2 },//
-                0, 4, new byte[] { 1, 3, 2, 1 }//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
+                1, 3, new byte[] { 9, 1, 3, 2 },
+                0, 4, new byte[] { 1, 3, 2, 1 }
                 ) < 0);
 
         /*
          * test with non-zero offsets and only some of the remaining bytes are
          * compared.
          */
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
                 1, 2, new byte[] { 9, 1, 3, 2 },// using {1,3}
                 0, 2, new byte[] { 1, 3, 3, 1 }// using {1,3}
                 ) == 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
                 1, 2, new byte[] { 9, 1, 3, 2 },// using {1,3}
                 0, 3, new byte[] { 1, 3, 3, 1 }// using {1,3,3}
                 ) < 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
                 1, 3, new byte[] { 9, 1, 3, 2 },// using {1,3,2}
                 0, 2, new byte[] { 1, 3, 3, 1 }// using {1,3}
                 ) > 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
                 1, 3, new byte[] { 9, 1, 3, 2 },// using {1,3,2}
                 0, 3, new byte[] { 1, 3, 3, 1 }// using {1,3,3}
                 ) < 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
                 1, 3, new byte[] { 9, 1, 3, 2 },// using {1,3,2}
                 0, 4, new byte[] { 1, 3, 3, 1 }// using {1,3,3,1}
                 ) < 0);
 
-        assertTrue(BytesUtil.compareBytesWithLenAndOffset(//
+        assertTrue(BytesUtil.compareBytesWithLenAndOffset(
                 0, 4, new byte[] { 9, 1, 3, 2 },// using {9,1,3,2}
                 0, 4, new byte[] { 1, 3, 3, 1 }// using {1,3,3,1}
                 ) > 0);
@@ -458,9 +458,9 @@ public class TestBytesUtil extends TestCase2 {
             byte[] prior = new byte[]{};
             
             assertEquals(given, // separator
-                    BytesUtil.getSeparatorKey(//
-                            given,//
-                            prior //
+                    BytesUtil.getSeparatorKey(
+                            given,
+                            prior
                             ));
             
         }
@@ -473,13 +473,13 @@ public class TestBytesUtil extends TestCase2 {
         {
             
             assertEquals(new byte[] {3}, // separator
-                    BytesUtil.getSeparatorKey(//
+                    BytesUtil.getSeparatorKey(
                             new byte[] { 3, 5, 7 },// given
                             new byte[] { 1, 5, 7 }// prior
                             ));
             
             assertEquals(new byte[] {7}, // separator
-                    BytesUtil.getSeparatorKey(//
+                    BytesUtil.getSeparatorKey(
                             new byte[] { 7 },// given
                             new byte[] { 5, 1 }// prior
                             ));
@@ -495,13 +495,13 @@ public class TestBytesUtil extends TestCase2 {
         {
 
             assertEquals(new byte[] {7, 1}, // separator
-                    BytesUtil.getSeparatorKey(//
+                    BytesUtil.getSeparatorKey(
                             new byte[] { 7, 1, 3 },// given
                             new byte[] { 7,      } // prior
                             ));
 
             assertEquals(new byte[] {7, 1, 1}, // separator
-                    BytesUtil.getSeparatorKey(//
+                    BytesUtil.getSeparatorKey(
                             new byte[] { 7, 1, 1, 3 },// given
                             new byte[] { 7, 1       } // prior
                             ));
@@ -596,13 +596,13 @@ public class TestBytesUtil extends TestCase2 {
     int nmem = 5;
 
     // The general formula for the record offset is:
-    //
+
     //    offset := sizeof(record) * ( index - 1 )
-    //
+
     // The general formula for the insertion point is:
-    //
+
     //    insert := - ( offset + 1 )
-    //
+
     // where [offset] is the offset of the record before which the
     // new record should be inserted.
 
@@ -614,9 +614,9 @@ public class TestBytesUtil extends TestCase2 {
     keys[ i ++ ] =  new byte[]{ 13 };    // offset := 4, insert before := -5
                                         //               insert after := -6
 
-    //
+
     // verify offset of record found.
-    //
+
 
     // Verify finds the first record in the array.
     assertEquals
@@ -650,9 +650,9 @@ public class TestBytesUtil extends TestCase2 {
         )
           );
 
-    //
+
     // verify insertion points (key not found).
-    //
+
 
     // Verify insertion point for key less than any value in the
     // array.
@@ -689,12 +689,12 @@ public class TestBytesUtil extends TestCase2 {
         )
           );
 
-    //
+
     // Shift the array base and the #of members so that only the
     // three records in the middle of the array are "exposed" to
     // the search and then do a series of tests to verify that the
     // [base] and [nmem] parameters are being correctly respected.
-    //
+
     
     base++;     // hides the first record.
 
@@ -702,10 +702,10 @@ public class TestBytesUtil extends TestCase2 {
                 // subtract two since we are actually
                 // hiding two members).
 
-    //
+
     // Verify offset of "hidden" records, which now qualify as
     // "not found".
-    //
+
 
     // Verify does not find the first record in the array (which
     // is now "hidden").
@@ -725,9 +725,9 @@ public class TestBytesUtil extends TestCase2 {
         )
           );
 
-    //
+
     // verify offset of record found.
-    //
+
 
     // Verify finds the 2nd record in the array (the first that is
     // now visible).
@@ -756,10 +756,10 @@ public class TestBytesUtil extends TestCase2 {
         )
           );
 
-    //
+
     // verify insertion points (keys not found in either the
     // hidden or the full array).
-    //
+
 //  buf[ i ++ ] =   7L ;    // offset := 1, insert before := -2
 //  buf[ i ++ ] =   9L ;    // offset := 2, insert before := -3
 //  buf[ i ++ ] =  11L ;    // offset := 3, insert before := -4

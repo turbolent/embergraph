@@ -267,7 +267,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
      */
 
     @Override
-    final public void put(final int pos, //
+    final public void put(final int pos,
             final T[] b) {
 
         put(pos, b, 0, b.length);
@@ -275,7 +275,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     }
 
     @Override
-    final public void put(final int pos,//
+    final public void put(final int pos,
             final T[] b, final int off, final int len) {
 
         ensureCapacity(pos + len);
@@ -454,7 +454,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
         }
 
         @Override
-        final public void put(final int dstoff,//
+        final public void put(final int dstoff,
                 final T[] src, final int srcoff, final int srclen) {
 
             assert rangeCheck(dstoff, srclen);

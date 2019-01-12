@@ -87,10 +87,10 @@ public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager> e
    public void testSuppressTruthMaintenance() throws Exception {
 	   
 		//test disable truth maintenance
-        String updateStr = "DISABLE ENTAILMENTS; " + //
-        					"INSERT DATA { " + //
-        					"<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ." + //
-        					"<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . " + //
+        String updateStr = "DISABLE ENTAILMENTS; " +
+        					"INSERT DATA { " +
+        					"<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
+        					"<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . " +
         					"}";
 
         m_repo.prepareUpdate(updateStr).evaluate();
@@ -110,10 +110,10 @@ public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager> e
 		assertEquals(1, countResults(query.evaluate()));
 		
 		//test drop entailments
-	    updateStr = "DISABLE ENTAILMENTS; " + //
-	       			"DELETE DATA { " + //
-	       			"<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ." + //
-	       			"<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . " + //
+	    updateStr = "DISABLE ENTAILMENTS; " +
+	       			"DELETE DATA { " +
+	       			"<urn:1> <urn:property1> \"someValue\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
+	       			"<urn:property1> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> . " +
 	       			"}";
 
 	   m_repo.prepareUpdate(updateStr).evaluate();

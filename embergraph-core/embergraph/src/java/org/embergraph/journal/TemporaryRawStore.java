@@ -273,9 +273,9 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
          */
         final long overflowExtent = initialExtent;
 
-        final FileMetadata md = new FileMetadata(//
-                file,//
-                BufferMode.Temporary,//
+        final FileMetadata md = new FileMetadata(
+                file,
+                BufferMode.Temporary,
                 false,// useDirectBuffers (ignored for disk-based modes)
                 initialExtent, // The initial on disk capacity.
                 overflowExtent, // Note: same as [initialExtent] (overflow trigger) 
@@ -284,17 +284,17 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
                 true, // deleteOnExit
                 false, // readOnly
                 ForceEnum.No, // forceWrites
-                offsetBits,//
+                offsetBits,
                 true, // writeCacheEnabled
                 3, // writeCacheBufferCount
                 false, // validateChecksum (desperation option for restart).
-                createTime,//
+                createTime,
                 Quorum.NO_QUORUM,// Temporary stores are not HA.
                 false, // alternateRootBlock,
                 null // properties
         );
         
-        buf = new DiskOnlyStrategy(maximumExtent, //
+        buf = new DiskOnlyStrategy(maximumExtent,
 //                Long.valueOf(Options.DEFAULT_MINIMUM_EXTENSION), 
                 md);
 
@@ -462,8 +462,8 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
                 final String fileStr) {
 
             super(fileStr, // store.buf.getExtent()
-                    store.uuid,//
-                    store.createTime, //
+                    store.uuid,
+                    store.createTime,
                     0L// commitTime
             );
 

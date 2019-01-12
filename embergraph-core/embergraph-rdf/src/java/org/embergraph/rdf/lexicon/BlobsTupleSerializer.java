@@ -110,10 +110,10 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
     public BlobsTupleSerializer(final String namespace,
             final BigdataValueFactory valueFactory) {
         
-        super(//
+        super(
                 new ASCIIKeyBuilderFactory(
-                        BlobsIndexHelper.TERMS_INDEX_KEY_SIZE),//
-                getDefaultLeafKeysCoder(),//
+                        BlobsIndexHelper.TERMS_INDEX_KEY_SIZE),
+                getDefaultLeafKeysCoder(),
                 // getDefaultValuesCoder()
                 SimpleRabaCoder.INSTANCE);
 

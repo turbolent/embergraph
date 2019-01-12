@@ -62,9 +62,9 @@ public class CoordinateDDM implements ICoordinate {
      * @param thousandthsOfMinutesEast
      *            Decimal minutes east/west expressed as minutes * 1000.
      */
-    public CoordinateDDM(//
-            int degreesNorth, int thousandthsOfMinutesNorth,//
-            int degreesEast, int thousandthsOfMinutesEast //
+    public CoordinateDDM(
+            int degreesNorth, int thousandthsOfMinutesNorth,
+            int degreesEast, int thousandthsOfMinutesEast
     ) {
         if (degreesNorth > 90 || degreesNorth < -90)
             throw new IllegalArgumentException();
@@ -170,7 +170,7 @@ public class CoordinateDDM implements ICoordinate {
      * <dd>east/west (EeWw)</dd>
      * </dl>
      */
-    static final String regex_long = //
+    static final String regex_long =
     "(" + "(\\d{1,3})\\s?[:�*\\s]?\\s?" + // degrees (0:180)
             "(\\d{1,2}|\\d{1,2}\\.\\d*)\\s?[:'\\s]?\\s?" + // decimal minutes
             "([EeWw])" + // east/west
@@ -196,9 +196,9 @@ public class CoordinateDDM implements ICoordinate {
      * @see #regex_lat
      * @see #regex_long
      */
-    static final Pattern pattern_ddm = Pattern.compile("^(" + //
-            "(" + regex_lat + "(\\s?[/,]?\\s?)" + regex_long + ")" + //
-            ")$"//
+    static final Pattern pattern_ddm = Pattern.compile("^(" +
+            "(" + regex_lat + "(\\s?[/,]?\\s?)" + regex_long + ")" +
+            ")$"
     );
 
     /*
@@ -265,13 +265,13 @@ public class CoordinateDDM implements ICoordinate {
              * Note: When South or West then all components of the angle are
              * negative.
              */
-            return new CoordinateDDM( //
-                    northSouth ? degreesNorth : -degreesNorth,//
+            return new CoordinateDDM(
+                    northSouth ? degreesNorth : -degreesNorth,
                     northSouth ? thousandthsOfMinutesNorth
-                            : -thousandthsOfMinutesNorth,//
-                    eastWest ? degreesEast : -degreesEast,//
+                            : -thousandthsOfMinutesNorth,
+                    eastWest ? degreesEast : -degreesEast,
                     eastWest ? thousandthsOfMinutesEast
-                            : -thousandthsOfMinutesEast//
+                            : -thousandthsOfMinutesEast
             );
         }
         throw new ParseException("Not recognized: " + text, 0);
@@ -315,7 +315,7 @@ public class CoordinateDDM implements ICoordinate {
      */
     public CoordinateDD toDD() {
         return new CoordinateDD(
-                //
+
                 degreesNorth + (thousandthsOfMinutesNorth / 1000d) / 60d,
                 degreesEast + (thousandthsOfMinutesEast / 1000d) / 60d);
     }

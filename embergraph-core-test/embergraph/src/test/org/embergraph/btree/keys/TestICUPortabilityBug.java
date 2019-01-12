@@ -139,7 +139,7 @@ public class TestICUPortabilityBug extends TestCase {
         }
 
         if (!Arrays.equals(expected, actual)) {
-            fail("Expected: " + Arrays.toString(expected) + ", " + //
+            fail("Expected: " + Arrays.toString(expected) + ", " +
                     "Actual: " + Arrays.toString(actual));
         }
 

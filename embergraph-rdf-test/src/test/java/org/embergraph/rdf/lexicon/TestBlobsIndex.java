@@ -195,10 +195,10 @@ public class TestBlobsIndex extends TestCase2 {
 ////			
 ////            // Should be one entry for each type of NullIV.
 ////            assertEquals(4L, ndx.rangeCount());
-////
+//
 ////            // Verify we visit each of those NullIVs.
 ////	        final ITupleIterator<BigdataValue> itr = ndx.rangeIterator();
-////
+//
 ////	        while(itr.hasNext()) {
 ////	            
 ////	            final ITuple<BigdataValue> tuple = itr.next();
@@ -207,7 +207,7 @@ public class TestBlobsIndex extends TestCase2 {
 ////	            
 ////	            // The tuple is deserialized as a [null] reference.
 ////                assertNull(tuple.getObject());
-////
+//
 ////	        }
 //	        
 //		} finally {
@@ -244,8 +244,8 @@ public class TestBlobsIndex extends TestCase2 {
 //      metadata.setNodeKeySerializer(new FrontCodedRabaCoder(ratio));
 
 //      final DefaultTupleSerializer tupleSer = new DefaultTupleSerializer(
-//              new DefaultKeyBuilderFactory(new Properties()),//
-//              new FrontCodedRabaCoder(ratio),//
+//              new DefaultKeyBuilderFactory(new Properties()),
+//              new FrontCodedRabaCoder(ratio),
 //              CanonicalHuffmanRabaCoder.INSTANCE
 //      );
 //
@@ -301,10 +301,10 @@ public class TestBlobsIndex extends TestCase2 {
 //        final IKeyBuilder keyBuilder = new TermsIndexHelper().newKeyBuilder();
 //
 //        final byte[][] keys = new byte[][] {
-//            BlobIV.mockIV(VTE.URI).encode(keyBuilder.reset()).getKey(), //
-//            BlobIV.mockIV(VTE.BNODE).encode(keyBuilder.reset()).getKey(), //
-//            BlobIV.mockIV(VTE.LITERAL).encode(keyBuilder.reset()).getKey(), //
-//            BlobIV.mockIV(VTE.STATEMENT).encode(keyBuilder.reset()).getKey(), //
+//            BlobIV.mockIV(VTE.URI).encode(keyBuilder.reset()).getKey(),
+//            BlobIV.mockIV(VTE.BNODE).encode(keyBuilder.reset()).getKey(),
+//            BlobIV.mockIV(VTE.LITERAL).encode(keyBuilder.reset()).getKey(),
+//            BlobIV.mockIV(VTE.STATEMENT).encode(keyBuilder.reset()).getKey(),
 //        };
 //        final byte[][] vals = new byte[][] { null, null, null, null };
 //        

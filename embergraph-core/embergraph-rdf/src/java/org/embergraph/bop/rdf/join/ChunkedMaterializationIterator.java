@@ -62,10 +62,10 @@ public class ChunkedMaterializationIterator implements
      * @param src
      *            The source iterator.
      */
-    public ChunkedMaterializationIterator(//
-            final IVariable<?>[] vars,//
-            final LexiconRelation lex,//
-            final boolean materializeInlineIVs,//
+    public ChunkedMaterializationIterator(
+            final IVariable<?>[] vars,
+            final LexiconRelation lex,
+            final boolean materializeInlineIVs,
             final ICloseableIterator<IBindingSet[]> src) {
 
         if (vars == null)

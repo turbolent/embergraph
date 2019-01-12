@@ -95,20 +95,20 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
      * Text properties file using <code>text/plain</code> and
      * <code>UTF-8</code>.
      */
-    public static final PropertiesFormat TEXT = new PropertiesFormat(//
-            "text/plain",//
-            Arrays.asList("text/plain"),//
-            Charset.forName("UTF-8"), //
-            Arrays.asList("properties")//
+    public static final PropertiesFormat TEXT = new PropertiesFormat(
+            "text/plain",
+            Arrays.asList("text/plain"),
+            Charset.forName("UTF-8"),
+            Arrays.asList("properties")
             );
 
     /**
      * XML properties file using <code>application/xml</code> and
      * <code>UTF-8</code>.
      */
-    public static final PropertiesFormat XML = new PropertiesFormat(//
-            "application/xml",//
-            Arrays.asList("application/xml"),//
+    public static final PropertiesFormat XML = new PropertiesFormat(
+            "application/xml",
+            Arrays.asList("application/xml"),
             Charset.forName("UTF-8"),// charset
             Arrays.asList("xml")// known-file-extensions
     );
@@ -132,9 +132,9 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
 //    /**
 //     * Binary properties file using <code>application/octet-stream</code>
 //     */
-//    public static final PropertiesFormat BINARY = new PropertiesFormat(//
-//            "application/octet-stream",//
-//            Arrays.asList("application/octet-stream"),//
+//    public static final PropertiesFormat BINARY = new PropertiesFormat(
+//            "application/octet-stream",
+//            Arrays.asList("application/octet-stream"),
 //            null,// charset
 //            (List) Collections.emptyList()// known-file-extensions
 //    );

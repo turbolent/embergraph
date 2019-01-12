@@ -76,14 +76,14 @@ public class SKOSVocabularyDecl implements VocabularyDecl {
     public static final URI topConceptOf = new URIImpl(NAMESPACE+"topConceptOf");
     
     static private final URI[] uris = new URI[] {
-        new URIImpl(NAMESPACE),//
+        new URIImpl(NAMESPACE),
         Collection, Concept, ConceptScheme, OrderedCollection, altLabel,
         broadMatch, broader, broaderTransitive, changeNote, closeMatch,
         definition, editorialNote, exactMatch, example, hasTopConcept,
         hiddenLabel, historyNote, inScheme, mappingRelation, member,
         memberList, narrowMatch, narrow, narrowTransitive, notation, note,
         prefLabel, related, relatedMatch, scopeNote, semanticRelation,
-        topConceptOf//
+        topConceptOf
     };
 
     public SKOSVocabularyDecl() {

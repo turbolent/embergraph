@@ -44,10 +44,10 @@ public class CSet {
 //                
 //            }
             
-        return "CSet{cats=" + Arrays.toString(cats) + //
-                ", #counters="+counters.size()+//
+        return "CSet{cats=" + Arrays.toString(cats) +
+                ", #counters="+counters.size()+
                 // Note: This is just too much detail.
-                //",counters=[" + sb + "]" + //
+                //",counters=[" + sb + "]" +
                 "}";
         
     }

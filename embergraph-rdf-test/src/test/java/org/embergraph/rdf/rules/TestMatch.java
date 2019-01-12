@@ -198,10 +198,10 @@ public class TestMatch extends AbstractTripleStoreTestCase {
                     
                 }
                 
-                final ICloseableIterator<IBindingSet> itr = store.match(//
-                        new Literal[] { new LiteralImpl("bryan") },//
-                        new URI[] { RDFS.LABEL },//
-                        person//
+                final ICloseableIterator<IBindingSet> itr = store.match(
+                        new Literal[] { new LiteralImpl("bryan") },
+                        new URI[] { RDFS.LABEL },
+                        person
                         );
 
                 try {
@@ -266,10 +266,10 @@ public class TestMatch extends AbstractTripleStoreTestCase {
              */
             {
                 
-                final ICloseableIterator<IBindingSet> itr = store.match(//
-                        new Literal[] { new LiteralImpl("paul") },//
-                        new URI[] { RDFS.LABEL },//
-                        person//
+                final ICloseableIterator<IBindingSet> itr = store.match(
+                        new Literal[] { new LiteralImpl("paul") },
+                        new URI[] { RDFS.LABEL },
+                        person
                         );
 
                 try {

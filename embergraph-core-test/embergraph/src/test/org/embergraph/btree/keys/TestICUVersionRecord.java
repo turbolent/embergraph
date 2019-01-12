@@ -65,17 +65,17 @@ public class TestICUVersionRecord extends TestCase2 {
     public void test_roundTrip2() {
 
         final ICUVersionRecord r1 = new ICUVersionRecord(
-                VersionInfo.getInstance(3, 6, 2, 1),//
-                VersionInfo.getInstance(1, 8, 5, 7),//
-                VersionInfo.getInstance(6, 3, 1, 8),//
-                VersionInfo.getInstance(4, 6, 8, 12)//
+                VersionInfo.getInstance(3, 6, 2, 1),
+                VersionInfo.getInstance(1, 8, 5, 7),
+                VersionInfo.getInstance(6, 3, 1, 8),
+                VersionInfo.getInstance(4, 6, 8, 12)
                 );
 
         final ICUVersionRecord r2 = new ICUVersionRecord( 
-            VersionInfo.getInstance(3, 6, 2, 1),//
-            VersionInfo.getInstance(1, 8, 5, 7),//
-            VersionInfo.getInstance(6, 3, 1, 8),//
-            VersionInfo.getInstance(4, 6, 8, 12)//
+            VersionInfo.getInstance(3, 6, 2, 1),
+            VersionInfo.getInstance(1, 8, 5, 7),
+            VersionInfo.getInstance(6, 3, 1, 8),
+            VersionInfo.getInstance(4, 6, 8, 12)
             );
         
         assertTrue(r1.equals(r2));

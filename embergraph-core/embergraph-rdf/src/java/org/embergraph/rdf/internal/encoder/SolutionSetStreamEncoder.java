@@ -54,7 +54,7 @@ public class SolutionSetStreamEncoder {
      * solution streams (for example, appending one stream onto another at a
      * low-level in the store).
      */
-    static int CHUNK_HEADER_SIZE = //
+    static int CHUNK_HEADER_SIZE =
             Bytes.SIZEOF_INT + // version number.
             Bytes.SIZEOF_INT + // #of solutions in chunk.
             Bytes.SIZEOF_INT // #of bytes in payload

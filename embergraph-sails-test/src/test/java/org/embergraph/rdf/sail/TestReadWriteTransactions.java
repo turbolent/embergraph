@@ -118,9 +118,9 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
             final URI s = uri("a"), p = uri("b"), o = uri("c");
 
             // add the statement.
-//            store.addStatements(new SPO[] { //
-//                    new SPO(s, p, o, StatementEnum.Explicit) //
-//                    },//
+//            store.addStatements(new SPO[] {
+//                    new SPO(s, p, o, StatementEnum.Explicit)
+//                    },
 //                    1);
             isolated.add(stmt(s, p, o));
             
@@ -201,9 +201,9 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
         try {
             
             // add the statement.
-//            store.addStatements(new SPO[] { //
-//                    new SPO(s, p, o, StatementEnum.Explicit) //
-//                    },//
+//            store.addStatements(new SPO[] {
+//                    new SPO(s, p, o, StatementEnum.Explicit)
+//                    },
 //                    1);
             store.add(stmt(s, p, o));
 
@@ -249,9 +249,9 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
             final URI author = uri("author"), mike = uri("mike"), bryan = uri("bryan");
             
             // add the statement.
-//            store.addStatements(new SPO[] { //
-//                    new SPO(s, p, o, StatementEnum.Explicit) //
-//                    },//
+//            store.addStatements(new SPO[] {
+//                    new SPO(s, p, o, StatementEnum.Explicit)
+//                    },
 //                    1);
             tx1.add(stmt(s, p, o, sid1));
             

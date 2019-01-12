@@ -242,22 +242,22 @@ public class FederatedQueryEngine extends QueryEngine {
      * @param indexManager
      * @param resourceService
      */
-    public FederatedQueryEngine(//
+    public FederatedQueryEngine(
             final UUID thisService,
-            final IBigdataFederation<?> fed,//
-            final IIndexManager indexManager,//
-            final ManagedResourceService resourceService//
+            final IBigdataFederation<?> fed,
+            final IIndexManager indexManager,
+            final ManagedResourceService resourceService
     ) {
 
         this(thisService, fed, indexManager, resourceService, false/* isDataService */);
 
     }
 
-    private FederatedQueryEngine(//
+    private FederatedQueryEngine(
                 final UUID thisService,
-                final IBigdataFederation<?> fed,//
-                final IIndexManager localIndexManager,//
-                final ManagedResourceService resourceService,//
+                final IBigdataFederation<?> fed,
+                final IIndexManager localIndexManager,
+                final ManagedResourceService resourceService,
                 final boolean isDataService
                 ) {
 

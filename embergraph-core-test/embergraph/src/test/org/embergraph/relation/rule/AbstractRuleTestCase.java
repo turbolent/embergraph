@@ -89,12 +89,12 @@ abstract public class AbstractRuleTestCase extends TestCase2 {
         
         public TestRuleRdfs9(String relation) {
             
-            super(  "rdfs9",//
-                    new P(relation,var("v"), rdfType, var("x")), //
-                    new IPredicate[] {//
-                            new P(relation, var("u"), rdfsSubClassOf, var("x")),//
-                            new P(relation, var("v"), rdfType, var("u")) //
-                    },//
+            super(  "rdfs9",
+                    new P(relation,var("v"), rdfType, var("x")),
+                    new IPredicate[] {
+                            new P(relation, var("u"), rdfsSubClassOf, var("x")),
+                            new P(relation, var("v"), rdfType, var("u"))
+                    },
                     new IConstraint[] {
             			Constraint.wrap(new NE(var("u"),var("x")))
                         }
@@ -119,12 +119,12 @@ abstract public class AbstractRuleTestCase extends TestCase2 {
 
         public TestRuleRdfs04a(String relation) {
 
-            super("rdfs4a",//
-                    new P(relation,//
-                            Var.var("u"), rdfType, rdfsResource), //
-                    new IPredicate[] { //
-                    new P(relation,//
-                            Var.var("u"), Var.var("a"), Var.var("x")) //
+            super("rdfs4a",
+                    new P(relation,
+                            Var.var("u"), rdfType, rdfsResource),
+                    new IPredicate[] {
+                    new P(relation,
+                            Var.var("u"), Var.var("a"), Var.var("x"))
                     },
                     /* constraints */
                     null);

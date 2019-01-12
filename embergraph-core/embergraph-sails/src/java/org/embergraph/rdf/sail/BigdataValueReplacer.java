@@ -85,9 +85,9 @@ public class BigdataValueReplacer {
      * @return yucky hack, need to return a new dataset and a new binding set.
      *         dataset is [0], binding set is [1]
      */
-    public Object[] replaceValues(//
-            final Dataset dataset,//
-            final BindingSet[] bindingSets//
+    public Object[] replaceValues(
+            final Dataset dataset,
+            final BindingSet[] bindingSets
     ) {
 
         if(dataset == null && bindingSets == null) {

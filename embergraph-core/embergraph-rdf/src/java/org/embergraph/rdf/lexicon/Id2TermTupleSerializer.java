@@ -111,8 +111,8 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
         
         this(namespace,valueFactory,
                 // Note: TermId is now 9 bytes (flags + tid)
-                new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG+1),//
-                getDefaultLeafKeysCoder(),//
+                new ASCIIKeyBuilderFactory(Bytes.SIZEOF_LONG+1),
+                getDefaultLeafKeysCoder(),
 //                getDefaultValuesCoder() // Canonical Huffman coding. 
                 SimpleRabaCoder.INSTANCE // Much faster
         );

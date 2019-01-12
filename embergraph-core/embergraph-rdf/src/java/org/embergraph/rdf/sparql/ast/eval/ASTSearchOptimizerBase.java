@@ -166,11 +166,11 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
      * such predicates for a given <code>searchVar</code> MUST appear within the
      * same group.
      */
-    private void extractSearches(//
+    private void extractSearches(
             final AST2BOpContext ctx,
-//            final AbstractTripleStore database,//
-            final QueryRoot queryRoot,//
-            final QueryBase queryBase,//
+//            final AbstractTripleStore database,
+            final QueryRoot queryRoot,
+            final QueryBase queryBase,
             final GroupNodeBase<IGroupMemberNode> group) {
 
         // lazily allocate iff we find some search predicates in this group.
@@ -320,10 +320,10 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
      * @param group
      *            The group in which the search magic predicates appear.
      */
-    private void enforceGraphConstraint(//
-            final AST2BOpContext ctx,//
-            final QueryRoot queryRoot,//
-            final IVariable<?> searchVar,//
+    private void enforceGraphConstraint(
+            final AST2BOpContext ctx,
+            final QueryRoot queryRoot,
+            final IVariable<?> searchVar,
             final GroupNodeBase<IGroupMemberNode> group) {
 
         StatementPatternNode subjectJoin = null;
@@ -366,7 +366,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
              */
             
             // Add the join to impose the named graph constraint.
-            group.addChild(new StatementPatternNode(//
+            group.addChild(new StatementPatternNode(
                     new VarNode("--anon-" + ctx.nextId()),// s
                     new VarNode("--anon-" + ctx.nextId()),// p
                     new VarNode(searchVar.getName()),// o
@@ -411,7 +411,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
             }
             
             // Add the join to impose the default graph constraint.
-            group.addChild(new StatementPatternNode(//
+            group.addChild(new StatementPatternNode(
                     new VarNode("--anon-" + ctx.nextId()),// s
                     new VarNode("--anon-" + ctx.nextId()),// p
                     new VarNode(searchVar.getName()),// o

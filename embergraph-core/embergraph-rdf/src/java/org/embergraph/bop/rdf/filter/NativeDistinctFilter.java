@@ -443,7 +443,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
 
                 @SuppressWarnings("rawtypes")
                 final ITupleSerializer<?, ?> tupleSer = new DefaultTupleSerializer(
-                        new ASCIIKeyBuilderFactory(64/* initialCapacity */),//
+                        new ASCIIKeyBuilderFactory(64/* initialCapacity */),
                         new FrontCodedRabaCoder(ratio),// keys
                         EmptyRabaValueCoder.INSTANCE // vals
                 );

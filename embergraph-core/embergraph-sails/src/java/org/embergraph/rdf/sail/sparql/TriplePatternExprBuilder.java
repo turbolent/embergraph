@@ -209,9 +209,9 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 ////            @SuppressWarnings("unchecked")
 ////            final List<TermNode> objectList = (List<TermNode>) propListNode
 ////                    .getObjectList().jjtAccept(this, null);
-////
+//
 ////            for (TermNode object : objectList) {
-////
+//
 ////                graphPattern.addSP(subject, verbPath, object);
 ////                
 ////            }
@@ -400,9 +400,9 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
         return rootListVar;
     }
 
-    //
+
     // FIXME Property paths (Implement).
-    //
+
 
 //	@Override
 //	public Object visit(ASTPathAlternative pathAltNode, Object data)

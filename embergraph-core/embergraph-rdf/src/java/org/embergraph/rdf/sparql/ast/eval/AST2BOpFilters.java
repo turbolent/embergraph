@@ -128,11 +128,11 @@ public class AST2BOpFilters extends AST2BOpBase {
 //     */
 //    @SuppressWarnings({ "rawtypes", "unchecked" })
 //    protected static PipelineOp addMaterializationSteps(
-//            final AST2BOpContext context,//
-//            PipelineOp left, //
-//            final int right,//
-//            final IConstraint c,//
-//            final Collection<IVariable<IV>> varsToMaterialize,//
+//            final AST2BOpContext context,
+//            PipelineOp left,
+//            final int right,
+//            final IConstraint c,
+//            final Collection<IVariable<IV>> varsToMaterialize,
 ////            final AtomicInteger idFactory, 
 //            final Properties queryHints) {
 //
@@ -197,11 +197,11 @@ public class AST2BOpFilters extends AST2BOpBase {
      *      IValueExpression, Collection, AST2BOpContext)
      */
     @SuppressWarnings("rawtypes")
-    protected static PipelineOp addMaterializationSteps1(//
-            PipelineOp left,//
-            final int rightId, //
-            final IValueExpression<IV> ve,//
-            final Set<IVariable<IV>> vars, //
+    protected static PipelineOp addMaterializationSteps1(
+            PipelineOp left,
+            final int rightId,
+            final IValueExpression<IV> ve,
+            final Set<IVariable<IV>> vars,
             final Properties queryHints,
             final AST2BOpContext ctx) {
 
@@ -213,9 +213,9 @@ public class AST2BOpFilters extends AST2BOpBase {
                 new NeedsMaterializationBOp(ve));
 
         left = applyQueryHints(new ConditionalRoutingOp(leftOrEmpty(left),
-                new NV(BOp.Annotations.BOP_ID, ctx.nextId()),//
-                new NV(ConditionalRoutingOp.Annotations.CONDITION, c2),//
-                new NV(PipelineOp.Annotations.ALT_SINK_REF, rightId)//
+                new NV(BOp.Annotations.BOP_ID, ctx.nextId()),
+                new NV(ConditionalRoutingOp.Annotations.CONDITION, c2),
+                new NV(PipelineOp.Annotations.ALT_SINK_REF, rightId)
                 ), queryHints, ctx);
 
         return addMaterializationSteps2(left, rightId, vars, queryHints, ctx);
@@ -270,11 +270,11 @@ public class AST2BOpFilters extends AST2BOpBase {
      * @see TryBeforeMaterializationConstraint
      */
     @SuppressWarnings("rawtypes")
-    protected static PipelineOp addMaterializationSteps2(//
-            PipelineOp left,//
-            final int rightId, //
-            final Set<IVariable<IV>> vars,//
-            final Properties queryHints, //
+    protected static PipelineOp addMaterializationSteps2(
+            PipelineOp left,
+            final int rightId,
+            final Set<IVariable<IV>> vars,
+            final Properties queryHints,
             final AST2BOpContext ctx) {
 
         final int nvars = vars.size();
@@ -354,12 +354,12 @@ public class AST2BOpFilters extends AST2BOpBase {
                     new IsMaterializedBOp(v, false/* materialized */));
 
             final PipelineOp condOp1 = applyQueryHints(
-                    new ConditionalRoutingOp(leftOrEmpty(left), //
-                            new NV(BOp.Annotations.BOP_ID, condId1),//
+                    new ConditionalRoutingOp(leftOrEmpty(left),
+                            new NV(BOp.Annotations.BOP_ID, condId1),
                             new NV(ConditionalRoutingOp.Annotations.CONDITION,
-                                    c1),//
-                            new NV(PipelineOp.Annotations.SINK_REF, condId2),//
-                            new NV(PipelineOp.Annotations.ALT_SINK_REF, endId)//
+                                    c1),
+                            new NV(PipelineOp.Annotations.SINK_REF, condId2),
+                            new NV(PipelineOp.Annotations.ALT_SINK_REF, endId)
                     ), queryHints, ctx);
 
             if (log.isDebugEnabled()) {
@@ -370,14 +370,14 @@ public class AST2BOpFilters extends AST2BOpBase {
                     new IsInlineBOp(v, true/* inline */));
 
             final PipelineOp condOp2 = applyQueryHints(
-                    new ConditionalRoutingOp(leftOrEmpty(condOp1), //
-                            new NV(BOp.Annotations.BOP_ID, condId2), //
+                    new ConditionalRoutingOp(leftOrEmpty(condOp1),
+                            new NV(BOp.Annotations.BOP_ID, condId2),
                             new NV(ConditionalRoutingOp.Annotations.CONDITION,
-                                    c2),//
+                                    c2),
                             new NV(PipelineOp.Annotations.SINK_REF,
-                                    inlineMaterializeId), //
+                                    inlineMaterializeId),
                             new NV(PipelineOp.Annotations.ALT_SINK_REF,
-                                    lexJoinId)//
+                                    lexJoinId)
                     ), queryHints, ctx);
 
             if (log.isDebugEnabled()) {
@@ -407,11 +407,11 @@ public class AST2BOpFilters extends AST2BOpBase {
 
             final PipelineOp inlineMaterializeOp = applyQueryHints(
                     new InlineMaterializeOp(
-                            leftOrEmpty(condOp2),//
-                            new NV(BOp.Annotations.BOP_ID, inlineMaterializeId),//
+                            leftOrEmpty(condOp2),
+                            new NV(BOp.Annotations.BOP_ID, inlineMaterializeId),
                             new NV(InlineMaterializeOp.Annotations.PREDICATE,
-                                    lexPred.clone()),//
-                            new NV(PipelineOp.Annotations.SINK_REF, endId)//
+                                    lexPred.clone()),
+                            new NV(PipelineOp.Annotations.SINK_REF, endId)
                     ), queryHints, ctx);
 
             if (log.isDebugEnabled()) {
@@ -441,8 +441,8 @@ public class AST2BOpFilters extends AST2BOpBase {
                 anns.add(new NV(PipelineJoin.Annotations.PREDICATE, pred));
 
                 // Join against the lexicon to materialize the Value.
-                final PipelineOp lexJoinOp = applyQueryHints(//
-                        new PipelineJoin(leftOrEmpty(inlineMaterializeOp), //
+                final PipelineOp lexJoinOp = applyQueryHints(
+                        new PipelineJoin(leftOrEmpty(inlineMaterializeOp),
                                 anns.toArray(new NV[anns.size()])),
                         queryHints, ctx);
 //                final PipelineOp lexJoinOp = newJoin(inlineMaterializeOp, anns,
@@ -488,13 +488,13 @@ public class AST2BOpFilters extends AST2BOpBase {
      * 
      * @see ChunkedMaterializationOp
      */
-    protected static PipelineOp addChunkedMaterializationStep(//
-            PipelineOp left,//
-            final Set<IVariable<IV>> vars,//
-            final boolean materializeInlineIvs,//
-            final Long cutoffLimit,//
-            final Properties queryHints,//
-            final AST2BOpContext ctx//
+    protected static PipelineOp addChunkedMaterializationStep(
+            PipelineOp left,
+            final Set<IVariable<IV>> vars,
+            final boolean materializeInlineIvs,
+            final Long cutoffLimit,
+            final Properties queryHints,
+            final AST2BOpContext ctx
             ) {
 
         final int nvars = vars.size();
@@ -524,14 +524,14 @@ public class AST2BOpFilters extends AST2BOpBase {
                 : PipelineOp.Annotations.DEFAULT_MAX_PARALLEL;
 
         return (PipelineOp) applyQueryHints(new ChunkedMaterializationOp(leftOrEmpty(left),
-            new NV(ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),//
-            new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] { ns }), //
-            new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp), //
-            new NV(ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS, materializeInlineIvs), //
+            new NV(ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
+            new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] { ns }),
+            new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp),
+            new NV(ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS, materializeInlineIvs),
             new NV(PipelineOp.Annotations.SHARED_STATE, !ctx.isCluster()),// live stats, but not on the cluster.
-            new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,reorderSolutions),//
-            new NV(PipelineOp.Annotations.MAX_PARALLEL,maxParallel),//
-            new NV(BOp.Annotations.BOP_ID, ctx.nextId())//
+            new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,reorderSolutions),
+            new NV(PipelineOp.Annotations.MAX_PARALLEL,maxParallel),
+            new NV(BOp.Annotations.BOP_ID, ctx.nextId())
             ), queryHints, ctx);
         
     }
@@ -588,12 +588,12 @@ public class AST2BOpFilters extends AST2BOpBase {
      *            are more selective before others, etc.).
      */
     @SuppressWarnings("rawtypes")
-    protected static PipelineOp addMaterializationSteps3(//
-            PipelineOp left,//
-            final Set<IVariable<?>> doneSet,//
+    protected static PipelineOp addMaterializationSteps3(
+            PipelineOp left,
+            final Set<IVariable<?>> doneSet,
             final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization,
-            final Properties queryHints,//
-            final AST2BOpContext ctx//
+            final Properties queryHints,
+            final AST2BOpContext ctx
             ) {
 
         if (needsMaterialization.isEmpty()) {
@@ -633,20 +633,20 @@ public class AST2BOpFilters extends AST2BOpBase {
                 @SuppressWarnings("unchecked")
                 final IValueExpression<IV> ve = (IValueExpression) c.get(0);
 
-                left = addMaterializationSteps1(//
-                        left, //
+                left = addMaterializationSteps1(
+                        left,
                         condId, // right
                         ve, // value expression
                         terms,// varsToMaterialize,
-                        queryHints,//
+                        queryHints,
                         ctx);
                 
             }
 
-            left = applyQueryHints(//
-                new ConditionalRoutingOp(leftOrEmpty(left),//
-                    new NV(BOp.Annotations.BOP_ID, condId),//
-                    new NV(ConditionalRoutingOp.Annotations.CONDITION,c)//
+            left = applyQueryHints(
+                new ConditionalRoutingOp(leftOrEmpty(left),
+                    new NV(BOp.Annotations.BOP_ID, condId),
+                    new NV(ConditionalRoutingOp.Annotations.CONDITION,c)
                 ), queryHints, ctx);
 
         }
@@ -677,13 +677,13 @@ public class AST2BOpFilters extends AST2BOpBase {
      * single operator that prepare the solutions for filter evaluation.
      */
     @SuppressWarnings("rawtypes")
-    protected static PipelineOp addNonConditionalMaterializationSteps(//
-            PipelineOp left,//
-            final Set<IVariable<?>> doneSet,//
+    protected static PipelineOp addNonConditionalMaterializationSteps(
+            PipelineOp left,
+            final Set<IVariable<?>> doneSet,
             final Map<IConstraint, Set<IVariable<IV>>> needsMaterialization,
-            final Long cutoffLimit,//
-            final Properties queryHints,//
-            final AST2BOpContext ctx//
+            final Long cutoffLimit,
+            final Properties queryHints,
+            final AST2BOpContext ctx
             ) {
         
         if (needsMaterialization.isEmpty()) {
@@ -725,13 +725,13 @@ public class AST2BOpFilters extends AST2BOpBase {
              * Parallel evaluation is also disabled.
              */
 
-            left = applyQueryHints(//
-                new ConditionalRoutingOp(leftOrEmpty(left),//
-                    new NV(BOp.Annotations.BOP_ID, ctx.nextId()),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
+            left = applyQueryHints(
+                new ConditionalRoutingOp(leftOrEmpty(left),
+                    new NV(BOp.Annotations.BOP_ID, ctx.nextId()),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
                     // disallow reordering of solutions by the query engine.
-                    new NV(PipelineJoin.Annotations.REORDER_SOLUTIONS, Boolean.FALSE),//
-                    new NV(ConditionalRoutingOp.Annotations.CONDITION, c)//
+                    new NV(PipelineJoin.Annotations.REORDER_SOLUTIONS, Boolean.FALSE),
+                    new NV(ConditionalRoutingOp.Annotations.CONDITION, c)
                 ), queryHints, ctx);
         
         }

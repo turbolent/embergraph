@@ -158,7 +158,7 @@ public class HASendState implements IHASendState, Externalizable {
     private static final int MAGIC_SIZE = Bytes.SIZEOF_LONG;
     
     private static final transient short VERSION0 = 0x0;
-    private static final transient int VERSION0_LEN = //
+    private static final transient int VERSION0_LEN =
             Bytes.SIZEOF_SHORT + // version
             Bytes.SIZEOF_LONG + // messageId
             Bytes.SIZEOF_UUID + // originalSenderId
@@ -187,12 +187,12 @@ public class HASendState implements IHASendState, Externalizable {
 
         messageId = in.readLong();
 
-        originalSenderId = new UUID(//
+        originalSenderId = new UUID(
                 in.readLong(), /* MSB */
                 in.readLong() /* LSB */
         );
 
-        senderId = new UUID(//
+        senderId = new UUID(
                 in.readLong(), /* MSB */
                 in.readLong() /* LSB */
         );
@@ -261,23 +261,23 @@ public class HASendState implements IHASendState, Externalizable {
     }
 
     // static final private int MARKER_SIZE = 8;
-    //
+
     // /**
     // * Unique marker generation with JVM wide random number generator.
     // *
     // * @return A "pretty unique" marker.
     // */
     // private byte[] genMarker() {
-    //
+
     // final byte[] token = new byte[MARKER_SIZE];
-    //
+
     // while (!unique1(token)) {
     // r.nextBytes(token);
     // }
-    //
+
     // return token;
     // }
-    //
+
     // /**
     // * Checks that the first byte is not repeated in the remaining bytes, this
     // * simplifies search for the token in the input stream.
@@ -288,7 +288,7 @@ public class HASendState implements IHASendState, Externalizable {
     // if (bytes[t] == b)
     // return false;
     // }
-    //
+
     // return true;
     // }
 

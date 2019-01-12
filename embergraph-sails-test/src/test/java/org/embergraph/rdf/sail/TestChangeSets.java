@@ -153,7 +153,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // should see all of the stmts[] added
                 
@@ -173,7 +173,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // shouldn't see any change records
                 
@@ -187,7 +187,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // should see all of the stmts2[] added
                 
@@ -266,7 +266,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // should see all of the stmts[] added
                 
@@ -286,7 +286,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // shouldn't see any change records
                 
@@ -300,7 +300,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // should see all of the stmts2[] added
                 
@@ -362,7 +362,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             // remove the stmts[]
 
@@ -371,7 +371,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.remove(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isDebugEnabled()) {
                 log.debug("\ndump store:\n" + tripleStore.dumpStore(true, true, false));
@@ -395,7 +395,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.remove(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             { // shouldn't see any change records
                 
@@ -472,7 +472,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
             
@@ -503,7 +503,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.remove(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
 
             {
                 
@@ -596,7 +596,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isDebugEnabled()) {
                 log.debug("\n" + tripleStore.dumpStore(true, true, false));
@@ -621,7 +621,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isDebugEnabled()) {
                 log.debug("\n" + tripleStore.dumpStore(true, true, false));
@@ -715,7 +715,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
 
             {
                 
@@ -741,7 +741,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.remove(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
 
             {
                 
@@ -835,7 +835,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 cxn.add(stmt);
             }
 
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isDebugEnabled()) {
                 log.debug("\n" + tripleStore.dumpStore(true, true, false));
@@ -845,7 +845,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             // be upgraded to Explicit from Inferred
             cxn.add(update);
 
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isDebugEnabled()) {
                 log.debug("\n" + tripleStore.dumpStore(true, true, false));
@@ -868,7 +868,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             // inference - should be downgraded from Explicit to Inferred
             cxn.remove(update);
 
-            cxn.commit();//
+            cxn.commit();
             
             if (log.isDebugEnabled()) {
                 log.debug("\n" + tripleStore.dumpStore(true, true, false));

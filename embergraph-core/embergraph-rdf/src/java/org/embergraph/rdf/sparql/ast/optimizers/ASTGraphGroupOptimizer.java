@@ -211,11 +211,11 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
      */
     @SuppressWarnings("unchecked")
     private void visitGroups(
-            //
-            final IEvaluationContext context,//
-            final DatasetNode dataSet,//
-            final IGroupNode<IGroupMemberNode> group, //
-            TermNode graphContext//
+
+            final IEvaluationContext context,
+            final DatasetNode dataSet,
+            final IGroupNode<IGroupMemberNode> group,
+            TermNode graphContext
             ) {
 
         if (group instanceof JoinGroupNode && group.getContext() != null) {

@@ -133,18 +133,18 @@ public class DistributedJoinTask extends JoinTask {
 
     public DistributedJoinTask(
 //            final String scaleOutIndexName,
-            final IRule rule,//
-            final IJoinNexus joinNexus,//
-            final int[] order,//
-            final int orderIndex,//
-            final int partitionId,//
-            final AbstractScaleOutFederation<?> fed,//
-            final IJoinMaster master,//
-            final UUID masterUUID,//
-            final IAsynchronousIterator<IBindingSet[]> src,//
-            final IKeyOrder[] keyOrders,//
-            final DataService dataService,//
-            final IVariable[][] requiredVars//
+            final IRule rule,
+            final IJoinNexus joinNexus,
+            final int[] order,
+            final int orderIndex,
+            final int partitionId,
+            final AbstractScaleOutFederation<?> fed,
+            final IJoinMaster master,
+            final UUID masterUUID,
+            final IAsynchronousIterator<IBindingSet[]> src,
+            final IKeyOrder[] keyOrders,
+            final DataService dataService,
+            final IVariable[][] requiredVars
             ) {
 
         super(

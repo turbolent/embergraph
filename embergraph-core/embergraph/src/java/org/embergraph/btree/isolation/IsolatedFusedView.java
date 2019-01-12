@@ -590,7 +590,7 @@ public class IsolatedFusedView extends FusedView {
 
                     if (tmp == null) {
 
-                        tmp = BTree.create(//
+                        tmp = BTree.create(
                                 writeSet.getStore(), // same store.
                                 writeSet.getIndexMetadata().clone() // same metadata
                                 );                        

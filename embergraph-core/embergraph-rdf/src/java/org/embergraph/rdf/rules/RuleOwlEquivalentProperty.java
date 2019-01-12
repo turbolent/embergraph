@@ -48,11 +48,11 @@ public class RuleOwlEquivalentProperty extends Rule {
      */
     public RuleOwlEquivalentProperty(String relationName, Vocabulary vocab) {
 
-        super(  "owl:equivalentProperty",//
-                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("a")), //
-                new SPOPredicate[] { //
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("b"))//
-                },//
+        super(  "owl:equivalentProperty",
+                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("a")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.EQUIVALENTPROPERTY), var("b"))
+                },
                 null//constraints
                 );
         

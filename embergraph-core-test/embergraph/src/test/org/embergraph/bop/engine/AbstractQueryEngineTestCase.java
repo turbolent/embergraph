@@ -551,11 +551,11 @@ abstract public class AbstractQueryEngineTestCase extends TestCase2 {
                     + name
                     + "\" having "
                     + (a1 == null ? "null" : (a1 instanceof BOp ? ((BOp) a1)
-                            .toShortString() : a1.toString()))//
+                            .toShortString() : a1.toString()))
                     + " with "
-                    + //
+                    +
                     (a2 == null ? "null" : (a2 instanceof BOp ? ((BOp) a2)
-                            .toShortString() : a2.toString()))//
+                            .toShortString() : a2.toString()))
             );
 
             if (a1 == a2) // same ref, including null.
@@ -714,14 +714,14 @@ abstract public class AbstractQueryEngineTestCase extends TestCase2 {
 	 * @throws QueryEvaluationException
 	 */
 	static public void compareTupleQueryResults(
-		final String name,//
-		final String testURI, //
-		final AbstractTripleStore store,//
-		final ASTContainer astContainer,//
-        final TupleQueryResult queryResult,//
-        final TupleQueryResult expectedResult,//
-        final boolean laxCardinality,//
-		final boolean checkOrder//
+		final String name,
+		final String testURI,
+		final AbstractTripleStore store,
+		final ASTContainer astContainer,
+        final TupleQueryResult queryResult,
+        final TupleQueryResult expectedResult,
+        final boolean laxCardinality,
+		final boolean checkOrder
 	) throws QueryEvaluationException {
 
     /*

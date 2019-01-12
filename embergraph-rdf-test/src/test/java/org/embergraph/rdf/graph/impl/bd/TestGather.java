@@ -216,9 +216,9 @@ public class TestGather extends AbstractBigdataGraphTestCase {
         // gather in-edges for :mike
         {
             
-            final Set<Statement> expected = set(//
+            final Set<Statement> expected = set(
             (Statement) new SPO(p.getBryan(), p.getFoafKnows(), p.getMike(),
-                    StatementEnum.Explicit)//
+                    StatementEnum.Explicit)
             );
 
             doGatherTest(EdgesEnum.InEdges, expected, p.getMike()/* startingVertex */);
@@ -228,11 +228,11 @@ public class TestGather extends AbstractBigdataGraphTestCase {
         // gather out-edges for :mike
         {
             
-            final Set<Statement> expected = set(//
+            final Set<Statement> expected = set(
                     (Statement) new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(),
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
                     (Statement) new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(),
-                            StatementEnum.Explicit)//
+                            StatementEnum.Explicit)
             );
 
             doGatherTest(EdgesEnum.OutEdges, expected, p.getMike()/* startingVertex */);
@@ -242,13 +242,13 @@ public class TestGather extends AbstractBigdataGraphTestCase {
         // gather all-edges for :mike 
         {
             
-            final Set<Statement> expected = set(//
+            final Set<Statement> expected = set(
                     (Statement) new SPO(p.getBryan(), p.getFoafKnows(), p.getMike(),
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
                     (Statement) new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(),
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
                     (Statement) new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(),
-                            StatementEnum.Explicit)//
+                            StatementEnum.Explicit)
             );
 
             doGatherTest(EdgesEnum.AllEdges, expected, p.getMike()/* startingVertex */);

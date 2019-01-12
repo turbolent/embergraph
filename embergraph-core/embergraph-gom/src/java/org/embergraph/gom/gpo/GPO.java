@@ -598,9 +598,9 @@ public class GPO implements IGPO {
         m_id = om.getValueFactory().asValue(id);
         
         final BigdataStatement stmt2 = om.getValueFactory().createStatement(
-                ((ObjectMgrModel)om).bestEffortIntern(stmt.getSubject()),//
-                ((ObjectMgrModel)om).internKey(stmt.getPredicate()), //
-                ((ObjectMgrModel)om).bestEffortIntern(stmt.getObject()) //
+                ((ObjectMgrModel)om).bestEffortIntern(stmt.getSubject()),
+                ((ObjectMgrModel)om).internKey(stmt.getPredicate()),
+                ((ObjectMgrModel)om).bestEffortIntern(stmt.getObject())
                 );
 
         this.m_stmt = stmt2;
@@ -1199,14 +1199,14 @@ public class GPO implements IGPO {
 	}
 
 	// private void update(final GPOEntry entry) {
-	//
+
 	// assert m_materialized;
 	//		
 	// // final Iterator<Value> removes = entry.removes();
 	// // while (removes.hasNext()) {
 	// // m_om.retract(m_id, entry.m_key, removes.next());
 	// // }
-	// //
+	//
 	// // final Iterator<Value> inserts = entry.additions();
 	// // while (inserts.hasNext()) {
 	// // m_om.insert(m_id, entry.m_key, inserts.next());

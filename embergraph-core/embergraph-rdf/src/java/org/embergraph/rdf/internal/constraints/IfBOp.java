@@ -50,8 +50,8 @@ public class IfBOp extends IVValueExpression<IV> implements IPassesMaterializati
         
     }
     
-    public IfBOp(final IValueExpression<? extends IV> conditional,//
-            final IValueExpression<? extends IV> expression1,//
+    public IfBOp(final IValueExpression<? extends IV> conditional,
+            final IValueExpression<? extends IV> expression1,
             final IValueExpression<? extends IV> expression2) {
 
         this(new BOp[] { conditional,expression1,expression2 }, BOp.NOANNS);

@@ -133,9 +133,9 @@ public class TestFactory extends TestCase2 {
                 0// timezone
                 );
         
-		assertEquals(//
-				"http://www.w3.org/2001/XMLSchema#date",//
-				vf.createLiteral(cal).getDatatype().stringValue()//
+		assertEquals(
+				"http://www.w3.org/2001/XMLSchema#date",
+				vf.createLiteral(cal).getDatatype().stringValue()
 				);
 
     }

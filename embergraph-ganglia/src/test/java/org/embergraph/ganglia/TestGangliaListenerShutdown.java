@@ -72,10 +72,10 @@ public class TestGangliaListenerShutdown extends TestCase {
         };
         
         final GangliaListener gangliaListener = new GangliaListener(
-                InetAddress.getByName(IGangliaDefaults.DEFAULT_GROUP),//
-                IGangliaDefaults.DEFAULT_PORT, //
-                new GangliaMessageDecoder31(),//
-                handler//
+                InetAddress.getByName(IGangliaDefaults.DEFAULT_GROUP),
+                IGangliaDefaults.DEFAULT_PORT,
+                new GangliaMessageDecoder31(),
+                handler
                 );
         
         ExecutorService executorService = null;

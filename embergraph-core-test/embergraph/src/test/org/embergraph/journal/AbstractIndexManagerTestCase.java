@@ -46,9 +46,9 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
 
 //    private final static boolean DEBUG = log.isDebugEnabled();
     
-    //
+
     // Constructors.
-    //
+
 
     public AbstractIndexManagerTestCase() {}
     
@@ -109,9 +109,9 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
         
     }
 
-    //
+
     // Properties
-    //
+
 
     @Override
     public Properties getProperties() {
@@ -168,9 +168,9 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
     //************************************************************
     //************************************************************
     //************************************************************
-    //
+
     // Test helpers.
-    //
+
 
     /**
 //     * <p>

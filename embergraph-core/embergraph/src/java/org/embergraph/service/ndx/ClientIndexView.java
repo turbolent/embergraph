@@ -2262,24 +2262,24 @@ public class ClientIndexView implements IScaleOutClientIndex {
                 // @todo config deque vs queue (deque combines on add() as well)
                 new LinkedBlockingDeque<KVO<O>[]>(conf.getMasterQueueCapacity()),
 //                new ArrayBlockingQueue<KVO<O>[]>(conf.getMasterQueueCapacity()),
-                conf.getMasterChunkSize(),//
+                conf.getMasterChunkSize(),
                 conf.getMasterChunkTimeoutNanos(),// 
-                TimeUnit.NANOSECONDS,//
+                TimeUnit.NANOSECONDS,
                 true// ordered
         );
         
         final IndexWriteTask.M<T, O, R, A> task = new IndexWriteTask.M<T, O, R, A>(
-                this, //
-                conf.getSinkIdleTimeoutNanos(),//
-                conf.getSinkPollTimeoutNanos(),//
-                conf.getSinkQueueCapacity(), //
-                conf.getSinkChunkSize(), //
-                conf.getSinkChunkTimeoutNanos(),//
-                duplicateRemover,//
-                ctor,//
-                resultHandler,//
+                this,
+                conf.getSinkIdleTimeoutNanos(),
+                conf.getSinkPollTimeoutNanos(),
+                conf.getSinkQueueCapacity(),
+                conf.getSinkChunkSize(),
+                conf.getSinkChunkTimeoutNanos(),
+                duplicateRemover,
+                ctor,
+                resultHandler,
                 fed.getIndexCounters(name).asynchronousStats,
-                writeBuffer//
+                writeBuffer
                 );
 
         /**

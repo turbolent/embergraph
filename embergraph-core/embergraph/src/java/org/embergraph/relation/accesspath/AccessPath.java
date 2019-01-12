@@ -302,11 +302,11 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
      *            The order in which the elements would be visited for this
      *            access path.
      */
-    public AccessPath(//
-            final IRelation<R> relation,//
-            final IIndexManager localIndexManager,  //
-            final IPredicate<R> predicate,//
-            final IKeyOrder<R> keyOrder  //
+    public AccessPath(
+            final IRelation<R> relation,
+            final IIndexManager localIndexManager,
+            final IPredicate<R> predicate,
+            final IKeyOrder<R> keyOrder
             ) {
 
         if (relation == null)
@@ -1714,8 +1714,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
                 / (partitionCount * (njournals + nsegments));
 
         final double costPerJournal = new BTreeCostModel(diskCostModel)
-                .rangeScan(rangeCountOnJournal, //
-                        mdi.getIndexMetadata().getBranchingFactor(), //
+                .rangeScan(rangeCountOnJournal,
+                        mdi.getIndexMetadata().getBranchingFactor(),
                         5,// height (SWAG)
                         70// leafUtilization (percent, SWAG).
                 );

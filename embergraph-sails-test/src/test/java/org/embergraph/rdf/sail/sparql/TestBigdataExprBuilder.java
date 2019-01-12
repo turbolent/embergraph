@@ -274,9 +274,9 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             final GroupByNode groupBy = new GroupByNode();
             expected.setGroupBy(groupBy);
-            groupBy.addExpr(//
+            groupBy.addExpr(
                     new AssignmentNode(new VarNode("z"),
-                    (IValueExpressionNode) new VarNode("o"))//
+                    (IValueExpressionNode) new VarNode("o"))
                     );
 
         }
@@ -382,11 +382,11 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             final HavingNode having = new HavingNode();
             expected.setHaving(having);
-            having.addExpr(new FunctionNode( //
-                    FunctionRegistry.GT,//
+            having.addExpr(new FunctionNode(
+                    FunctionRegistry.GT,
                     null, // scalarValues
                     new ValueExpressionNode[] {// args
-                    new VarNode("o"), new VarNode("s") })//
+                    new VarNode("o"), new VarNode("s") })
             );
             
         }
@@ -952,17 +952,17 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_from_and_from_named() throws MalformedQueryException,
             TokenMgrError, ParseException {
         
-        final String sparql = "" + //
-                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + //
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT ?who ?g ?mbox\n" + //
-                "FROM <http://example.org/dft.ttl>\n" + //
-                "FROM NAMED <http://example.org/alice>\n" + //
-                "FROM NAMED <http://example.org/bob>\n" + //
-                "WHERE {\n" + //
-                "    ?g dc:publisher ?who .\n" + //
-                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" + //
-                "}"//
+        final String sparql = "" +
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT ?who ?g ?mbox\n" +
+                "FROM <http://example.org/dft.ttl>\n" +
+                "FROM NAMED <http://example.org/alice>\n" +
+                "FROM NAMED <http://example.org/bob>\n" +
+                "WHERE {\n" +
+                "    ?g dc:publisher ?who .\n" +
+                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" +
+                "}"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1046,17 +1046,17 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_from_and_from_named_with_unknown_graph()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        final String sparql = "" + //
-                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + //
-                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + //
-                "SELECT ?who ?g ?mbox\n" + //
-                "FROM <http://example.org/dft.ttl>\n" + //
-                "FROM NAMED <http://example.org/alice>\n" + //
-                "FROM NAMED <http://example.org/bob>\n" + //
-                "WHERE {\n" + //
-                "    ?g dc:publisher ?who .\n" + //
-                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" + //
-                "}"//
+        final String sparql = "" +
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+                "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+                "SELECT ?who ?g ?mbox\n" +
+                "FROM <http://example.org/dft.ttl>\n" +
+                "FROM NAMED <http://example.org/alice>\n" +
+                "FROM NAMED <http://example.org/bob>\n" +
+                "WHERE {\n" +
+                "    ?g dc:publisher ?who .\n" +
+                "    GRAPH ?g { ?x foaf:mbox ?mbox } \n" +
+                "}"
         ;
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -1087,10 +1087,10 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 final BigdataURI uri3 = valueFactory
                         .createURI("http://example.org/bob");
 
-                final BigdataValue[] values = new BigdataValue[] { //
-                        uri1, //
-                        uri2,//
-//                        uri3 //
+                final BigdataValue[] values = new BigdataValue[] {
+                        uri1,
+                        uri2,
+//                        uri3
                 };
 
                 tripleStore.getLexiconRelation().addTerms(values,
@@ -1164,12 +1164,12 @@ public class TestBigdataExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_bnode_bracket_syntax_05() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = "" + //
-                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + //
-                " SELECT * {\n" + //
-                "   [ foaf:name ?name ;\n" + //
-                "     foaf:mbox <mailto:alice@example.org>\n" + //
-                "   ]\n" + //
+        final String sparql = "" +
+                "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+                " SELECT * {\n" +
+                "   [ foaf:name ?name ;\n" +
+                "     foaf:mbox <mailto:alice@example.org>\n" +
+                "   ]\n" +
                 " }";
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);

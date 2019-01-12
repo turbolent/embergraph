@@ -415,10 +415,10 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
             
         }
         
-        final G stmt = (G) getValueFactory().createStatement(//
-                (BigdataResource) convertValue(e.getSubject()), //
-                (BigdataURI)      convertValue(e.getPredicate()), //
-                    convertValue(e.getObject()), //
+        final G stmt = (G) getValueFactory().createStatement(
+                (BigdataResource) convertValue(e.getSubject()),
+                (BigdataURI)      convertValue(e.getPredicate()),
+                    convertValue(e.getObject()),
                 (BigdataResource) convertValue(e.getContext()),
                 (e instanceof BigdataStatement ? ((BigdataStatement) e)
                         .getStatementType() : StatementEnum.Explicit));
@@ -474,11 +474,11 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     @SuppressWarnings("unchecked")
     public void add(Resource s, URI p, Value o, Resource c, StatementEnum type) {
         
-        final G stmt = (G)  getValueFactory().createStatement(//
-                (BigdataResource) convertValue(s), //
-                (BigdataURI)      convertValue(p), //
-                                  convertValue(o), //
-                (BigdataResource) convertValue(c), //
+        final G stmt = (G)  getValueFactory().createStatement(
+                (BigdataResource) convertValue(s),
+                (BigdataURI)      convertValue(p),
+                                  convertValue(o),
+                (BigdataResource) convertValue(c),
                 type);
         
         add((F)stmt); 

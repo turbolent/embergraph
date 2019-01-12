@@ -184,7 +184,7 @@ public class TestFederatedQueryEngine extends
         /*
          * The data to insert (in key order).
          */
-        final E[] a = {//
+        final E[] a = {
                 // partition0
                 new E("John", "Mary"),// 
                 new E("Leon", "Paul"),// 
@@ -197,15 +197,15 @@ public class TestFederatedQueryEngine extends
         // The separator key between the two index partitions.
         separatorKey = KeyBuilder.newUnicodeInstance().append("Mary").getKey();
 
-        final byte[][] separatorKeys = new byte[][] {//
-                new byte[] {}, //
-                separatorKey //
+        final byte[][] separatorKeys = new byte[][] {
+                new byte[] {},
+                separatorKey
         };
 
         // two partitions on the same data service.
-        final UUID[] dataServices = new UUID[] {//
-                dataService0.getServiceUUID(),//
-                dataService0.getServiceUUID(),//
+        final UUID[] dataServices = new UUID[] {
+                dataService0.getServiceUUID(),
+                dataService0.getServiceUUID(),
         };
 
         /*
@@ -255,12 +255,12 @@ public class TestFederatedQueryEngine extends
 
         final int startId = 1;
         final PipelineOp query = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                        FederationChunkHandler.TEST_INSTANCE),//
+                        FederationChunkHandler.TEST_INSTANCE),
                 }));
 
         final UUID queryId = UUID.randomUUID();
@@ -295,8 +295,8 @@ public class TestFederatedQueryEngine extends
         // Verify results.
         {
             // the expected solution (just one empty binding set).
-            final IBindingSet[] expected = new IBindingSet[] {//
-            new ListBindingSet() //
+            final IBindingSet[] expected = new IBindingSet[] {
+            new ListBindingSet()
             };
 
             AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected,
@@ -318,34 +318,34 @@ public class TestFederatedQueryEngine extends
         final int startId = 1;
         final int sliceId = 4;
 
-        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query = new SliceOp(new BOp[] { startOp },
                 // slice annotations
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, sliceId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                FederationChunkHandler.TEST_INSTANCE),//
-                        })//
+                                FederationChunkHandler.TEST_INSTANCE),
+                        })
         );
 
         // the expected solutions (order is not reliable due to concurrency).
-        final IBindingSet[] expected = new IBindingSet[] {//
-            new ListBindingSet(//
-                new IVariable[] { Var.var("value") },//
-                new IConstant[] { new Constant<String>("Paul") }//
-                ), //
-            new ListBindingSet(//
-                new IVariable[] { Var.var("value") },//
-                new IConstant[] { new Constant<String>("John") }//
+        final IBindingSet[] expected = new IBindingSet[] {
+            new ListBindingSet(
+                new IVariable[] { Var.var("value") },
+                new IConstant[] { new Constant<String>("Paul") }
+                ),
+            new ListBindingSet(
+                new IVariable[] { Var.var("value") },
+                new IConstant[] { new Constant<String>("John") }
         ) };
 
         final UUID queryId = UUID.randomUUID();
@@ -416,78 +416,78 @@ public class TestFederatedQueryEngine extends
         final int predId = 3;
         final int sliceId = 4;
 
-        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         // access path has has no constants and no constraint.
         final Predicate<E> predOp = new Predicate<E>(new IVariableOrConstant[] {
                 x, y}, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                         // Note: local access path!
                         new NV( Predicate.Annotations.REMOTE_ACCESS_PATH,false),
                 }));
 
 		final PipelineJoin<E> joinOp = new PipelineJoin<E>(
-				new BOp[] { startOp },//
-				new NV(Predicate.Annotations.BOP_ID, joinId),//
-				new NV(PipelineJoin.Annotations.PREDICATE, predOp),//
+				new BOp[] { startOp },
+				new NV(Predicate.Annotations.BOP_ID, joinId),
+				new NV(PipelineJoin.Annotations.PREDICATE, predOp),
 				// Note: shard-partitioned joins!
 				new NV(Predicate.Annotations.EVALUATION_CONTEXT,
 						BOpEvaluationContext.SHARDED));
 
         final PipelineOp query = new SliceOp(new BOp[] { joinOp },
         // slice annotations
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, sliceId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                FederationChunkHandler.TEST_INSTANCE),//
-                        })//
+                                FederationChunkHandler.TEST_INSTANCE),
+                        })
         );
 
         // the expected solutions (order is not reliable due to concurrency).
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
-                        new IConstant[] { //
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x, y },
+                        new IConstant[] {
                                 new Constant<String>("John"),
-                                new Constant<String>("Mary") }//
-                ), //
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
-                        new IConstant[] {//
+                                new Constant<String>("Mary") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
+                        new IConstant[] {
                                 new Constant<String>("Leon"),
-                                new Constant<String>("Paul") }//
+                                new Constant<String>("Paul") }
                 ), // 
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
-                        new IConstant[] { //
+                new ListBindingSet(
+                        new IVariable[] { x, y },
+                        new IConstant[] {
                                 new Constant<String>("Mary"),
-                                new Constant<String>("John") }//
-                ), //
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
-                        new IConstant[] {//
+                                new Constant<String>("John") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
+                        new IConstant[] {
                                 new Constant<String>("Mary"),
-                                new Constant<String>("Paul") }//
-                ), //
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
-                        new IConstant[] { //
+                                new Constant<String>("Paul") }
+                ),
+                new ListBindingSet(
+                        new IVariable[] { x, y },
+                        new IConstant[] {
                                 new Constant<String>("Paul"),
-                                new Constant<String>("Leon") }//
-                ), //
+                                new Constant<String>("Leon") }
+                ),
                 };
 //        // partition0
 //        new E("John", "Mary"),// 
@@ -577,10 +577,10 @@ public class TestFederatedQueryEngine extends
         final int predId = 3;
         final int sliceId = 4;
 
-        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         /*
@@ -591,23 +591,23 @@ public class TestFederatedQueryEngine extends
          */
         final Predicate<E> predOp = new Predicate<E>(new IVariableOrConstant[] {
                 x, y}, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                         // Note: local access path!
                         new NV( Predicate.Annotations.REMOTE_ACCESS_PATH,false),
                 }));
 
 		final PipelineJoin<E> joinOp = new PipelineJoin<E>(
-				new BOp[] { startOp },//
-				new NV(Predicate.Annotations.BOP_ID, joinId),//
+				new BOp[] { startOp },
+				new NV(Predicate.Annotations.BOP_ID, joinId),
 				new NV(PipelineJoin.Annotations.PREDICATE, predOp),
 				// Note: shard-partitioned joins!
 				new NV(Predicate.Annotations.EVALUATION_CONTEXT,
-						BOpEvaluationContext.SHARDED),//
+						BOpEvaluationContext.SHARDED),
 				// impose constraint on the join.
 				new NV(PipelineJoin.Annotations.CONSTRAINTS,
 						new IConstraint[] { Constraint.wrap(new EQConstant(y,
@@ -615,29 +615,29 @@ public class TestFederatedQueryEngine extends
         
         final PipelineOp query = new SliceOp(new BOp[] { joinOp },
         // slice annotations
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, sliceId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                FederationChunkHandler.TEST_INSTANCE),//
-                        })//
+                                FederationChunkHandler.TEST_INSTANCE),
+                        })
         );
 
         // the expected solutions (order is not reliable due to concurrency).
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Leon"),
-                                new Constant<String>("Paul") }//
+                                new Constant<String>("Paul") }
                 ), // 
-                new ListBindingSet(//
-                        new IVariable[] { x, y },//
+                new ListBindingSet(
+                        new IVariable[] { x, y },
                         new IConstant[] { new Constant<String>("Mary"),
-                                new Constant<String>("Paul") }//
-                ), //
+                                new Constant<String>("Paul") }
+                ),
         };
 //        // partition0
 //        new E("John", "Mary"),// 
@@ -733,55 +733,55 @@ public class TestFederatedQueryEngine extends
         final int predId = 3;
         final int sliceId = 4;
 
-        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+        final StartOp startOp = new StartOp(new BOp[] {}, NV.asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         // Note: tuples with "Mary" in the 1st column are on partition1.
         final Predicate<E> predOp = new Predicate<E>(new IVariableOrConstant[] {
                 new Constant<String>("Mary"), Var.var("value") }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
+                                new String[] { namespace }),
                         // Note: local access path!
                         new NV( Predicate.Annotations.REMOTE_ACCESS_PATH,false),
-                        new NV(Predicate.Annotations.BOP_ID, predId),//
+                        new NV(Predicate.Annotations.BOP_ID, predId),
                         new NV(Annotations.TIMESTAMP,
-                                ITx.READ_COMMITTED),//
+                                ITx.READ_COMMITTED),
                 }));
 
 		final PipelineJoin<E> joinOp = new PipelineJoin<E>(
-				new BOp[] { startOp },//
-				new NV(Predicate.Annotations.BOP_ID, joinId),//
-				new NV(PipelineJoin.Annotations.PREDICATE, predOp),//
+				new BOp[] { startOp },
+				new NV(Predicate.Annotations.BOP_ID, joinId),
+				new NV(PipelineJoin.Annotations.PREDICATE, predOp),
 				// Note: shard-partitioned joins!
 				new NV(Predicate.Annotations.EVALUATION_CONTEXT,
 						BOpEvaluationContext.SHARDED));
 
         final PipelineOp query = new SliceOp(new BOp[] { joinOp },
                 // slice annotations
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, sliceId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                FederationChunkHandler.TEST_INSTANCE),//
-                        })//
+                                FederationChunkHandler.TEST_INSTANCE),
+                        })
         );
 
         // the expected solutions (order is not reliable due to concurrency).
-        final IBindingSet[] expected = new IBindingSet[] {//
-            new ListBindingSet(//
-                new IVariable[] { Var.var("value") },//
-                new IConstant[] { new Constant<String>("Paul") }//
-                ), //
-            new ListBindingSet(//
-                new IVariable[] { Var.var("value") },//
-                new IConstant[] { new Constant<String>("John") }//
+        final IBindingSet[] expected = new IBindingSet[] {
+            new ListBindingSet(
+                new IVariable[] { Var.var("value") },
+                new IConstant[] { new Constant<String>("Paul") }
+                ),
+            new ListBindingSet(
+                new IVariable[] { Var.var("value") },
+                new IConstant[] { new Constant<String>("John") }
         ) };
 
         final UUID queryId = UUID.randomUUID();
@@ -864,59 +864,59 @@ public class TestFederatedQueryEngine extends
         final int sliceId = 6;
         
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
         
         final Predicate<?> pred1Op = new Predicate<E>(new IVariableOrConstant[] {
                 Var.var("x"), Var.var("y") }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId1),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId1),
                         // Note: local access path!
                         new NV( Predicate.Annotations.REMOTE_ACCESS_PATH,false),
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred2Op = new Predicate<E>(new IVariableOrConstant[] {
                 Var.var("y"), Var.var("z") }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
-                        new NV(Predicate.Annotations.BOP_ID, predId2),//
+                                new String[] { namespace }),
+                        new NV(Predicate.Annotations.BOP_ID, predId2),
                         // Note: local access path!
                         new NV( Predicate.Annotations.REMOTE_ACCESS_PATH,false),
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
-        final PipelineOp join1Op = new PipelineJoin<E>(//
-        		new BOp[]{startOp},//
-                new NV(Predicate.Annotations.BOP_ID, joinId1),//
-                new NV(PipelineJoin.Annotations.PREDICATE,pred1Op),//
+        final PipelineOp join1Op = new PipelineJoin<E>(
+        		new BOp[]{startOp},
+                new NV(Predicate.Annotations.BOP_ID, joinId1),
+                new NV(PipelineJoin.Annotations.PREDICATE,pred1Op),
                 // Note: shard-partitioned joins!
                 new NV( Predicate.Annotations.EVALUATION_CONTEXT,
                         BOpEvaluationContext.SHARDED));
 
-		final PipelineOp join2Op = new PipelineJoin<E>(//
-				new BOp[] { join1Op },//
-				new NV(Predicate.Annotations.BOP_ID, joinId2),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op),//
+		final PipelineOp join2Op = new PipelineJoin<E>(
+				new BOp[] { join1Op },
+				new NV(Predicate.Annotations.BOP_ID, joinId2),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op),
 				// Note: shard-partitioned joins!
 				new NV(Predicate.Annotations.EVALUATION_CONTEXT,
 						BOpEvaluationContext.SHARDED));
 
         final PipelineOp query = new SliceOp(new BOp[] { join2Op },
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, sliceId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                FederationChunkHandler.TEST_INSTANCE),//
+                                FederationChunkHandler.TEST_INSTANCE),
                         }));
 
         // start the query.
@@ -936,18 +936,18 @@ public class TestFederatedQueryEngine extends
         {
 
             // the expected solutions.
-            final IBindingSet[] expected = new IBindingSet[] {//
+            final IBindingSet[] expected = new IBindingSet[] {
             new ListBindingSet(// partition1
-                    new IVariable[] { Var.var("x"), Var.var("y"), Var.var("z") },//
+                    new IVariable[] { Var.var("x"), Var.var("y"), Var.var("z") },
                     new IConstant[] { new Constant<String>("Mary"),
                             new Constant<String>("Paul"),
-                            new Constant<String>("Leon") }//
-            ),//
+                            new Constant<String>("Leon") }
+            ),
             new ListBindingSet(// partition0
-                    new IVariable[] { Var.var("x"), Var.var("y"), Var.var("z") },//
+                    new IVariable[] { Var.var("x"), Var.var("y"), Var.var("z") },
                     new IConstant[] { new Constant<String>("Mary"),
                             new Constant<String>("John"),
-                            new Constant<String>("Mary") }//
+                            new Constant<String>("Mary") }
             )};
 
             AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected,
@@ -1059,51 +1059,51 @@ public class TestFederatedQueryEngine extends
         final IVariable<?> z = Var.var("z");
         
         final PipelineOp startOp = new StartOp(new BOp[] {},
-                NV.asMap(new NV[] {//
-                        new NV(Predicate.Annotations.BOP_ID, startId),//
+                NV.asMap(new NV[] {
+                        new NV(Predicate.Annotations.BOP_ID, startId),
                         new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
+                                BOpEvaluationContext.CONTROLLER),
                         }));
         
         final Predicate<?> pred1Op = new Predicate<E>(
                 new IVariableOrConstant[] { x, y }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
+                                new String[] { namespace }),
                         // Note: local access path!
                         new NV( Predicate.Annotations.REMOTE_ACCESS_PATH,false),
-                        new NV(Predicate.Annotations.BOP_ID, predId1),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                        new NV(Predicate.Annotations.BOP_ID, predId1),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
         final Predicate<?> pred2Op = new Predicate<E>(
                 new IVariableOrConstant[] { y, z }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                         new NV(Predicate.Annotations.RELATION_NAME,
-                                new String[] { namespace }),//
+                                new String[] { namespace }),
                         // Note: local access path!
                         new NV(Predicate.Annotations.REMOTE_ACCESS_PATH,false),
                         // join is optional.
-                        new NV(Predicate.Annotations.OPTIONAL, true),//
-                        new NV(Predicate.Annotations.BOP_ID, predId2),//
-                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),//
+                        new NV(Predicate.Annotations.OPTIONAL, true),
+                        new NV(Predicate.Annotations.BOP_ID, predId2),
+                        new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
                 }));
         
-		final PipelineOp join1Op = new PipelineJoin<E>(//
-				new BOp[] { startOp },//
-				new NV(Predicate.Annotations.BOP_ID, joinId1),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred1Op),//
+		final PipelineOp join1Op = new PipelineJoin<E>(
+				new BOp[] { startOp },
+				new NV(Predicate.Annotations.BOP_ID, joinId1),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred1Op),
 				// Note: shard-partitioned joins!
 				new NV(Predicate.Annotations.EVALUATION_CONTEXT,
 						BOpEvaluationContext.SHARDED));
 
-		final PipelineOp join2Op = new PipelineJoin<E>(//
-				new BOp[] { join1Op },//
-				new NV(Predicate.Annotations.BOP_ID, joinId2),//
-				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op),//
+		final PipelineOp join2Op = new PipelineJoin<E>(
+				new BOp[] { join1Op },
+				new NV(Predicate.Annotations.BOP_ID, joinId2),
+				new NV(PipelineJoin.Annotations.PREDICATE, pred2Op),
 				// Note: shard-partitioned joins!
 				new NV(Predicate.Annotations.EVALUATION_CONTEXT,
-						BOpEvaluationContext.SHARDED),//
+						BOpEvaluationContext.SHARDED),
 //				// constraint x == z
 //				new NV(PipelineJoin.Annotations.CONSTRAINTS,
 //						new IConstraint[] { Constraint.wrap(new EQ(x,z)) }),
@@ -1117,16 +1117,16 @@ public class TestFederatedQueryEngine extends
 						Constraint.wrap(new EQ(x, z)))
 				));
 		
-        final PipelineOp sliceOp = new SliceOp(//
+        final PipelineOp sliceOp = new SliceOp(
                 new BOp[]{condOp},
-                NV.asMap(new NV[] {//
-                        new NV(BOp.Annotations.BOP_ID, sliceId),//
+                NV.asMap(new NV[] {
+                        new NV(BOp.Annotations.BOP_ID, sliceId),
                         new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                                BOpEvaluationContext.CONTROLLER),//
-                        new NV(PipelineOp.Annotations.SHARED_STATE,true),//
-                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),//
+                                BOpEvaluationContext.CONTROLLER),
+                        new NV(PipelineOp.Annotations.SHARED_STATE,true),
+                        new NV(PipelineOp.Annotations.REORDER_SOLUTIONS,false),
                         new NV(QueryEngine.Annotations.CHUNK_HANDLER,
-                                FederationChunkHandler.TEST_INSTANCE),//
+                                FederationChunkHandler.TEST_INSTANCE),
                         }));
 
         final PipelineOp query = sliceOp;
@@ -1141,7 +1141,7 @@ public class TestFederatedQueryEngine extends
 ////            initialBindings.set(Var.var("x"), new Constant<String>("Mary"));
 //
 //            initialChunkMessage = new LocalChunkMessage<IBindingSet>(queryEngine,
-//                    queryId, startId,//
+//                    queryId, startId,
 //                    -1, // partitionId
 //                    newBindingSetIterator(initialBindings));
 //        }
@@ -1152,31 +1152,31 @@ public class TestFederatedQueryEngine extends
         {
 
             // the expected solutions.
-            final IBindingSet[] expected = new IBindingSet[] {//
+            final IBindingSet[] expected = new IBindingSet[] {
             // solutions where the 2nd join succeeds.
-            new ListBindingSet(//
-                    new IVariable[] { x, y, z },//
+            new ListBindingSet(
+                    new IVariable[] { x, y, z },
                     new IConstant[] { new Constant<String>("John"),
                             new Constant<String>("Mary"),
-                            new Constant<String>("John") }//
+                            new Constant<String>("John") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { x, y, z },//
+            new ListBindingSet(
+                    new IVariable[] { x, y, z },
                     new IConstant[] { new Constant<String>("Mary"),
                             new Constant<String>("John"),
-                            new Constant<String>("Mary") }//
+                            new Constant<String>("Mary") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { x, y, z },//
+            new ListBindingSet(
+                    new IVariable[] { x, y, z },
                     new IConstant[] { new Constant<String>("Leon"),
                             new Constant<String>("Paul"),
-                            new Constant<String>("Leon") }//
+                            new Constant<String>("Leon") }
             ),
-            new ListBindingSet(//
-                    new IVariable[] { x, y, z },//
+            new ListBindingSet(
+                    new IVariable[] { x, y, z },
                     new IConstant[] { new Constant<String>("Paul"),
                             new Constant<String>("Leon"),
-                            new Constant<String>("Paul") }//
+                            new Constant<String>("Paul") }
             ),
             /*
              * No. The CONSTRAINT on the 2nd join [x == y] filters all
@@ -1188,10 +1188,10 @@ public class TestFederatedQueryEngine extends
 //             * Plus anything we read from the first access path which
 //             * did not pass the 2nd join.
              */
-//            new ListBindingSet(//
-//                    new IVariable[] { Var.var("x"), Var.var("y") },//
+//            new ListBindingSet(
+//                    new IVariable[] { Var.var("x"), Var.var("y") },
 //                    new IConstant[] { new Constant<String>("Mary"),
-//                            new Constant<String>("Paul") }//
+//                            new Constant<String>("Paul") }
 //            ),
             };
 

@@ -112,7 +112,7 @@ public class TestFastRangeCountOp extends TestCase2 {
         rel.create();
 
         // data to insert.
-        final E[] a = {//
+        final E[] a = {
                 new E("John", "Mary"),// 
                 new E("Mary", "Paul"),// 
                 new E("Paul", "Leon"),// 
@@ -170,27 +170,27 @@ public class TestFastRangeCountOp extends TestCase2 {
 
 		final Predicate<E> predOp = new Predicate<E>(new IVariableOrConstant[] {
 				new Constant<String>("Mary"), Var.var("x") }, NV
-				.asMap(new NV[] {//
+				.asMap(new NV[] {
 						new NV(Predicate.Annotations.RELATION_NAME,
-								new String[] { namespace }),//
-						new NV(Predicate.Annotations.BOP_ID, predId),//
+								new String[] { namespace }),
+						new NV(Predicate.Annotations.BOP_ID, predId),
 						new NV(Annotations.TIMESTAMP,
-								ITx.READ_COMMITTED),//
+								ITx.READ_COMMITTED),
 				}));
 
 		final FastRangeCountOp<E> query = new FastRangeCountOp<E>(
 				new BOp[] {},// args
-				new NV(FastRangeCountOp.Annotations.BOP_ID, joinId),//
-				new NV(FastRangeCountOp.Annotations.PREDICATE, predOp),//
-				new NV(FastRangeCountOp.Annotations.COUNT_VAR, Var.var("count"))//
+				new NV(FastRangeCountOp.Annotations.BOP_ID, joinId),
+				new NV(FastRangeCountOp.Annotations.PREDICATE, predOp),
+				new NV(FastRangeCountOp.Annotations.COUNT_VAR, Var.var("count"))
 				);
 
         // the expected solutions.
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { Var.var("count") },//
-                        new IConstant[] { new Constant<XSDIntegerIV>(new XSDIntegerIV(BigInteger.valueOf(2L))) }//
-                ),//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { Var.var("count") },
+                        new IConstant[] { new Constant<XSDIntegerIV>(new XSDIntegerIV(BigInteger.valueOf(2L))) }
+                ),
         };
 
         final BOpStats stats = query.newStats();

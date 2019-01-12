@@ -519,10 +519,10 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore implem
 //        
 ////        // Verify transfer is complete.
 ////            if (nxfer != count) {
-////
+//
 ////                throw new IOException("Expected to transfer " + count
 ////                        + ", but transferred " + nxfer);
-////
+//
 ////            }
 //
 //            }

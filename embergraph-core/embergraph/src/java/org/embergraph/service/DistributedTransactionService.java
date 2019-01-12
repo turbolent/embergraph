@@ -276,7 +276,7 @@ public abstract class DistributedTransactionService extends
             final long time1 = file1.lastModified();
 
             // true iff file0 is more recent.
-            final boolean isFile0 = (time0 != 0L && time1 != 0L) //
+            final boolean isFile0 = (time0 != 0L && time1 != 0L)
                 ? (time0 > time1 ? true: false)// Note: both files exist.
                 : (time0 != 0L ? true: false)// Note: only one file exists
                 ;

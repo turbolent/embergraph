@@ -657,7 +657,7 @@ public class TxServlet extends BigdataRDFServlet {
             root.close();
 
             buildAndCommitResponse(resp, HttpServletResponse.SC_OK,
-                  MIME_APPLICATION_XML, w.toString(),//
+                  MIME_APPLICATION_XML, w.toString(),
                   // disable caching (if GET)
                   new NV("Cache-Control", "no-cache"));
 
@@ -731,7 +731,7 @@ public class TxServlet extends BigdataRDFServlet {
        * TODO What is an appropriate cache strategy here?
        */
       buildAndCommitResponse(resp, HttpServletResponse.SC_OK,
-            MIME_APPLICATION_XML, w.toString(), //
+            MIME_APPLICATION_XML, w.toString(),
             // disable caching.
             new NV("Cache-Control", "no-cache")
             /*
@@ -741,7 +741,7 @@ public class TxServlet extends BigdataRDFServlet {
              * 60 seconds, that the client must revalidate, and that the
              * response is cachable even if the client was authenticated.
              */
-//            new NV("Cache-Control", "max-age=60, must-revalidate, public")//
+//            new NV("Cache-Control", "max-age=60, must-revalidate, public")
       );
 
    }

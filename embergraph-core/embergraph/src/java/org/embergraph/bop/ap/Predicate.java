@@ -140,13 +140,13 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements
             final boolean optional, final IElementFilter<E> constraint,
             final IAccessPathExpander<E> expander, final long timestamp) {
 
-        this(values, NV.asMap(new NV[] {//
-                new NV(Annotations.RELATION_NAME,new String[]{relationName}),//
-                new NV(Annotations.PARTITION_ID,partitionId),//
-                new NV(Annotations.OPTIONAL,optional),//
+        this(values, NV.asMap(new NV[] {
+                new NV(Annotations.RELATION_NAME,new String[]{relationName}),
+                new NV(Annotations.PARTITION_ID,partitionId),
+                new NV(Annotations.OPTIONAL,optional),
                 new NV(Annotations.INDEX_LOCAL_FILTER,
-                    ElementFilter.newInstance(constraint)),//
-                new NV(Annotations.ACCESS_PATH_EXPANDER,expander),//
+                    ElementFilter.newInstance(constraint)),
+                new NV(Annotations.ACCESS_PATH_EXPANDER,expander),
                 new NV(Annotations.TIMESTAMP, timestamp)
         }));
         

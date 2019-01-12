@@ -537,8 +537,8 @@ public class PipelineJoin<E> extends PipelineOp implements
 		 * @param joinOp
 		 * @param context
 		 */
-		public JoinTask(//
-				final PipelineJoin<E> joinOp,//
+		public JoinTask(
+				final PipelineJoin<E> joinOp,
 				final BOpContext<IBindingSet> context) {
 
 			if (joinOp == null)

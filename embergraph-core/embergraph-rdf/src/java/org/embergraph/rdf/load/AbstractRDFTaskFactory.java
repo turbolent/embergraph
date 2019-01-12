@@ -139,10 +139,10 @@ public class AbstractRDFTaskFactory<S extends Statement,T extends Runnable> impl
      */
     public RDFFormat getRDFFormat(String filename) {
 
-        final RDFFormat rdfFormat = //
-        fallback == null //
-        ? RDFFormat.forFileName(filename) //
-                : RDFFormat.forFileName(filename, fallback)//
+        final RDFFormat rdfFormat =
+        fallback == null
+        ? RDFFormat.forFileName(filename)
+                : RDFFormat.forFileName(filename, fallback)
         ;
 
         return rdfFormat;

@@ -277,8 +277,8 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
              * execution exceptions.
              */
             delegateService = new ThreadPoolExecutor(
-                    corePoolSize,//
-                    Integer.MAX_VALUE, //maxPoolSize,//
+                    corePoolSize,
+                    Integer.MAX_VALUE, //maxPoolSize,
                     Long.MAX_VALUE/* keepAliveTime */,
                     TimeUnit.SECONDS/* keepAliveUnit */,
                     new SynchronousQueue<Runnable>(synchronousQueueFair));
@@ -291,8 +291,8 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
              * execution exceptions from the delegate.
              */ 
             delegateService = new ThreadPoolExecutor(
-                    corePoolSize,//
-                    maxPoolSize,//
+                    corePoolSize,
+                    maxPoolSize,
                     Long.MAX_VALUE/* keepAliveTime */,
                     TimeUnit.SECONDS/*keepAliveUnit*/,
                     new LinkedBlockingQueue<Runnable>());

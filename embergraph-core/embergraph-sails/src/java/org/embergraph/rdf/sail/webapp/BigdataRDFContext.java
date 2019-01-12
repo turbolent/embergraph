@@ -980,21 +980,21 @@ public class BigdataRDFContext extends BigdataBaseContext {
 		 * @param os
 		 *            Where to write the data for the query result.
 		 */
-        protected AbstractQueryTask(//
-        		final BigdataSailRepositoryConnection cxn,//
-                final String namespace,//
-                final long timestamp, //
-                final String baseURI, //
-                final boolean includeInferred, //
-                final Map<String, Value> bindings, //
-                final ASTContainer astContainer,//
-                final QueryType queryType,//
-                final String mimeType,//
-                final Charset charset,//
-                final String fileExt,//
-                final HttpServletRequest req,//
-                final HttpServletResponse resp,//
-                final OutputStream os//
+        protected AbstractQueryTask(
+        		final BigdataSailRepositoryConnection cxn,
+                final String namespace,
+                final long timestamp,
+                final String baseURI,
+                final boolean includeInferred,
+                final Map<String, Value> bindings,
+                final ASTContainer astContainer,
+                final QueryType queryType,
+                final String mimeType,
+                final Charset charset,
+                final String fileExt,
+                final HttpServletRequest req,
+                final HttpServletResponse resp,
+                final OutputStream os
         ) {
 
             if (cxn == null)
@@ -1072,21 +1072,21 @@ public class BigdataRDFContext extends BigdataBaseContext {
          * @param os
          *            Where to write the data for the query result.
          */
-        protected AbstractQueryTask(//
-        		final BigdataSailRepositoryConnection cxn,//
-                final String namespace,//
-                final long timestamp, //
-                final String baseURI, //
-                final boolean includeInferred, //
-                final Map<String, Value> bindings, //
-                final ASTContainer astContainer,//
-//                final QueryType queryType,//
-//                final String mimeType,//
-//                final Charset charset,//
-//                final String fileExt,//
-                final HttpServletRequest req,//
-                final HttpServletResponse resp,//
-                final OutputStream os//
+        protected AbstractQueryTask(
+        		final BigdataSailRepositoryConnection cxn,
+                final String namespace,
+                final long timestamp,
+                final String baseURI,
+                final boolean includeInferred,
+                final Map<String, Value> bindings,
+                final ASTContainer astContainer,
+//                final QueryType queryType,
+//                final String mimeType,
+//                final Charset charset,
+//                final String fileExt,
+                final HttpServletRequest req,
+                final HttpServletResponse resp,
+                final OutputStream os
         ) {
 
             if (cxn == null)
@@ -1457,7 +1457,7 @@ public class BigdataRDFContext extends BigdataBaseContext {
 ////            public SparqlRestApiTask(final HttpServletRequest req,
 ////                    final HttpServletResponse resp, final String namespace,
 ////                    final long timestamp) {
-////
+//
 ////                super(req, resp, namespace, timestamp);
 ////                
 ////            }
@@ -1810,9 +1810,9 @@ public class BigdataRDFContext extends BigdataBaseContext {
         	// SPARQL Query parameter includeInferred set to true, because inferred triples
         	// should always be updated automatically upon original triples changed 
             super(cxn, namespace, timestamp, baseURI, /* includeInferred = */ true, bindings, astContainer,
-                    req,//
-                    resp,//
-                    os//
+                    req,
+                    resp,
+                    os
                     );
             /*
              * Setup a change listener. It will notice the #of mutations.
@@ -2161,7 +2161,7 @@ public class BigdataRDFContext extends BigdataBaseContext {
                             lastOp = thisOp;
 
                             // Write out the LOAD operation.
-                            body.node("pre").text(thisOp.toString())//
+                            body.node("pre").text(thisOp.toString())
                                     .close();
 
                         }
@@ -2193,9 +2193,9 @@ public class BigdataRDFContext extends BigdataBaseContext {
                     pw.flush();
                     pw.close();
                     
-                    body.node("p").text("ABORT").close()//
-                    .node("pre").text(e.getUpdate().toString()).close()//
-                    .node("pre").text(w.toString()).close()//
+                    body.node("p").text("ABORT").close()
+                    .node("pre").text(e.getUpdate().toString()).close()
+                    .node("pre").text(w.toString()).close()
                     .node("p").text("totalElapsed=" + totalElapsedMillis
                             + "ms, elapsed=" + elapsedMillis + "ms")
                     .close();
@@ -2220,13 +2220,13 @@ public class BigdataRDFContext extends BigdataBaseContext {
                          */
                         lastOp = null;
 //                        body.node("p")
-//                                //
+//
 ////                                .node("pre")
 ////                                .text(e.getUpdate().toString())
 ////                                .close()
-//                                //
+//
 //                                .text("totalElapsed=" + totalElapsedMillis
-//                                        + "ms, elapsed=" + elapsedMillis + "ms")//
+//                                        + "ms, elapsed=" + elapsedMillis + "ms")
 //                                .close();
                     } else {
                     
@@ -2250,17 +2250,17 @@ public class BigdataRDFContext extends BigdataBaseContext {
                                 .text(e.getUpdate().toString())
                                 .close();
                         }
-                                //
+
                         body.node("p")
                                 .text("totalElapsed=" + totalElapsedMillis
                                         + "ms, elapsed=" + elapsedMillis
-                                        + "ms, connFlush="+TimeUnit.NANOSECONDS.toMillis(e.getConnectionFlushNanos())//
-                                        + "ms, batchResolve="+TimeUnit.NANOSECONDS.toMillis(e.getBatchResolveNanos())//
+                                        + "ms, connFlush="+TimeUnit.NANOSECONDS.toMillis(e.getConnectionFlushNanos())
+                                        + "ms, batchResolve="+TimeUnit.NANOSECONDS.toMillis(e.getBatchResolveNanos())
 										+ (deleteInsertWhereStats == null ? ""
 												: ", whereClause=" + TimeUnit.NANOSECONDS.toMillis(deleteInsertWhereStats.whereNanos.get())
 														+ "ms, deleteClause=" + TimeUnit.NANOSECONDS.toMillis(deleteInsertWhereStats.deleteNanos.get())
 														+ "ms, insertClause=" + TimeUnit.NANOSECONDS.toMillis(deleteInsertWhereStats.whereNanos.get())
-														+ "ms"))//
+														+ "ms"))
                                 .close();
                    }
                     
@@ -2316,7 +2316,7 @@ public class BigdataRDFContext extends BigdataBaseContext {
             body.node("p")
                     .text("COMMIT: totalElapsed=" + totalElapsedMillis
                             + "ms, commitTime=" + commitTime
-                            + ", mutationCount=" + mutationCount.get())//
+                            + ", mutationCount=" + mutationCount.get())
                     .close();
 
         }
@@ -2372,20 +2372,20 @@ public class BigdataRDFContext extends BigdataBaseContext {
 	 * 
 	 * @throws IOException
 	 */
-    public AbstractQueryTask getQueryTask(//
-    		final BigdataSailRepositoryConnection cxn,//
-            final String namespace,//
-            final long timestamp,//
-            final String queryStr,//
+    public AbstractQueryTask getQueryTask(
+    		final BigdataSailRepositoryConnection cxn,
+            final String namespace,
+            final long timestamp,
+            final String queryStr,
             final String baseURI,// See BLZG-2039
             final ASTContainer astContainer,// See BLZG-2039
-            final boolean includeInferred, //
-            final Map<String, Value> bindings, //
-            final String acceptOverride,//
-            final HttpServletRequest req,//
-            final HttpServletResponse resp,//
-            final OutputStream os//
-//            final boolean update//
+            final boolean includeInferred,
+            final Map<String, Value> bindings,
+            final String acceptOverride,
+            final HttpServletRequest req,
+            final HttpServletResponse resp,
+            final OutputStream os
+//            final boolean update
             ) throws MalformedQueryException, IOException {
 
         if (cxn == null)
@@ -2885,10 +2885,10 @@ public class BigdataRDFContext extends BigdataBaseContext {
                     .getHeader(HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS);
             if (s != null) {
                 final long tmp = StringUtil.toLong(s);
-                if (tmp > 0 && // != -1L && //
+                if (tmp > 0 && // != -1L &&
                         (queryTimeoutMillis == 0/* noLimit */
-                        || //
-                        tmp < queryTimeoutMillis/* shorterLimit */)//
+                        ||
+                        tmp < queryTimeoutMillis/* shorterLimit */)
                 ) {
                     // Set based on the http header value.
                     queryTimeoutMillis = tmp;
@@ -2904,10 +2904,10 @@ public class BigdataRDFContext extends BigdataBaseContext {
                  * The maxQueryTimeMillis parameter was specified (0 implies no timeout).
                  */
                 final long tmp = StringUtil.toLong(s);
-                if (tmp > 0 && // != -1L && //
+                if (tmp > 0 && // != -1L &&
                         (queryTimeoutMillis == 0/* noLimit */
-                        || //
-                        tmp < queryTimeoutMillis/* shorterLimit */)//
+                        ||
+                        tmp < queryTimeoutMillis/* shorterLimit */)
                 ) {
                     /*
                      * Either we do not already have a timeout from the http
@@ -2930,10 +2930,10 @@ public class BigdataRDFContext extends BigdataBaseContext {
                  * The timeout parameter was specified (0 implies no timeout).
                  */
                 final long tmp = StringUtil.toLong(s) * 1000L;
-                if (tmp > 0 && // != -1L && //
+                if (tmp > 0 && // != -1L &&
                         (queryTimeoutMillis == 0/* noLimit */
-                        || //
-                        tmp < queryTimeoutMillis/* shorterLimit */)//
+                        ||
+                        tmp < queryTimeoutMillis/* shorterLimit */)
                 ) {
                     /*
                      * The timeout parameter value is less than the current

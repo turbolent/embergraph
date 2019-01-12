@@ -499,7 +499,7 @@ public class JoinGraph extends PipelineOp {
                 setSamples(context.getRunningQuery(), edgeSamples);
 
                 // final long mark = System.nanoTime();
-                //
+
                 // final long elapsed_queryOptimizer = mark - begin;
 
                 /*

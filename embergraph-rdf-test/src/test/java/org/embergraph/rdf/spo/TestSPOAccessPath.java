@@ -227,8 +227,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
             // no shared variable (?g, ?h, o1)
             {
 
-                final SPOPredicate predicate = new SPOPredicate(//
-                        store.getSPORelation().getNamespace(),//
+                final SPOPredicate predicate = new SPOPredicate(
+                        store.getSPORelation().getNamespace(),
                         Var.var("g"), // s
                         Var.var("h"), // p
                         new Constant<IV>(o1.getIV()) // o
@@ -239,16 +239,16 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
                 assertSameSPOs(new ISPO[] { // FIXME TERMS REFACTOR FAILS HERE
                                 new SPO(s1.getIV(), p1.getIV(), o1
-                                        .getIV(), StatementEnum.Explicit),//
+                                        .getIV(), StatementEnum.Explicit),
                                 new SPO(s1.getIV(), s1.getIV(), o1
-                                        .getIV(), StatementEnum.Explicit),//
+                                        .getIV(), StatementEnum.Explicit),
                         }, accessPath.iterator());
             }
 
             // shared 'g' variable (?g, ?g, o1)
             {
-                final SPOPredicate predicate = new SPOPredicate(//
-                        store.getSPORelation().getNamespace(),//
+                final SPOPredicate predicate = new SPOPredicate(
+                        store.getSPORelation().getNamespace(),
                         Var.var("g"), // s
                         Var.var("g"), // s
                         new Constant<IV>(o1.getIV()) // o
@@ -257,9 +257,9 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
                 final IAccessPath<ISPO> accessPath = store.getSPORelation()
                         .getAccessPath(predicate);
 
-                assertSameSPOs(new ISPO[] { //
+                assertSameSPOs(new ISPO[] {
                         new SPO(s1.getIV(), s1.getIV(), o1.getIV(),
-                                StatementEnum.Explicit),//
+                                StatementEnum.Explicit),
                         }, accessPath.iterator());
             }
 
@@ -335,32 +335,32 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
             // no shared variable (?g, p1, o1, ?h)
             {
 
-                final SPOPredicate predicate = new SPOPredicate(//
+                final SPOPredicate predicate = new SPOPredicate(
                         new BOp[] { Var.var("g"), // s
                                 new Constant<IV>(p1.getIV()), // p
                                 new Constant<IV>(o1.getIV()), // o
                                 Var.var("h") // c
                         }, new NV(IPredicate.Annotations.RELATION_NAME,
                                 new String[] { store.getSPORelation()
-                                        .getNamespace() //
+                                        .getNamespace()
                                 }));
 
                 final IAccessPath<ISPO> accessPath = store.getSPORelation()
                         .getAccessPath(predicate);
 
-                assertSameSPOs(new ISPO[] { //
+                assertSameSPOs(new ISPO[] {
                                 new SPO(graphA.getIV(), p1.getIV(), o1
                                         .getIV(), graphA.getIV(),
-                                        StatementEnum.Explicit),//
+                                        StatementEnum.Explicit),
                                 new SPO(s.getIV(), p1.getIV(), o1
                                         .getIV(), graphA.getIV(),
-                                        StatementEnum.Explicit),//
+                                        StatementEnum.Explicit),
                         }, accessPath.iterator());
             }
 
             // shared 'g' variable (?g, p1, o1, ?g)
             {
-                final SPOPredicate predicate = new SPOPredicate(//
+                final SPOPredicate predicate = new SPOPredicate(
                         new BOp[] { Var.var("g"), // s
                                 new Constant<IV>(p1.getIV()), // p
                                 new Constant<IV>(o1.getIV()), // o
@@ -372,10 +372,10 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
                 final IAccessPath<ISPO> accessPath = store.getSPORelation()
                         .getAccessPath(predicate);
 
-                assertSameSPOs(new ISPO[] { //
+                assertSameSPOs(new ISPO[] {
                         new SPO(graphA.getIV(), p1.getIV(), o1
                                 .getIV(), graphA.getIV(),
-                                StatementEnum.Explicit),//
+                                StatementEnum.Explicit),
                         }, accessPath.iterator());
             }
             

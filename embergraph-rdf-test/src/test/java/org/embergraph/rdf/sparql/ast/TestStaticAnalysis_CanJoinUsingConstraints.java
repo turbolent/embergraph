@@ -122,7 +122,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
         
         // path must not be null.
         try {
-            sa.canJoinUsingConstraints(//
+            sa.canJoinUsingConstraints(
                     null, // path
                     p1,// vertex
                     new FilterNode[0]// constraints
@@ -135,7 +135,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
 
         // vertex must not be null.
         try {
-            sa.canJoinUsingConstraints(//
+            sa.canJoinUsingConstraints(
                     new IJoinNode[]{p1}, // path
                     null,// vertex
                     new FilterNode[0]// constraints
@@ -148,7 +148,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
 
         // path may not be empty.
         try {
-            sa.canJoinUsingConstraints(//
+            sa.canJoinUsingConstraints(
                     new IJoinNode[] {}, // path
                     p1,// vertex
                     new FilterNode[0]// constraints
@@ -161,7 +161,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
 
         // path elements may not be null.
         try {
-            sa.canJoinUsingConstraints(//
+            sa.canJoinUsingConstraints(
                     new IJoinNode[] { p2, null }, // path
                     p1,// vertex
                     new FilterNode[0]// constraints
@@ -174,7 +174,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
 
         // vertex must not appear in the path.
         try {
-            sa.canJoinUsingConstraints(//
+            sa.canJoinUsingConstraints(
                     new IJoinNode[] { p2, p1 }, // path
                     p1,// vertex
                     new FilterNode[0]// constraints
@@ -187,12 +187,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
 
         // constraint array may not contain null elements.
         try {
-            sa.canJoinUsingConstraints(//
+            sa.canJoinUsingConstraints(
                     new IJoinNode[] { p2 }, // path
                     p1,// vertex
-                    new FilterNode[] { //
+                    new FilterNode[] {
                             new FilterNode(new VarNode("x")),
-                            null //
+                            null
                     }// constraints
                     );
             fail("Expecting: " + IllegalArgumentException.class);
@@ -225,12 +225,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
                      * Test join path extension, but not when the vertex used to
                      * extend the path is already present in the join path.
                      */
-                    assertTrue(sa.canJoinUsingConstraints(//
+                    assertTrue(sa.canJoinUsingConstraints(
                             new IJoinNode[] { t0 }, // path
                             t1,// vertex
                             new FilterNode[0]// constraints
                             ));
-                    assertTrue(sa.canJoinUsingConstraints(//
+                    assertTrue(sa.canJoinUsingConstraints(
                             new IJoinNode[] { t1 }, // path
                             t0,// vertex
                             new FilterNode[0]// constraints
@@ -300,9 +300,9 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
         }
         
         // Verify the extension of the path is legal.
-        assertTrue(sa.canJoinUsingConstraints(//
-                path,//
-                vertex,//
+        assertTrue(sa.canJoinUsingConstraints(
+                path,
+                vertex,
                 new FilterNode[0]// constraints
                 ));
 
@@ -330,12 +330,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
          */
         assertFalse(sa.canJoin(s.p3, s.p4));
         assertFalse(sa.canJoin(s.p4, s.p3));
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p3 }, // path
                 s.p4,// vertex
                 new FilterNode[0]// constraints
                 ));
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p4 }, // path
                 s.p3,// vertex
                 new FilterNode[0]// constraints
@@ -345,12 +345,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
          * Verify (p3,p4) join is not permitted if we do not consider the
          * constraint which provides the shared variables.
          */
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p3 }, // path
                 s.p4,// vertex
                 new FilterNode[] { s.c2 }// constraints
                 ));
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p4 }, // path
                 s.p3,// vertex
                 new FilterNode[] { s.c2 }// constraints
@@ -360,12 +360,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
          * Verify (p3,p4) join is permitted if we consider the constraint which
          * provides the shared variables.
          */
-        assertTrue(sa.canJoinUsingConstraints(//
+        assertTrue(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p3 }, // path
                 s.p4,// vertex
                 new FilterNode[] { s.c1 }// constraints
                 ));
-        assertTrue(sa.canJoinUsingConstraints(//
+        assertTrue(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p4 }, // path
                 s.p3,// vertex
                 new FilterNode[] { s.c1 }// constraints
@@ -395,12 +395,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
          */
         assertFalse(sa.canJoin(s.p5, s.p6));
         assertFalse(sa.canJoin(s.p6, s.p5));
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p5 }, // path
                 s.p6,// vertex
                 new FilterNode[0]// constraints
                 ));
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p6 }, // path
                 s.p5,// vertex
                 new FilterNode[0]// constraints
@@ -410,12 +410,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
          * Verify (p5,p6) join is not permitted if we do not consider the
          * constraint which provides the shared variables.
          */
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p5 }, // path
                 s.p6,// vertex
                 new FilterNode[] { s.c1 }// constraints
                 ));
-        assertFalse(sa.canJoinUsingConstraints(//
+        assertFalse(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p6 }, // path
                 s.p5,// vertex
                 new FilterNode[] { s.c1 }// constraints
@@ -425,12 +425,12 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
          * Verify (p5,p6) join is permitted if we consider the constraint which
          * provides the shared variables.
          */
-        assertTrue(sa.canJoinUsingConstraints(//
+        assertTrue(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p5 }, // path
                 s.p6,// vertex
                 new FilterNode[] { s.c2 }// constraints
                 ));
-        assertTrue(sa.canJoinUsingConstraints(//
+        assertTrue(sa.canJoinUsingConstraints(
                 new IJoinNode[] { s.p6 }, // path
                 s.p5,// vertex
                 new FilterNode[] { s.c2 }// constraints
@@ -456,7 +456,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
                         null/* knownBoundVars */, true/* pathIsComplete */);
 
         @SuppressWarnings("unchecked")
-        final Set<FilterNode>[] expected = new Set[] { //
+        final Set<FilterNode>[] expected = new Set[] {
                 s.NA, // p1
                 s.C0, // p2
                 s.NA, // p4
@@ -484,7 +484,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
                         null/* knownBoundVars */, true/* pathIsComplete */);
 
         @SuppressWarnings("unchecked")
-        final Set<FilterNode>[] expected = new Set[] { //
+        final Set<FilterNode>[] expected = new Set[] {
                 s.NA, // p5
                 s.NA, // p3
                 s.NA, // p1
@@ -512,7 +512,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
                         null/* knownBoundVars */, true/* pathIsComplete */);
 
         @SuppressWarnings("unchecked")
-        final Set<FilterNode>[] expected = new Set[] { //
+        final Set<FilterNode>[] expected = new Set[] {
                 s.NA, // p3
                 asSet(new FilterNode[]{s.c0,s.c1}), // p4
                 s.NA, // p5
@@ -560,7 +560,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends
                         null/* knownBoundVars */, true/* pathIsComplete */);
 
         @SuppressWarnings("unchecked")
-        final Set<FilterNode>[] expected = new Set[] { //
+        final Set<FilterNode>[] expected = new Set[] {
                 s.NA, // p5
                 asSet(new FilterNode[] { s.c0, s.c2 }), // p6
                 s.NA, // p0

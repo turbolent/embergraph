@@ -239,15 +239,15 @@ abstract public class WriteCache implements IWriteCache {
     // * if the buffer reference has been cleared.
     // */
     // protected ByteBuffer getExclusiveBuffer() {
-    //
+
     // if (!lock.writeLock().isHeldByCurrentThread())
     // throw new IllegalMonitorStateException();
-    //
+
     // final ByteBuffer tmp = buf.get();
-    //
+
     // if (tmp == null)
     // throw new IllegalStateException();
-    //
+
     // return tmp;
     //        
     // }
@@ -628,15 +628,15 @@ abstract public class WriteCache implements IWriteCache {
      */
     public String toString() {
 
-        return super.toString()//
-                + "{recordCount=" + recordMap.size()//
-                + ",firstOffset=" + firstOffset//
-                + ",releaseBuffer=" + releaseBuffer//
-                + ",prefixWrites=" + prefixWrites//
-                + ",useChecksum=" + useChecksum//
-                + ",bytesWritten=" + bytesWritten()//
-                + ",bytesRemaining=" + remaining()//
-                + ",bytesRemoved=" + m_removed//
+        return super.toString()
+                + "{recordCount=" + recordMap.size()
+                + ",firstOffset=" + firstOffset
+                + ",releaseBuffer=" + releaseBuffer
+                + ",prefixWrites=" + prefixWrites
+                + ",useChecksum=" + useChecksum
+                + ",bytesWritten=" + bytesWritten()
+                + ",bytesRemaining=" + remaining()
+                + ",bytesRemoved=" + m_removed
                 + "}";
 
     }
@@ -1545,20 +1545,20 @@ abstract public class WriteCache implements IWriteCache {
 //     * 
 //     * @return cache A {@link WriteCache} to be replicated.
 //     */
-//    final IHAWriteMessage newHAWriteMessage(//
+//    final IHAWriteMessage newHAWriteMessage(
 //            final UUID storeUUID,
 //            final long quorumToken,
-//            final long lastCommitCounter,//
-//            final long lastCommitTime,//
+//            final long lastCommitCounter,
+//            final long lastCommitTime,
 //            final long sequence,
 //            final ByteBuffer tmp
 //            ) {
 //
-//        return new HAWriteMessage(//
-//                storeUUID,//
-//                lastCommitCounter,//
-//                lastCommitTime,//
-//                sequence, //
+//        return new HAWriteMessage(
+//                storeUUID,
+//                lastCommitCounter,
+//                lastCommitTime,
+//                sequence,
 //                bytesWritten(), getWholeBufferChecksum(tmp),
 //                prefixWrites ? StoreTypeEnum.RW : StoreTypeEnum.WORM,
 //                quorumToken, fileExtent.get(), firstOffset.get());
@@ -1621,13 +1621,13 @@ abstract public class WriteCache implements IWriteCache {
      * Return the RMI message object plus the payload (the payload has been
      * optionally compressed, depending on the configuration).
      */
-    final HAPackage newHAPackage(//
-            final UUID storeUUID,//
-            final long quorumToken,//
-            final long lastCommitCounter,//
-            final long lastCommitTime,//
-            final long sequence,//
-            final int replicationFactor,//
+    final HAPackage newHAPackage(
+            final UUID storeUUID,
+            final long quorumToken,
+            final long lastCommitCounter,
+            final long lastCommitTime,
+            final long sequence,
+            final int replicationFactor,
             final ByteBuffer checksumBuffer
             ) {
     	
@@ -1653,11 +1653,11 @@ abstract public class WriteCache implements IWriteCache {
         }
     	
     	final int chksum = getWholeBufferChecksum(checksumBuffer, send.duplicate(), b != send /*isCompressed*/);
-        final HAWriteMessage msg = new HAWriteMessage(//
-                storeUUID,//
-                lastCommitCounter,//
-                lastCommitTime,//
-                sequence, //
+        final HAWriteMessage msg = new HAWriteMessage(
+                storeUUID,
+                lastCommitCounter,
+                lastCommitTime,
+                sequence,
                 send.limit(), chksum,
                 prefixWrites ? StoreTypeEnum.RW : StoreTypeEnum.WORM,
                 quorumToken, replicationFactor,
@@ -2374,15 +2374,15 @@ abstract public class WriteCache implements IWriteCache {
         // */
         // public void update(final ByteBuffer buf) {
         // assert buf != null;
-        //
+
         // final int pos = buf.position();
         // final int limit = buf.limit();
         //          
         // assert pos >= 0;
         // assert limit > pos;
-        //
+
         // if (buf.hasArray()) {
-        //
+
         // /*
         // * Optimized when the buffer is backed by an array.
         // */

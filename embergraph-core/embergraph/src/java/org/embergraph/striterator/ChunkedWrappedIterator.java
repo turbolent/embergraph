@@ -139,8 +139,8 @@ public class ChunkedWrappedIterator<E> implements IChunkedOrderedIterator<E> {
          * iterator such that it includes only those SPOs that match the filter.
          */
         
-        this.src = (filter == null //
-                ? src //
+        this.src = (filter == null
+                ? src
                 : new Striterator(src).addFilter(new Filter(){
 
                     private static final long serialVersionUID = 1L;

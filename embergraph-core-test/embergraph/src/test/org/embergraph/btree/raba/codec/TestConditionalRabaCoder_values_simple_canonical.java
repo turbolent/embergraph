@@ -50,8 +50,8 @@ public class TestConditionalRabaCoder_values_simple_canonical extends
 
         super.setUp();
 
-        rabaCoder = new ConditionalRabaCoder( //
-                SimpleRabaCoder.INSTANCE,//
+        rabaCoder = new ConditionalRabaCoder(
+                SimpleRabaCoder.INSTANCE,
                 CanonicalHuffmanRabaCoder.INSTANCE,
                 32 // bigsize
         );

@@ -944,9 +944,9 @@ public class TestRemoteSparql10QueryBuilder extends
             final JoinGroupNode whereClause = new JoinGroupNode();
             
             // A FILTER to enforce variable correlation.
-            whereClause.addChild(new FilterNode(FunctionNode.AND(//
-                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o")),//
-                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o1"))//
+            whereClause.addChild(new FilterNode(FunctionNode.AND(
+                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o")),
+                    FunctionNode.sameTerm(new VarNode("s"), new VarNode("o1"))
                     )));
             
             whereClause.addChild(new StatementPatternNode(new VarNode("s"),
@@ -1269,11 +1269,11 @@ public class TestRemoteSparql10QueryBuilder extends
 //             * that are using to model the blank node in the AST.
 //             */
 //            
-//            final String queryStr = "prefix : <http://example.org/>\n"//
-//                    + "prefix foaf: <http://xmlns.com/foaf/0.1/>\n"//
-//                    + "SELECT  ?-anon-2 ?t2\n"//
-//                    + "WHERE {\n"//
-//                    + "     [] foaf:name ?t2 . "//
+//            final String queryStr = "prefix : <http://example.org/>\n"
+//                    + "prefix foaf: <http://xmlns.com/foaf/0.1/>\n"
+//                    + "SELECT  ?-anon-2 ?t2\n"
+//                    + "WHERE {\n"
+//                    + "     [] foaf:name ?t2 . "
 //                    + "}";
 //            
 //            final QueryRoot actual = parse(queryStr, baseURI);
@@ -1281,13 +1281,13 @@ public class TestRemoteSparql10QueryBuilder extends
 //        }
 //        {
 //            
-//            final String queryStr = "PREFIX : <http://example.org/>\n" //
-//                    + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"//
-//                    + "SELECT ?t1 ?t2 {\n" //
-//                    + "  [] foaf:name ?t1 .\n"//
-//                    + "  SERVICE <http://localhost:18080/openrdf/repositories/endpoint1> {\n"//
-//                    + "     [] foaf:name ?t2 .\n"//
-//                    + " }\n"//
+//            final String queryStr = "PREFIX : <http://example.org/>\n"
+//                    + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+//                    + "SELECT ?t1 ?t2 {\n"
+//                    + "  [] foaf:name ?t1 .\n"
+//                    + "  SERVICE <http://localhost:18080/openrdf/repositories/endpoint1> {\n"
+//                    + "     [] foaf:name ?t2 .\n"
+//                    + " }\n"
 //                    + "}";
 //
 //            final QueryRoot actual = parse(queryStr, baseURI);

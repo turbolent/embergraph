@@ -89,7 +89,7 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
 
 		final ITupleSerializer<?,?> tupleSer = new DefaultTupleSerializer(
 				new ASCIIKeyBuilderFactory(Bytes.SIZEOF_INT),
-				FrontCodedRabaCoderDupKeys.INSTANCE,//
+				FrontCodedRabaCoderDupKeys.INSTANCE,
 				new SimpleRabaCoder() // vals
 				);
 		
@@ -148,10 +148,10 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
         
         protected HardReferenceQueue<PO> newWriteRetentionQueue(final boolean readOnly) {
 
-            return new MyHardReferenceQueue<PO>(//
-                    new DefaultEvictionListener(),//
-                    getQueueCapacity(),//
-                    getQueueScan()//
+            return new MyHardReferenceQueue<PO>(
+                    new DefaultEvictionListener(),
+                    getQueueCapacity(),
+                    getQueueScan()
             );
 
         }

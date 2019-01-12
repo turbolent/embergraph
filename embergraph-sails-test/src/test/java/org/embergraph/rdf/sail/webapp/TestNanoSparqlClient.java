@@ -181,24 +181,24 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //	// * (assuming that we are using a told triple kb or quads kb w/o axioms).
 //	// */
 //	// public void test_POST_SELECT_ALL() throws Exception {
-//	//
+//
 //	// final String queryStr = "select * where {?s ?p ?o}";
-//	//
+//
 //	// final QueryOptions opts = new QueryOptions();
 //	// opts.serviceURL = m_serviceURL;
 //	// opts.queryStr = queryStr;
 //	// opts.method = "POST";
-//	//
+//
 //	// opts.acceptHeader = TupleQueryResultFormat.SPARQL.getDefaultMIMEType();
 //	// assertEquals(0, countResults(doSparqlQuery(opts, requestPath)));
-//	//
+//
 //	// // TODO JSON parser is not bundled by openrdf.
 //	// //opts.acceptHeader = TupleQueryResultFormat.JSON.getDefaultMIMEType();
 //	// //assertEquals(0, countResults(doSparqlQuery(opts, requestPath)));
-//	//
+//
 //	// opts.acceptHeader = TupleQueryResultFormat.BINARY.getDefaultMIMEType();
 //	// assertEquals(0, countResults(doSparqlQuery(opts, requestPath)));
-//	//
+//
 //	// }
 //
 //	/**
@@ -377,7 +377,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.serviceURL = m_serviceURL;
 //			// opts.queryStr = queryStr;
 //			// opts.method = "GET";
-//			//
+//
 //			// opts.acceptHeader = BooleanQueryResultFormat.SPARQL
 //			// .getDefaultMIMEType();
 //			// assertEquals(false, askResults(doSparqlQuery(opts,
@@ -403,11 +403,11 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// new String[] {
 //			// "file:embergraph-sails/src/test/org/embergraph/rdf/sail/webapp/quads.nq"
 //			// });
-//			//
+//
 //			// final MutationResult result =
 //			// getMutationResult(doSparqlQuery(opts,
 //			// requestPath));
-//			//
+//
 //			// assertEquals(expectedStatementCount, result.mutationCount);
 //
 //			final AddOp add = new AddOp(
@@ -426,10 +426,10 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.serviceURL = m_serviceURL;
 //			// opts.queryStr = queryStr;
 //			// opts.method = "GET";
-//			//
+//
 //			// opts.acceptHeader = BooleanQueryResultFormat.SPARQL
 //			// .getDefaultMIMEType();
-//			//
+//
 //			// assertEquals(expectedStatementCount, countResults(doSparqlQuery(
 //			// opts, requestPath)));
 //
@@ -495,7 +495,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.serviceURL = m_serviceURL;
 //			// opts.queryStr = queryStr;
 //			// opts.method = "GET";
-//			//
+//
 //			// opts.acceptHeader = BooleanQueryResultFormat.SPARQL
 //			// .getDefaultMIMEType();
 //			// assertEquals(false, askResults(doSparqlQuery(opts,
@@ -520,11 +520,11 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// .put("uri",
 //			// new String[] {
 //			// "file:bigdata-rdf/src/test/org/embergraph/rdf/rio/small.rdf" });
-//			//
+//
 //			// final MutationResult result =
 //			// getMutationResult(doSparqlQuery(opts,
 //			// requestPath));
-//			//
+//
 //			// assertEquals(expectedStatementCount, result.mutationCount);
 //
 //			final AddOp add = new AddOp(
@@ -544,10 +544,10 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.serviceURL = m_serviceURL;
 //			// opts.queryStr = queryStr;
 //			// opts.method = "GET";
-//			//
+//
 //			// opts.acceptHeader = BooleanQueryResultFormat.SPARQL
 //			// .getDefaultMIMEType();
-//			//
+//
 //			// assertEquals(expectedStatementCount, countResults(doSparqlQuery(
 //			// opts, requestPath)));
 //
@@ -666,8 +666,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 ////        final String queryHint = "\n hint:Query hint:constructDistinctSPO true .\n";
 //        final String queryHint = ""; // No query hint.
 //        
-//        final String queryStr = "PREFIX : <http://www.bigdata.com/> \n" + //
-//                "CONSTRUCT { ?s ?p ?o }\n"//
+//        final String queryStr = "PREFIX : <http://www.bigdata.com/> \n" +
+//                "CONSTRUCT { ?s ?p ?o }\n"
 //                + "WHERE { " + queryHint + " GRAPH ?g {?s ?p ?o} }";
 //
 //        final IPreparedGraphQuery query = m_repo.prepareGraphQuery(queryStr);
@@ -719,8 +719,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //        
 //        final String queryHint = "\n hint:Query hint:constructDistinctSPO false .\n";
 //        
-//        final String queryStr = "PREFIX : <http://www.bigdata.com/> \n" + //
-//                "CONSTRUCT { ?s ?p ?o }\n"//
+//        final String queryStr = "PREFIX : <http://www.bigdata.com/> \n" +
+//                "CONSTRUCT { ?s ?p ?o }\n"
 //                + "WHERE { " + queryHint + " GRAPH ?g {?s ?p ?o} }";
 //
 //        final IPreparedGraphQuery query = m_repo.prepareGraphQuery(queryStr);
@@ -756,14 +756,14 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //		 * This is the query that we will use to delete some triples from the
 //		 * database.
 //		 */
-//		final String deleteQueryStr = //
-//		"prefix bd: <" + BD.NAMESPACE + "> " + //
-//				"prefix rdf: <" + RDF.NAMESPACE + "> " + //
-//				"prefix rdfs: <" + RDFS.NAMESPACE + "> " + //
-//				"CONSTRUCT { ?x bd:likes bd:RDFS }" + //
-//				"WHERE { " + //
-//				// "  ?x rdf:type bd:Person . " +//
-//				"  ?x bd:likes bd:RDFS " + //
+//		final String deleteQueryStr =
+//		"prefix bd: <" + BD.NAMESPACE + "> " +
+//				"prefix rdf: <" + RDF.NAMESPACE + "> " +
+//				"prefix rdfs: <" + RDFS.NAMESPACE + "> " +
+//				"CONSTRUCT { ?x bd:likes bd:RDFS }" +
+//				"WHERE { " +
+//				// "  ?x rdf:type bd:Person . " +
+//				"  ?x bd:likes bd:RDFS " +
 //				"}";
 //
 //		/*
@@ -844,14 +844,14 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			 */
 //			{
 //
-//				final String queryStr2 = //
-//				"prefix bd: <" + BD.NAMESPACE + "> " + //
-//						"prefix rdf: <" + RDF.NAMESPACE + "> " + //
-//						"prefix rdfs: <" + RDFS.NAMESPACE + "> " + //
-//						"CONSTRUCT { ?x bd:likes bd:RDF }" + //
-//						"WHERE { " + //
-//						// "  ?x rdf:type bd:Person . " + //
-//						"  ?x bd:likes bd:RDF " + //
+//				final String queryStr2 =
+//				"prefix bd: <" + BD.NAMESPACE + "> " +
+//						"prefix rdf: <" + RDF.NAMESPACE + "> " +
+//						"prefix rdfs: <" + RDFS.NAMESPACE + "> " +
+//						"CONSTRUCT { ?x bd:likes bd:RDF }" +
+//						"WHERE { " +
+//						// "  ?x rdf:type bd:Person . " +
+//						"  ?x bd:likes bd:RDF " +
 //						"}";
 //
 //				// The expected results.
@@ -866,7 +866,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //				// opts.method = "GET";
 //				// opts.acceptHeader = TupleQueryResultFormat.SPARQL
 //				// .getDefaultMIMEType();
-//				//
+//
 //				// assertSameGraph(expected, buildGraph(doSparqlQuery(opts,
 //				// requestPath)));
 //
@@ -886,15 +886,15 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //	// */
 //	// public void test_CONSTRUCT_TEMPLATE_ONLY() throws MalformedQueryException
 //	// {
-//	//
-//	// final String deleteQueryStr =//
-//	// "prefix bd: <"+BD.NAMESPACE+"> " +//
-//	// "CONSTRUCT { bd:Bryan bd:likes bd:RDFS }" +//
+//
+//	// final String deleteQueryStr =
+//	// "prefix bd: <"+BD.NAMESPACE+"> " +
+//	// "CONSTRUCT { bd:Bryan bd:likes bd:RDFS }" +
 //	// "{}";
-//	//
+//
 //	// new BigdataSPARQLParser().parseQuery(deleteQueryStr,
 //	// "http://www.bigdata.com");
-//	//
+//
 //	// }
 //
 //	/**
@@ -924,9 +924,9 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //		 * This is the query that we will use to delete some triples from the
 //		 * database.
 //		 */
-//		final String deleteQueryStr = //
-//		"prefix bd: <" + BD.NAMESPACE + "> " + //
-//				"CONSTRUCT { bd:Bryan bd:likes bd:RDFS }" + //
+//		final String deleteQueryStr =
+//		"prefix bd: <" + BD.NAMESPACE + "> " +
+//				"CONSTRUCT { bd:Bryan bd:likes bd:RDFS }" +
 //				"{ }";
 //
 //		// new BigdataSPARQLParser().parseQuery(deleteQueryStr,
@@ -951,7 +951,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.method = "GET";
 //			// opts.acceptHeader = TupleQueryResultFormat.SPARQL
 //			// .getDefaultMIMEType();
-//			//
+//
 //			// assertSameGraph(expected, buildGraph(doSparqlQuery(opts,
 //			// requestPath)));
 //
@@ -1007,13 +1007,13 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			 */
 //			{
 //
-//				final String queryStr2 = //
-//				"prefix bd: <" + BD.NAMESPACE + "> " + //
-//						"prefix rdf: <" + RDF.NAMESPACE + "> " + //
-//						"prefix rdfs: <" + RDFS.NAMESPACE + "> " + //
-//						"CONSTRUCT { ?x bd:likes bd:RDFS }" + //
-//						"WHERE { " + //
-//						// "  ?x rdf:type bd:Person . " + //
+//				final String queryStr2 =
+//				"prefix bd: <" + BD.NAMESPACE + "> " +
+//						"prefix rdf: <" + RDF.NAMESPACE + "> " +
+//						"prefix rdfs: <" + RDFS.NAMESPACE + "> " +
+//						"CONSTRUCT { ?x bd:likes bd:RDFS }" +
+//						"WHERE { " +
+//						// "  ?x rdf:type bd:Person . " +
 //						"  ?x bd:likes bd:RDFS " + // NB: Checks the kb!
 //						"}";
 //
@@ -1030,14 +1030,14 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			 */
 //			{
 //
-//				final String queryStr2 = //
-//				"prefix bd: <" + BD.NAMESPACE + "> " + //
-//						"prefix rdf: <" + RDF.NAMESPACE + "> " + //
-//						"prefix rdfs: <" + RDFS.NAMESPACE + "> " + //
-//						"CONSTRUCT { ?x bd:likes bd:RDF }" + //
-//						"WHERE { " + //
-//						// "  ?x rdf:type bd:Person . " + //
-//						"  ?x bd:likes bd:RDF " + //
+//				final String queryStr2 =
+//				"prefix bd: <" + BD.NAMESPACE + "> " +
+//						"prefix rdf: <" + RDF.NAMESPACE + "> " +
+//						"prefix rdfs: <" + RDFS.NAMESPACE + "> " +
+//						"CONSTRUCT { ?x bd:likes bd:RDF }" +
+//						"WHERE { " +
+//						// "  ?x rdf:type bd:Person . " +
+//						"  ?x bd:likes bd:RDF " +
 //						"}";
 //
 //				// The expected results.

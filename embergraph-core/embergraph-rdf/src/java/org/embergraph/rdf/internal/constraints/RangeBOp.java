@@ -298,7 +298,7 @@ final public class RangeBOp extends ModifiableBOpBase { // implements IVariable<
 ////    	return var().equals(op.var())
 ////    		&& from().equals(op.from())
 ////    		&& to().equals(op.to());
-////
+//
 ////    }
 //    
 //	/**
@@ -315,7 +315,7 @@ final public class RangeBOp extends ModifiableBOpBase { // implements IVariable<
 ////			hash = h;
 ////		}
 ////		return h;
-////
+//
 //		return var().hashCode();
 //	}
 

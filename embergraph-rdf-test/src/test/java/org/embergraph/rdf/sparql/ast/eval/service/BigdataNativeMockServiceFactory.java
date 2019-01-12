@@ -83,7 +83,7 @@ public class BigdataNativeMockServiceFactory extends AbstractServiceFactoryBase 
             TestBigdataNativeServiceEvaluation.assertNotNull(bindingSets);
 
             // System.err.println("ServiceCall: in="+Arrays.toString(bindingSets));
-            //
+
             // System.err.println("ServiceCall: out="+serviceSolutions);
 
             return new CloseableIteratorWrapper<IBindingSet>(

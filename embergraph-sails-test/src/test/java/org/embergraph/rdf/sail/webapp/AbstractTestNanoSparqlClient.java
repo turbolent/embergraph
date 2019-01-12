@@ -879,12 +879,12 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
 		
     }
 
-    protected long doDeleteWithAccessPath(//
-//            final String servlet,//
-            final URI s,//
-            final URI p,//
-            final Value o,//
-            final URI... c//
+    protected long doDeleteWithAccessPath(
+//            final String servlet,
+            final URI s,
+            final URI p,
+            final Value o,
+            final URI... c
             ) throws Exception {
     	
     	final RemoveOp remove = new RemoveOp(s, p, o, c);
@@ -1182,13 +1182,13 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
         {
             
         	final String queryStr =
-                "prefix bd: <"+BD.NAMESPACE+"> " +//
-                "prefix rdf: <"+RDF.NAMESPACE+"> " +//
-                "prefix rdfs: <"+RDFS.NAMESPACE+"> " +//
-                "DESCRIBE ?x " +//
-                "WHERE { " +//
-                "  ?x rdf:type bd:Person . " +//
-                "  ?x bd:likes bd:RDF " +//
+                "prefix bd: <"+BD.NAMESPACE+"> " +
+                "prefix rdf: <"+RDF.NAMESPACE+"> " +
+                "prefix rdfs: <"+RDFS.NAMESPACE+"> " +
+                "DESCRIBE ?x " +
+                "WHERE { " +
+                "  ?x rdf:type bd:Person . " +
+                "  ?x bd:likes bd:RDF " +
                 "}";
 
         	assertSameGraph(expected, m_repo.prepareGraphQuery(queryStr));
@@ -1279,13 +1279,13 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
         {
 
             final String queryStr =
-                "prefix bd: <"+BD.NAMESPACE+"> " +//
-                "prefix rdf: <"+RDF.NAMESPACE+"> " +//
-                "prefix rdfs: <"+RDFS.NAMESPACE+"> " +//
-                "CONSTRUCT { ?x rdf:type bd:Person }" +//
-                "WHERE { " +//
-                "  ?x rdf:type bd:Person . " +//
-//                "  ?x bd:likes bd:RDF " +//
+                "prefix bd: <"+BD.NAMESPACE+"> " +
+                "prefix rdf: <"+RDF.NAMESPACE+"> " +
+                "prefix rdfs: <"+RDFS.NAMESPACE+"> " +
+                "CONSTRUCT { ?x rdf:type bd:Person }" +
+                "WHERE { " +
+                "  ?x rdf:type bd:Person . " +
+//                "  ?x bd:likes bd:RDF " +
                 "}";
 
             final IPreparedGraphQuery query = m_repo.prepareGraphQuery(queryStr);

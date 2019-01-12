@@ -121,48 +121,48 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
         final Constant<?> emailAddress = new Constant<String>("emailAddress");
         final Constant<?> University0 = new Constant<String>("University0");
 
-        final IPredicate<?> pred0 = new Predicate(//
-                new IVariableOrConstant[] {//
-                Var.var("y"), rdfType, Department },//
+        final IPredicate<?> pred0 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("y"), rdfType, Department },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
 
-        final IPredicate<?> pred1 = new Predicate(//
-                new IVariableOrConstant[] {//
-                Var.var("x"), rdfType, Student },//
+        final IPredicate<?> pred1 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("x"), rdfType, Student },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
-        final IPredicate<?> pred2 = new Predicate( //
-                new IVariableOrConstant[] {//
-                Var.var("x"), memberOf, Var.var("y") },//
+        final IPredicate<?> pred2 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("x"), memberOf, Var.var("y") },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
-        final IPredicate<?> pred3 = new Predicate(//
-                new IVariableOrConstant[] {//
-                Var.var("y"), subOrganizationOf, University0 },//
+        final IPredicate<?> pred3 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("y"), subOrganizationOf, University0 },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
-        final IPredicate<?> pred4 = new Predicate(//
-                new IVariableOrConstant[] {//
+        final IPredicate<?> pred4 = new Predicate(
+                new IVariableOrConstant[] {
                 Var.var("x"), emailAddress, Var.var("z") },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
         final IRule rule = new Rule(getName(), null/* head */,
-                new IPredicate[] { pred0, pred1, pred2, pred3, pred4 }, //
+                new IPredicate[] { pred0, pred1, pred2, pred3, pred4 },
                 null// constraints
         );
         
@@ -284,41 +284,41 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
         	
         };
         
-        final IPredicate<?> pred0 = new Predicate(//
-                new IVariableOrConstant[] {//
-                Var.var("l"), search, Mike },//
+        final IPredicate<?> pred0 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("l"), search, Mike },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp),//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp),
                 new NV(Predicate.Annotations.ACCESS_PATH_EXPANDER, expander)
                 );
 
-        final IPredicate<?> pred1 = new Predicate(//
-                new IVariableOrConstant[] {//
-                Var.var("s"), Var.var("p"), Var.var("l") },//
+        final IPredicate<?> pred1 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("s"), Var.var("p"), Var.var("l") },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
-        final IPredicate<?> pred2 = new Predicate( //
-                new IVariableOrConstant[] {//
-                Var.var("s"), type, Person },//
+        final IPredicate<?> pred2 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("s"), type, Person },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
-        final IPredicate<?> pred3 = new Predicate( //
-                new IVariableOrConstant[] {//
-                Var.var("p"), type, Property },//
+        final IPredicate<?> pred3 = new Predicate(
+                new IVariableOrConstant[] {
+                Var.var("p"), type, Property },
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { relation }),//
-                new NV(Annotations.TIMESTAMP,timestamp)//
+                        new String[] { relation }),
+                new NV(Annotations.TIMESTAMP,timestamp)
                 );
         
         final IRule rule = new Rule(getName(), null/* head */,
-                new IPredicate[] { pred0, pred1, pred2, pred3 }, //
+                new IPredicate[] { pred0, pred1, pred2, pred3 },
                 null// constraints
         );
         

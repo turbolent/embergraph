@@ -105,11 +105,11 @@ public class AbstractLeafDataRecordTestCase extends
 //        assertSameLeafData(expected, actual);
 //        
 //        // check some keys that are not in the leaf.
-//        assertEquals(//
-//                expected.getKeys().search(new byte[] { 1 }), //
+//        assertEquals(
+//                expected.getKeys().search(new byte[] { 1 }),
 //                actual.getKeys().search(new byte[] { 1 }));
-//        assertEquals(//
-//                expected.getKeys().search(new byte[] { 0, 1, 2 }), //
+//        assertEquals(
+//                expected.getKeys().search(new byte[] { 0, 1, 2 }),
 //                actual.getKeys().search(new byte[] { 0, 1, 2 }));
 
     }
@@ -130,11 +130,11 @@ public class AbstractLeafDataRecordTestCase extends
         deleteMarkers[0] = true;
         versionTimestamps[0] = System.currentTimeMillis();
 
-        final ILeafData expected = mockLeafFactory(//
-                new ReadOnlyKeysRaba(nkeys, keys),//
-                new ReadOnlyValuesRaba(nkeys, vals),//
-                deleteMarkers,//
-                versionTimestamps,//
+        final ILeafData expected = mockLeafFactory(
+                new ReadOnlyKeysRaba(nkeys, keys),
+                new ReadOnlyValuesRaba(nkeys, vals),
+                deleteMarkers,
+                versionTimestamps,
                 null// rawRecords
         );
 
@@ -152,11 +152,11 @@ public class AbstractLeafDataRecordTestCase extends
 //        assertSameLeafData(expected, actual);
 //
 //        // check some keys that are not in the leaf.
-//        assertEquals(//
-//                expected.getKeys().search(new byte[] { 1 }), //
+//        assertEquals(
+//                expected.getKeys().search(new byte[] { 1 }),
 //                actual.getKeys().search(new byte[] { 1 }));
-//        assertEquals(//
-//                expected.getKeys().search(new byte[] { 0, 1, 2 }), //
+//        assertEquals(
+//                expected.getKeys().search(new byte[] { 0, 1, 2 }),
 //                actual.getKeys().search(new byte[] { 0, 1, 2 }));
 
     }
@@ -180,11 +180,11 @@ public class AbstractLeafDataRecordTestCase extends
         versionTimestamps[0] = System.currentTimeMillis();
         versionTimestamps[1] = System.currentTimeMillis()+20;
 
-        final ILeafData expected = mockLeafFactory(//
-                new ReadOnlyKeysRaba(nkeys, keys),//
-                new ReadOnlyValuesRaba(nkeys, vals),//
-                deleteMarkers,//
-                versionTimestamps,//
+        final ILeafData expected = mockLeafFactory(
+                new ReadOnlyKeysRaba(nkeys, keys),
+                new ReadOnlyValuesRaba(nkeys, vals),
+                deleteMarkers,
+                versionTimestamps,
                 null// rawRecords
         );
 
@@ -215,13 +215,13 @@ public class AbstractLeafDataRecordTestCase extends
         vals[0] = AbstractBTree.encodeRecordAddr(recordAddrBuf, nextAddr());
         rawRecords[0] = true;
         
-        final ILeafData expected = mockLeafFactory(//
+        final ILeafData expected = mockLeafFactory(
         		new ReadOnlyKeysRaba(
-                nkeys, keys), //
-                new ReadOnlyValuesRaba(nkeys, vals),//
+                nkeys, keys),
+                new ReadOnlyValuesRaba(nkeys, vals),
                 null, // deleteMarkers
                 null, // version timestamps
-                rawRecords//
+                rawRecords
         		);
 
         doRoundTripTest(expected, coder, new DataOutputBuffer());

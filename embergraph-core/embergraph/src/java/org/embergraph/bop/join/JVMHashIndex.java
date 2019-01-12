@@ -282,7 +282,7 @@ public class JVMHashIndex {
         @Override
         public String toString() {
             return super.toString()
-                    + //
+                    +
                     "{hashCode=" + hashCode + ",#solutions=" + solutions.size()
                     + "}";
         }
@@ -366,16 +366,16 @@ public class JVMHashIndex {
 
         // @SuppressWarnings("unchecked")
         // public Iterator<IBindingSet> bindingSetIterator() {
-        //
+
         // return new Striterator(solutions.iterator()).addFilter(new Resolver()
         // {
-        //
+
         // @Override
         // protected Object resolve(Object obj) {
         // return ((SolutionHit)obj).solution;
         // }
         // });
-        //
+
         // }
 
         /**

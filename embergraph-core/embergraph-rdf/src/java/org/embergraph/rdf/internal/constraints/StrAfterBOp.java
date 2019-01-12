@@ -48,7 +48,7 @@ public class StrAfterBOp extends IVValueExpression<IV> implements INeedsMaterial
      * @see http://www.w3.org/2009/sparql/docs/query-1.1/rq25.xml#func-strafter
      */
     @SuppressWarnings("rawtypes")
-    public StrAfterBOp(//
+    public StrAfterBOp(
             final IValueExpression<? extends IV> arg1,
             final IValueExpression<? extends IV> arg2,
             final GlobalAnnotations globals) {

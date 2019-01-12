@@ -101,8 +101,8 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
 //     */
 //    public void test_singleEmptyChunk() {
 //
-//        final Object[] expected = new Object[] {//
-//                //
+//        final Object[] expected = new Object[] {
+//
 //        };
 //
 //        final CloseableChunkedIteratorWrapperConverter<Object> actual = new CloseableChunkedIteratorWrapperConverter<Object>(
@@ -117,8 +117,8 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
      */
     public void test_singleEmptyChunk2() {
 
-        final String[][] expected = new String[][] {//
-                new String[]{}//
+        final String[][] expected = new String[][] {
+                new String[]{}
         };
 
         final IChunkedIterator<String> src = new MyArrayExpander<String>(
@@ -136,8 +136,8 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
      */
     public void test_oneElement() {
 
-        final String[][] expected = new String[][] {//
-                new String[]{"A"}//
+        final String[][] expected = new String[][] {
+                new String[]{"A"}
         };
 
         final IChunkedIterator<String> src = new MyArrayExpander<String>(
@@ -155,9 +155,9 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
      */
     public void test_twoChunks_oneElementEach() {
 
-        final String[][] expected = new String[][] {//
-                new String[]{"A"},//
-                new String[]{"B"},//
+        final String[][] expected = new String[][] {
+                new String[]{"A"},
+                new String[]{"B"},
         };
 
         final IChunkedIterator<String> src = new MyArrayExpander<String>(
@@ -176,10 +176,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
      */
     public void test_threeChunks_1_0_1() {
 
-        final String[][] expected = new String[][] {//
-                new String[]{"A"},//
-                new String[]{},//
-                new String[]{"B"},//
+        final String[][] expected = new String[][] {
+                new String[]{"A"},
+                new String[]{},
+                new String[]{"B"},
         };
 
         final IChunkedIterator<String> src = new MyArrayExpander<String>(
@@ -198,10 +198,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
      */
     public void test_threeChunks_2_0_2() {
 
-        final String[][] expected = new String[][] {//
-                new String[]{"A","a"},//
-                new String[]{},//
-                new String[]{"B","b"},//
+        final String[][] expected = new String[][] {
+                new String[]{"A","a"},
+                new String[]{},
+                new String[]{"B","b"},
         };
 
         final IChunkedIterator<String> src = new MyArrayExpander<String>(
@@ -219,10 +219,10 @@ public class TestCloseableChunkedIteratorWrapperConverter extends TestCase2 {
      */
     public void test_threeChunks_1_2_1() {
 
-        final String[][] expected = new String[][] {//
-                new String[]{"A"},//
-                new String[]{"C","c"},//
-                new String[]{"B"},//
+        final String[][] expected = new String[][] {
+                new String[]{"A"},
+                new String[]{"C","c"},
+                new String[]{"B"},
         };
 
         final IChunkedIterator<String> src = new MyArrayExpander<String>(

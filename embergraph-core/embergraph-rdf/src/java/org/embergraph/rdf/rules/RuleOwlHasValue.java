@@ -47,14 +47,14 @@ public class RuleOwlHasValue extends Rule {
     public RuleOwlHasValue(String relationName, Vocabulary vocab) {
 
 
-        super(  "owl:hasValue",//
-                new SPOPredicate(relationName, var("x"), var("p"), var("v")), //
-                new SPOPredicate[] { //
-                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), var("a")),//
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.RESTRICTION)),//
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.ONPROPERTY), var("p")),//
-                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.HASVALUE), var("v"))//
-                },//
+        super(  "owl:hasValue",
+                new SPOPredicate(relationName, var("x"), var("p"), var("v")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), var("a")),
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.RESTRICTION)),
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.ONPROPERTY), var("p")),
+                    new SPOPredicate(relationName,var("a"), vocab.getConstant(OWL.HASVALUE), var("v"))
+                },
                 null//constraints
                 );
         

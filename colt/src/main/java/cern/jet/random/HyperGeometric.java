@@ -166,8 +166,8 @@ protected int hprs(int N, int M, int n,  RandomEngine randomGenerator) {
 		r5 = (np/(double)(k5 + 1) - 1.0) * (M  - k5)/(double)(N_Mn + k5 + 1);
 
 		// reciprocal values of the scale parameters of expon. tail envelopes   
-		ll =  Math.log(r1);                                  // expon. tail left  //
-		lr = -Math.log(r5);                                  // expon. tail right //
+		ll =  Math.log(r1);                                  // expon. tail left
+		lr = -Math.log(r5);                                  // expon. tail right
 
 		// hypergeom. constant, necessary for computing function values f(k)    
 		c_pm = fc_lnpk(m, N_Mn, M, n);

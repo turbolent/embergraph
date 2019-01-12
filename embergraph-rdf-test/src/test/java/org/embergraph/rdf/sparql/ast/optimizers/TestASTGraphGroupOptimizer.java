@@ -89,14 +89,14 @@ public class TestASTGraphGroupOptimizer extends
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void test_graphGroupOptimizer_01() throws MalformedQueryException {
         
-        final String queryStr = ""//
-                + "PREFIX : <http://example.org/>\n"//
-                + "SELECT ?s\n"//
-                + "WHERE {\n"//
-                + "  GRAPH ?g {\n"//
-                + "    ?s :p :o .\n"//
-                + "    OPTIONAL { ?g :p2 ?s }\n"//
-                + "  }\n"//
+        final String queryStr = ""
+                + "PREFIX : <http://example.org/>\n"
+                + "SELECT ?s\n"
+                + "WHERE {\n"
+                + "  GRAPH ?g {\n"
+                + "    ?s :p :o .\n"
+                + "    OPTIONAL { ?g :p2 ?s }\n"
+                + "  }\n"
                 + "}";
 
         /*
@@ -145,24 +145,24 @@ public class TestASTGraphGroupOptimizer extends
             expectedClause.addChild(graphGroup);
 
             // ?s :p :o
-            graphGroup.addChild(new StatementPatternNode(//
+            graphGroup.addChild(new StatementPatternNode(
                     s,// s
                     new ConstantNode(new Constant(p.getIV())),// p
                     new ConstantNode(new Constant(o.getIV())),// o
                     g,// c
-                    Scope.NAMED_CONTEXTS//
+                    Scope.NAMED_CONTEXTS
                     ));
         
             final JoinGroupNode optionalGroup = new JoinGroupNode(true/*optional*/);
             graphGroup.addChild(optionalGroup);
             
             // ?g :p2 ?s
-            optionalGroup.addChild(new StatementPatternNode(//
+            optionalGroup.addChild(new StatementPatternNode(
                     g,// s
                     new ConstantNode(new Constant(p2.getIV())),// p
                     s,// o
                     g,// c
-                    Scope.NAMED_CONTEXTS//
+                    Scope.NAMED_CONTEXTS
                     ));
 
         }
@@ -188,14 +188,14 @@ public class TestASTGraphGroupOptimizer extends
    @SuppressWarnings({ "unchecked", "rawtypes" })
    public void test_graphGroupOptimizer_02() throws MalformedQueryException {
        
-       final String queryStr = ""//
-               + "PREFIX : <http://example.org/>\n"//
-               + "SELECT ?s\n"//
-               + "WHERE {\n"//
-               + "  GRAPH ?g {\n"//
-               + "    ?s :p :o .\n"//
-               + "    GRAPH ?g1 { ?g :p2 ?s }\n"//
-               + "  }\n"//
+       final String queryStr = ""
+               + "PREFIX : <http://example.org/>\n"
+               + "SELECT ?s\n"
+               + "WHERE {\n"
+               + "  GRAPH ?g {\n"
+               + "    ?s :p :o .\n"
+               + "    GRAPH ?g1 { ?g :p2 ?s }\n"
+               + "  }\n"
                + "}";
 
        /*
@@ -245,12 +245,12 @@ public class TestASTGraphGroupOptimizer extends
            graphGroup.setContext(g);
 
            // ?s :p :o
-           graphGroup.addChild(new StatementPatternNode(//
+           graphGroup.addChild(new StatementPatternNode(
                    s,// s
                    new ConstantNode(new Constant(p.getIV())),// p
                    new ConstantNode(new Constant(o.getIV())),// o
                    g,// c
-                   Scope.NAMED_CONTEXTS//
+                   Scope.NAMED_CONTEXTS
                    ));
        
            final JoinGroupNode innerGraphGroup = new JoinGroupNode();
@@ -258,12 +258,12 @@ public class TestASTGraphGroupOptimizer extends
            innerGraphGroup.setContext(g1);
            
            // ?g :p2 ?s
-           innerGraphGroup.addChild(new StatementPatternNode(//
+           innerGraphGroup.addChild(new StatementPatternNode(
                    g,// s
                    new ConstantNode(new Constant(p2.getIV())),// p
                    s,// o
                    g1,// c
-                   Scope.NAMED_CONTEXTS//
+                   Scope.NAMED_CONTEXTS
                    ));
            
             final FilterNode filterNode = new FilterNode(FunctionNode.sameTerm(
@@ -295,14 +295,14 @@ public class TestASTGraphGroupOptimizer extends
     public void test_graphContexts_constants_legal()
             throws MalformedQueryException {
 
-        final String queryStr = ""//
-                + "PREFIX : <http://example.org/>\n"//
-                + "SELECT ?s\n"//
-                + "WHERE {\n"//
-                + "  GRAPH :foo {\n"//
-                + "    ?s :p :o .\n"//
-                + "    GRAPH :foo { ?o :p2 ?s }\n"//
-                + "  }\n"//
+        final String queryStr = ""
+                + "PREFIX : <http://example.org/>\n"
+                + "SELECT ?s\n"
+                + "WHERE {\n"
+                + "  GRAPH :foo {\n"
+                + "    ?s :p :o .\n"
+                + "    GRAPH :foo { ?o :p2 ?s }\n"
+                + "  }\n"
                 + "}";
 
         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
@@ -324,14 +324,14 @@ public class TestASTGraphGroupOptimizer extends
     public void test_graphContexts_constants_illegal()
             throws MalformedQueryException {
 
-        final String queryStr = ""//
-                + "PREFIX : <http://example.org/>\n"//
-                + "SELECT ?s\n"//
-                + "WHERE {\n"//
-                + "  GRAPH :foo {\n"//
-                + "    ?s :p :o .\n"//
-                + "    GRAPH :bar { ?o :p2 ?s }\n"//
-                + "  }\n"//
+        final String queryStr = ""
+                + "PREFIX : <http://example.org/>\n"
+                + "SELECT ?s\n"
+                + "WHERE {\n"
+                + "  GRAPH :foo {\n"
+                + "    ?s :p :o .\n"
+                + "    GRAPH :bar { ?o :p2 ?s }\n"
+                + "  }\n"
                 + "}";
 
 

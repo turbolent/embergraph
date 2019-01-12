@@ -571,9 +571,9 @@ public class TestTx extends ProxyTestCase<Journal> {
         
     }
 
-    //
+
     // Delete object.
-    //
+
 
     /**
      * Two transactions (tx0, tx1) are created. A version (v0) is written onto

@@ -1090,9 +1090,9 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
     }
 
-    //
-    //
-    //
+
+
+
     
     /**
      * <pre>
@@ -1222,9 +1222,9 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
     }
 
-    //
-    //
-    //
+
+
+
     
     /**
      * <pre>
@@ -1354,9 +1354,9 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
     }
 
-    //
-    //
-    //
+
+
+
     
     /**
      * <pre>
@@ -1373,10 +1373,10 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         final String sparql = "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n"
-                + "INSERT DATA\n" + //
-                "{\n" + //
-                "  <http://example/book1> dc:title \"A new book\" ;\n" + //
-                "                         dc:creator \"A.N.Other\" .\n" + //
+                + "INSERT DATA\n" +
+                "{\n" +
+                "  <http://example/book1> dc:title \"A new book\" ;\n" +
+                "                         dc:creator \"A.N.Other\" .\n" +
                 "}";
 
         final UpdateRoot expected = new UpdateRoot();
@@ -1392,23 +1392,23 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final BigdataLiteral label1 = valueFactory.createLiteral("A new book");
             final BigdataLiteral label2 = valueFactory.createLiteral("A.N.Other");
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)dcTitle,//
-                            (BigdataValue)label1, //
+            final BigdataStatement[] data = new BigdataStatement[] {
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcTitle,
+                            (BigdataValue)label1,
                             null,
-                            StatementEnum.Explicit),//
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1, //
-                            (BigdataURI)dcCreator, //
-                            (BigdataValue) label2, //
-                            null,//
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcCreator,
+                            (BigdataValue) label2,
+                            null,
+                            StatementEnum.Explicit),
 //                    new SPO(book1, dcTitle, label1, null,
-//                            StatementEnum.Explicit),//
+//                            StatementEnum.Explicit),
 //                    new SPO(book1, dcCreator, label2, null,
-//                            StatementEnum.Explicit),//
+//                            StatementEnum.Explicit),
             };
             op.setData(data);
             
@@ -1449,13 +1449,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
             final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)price, //
-                            (BigdataValue)i42, //
-                            (BigdataResource)bookstore, //
-                            StatementEnum.Explicit),//
+            final BigdataStatement[] data = new BigdataStatement[] {
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)price,
+                            (BigdataValue)i42,
+                            (BigdataResource)bookstore,
+                            StatementEnum.Explicit),
             };
 
             op.setData(data);
@@ -1494,13 +1494,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.toString());
             final BigdataURI foo = valueFactory.createURI("http://example/Foo");
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
-                    valueFactory.createStatement(//
-                            bnode,//
-                            rdfType,//
-                            foo, //
+            final BigdataStatement[] data = new BigdataStatement[] {
+                    valueFactory.createStatement(
+                            bnode,
+                            rdfType,
+                            foo,
                             null,// c 
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
             };
 
             op.setData(data);
@@ -1536,7 +1536,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 + "INSERT DATA\n"
                 + "{\n"
                 + "  <http://example/book1> dc:title \"A new book\" .\n"
-                + "  <http://example/book1> dc:creator \"A.N.Other\" .\n" //
+                + "  <http://example/book1> dc:creator \"A.N.Other\" .\n"
                 + "  GRAPH <http://example/bookStore> { <http://example/book1>  ns:price  42 }\n"
                 + "}";
 
@@ -1556,25 +1556,25 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
             final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)dcTitle,//
-                            (BigdataValue)label1,//
-                            null,//
-                            StatementEnum.Explicit),//
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)dcCreator, //
-                            (BigdataValue)label2,//
-                            null,//
-                            StatementEnum.Explicit),//
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1, //
-                            (BigdataURI)price, //
-                            (BigdataValue)i42, //
-                            (BigdataResource)bookstore,//
-                            StatementEnum.Explicit),//
+            final BigdataStatement[] data = new BigdataStatement[] {
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcTitle,
+                            (BigdataValue)label1,
+                            null,
+                            StatementEnum.Explicit),
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcCreator,
+                            (BigdataValue)label2,
+                            null,
+                            StatementEnum.Explicit),
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)price,
+                            (BigdataValue)i42,
+                            (BigdataResource)bookstore,
+                            StatementEnum.Explicit),
             };
             
             op.setData(data);
@@ -1626,7 +1626,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 + "{\n"
                 + "  GRAPH <http://example/bookStore> { <http://example/book1>  ns:price  42 }\n"
                 + "  <http://example/book1> dc:title \"A new book\" .\n"
-                + "  <http://example/book1> dc:creator \"A.N.Other\" .\n" //
+                + "  <http://example/book1> dc:creator \"A.N.Other\" .\n"
                 + "}";
 
         final UpdateRoot expected = new UpdateRoot();
@@ -1645,25 +1645,25 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
             final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1, //
-                            (BigdataURI)price, //
-                            (BigdataValue)i42, //
-                            (BigdataResource)bookstore,//
-                            StatementEnum.Explicit),//
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)dcTitle,//
-                            (BigdataValue)label1,//
-                            null,//
-                            StatementEnum.Explicit),//
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1, //
-                            (BigdataURI)dcCreator,//
-                            (BigdataValue)label2, //
-                            null,//
-                            StatementEnum.Explicit),//
+            final BigdataStatement[] data = new BigdataStatement[] {
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)price,
+                            (BigdataValue)i42,
+                            (BigdataResource)bookstore,
+                            StatementEnum.Explicit),
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcTitle,
+                            (BigdataValue)label1,
+                            null,
+                            StatementEnum.Explicit),
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcCreator,
+                            (BigdataValue)label2,
+                            null,
+                            StatementEnum.Explicit),
             };
             op.setData(data);
 
@@ -1697,7 +1697,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 + "{\n"
                 + "  <http://example/book1> dc:title \"A new book\" . "
                 + "  GRAPH <http://example/bookStore> { <http://example/book1>  ns:price  42 }\n"
-                + "  <http://example/book1> dc:creator \"A.N.Other\" .\n" //
+                + "  <http://example/book1> dc:creator \"A.N.Other\" .\n"
                 + "}";
 
         final UpdateRoot expected = new UpdateRoot();
@@ -1716,28 +1716,28 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
             final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
+            final BigdataStatement[] data = new BigdataStatement[] {
                     
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)dcTitle,//
-                            (BigdataValue)label1, //
-                            null, //
-                            StatementEnum.Explicit),//
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcTitle,
+                            (BigdataValue)label1,
+                            null,
+                            StatementEnum.Explicit),
                     
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)price,//
-                            (BigdataValue)i42,//
-                            (BigdataResource)bookstore,//
-                            StatementEnum.Explicit),//
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)price,
+                            (BigdataValue)i42,
+                            (BigdataResource)bookstore,
+                            StatementEnum.Explicit),
                     
-                    valueFactory.createStatement(//
-                            (BigdataResource)book1,//
-                            (BigdataURI)dcCreator,//
-                            (BigdataValue)label2,//
+                    valueFactory.createStatement(
+                            (BigdataResource)book1,
+                            (BigdataURI)dcCreator,
+                            (BigdataValue)label2,
                             null,// 
-                            StatementEnum.Explicit),//
+                            StatementEnum.Explicit),
             
             };
             op.setData(data);
@@ -1786,15 +1786,15 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
+            final BigdataStatement[] data = new BigdataStatement[] {
                     
-            valueFactory.createStatement(//
-                    (BigdataResource) book1.getValue(),//
-                    (BigdataURI) dcTitle.getValue(),//
-                    (BigdataValue) label1.getValue(),//
-                    (BigdataResource) bookstore.getValue(),//
-                    StatementEnum.Explicit//
-                    ),//
+            valueFactory.createStatement(
+                    (BigdataResource) book1.getValue(),
+                    (BigdataURI) dcTitle.getValue(),
+                    (BigdataValue) label1.getValue(),
+                    (BigdataResource) bookstore.getValue(),
+                    StatementEnum.Explicit
+                    ),
 
             };
             op.setData(data);
@@ -1807,16 +1807,16 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataStatement[] data = new BigdataStatement[] { //
+            final BigdataStatement[] data = new BigdataStatement[] {
                     
-                    valueFactory.createStatement(//
-                            (BigdataResource) book1.getValue(),//
-                            (BigdataURI) dcTitle.getValue(),//
-                            (BigdataValue) label2.getValue(),//
-                            (BigdataResource) bookstore.getValue(),//
-                            StatementEnum.Explicit//
-                            ),//
-//            new SPO(book1, dcTitle, label2, bookstore, StatementEnum.Explicit),//
+                    valueFactory.createStatement(
+                            (BigdataResource) book1.getValue(),
+                            (BigdataURI) dcTitle.getValue(),
+                            (BigdataValue) label2.getValue(),
+                            (BigdataResource) bookstore.getValue(),
+                            StatementEnum.Explicit
+                            ),
+//            new SPO(book1, dcTitle, label2, bookstore, StatementEnum.Explicit),
                                 
             };
             op.setData(data);
@@ -1859,13 +1859,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
        
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH <http://example/addresses> {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "DELETE { ?person foaf:givenName 'Bill' }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH <http://example/addresses> {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -1963,14 +1963,14 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "WITH <http://example/addresses>\n"//
-                + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH <http://example/addresses> {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "WITH <http://example/addresses>\n"
+                + "DELETE { ?person foaf:givenName 'Bill' }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH <http://example/addresses> {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -2072,14 +2072,14 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "USING <http://example/addresses2>\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH <http://example/addresses> {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "DELETE { ?person foaf:givenName 'Bill' }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "USING <http://example/addresses2>\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH <http://example/addresses> {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -2188,14 +2188,14 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
        
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "USING NAMED <http://example/addresses>\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH ?graph {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "DELETE { ?person foaf:givenName 'Bill' }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "USING NAMED <http://example/addresses>\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH ?graph {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -2304,16 +2304,16 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
 
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "WITH <http://example/addresses>\n"//
-                + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "USING NAMED <http://example/addresses>\n"//
-                + "USING NAMED <http://example/addresses2>\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH ?graph {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "WITH <http://example/addresses>\n"
+                + "DELETE { ?person foaf:givenName 'Bill' }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "USING NAMED <http://example/addresses>\n"
+                + "USING NAMED <http://example/addresses2>\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH ?graph {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -2383,7 +2383,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             @SuppressWarnings("unchecked")
             final DatasetNode dataset = new DatasetNode(
                     (Set)Collections.emptySet(),// defaultGraph
-                    namedGraphs,//
+                    namedGraphs,
                     true // update
                     );
             
@@ -2434,19 +2434,19 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
        
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE {\n"//
-                + "  GRAPH <http://example/addresses> { ?person foaf:givenName 'Bill' } .\n" //
+                + "DELETE {\n"
+                + "  GRAPH <http://example/addresses> { ?person foaf:givenName 'Bill' } .\n"
                 + "  ?person foaf:givenName 'Bill'\n"
-                + "}\n"//
-                + "INSERT {\n"//
+                + "}\n"
+                + "INSERT {\n"
                 + "  ?person foaf:givenName 'William'\n"
-                + "  GRAPH <http://example/addresses> { ?person foaf:givenName 'William' } .\n" //
-                + "}\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH <http://example/addresses> {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "  GRAPH <http://example/addresses> { ?person foaf:givenName 'William' } .\n"
+                + "}\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH <http://example/addresses> {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -2564,19 +2564,19 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
        
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
                 +"WITH <http://example/addresses>\n"
-                + "DELETE {\n"//
-                + "  GRAPH ?graph { ?person foaf:givenName 'Bill' } .\n" //
+                + "DELETE {\n"
+                + "  GRAPH ?graph { ?person foaf:givenName 'Bill' } .\n"
                 + "  ?person foaf:givenName 'Bill'\n"
-                + "}\n"//
-                + "INSERT {\n"//
+                + "}\n"
+                + "INSERT {\n"
                 + "  ?person foaf:givenName 'William'\n"
-                + "  GRAPH ?graph { ?person foaf:givenName 'William' } .\n" //
-                + "}\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH ?group {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "  GRAPH ?graph { ?person foaf:givenName 'William' } .\n"
+                + "}\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH ?group {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
         
         final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -2680,15 +2680,15 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_delete_insert_20() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = //
-        "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"//
-                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"//
-                + "DELETE\n"//
-                + " { ?book ?p ?v }\n"//
-                + "WHERE\n"//
-                + " { ?book dc:date ?date .\n"//
-                + "  FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"//
-                + "   ?book ?p ?v\n"//
+        final String sparql =
+        "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
+                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+                + "DELETE\n"
+                + " { ?book ?p ?v }\n"
+                + "WHERE\n"
+                + " { ?book dc:date ?date .\n"
+                + "  FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"
+                + "   ?book ?p ?v\n"
                 + "}";
         
         final IV dcDate = makeIV(valueFactory.createURI("http://purl.org/dc/elements/1.1/date"));
@@ -2757,16 +2757,16 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_delete_insert_21() throws MalformedQueryException,
             TokenMgrError, ParseException {
 
-        final String sparql = //
-        "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"//
-                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"//
-                + "INSERT \n"//
-                + "   { GRAPH <http://example/bookStore2> { ?book ?p ?v } }\n"//
-                + "WHERE\n"//
-                + "   { GRAPH  <http://example/bookStore>\n"//
-                + "        { ?book dc:date ?date .\n"//
-                + "          FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"//
-                + "          ?book ?p ?v\n"//
+        final String sparql =
+        "PREFIX dc:  <http://purl.org/dc/elements/1.1/>\n"
+                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+                + "INSERT \n"
+                + "   { GRAPH <http://example/bookStore2> { ?book ?p ?v } }\n"
+                + "WHERE\n"
+                + "   { GRAPH  <http://example/bookStore>\n"
+                + "        { ?book dc:date ?date .\n"
+                + "          FILTER ( ?date > \"1970-01-01T00:00:00-02:00\"^^xsd:dateTime )\n"
+                + "          ?book ?p ?v\n"
                 + "} }";
         
         final IV dcDate = makeIV(valueFactory.createURI("http://purl.org/dc/elements/1.1/date"));
@@ -2938,13 +2938,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
        
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE { [] foaf:givenName 'Bill' }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH <http://example/addresses> {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "DELETE { [] foaf:givenName 'Bill' }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH <http://example/addresses> {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
 
         try {
@@ -2972,13 +2972,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             throws MalformedQueryException, TokenMgrError, ParseException {
 
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE { ?person foaf:givenName [] }\n"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH <http://example/addresses> {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "DELETE { ?person foaf:givenName [] }\n"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH <http://example/addresses> {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
 
         try {
@@ -3073,20 +3073,20 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
           TokenMgrError, ParseException {
 
       final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-              + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-              + "WHERE {\n"//
-              + "  ?person foaf:givenName 'Bill'. \n"//
-              + "  GRAPH ?graph {\n"//
-              + "    ?person foaf:givenName 'Bill'\n"//
-              + "    }\n"//
-              + "};"//
-              + "INSERT { ?person foaf:givenName 'William' }\n"//
-              + "USING NAMED <http://example/addresses>\n"//
-              + "WHERE {\n"//
-              + "  ?person foaf:givenName 'Bill'. \n"//
-              + "  GRAPH ?graph {\n"//
-              + "    ?person foaf:givenName 'Bill'\n"//
-              + "    }\n"//
+              + "DELETE { ?person foaf:givenName 'Bill' }\n"
+              + "WHERE {\n"
+              + "  ?person foaf:givenName 'Bill'. \n"
+              + "  GRAPH ?graph {\n"
+              + "    ?person foaf:givenName 'Bill'\n"
+              + "    }\n"
+              + "};"
+              + "INSERT { ?person foaf:givenName 'William' }\n"
+              + "USING NAMED <http://example/addresses>\n"
+              + "WHERE {\n"
+              + "  ?person foaf:givenName 'Bill'. \n"
+              + "  GRAPH ?graph {\n"
+              + "    ?person foaf:givenName 'Bill'\n"
+              + "    }\n"
               + "}";
       
       final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -3186,7 +3186,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 @SuppressWarnings("unchecked")
                 final DatasetNode dataset = new DatasetNode(
                         (Set) Collections.emptySet(),// defaultGraph
-                        namedGraphs,//
+                        namedGraphs,
                         true // update
                 );
 
@@ -3234,20 +3234,20 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
             TokenMgrError, ParseException {
         
         final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-                + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-                + "USING NAMED <http://example/addresses>\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH ?graph {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
-                + "};"//
-                + "INSERT { ?person foaf:givenName 'William' }\n"//
-                + "WHERE {\n"//
-                + "  ?person foaf:givenName 'Bill'. \n"//
-                + "  GRAPH ?graph {\n"//
-                + "    ?person foaf:givenName 'Bill'\n"//
-                + "    }\n"//
+                + "DELETE { ?person foaf:givenName 'Bill' }\n"
+                + "USING NAMED <http://example/addresses>\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH ?graph {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
+                + "};"
+                + "INSERT { ?person foaf:givenName 'William' }\n"
+                + "WHERE {\n"
+                + "  ?person foaf:givenName 'Bill'. \n"
+                + "  GRAPH ?graph {\n"
+                + "    ?person foaf:givenName 'Bill'\n"
+                + "    }\n"
                 + "}";
 
         final IV addresses = makeIV(valueFactory
@@ -3307,7 +3307,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 @SuppressWarnings("unchecked")
                 final DatasetNode dataset = new DatasetNode(
                         (Set) Collections.emptySet(),// defaultGraph
-                        namedGraphs,//
+                        namedGraphs,
                         true // update
                 );
 
@@ -3396,21 +3396,21 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
           TokenMgrError, ParseException {
 
       final String sparql = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>\n"
-              + "DELETE { ?person foaf:givenName 'Bill' }\n"//
-              + "USING NAMED <http://example/addresses>\n"//
-              + "WHERE {\n"//
-              + "  ?person foaf:givenName 'Bill'. \n"//
-              + "  GRAPH ?graph {\n"//
-              + "    ?person foaf:givenName 'Bill'\n"//
-              + "    }\n"//
-              + "};"//
-              + "INSERT { ?person foaf:givenName 'William' }\n"//
-              + "USING NAMED <http://example/addresses2>\n"//
-              + "WHERE {\n"//
-              + "  ?person foaf:givenName 'Bill'. \n"//
-              + "  GRAPH ?graph {\n"//
-              + "    ?person foaf:givenName 'Bill'\n"//
-              + "    }\n"//
+              + "DELETE { ?person foaf:givenName 'Bill' }\n"
+              + "USING NAMED <http://example/addresses>\n"
+              + "WHERE {\n"
+              + "  ?person foaf:givenName 'Bill'. \n"
+              + "  GRAPH ?graph {\n"
+              + "    ?person foaf:givenName 'Bill'\n"
+              + "    }\n"
+              + "};"
+              + "INSERT { ?person foaf:givenName 'William' }\n"
+              + "USING NAMED <http://example/addresses2>\n"
+              + "WHERE {\n"
+              + "  ?person foaf:givenName 'Bill'. \n"
+              + "  GRAPH ?graph {\n"
+              + "    ?person foaf:givenName 'Bill'\n"
+              + "    }\n"
               + "}";
       
       final IV addresses = makeIV(valueFactory.createURI("http://example/addresses"));
@@ -3469,7 +3469,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 @SuppressWarnings("unchecked")
                 final DatasetNode dataset = new DatasetNode(
                         (Set) Collections.emptySet(),// defaultGraph
-                        namedGraphs,//
+                        namedGraphs,
                         true // update
                 );
 
@@ -3522,7 +3522,7 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
                 @SuppressWarnings("unchecked")
                 final DatasetNode dataset = new DatasetNode(
                         (Set) Collections.emptySet(),// defaultGraph
-                        namedGraphs,//
+                        namedGraphs,
                         true // update
                 );
 
@@ -3562,14 +3562,14 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
     public void test_ticket_562() throws MalformedQueryException,
             TokenMgrError, ParseException {
        
-        final String sparql = "INSERT {\n" + //
-                "  GRAPH <http://example/out> { ?s ?p ?v . }\n" + //
-                "}\n" + //
-                "WHERE {\n" + //
-                "  SELECT ?s ?p ?v\n" + //
-                "  WHERE {\n" + //
-                "    GRAPH <http://example/in> { ?s ?p ?v . }\n" + //
-                "    }\n" + //
+        final String sparql = "INSERT {\n" +
+                "  GRAPH <http://example/out> { ?s ?p ?v . }\n" +
+                "}\n" +
+                "WHERE {\n" +
+                "  SELECT ?s ?p ?v\n" +
+                "  WHERE {\n" +
+                "    GRAPH <http://example/in> { ?s ?p ?v . }\n" +
+                "    }\n" +
                 "}";
 
         @SuppressWarnings("rawtypes")

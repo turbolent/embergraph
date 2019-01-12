@@ -51,7 +51,7 @@ public class TestBucketDataRecord_Simple_Simple extends
         
         super.setUp();
 
-        coder = new DefaultLeafCoder(//
+        coder = new DefaultLeafCoder(
                 SimpleRabaCoder.INSTANCE,// keys
                 SimpleRabaCoder.INSTANCE // vals
         );

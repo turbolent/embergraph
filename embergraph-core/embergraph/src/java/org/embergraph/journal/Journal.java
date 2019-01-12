@@ -1595,11 +1595,11 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
                     newCommitCounter, newCommitTime);
 
             if (log.isTraceEnabled())
-                log.trace("releaseTime=" + getReleaseTime()//
+                log.trace("releaseTime=" + getReleaseTime()
                         + ",effectiveReleaseTimeForHA="
-                        + effectiveReleaseTimeForHA //
-                        + ",rootBlock=" + getRootBlockView() //
-                        + ",req=" + req//
+                        + effectiveReleaseTimeForHA
+                        + ",rootBlock=" + getRootBlockView()
+                        + ",req=" + req
                         );
 
             return req;

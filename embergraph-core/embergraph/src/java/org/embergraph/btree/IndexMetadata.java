@@ -2232,12 +2232,12 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
 //                    Options.SPLIT_HANDLER_SAMPLE_RATE,
 //                    Options.DEFAULT_SPLIT_HANDLER_SAMPLE_RATE));
 //
-//            this.splitHandler = new DefaultSplitHandler(//
-//                    minimumEntryCount, //
-//                    entryCountPerSplit, //
-//                    overCapacityMultiplier, //
-//                    underCapacityMultiplier, //
-//                    sampleRate //
+//            this.splitHandler = new DefaultSplitHandler(
+//                    minimumEntryCount,
+//                    entryCountPerSplit,
+//                    overCapacityMultiplier,
+//                    underCapacityMultiplier,
+//                    sampleRate
 //            );
 
             /*
@@ -2298,14 +2298,14 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
                     Options.DEFAULT_SINK_CHUNK_TIMEOUT_NANOS));
 
             this.asynchronousIndexWriteConfiguration = new AsynchronousIndexWriteConfiguration(
-                    masterQueueCapacity,//
-                    masterChunkSize,//
-                    masterChunkTimeoutNanos,//
-                    sinkIdleTimeoutNanos,//
-                    sinkPollTimeoutNanos,//
-                    sinkQueueCapacity,//
-                    sinkChunkSize,//
-                    sinkChunkTimeoutNanos//
+                    masterQueueCapacity,
+                    masterChunkSize,
+                    masterChunkTimeoutNanos,
+                    sinkIdleTimeoutNanos,
+                    sinkPollTimeoutNanos,
+                    sinkQueueCapacity,
+                    sinkChunkSize,
+                    sinkChunkTimeoutNanos
             );
 
         }
@@ -2827,8 +2827,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
              * declare the required public constructor.
              */
             
-            final Constructor ctor = cl.getConstructor(new Class[] {//
-                    IndexMetadata.class//
+            final Constructor ctor = cl.getConstructor(new Class[] {
+                    IndexMetadata.class
                     });
 
             final Checkpoint checkpoint = (Checkpoint) ctor
@@ -2885,14 +2885,14 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
              */
             
             final Constructor ctor = cl.getConstructor(new Class[] {
-                    IndexMetadata.class, //
-                    Checkpoint.class//
+                    IndexMetadata.class,
+                    Checkpoint.class
                     });
 
             final Checkpoint checkpoint = (Checkpoint) ctor
-                    .newInstance(new Object[] { //
-                            this, //
-                            oldCheckpoint //
+                    .newInstance(new Object[] {
+                            this,
+                            oldCheckpoint
                     });
             
             // sanity check makes sure the counter is propagated to the new store.

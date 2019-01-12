@@ -424,9 +424,9 @@ public class StaticAnalysisBase {
 //        proj.getProjectionVars(varSet);
 //        
 ////        for (IVariable<?> var : proj.getProjectionVars()) {
-////
+//
 ////            varSet.add(var);
-////
+//
 ////        }
 //        
 //    }

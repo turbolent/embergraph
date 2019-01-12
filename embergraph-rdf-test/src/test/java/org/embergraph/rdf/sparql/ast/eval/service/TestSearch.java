@@ -292,7 +292,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_search_named_graphs10a() throws Exception {
 
-        new TestHelper(//
+        new TestHelper(
                 "search-named-graphs10", // testURI
                 "search-named-graphs10a.rq", // queryFileURI
                 "search-named-graphs10.trig",// dataFileURI
@@ -316,7 +316,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_search_named_graphs10b() throws Exception {
 
-        new TestHelper(//
+        new TestHelper(
                 "search-named-graphs10", // testURI
                 "search-named-graphs10b.rq", // queryFileURI
                 "search-named-graphs10.trig",// dataFileURI
@@ -338,7 +338,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_search_named_graphs10c() throws Exception {
 
-        new TestHelper(//
+        new TestHelper(
                 "search-named-graphs10", // testURI
                 "search-named-graphs10c.rq", // queryFileURI
                 "search-named-graphs10.trig",// dataFileURI
@@ -362,7 +362,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_search_named_graphs10d() throws Exception {
 
-        new TestHelper(//
+        new TestHelper(
                 "search-named-graphs10", // testURI
                 "search-named-graphs10d.rq", // queryFileURI
                 "search-named-graphs10.trig",// dataFileURI
@@ -390,7 +390,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      */
     public void test_search_named_graphs10e() throws Exception {
 
-        new TestHelper(//
+        new TestHelper(
                 "search-named-graphs10", // testURI
                 "search-named-graphs10e.rq", // queryFileURI
                 "search-named-graphs10.trig",// dataFileURI

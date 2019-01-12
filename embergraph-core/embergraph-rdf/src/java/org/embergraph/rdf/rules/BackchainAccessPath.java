@@ -353,11 +353,11 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 //        if(accessPathFilter!=null)
 //            tmp.addFilter(accessPathFilter);
         
-        IChunkedOrderedIterator<ISPO> itr = (owlSameAsItr == null//
-                ? accessPath.iterator(offset, limit, capacity) //
+        IChunkedOrderedIterator<ISPO> itr = (owlSameAsItr == null
+                ? accessPath.iterator(offset, limit, capacity)
                 : new ChunkedWrappedIterator<ISPO>(owlSameAsItr,
                         capacity == 0 ? inf.database.getChunkCapacity()
-                                : capacity, null/* keyOrder */, filter)//
+                                : capacity, null/* keyOrder */, filter)
         );
 
         if (axioms.isRdfSchema() && !inf.forwardChainRdfTypeRdfsResource) {
@@ -373,12 +373,12 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
              * @todo pass the filter in here also.
              */
             
-            itr = BackchainTypeResourceIterator.newInstance(//
-                    itr,//
-                    accessPath,//
-                    database, //
-                    rdfType, //
-                    rdfsResource //
+            itr = BackchainTypeResourceIterator.newInstance(
+                    itr,
+                    accessPath,
+                    database,
+                    rdfType,
+                    rdfsResource
                     );
             
         }
@@ -426,9 +426,9 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
             } else {
 
-                owlSameAsItr = new OwlSameAsPropertiesExpandingIterator(//
-                        spo.s, spo.p, spo.o,//
-                        inf.database, //
+                owlSameAsItr = new OwlSameAsPropertiesExpandingIterator(
+                        spo.s, spo.p, spo.o,
+                        inf.database,
                         inf.owlSameAs.get(), accessPath.getKeyOrder());
             }
             
@@ -457,7 +457,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
         IChunkedOrderedIterator<ISPO> itr = (owlSameAsItr instanceof OwlSameAsPropertiesExpandingIterator
                 ? new ChunkedWrappedIterator<ISPO>(owlSameAsItr,
                         capacity == 0 ? inf.database.queryBufferCapacity
-                                : capacity, null/* keyOrder *//*, filter)//
+                                : capacity, null/* keyOrder *//*, filter)
                 : src
         );
 
@@ -469,12 +469,12 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
              * @todo pass the filter in here also.
              *//*
             
-            itr = BackchainTypeResourceIterator.newInstance(//
-                    itr,//
-                    accessPath,//
-                    inf.database, //
-                    inf.rdfType.get(), //
-                    inf.rdfsResource.get() //
+            itr = BackchainTypeResourceIterator.newInstance(
+                    itr,
+                    accessPath,
+                    inf.database,
+                    inf.rdfType.get(),
+                    inf.rdfsResource.get()
                     );
             
         }

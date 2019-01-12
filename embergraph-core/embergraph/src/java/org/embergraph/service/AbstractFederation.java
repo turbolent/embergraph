@@ -970,10 +970,10 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
             
         }
 
-        return registerIndex(//
-                metadata, //
-                new byte[][] { new byte[] {} },//
-                new UUID[] { dataServiceUUID } //
+        return registerIndex(
+                metadata,
+                new byte[][] { new byte[] {} },
+                new UUID[] { dataServiceUUID }
             );
 
     }
@@ -1646,11 +1646,11 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
                 // Note: Factory is extensible (application can add its own
                 // delegates).
                 final GangliaMetadataFactory metadataFactory = new GangliaMetadataFactory(
-                        new DefaultMetadataFactory(//
-                                defaultUnits,//
-                                defaultSlope,//
-                                defaultTMax,//
-                                defaultDMax//
+                        new DefaultMetadataFactory(
+                                defaultUnits,
+                                defaultSlope,
+                                defaultTMax,
+                                defaultDMax
                         ));
 
                 /*
@@ -1665,18 +1665,18 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
 
                 // The embedded ganglia peer.
                 final BigdataGangliaService gangliaService = new BigdataGangliaService(
-                        hostName, //
-                        serviceName, //
-                        metricsServers,//
-                        listenGroup,//
-                        listenPort, //
+                        hostName,
+                        serviceName,
+                        metricsServers,
+                        listenGroup,
+                        listenPort,
                         listen,// listen
                         report,// report
                         false,// mock,
-                        quietPeriod, //
-                        initialDelay, //
-                        heartbeatInterval,//
-                        monitoringInterval, //
+                        quietPeriod,
+                        initialDelay,
+                        heartbeatInterval,
+                        monitoringInterval,
                         defaultDMax,// globalDMax
                         metadataFactory);
 

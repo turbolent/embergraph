@@ -139,15 +139,15 @@ public class SPOStarJoin extends SPOPredicate
 //     * @param expander
 //     *            MAY be <code>null</code>.
 //     */
-//    public SPOStarJoin(final String[] relationName, //
-//            final int partitionId, //
-//            final IVariableOrConstant<IV> s,//
-//            final IVariableOrConstant<IV> p,//
-//            final IVariableOrConstant<IV> o,//
-//            final IVariableOrConstant<IV> c,//
-//            final boolean optional, //
-//            final IElementFilter<ISPO> constraint,//
-//            final ISolutionExpander<ISPO> expander//
+//    public SPOStarJoin(final String[] relationName,
+//            final int partitionId,
+//            final IVariableOrConstant<IV> s,
+//            final IVariableOrConstant<IV> p,
+//            final IVariableOrConstant<IV> o,
+//            final IVariableOrConstant<IV> c,
+//            final boolean optional,
+//            final IElementFilter<ISPO> constraint,
+//            final ISolutionExpander<ISPO> expander
 //            ) {
 //        
 //        super(relationName, partitionId, s, p, o, c, optional, constraint, 

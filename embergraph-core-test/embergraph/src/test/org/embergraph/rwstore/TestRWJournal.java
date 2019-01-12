@@ -715,24 +715,24 @@ public class TestRWJournal extends AbstractJournalTestCase {
 		// public void test_allocPreExtendsStore() {
 		//       
 		// final Journal store = (Journal) getStore();
-		//
+
 		// try {
-		//
+
 		// final DiskOnlyStrategy bufferStrategy = (DiskOnlyStrategy) store
 		// .getBufferStrategy();
-		//
+
 		// final long nextOffset = store.getRootBlockView()
 		// .getNextOffset();
-		//
+
 		// final long length = store.size();
-		//
+
 		// final long headerSize = FileMetadata.headerSize0;
-		//
+
 		// // #of bytes remaining in the user extent before overflow.
 		// final long nfree = length - (headerSize + nextOffset);
-		//
+
 		// if (nfree >= Integer.MAX_VALUE) {
-		//
+
 		// /*
 		// * The test is trying to allocate a single record that will
 		// * force the store to be extended. This will not work if the
@@ -741,22 +741,22 @@ public class TestRWJournal extends AbstractJournalTestCase {
 		// */
 		//                    
 		// fail("Can't allocate a record with: " + nfree + " bytes");
-		//
+
 		// }
-		//
+
 		// final int nbytes = (int) nfree;
 		//                
 		// final long addr = bufferStrategy.allocate(nbytes);
-		//
+
 		// assertNotSame(0L, addr);
-		//
+
 		// assertEquals(nbytes, store.getByteCount(addr));
 		//                
 		// // store file was extended.
 		// assertTrue(store.size() > length);
 		//                
 		// } finally {
-		//
+
 		// store.destroy();
 		//            
 		// }

@@ -49,9 +49,9 @@ public class CoordinateDMS implements ICoordinate {
 
     public final int tenthsOfSecondsEast;
 
-    public CoordinateDMS(//
-            int degreesNorth, int minutesNorth, int tenthsOfSecondsNorth,//
-            int degreesEast, int minutesEast, int tenthsOfSecondsEast//
+    public CoordinateDMS(
+            int degreesNorth, int minutesNorth, int tenthsOfSecondsNorth,
+            int degreesEast, int minutesEast, int tenthsOfSecondsEast
     ) {
         if (degreesNorth > 90 || degreesNorth < -90)
             throw new IllegalArgumentException();
@@ -132,9 +132,9 @@ public class CoordinateDMS implements ICoordinate {
         int secondsEast = (tenthsOfSecondsEast > 0 ? (int) Math
                 .round(tenthsOfSecondsEast / 10.) : -(int) Math
                 .round(-tenthsOfSecondsEast / 10.));
-        return new CoordinateDMS(//
-                degreesNorth, minutesNorth, secondsNorth * 10,//
-                degreesEast, minutesEast, secondsEast * 10//
+        return new CoordinateDMS(
+                degreesNorth, minutesNorth, secondsNorth * 10,
+                degreesEast, minutesEast, secondsEast * 10
         );
     }
 
@@ -152,9 +152,9 @@ public class CoordinateDMS implements ICoordinate {
         final int roundMinutesEast = (tenthsOfSecondsEast > 300 ? minutesEast + 1
                 : (tenthsOfSecondsEast < -300 ? minutesEast - 1 : minutesEast));
         return new CoordinateDMS(
-                //
+
                 degreesNorth, roundMinutesNorth, 0, degreesEast,
-                roundMinutesEast, 0//
+                roundMinutesEast, 0
         );
     }
 
@@ -247,13 +247,13 @@ public class CoordinateDMS implements ICoordinate {
              * Note: When South or West then all components of the angle are
              * negative.
              */
-            return new CoordinateDMS( //
-                    northSouth ? degreesNorth : -degreesNorth,//
-                    northSouth ? minutesNorth : -minutesNorth,//
-                    northSouth ? tenthsOfSecondsNorth : -tenthsOfSecondsNorth,//
-                    eastWest ? degreesEast : -degreesEast,//
-                    eastWest ? minutesEast : -minutesEast,//
-                    eastWest ? tenthsOfSecondsEast : -tenthsOfSecondsEast//
+            return new CoordinateDMS(
+                    northSouth ? degreesNorth : -degreesNorth,
+                    northSouth ? minutesNorth : -minutesNorth,
+                    northSouth ? tenthsOfSecondsNorth : -tenthsOfSecondsNorth,
+                    eastWest ? degreesEast : -degreesEast,
+                    eastWest ? minutesEast : -minutesEast,
+                    eastWest ? tenthsOfSecondsEast : -tenthsOfSecondsEast
             );
         }
         throw new ParseException("Not recognized: " + text, 0);
@@ -300,7 +300,7 @@ public class CoordinateDMS implements ICoordinate {
      * <dd>east/west (EeWw)</dd>
      * </dl>
      */
-    static final String regex_long = //
+    static final String regex_long =
     "(" + "(\\d{1,3})\\s?[:�*\\s]?\\s?" + // degrees (0:180)
             "(\\d{1,2})\\s?[:'\\s]?\\s?" + // minutes
             "((\\d{1,2}|\\d{1,2}\\.\\d?)\\s?\"?)?\\s?" + // optional seconds
@@ -334,9 +334,9 @@ public class CoordinateDMS implements ICoordinate {
      * @see #regex_lat
      * @see #regex_long
      */
-    static final Pattern pattern_dms1 = Pattern.compile("^(" + //
-            "(" + regex_lat + "(\\s?[/,]?\\s?)" + regex_long + ")" + //
-            ")$"//
+    static final Pattern pattern_dms1 = Pattern.compile("^(" +
+            "(" + regex_lat + "(\\s?[/,]?\\s?)" + regex_long + ")" +
+            ")$"
     );
 
     /*

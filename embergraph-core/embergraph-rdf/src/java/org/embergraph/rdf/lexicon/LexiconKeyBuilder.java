@@ -62,7 +62,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     // return keyBuilder.reset().append(TERM_CODE_URI).getKey();
     //            
     // }
-    //
+
     // public byte[] uriEndKey() {
     //            
     // return keyBuilder.reset().append(TERM_CODE_LIT).getKey();
@@ -158,7 +158,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     // return keyBuilder.reset().append(TERM_CODE_LIT).getKey();
     //            
     // }
-    //
+
     // /**
     // * The key corresponding to the first key after the literals section of
     // the

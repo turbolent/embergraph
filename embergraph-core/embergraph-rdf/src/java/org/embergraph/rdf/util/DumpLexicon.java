@@ -387,7 +387,7 @@ public class DumpLexicon {
             // System.err.println("term->id : "+itr.next());
             //            
             // }
-            //
+
             // /**
             // * Dumps the id:term index.
             // */
@@ -397,7 +397,7 @@ public class DumpLexicon {
             // System.err.println("id->term : "+itr.next());
             //            
             // }
-            //
+
             // /**
             // * Dumps the terms in term order.
             // */
@@ -434,7 +434,7 @@ public class DumpLexicon {
      */
     static public Appendable dump(final LexiconRelation r) {
     
-    	final StringWriter w = new StringWriter(//
+    	final StringWriter w = new StringWriter(
     			100 * Bytes.kilobyte32// initialCapacity
     	);
     
@@ -457,7 +457,7 @@ public class DumpLexicon {
      */
     static public Appendable dumpBlobs(final String namespace, final IIndex ndx) {
     	
-    	final StringWriter w = new StringWriter(//
+    	final StringWriter w = new StringWriter(
     			100 * Bytes.kilobyte32// initialCapacity
     	);
     	

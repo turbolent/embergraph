@@ -72,8 +72,8 @@ public class TestRule extends AbstractRuleTestCase {
                 // head
                 new P(relation, u, rdfsSubClassOf, rdfsResource),
                 // tail
-                new IPredicate[] {//
-                    new P(relation, u, rdfType, rdfsClass) //
+                new IPredicate[] {
+                    new P(relation, u, rdfType, rdfsClass)
                 }
                 );
 
@@ -134,8 +134,8 @@ public class TestRule extends AbstractRuleTestCase {
                 // NO head
                 null,
                 // tail
-                new IPredicate[] {//
-                new P(relation, u, rdfType, rdfsClass) //
+                new IPredicate[] {
+                new P(relation, u, rdfType, rdfsClass)
                 });
 
         // write out the rule on the console.
@@ -161,10 +161,10 @@ public class TestRule extends AbstractRuleTestCase {
      */
     public void test_getSharedVars() {
 
-        final IPredicate p1 = new P(relation,//
+        final IPredicate p1 = new P(relation,
                 Var.var("u"), rdfsSubClassOf, rdfsResource);
 
-        final IPredicate p2 = new P(relation,//
+        final IPredicate p2 = new P(relation,
                 Var.var("x"), rdfType, Var.var("u"));
 
         final Set<IVariable<?>> actual = Rule.getSharedVars(p1, p2);
@@ -204,9 +204,9 @@ public class TestRule extends AbstractRuleTestCase {
 
         final IPredicate head = new P(relation, u, rdfsSubClassOf, rdfsResource);
 
-        final IPredicate[] body = new IPredicate[] {//
+        final IPredicate[] body = new IPredicate[] {
 
-                new P(relation, u, rdfType, rdfsClass)//
+                new P(relation, u, rdfType, rdfsClass)
                 
         };
 
@@ -345,9 +345,9 @@ public class TestRule extends AbstractRuleTestCase {
              * Verify we can override a variable with a constant.
              */
 
-            final IBindingSet bindingSet = new ListBindingSet(//
-                    new IVariable[] { Var.var("v") },//
-                    new IConstant[] { rdfProperty }//
+            final IBindingSet bindingSet = new ListBindingSet(
+                    new IVariable[] { Var.var("v") },
+                    new IConstant[] { rdfProperty }
             );
 
             final IRule r1 = r
@@ -368,9 +368,9 @@ public class TestRule extends AbstractRuleTestCase {
              * Verify we can override another variable with a constant.
              */
 
-            final IBindingSet bindingSet = new ListBindingSet(//
-                    new IVariable[] { Var.var("x") },//
-                    new IConstant[] { rdfProperty }//
+            final IBindingSet bindingSet = new ListBindingSet(
+                    new IVariable[] { Var.var("x") },
+                    new IConstant[] { rdfProperty }
             );
             
             final IRule r2 = r

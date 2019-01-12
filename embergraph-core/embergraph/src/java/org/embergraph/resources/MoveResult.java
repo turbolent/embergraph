@@ -53,11 +53,11 @@ public class MoveResult extends AbstractResult {
      *            The locator for the new index partition.
      */
     public MoveResult(final String name,// 
-            final IndexMetadata indexMetadata,//
-            final UUID targetDataServiceUUID, //
-            final int newPartitionId,//
-            final PartitionLocator oldLocator,//
-            final PartitionLocator newLocator//
+            final IndexMetadata indexMetadata,
+            final UUID targetDataServiceUUID,
+            final int newPartitionId,
+            final PartitionLocator oldLocator,
+            final PartitionLocator newLocator
     ) {
 
         super(name, indexMetadata);

@@ -85,10 +85,10 @@ public class TestStrAfterBOp extends ProxyTestCase {
                 final IV arg2 = DummyConstantNode.toDummyIV(vf
                         .createLiteral("b"));
                 
-                final IV actual = new StrAfterBOp(//
-                        new Constant<IV>(arg1), //
-                        new Constant<IV>(arg2), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new StrAfterBOp(
+                        new Constant<IV>(arg1),
+                        new Constant<IV>(arg2),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -105,10 +105,10 @@ public class TestStrAfterBOp extends ProxyTestCase {
                 final IV arg2 = DummyConstantNode.toDummyIV(vf
                         .createLiteral("ab"));
                 
-                final IV actual = new StrAfterBOp(//
-                        new Constant<IV>(arg1), //
-                        new Constant<IV>(arg2), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new StrAfterBOp(
+                        new Constant<IV>(arg1),
+                        new Constant<IV>(arg2),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -123,10 +123,10 @@ public class TestStrAfterBOp extends ProxyTestCase {
                         .createLiteral("b", "cy"));
                 
                 try {
-	                final IV actual = new StrAfterBOp(//
-	                        new Constant<IV>(arg1), //
-	                        new Constant<IV>(arg2), //
-	                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+	                final IV actual = new StrAfterBOp(
+	                        new Constant<IV>(arg1),
+	                        new Constant<IV>(arg2),
+	                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
 	                ).get(emptyBindingSet);
 	                
 	                fail("should be a type error");
@@ -145,10 +145,10 @@ public class TestStrAfterBOp extends ProxyTestCase {
                 final IV arg2 = DummyConstantNode.toDummyIV(vf
                         .createLiteral(""));
                 
-                final IV actual = new StrAfterBOp(//
-                        new Constant<IV>(arg1), //
-                        new Constant<IV>(arg2), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new StrAfterBOp(
+                        new Constant<IV>(arg1),
+                        new Constant<IV>(arg2),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -165,10 +165,10 @@ public class TestStrAfterBOp extends ProxyTestCase {
                 final IV arg2 = DummyConstantNode.toDummyIV(vf
                         .createLiteral("xyz"));
                 
-                final IV actual = new StrAfterBOp(//
-                        new Constant<IV>(arg1), //
-                        new Constant<IV>(arg2), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new StrAfterBOp(
+                        new Constant<IV>(arg1),
+                        new Constant<IV>(arg2),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -185,10 +185,10 @@ public class TestStrAfterBOp extends ProxyTestCase {
                 final IV arg2 = DummyConstantNode.toDummyIV(vf
                         .createLiteral("bc"));
                 
-                final IV actual = new StrAfterBOp(//
-                        new Constant<IV>(arg1), //
-                        new Constant<IV>(arg2), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new StrAfterBOp(
+                        new Constant<IV>(arg1),
+                        new Constant<IV>(arg2),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);

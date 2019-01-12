@@ -78,12 +78,12 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
             {
 
                 SPO[] told = new SPO[] {
-                        //
+
                         new SPO(x, y, z, StatementEnum.Explicit),
-                        //
+
                         new SPO(y, vocab.get(RDFS.SUBPROPERTYOF), a,
                                 StatementEnum.Explicit),
-                        //
+
                         new SPO(a, vocab.get(RDFS.DOMAIN), b,
                                 StatementEnum.Explicit) };
 
@@ -150,12 +150,12 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
             {
 
                 SPO[] told = new SPO[] {
-                        //
+
                         new SPO(x, y, z, StatementEnum.Explicit),
-                        //
+
                         new SPO(y, vocab.get(RDFS.SUBPROPERTYOF), a,
                                 StatementEnum.Explicit),
-                        //
+
                         new SPO(a, vocab.get(RDFS.RANGE), b,
                                 StatementEnum.Explicit) };
 

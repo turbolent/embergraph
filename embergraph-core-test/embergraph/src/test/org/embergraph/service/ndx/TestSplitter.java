@@ -194,7 +194,7 @@ public class TestSplitter extends TestCase2 {
                 new IndexMetadata("test-ndx", UUID.randomUUID()));
 
         final PartitionLocator loc1 = new PartitionLocator(mdi
-                .incrementAndGetNextPartitionId(), dataServiceUUID,//
+                .incrementAndGetNextPartitionId(), dataServiceUUID,
                 new byte[] {}, // leftSeparatorKey
                 null// rightSeparatorKey
         );
@@ -220,9 +220,9 @@ public class TestSplitter extends TestCase2 {
                 
         };
         
-        assertSplits(new Split[] {//
-                new Split(loc1, 0, 1)//
-                },//
+        assertSplits(new Split[] {
+                new Split(loc1, 0, 1)
+                },
                 splitter.splitKeys(ts, 0/* fromIndex */, 1/* toIndex */, keys)
                         .iterator());
 
@@ -241,7 +241,7 @@ public class TestSplitter extends TestCase2 {
                 new IndexMetadata("test-ndx", UUID.randomUUID()));
 
         final PartitionLocator loc1 = new PartitionLocator(mdi
-                .incrementAndGetNextPartitionId(), dataServiceUUID,//
+                .incrementAndGetNextPartitionId(), dataServiceUUID,
                 new byte[] {}, // leftSeparatorKey
                 null// rightSeparatorKey
         );
@@ -268,9 +268,9 @@ public class TestSplitter extends TestCase2 {
                 
         };
         
-        assertSplits(new Split[] {//
-                new Split(loc1, 0, 1)//
-                },//
+        assertSplits(new Split[] {
+                new Split(loc1, 0, 1)
+                },
                 splitter.splitKeys(ts, 0/* fromIndex */, 1/* toIndex */, keys)
                         .iterator());
 
@@ -291,13 +291,13 @@ public class TestSplitter extends TestCase2 {
                 new IndexMetadata("test-ndx", UUID.randomUUID()));
 
         final PartitionLocator loc1 = new PartitionLocator(mdi
-                .incrementAndGetNextPartitionId(), dataServiceUUID,//
+                .incrementAndGetNextPartitionId(), dataServiceUUID,
                 new byte[] {}, // leftSeparatorKey
                 new byte[] {2} // rightSeparator
         );
 
         final PartitionLocator loc2 = new PartitionLocator(mdi
-                .incrementAndGetNextPartitionId(), dataServiceUUID,//
+                .incrementAndGetNextPartitionId(), dataServiceUUID,
                 new byte[] {2}, // leftSeparatorKey
                 null// rightSeparatorKey
         );
@@ -327,27 +327,27 @@ public class TestSplitter extends TestCase2 {
         };
 
         // verify with just the 1st key.
-        assertSplits(new Split[] {//
-                new Split(loc1, 0/*fromIndex*/, 1/*toIndex*/),//
-//                new Split(loc2, 1/*fromIndex*/, 2/*toIndex*/)//
-                },//
+        assertSplits(new Split[] {
+                new Split(loc1, 0/*fromIndex*/, 1/*toIndex*/),
+//                new Split(loc2, 1/*fromIndex*/, 2/*toIndex*/)
+                },
                 splitter.splitKeys(ts, 0/* fromIndex */, 1/* toIndex */, keys)
                         .iterator());
 
 
         // verify with just the 2nd key.
-        assertSplits(new Split[] {//
-//                new Split(loc1, 0/*fromIndex*/, 1/*toIndex*/),//
-                new Split(loc2, 1/*fromIndex*/, 2/*toIndex*/)//
-                },//
+        assertSplits(new Split[] {
+//                new Split(loc1, 0/*fromIndex*/, 1/*toIndex*/),
+                new Split(loc2, 1/*fromIndex*/, 2/*toIndex*/)
+                },
                 splitter.splitKeys(ts, 1/* fromIndex */, 2/* toIndex */, keys)
                         .iterator());
 
         // verify with both keys.
-        assertSplits(new Split[] {//
-                new Split(loc1, 0/*fromIndex*/, 1/*toIndex*/),//
-                new Split(loc2, 1/*fromIndex*/, 2/*toIndex*/)//
-                },//
+        assertSplits(new Split[] {
+                new Split(loc1, 0/*fromIndex*/, 1/*toIndex*/),
+                new Split(loc2, 1/*fromIndex*/, 2/*toIndex*/)
+                },
                 splitter.splitKeys(ts, 0/* fromIndex */, 2/* toIndex */, keys)
                         .iterator());
 
@@ -370,7 +370,7 @@ public class TestSplitter extends TestCase2 {
                 new IndexMetadata("test-ndx", UUID.randomUUID()));
 
         final PartitionLocator loc1 = new PartitionLocator(mdi
-                .incrementAndGetNextPartitionId(), dataServiceUUID,//
+                .incrementAndGetNextPartitionId(), dataServiceUUID,
                 new byte[] {}, // leftSeparatorKey
                 null// rightSeparatorKey
         );
@@ -393,8 +393,8 @@ public class TestSplitter extends TestCase2 {
         // keys are out of order.
         final byte[][] keys = new byte[][] {
           
-                new byte[] { 1 },//
-                new byte[] { 3 }, //
+                new byte[] { 1 },
+                new byte[] { 3 },
                 new byte[] { 2 },
 
         };

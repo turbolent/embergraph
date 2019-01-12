@@ -54,7 +54,7 @@ public class ConnegUtil {
 	// static {
 	// // Work-around for sesame not handling ask and json (see trac 704 and
 	// 714)
-	//
+
 	// if
 	// (BooleanQueryResultFormat.forMIMEType(BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON)!=null)
 	// {
@@ -67,21 +67,21 @@ public class ConnegUtil {
 	// BooleanQueryResultFormat.register("SPARQL/JSON",BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON,"srj");
 	// BooleanQueryResultWriterRegistry.getInstance().add(new
 	// BooleanQueryResultWriterFactory(){
-	//
+
 	// @Override
 	// public BooleanQueryResultFormat getBooleanQueryResultFormat() {
 	// return askJsonFormat;
 	// }
-	//
+
 	// @Override
 	// public BooleanQueryResultWriter getWriter(final OutputStream out) {
 	// return new BooleanQueryResultWriter(){
-	//
+
 	// @Override
 	// public BooleanQueryResultFormat getBooleanQueryResultFormat() {
 	// return askJsonFormat;
 	// }
-	//
+
 	// @Override
 	// public void write(boolean arg0) throws IOException {
 	// final String answer = "{ \"head\":{ } , \"boolean\": " +

@@ -118,8 +118,8 @@ public class PrepareRequest {
             final IHANotifyReleaseTimeResponse consensusReleaseTime,
             final IJoinedAndNonJoinedServices gatherJoinedAndNonJoinedServices,
             final IJoinedAndNonJoinedServices prepareJoinedAndNonJoinedServices,
-//            final UUID[] joinedServiceIds, //
-//            final Set<UUID> nonJoinedPipelineServiceIds,//
+//            final UUID[] joinedServiceIds,
+//            final Set<UUID> nonJoinedPipelineServiceIds,
             final IRootBlockView rootBlock, final long timeout,
             final TimeUnit unit) {
         
@@ -151,19 +151,19 @@ public class PrepareRequest {
     @Override
     public String toString() {
         return super.toString()
-                + "{"//
+                + "{"
                 + "isRootBlock0="
-                + rootBlock.isRootBlock0()//
+                + rootBlock.isRootBlock0()
                 + ", rootBlock="
-                + rootBlock//
+                + rootBlock
                 + ", consensusReleaseTime="
-                + consensusReleaseTime//
+                + consensusReleaseTime
                 + ", gatherJoinedAndNonJoinedServices="
-                + gatherJoinedAndNonJoinedServices//
+                + gatherJoinedAndNonJoinedServices
                 + ", prepareJoinedAndNonJoinedServices="
-                + prepareJoinedAndNonJoinedServices //
-                + ", timeout=" + timeout//
-                + ", unit=" + unit //
+                + prepareJoinedAndNonJoinedServices
+                + ", timeout=" + timeout
+                + ", unit=" + unit
                 + "}";
     }
 

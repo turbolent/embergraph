@@ -400,9 +400,9 @@ final public class BTreeCounters implements Cloneable, ICounterSetAccess {
 //     */
 //    public final CAT touchCount = new CAT();
 
-    //
+
     // write eviction queue
-    //
+
     
     /*
      * Note: The introduction of these performance counters might have caused
@@ -480,9 +480,9 @@ final public class BTreeCounters implements Cloneable, ICounterSetAccess {
      */
     public double computeRawReadWriteScore() {
         
-        return //
-            (serializeNanos.get() + deserializeNanos.get()) + //
-            (writeNanos.get() + readNanos.get())//
+        return
+            (serializeNanos.get() + deserializeNanos.get()) +
+            (writeNanos.get() + readNanos.get())
             ;
         
     }

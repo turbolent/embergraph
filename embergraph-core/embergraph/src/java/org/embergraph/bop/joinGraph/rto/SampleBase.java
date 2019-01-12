@@ -155,11 +155,11 @@ public abstract class SampleBase {
      * @param sample
      *            The sample.
      */
-    public SampleBase(//
-            final long estimatedCardinality,//
-            final int limit,//
-            final EstimateEnum estimateEnum,//
-            final IBindingSet[] sample//
+    public SampleBase(
+            final long estimatedCardinality,
+            final int limit,
+            final EstimateEnum estimateEnum,
+            final IBindingSet[] sample
             ) {
 
         if (estimatedCardinality < 0L)

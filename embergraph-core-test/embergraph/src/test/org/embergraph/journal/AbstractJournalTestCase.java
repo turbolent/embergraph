@@ -45,9 +45,9 @@ abstract public class AbstractJournalTestCase
     extends AbstractIndexManagerTestCase<Journal>
 {
 
-    //
+
     // Constructors.
-    //
+
 
     public AbstractJournalTestCase() {}
     
@@ -139,9 +139,9 @@ abstract public class AbstractJournalTestCase
 //
 //    }
 
-    //
+
     // Properties
-    //
+
     
     private Properties m_properties;
     

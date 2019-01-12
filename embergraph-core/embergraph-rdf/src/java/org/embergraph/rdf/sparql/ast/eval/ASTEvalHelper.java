@@ -513,8 +513,8 @@ public class ASTEvalHelper {
         
         // Solutions to the WHERE clause (as projected).
         final CloseableIteration<BindingSet, QueryEvaluationException> solutions = ASTEvalHelper
-                .evaluateQuery(astContainer, context, materializeProjectionInQuery//
-                        , optimizedQuery.getProjection().getProjectionVars()//
+                .evaluateQuery(astContainer, context, materializeProjectionInQuery
+                        , optimizedQuery.getProjection().getProjectionVars()
                 );
 
         try {
@@ -551,7 +551,7 @@ public class ASTEvalHelper {
                     .newSetFromMap(new ConcurrentHashMap<BigdataValue, Boolean>());
 
             // Collect the bindings on those variables.
-            solutions2 = new DescribeBindingsCollector(//
+            solutions2 = new DescribeBindingsCollector(
                     describeVars,// what to collect
                     describedResources,// where to put the bindings.
                     solutions// source solutions
@@ -567,11 +567,11 @@ public class ASTEvalHelper {
 
         // Constructed Statements.
         final CloseableIteration<BigdataStatement, QueryEvaluationException> src =
-                new ASTConstructIterator(context, store, //
-                        optimizedQuery.getConstruct(), //
-                        optimizedQuery.getWhereClause(),//
-                        bnodes,//
-                        solutions2//
+                new ASTConstructIterator(context, store,
+                        optimizedQuery.getConstruct(),
+                        optimizedQuery.getWhereClause(),
+                        bnodes,
+                        solutions2
                         );
 
         final CloseableIteration<BigdataStatement, QueryEvaluationException> src2;
@@ -634,8 +634,8 @@ public class ASTEvalHelper {
 
         }
         
-        result = new GraphQueryResultImpl(//
-                optimizedQuery.getPrefixDecls(), //
+        result = new GraphQueryResultImpl(
+                optimizedQuery.getPrefixDecls(),
                 src3);
         } finally {
             if (result == null) {
@@ -1005,11 +1005,11 @@ public class ASTEvalHelper {
      * 
      * TODO timeout for update?
      */
-    static public long executeUpdate(//
-            final BigdataSailRepositoryConnection conn,//
-            final ASTContainer astContainer,//
+    static public long executeUpdate(
+            final BigdataSailRepositoryConnection conn,
+            final ASTContainer astContainer,
             final Dataset dataset,
-            final boolean includeInferred,//
+            final boolean includeInferred,
             final QueryBindingSet bs
             ) throws UpdateExecutionException {
 

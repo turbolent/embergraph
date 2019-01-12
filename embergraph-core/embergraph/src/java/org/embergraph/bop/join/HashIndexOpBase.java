@@ -283,7 +283,7 @@ abstract public class HashIndexOpBase extends PipelineOp implements ISingleThrea
             }
             
             // true iff we will build the index from the pipeline.
-            this.sourceIsPipeline //
+            this.sourceIsPipeline
                 = (op.getProperty(Annotations.NAMED_SET_SOURCE_REF) == null)
                 && (op.getProperty(Annotations.BINDING_SETS_SOURCE) == null)
                 ;

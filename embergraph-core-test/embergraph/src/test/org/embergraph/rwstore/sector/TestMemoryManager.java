@@ -359,7 +359,7 @@ public class TestMemoryManager extends TestCase2 {
 //		final long lastAddr2 = addrs.size() >= 2 ? addrs.get(addrs.size() - 1)
 //				: 0L;
 
-		final FutureTask<Long> ft = new FutureTask<Long>(//
+		final FutureTask<Long> ft = new FutureTask<Long>(
 				new Callable<Long>() {
 					public Long call() throws Exception {
 						try {

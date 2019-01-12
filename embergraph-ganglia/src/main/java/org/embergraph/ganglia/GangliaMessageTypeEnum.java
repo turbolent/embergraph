@@ -31,7 +31,7 @@ public enum GangliaMessageTypeEnum {
 	/**
 	 * Ganglia metric metadata declaration record.
 	 */
-	METADATA(128, false, null/* n/a */, null/* n/a */, null/* n/a */), //
+	METADATA(128, false, null/* n/a */, null/* n/a */, null/* n/a */),
 
 	/**
 	 * Ganglia metric record with unsigned short value.
@@ -45,17 +45,17 @@ public enum GangliaMessageTypeEnum {
 	 * wire they are written out using the printf format string for an unsigned
 	 * int16 value.
 	 */
-	UINT16(128 + 1, true, "uint16", "%hu", null/* n/a */), //
+	UINT16(128 + 1, true, "uint16", "%hu", null/* n/a */),
 
 	/**
 	 * Ganglia metric record with short value.
 	 */
-	INT16(128 + 2, true, "int16", "%hi", new Class[]{Short.class}), //
+	INT16(128 + 2, true, "int16", "%hi", new Class[]{Short.class}),
 
 	/**
 	 * Ganglia metric record with int32 value.
 	 */
-	INT32(128 + 3, true, "int32", "%i", new Class[]{Integer.class}), //
+	INT32(128 + 3, true, "int32", "%i", new Class[]{Integer.class}),
 
 	/**
 	 * Ganglia metric record with unsigned int32 value.
@@ -69,23 +69,23 @@ public enum GangliaMessageTypeEnum {
 	 * wire they are written out using the printf format string for an unsigned
 	 * int32 value.
 	 */
-	UINT32(128 + 4, true, "uint32", "%u", null/* n/a */), //
+	UINT32(128 + 4, true, "uint32", "%u", null/* n/a */),
 
 	/**
 	 * Ganglia metric record with string value.
 	 */
-	STRING(128 + 5, true, "string", "%s", new Class[]{String.class}),//
+	STRING(128 + 5, true, "string", "%s", new Class[]{String.class}),
 	
 	/**
 	 * Ganglia metric record with float value.
 	 */
-	FLOAT(128 + 6, true, "float", "%f", new Class[]{Float.class}), //
+	FLOAT(128 + 6, true, "float", "%f", new Class[]{Float.class}),
 	
 	/**
 	 * Ganglia metric record with double value.
 	 */
 	DOUBLE(128 + 7, true, "double", "%lf", new Class[] { Double.class,
-			Long.class }), //
+			Long.class }),
 	
 	/**
 	 * Ganglia request record (requests a metadata record for the named metric).

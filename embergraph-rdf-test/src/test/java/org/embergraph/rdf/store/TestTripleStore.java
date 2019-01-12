@@ -310,20 +310,20 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
         
             final BigdataValueFactory valueFactory = store.getValueFactory();
             
-            final BigdataValue[] terms = new BigdataValue[] {//
+            final BigdataValue[] terms = new BigdataValue[] {
     
-                valueFactory.createURI("http://www.embergraph.org"),//
+                valueFactory.createURI("http://www.embergraph.org"),
 
-                valueFactory.createURI(RDF.TYPE.stringValue()),//
-                valueFactory.createURI(RDFS.SUBCLASSOF.stringValue()),//
-                valueFactory.createURI(XMLSchema.DECIMAL.stringValue()),//
+                valueFactory.createURI(RDF.TYPE.stringValue()),
+                valueFactory.createURI(RDFS.SUBCLASSOF.stringValue()),
+                valueFactory.createURI(XMLSchema.DECIMAL.stringValue()),
 
-                valueFactory.createLiteral("abc"),//
-                valueFactory.createLiteral("abc", XMLSchema.STRING),//
-                valueFactory.createLiteral("abc", "en"),//
+                valueFactory.createLiteral("abc"),
+                valueFactory.createLiteral("abc", XMLSchema.STRING),
+                valueFactory.createLiteral("abc", "en"),
 
-                valueFactory.createBNode(UUID.randomUUID().toString()),//
-                valueFactory.createBNode("a12") //
+                valueFactory.createBNode(UUID.randomUUID().toString()),
+                valueFactory.createBNode("a12")
 
             };
     
@@ -700,11 +700,11 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             final BNode bn3 = new BNodeImpl(getVeryLargeLiteral());
 
             // Create an array of those Value objects.
-            final Value[] values = new Value[] {//
-                    x, y, z, A, B, C, big,//
-                    rdfsSubClassOf, rdfType,//
-                    lit1, lit2, lit3, lit5,//
-                    bn1, bn2, bn3 //
+            final Value[] values = new Value[] {
+                    x, y, z, A, B, C, big,
+                    rdfsSubClassOf, rdfType,
+                    lit1, lit2, lit3, lit5,
+                    bn1, bn2, bn3
             };
 
             /*
@@ -1010,13 +1010,13 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
                 
             }
             
-            assertEquals("mutationCount", 2L,//
-                    store.addStatements(new SPO[] { spo1, spo2 }, 2)//
+            assertEquals("mutationCount", 2L,
+                    store.addStatements(new SPO[] { spo1, spo2 }, 2)
                     );
 
             // verify that a re-insert reports a zero mutation count.
-            assertEquals("mutationCount", 0L,//
-                    store.addStatements(new SPO[] { spo1, spo2 }, 2)//
+            assertEquals("mutationCount", 0L,
+                    store.addStatements(new SPO[] { spo1, spo2 }, 2)
                     );
 
             if (log.isInfoEnabled()) {
@@ -1222,8 +1222,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             
             assertSameSPOs(new SPO[] {
                     new SPO(A, rdfType, B, StatementEnum.Explicit),
-                    new SPO(A, rdfType, C, StatementEnum.Explicit),//
-                    },//
+                    new SPO(A, rdfType, C, StatementEnum.Explicit),
+                    },
                     store.getAccessPath(NULL, NULL, NULL).iterator());
 
             assertEquals(1, store.getAccessPath(NULL, NULL, store.getIV(B))
@@ -1235,9 +1235,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             
 //            store.commit();
             
-            assertSameSPOs(new SPO[] {//
-                    new SPO(A, rdfType, C, StatementEnum.Explicit), //
-                    }, //
+            assertSameSPOs(new SPO[] {
+                    new SPO(A, rdfType, C, StatementEnum.Explicit),
+                    },
                     store.getAccessPath(NULL,NULL,NULL).iterator()
                     );
 
@@ -1284,11 +1284,11 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
             store.addStatements(a,a.length);
             
-            assertSameSPOs(new SPO[] {//
-                    new SPO(v1, v2, v3, StatementEnum.Explicit),//
-                    new SPO(v2, v2, v3, StatementEnum.Inferred),//
-                    new SPO(v3, v2, v3, StatementEnum.Axiom),//
-                    },//
+            assertSameSPOs(new SPO[] {
+                    new SPO(v1, v2, v3, StatementEnum.Explicit),
+                    new SPO(v2, v2, v3, StatementEnum.Inferred),
+                    new SPO(v3, v2, v3, StatementEnum.Axiom),
+                    },
                     store.getAccessPath(NULL,NULL,NULL).iterator()
                     );
 
@@ -1505,71 +1505,71 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             {
                 final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {};
                 assertSameStatements(
-                        new Statement[] {//
-                        },//
+                        new Statement[] {
+                        },
                         store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
                                 triplePatterns)));
             }
 
             // Single pattern matching one statement.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {//
-                    new BigdataTriplePattern(A, rdfType, null),//
+                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
+                    new BigdataTriplePattern(A, rdfType, null),
                 };
                 assertSameStatements(
-                        new Statement[] {//
-                        new StatementImpl(A, rdfType, Person),//
-                        },//
+                        new Statement[] {
+                        new StatementImpl(A, rdfType, Person),
+                        },
                         store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
                                 triplePatterns)));
             }
 
             // Single pattern matching three statements.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {//
-                    new BigdataTriplePattern(null, rdfType, Person),//
+                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
+                    new BigdataTriplePattern(null, rdfType, Person),
                 };
                 assertSameStatements(
-                        new Statement[] {//
-                                new StatementImpl(A, rdfType, Person),//
-                                new StatementImpl(B, rdfType, Person),//
-                                new StatementImpl(C, rdfType, Person),//
-                        },//
+                        new Statement[] {
+                                new StatementImpl(A, rdfType, Person),
+                                new StatementImpl(B, rdfType, Person),
+                                new StatementImpl(C, rdfType, Person),
+                        },
                         store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
                                 triplePatterns)));
             }
 
             // Two patterns matching various statements.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {//
-                        new BigdataTriplePattern(A, foafKnows, null),//
-                        new BigdataTriplePattern(null, rdfType, Person),//
+                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
+                        new BigdataTriplePattern(A, foafKnows, null),
+                        new BigdataTriplePattern(null, rdfType, Person),
                 };
                 assertSameIteratorAnyOrder(
-                        new Statement[] {//
-                                new StatementImpl(A, foafKnows, B),//
-                                new StatementImpl(A, rdfType, Person),//
-                                new StatementImpl(B, rdfType, Person),//
-                                new StatementImpl(C, rdfType, Person),//
-                        },//
+                        new Statement[] {
+                                new StatementImpl(A, foafKnows, B),
+                                new StatementImpl(A, rdfType, Person),
+                                new StatementImpl(B, rdfType, Person),
+                                new StatementImpl(C, rdfType, Person),
+                        },
                         store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
                                 triplePatterns)));
             }
 
             // Three patterns, two of which match various statements.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {//
-                        new BigdataTriplePattern(A, foafKnows, null),//
-                        new BigdataTriplePattern(null, rdfType, Person),//
+                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
+                        new BigdataTriplePattern(A, foafKnows, null),
+                        new BigdataTriplePattern(null, rdfType, Person),
                         new BigdataTriplePattern(rdfType, foafKnows, null),// no match
                 };
                 assertSameIteratorAnyOrder(
-                        new Statement[] {//
-                                new StatementImpl(A, foafKnows, B),//
-                                new StatementImpl(A, rdfType, Person),//
-                                new StatementImpl(B, rdfType, Person),//
-                                new StatementImpl(C, rdfType, Person),//
-                        },//
+                        new Statement[] {
+                                new StatementImpl(A, foafKnows, B),
+                                new StatementImpl(A, rdfType, Person),
+                                new StatementImpl(B, rdfType, Person),
+                                new StatementImpl(C, rdfType, Person),
+                        },
                         store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
                                 triplePatterns)));
             }

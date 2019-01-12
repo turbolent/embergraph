@@ -878,7 +878,7 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
 //
 //                btree = BTree.create(journal, metadata);
 //
-//                doInsertRandomSparseKeySequenceTest(//
+//                doInsertRandomSparseKeySequenceTest(
 //                        btree, ntuples, // #of inserts into the source btree.
 //                        0// disable trace
 //                );
@@ -915,12 +915,12 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
 //
 //                public String toString() {
 //
-//                    return buildEnum//
+//                    return buildEnum
 //                            + ", " + elapsed// note: total build time!
-//                            + ", " + builder.elapsed_build//
-//                            + ", " + builder.elapsed_write//
-//                            + ", " + builder.mbPerSec//
-//                            + ", " + (builder.outFile.length()/Bytes.megabyte)//
+//                            + ", " + builder.elapsed_build
+//                            + ", " + builder.elapsed_write
+//                            + ", " + builder.mbPerSec
+//                            + ", " + (builder.outFile.length()/Bytes.megabyte)
 //                    ;
 //
 //                }

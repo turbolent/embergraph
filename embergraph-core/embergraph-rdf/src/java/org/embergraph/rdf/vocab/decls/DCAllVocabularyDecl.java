@@ -51,9 +51,9 @@ public class DCAllVocabularyDecl implements VocabularyDecl {
     
     public Iterator<URI> values() {
 
-        return new Striterator(new EmptyIterator())//
-            .append(new DCTermsVocabularyDecl().values())//
-            .append(new DCElementsVocabularyDecl().values())//
+        return new Striterator(new EmptyIterator())
+            .append(new DCTermsVocabularyDecl().values())
+            .append(new DCElementsVocabularyDecl().values())
             ;
 
     }

@@ -172,11 +172,11 @@ public class ASTServiceNodeOptimizer implements IASTOptimizer {
      *            not be evaluated in an embedded location without causing
      *            multiple invocations of the SERVICE.
      */
-    private void liftOutServiceNodes(//
-            final QueryRoot queryRoot,//
-            final AST2BOpContext context,//
-            final GroupNodeBase<IGroupMemberNode> parent, //
-            final boolean all//
+    private void liftOutServiceNodes(
+            final QueryRoot queryRoot,
+            final AST2BOpContext context,
+            final GroupNodeBase<IGroupMemberNode> parent,
+            final boolean all
             ) {
 
         boolean first = true;
@@ -243,11 +243,11 @@ public class ASTServiceNodeOptimizer implements IASTOptimizer {
      * @param serviceNode
      *            The {@link ServiceNode}.
      */
-    private void liftOutServiceNode(//
-            final QueryRoot queryRoot,//
-            final AST2BOpContext context,//
-            final GroupNodeBase<IGroupMemberNode> parent,//
-            final ServiceNode serviceNode//
+    private void liftOutServiceNode(
+            final QueryRoot queryRoot,
+            final AST2BOpContext context,
+            final GroupNodeBase<IGroupMemberNode> parent,
+            final ServiceNode serviceNode
             ) {
 
         /*

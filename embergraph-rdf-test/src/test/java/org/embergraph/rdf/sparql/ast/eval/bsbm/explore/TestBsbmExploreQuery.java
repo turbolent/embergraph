@@ -62,7 +62,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query1", // name
                 "bsbm/explore/query1.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -72,7 +72,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query2", // name
                 "bsbm/explore/query2.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -82,7 +82,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query3", // name
                 "bsbm/explore/query3.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -92,7 +92,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query4", // name
                 "bsbm/explore/query4.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -102,7 +102,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query5", // name
                 "bsbm/explore/query5.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -117,7 +117,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query7", // name
                 "bsbm/explore/query7.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -127,7 +127,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query8", // name
                 "bsbm/explore/query8.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -137,7 +137,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query9", // name
                 "bsbm/explore/query9.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -147,7 +147,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query10", // name
                 "bsbm/explore/query10.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -157,7 +157,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query11", // name
                 "bsbm/explore/query11.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 
@@ -167,7 +167,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
 
         new TestHelper("query12", // name
                 "bsbm/explore/query12.txt",// query
-                dataset,//
+                dataset,
                 "bsbm/explore/empty.srx"// result
         ).runTest();
 

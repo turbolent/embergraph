@@ -178,20 +178,20 @@ public class Banner {
 
                     final Formatter f = new Formatter(sb);
                     try {
-                    final String fmt1 = "" //
-                            + "%-" + maxNameLen + "s"//
-//                            + " %-" + maxProjectLen + "s" //
-                            + " %-" + maxLicenseLen + "s"//
+                    final String fmt1 = ""
+                            + "%-" + maxNameLen + "s"
+//                            + " %-" + maxProjectLen + "s"
+                            + " %-" + maxLicenseLen + "s"
                             + "\n";
 
                     f.format(fmt1, "Dependency", "License");
                     
                     for (Dependency dep : Depends.depends()) {
 
-                        f.format(fmt1, //
+                        f.format(fmt1,
                                 dep.getName(),// 
-//                                dep.projectURL(),//
-                                dep.licenseURL()//
+//                                dep.projectURL(),
+                                dep.licenseURL()
                                 );
 
                     }
@@ -505,18 +505,18 @@ public class Banner {
         setDefaultLogLevel(quiet);
         
     	banner = 
-        "\nEmbergraph"+//
-        "\n"+//
-        "\nCopyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018.  All rights reserved."+//
-        "\nCopyright (C) Embergraph contributors 2019.  All rights reserved."+//
-        "\n"+//
-        "\n"+fullyQualifiedHostName+//
-        "\n"+new Date()+//
+        "\nEmbergraph"+
+        "\n"+
+        "\nCopyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018.  All rights reserved."+
+        "\nCopyright (C) Embergraph contributors 2019.  All rights reserved."+
+        "\n"+
+        "\n"+fullyQualifiedHostName+
+        "\n"+new Date()+
         "\n"+SystemUtil.operatingSystem() + "/" + SystemUtil.osVersion()
-                + " " + SystemUtil.architecture() + //
-        "\n"+SystemUtil.cpuInfo() + " #CPU="+SystemUtil.numProcessors() +//
+                + " " + SystemUtil.architecture() +
+        "\n"+SystemUtil.cpuInfo() + " #CPU="+SystemUtil.numProcessors() +
         "\n"+System.getProperty("java.vendor")+" "+System.getProperty("java.version")+
-        "\nfreeMemory="+Runtime.getRuntime().freeMemory()+//
+        "\nfreeMemory="+Runtime.getRuntime().freeMemory()+
         getBuildString()+ // Note: Will add its own newline if non-empty.
         "\n\n"
         ;

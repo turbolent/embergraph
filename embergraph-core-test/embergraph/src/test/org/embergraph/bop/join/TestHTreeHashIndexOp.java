@@ -103,35 +103,35 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
         final INamedSolutionSetRef namedSolutionSet = NamedSolutionSetRefUtility
                 .newInstance(queryId, solutionSetName, joinVars);
 
-        new HashIndexOp(BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        new HashIndexOp(BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                new NV(HashIndexOp.Annotations.SELECT, selected),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                new NV(HashIndexOp.Annotations.SELECT, selected),
                 new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                        HTreeHashJoinUtility.factory),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                        HTreeHashJoinUtility.factory),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
 
         // Must run on the query controller.
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
 //                    new NV(BOp.Annotations.EVALUATION_CONTEXT,
-//                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+//                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
                     new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                            HTreeHashJoinUtility.factory),//
-                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                            HTreeHashJoinUtility.factory),
+                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                     new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalArgumentException ex) {
@@ -141,18 +141,18 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
 
         // Parallel evaluation is not permitted since operator writes on HTree.
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
                     new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-//                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+                            BOpEvaluationContext.CONTROLLER),
+//                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
                     new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                            HTreeHashJoinUtility.factory),//
-                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                            HTreeHashJoinUtility.factory),
+                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                     new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalArgumentException ex) {
@@ -163,18 +163,18 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
         // Last pass evaluation must be requested since operator defers outputs
         // until all inputs have been consumed.
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
                     new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-//                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+//                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
                     new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                            HTreeHashJoinUtility.factory),//
-                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                            HTreeHashJoinUtility.factory),
+                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                     new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalArgumentException ex) {
@@ -183,35 +183,35 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
         }
 
         // OPTIONAL semantics are supported.
-        new HashIndexOp(BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        new HashIndexOp(BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                new NV(HashIndexOp.Annotations.SELECT, selected),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                new NV(HashIndexOp.Annotations.SELECT, selected),
                 new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                        HTreeHashJoinUtility.factory),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                        HTreeHashJoinUtility.factory),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
 
         // Join vars must be specified.
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
                     new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-//                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+//                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
                     new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                            HTreeHashJoinUtility.factory),//
-                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                            HTreeHashJoinUtility.factory),
+                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                     new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalStateException ex) {
@@ -220,51 +220,51 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
         }
 
         // Join vars may be an empty [].
-        new HashIndexOp(BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        new HashIndexOp(BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, new IVariable[] {}),//
-                new NV(HashIndexOp.Annotations.SELECT, selected),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, new IVariable[] {}),
+                new NV(HashIndexOp.Annotations.SELECT, selected),
                 new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                        HTreeHashJoinUtility.factory),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                        HTreeHashJoinUtility.factory),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
         
         // The selected variables annotation is optional.
-        new HashIndexOp(BOp.NOARGS,//
-                new NV(BOp.Annotations.BOP_ID, 1),//
+        new HashIndexOp(BOp.NOARGS,
+                new NV(BOp.Annotations.BOP_ID, 1),
                 new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                new NV(HashIndexOp.Annotations.JOIN_VARS, new IVariable[] {}),//
-                new NV(HashIndexOp.Annotations.SELECT, null),//
+                        BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                new NV(HashIndexOp.Annotations.JOIN_VARS, new IVariable[] {}),
+                new NV(HashIndexOp.Annotations.SELECT, null),
                 new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                        HTreeHashJoinUtility.factory),//
-                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+                        HTreeHashJoinUtility.factory),
+                new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                 new NV(IPredicate.Annotations.RELATION_NAME, "kb")
         );
         
         // The IHashJoinUtility must be specified.
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
                     new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
 //                    new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-//                            HTreeHashJoinUtility.factory),//
-                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),//
+//                            HTreeHashJoinUtility.factory),
+                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
                     new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalStateException ex) {
@@ -274,18 +274,18 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
         
         // The solution set name must be specified.
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
                     new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
                     new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                            HTreeHashJoinUtility.factory),//
-//                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet)//
+                            HTreeHashJoinUtility.factory),
+//                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet)
                     new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalStateException ex) {
@@ -295,18 +295,18 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
         
         // The relation name must be set
         try {
-            new HashIndexOp(BOp.NOARGS,//
-                    new NV(BOp.Annotations.BOP_ID, 1),//
+            new HashIndexOp(BOp.NOARGS,
+                    new NV(BOp.Annotations.BOP_ID, 1),
                     new NV(BOp.Annotations.EVALUATION_CONTEXT,
-                            BOpEvaluationContext.CONTROLLER),//
-                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),//
-                    new NV(PipelineOp.Annotations.LAST_PASS, true),//
-                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),//
-                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),//
-                    new NV(HashIndexOp.Annotations.SELECT, selected),//
+                            BOpEvaluationContext.CONTROLLER),
+                    new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+                    new NV(PipelineOp.Annotations.LAST_PASS, true),
+                    new NV(HashIndexOp.Annotations.JOIN_TYPE, JoinTypeEnum.Normal),
+                    new NV(HashIndexOp.Annotations.JOIN_VARS, joinVars),
+                    new NV(HashIndexOp.Annotations.SELECT, selected),
                     new NV(HashIndexOp.Annotations.HASH_JOIN_UTILITY_FACTORY,
-                            HTreeHashJoinUtility.factory),//
-                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet)//
+                            HTreeHashJoinUtility.factory),
+                    new NV(HashIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet)
 //                    new NV(IPredicate.Annotations.RELATION_NAME, "kb")
             );
         } catch(IllegalStateException ex) {

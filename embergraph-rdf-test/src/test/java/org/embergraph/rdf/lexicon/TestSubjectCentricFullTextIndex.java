@@ -228,23 +228,23 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
             
             final LiteralImpl largeLiteral = getLargeLiteral(store);
 
-            final BigdataValue[] terms = new BigdataValue[] {//
-                    f.createLiteral("abc"),//
-                    f.createLiteral("abc", "en"),//
-                    f.createLiteral("good day", "en"),//
-                    f.createLiteral("gutten tag", "de"),//
-                    f.createLiteral("tag team", "en"),//
+            final BigdataValue[] terms = new BigdataValue[] {
+                    f.createLiteral("abc"),
+                    f.createLiteral("abc", "en"),
+                    f.createLiteral("good day", "en"),
+                    f.createLiteral("gutten tag", "de"),
+                    f.createLiteral("tag team", "en"),
                     f.createLiteral("the first day", "en"),// // 'the' is a stopword.
 
-                    f.createURI("http://www.embergraph.org"),//
-                    f.asValue(RDF.TYPE),//
-                    f.asValue(RDFS.SUBCLASSOF),//
-                    f.asValue(XMLSchema.DECIMAL),//
+                    f.createURI("http://www.embergraph.org"),
+                    f.asValue(RDF.TYPE),
+                    f.asValue(RDFS.SUBCLASSOF),
+                    f.asValue(XMLSchema.DECIMAL),
 
-                    f.createBNode(UUID.randomUUID().toString()),//
-                    f.createBNode("a12"),//
+                    f.createBNode(UUID.randomUUID().toString()),
+                    f.createBNode("a12"),
                     
-                    f.asValue(largeLiteral),//
+                    f.asValue(largeLiteral),
 
             };
 
@@ -273,27 +273,27 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
             			s
                     });
 
-            assertExpectedHits(store, "tag", "en", new BigdataValue[] {//
+            assertExpectedHits(store, "tag", "en", new BigdataValue[] {
 					s
 					});
 
-            assertExpectedHits(store, "tag", "de", new BigdataValue[] {//
+            assertExpectedHits(store, "tag", "de", new BigdataValue[] {
             		s
                     });
 
-            assertExpectedHits(store, "GOOD DAY", "en", //
+            assertExpectedHits(store, "GOOD DAY", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {//
+                    new BigdataValue[] {
             		s
                     });
 
-            assertExpectedHits(store, "GOOD DAY", "en", //
+            assertExpectedHits(store, "GOOD DAY", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {//
+                    new BigdataValue[] {
             		s
                     });
 
-            assertExpectedHits(store, "day", "en", //
+            assertExpectedHits(store, "day", "en",
                     .0f, // minCosine
                     new BigdataValue[] {
             		s
@@ -303,7 +303,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
             assertExpectedHits(store, "the", "en", new BigdataValue[] {});
 
             // BLOB
-            assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/, //
+            assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                     .0f, // minCosine
                     new BigdataValue[] {
                     s
@@ -327,38 +327,38 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
                 assertNotNull(store.getLexiconRelation().getSubjectCentricSearchEngine());
                 
                 assertExpectedHits(store, "abc", null/* languageCode */,
-                        new BigdataValue[] { //
+                        new BigdataValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "tag", "en", new BigdataValue[] {//
+                assertExpectedHits(store, "tag", "en", new BigdataValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "tag", "de", new BigdataValue[] {//
+                assertExpectedHits(store, "tag", "de", new BigdataValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "GOOD DAY", "en", //
+                assertExpectedHits(store, "GOOD DAY", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {//
+                        new BigdataValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "GOOD DAY", "en", //
+                assertExpectedHits(store, "GOOD DAY", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {//
+                        new BigdataValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "day", "en", //
+                assertExpectedHits(store, "day", "en",
                         .0f, // minCosine
                         new BigdataValue[] {
                 		s
                 		});
                 
                 // BLOB
-                assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/, //
+                assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                         .0f, // minCosine
                         new BigdataValue[] {
                         s
@@ -394,23 +394,23 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
             
             final LiteralImpl largeLiteral = getLargeLiteral(store);
 
-            final BigdataValue[] terms = new BigdataValue[] {//
-                    f.createLiteral("abc"),//
-                    f.createLiteral("abc", "en"),//
-                    f.createLiteral("good day", "en"),//
-                    f.createLiteral("gutten tag", "de"),//
-                    f.createLiteral("tag team", "en"),//
+            final BigdataValue[] terms = new BigdataValue[] {
+                    f.createLiteral("abc"),
+                    f.createLiteral("abc", "en"),
+                    f.createLiteral("good day", "en"),
+                    f.createLiteral("gutten tag", "de"),
+                    f.createLiteral("tag team", "en"),
                     f.createLiteral("the first day", "en"),// // 'the' is a stopword.
 
-                    f.createURI("http://www.embergraph.org"),//
-                    f.asValue(RDF.TYPE),//
-                    f.asValue(RDFS.SUBCLASSOF),//
-                    f.asValue(XMLSchema.DECIMAL),//
+                    f.createURI("http://www.embergraph.org"),
+                    f.asValue(RDF.TYPE),
+                    f.asValue(RDFS.SUBCLASSOF),
+                    f.asValue(XMLSchema.DECIMAL),
 
-                    f.createBNode(UUID.randomUUID().toString()),//
-                    f.createBNode("a12"),//
+                    f.createBNode(UUID.randomUUID().toString()),
+                    f.createBNode("a12"),
                     
-                    f.asValue(largeLiteral),//
+                    f.asValue(largeLiteral),
 
             };
 
@@ -451,21 +451,21 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
         			s1, s2
                     });
 
-            assertExpectedHits(store, "tag", "en", new BigdataValue[] {//
+            assertExpectedHits(store, "tag", "en", new BigdataValue[] {
 					s1, s3
 					});
 
-            assertExpectedHits(store, "tag", "de", new BigdataValue[] {//
+            assertExpectedHits(store, "tag", "de", new BigdataValue[] {
             		s1, s3
                     });
 
-            assertExpectedHits(store, "GOOD DAY", "en", //
+            assertExpectedHits(store, "GOOD DAY", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {//
+                    new BigdataValue[] {
             		s1, s2, s3
                     });
 
-            assertExpectedHits(store, "day", "en", //
+            assertExpectedHits(store, "day", "en",
                     .0f, // minCosine
                     new BigdataValue[] {
             		s1, s2, s3
@@ -475,7 +475,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
             assertExpectedHits(store, "the", "en", new BigdataValue[] {});
 
             // BLOB
-            assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/, //
+            assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                     .0f, // minCosine
                     new BigdataValue[] {
                     s1
@@ -499,32 +499,32 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
                 assertNotNull(store.getLexiconRelation().getSubjectCentricSearchEngine());
                 
                 assertExpectedHits(store, "abc", null/* languageCode */,
-                        new BigdataValue[] { //
+                        new BigdataValue[] {
                 		s1, s2
                         });
 
-                assertExpectedHits(store, "tag", "en", new BigdataValue[] {//
+                assertExpectedHits(store, "tag", "en", new BigdataValue[] {
                 		s1, s3
                         });
 
-                assertExpectedHits(store, "tag", "de", new BigdataValue[] {//
+                assertExpectedHits(store, "tag", "de", new BigdataValue[] {
                 		s1, s3
                         });
 
-                assertExpectedHits(store, "GOOD DAY", "en", //
+                assertExpectedHits(store, "GOOD DAY", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {//
+                        new BigdataValue[] {
                 		s1, s2, s3
                         });
 
-                assertExpectedHits(store, "day", "en", //
+                assertExpectedHits(store, "day", "en",
                         .0f, // minCosine
                         new BigdataValue[] {
                 		s1, s2, s3
                 		});
                 
                 // BLOB
-                assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/, //
+                assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                         .0f, // minCosine
                         new BigdataValue[] {
                         s1

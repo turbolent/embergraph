@@ -823,13 +823,13 @@ public class BloomFilter implements IBloomFilter, Externalizable {
          */
         public String getBloomFilterPerformance() {
 
-            return "bloom filter" + //
-            ": nadd=" + nbloomAdd + //
-            ", ntest=" + nbloomTest + //
-            ", nreject=" + nbloomRejects + //
-            ", nfalsePos=" + nbloomFalsePos + //
-            ", rejectRate=" + getBloomRejectionRate() + //
-            ", errorRate=" + getBloomErrorRate()//
+            return "bloom filter" +
+            ": nadd=" + nbloomAdd +
+            ", ntest=" + nbloomTest +
+            ", nreject=" + nbloomRejects +
+            ", nfalsePos=" + nbloomFalsePos +
+            ", rejectRate=" + getBloomRejectionRate() +
+            ", errorRate=" + getBloomErrorRate()
             ;
 
         }

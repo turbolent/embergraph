@@ -86,11 +86,11 @@ public class TestReplaceBOp extends ProxyTestCase {
                 final IV replacement = DummyConstantNode.toDummyIV(vf
                         .createLiteral("Z"));
                 
-                final IV actual = new ReplaceBOp(//
-                        new Constant<IV>(var), //
-                        new Constant<IV>(pattern), //
-                        new Constant<IV>(replacement), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new ReplaceBOp(
+                        new Constant<IV>(var),
+                        new Constant<IV>(pattern),
+                        new Constant<IV>(replacement),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -113,12 +113,12 @@ public class TestReplaceBOp extends ProxyTestCase {
                 final IV flags = DummyConstantNode.toDummyIV(vf
                         .createLiteral("i"));
                 
-                final IV actual = new ReplaceBOp(//
-                        new Constant<IV>(var), //
-                        new Constant<IV>(pattern), //
-                        new Constant<IV>(replacement), //
-                        new Constant<IV>(flags), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new ReplaceBOp(
+                        new Constant<IV>(var),
+                        new Constant<IV>(pattern),
+                        new Constant<IV>(replacement),
+                        new Constant<IV>(flags),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);
@@ -141,12 +141,12 @@ public class TestReplaceBOp extends ProxyTestCase {
                 final IV flags = DummyConstantNode.toDummyIV(vf
                         .createLiteral("i"));
                 
-                final IV actual = new ReplaceBOp(//
-                        new Constant<IV>(var), //
-                        new Constant<IV>(pattern), //
-                        new Constant<IV>(replacement), //
-                        new Constant<IV>(flags), //
-                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)//
+                final IV actual = new ReplaceBOp(
+                        new Constant<IV>(var),
+                        new Constant<IV>(pattern),
+                        new Constant<IV>(replacement),
+                        new Constant<IV>(flags),
+                        new GlobalAnnotations(vf.getNamespace(), ITx.READ_COMMITTED)
                 ).get(emptyBindingSet);
 
                 assertEquals(expected, actual);

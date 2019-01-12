@@ -1684,11 +1684,11 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
      *             if the {@link QueryEngine} has been {@link #shutdown()}.
      * @throws Exception
      */
-    public AbstractRunningQuery eval(//
-            final UUID queryId,//
-            final PipelineOp query,//
-            final Map<Object,Object> queryAttributes,//
-            final IChunkMessage<IBindingSet> msg//
+    public AbstractRunningQuery eval(
+            final UUID queryId,
+            final PipelineOp query,
+            final Map<Object,Object> queryAttributes,
+            final IChunkMessage<IBindingSet> msg
             ) throws Exception {
 
         return startEval(queryId, query, queryAttributes, msg);
@@ -1717,11 +1717,11 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
      *             if the {@link QueryEngine} has been {@link #shutdown()}.
      * @throws Exception
      */
-    private AbstractRunningQuery startEval(//
-            final UUID queryId,//
-            final PipelineOp query,//
-            final Map<Object, Object> queryAttributes,//
-            final IChunkMessage<IBindingSet> msg//
+    private AbstractRunningQuery startEval(
+            final UUID queryId,
+            final PipelineOp query,
+            final Map<Object, Object> queryAttributes,
+            final IChunkMessage<IBindingSet> msg
             ) throws Exception {
         
         if (queryId == null)

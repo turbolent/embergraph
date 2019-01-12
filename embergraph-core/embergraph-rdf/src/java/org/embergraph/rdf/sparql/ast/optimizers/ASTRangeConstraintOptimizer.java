@@ -391,7 +391,7 @@ public class ASTRangeConstraintOptimizer implements IASTOptimizer {
 ////                new BindingImpl("a", brad),
 ////                new BindingImpl("b", john)
 ////                ));
-////
+//
 ////        final TupleQueryResult result = tupleQuery.evaluate();
 ////          compare(result, answer);
 //

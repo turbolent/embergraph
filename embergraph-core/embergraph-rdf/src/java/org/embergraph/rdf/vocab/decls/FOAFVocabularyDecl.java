@@ -117,13 +117,13 @@ public class FOAFVocabularyDecl implements VocabularyDecl {
     public static final URI workplaceHomepage = new URIImpl(NAMESPACE + "workplaceHomepage");
     public static final URI yahooChatID = new URIImpl(NAMESPACE + "yahooChatID");
     // archaic
-//  new URIImpl(NAMESPACE + "dnaChecksum"),//
-//  new URIImpl(NAMESPACE + "family_name"),//
-//  new URIImpl(NAMESPACE + "fundedBy"),//
-//  new URIImpl(NAMESPACE + "geekcode"),//
-//  new URIImpl(NAMESPACE + "givenname"),//
-//  new URIImpl(NAMESPACE + "holdsAccount"),//
-//  new URIImpl(NAMESPACE + "theme"),//
+//  new URIImpl(NAMESPACE + "dnaChecksum"),
+//  new URIImpl(NAMESPACE + "family_name"),
+//  new URIImpl(NAMESPACE + "fundedBy"),
+//  new URIImpl(NAMESPACE + "geekcode"),
+//  new URIImpl(NAMESPACE + "givenname"),
+//  new URIImpl(NAMESPACE + "holdsAccount"),
+//  new URIImpl(NAMESPACE + "theme"),
 
     /*
      * Note: While FOAF is pretty dynamic, DO NOT add new terms to this
@@ -132,8 +132,8 @@ public class FOAFVocabularyDecl implements VocabularyDecl {
      * used to provide a reasonably tight representation for any new terms added
      * to this vocabulary over time.
      */
-    static private final URI[] uris = new URI[] {//
-        new URIImpl(NAMESPACE),//
+    static private final URI[] uris = new URI[] {
+        new URIImpl(NAMESPACE),
             // Classes
             Agent, Document, Group, Image, LabelProperty, OnlineAccount,
             OnlineChatAccount, OnlineEcommerceAccount, OnlineGamingAccount,

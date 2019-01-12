@@ -276,10 +276,10 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
                  * pattern in a union. The statement pattern has to be embedded
                  * within a group.
                  */
-                final StatementPatternNode sp = new StatementPatternNode(//
-                        term, //
-                        new VarNode("p" + termNum + "a"),//
-                        new VarNode("o" + termNum)//
+                final StatementPatternNode sp = new StatementPatternNode(
+                        term,
+                        new VarNode("p" + termNum + "a"),
+                        new VarNode("o" + termNum)
                 );
 
 				construct.addChild(sp);
@@ -295,10 +295,10 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
 			if(describeMode.isReverse())
 			{ // ?sN ?pN-b <term>
 			
-                final StatementPatternNode sp = new StatementPatternNode(//
-                        new VarNode("s" + termNum),//
-                        new VarNode("p" + termNum + "b"),//
-                        term//
+                final StatementPatternNode sp = new StatementPatternNode(
+                        new VarNode("s" + termNum),
+                        new VarNode("p" + termNum + "b"),
+                        term
                 );
 
 				construct.addChild(sp);
@@ -319,10 +319,10 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
                  * 
                  * ?stmtN rdf:subject <term>
                  */
-                final StatementPatternNode sp = new StatementPatternNode(//
-                        new VarNode("stmt" + termNum),//
-                        new ConstantNode(rdfSubject.getIV()),//
-                        term//
+                final StatementPatternNode sp = new StatementPatternNode(
+                        new VarNode("stmt" + termNum),
+                        new ConstantNode(rdfSubject.getIV()),
+                        term
                 );
 
                 construct.addChild(sp);

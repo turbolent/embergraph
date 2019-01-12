@@ -120,13 +120,13 @@ public class TestJoinSetUtil extends AbstractASTEvaluationTestCase {
         
         // Verify the canJoin matrix (upper diagonal).
         final int canJoin[][] = new int[][] {
-                new int[]{0,0,1,0,1,0,1},//
-                new int[]{0,0,1,0,0,0,0},//
-                new int[]{0,0,0,0,1,0,1},//
-                new int[]{0,0,0,0,0,0,0},//
-                new int[]{0,0,0,0,0,0,1},//
-                new int[]{0,0,0,0,0,0,0},//
-                new int[]{0,0,0,0,0,0,0},//
+                new int[]{0,0,1,0,1,0,1},
+                new int[]{0,0,1,0,0,0,0},
+                new int[]{0,0,0,0,1,0,1},
+                new int[]{0,0,0,0,0,0,0},
+                new int[]{0,0,0,0,0,0,1},
+                new int[]{0,0,0,0,0,0,0},
+                new int[]{0,0,0,0,0,0,0},
         };
         for (int i = 0; i < fixture.requiredJoinCount; i++) {
             assertEquals("row=" + i, canJoin[i], fixture.canJoin[i]);
@@ -144,26 +144,26 @@ public class TestJoinSetUtil extends AbstractASTEvaluationTestCase {
          */
         {
 
-            assertTrue(fixture.directJoinSets.contains(new VertexJoinSet(//
-                    asSet(new Integer[] { 0, 2, 1, 4, 6 }),//
-                    asSet(new IVariable[] {//
-                            Var.var("product"),//
-                            Var.var("productLabel"),//
-                            Var.var("prodFeature"),//
-                            Var.var("simProperty1"),//
-                            Var.var("simProperty2")//
+            assertTrue(fixture.directJoinSets.contains(new VertexJoinSet(
+                    asSet(new Integer[] { 0, 2, 1, 4, 6 }),
+                    asSet(new IVariable[] {
+                            Var.var("product"),
+                            Var.var("productLabel"),
+                            Var.var("prodFeature"),
+                            Var.var("simProperty1"),
+                            Var.var("simProperty2")
                     }))));
 
-            assertTrue(fixture.directJoinSets.contains(new VertexJoinSet(//
-                    asSet(new Integer[] { 3 }),//
-                    asSet(new IVariable[] {//
-                    Var.var("origProperty1") //
+            assertTrue(fixture.directJoinSets.contains(new VertexJoinSet(
+                    asSet(new Integer[] { 3 }),
+                    asSet(new IVariable[] {
+                    Var.var("origProperty1")
                     }))));
 
-            assertTrue(fixture.directJoinSets.contains(new VertexJoinSet(//
-                    asSet(new Integer[] { 5 }),//
-                    asSet(new IVariable[] {//
-                    Var.var("origProperty2") //
+            assertTrue(fixture.directJoinSets.contains(new VertexJoinSet(
+                    asSet(new Integer[] { 5 }),
+                    asSet(new IVariable[] {
+                    Var.var("origProperty2")
                     }))));
 
             assertEquals("#of join sets", 3, fixture.directJoinSets.size());

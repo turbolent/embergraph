@@ -271,7 +271,7 @@ public class W3CQueryLanguageException extends RuntimeException {
     }
     
     // public static void main(String[] x) {
-    //
+
     // System.err.println(toURI(LanguageFamily.SP,ErrorCategory.TY,120));
     //        
     // }

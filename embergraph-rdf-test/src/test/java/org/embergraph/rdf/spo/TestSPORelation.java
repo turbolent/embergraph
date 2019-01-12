@@ -183,12 +183,12 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
 //        @SuppressWarnings("unchecked")
 		public TestRuleRdfs9(String relation) {
             
-            super(  "rdfs9",//
-                    new P(relation,var("v"), rdfType, var("x")), //
-                    new IPredicate[] {//
-                            new P(relation, var("u"), rdfsSubClassOf, var("x")),//
-                            new P(relation, var("v"), rdfType, var("u")) //
-                    },//
+            super(  "rdfs9",
+                    new P(relation,var("v"), rdfType, var("x")),
+                    new IPredicate[] {
+                            new P(relation, var("u"), rdfsSubClassOf, var("x")),
+                            new P(relation, var("v"), rdfType, var("u"))
+                    },
                     new IConstraint[] {
             			Constraint.wrap(new NE(var("u"),var("x")))
                         }
@@ -328,12 +328,12 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
                         new SPOPredicate(relationIdentifier, Var.var("x"), Var
                                 .var("y"), Var.var("z")),
                         // tail
-                        new SPOPredicate[] {//
+                        new SPOPredicate[] {
                                 new SPOPredicate(relationIdentifier,
                                         new Constant<IV>(uriId(2L)), Var.var("y"),
-                                        Var.var("z")),//
+                                        Var.var("z")),
                                 new SPOPredicate(relationIdentifier, Var.var("x"),
-                                        Var.var("y"), new Constant<IV>(uriId(1L))) //
+                                        Var.var("y"), new Constant<IV>(uriId(1L)))
                         },
                         // constraints
                         new IConstraint[] {});

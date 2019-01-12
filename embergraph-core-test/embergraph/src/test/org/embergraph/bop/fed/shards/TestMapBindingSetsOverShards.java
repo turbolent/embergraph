@@ -113,7 +113,7 @@ public class TestMapBindingSetsOverShards extends
         /*
          * The data to insert (in sorted order this time).
          */
-        final E[] a = {//
+        final E[] a = {
                 // partition0
                 new E("John", "Mary"),// 
                 new E("Leon", "Paul"),// 
@@ -126,14 +126,14 @@ public class TestMapBindingSetsOverShards extends
         // The separator key between the two index partitions.
         separatorKey = KeyBuilder.newUnicodeInstance().append("Mary").getKey();
 
-        final byte[][] separatorKeys = new byte[][] {//
-                new byte[] {}, //
-                separatorKey //
+        final byte[][] separatorKeys = new byte[][] {
+                new byte[] {},
+                separatorKey
         };
 
-        final UUID[] dataServices = new UUID[] {//
-                dataService0.getServiceUUID(),//
-                dataService1.getServiceUUID() //
+        final UUID[] dataServices = new UUID[] {
+                dataService0.getServiceUUID(),
+                dataService1.getServiceUUID()
         };
 
         /*
@@ -245,15 +245,15 @@ public class TestMapBindingSetsOverShards extends
 
         // partition0
         assertEquals(2L, ((Long) dataService0.submit(
-                ITx.UNISOLATED,//
-                DataService.getIndexPartitionName(name, 0/* partitionId */),//
+                ITx.UNISOLATED,
+                DataService.getIndexPartitionName(name, 0/* partitionId */),
                 new RangeCountProcedure(true/* exact */, false/* deleted */,
                         null/* fromKey */, null/* toKey */)).get()).longValue());
         
         // partition1
         assertEquals(3L, ((Long) dataService1.submit(
-                ITx.UNISOLATED,//
-                DataService.getIndexPartitionName(name, 1/* partitionId */),//
+                ITx.UNISOLATED,
+                DataService.getIndexPartitionName(name, 1/* partitionId */),
                 new RangeCountProcedure(true/* exact */, false/* deleted */,
                         null/* fromKey */, null/* toKey */)).get()).longValue());
 
@@ -263,21 +263,21 @@ public class TestMapBindingSetsOverShards extends
 //
 //    // verify correct value in the index on the correct data service.
 //    assertEquals(new byte[] { 1 }, ((ResultBuffer) dataService0.submit(
-//            ITx.UNISOLATED,//
-//            DataService.getIndexPartitionName(name, 0/*partitionId*/),//
-//            BatchLookupConstructor.INSTANCE.newInstance(//
-//                    metadata, //
+//            ITx.UNISOLATED,
+//            DataService.getIndexPartitionName(name, 0/*partitionId*/),
+//            BatchLookupConstructor.INSTANCE.newInstance(
+//                    metadata,
 //                    0,// fromIndex
 //                    1,// toIndex
 //                    new byte[][] { new byte[] { 1 } },// keys
 //                    null // vals
 //                    )).get()).getValues().get(0));
-//    //
+//
 //    assertEquals(new byte[] { 5 }, ((ResultBuffer) dataService1.submit(
-//            ITx.UNISOLATED,//
-//            DataService.getIndexPartitionName(name, 1/*partitionId*/),//
-//            BatchLookupConstructor.INSTANCE.newInstance(//
-//                    metadata,//
+//            ITx.UNISOLATED,
+//            DataService.getIndexPartitionName(name, 1/*partitionId*/),
+//            BatchLookupConstructor.INSTANCE.newInstance(
+//                    metadata,
 //                    0,// fromIndex
 //                    1,// toIndex
 //                    new byte[][] { separatorKey },// keys
@@ -356,9 +356,9 @@ public class TestMapBindingSetsOverShards extends
         }
 
         final Predicate<E> pred = new Predicate<E>(new BOp[] { x, y }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { namespace }) //
+                        new String[] { namespace })
                 }));
 
         final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
@@ -504,9 +504,9 @@ public class TestMapBindingSetsOverShards extends
         }
 
         final Predicate<E> pred = new Predicate<E>(new BOp[] { x, y }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { namespace }) //
+                        new String[] { namespace })
                 }));
 
         final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
@@ -617,9 +617,9 @@ public class TestMapBindingSetsOverShards extends
         }
 
         final Predicate<E> pred = new Predicate<E>(new BOp[] { x, y }, NV
-                .asMap(new NV[] {//
+                .asMap(new NV[] {
                 new NV(Predicate.Annotations.RELATION_NAME,
-                        new String[] { namespace }) //
+                        new String[] { namespace })
                 }));
 
         final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);

@@ -467,27 +467,27 @@ abstract public class DataService extends AbstractService
 ////                            .makePath(IDataServiceCounters.concurrencyManager
 ////                                    + ICounterSet.pathSeparator
 ////                                    + IConcurrencyManagerCounters.writeService);
-////
+//
 ////                    synchronized (tmp) {
-////
+//
 ////                        /*
 ////                         * Note: We detach and then attach since that wipes out
 ////                         * any counter set nodes for queues which no longer
 ////                         * exist. Otherwise they will build up forever.
 ////                         */
-////
+//
 ////                        // detach the old counters.
 ////                        tmp.detach(IConcurrencyManagerCounters.LockManager);
-////
+//
 ////                        // attach the the new counters.
 ////                        ((CounterSet) tmp
 ////                                .makePath(IConcurrencyManagerCounters.LockManager))
 ////                                .attach(dataService.concurrencyManager
 ////                                        .getWriteService().getLockManager()
 ////                                        .getCounters());
-////
+//
 ////                    }
-////
+//
 ////                }
 //                
 //                // The live indices.
@@ -1108,11 +1108,11 @@ abstract public class DataService extends AbstractService
          * @param revisionTime
          */
         public DistributedCommitTask(
-                final ConcurrencyManager concurrencyManager,//
-                final ResourceManager resourceManager,//
-                final UUID dataServiceUUID,//
-                final Tx localState,//
-                final long revisionTime//
+                final ConcurrencyManager concurrencyManager,
+                final ResourceManager resourceManager,
+                final UUID dataServiceUUID,
+                final Tx localState,
+                final long revisionTime
         ) {
 
             super(concurrencyManager, ITx.UNISOLATED, localState

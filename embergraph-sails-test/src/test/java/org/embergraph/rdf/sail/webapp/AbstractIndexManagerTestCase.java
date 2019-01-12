@@ -42,9 +42,9 @@ import org.embergraph.journal.IIndexManager;
  */
 public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> extends TestCase2 {
 
-    //
+
     // Constructors.
-    //
+
 
     public AbstractIndexManagerTestCase() {}
     
@@ -88,9 +88,9 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
         
     }
 
-    //
+
     // Properties
-    //
+
 
     @Override
     public Properties getProperties() {

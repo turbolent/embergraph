@@ -65,10 +65,10 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal m2 = new BigDecimal("-1.51");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(p1),//
-                new XSDDecimalIV<BigdataLiteral>(p2),//
-                new XSDDecimalIV<BigdataLiteral>(m1),//
-                new XSDDecimalIV<BigdataLiteral>(m2),//
+                new XSDDecimalIV<BigdataLiteral>(p1),
+                new XSDDecimalIV<BigdataLiteral>(p2),
+                new XSDDecimalIV<BigdataLiteral>(m1),
+                new XSDDecimalIV<BigdataLiteral>(m2),
                 };
 
         doEncodeDecodeTest(e);
@@ -89,8 +89,8 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal p2 = new BigDecimal("1.500");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(p1),//
-                new XSDDecimalIV<BigdataLiteral>(p2),//
+                new XSDDecimalIV<BigdataLiteral>(p1),
+                new XSDDecimalIV<BigdataLiteral>(p2),
                 };
 
 //        for(IV t : e) {
@@ -190,20 +190,20 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal v2 = new BigDecimal("383.00000000000002");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(z1),//
-//                new XSDDecimalIV<BigdataLiteral>(negz1),//
-//                new XSDDecimalIV<BigdataLiteral>(z2),//
-                new XSDDecimalIV<BigdataLiteral>(p1),//
-                new XSDDecimalIV<BigdataLiteral>(negp1),//
-//                new XSDDecimalIV<BigdataLiteral>(z3),//
-                new XSDDecimalIV<BigdataLiteral>(m1),//
-                new XSDDecimalIV<BigdataLiteral>(m2),//
-                new XSDDecimalIV<BigdataLiteral>(m5),//
-//                new XSDDecimalIV<BigdataLiteral>(m53),//
-                new XSDDecimalIV<BigdataLiteral>(m500),//
-//                new XSDDecimalIV<BigdataLiteral>(m5003),//
-                new XSDDecimalIV<BigdataLiteral>(v1),//
-                new XSDDecimalIV<BigdataLiteral>(v2),//
+                new XSDDecimalIV<BigdataLiteral>(z1),
+//                new XSDDecimalIV<BigdataLiteral>(negz1),
+//                new XSDDecimalIV<BigdataLiteral>(z2),
+                new XSDDecimalIV<BigdataLiteral>(p1),
+                new XSDDecimalIV<BigdataLiteral>(negp1),
+//                new XSDDecimalIV<BigdataLiteral>(z3),
+                new XSDDecimalIV<BigdataLiteral>(m1),
+                new XSDDecimalIV<BigdataLiteral>(m2),
+                new XSDDecimalIV<BigdataLiteral>(m5),
+//                new XSDDecimalIV<BigdataLiteral>(m53),
+                new XSDDecimalIV<BigdataLiteral>(m500),
+//                new XSDDecimalIV<BigdataLiteral>(m5003),
+                new XSDDecimalIV<BigdataLiteral>(v1),
+                new XSDDecimalIV<BigdataLiteral>(v2),
                 };
 
         doEncodeDecodeTest(e);
@@ -219,30 +219,30 @@ public class TestEncodeDecodeXSDDecimalIVs extends
 //
 //        final IV<?,?>[] e = new IV[] {
 //            
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0)),//
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0)),
 //            
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-123450)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-99)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-9)),//
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-123450)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-99)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-9)),
 //            
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(8.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(255.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(256.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(512.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1028.001)),//
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(8.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(255.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(256.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(512.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1028.001)),
 //
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-8.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-255.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-256.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-512.0001)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1028.001)),//
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-8.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-255.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-256.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-512.0001)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1028.001)),
 //
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MIN_VALUE)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MAX_VALUE)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MIN_VALUE - 1)),//
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MAX_VALUE + 1)),//
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MIN_VALUE)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MAX_VALUE)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MIN_VALUE - 1)),
+//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MAX_VALUE + 1)),
 //            };
 //
 //        doEncodeDecodeTest(e);
@@ -258,21 +258,21 @@ public class TestEncodeDecodeXSDDecimalIVs extends
 
       final IV<?,?>[] e = new IV[] {
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(2.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(2.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-2.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(10.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(11.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(11.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(258.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(3.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)),
                 new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.02)),//
+                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.02)),
       };
 
         doEncodeDecodeTest(e);

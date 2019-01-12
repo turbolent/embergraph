@@ -150,7 +150,7 @@ public class DefaultDirectoryPageCoder implements IAbstractNodeDataCoder<IDirect
         }
         
         // Slice onto the coded data record.
-        final AbstractFixedByteArrayBuffer slice = buf.slice(//
+        final AbstractFixedByteArrayBuffer slice = buf.slice(
                 O_origin, buf.pos() - O_origin);
 
         // Read-only coded IDataRecord. 

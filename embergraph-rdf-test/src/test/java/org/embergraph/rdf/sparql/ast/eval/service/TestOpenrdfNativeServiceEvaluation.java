@@ -92,7 +92,7 @@ public class TestOpenrdfNativeServiceEvaluation extends
 
         try {
 
-            new TestHelper(//
+            new TestHelper(
                     "sparql11-service-001", // testURI
                     "sparql11-service-001.rq",// queryFileURL
                     "sparql11-service-001.ttl",// dataFileURL
@@ -158,7 +158,7 @@ public class TestOpenrdfNativeServiceEvaluation extends
 
         try {
 
-            new TestHelper(//
+            new TestHelper(
                     "sparql11-service-002", // testURI
                     "sparql11-service-002.rq",// queryFileURL
                     "sparql11-service-002.ttl",// dataFileURL

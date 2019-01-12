@@ -145,36 +145,36 @@ public class TestConditionalRoutingOp extends TestCase2 {
         final int bopId = 1;
         
         final ConditionalRoutingOp query = new ConditionalRoutingOp(new BOp[]{},
-                NV.asMap(new NV[]{//
-                    new NV(BOp.Annotations.BOP_ID,bopId),//
+                NV.asMap(new NV[]{
+                    new NV(BOp.Annotations.BOP_ID,bopId),
                     new NV(ConditionalRoutingOp.Annotations.CONDITION,
-                    		Constraint.wrap(new EQConstant(x,new Constant<String>("Mary")))),//
+                    		Constraint.wrap(new EQConstant(x,new Constant<String>("Mary")))),
                 }));
         
         // the expected solutions (default sink).
-        final IBindingSet[] expected = new IBindingSet[] {//
-                new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Mary") }//
-                ), new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Mary") }//
+        final IBindingSet[] expected = new IBindingSet[] {
+                new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Mary") }
+                ), new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Mary") }
                 ), };
 
         // the expected solutions (alt sink).
-        final IBindingSet[] expected2 = new IBindingSet[] {//
-        new ListBindingSet(//
-                new IVariable[] { x },//
-                new IConstant[] { new Constant<String>("John") }//
-                ), new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Paul") }//
-                ), new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Paul") }//
-                ), new ListBindingSet(//
-                        new IVariable[] { x },//
-                        new IConstant[] { new Constant<String>("Leon") }//
+        final IBindingSet[] expected2 = new IBindingSet[] {
+        new ListBindingSet(
+                new IVariable[] { x },
+                new IConstant[] { new Constant<String>("John") }
+                ), new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Paul") }
+                ), new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Paul") }
+                ), new ListBindingSet(
+                        new IVariable[] { x },
+                        new IConstant[] { new Constant<String>("Leon") }
                 ), };
 
         final BOpStats stats = query.newStats();

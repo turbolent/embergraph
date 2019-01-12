@@ -92,9 +92,9 @@ public class TestGangliaServiceShutdown extends TestCase {
 
         final int defaultDMax = IGangliaDefaults.DEFAULT_DMAX;
         
-        final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(//
-                IGangliaDefaults.DEFAULT_GROUP,//
-                IGangliaDefaults.DEFAULT_PORT//
+        final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(
+                IGangliaDefaults.DEFAULT_GROUP,
+                IGangliaDefaults.DEFAULT_PORT
         ) };
 
         /*
@@ -106,11 +106,11 @@ public class TestGangliaServiceShutdown extends TestCase {
          * counters of interest.
          */
         final GangliaMetadataFactory metadataFactory = new GangliaMetadataFactory(
-                new DefaultMetadataFactory(//
-                        defaultUnits,//
-                        defaultSlope,//
-                        defaultTMax,//
-                        defaultDMax//
+                new DefaultMetadataFactory(
+                        defaultUnits,
+                        defaultSlope,
+                        defaultTMax,
+                        defaultDMax
                         ));
         
         ExecutorService executorService = null;
@@ -124,20 +124,20 @@ public class TestGangliaServiceShutdown extends TestCase {
 
             executorService = Executors.newSingleThreadExecutor();
 
-            service = new GangliaService(//
-                    hostName,//
-                    serviceName, //
-                    metricsServers, //
-                    listenGroup, listenPort,//
+            service = new GangliaService(
+                    hostName,
+                    serviceName,
+                    metricsServers,
+                    listenGroup, listenPort,
                     true,// listen
                     true,// report
                     true,// mock (does not transmit when true).
-                    quietPeriod,//
-                    initialDelay,//
-                    heartbeatInterval,//
-                    monitoringInterval, //
-                    defaultDMax,//
-                    metadataFactory//
+                    quietPeriod,
+                    initialDelay,
+                    heartbeatInterval,
+                    monitoringInterval,
+                    defaultDMax,
+                    metadataFactory
             );
 
             ft = new FutureTask<Void>(service, (Void) null);

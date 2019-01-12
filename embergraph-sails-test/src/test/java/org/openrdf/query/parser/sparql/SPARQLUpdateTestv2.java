@@ -315,19 +315,19 @@ public class SPARQLUpdateTestv2 extends TestCase {
          * LOAD <file:///tmp/junk.ttl> INTO GRAPH graphA: ;
          * </pre>
          */
-        con.prepareUpdate(//
-                QueryLanguage.SPARQL,//
-                "PREFIX graphA:  <http://example/graphA> \n" + //
-                        // "PREFIX tempGraph:  <http://example/temp> \n"+//
-                        // "DROP SILENT GRAPH tempGraph: ;\n"+//
-                        // "DROP SILENT GRAPH graphA: ;\n"+//
-                        "INSERT DATA { \n" + //
-                        " GRAPH graphA: { \n" + //
-                        "   _:bnode <http://example/p> 2 . \n" + //
-                        "   _:bnode a <http://example/Foo> . \n" + //
-                        "   <http://example/s> <http://example/p> 2 . \n" + //
-                        "}}\n"//
-                        // "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"//
+        con.prepareUpdate(
+                QueryLanguage.SPARQL,
+                "PREFIX graphA:  <http://example/graphA> \n" +
+                        // "PREFIX tempGraph:  <http://example/temp> \n"+
+                        // "DROP SILENT GRAPH tempGraph: ;\n"+
+                        // "DROP SILENT GRAPH graphA: ;\n"+
+                        "INSERT DATA { \n" +
+                        " GRAPH graphA: { \n" +
+                        "   _:bnode <http://example/p> 2 . \n" +
+                        "   _:bnode a <http://example/Foo> . \n" +
+                        "   <http://example/s> <http://example/p> 2 . \n" +
+                        "}}\n"
+                        // "LOAD <file:embergraph-sails/src/test/org/openrdf/query/parser/sparql/ticket571.ttl> INTO GRAPH graphA: ;\n"
         ).execute();
 
         System.err.println("##### DATA IN DATABASE AFTER INSERT");
@@ -363,16 +363,16 @@ public class SPARQLUpdateTestv2 extends TestCase {
          *     ?s ?p ?v . } }
          * </pre>
          */
-        con.prepareUpdate(//
-                QueryLanguage.SPARQL, //
-                "PREFIX graphA:  <http://example/graphA> \n" + //
-                        "PREFIX tempGraph:  <http://example/temp> \n" + //
-                        // "DROP SILENT GRAPH tempGraph: ;\n"+//
-                        "DELETE { GRAPH graphA:    { ?s ?p ?v . } } \n" + //
-                        "INSERT { GRAPH tempGraph: { ?s ?p ?v . } } \n" + //
-                        "WHERE { GRAPH graphA: { \n" + //
-                        "    ?s a <http://example/Foo> . \n" + //
-                        "    ?s ?p ?v . } }\n"//
+        con.prepareUpdate(
+                QueryLanguage.SPARQL,
+                "PREFIX graphA:  <http://example/graphA> \n" +
+                        "PREFIX tempGraph:  <http://example/temp> \n" +
+                        // "DROP SILENT GRAPH tempGraph: ;\n"+
+                        "DELETE { GRAPH graphA:    { ?s ?p ?v . } } \n" +
+                        "INSERT { GRAPH tempGraph: { ?s ?p ?v . } } \n" +
+                        "WHERE { GRAPH graphA: { \n" +
+                        "    ?s a <http://example/Foo> . \n" +
+                        "    ?s ?p ?v . } }\n"
         ).execute();
 
         System.err.println("##### DATA IN DATABASE AFTER DELETE + INSERT");

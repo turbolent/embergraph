@@ -103,8 +103,8 @@ public class TestConneg extends TestCase2 {
 
             }
 
-            assertSameArray(new ConnegScore[] {//
-                    new ConnegScore(1f, format) },//
+            assertSameArray(new ConnegScore[] {
+                    new ConnegScore(1f, format) },
                     util.getScores(RDFFormat.class));
 
         }
@@ -132,8 +132,8 @@ public class TestConneg extends TestCase2 {
             assertEquals(format.getName(), format,
                     util.getTupleQueryResultFormat());
 
-            assertSameArray(new ConnegScore[] {//
-                    new ConnegScore(1f, format) },//
+            assertSameArray(new ConnegScore[] {
+                    new ConnegScore(1f, format) },
                     util.getScores(TupleQueryResultFormat.class));
 
         }
@@ -151,10 +151,10 @@ public class TestConneg extends TestCase2 {
 
         assertNull(util.getRDFFormat());
 
-        assertSameArray(new ConnegScore[] {//
-                new ConnegScore(1f, TupleQueryResultFormat.BINARY),//
-                new ConnegScore(1f, TupleQueryResultFormat.SPARQL),//
-                },//
+        assertSameArray(new ConnegScore[] {
+                new ConnegScore(1f, TupleQueryResultFormat.BINARY),
+                new ConnegScore(1f, TupleQueryResultFormat.SPARQL),
+                },
                 util.getScores(TupleQueryResultFormat.class));
 
         assertEquals(TupleQueryResultFormat.BINARY,
@@ -170,10 +170,10 @@ public class TestConneg extends TestCase2 {
 
         assertNull(util.getRDFFormat());
 
-        assertSameArray(new ConnegScore[] {//
-                new ConnegScore(.5f, TupleQueryResultFormat.SPARQL),//
-                new ConnegScore(.3f, TupleQueryResultFormat.BINARY),//
-                },//
+        assertSameArray(new ConnegScore[] {
+                new ConnegScore(.5f, TupleQueryResultFormat.SPARQL),
+                new ConnegScore(.3f, TupleQueryResultFormat.BINARY),
+                },
                 util.getScores(TupleQueryResultFormat.class));
 
         assertEquals(TupleQueryResultFormat.SPARQL,
@@ -189,10 +189,10 @@ public class TestConneg extends TestCase2 {
 
         assertNull(util.getRDFFormat());
 
-        assertSameArray(new ConnegScore[] {//
-                new ConnegScore(.4f, TupleQueryResultFormat.BINARY),//
-                new ConnegScore(.2f, TupleQueryResultFormat.SPARQL),//
-                },//
+        assertSameArray(new ConnegScore[] {
+                new ConnegScore(.4f, TupleQueryResultFormat.BINARY),
+                new ConnegScore(.2f, TupleQueryResultFormat.SPARQL),
+                },
                 util.getScores(TupleQueryResultFormat.class));
 
         assertEquals(TupleQueryResultFormat.BINARY,
@@ -217,8 +217,8 @@ public class TestConneg extends TestCase2 {
             assertEquals(format.getName(), format,
                     util.getBooleanQueryResultFormat());
 
-            assertSameArray(new ConnegScore[] {//
-                    new ConnegScore(1f, format) },//
+            assertSameArray(new ConnegScore[] {
+                    new ConnegScore(1f, format) },
                     util.getScores(BooleanQueryResultFormat.class));
 
         }
@@ -282,10 +282,10 @@ public class TestConneg extends TestCase2 {
 
 //        System.out.println(Arrays.toString(util.getScores(CounterSetFormat.class)));
         
-        assertSameArray(new ConnegScore[] {//
-                new ConnegScore(1f, CounterSetFormat.HTML),//
-                new ConnegScore(.9f, CounterSetFormat.XML),//
-                },//
+        assertSameArray(new ConnegScore[] {
+                new ConnegScore(1f, CounterSetFormat.HTML),
+                new ConnegScore(.9f, CounterSetFormat.XML),
+                },
                 util.getScores(CounterSetFormat.class));
 
         final CounterSetFormat format = util.getCounterSetFormat();

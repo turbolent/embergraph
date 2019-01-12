@@ -80,10 +80,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
         /*
          * Register and statically partition an index.
          */
-        fed.registerIndex( metadata, new byte[][]{//
+        fed.registerIndex( metadata, new byte[][]{
                 new byte[]{}, // keys less than 5...
                 new byte[]{5} // keys GTE 5....
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -147,10 +147,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
         final IndexMetadata metadata = new IndexMetadata(name,UUID.randomUUID());
 
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -196,10 +196,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
         final IndexMetadata metadata = new IndexMetadata(name,UUID.randomUUID());
 
-        fed.registerIndex( metadata, new byte[][]{//
+        fed.registerIndex( metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -242,10 +242,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
         final IndexMetadata metadata = new IndexMetadata(name,UUID.randomUUID());
 
-        fed.registerIndex( metadata, new byte[][]{//
+        fed.registerIndex( metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -288,10 +288,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
         final IndexMetadata metadata = new IndexMetadata(name,UUID.randomUUID());
 
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -345,10 +345,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
         final IndexMetadata metadata = new IndexMetadata(name,UUID.randomUUID());
 
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{5}
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -406,10 +406,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
         final IndexMetadata metadata = new IndexMetadata(name,UUID.randomUUID());
 
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 TestKeyBuilder.asSortKey(5) // the half-way point.
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -531,10 +531,10 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
        
         metadata.setTupleSerializer(NOPTupleSerializer.INSTANCE);
 
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 TestKeyBuilder.asSortKey(5) // the half-way point.
-        }, new UUID[]{//
+        }, new UUID[]{
                 dataService0.getServiceUUID(),
                 dataService1.getServiceUUID()
         });
@@ -674,7 +674,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
          * iterator is robust to empty partitions!
          */
         
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{4},
                 new byte[]{7},
@@ -1003,7 +1003,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
          * iterator is robust to empty partitions!
          */
         
-        fed.registerIndex(metadata, new byte[][]{//
+        fed.registerIndex(metadata, new byte[][]{
                 new byte[]{},
                 new byte[]{4},
                 new byte[]{7},
@@ -1057,7 +1057,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
                     .rangeIterator(new byte[] { 10 }/* fromKey */,
                             new byte[] { 13 }/* toKey */, capacity, flags, null/* filter */);
 
-            assertSameIteratorAnyOrder(new ITuple[] {//
+            assertSameIteratorAnyOrder(new ITuple[] {
                             new TestTuple(flags, tupleSer, new byte[] { 10 },
                                     new byte[] { 10 }, false/* deleted */,
                                     timestamp),
@@ -1078,7 +1078,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
                     .rangeIterator(new byte[] { 11 }/* fromKey */,
                             new byte[] { 12 }/* toKey */, capacity, flags, null/* filter */);
 
-            assertSameIteratorAnyOrder(new ITuple[] {//
+            assertSameIteratorAnyOrder(new ITuple[] {
                             new TestTuple(flags, tupleSer, new byte[] { 11 },
                                     new byte[] { 11 }, false/* deleted */,
                                     timestamp),
@@ -1094,7 +1094,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
             final ITupleIterator itr = ndx.rangeIterator(null/* fromKey */,
                     null/* toKey */, capacity, flags, null/* filter */);
 
-            assertSameIteratorAnyOrder(new ITuple[] {//
+            assertSameIteratorAnyOrder(new ITuple[] {
                             new TestTuple(flags, tupleSer, new byte[] { 1 },
                                     new byte[] { 1 }, false/* deleted */,
                                     timestamp),
@@ -1134,7 +1134,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
                     .rangeIterator(new byte[] { 2 }/* fromKey */,
                             new byte[] { 12 }/* toKey */, capacity, flags, null/* filter */);
 
-            assertSameIteratorAnyOrder(new ITuple[] {//
+            assertSameIteratorAnyOrder(new ITuple[] {
                             new TestTuple(flags, tupleSer, new byte[] { 2 },
                                     new byte[] { 2 }, false/* deleted */,
                                     timestamp),

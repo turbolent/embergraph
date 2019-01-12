@@ -962,11 +962,11 @@ public class TestGroupGraphPatternBuilder extends
                     new VarNode("p"), new VarNode("o"), null/* c */,
                     Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(new FunctionNode( //
-                    FunctionRegistry.IN,//
+            whereClause.addChild(new FilterNode(new FunctionNode(
+                    FunctionRegistry.IN,
                     null, // scalarValues
                     new ValueExpressionNode[] {// args
-                    new VarNode("s") })));//
+                    new VarNode("s") })));
 
         }
         
@@ -1008,13 +1008,13 @@ public class TestGroupGraphPatternBuilder extends
                     new VarNode("p"), new VarNode("o"), null/* c */,
                     Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(new FunctionNode( //
-                    FunctionRegistry.IN,//
+            whereClause.addChild(new FilterNode(new FunctionNode(
+                    FunctionRegistry.IN,
                     null, // scalarValues
                     new ValueExpressionNode[] {// args
                     new VarNode("s"), // variable 
                     new VarNode("o")  // other arg
-                    })));//
+                    })));
 
         }
         
@@ -1056,13 +1056,13 @@ public class TestGroupGraphPatternBuilder extends
                     new VarNode("p"), new VarNode("o"), null/* c */,
                     Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(new FunctionNode( //
-                    FunctionRegistry.IN,//
+            whereClause.addChild(new FilterNode(new FunctionNode(
+                    FunctionRegistry.IN,
                     null, // scalarValues
                     new ValueExpressionNode[] {// args
                     new VarNode("s"), // // variable
                     new VarNode("p"), new VarNode("o") // other args. 
-                    })));//
+                    })));
 
         }
         
@@ -1105,15 +1105,15 @@ public class TestGroupGraphPatternBuilder extends
                     new VarNode("p"), new VarNode("o"), null/* c */,
                     Scope.DEFAULT_CONTEXTS));
 
-            whereClause.addChild(new FilterNode(new FunctionNode( //
-                    FunctionRegistry.IN,//
+            whereClause.addChild(new FilterNode(new FunctionNode(
+                    FunctionRegistry.IN,
                     null, // scalarValues
                     new ValueExpressionNode[] {// args
                     new VarNode("s"), // var
                     // other args to IN()
                     new ConstantNode(makeIV(valueFactory.createLiteral("1",XSD.INTEGER))),
                     new ConstantNode(makeIV(valueFactory.createLiteral("2",XSD.INTEGER)))
-                    })));//
+                    })));
 
         }
         

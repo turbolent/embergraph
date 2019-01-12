@@ -52,12 +52,12 @@ public class RuleOwlFunctionalProperty extends Rule {
      */
     public RuleOwlFunctionalProperty(String relationName, Vocabulary vocab) {
 
-        super( "owlFunctionalProperty", //
-                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.SAMEAS), var("c")),//
-                new SPOPredicate[] {//
-                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.FUNCTIONALPROPERTY)),//
-                    new SPOPredicate(relationName,var("a"), var("x"), var("b")),//
-                    new SPOPredicate(relationName,var("a"), var("x"), var("c"))//
+        super( "owlFunctionalProperty",
+                new SPOPredicate(relationName,var("b"), vocab.getConstant(OWL.SAMEAS), var("c")),
+                new SPOPredicate[] {
+                    new SPOPredicate(relationName,var("x"), vocab.getConstant(RDF.TYPE), vocab.getConstant(OWL.FUNCTIONALPROPERTY)),
+                    new SPOPredicate(relationName,var("a"), var("x"), var("b")),
+                    new SPOPredicate(relationName,var("a"), var("x"), var("c"))
                 },
                 new IConstraint[] {
 					Constraint.wrap(new NE(var("b"),var("c")))

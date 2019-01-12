@@ -515,13 +515,13 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
 //                    - store.getBufferStrategy().getNextOffset();
 //
 ////            assertTrue(remaining < Integer.MAX_VALUE);
-////
+//
 ////            b = new byte[(int) remaining];
-////
+//
 ////            r.nextBytes(b);
-////
+//
 ////            ByteBuffer tmp = ByteBuffer.wrap(b);
-////
+//
 ////            addr = store.write(tmp);
 //            
 //            addr = writeRandomData(store, remaining);

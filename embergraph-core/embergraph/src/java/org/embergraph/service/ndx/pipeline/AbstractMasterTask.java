@@ -173,11 +173,11 @@ import org.embergraph.util.concurrent.AbstractHaltableProcess;
  *       sink in {@link #getSink(Object, boolean)} but instead places the sink
  *       onto the {@link #finishedSubtaskQueue}.
  */
-public abstract class AbstractMasterTask<//
-H extends AbstractMasterStats<L, ? extends AbstractSubtaskStats>, //
-E, //
-S extends AbstractSubtask,//
-L>//
+public abstract class AbstractMasterTask<
+H extends AbstractMasterStats<L, ? extends AbstractSubtaskStats>,
+E,
+S extends AbstractSubtask,
+L>
         extends AbstractHaltableProcess implements Callable<H>, IMasterTask<E,H> {
 
     static protected transient final Logger log = Logger
@@ -917,10 +917,10 @@ L>//
                 stats.subtaskStartCount.incrementAndGet();
 
                 // } else {
-                //
+
                 // // concurrent create of the sink.
                 // sink = oldval;
-                //
+
                 // }
 
             }

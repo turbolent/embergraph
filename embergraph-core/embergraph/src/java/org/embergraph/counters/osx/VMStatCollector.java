@@ -418,7 +418,7 @@ public class VMStatCollector extends AbstractProcessCollector implements
                final String free = fields[INDEX_FREE.get()]; // free
                final String active = fields[INDEX_ACTIVE.get()]; // in use and pageable
                final String spec = fields[INDEX_SPEC.get()]; // speculative
-               // final String inactive = fields[3]; //
+               // final String inactive = fields[3];
                final String wire = fields[INDEX_WIRED.get()]; // wired down
                // final String faults = fields[5]; // translation faults
 
@@ -474,9 +474,9 @@ public class VMStatCollector extends AbstractProcessCollector implements
                 * Issue warning for parsing problems.
                 */
 
-               log.warn(ex.getMessage() //
-                     + "\nheader: " + h1 //
-                     + "\n  data: " + data //
+               log.warn(ex.getMessage()
+                     + "\nheader: " + h1
+                     + "\n  data: " + data
                , ex);
 
             }

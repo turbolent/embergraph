@@ -326,10 +326,10 @@ public class AsynchronousOverflowTask implements Callable<Object> {
          * @param task
          *            The task which implements that action.
          */
-        public AtomicCallable(final OverflowActionEnum action,//
-			      final ViewMetadata vmd,//
-			      final boolean forceCompactingMerge, //
-			      final AbstractTask<T> task//
+        public AtomicCallable(final OverflowActionEnum action,
+			      final ViewMetadata vmd,
+			      final boolean forceCompactingMerge,
+			      final AbstractTask<T> task
 			      ) {
 
             if (action == null)
@@ -745,7 +745,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
              */
             // if (buildService != null)
             // buildService.shutdownNow();
-            //
+
             // if (mergeService != null)
             // mergeService.shutdownNow();
 
@@ -798,15 +798,15 @@ public class AsynchronousOverflowTask implements Callable<Object> {
                     .getScatterSplitConfiguration();
             
             if ( // only a single index partitions?
-                (vmd.getIndexPartitionCount() == 1L)//
+                (vmd.getIndexPartitionCount() == 1L)
                 // move not in progress
-                && vmd.pmd.getSourcePartitionId() == -1//
+                && vmd.pmd.getSourcePartitionId() == -1
                 // scatter splits enabled for service
-                && resourceManager.scatterSplitEnabled//
+                && resourceManager.scatterSplitEnabled
                 // scatter splits enabled for index
-                && ssc.isEnabled()//
+                && ssc.isEnabled()
                 // The view is compact (only one segment).
-                && vmd.compactView//
+                && vmd.compactView
                 // trigger scatter split before too much data builds up in one place.
                 && vmd.getPercentOfSplit() >= ssc.getPercentOfSplitThreshold()
             ) {
@@ -861,9 +861,9 @@ public class AsynchronousOverflowTask implements Callable<Object> {
                 }
 
                 // #of splits.
-                final int nsplits = ssc.getIndexPartitionCount() == 0//
+                final int nsplits = ssc.getIndexPartitionCount() == 0
                         ? (2 * moveTargets.length) // two per data service.
-                        : ssc.getIndexPartitionCount()//
+                        : ssc.getIndexPartitionCount()
                         ;
 
                 // scatter split task.
@@ -1335,9 +1335,9 @@ public class AsynchronousOverflowTask implements Callable<Object> {
                          */
                         putUsed(resources[0], "willMoveToJoinWithRightSibling"
                                 + "( " + sourceIndexName + " -> "
-                                + targetDataServiceName //
-                                + ", leftSibling=" + resources[0] //
-                                + ", rightSibling=" + resources[1] //
+                                + targetDataServiceName
+                                + ", leftSibling=" + resources[0]
+                                + ", rightSibling=" + resources[1]
                                 + ")");
 
                         nmove++;
@@ -1455,7 +1455,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
          */
         final ResourceScores resourceScores = resourceManager.getResourceScores();
 
-        final boolean shouldMove = //
+        final boolean shouldMove =
             // heavy CPU utilization.
             (resourceScores.percentCPUTime >= resourceManager.movePercentCpuTimeThreshold) ||
             // swapping heavily.
@@ -1548,7 +1548,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
 
             // request under utilized data service UUIDs (RMI).
             underUtilizedDataServiceUUIDs = loadBalancerService
-                    .getUnderUtilizedDataServices(//
+                    .getUnderUtilizedDataServices(
                             0, // minCount - no lower bound.
                             0, // maxCount - no upper bound.
                             sourceServiceUUID // exclude this data service.
@@ -1599,8 +1599,8 @@ public class AsynchronousOverflowTask implements Callable<Object> {
             
             assert underUtilizedDataServiceUUIDs != null;
 
-            maxMoves = Math.min(resourceManager.maximumMoves, //
-                    Math.min(nactiveSurplus, //
+            maxMoves = Math.min(resourceManager.maximumMoves,
+                    Math.min(nactiveSurplus,
                             maxMovesPerTarget
                                     * underUtilizedDataServiceUUIDs.length));
             
@@ -1865,7 +1865,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
              * large.
              */
             final double moveMinScore = .1;
-            final boolean moveCandidate = //
+            final boolean moveCandidate =
                 /*
                  * Note: barely active indices are not moved since moving them
                  * does not change the load on the data service.
@@ -1885,9 +1885,9 @@ public class AsynchronousOverflowTask implements Callable<Object> {
              * Note: This also helps to prevent very small indices that are not
              * getting much activity from bounding around.
              */
-            final double movePriority = vmd.isTailSplit() //
+            final double movePriority = vmd.isTailSplit()
                 ? score.drank / .1// 
-                : score.drank / vmd.getPercentOfSplit()//
+                : score.drank / vmd.getPercentOfSplit()
                 ;
 
             if (log.isInfoEnabled())
@@ -2685,11 +2685,11 @@ public class AsynchronousOverflowTask implements Callable<Object> {
              * capacity for an index partition by the time the live journal
              * overflows again.
              */
-            if (!compactingMerge //
+            if (!compactingMerge
                     // move not in progress
-                    && vmd.pmd.getSourcePartitionId() == -1//
+                    && vmd.pmd.getSourcePartitionId() == -1
                     // satisfies tail split criteria
-                    && vmd.isTailSplit()//
+                    && vmd.isTailSplit()
                     ) {
 
                 /*
@@ -2731,11 +2731,11 @@ public class AsynchronousOverflowTask implements Callable<Object> {
              * split has a precondition that the view is compact.
              */
             if (    // move not in progress
-                    vmd.pmd.getSourcePartitionId() == -1//
+                    vmd.pmd.getSourcePartitionId() == -1
                     // looks like a split candidate.
                     && vmd.getPercentOfSplit() > 1.0
-//                    && splitHandler.shouldSplit(vmd.getRangeCount())//
-////                    (vmd.sourceSegmentCount == 1 && vmd.getPercentOfSplit() > .9) //
+//                    && splitHandler.shouldSplit(vmd.getRangeCount())
+////                    (vmd.sourceSegmentCount == 1 && vmd.getPercentOfSplit() > .9)
             ) {
 
                 /*

@@ -814,10 +814,10 @@ public class NonBlockingLockManager</* T, */R extends Comparable<R>> {
         
         public String toString() {
 
-            return super.toString() + //
-                    "{resources=" + Arrays.toString(resource) + //
-                    ", done=" + isDone() + //
-                    ", cancelled=" + isCancelled() + //
+            return super.toString() +
+                    "{resources=" + Arrays.toString(resource) +
+                    ", done=" + isDone() +
+                    ", cancelled=" + isCancelled() +
                     ", ntries=" + ntries +
                     "}";
 
@@ -2134,17 +2134,17 @@ public class NonBlockingLockManager</* T, */R extends Comparable<R>> {
 
         // return getCounters().toString();
 
-        return getClass().getName() + //
-                "{ accepted=" + acceptedTasks.size() + //
-                ", waiting=" + waitingTasks.size() + //
-//                ", running=" + runningTasks.size() + //
-                ", #started="+counters.nstarted+//
-                ", #ended="+counters.nended+//
-                ", #cancel="+counters.ncancel+//
-                ", #timeout="+counters.ntimeout+//
-                ", #error="+counters.nerror+//
-                ", #deadlock="+counters.ndeadlock+//
-                (waitsFor!=null?", vertices="+waitsFor.size():"")+//
+        return getClass().getName() +
+                "{ accepted=" + acceptedTasks.size() +
+                ", waiting=" + waitingTasks.size() +
+//                ", running=" + runningTasks.size() +
+                ", #started="+counters.nstarted+
+                ", #ended="+counters.nended+
+                ", #cancel="+counters.ncancel+
+                ", #timeout="+counters.ntimeout+
+                ", #error="+counters.nerror+
+                ", #deadlock="+counters.ndeadlock+
+                (waitsFor!=null?", vertices="+waitsFor.size():"")+
                 "}";
 
     }

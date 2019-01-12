@@ -57,11 +57,11 @@ public interface IHashJoinUtilityFactory extends Serializable {
      * @param joinType
      *            The type of join.
      */
-    IHashJoinUtility create(//
-            final BOpContext<IBindingSet> context,//
-            final INamedSolutionSetRef namedSetRef,//
-            final PipelineOp op,//
-            final JoinTypeEnum joinType//
+    IHashJoinUtility create(
+            final BOpContext<IBindingSet> context,
+            final INamedSolutionSetRef namedSetRef,
+            final PipelineOp op,
+            final JoinTypeEnum joinType
             );
     
 }

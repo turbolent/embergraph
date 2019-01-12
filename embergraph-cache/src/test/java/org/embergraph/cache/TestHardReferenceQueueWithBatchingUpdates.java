@@ -154,7 +154,7 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
             vals[i] = Integer.valueOf(i);
         }
         
-        doStressTest(//
+        doStressTest(
                 10L,// timeout
                 TimeUnit.SECONDS,// unit
                 false, // threadLocalBuffers (vs striped locks)
@@ -225,31 +225,31 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
      * @throws TimeoutException
      * @throws ExecutionException
      */
-    public long doStressTest(//
-            final long timeout, final TimeUnit unit,//
-            final boolean threadLocalBuffers,//
-            final int concurrencyLevel,//
-            final int threadPoolSize,//
-            final int capacity,//
-            final int threadLocalNScan,//
-            final int threadLocalQueueCapacity,//
-            final int threadLocalTryLockSize, //
-            final Callable<?> worker//
+    public long doStressTest(
+            final long timeout, final TimeUnit unit,
+            final boolean threadLocalBuffers,
+            final int concurrencyLevel,
+            final int threadPoolSize,
+            final int capacity,
+            final int threadLocalNScan,
+            final int threadLocalQueueCapacity,
+            final int threadLocalTryLockSize,
+            final Callable<?> worker
     ) throws InterruptedException, BrokenBarrierException, TimeoutException,
             ExecutionException {
 
         final HardReferenceQueueWithBatchingUpdates<Object> queue = new HardReferenceQueueWithBatchingUpdates<Object>(
-                threadLocalBuffers,//
-                concurrencyLevel,//
-                new HardReferenceQueue<Object>(//
+                threadLocalBuffers,
+                concurrencyLevel,
+                new HardReferenceQueue<Object>(
                         null,// listener
-                        capacity,//
+                        capacity,
                         0// nscan
                 ),
 //                null/* listener */, capacity, 
-                threadLocalNScan, //
-                threadLocalQueueCapacity,//
-                threadLocalTryLockSize, //
+                threadLocalNScan,
+                threadLocalQueueCapacity,
+                threadLocalTryLockSize,
                 null// batched updates listener
                 );
 
@@ -528,11 +528,11 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
         }
 
         final long touchesPerUnit = doStressTest(timeout,
-                units, //
-                threadLocalBuffers,//
-                concurrencyLevel,//
-                threadPoolSize, //
-                capacity,//
+                units,
+                threadLocalBuffers,
+                concurrencyLevel,
+                threadPoolSize,
+                capacity,
                 threadLocalNScan, threadLocalCapacity, threadLocalTryLockSize,
                 new Callable<Object>() {
                     public Object call() throws Exception {
@@ -607,32 +607,32 @@ public class TestHardReferenceQueueWithBatchingUpdates extends TestCase2
 
             conditions = apply(
                     conditions,
-                    new NV[][] { //
+                    new NV[][] {
                             new NV[] {
                                     new NV(TestOptions.THREAD_LOCAL_CAPACITY,
                                             "16"),
                                     new NV(
                                             TestOptions.THREAD_LOCAL_TRY_LOCK_SIZE,
-                                            "8"), }, //
+                                            "8"), },
                             new NV[] {
                                     new NV(TestOptions.THREAD_LOCAL_CAPACITY,
                                             "32"),
                                     new NV(
                                             TestOptions.THREAD_LOCAL_TRY_LOCK_SIZE,
-                                            "16"), }, //
+                                            "16"), },
                             new NV[] {
                                     new NV(TestOptions.THREAD_LOCAL_CAPACITY,
                                             "64"),
                                     new NV(
                                             TestOptions.THREAD_LOCAL_TRY_LOCK_SIZE,
-                                            "32"), }, //
+                                            "32"), },
                             new NV[] {
                                     new NV(TestOptions.THREAD_LOCAL_CAPACITY,
                                             "128"),
                                     new NV(
                                             TestOptions.THREAD_LOCAL_TRY_LOCK_SIZE,
-                                            "64"), }, //
-                    //
+                                            "64"), },
+
                     });
                         
             final Experiment exp = new Experiment(className, defaultProperties,

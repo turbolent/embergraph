@@ -192,9 +192,9 @@ public class ASTSearchInSearchOptimizer extends AbstractJoinGroupOptimizer {
         }
 
         final Hiterator<IHit> it = textIndex.search(new FullTextQuery(
-    		s,//
+    		s,
             search.getLanguage(),// 
-            prefixMatch,//
+            prefixMatch,
             regex,
             match != null && match.equalsIgnoreCase("ALL"),
             match != null && match.equalsIgnoreCase("EXACT")

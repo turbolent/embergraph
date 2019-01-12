@@ -413,9 +413,9 @@ public class VMStatCollector extends AbstractProcessCollector implements
                      * Issue warning for parsing problems.
                      */
 
-                    log.warn(ex.getMessage() //
-                            + "\nheader: " + header //
-                            + "\n  data: " + data //
+                    log.warn(ex.getMessage()
+                            + "\nheader: " + header
+                            + "\n  data: " + data
                     , ex);
 
                 }

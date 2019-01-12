@@ -303,7 +303,7 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
 
             // Bindings.
             {
-                sb.append(" {\n"); //
+                sb.append(" {\n");
                 for (BindingSet bindingSet : bindingSets) {
                     sb.append("(");
                     for (String v : vars) {

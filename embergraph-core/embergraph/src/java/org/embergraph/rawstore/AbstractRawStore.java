@@ -158,10 +158,10 @@ abstract public class AbstractRawStore implements IRawStore {
 			
 			// return a stream address indicating the total size of the data and the address
 			//	of the header data.
-			//
+
 			// the negative address indicates that this is a stream header and cannot be
 			//	processed as a contiguous allocation.
-			//
+
 			// FIXME: enable standard non-stream read to process streamed data similarly to
 			//	RWStore BLOB handling.
 			return -am.toAddr(m_bytesWritten, am.getOffset(hdrAddr));

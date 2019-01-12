@@ -289,7 +289,7 @@ public class TestInlineConstraints extends AbstractDataDrivenSPARQLTestCase {
         final BOp[] vars = new BOp[] { s, p, o };
 
         anns.add(new NV(IPredicate.Annotations.RELATION_NAME,
-                new String[] { database.getSPORelation().getNamespace() }));//
+                new String[] { database.getSPORelation().getNamespace() }));
         
 
         // timestamp

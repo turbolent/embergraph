@@ -159,10 +159,10 @@ public class ByteArrayBuffer extends OutputStream implements IByteArrayBuffer,
      */
     public ByteArrayBuffer(final int initialCapacity) {
         
-        this(//
+        this(
                 0, // pos
                 0, // readLimit
-                new byte[assertNonNegative("initialCapacity", initialCapacity)]//
+                new byte[assertNonNegative("initialCapacity", initialCapacity)]
         );
         
     }
@@ -309,14 +309,14 @@ public class ByteArrayBuffer extends OutputStream implements IByteArrayBuffer,
      * Absolute put/get methods.
      */
     
-    final public void put(final int pos, //
+    final public void put(final int pos,
             final byte[] b) {
 
         put(pos, b, 0, b.length);
 
     }
 
-    final public void put(final int pos,//
+    final public void put(final int pos,
             final byte[] b, final int off, final int len) {
 
         ensureCapacity(pos + len);
@@ -1052,7 +1052,7 @@ public class ByteArrayBuffer extends OutputStream implements IByteArrayBuffer,
 ////        /*
 ////         * value is zero, which is considered to be one nibble for our purposes.
 ////         */
-////
+//
 ////        return 1;
 ////        
 //    }

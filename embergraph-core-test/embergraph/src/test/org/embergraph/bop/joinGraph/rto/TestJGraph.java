@@ -223,26 +223,26 @@ public class TestJGraph extends TestCase2 {
 //
 //      final IPredicate<E> p1 = new Predicate<E>(new BOp[] { x, y },
 //              new NV(IPredicate.Annotations.RELATION_NAME,
-//                      new String[] { namespace }),//
-//              new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED)//
+//                      new String[] { namespace }),
+//              new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED)
 //      );
 //
 //      final IPredicate<E> p2 = new Predicate<E>(new BOp[] { x, y },
 //              new NV(IPredicate.Annotations.RELATION_NAME,
-//                      new String[] { namespace }),//
-//              new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED)//
+//                      new String[] { namespace }),
+//              new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED)
 //      );
 //
 //      final IPredicate<E> p3 = new Predicate<E>(new BOp[] { x, y },
 //              new NV(IPredicate.Annotations.RELATION_NAME,
-//                      new String[] { namespace }),//
-//              new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED)//
+//                      new String[] { namespace }),
+//              new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED)
 //      );
 //
-//      new JoinGraph(//
-//              new NV(BOp.Annotations.BOP_ID, 1),//
-//              new NV(JoinGraph.Annotations.VERTICES,new IPredicate[]{}),//
-//              new NV(JoinGraph.Annotations.SAMPLE_SIZE, 100)//
+//      new JoinGraph(
+//              new NV(BOp.Annotations.BOP_ID, 1),
+//              new NV(JoinGraph.Annotations.VERTICES,new IPredicate[]{}),
+//              new NV(JoinGraph.Annotations.SAMPLE_SIZE, 100)
 //              );
 //}
 

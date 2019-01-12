@@ -73,9 +73,9 @@ public class LogicalRowSplitHandler implements ISimpleSplitHandler, Externalizab
              * Compare the first N bytes of those keys (unsigned byte[]
              * comparison).
              */
-            final int cmp = BytesUtil.compareBytesWithLenAndOffset(//
-                    0/* aoff */, alen, a,//
-                    0/* boff */, blen, b//
+            final int cmp = BytesUtil.compareBytesWithLenAndOffset(
+                    0/* aoff */, alen, a,
+                    0/* boff */, blen, b
                     );
 
             // the keys must be correctly ordered.

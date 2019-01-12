@@ -147,11 +147,11 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
 
         private static final long serialVersionUID = 1L;
         
-        public IHashJoinUtility create(//
-                final BOpContext<IBindingSet> context,//
-                final INamedSolutionSetRef namedSetRef,//
-                final PipelineOp op,//
-                final JoinTypeEnum joinType//
+        public IHashJoinUtility create(
+                final BOpContext<IBindingSet> context,
+                final INamedSolutionSetRef namedSetRef,
+                final PipelineOp op,
+                final JoinTypeEnum joinType
                 ) {
 
             return new HTreePipelinedHashJoinUtility(
@@ -576,11 +576,11 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
      * Executes the hash join for the chunk of solutions that is passed in
      * over rightSolutions and outputs the solutions.
      */
-    public void hashJoinAndEmit(//
-            final IBindingSet[] chunk,//
+    public void hashJoinAndEmit(
+            final IBindingSet[] chunk,
             final BOpStats stats,
-            final IBuffer<IBindingSet> outputBuffer,//
-            final IConstraint[] joinConstraints,//
+            final IBuffer<IBindingSet> outputBuffer,
+            final IConstraint[] joinConstraints,
             final IVariable<?> askVar) {
 
         if (!getOpen().get())
@@ -749,14 +749,14 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
                                 nrejected++;
                                 
                                 if (log.isTraceEnabled())
-                                    log.trace("Does not join"//
-                                            +": hashCode="+ hashCode//
-                                            + ", sameHashCodeCount="+ sameHashCodeCount//
-                                            + ", #left=" + bucketSize//
-                                            + ", #joined=" + njoined//
-                                            + ", #rejected=" + nrejected//
-                                            + ", left=" + leftSolution//
-                                            + ", right=" + rightSolution//
+                                    log.trace("Does not join"
+                                            +": hashCode="+ hashCode
+                                            + ", sameHashCodeCount="+ sameHashCodeCount
+                                            + ", #left=" + bucketSize
+                                            + ", #joined=" + njoined
+                                            + ", #rejected=" + nrejected
+                                            + ", left=" + leftSolution
+                                            + ", right=" + rightSolution
                                             );
     
                             } else {
@@ -765,13 +765,13 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
                                 leftSolutionsWithoutMatch.remove(leftSolution); // match found
     
                                 if (log.isDebugEnabled())
-                                    log.debug("JOIN"//
-                                        + ": hashCode=" + hashCode//
-                                        + ", sameHashCodeCount="+ sameHashCodeCount//
-                                        + ", #left="+ bucketSize//
-                                        + ", #joined=" + njoined//
-                                        + ", #rejected=" + nrejected//
-                                        + ", solution=" + outSolution//
+                                    log.debug("JOIN"
+                                        + ": hashCode=" + hashCode
+                                        + ", sameHashCodeCount="+ sameHashCodeCount
+                                        + ", #left="+ bucketSize
+                                        + ", #joined=" + njoined
+                                        + ", #rejected=" + nrejected
+                                        + ", solution=" + outSolution
                                         );
                             
                             }

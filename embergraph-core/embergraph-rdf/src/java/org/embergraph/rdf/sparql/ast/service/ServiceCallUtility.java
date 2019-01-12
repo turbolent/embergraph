@@ -237,9 +237,9 @@ public class ServiceCallUtility {
      * @return The bigdata {@link IBindingSet}.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    static private IBindingSet openrdf2Bigdata(//
-            final Set<IVariable<?>> vars,//
-            final BindingSet in//
+    static private IBindingSet openrdf2Bigdata(
+            final Set<IVariable<?>> vars,
+            final BindingSet in
             ) {
 
         final IBindingSet out = new ListBindingSet();

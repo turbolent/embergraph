@@ -358,9 +358,9 @@ abstract public class AbstractSubqueryOp extends PipelineOp {
                     subquerySolutionItr = runningSubquery.iterator();
 
                     // Copy solutions from the subquery to the query.
-                    BOpUtility.copy(//
-                            subquerySolutionItr, //
-                            parentContext.getSink(), //
+                    BOpUtility.copy(
+                            subquerySolutionItr,
+                            parentContext.getSink(),
                             null, // sink2
                             null, // merge solution (parent's source solution).
                             null, // selectVars (subquery projection).

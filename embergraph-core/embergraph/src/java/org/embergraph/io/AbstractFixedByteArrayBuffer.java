@@ -160,7 +160,7 @@ abstract public class AbstractFixedByteArrayBuffer implements IFixedDataRecord {
 
     }
 
-    final public void put(final int dstoff,//
+    final public void put(final int dstoff,
             final byte[] src, final int srcoff, final int srclen) {
 
         assert rangeCheck(dstoff, srclen);

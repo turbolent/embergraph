@@ -477,7 +477,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
         if (req.getParameter(MAPGRAPH) != null) {
 
-            final IServletDelegate delegate = ClassPathUtil.classForName(//
+            final IServletDelegate delegate = ClassPathUtil.classForName(
                         "org.embergraph.gpu.webapp.MapgraphStatusServletDelegate", // preferredClassName,
                         ServletDelegateBase.class, // defaultClass,
                         IServletDelegate.class, // sharedInterface,
@@ -764,13 +764,13 @@ public class StatusServlet extends BigdataRDFServlet {
                                 DETAILS).toString();
 
                 current.node("p").text("Show ")
-                        //
+
                         .node("a").attr("href", showQueriesURL)
                         .attr("id", "show-queries").text("queries").close()
-                        .text(", ")//
+                        .text(", ")
                         .node("a").attr("href", showQueriesDetailsURL)
                         .attr("id", "show-query-details").text("query details")
-                        .close()//
+                        .close()
                         .text(".").close();
 
             }
@@ -828,16 +828,16 @@ public class StatusServlet extends BigdataRDFServlet {
                 // .getCounters(null/* filter */);
                 //                
                 // while(itr.hasNext()) {
-                //
+
                 // final ICounter<?> c = itr.next();
-                //
+
                 // final Object value = c.getInstrument().getValue();
-                //
+
                 // // The full path to the metric name.
                 // final String path = c.getPath();
                 //                 
                 // current.node("br", path + "=" + value);
-                //
+
                 // }
 
                 current.node("p").attr("id",  "counter-set")
@@ -1002,7 +1002,7 @@ public class StatusServlet extends BigdataRDFServlet {
             // Open <p>.
             current.node("p")
             .attr("class", "update")
-            //
+
             .text("elapsed=").node("span")
                .attr("class", "elapsed").text("" + elapsedMillis).close()
             .text("ms")
@@ -1012,7 +1012,7 @@ public class StatusServlet extends BigdataRDFServlet {
             .attr("class", "mutationCount").text("" + mutationCount).close()
             .text(", ").node("a").attr("href", detailsURL)
             .attr("class", "details-url")
-            .text("details").close()//
+            .text("details").close()
             .close();
 
             // open <p>
@@ -1137,14 +1137,14 @@ public class StatusServlet extends BigdataRDFServlet {
             // Open <p>.
             current.node("p")
             .attr("class", "task")
-            //
+
             .text("elapsed=").node("span")
                .attr("class", "elapsed").text("" + elapsedMillis).close()
             .text("ms")
-            //
+
             .text(", ").node("a").attr("href", detailsURL)
             .attr("class", "details-url")
-            .text("details").close()//
+            .text("details").close()
             .close();
 
             // open <p>
@@ -1245,23 +1245,23 @@ public class StatusServlet extends BigdataRDFServlet {
                     .toString(stats.chunksOut.get());
 
             current.node("p")
-                    //
+
                     .text("solutions=").node("span").attr("class", "solutions")
                        .text(""+ solutionsOut).close()
-                    //
+
                     .text(", chunks=").node("span").attr("class", "chunks")
                        .text(""+ chunksOut).close()
-                    //
+
                     .text(", children=").node("span").attr("class", "children")
                        .text("" + children.length).close()
-                    //
+
                     .text(", elapsed=").node("span").attr("class", "elapsed")
                        .text("" + elapsedMillis).close()
                     .text("ms, ")
-                    //
+
                     .node("a").attr("href", detailsURL)
                     .attr("class",  "details-url")
-                    .text("details").close()//
+                    .text("details").close()
                     .close();
 
             // open <p>

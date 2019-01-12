@@ -144,13 +144,13 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
             {
                 final BigdataValue[] terms = new BigdataValue[] {
 
-                        x, y, z,//
-                        A, B, C,//
-                        rdfType,//
-                        rdfsLabel,//
-                        rdfsSubClassOf,//
-                        lit1, lit2, lit3,//
-                        bn1, bn2 //
+                        x, y, z,
+                        A, B, C,
+                        rdfType,
+                        rdfsLabel,
+                        rdfsSubClassOf,
+                        lit1, lit2, lit3,
+                        bn1, bn2
 
                 };
 
@@ -455,13 +455,13 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
             {
                 final BigdataValue[] terms = new BigdataValue[] {
 
-                x, y, z,//
-                        A, B, C,//
-                        rdfType,//
-                        // rdfsLabel,//
-                        dcCreator,//
-                        lit1, lit2,//
-                        // bn1,bn2//
+                x, y, z,
+                        A, B, C,
+                        rdfType,
+                        // rdfsLabel,
+                        dcCreator,
+                        lit1, lit2,
+                        // bn1,bn2
 
                 };
 
@@ -569,11 +569,11 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
 
                 final BigdataValue[] terms = new BigdataValue[] {
 
-                        x, y, z,//
-                        A, B, C,//
-                        rdfType,//
-                        dcCreator,//
-                        lit1, lit2,//
+                        x, y, z,
+                        A, B, C,
+                        rdfType,
+                        dcCreator,
+                        lit1, lit2,
 
                 };
 

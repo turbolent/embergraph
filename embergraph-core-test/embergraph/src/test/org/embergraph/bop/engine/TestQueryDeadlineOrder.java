@@ -92,7 +92,7 @@ public class TestQueryDeadlineOrder extends TestCase2 {
         rel.create();
 
         // data to insert (in key order for convenience).
-        final E[] a = {//
+        final E[] a = {
                 new E("John", "Mary"),// [0]
                 new E("Leon", "Paul"),// [1]
                 new E("Mary", "Paul"),// [2]
@@ -134,17 +134,17 @@ public class TestQueryDeadlineOrder extends TestCase2 {
         final int startId = 1;
 
         final PipelineOp query1 = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final PipelineOp query2 = new StartOp(new BOp[] {}, NV
-                .asMap(new NV[] {//
-                new NV(Predicate.Annotations.BOP_ID, startId),//
+                .asMap(new NV[] {
+                new NV(Predicate.Annotations.BOP_ID, startId),
                 new NV(SliceOp.Annotations.EVALUATION_CONTEXT,
-                        BOpEvaluationContext.CONTROLLER),//
+                        BOpEvaluationContext.CONTROLLER),
                 }));
 
         final AbstractRunningQuery runningQuery1 = queryEngine.eval(UUID.randomUUID(),

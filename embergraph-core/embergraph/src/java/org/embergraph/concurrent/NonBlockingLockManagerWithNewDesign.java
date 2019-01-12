@@ -1599,11 +1599,11 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */R extends Comp
 
         public String toString() {
 
-            return super.toString() + //
-                    "{resources=" + Arrays.toString(resource) + //
-                    ", runState=" + taskRunState + //
-                    ", done=" + isDone() + //
-                    ", cancelled=" + isCancelled() + //
+            return super.toString() +
+                    "{resources=" + Arrays.toString(resource) +
+                    ", runState=" + taskRunState +
+                    ", done=" + isDone() +
+                    ", cancelled=" + isCancelled() +
                     ", ntries=" + ntries + "}";
 
         }
@@ -2708,17 +2708,17 @@ public abstract class NonBlockingLockManagerWithNewDesign</* T, */R extends Comp
 
         // return getCounters().toString();
 
-        return getClass().getName() + //
-                "{ #rejected=" + counters.nrejected + //
-                ", #error=" + counters.nerror + //
-                ", #cancel=" + counters.ncancel + //
-                ", averageDeadlock=" + ((int)(10*statisticsTask.nretryAverageTask.getMovingAverage())/10d)+ //
-                ", averageWaiting=" + ((int)(10*statisticsTask.nwaitingAverageTask.getMovingAverage())/10d)+ //
-                ", averageReady=" + ((int)(10*statisticsTask.nreadyAverageTask.getMovingAverage())/10d)+ //
-                ", averageRunning=" + ((int)(10*statisticsTask.nrunningAverageTask.getMovingAverage())/10d)+ //
-                ", averageRunningWithLocksHeld=" + ((int)(10*statisticsTask.nrunningWithLocksHeldAverageTask.getMovingAverage())/10d)+ //
-                ", #maxrunning=" + counters.maxRunning + //
-//                (waitsFor != null ? ", vertices=" + waitsFor.size() : "") + //
+        return getClass().getName() +
+                "{ #rejected=" + counters.nrejected +
+                ", #error=" + counters.nerror +
+                ", #cancel=" + counters.ncancel +
+                ", averageDeadlock=" + ((int)(10*statisticsTask.nretryAverageTask.getMovingAverage())/10d)+
+                ", averageWaiting=" + ((int)(10*statisticsTask.nwaitingAverageTask.getMovingAverage())/10d)+
+                ", averageReady=" + ((int)(10*statisticsTask.nreadyAverageTask.getMovingAverage())/10d)+
+                ", averageRunning=" + ((int)(10*statisticsTask.nrunningAverageTask.getMovingAverage())/10d)+
+                ", averageRunningWithLocksHeld=" + ((int)(10*statisticsTask.nrunningWithLocksHeldAverageTask.getMovingAverage())/10d)+
+                ", #maxrunning=" + counters.maxRunning +
+//                (waitsFor != null ? ", vertices=" + waitsFor.size() : "") +
                 "}";
 
     }

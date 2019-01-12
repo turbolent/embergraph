@@ -36,9 +36,9 @@ public class RuleFastClosure7 extends AbstractRuleFastClosure_5_6_7_9 {
             Vocabulary vocab) {
             // Set<Long> C
         
-        super("fastClosure7", database, focusStore, //
-                vocab.getConstant(RDFS.SUBPROPERTYOF),//
-                vocab.getConstant(RDFS.SUBCLASSOF)//
+        super("fastClosure7", database, focusStore,
+                vocab.getConstant(RDFS.SUBPROPERTYOF),
+                vocab.getConstant(RDFS.SUBCLASSOF)
                 );
         
         // , C);

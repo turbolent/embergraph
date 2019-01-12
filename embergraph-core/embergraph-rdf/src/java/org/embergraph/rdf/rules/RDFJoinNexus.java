@@ -160,9 +160,9 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
 //            
 //            return new RDFRuleStats(
 //                    (indexManager instanceof IBigdataFederation<?> ? null
-//                            : indexManager), //
-//                        getReadTimestamp(), //
-//                        ruleState//
+//                            : indexManager),
+//                        getReadTimestamp(),
+//                        ruleState
 //                        );
 //            
 //        }
@@ -357,16 +357,16 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
 //
 //        // Find the best access path for the predicate for that relation.
 //        IAccessPath accessPath = relation.getAccessPath(predicate);
-////
+//
 ////        if (predicate.getPartitionId() != -1) {
-////
+//
 ////            /*
 ////             * Note: The expander can not run against a shard since it assumes
 ////             * access to the full key range of the index. Expanders are
 ////             * convenient and work well for stand alone indices, but they should
 ////             * be replaced by rule rewrites for scale-out.
 ////             */
-////
+//
 ////            return accessPath;
 ////            
 ////        }

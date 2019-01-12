@@ -154,7 +154,7 @@ final public class Var<E> extends ImmutableBOp implements IVariable<E>,
     }
     
     //        public int compareTo(IVariableOrConstant arg0) {
-    //
+
     //            // order vars before ids
     //            if(arg0.isConstant()) return -1;
     //            

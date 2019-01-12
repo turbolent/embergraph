@@ -225,12 +225,12 @@ public class ASTConstructIterator implements
      * @param src
      *            The solutions that will be used to construct the triples.
      */
-    public ASTConstructIterator(//
-            final AST2BOpContext context,//
-            final AbstractTripleStore tripleStore,//
-            final ConstructNode construct,//
-            final GraphPatternGroup<?> whereClause,//
-            final Map<String, BigdataBNode> bnodesIn,//
+    public ASTConstructIterator(
+            final AST2BOpContext context,
+            final AbstractTripleStore tripleStore,
+            final ConstructNode construct,
+            final GraphPatternGroup<?> whereClause,
+            final Map<String, BigdataBNode> bnodesIn,
             final CloseableIteration<BindingSet, QueryEvaluationException> src) {
 
         this.constructDistinctSPO = context.constructDistinctSPO;
@@ -262,11 +262,11 @@ public class ASTConstructIterator implements
                 final BigdataStatement stmt = makeStatement(pat,
                         EmptyBindingSet.getInstance(), bnodes);
                 
-//                final BigdataStatement stmt = f.createStatement(//
-//                        (Resource) pat.s().getValue(),//
-//                        (URI) pat.p().getValue(),//
-//                        (Value) pat.o().getValue(),//
-//                        pat.c() == null ? null : (Resource) pat.c().getValue()//
+//                final BigdataStatement stmt = f.createStatement(
+//                        (Resource) pat.s().getValue(),
+//                        (URI) pat.p().getValue(),
+//                        (Value) pat.o().getValue(),
+//                        pat.c() == null ? null : (Resource) pat.c().getValue()
 //                        );
 
                 if (DEBUG)
@@ -492,10 +492,10 @@ public class ASTConstructIterator implements
      *      CONSTRUCT should apply DISTINCT (s,p,o) filter </a>
      */
 	// Note: package private to expose to test suite.
-    static boolean isObviouslyDistinct(//
-            final boolean quads,//
-            final List<StatementPatternNode> templates,//
-            final GraphPatternGroup<?> whereClause//
+    static boolean isObviouslyDistinct(
+            final boolean quads,
+            final List<StatementPatternNode> templates,
+            final GraphPatternGroup<?> whereClause
     ) {
         
         if (templates.isEmpty()) {
@@ -858,10 +858,10 @@ public class ASTConstructIterator implements
      * 
      * @return The as-bound value.
      */
-    private BigdataValue getValue(//
-            final TermNode term,//
-            final BindingSet solution,//
-            final Map<String, BigdataBNode> bnodes//
+    private BigdataValue getValue(
+            final TermNode term,
+            final BindingSet solution,
+            final Map<String, BigdataBNode> bnodes
             ) {
 
         if (term instanceof ConstantNode) {

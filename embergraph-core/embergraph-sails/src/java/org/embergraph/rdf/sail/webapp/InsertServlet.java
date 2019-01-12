@@ -651,10 +651,10 @@ public class InsertServlet extends BigdataRDFServlet {
         	
             try {
 
-                conn.addStatement(//
-                        stmt.getSubject(), //
-                        stmt.getPredicate(), //
-                        stmt.getObject(), //
+                conn.addStatement(
+                        stmt.getSubject(),
+                        stmt.getPredicate(),
+                        stmt.getObject(),
                         c
                         );
 

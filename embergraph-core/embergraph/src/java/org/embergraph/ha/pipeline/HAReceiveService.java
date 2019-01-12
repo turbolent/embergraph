@@ -643,10 +643,10 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
          * mode so we will read whatever is available and loop until all data
          * has been read.
          */
-        public Client(//
-                final ServerSocketChannel server //
-//                , final HASendService downstream //
-//                , final InetSocketAddress addrNext//
+        public Client(
+                final ServerSocketChannel server
+//                , final HASendService downstream
+//                , final InetSocketAddress addrNext
         ) throws IOException {
 
             try {
@@ -693,12 +693,12 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
             final Socket s = client.socket();
             
-            return super.toString() //
-                    + "{client.isOpen()=" + client.isOpen()//
-                    + ",client.isConnected()=" + client.isConnected()//
+            return super.toString()
+                    + "{client.isOpen()=" + client.isOpen()
+                    + ",client.isConnected()=" + client.isConnected()
                     + ",socket.isInputShutdown()="
-                    + (s == null ? "N/A" : s.isInputShutdown())//
-                    + ",clientSelector.isOpen=" + clientSelector.isOpen()//
+                    + (s == null ? "N/A" : s.isInputShutdown())
+                    + ",clientSelector.isOpen=" + clientSelector.isOpen()
                     + "}";
 
         }

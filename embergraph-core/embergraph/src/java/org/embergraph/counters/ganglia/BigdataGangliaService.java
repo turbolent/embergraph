@@ -101,18 +101,18 @@ public class BigdataGangliaService extends GangliaService {
 
 		final int defaultDMax = IGangliaDefaults.DEFAULT_DMAX;
 		
-		final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(//
-				IGangliaDefaults.DEFAULT_GROUP,//
-				IGangliaDefaults.DEFAULT_PORT//
+		final InetSocketAddress[] metricsServers = new InetSocketAddress[] { new InetSocketAddress(
+				IGangliaDefaults.DEFAULT_GROUP,
+				IGangliaDefaults.DEFAULT_PORT
 		) };
 
 		// Note: Factory is extensible (application can add its own delegates).
 		final GangliaMetadataFactory metadataFactory = new GangliaMetadataFactory(
-				new DefaultMetadataFactory(//
-						defaultUnits,//
-						defaultSlope,//
-						defaultTMax,//
-						defaultDMax//
+				new DefaultMetadataFactory(
+						defaultUnits,
+						defaultSlope,
+						defaultTMax,
+						defaultDMax
 						));
 
 		/*
@@ -131,20 +131,20 @@ public class BigdataGangliaService extends GangliaService {
 
 		try {
 
-			service = new GangliaService(//
-					hostName,//
-					serviceName, //
-					metricsServers, //
-					listenGroup, listenPort,//
+			service = new GangliaService(
+					hostName,
+					serviceName,
+					metricsServers,
+					listenGroup, listenPort,
 					true,// listen
 					true,// report
 					false,// mock (does not transmit when true).
-					quietPeriod,//
-					initialDelay,//
-					heartbeatInterval,//
-					monitoringInterval, //
-					defaultDMax,//
-					metadataFactory//
+					quietPeriod,
+					initialDelay,
+					heartbeatInterval,
+					monitoringInterval,
+					defaultDMax,
+					metadataFactory
 			);
 			
 			/*

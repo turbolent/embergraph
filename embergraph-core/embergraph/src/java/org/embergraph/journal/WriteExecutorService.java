@@ -272,23 +272,23 @@ public class WriteExecutorService extends ThreadPoolExecutor {
      *            currently running tasks to join the commit group.
      *            @param overflowLockRequestTimeout
      */
-    public WriteExecutorService(//
+    public WriteExecutorService(
             final IResourceManager resourceManager,
             final int corePoolSize,
             final int maximumPoolSize,
-            final long keepAliveTime,//
-            final TimeUnit keepAliveUnit,//
+            final long keepAliveTime,
+            final TimeUnit keepAliveUnit,
             final BlockingQueue<Runnable> queue, 
             final ThreadFactory threadFactory,
             final long groupCommitTimeout,
             final long overflowLockRequestTimeout) {
 
-        super(  corePoolSize, //
-                maximumPoolSize,//
-                keepAliveTime,//
-                keepAliveUnit,//
-                queue,//
-                threadFactory//
+        super(  corePoolSize,
+                maximumPoolSize,
+                keepAliveTime,
+                keepAliveUnit,
+                queue,
+                threadFactory
                 );
 
         if (resourceManager == null)
@@ -318,13 +318,13 @@ public class WriteExecutorService extends ThreadPoolExecutor {
              * AbstractTask API.
              */
 
-            lockManager = new MyLockManager<String>(//
+            lockManager = new MyLockManager<String>(
                   maximumPoolSize, // capacity
                   3, // @todo config maxLockTries
                   true, // predeclareLocks
                   this);
 
-//            lockManager = new NonBlockingLockManagerWithNewDesign<String>(//
+//            lockManager = new NonBlockingLockManagerWithNewDesign<String>(
 //                    maximumPoolSize, // capacity
 //                    3, // @todo config maxLockTries
 //                    true // predeclareLocks
@@ -1648,15 +1648,15 @@ public class WriteExecutorService extends ThreadPoolExecutor {
                     System.nanoTime() - beginWait);
 
             log
-                    .info("Not waiting any longer"//
-                            + ": commitGroupSize=" + commitGroupSize//
-                            + ", nwaits="+nwaits //
+                    .info("Not waiting any longer"
+                            + ": commitGroupSize=" + commitGroupSize
+                            + ", nwaits="+nwaits
                             + ", elapsed(ms)=" + elapsedWait
-                            + ", queueSize=" + queueSize//
-                            + ", nrunning=" + nrunning//
+                            + ", queueSize=" + queueSize
+                            + ", nrunning=" + nrunning
                             + ", corePoolSize=" + corePoolSize
-                            + ", poolSize="+ poolSize//
-                            + ", maxPoolSize=" + maxPoolSize//
+                            + ", poolSize="+ poolSize
+                            + ", maxPoolSize=" + maxPoolSize
                             );
             
         }

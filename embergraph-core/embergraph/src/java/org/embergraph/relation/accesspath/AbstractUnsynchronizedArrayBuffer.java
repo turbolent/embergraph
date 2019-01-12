@@ -199,7 +199,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
         if (buffer == null) {
 
             // re-allocate on demand.
-            buffer = (E[]) java.lang.reflect.Array.newInstance(//
+            buffer = (E[]) java.lang.reflect.Array.newInstance(
                     cls,//e.getClass(),
                     capacity);
 
@@ -213,7 +213,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
             assert buffer == null;
 
             // re-allocate so that we can store the new element.
-            buffer = (E[]) java.lang.reflect.Array.newInstance(//
+            buffer = (E[]) java.lang.reflect.Array.newInstance(
                     cls,//e.getClass(),
                     capacity);
             

@@ -121,16 +121,16 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_nested_optionals_1()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    :x1 :p ?v . \n" + //
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    :x1 :p ?v . \n" +
                 "    OPTIONAL {" +
-                "      :x3 :q ?w . \n" + //
-                "      OPTIONAL { :x2 :p ?v  } \n" + //
-                "    } \n" + //
-                "}"//
+                "      :x3 :q ?w . \n" +
+                "      OPTIONAL { :x2 :p ?v  } \n" +
+                "    } \n" +
+                "}"
         ;
 
         /*
@@ -198,21 +198,21 @@ public class TestASTBottomUpOptimizer extends
                     final JoinGroupNode liftedClause = new JoinGroupNode(true/* optional */);
                     final JoinGroupNode innerClause = new JoinGroupNode(true/* optional */);
                     // :x3 :q ?w
-                    liftedClause.addChild(new StatementPatternNode(//
+                    liftedClause.addChild(new StatementPatternNode(
                             new ConstantNode(new Constant(x3.getIV())),// s
                             new ConstantNode(new Constant(q.getIV())),// p
                             new VarNode("w"),// o
                             null,// c
-                            Scope.DEFAULT_CONTEXTS//
+                            Scope.DEFAULT_CONTEXTS
                             ));
                     liftedClause.addChild(innerClause);
                     // :x2 :p ?v
-                    innerClause.addChild(new StatementPatternNode(//
+                    innerClause.addChild(new StatementPatternNode(
                             new ConstantNode(new Constant(x2.getIV())),// s
                             new ConstantNode(new Constant(p.getIV())),// p
                             new VarNode("v"),// o
                             null,// c
-                            Scope.DEFAULT_CONTEXTS//
+                            Scope.DEFAULT_CONTEXTS
                             ));
 
                     expectedNSR.setWhereClause(liftedClause);
@@ -225,12 +225,12 @@ public class TestASTBottomUpOptimizer extends
             {
 
                 // :x1 :p ?v 
-                modifiedClause.addChild(new StatementPatternNode(//
+                modifiedClause.addChild(new StatementPatternNode(
                         new ConstantNode(new Constant(x1.getIV())),// s
                         new ConstantNode(new Constant(p.getIV())),// p
                         new VarNode("v"),// o
                         null,// c
-                        Scope.DEFAULT_CONTEXTS//
+                        Scope.DEFAULT_CONTEXTS
                         ));
 
                 modifiedClause.addChild(new JoinGroupNode(true/* optional */,
@@ -271,16 +271,16 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_nested_optionals_1_correctRejection()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    :x1 :p ?v . \n" + //
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    :x1 :p ?v . \n" +
                 "    OPTIONAL {" +
-                "      :x3 :q ?w . \n" + //
-                "      OPTIONAL { :x2 :p ?v  } \n" + //
-                "    } \n" + //
-                "}"//
+                "      :x3 :q ?w . \n" +
+                "      OPTIONAL { :x2 :p ?v  } \n" +
+                "    } \n" +
+                "}"
         ;
 
         /*
@@ -308,13 +308,13 @@ public class TestASTBottomUpOptimizer extends
         final IVariable<?> v = Var.var("v");
         
         final IBindingSet[] bindingSets = new IBindingSet[] {
-                new ListBindingSet(//
-                        new IVariable[]{v},//
-                        new IConstant[]{new Constant(c1.getIV())}//
-                        ),//
-                new ListBindingSet(//
-                        new IVariable[]{v},//
-                        new IConstant[]{new Constant(c1.getIV())}//
+                new ListBindingSet(
+                        new IVariable[]{v},
+                        new IConstant[]{new Constant(c1.getIV())}
+                        ),
+                new ListBindingSet(
+                        new IVariable[]{v},
+                        new IConstant[]{new Constant(c1.getIV())}
                         )
         };
         
@@ -396,15 +396,15 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_filter_scope_1()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    :x :p ?v . \n" + //
-                "    { :x :q ?w \n" + //
-                "      OPTIONAL {  :x :p ?v2 FILTER(?v = 1) } \n" + //
-                "    } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    :x :p ?v . \n" +
+                "    { :x :q ?w \n" +
+                "      OPTIONAL {  :x :p ?v2 FILTER(?v = 1) } \n" +
+                "    } \n" +
+                "}"
         ;
 
         /*
@@ -484,31 +484,31 @@ public class TestASTBottomUpOptimizer extends
                     final JoinGroupNode liftedClause = new JoinGroupNode();
                     final JoinGroupNode innerClause = new JoinGroupNode(true/* optional */);
                     // :x :q ?w
-                    liftedClause.addChild(new StatementPatternNode(//
+                    liftedClause.addChild(new StatementPatternNode(
                             new ConstantNode(new Constant(x.getIV())),// s
                             new ConstantNode(new Constant(q.getIV())),// p
                             new VarNode("w"),// o
                             null,// c
-                            Scope.DEFAULT_CONTEXTS//
+                            Scope.DEFAULT_CONTEXTS
                             ));
                     liftedClause.addChild(innerClause);
                     // :x :p ?v2
-                    innerClause.addChild(new StatementPatternNode(//
+                    innerClause.addChild(new StatementPatternNode(
                             new ConstantNode(new Constant(x.getIV())),// s
                             new ConstantNode(new Constant(p.getIV())),// p
                             new VarNode("v2"),// o
                             null,// c
-                            Scope.DEFAULT_CONTEXTS//
+                            Scope.DEFAULT_CONTEXTS
                             ));
                     // FILTER(?v = 1) => anonymous variable.
                     final FilterNode filterNode = new FilterNode(
                             new FunctionNode(FunctionRegistry.EQ,
                                     null/* scalarValues */,
                                     new ValueExpressionNode[] { // args
-                                            new VarNode(unboundVarName),//
+                                            new VarNode(unboundVarName),
                                             new ConstantNode(new Constant(ONE
-                                                    .getIV())) //
-                                    }//
+                                                    .getIV()))
+                                    }
                             ));
                     final GlobalAnnotations globals = new GlobalAnnotations(
                     		context.getLexiconNamespace(),
@@ -528,12 +528,12 @@ public class TestASTBottomUpOptimizer extends
             {
                 
                 // :x :p ?v 
-                modifiedClause.addChild(new StatementPatternNode(//
+                modifiedClause.addChild(new StatementPatternNode(
                         new ConstantNode(new Constant(x.getIV())),// s
                         new ConstantNode(new Constant(p.getIV())),// p
                         new VarNode("v"),// o
                         null,// c
-                        Scope.DEFAULT_CONTEXTS//
+                        Scope.DEFAULT_CONTEXTS
                         ));
 
                 modifiedClause.addChild(new NamedSubqueryInclude(namedSet));
@@ -598,13 +598,13 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_join_scope_1()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    ?X  :name \"paul\" . \n" + //
-                "    {?Y :name \"george\" . OPTIONAL { ?X :email ?Z } } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    ?X  :name \"paul\" . \n" +
+                "    {?Y :name \"george\" . OPTIONAL { ?X :email ?Z } } \n" +
+                "}"
         ;
 
         /*
@@ -675,21 +675,21 @@ public class TestASTBottomUpOptimizer extends
                     final JoinGroupNode liftedClause = new JoinGroupNode();
                     final JoinGroupNode innerClause = new JoinGroupNode(true/* optional */);
                     // ?Y :name "george" 
-                    liftedClause.addChild(new StatementPatternNode(//
+                    liftedClause.addChild(new StatementPatternNode(
                             new VarNode("Y"),// s
                             new ConstantNode(new Constant(name.getIV())),// p
                             new ConstantNode(new Constant(george.getIV())),// o
                             null,// c
-                            Scope.DEFAULT_CONTEXTS//
+                            Scope.DEFAULT_CONTEXTS
                             ));
                     liftedClause.addChild(innerClause);
                     // ?X :email ?Z
-                    innerClause.addChild(new StatementPatternNode(//
+                    innerClause.addChild(new StatementPatternNode(
                             new VarNode("X"),// s
                             new ConstantNode(new Constant(email.getIV())),// p
                             new VarNode("Z"),// o
                             null,// c
-                            Scope.DEFAULT_CONTEXTS//
+                            Scope.DEFAULT_CONTEXTS
                             ));
 
                     expectedNSR.setWhereClause(liftedClause);
@@ -702,12 +702,12 @@ public class TestASTBottomUpOptimizer extends
             {
                 
                 // ?X  :name \"paul\"
-                modifiedClause.addChild(new StatementPatternNode(//
+                modifiedClause.addChild(new StatementPatternNode(
                         new VarNode("X"),// s
                         new ConstantNode(new Constant(name.getIV())),// p
                         new ConstantNode(new Constant(paul.getIV())),// o
                         null,// c
-                        Scope.DEFAULT_CONTEXTS//
+                        Scope.DEFAULT_CONTEXTS
                         ));
 
                 modifiedClause.addChild(new NamedSubqueryInclude(namedSet));
@@ -735,13 +735,13 @@ public class TestASTBottomUpOptimizer extends
     public void test_wellDesigned01()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    ?X  :name \"paul\" . \n" + //
-                "    {?X :name \"george\" . OPTIONAL { ?X :email ?Z } } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    ?X  :name \"paul\" . \n" +
+                "    {?X :name \"george\" . OPTIONAL { ?X :email ?Z } } \n" +
+                "}"
                 ;
         
         /*
@@ -789,13 +789,13 @@ public class TestASTBottomUpOptimizer extends
      */
     public void test_wellDesigned02() throws MalformedQueryException {
     
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    ?X  :name \"paul\" . \n" + //
-                "    OPTIONAL {?X :name \"george\" . ?X :email ?Z } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    ?X  :name \"paul\" . \n" +
+                "    OPTIONAL {?X :name \"george\" . ?X :email ?Z } \n" +
+                "}"
                 ;
 
         /*
@@ -843,13 +843,13 @@ public class TestASTBottomUpOptimizer extends
      */
     public void test_wellDesigned03() throws MalformedQueryException {
     
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    ?X  :name \"paul\" . \n" + //
-                "    OPTIONAL {?X :name \"george\" } OPTIONAL { ?X :email ?Z } \n" + //
-                "}"//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    ?X  :name \"paul\" . \n" +
+                "    OPTIONAL {?X :name \"george\" } OPTIONAL { ?X :email ?Z } \n" +
+                "}"
                 ;
 
         /*
@@ -970,9 +970,9 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_filter_nested_2()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT ?v \n" +//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT ?v \n" +
                 "{ :x :p ?v . { FILTER(?v = 1) } }";
         
         /*
@@ -1012,12 +1012,12 @@ public class TestASTBottomUpOptimizer extends
         final JoinGroupNode expectedWhereClause = new JoinGroupNode();
         {
             // :x :p ?v
-            expectedWhereClause.addChild(new StatementPatternNode(//
+            expectedWhereClause.addChild(new StatementPatternNode(
                     new ConstantNode(new Constant(x.getIV())),// s
                     new ConstantNode(new Constant(p.getIV())),// p
                     new VarNode("v"),// o
                     null,// c
-                    Scope.DEFAULT_CONTEXTS//
+                    Scope.DEFAULT_CONTEXTS
                     ));
 
             final JoinGroupNode innerGroup = new JoinGroupNode();
@@ -1025,14 +1025,14 @@ public class TestASTBottomUpOptimizer extends
             
             final String anonvar = "-unbound-var-v-0";
             final FilterNode filterNode = new FilterNode(
-                    new FunctionNode(//
-                            FunctionRegistry.EQ,//
-                            null,// scalarValues(Map)Collections.emptyMap(),//
-                            new ValueExpressionNode[]{//
-                                new VarNode(anonvar),//
-                                new ConstantNode(ONE.getIV())//
-                            }//
-                            )//
+                    new FunctionNode(
+                            FunctionRegistry.EQ,
+                            null,// scalarValues(Map)Collections.emptyMap(),
+                            new ValueExpressionNode[]{
+                                new VarNode(anonvar),
+                                new ConstantNode(ONE.getIV())
+                            }
+                            )
                     );
             final GlobalAnnotations globals = new GlobalAnnotations(
             		context.getLexiconNamespace(),
@@ -1066,9 +1066,9 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_filter_nested_2_withBindings()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT ?v \n" +//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT ?v \n" +
                 "{ :x :p ?v . { FILTER(?v = \"x\") } }";
         
         /*
@@ -1131,9 +1131,9 @@ public class TestASTBottomUpOptimizer extends
     public void test_bottomUpOptimizer_filter_unboundVar()
             throws MalformedQueryException {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT ?v \n" +//
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT ?v \n" +
                 "{ :x :p ?v . FILTER(?w = 1) }";
         
         /*
@@ -1171,24 +1171,24 @@ public class TestASTBottomUpOptimizer extends
         final JoinGroupNode expectedWhereClause = new JoinGroupNode();
         {
             // :x :q ?w
-            expectedWhereClause.addChild(new StatementPatternNode(//
+            expectedWhereClause.addChild(new StatementPatternNode(
                     new ConstantNode(new Constant(x.getIV())),// s
                     new ConstantNode(new Constant(p.getIV())),// p
                     new VarNode("v"),// o
                     null,// c
-                    Scope.DEFAULT_CONTEXTS//
+                    Scope.DEFAULT_CONTEXTS
                     ));
             
             final String anonvar = "-unbound-var-w-0";
             final FilterNode filterNode = new FilterNode(
-                    new FunctionNode(//
-                            FunctionRegistry.EQ,//
-                            null,// scalarValues (Map)Collections.emptyMap(),//
-                            new ValueExpressionNode[]{//
-                                new VarNode(anonvar),//
-                                new ConstantNode(ONE.getIV())//
-                            }//
-                            )//
+                    new FunctionNode(
+                            FunctionRegistry.EQ,
+                            null,// scalarValues (Map)Collections.emptyMap(),
+                            new ValueExpressionNode[]{
+                                new VarNode(anonvar),
+                                new ConstantNode(ONE.getIV())
+                            }
+                            )
             );
             final GlobalAnnotations globals = new GlobalAnnotations(
             		context.getLexiconNamespace(),
@@ -1240,17 +1240,17 @@ public class TestASTBottomUpOptimizer extends
      */
     public void test_opt_filter_1() throws Exception {
 
-        final String queryStr = "" + //
-                "PREFIX : <http://example/>\n" + //
-                "SELECT * \n" + //
-                "{ \n" + //
-                "    :x :p ?v . \n" + //
+        final String queryStr = "" +
+                "PREFIX : <http://example/>\n" +
+                "SELECT * \n" +
+                "{ \n" +
+                "    :x :p ?v . \n" +
                 "    OPTIONAL \n" +
                 "    {" +
-                "      :y :q ?w . \n" + //
-                "      FILTER(?v=2) \n" + //
-                "    } \n" + //
-                "}"//
+                "      :y :q ?w . \n" +
+                "      FILTER(?v=2) \n" +
+                "    } \n" +
+                "}"
         ;
 
         /*

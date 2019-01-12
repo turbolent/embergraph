@@ -56,12 +56,12 @@ import org.embergraph.service.master.INotifyOutcome;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractPendingSetMasterTask<//
-H extends AbstractPendingSetMasterStats<L, ? extends AbstractSubtaskStats>, //
-E, //
-S extends AbstractPendingSetSubtask, //
-L> //
-        extends AbstractMasterTask<H, E, S, L> //
+abstract public class AbstractPendingSetMasterTask<
+H extends AbstractPendingSetMasterStats<L, ? extends AbstractSubtaskStats>,
+E,
+S extends AbstractPendingSetSubtask,
+L>
+        extends AbstractMasterTask<H, E, S, L>
 implements INotifyOutcome<E, L>
 {
 

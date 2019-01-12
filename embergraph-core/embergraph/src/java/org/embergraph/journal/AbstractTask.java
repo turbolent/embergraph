@@ -685,9 +685,9 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 //                  tmp = resourceManager.getLiveJournal();
                     
                     // re-load btree from the store.
-                    ndx = Checkpoint.loadFromCheckpoint(//
+                    ndx = Checkpoint.loadFromCheckpoint(
                             tmp, // backing store.
-                            checkpointAddr,//
+                            checkpointAddr,
                             false// readOnly
                             );
 
@@ -2515,10 +2515,10 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
           * well.
           */
 
-            resourceLocator = new DefaultResourceLocator(//
+            resourceLocator = new DefaultResourceLocator(
                   this,// IndexManager (IsolatedActionJournal)
                   ((source instanceof ManagedJournal) ? source
-                     .getResourceLocator() : null/* DO-NOT-DELEGATE */)//
+                     .getResourceLocator() : null/* DO-NOT-DELEGATE */)
             );
 
             final IBufferStrategy bufferStrategy = source.getBufferStrategy();
@@ -3239,7 +3239,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
              * will be the federation's locator.
              */
 
-            resourceLocator = new DefaultResourceLocator(//
+            resourceLocator = new DefaultResourceLocator(
                     this, // IndexManager
                     source.getResourceLocator()// delegate locator
             );

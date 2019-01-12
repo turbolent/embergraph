@@ -87,10 +87,10 @@ public class BTreeUtilizationReport implements IBTreeUtilizationReport,
      * Human readable representation.
      */
     public String toString() {
-        return super.toString() + //
-                "{leafUtil=" + leafUtilization+ //
-                ",nodeUtil=" + nodeUtilization+ //
-                ",totalUtil=" + totalUtilization+ //
+        return super.toString() +
+                "{leafUtil=" + leafUtilization+
+                ",nodeUtil=" + nodeUtilization+
+                ",totalUtil=" + totalUtilization+
                 "}";
     }
 

@@ -58,9 +58,9 @@ public class TestConstrainKeys extends TestCase2 {
          * leftSeparator of that index partition.
          */
         assertEquals(new byte[] { 1 },// expected
-                AbstractKeyRangeIndexProcedure.constrainFromKey(//
+                AbstractKeyRangeIndexProcedure.constrainFromKey(
                         null,// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 1 }, // fromKey
                                 null// toKey
                         )));
@@ -71,16 +71,16 @@ public class TestConstrainKeys extends TestCase2 {
          * partition.
          */
         assertEquals(new byte[] { 3 },// expected
-                AbstractKeyRangeIndexProcedure.constrainFromKey(//
+                AbstractKeyRangeIndexProcedure.constrainFromKey(
                         new byte[] { 1 },// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 3 }, // fromKey
                                 null// toKey
                         )));
         assertEquals(new byte[] { 5 },// expected
-                AbstractKeyRangeIndexProcedure.constrainFromKey(//
+                AbstractKeyRangeIndexProcedure.constrainFromKey(
                         new byte[] { 5 },// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 3 }, // fromKey
                                 null// toKey
                         )));
@@ -94,16 +94,16 @@ public class TestConstrainKeys extends TestCase2 {
          * rightSeparator of that index partition (which may itself be null).
          */
         assertEquals(new byte[] { 2 },// expected
-                AbstractKeyRangeIndexProcedure.constrainToKey(//
+                AbstractKeyRangeIndexProcedure.constrainToKey(
                         null,// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 1 }, // fromKey
                                 new byte[] { 2 }// toKey
                         )));
         assertEquals(null,// expected
-                AbstractKeyRangeIndexProcedure.constrainToKey(//
+                AbstractKeyRangeIndexProcedure.constrainToKey(
                         null,// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 1 }, // fromKey
                                 null// toKey
                         )));
@@ -113,9 +113,9 @@ public class TestConstrainKeys extends TestCase2 {
          * exclusive upper bound is null (no upper bound) is that toKey.
          */
         assertEquals(new byte[] { 5 },// expected
-                AbstractKeyRangeIndexProcedure.constrainToKey(//
+                AbstractKeyRangeIndexProcedure.constrainToKey(
                         new byte[] { 5 },// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 3 }, // fromKey
                                 null// toKey
                         )));
@@ -126,16 +126,16 @@ public class TestConstrainKeys extends TestCase2 {
          * leftSeparator of that index partition.
          */
         assertEquals(new byte[] { 7 },// expected
-                AbstractKeyRangeIndexProcedure.constrainToKey(//
+                AbstractKeyRangeIndexProcedure.constrainToKey(
                         new byte[] { 7 },// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 3 }, // fromKey
                                 new byte[] { 12 }// toKey
                         )));
         assertEquals(new byte[] { 12 },// expected
-                AbstractKeyRangeIndexProcedure.constrainToKey(//
+                AbstractKeyRangeIndexProcedure.constrainToKey(
                         new byte[] { 20 },// key
-                        new MockLocator(//
+                        new MockLocator(
                                 new byte[] { 3 }, // fromKey
                                 new byte[] { 12 }// toKey
                         )));

@@ -480,17 +480,17 @@ public class CBD {
 
         // Solutions to the WHERE clause (as projected).
         final CloseableIteration<BindingSet, QueryEvaluationException> solutions = ASTEvalHelper
-                .evaluateQuery(astContainer, context, materializeProjectionInQuery//
-                        , optimizedQuery.getProjection().getProjectionVars()//
+                .evaluateQuery(astContainer, context, materializeProjectionInQuery
+                        , optimizedQuery.getProjection().getProjectionVars()
                 );
 
         // Constructed Statements.
         final CloseableIteration<BigdataStatement, QueryEvaluationException> src =
-                new ASTConstructIterator(context, store, //
-                        optimizedQuery.getConstruct(), //
-                        optimizedQuery.getWhereClause(),//
-                        bnodes,//
-                        solutions//
+                new ASTConstructIterator(context, store,
+                        optimizedQuery.getConstruct(),
+                        optimizedQuery.getWhereClause(),
+                        bnodes,
+                        solutions
                         );
 
         return src;

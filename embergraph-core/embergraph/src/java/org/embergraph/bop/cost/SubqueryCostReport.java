@@ -83,12 +83,12 @@ public class SubqueryCostReport implements Serializable {
      * Human readable representation.
      */
     public String toString() {
-        return super.toString() + //
-                "{ngraphs=" + ngraphs + //
-                ",limit=" + limit + //
-                ",nsamples=" + nsamples + //
-                ",rangeCount=" + rangeCount + //
-                ",cost=" + cost + //
+        return super.toString() +
+                "{ngraphs=" + ngraphs +
+                ",limit=" + limit +
+                ",nsamples=" + nsamples +
+                ",rangeCount=" + rangeCount +
+                ",cost=" + cost +
                 "}";
     }
     

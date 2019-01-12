@@ -277,16 +277,16 @@ public class BigdataGraphBulkLoad extends BigdataGraph implements
 		}
 
 		// if (key != null && !laxEdges) {
-		//
+
 		// final Edge edge = getEdge(key);
-		//
+
 		// if (edge != null) {
 		// if (!(edge.getVertex(Direction.OUT).equals(from) &&
 		// (edge.getVertex(Direction.IN).equals(to)))) {
 		// throw new IllegalArgumentException("edge already exists: " + key);
 		// }
 		// }
-		//
+
 		// }
 
 		final String eid = key != null ? key.toString() : UUID.randomUUID()

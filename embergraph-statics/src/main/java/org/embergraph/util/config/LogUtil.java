@@ -149,9 +149,9 @@ public class LogUtil {
             
             final URL log4jUrl = getConfigPropertyValueUrl();
             
-            if (log4jUrl != null &&//
-                    (log4jUrl.getFile().endsWith(".properties") || //
-                     log4jUrl.getFile().endsWith(".logging")//
+            if (log4jUrl != null &&
+                    (log4jUrl.getFile().endsWith(".properties") ||
+                     log4jUrl.getFile().endsWith(".logging")
                     )) {
 
                 PropertyConfigurator.configure(log4jUrl);

@@ -540,14 +540,14 @@ public class DirectBufferPool {
         DEBUG = Boolean.valueOf(System.getProperty(Options.DEBUG,
                 Options.DEFAULT_DEBUG));
         
-        INSTANCE = new DirectBufferPool(//
-                "default",//
-                poolCapacity,//
-                bufferCapacity//
+        INSTANCE = new DirectBufferPool(
+                "default",
+                poolCapacity,
+                bufferCapacity
                 );
         
-//        INSTANCE_10M = new DirectBufferPool(//
-//                "10M",//
+//        INSTANCE_10M = new DirectBufferPool(
+//                "10M",
 //                Integer.MAX_VALUE, // poolCapacity
 //                10 * Bytes.megabyte32 // bufferCapacity
 //                );

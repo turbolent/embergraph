@@ -124,7 +124,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
         @SuppressWarnings("rawtypes")
         final IV mikeIV = makeIV(store.getValueFactory().createLiteral("mike"));
 
-        final IBindingSet[] bsets = new IBindingSet[] { //
+        final IBindingSet[] bsets = new IBindingSet[] {
                 new ListBindingSet()
         };
 
@@ -324,7 +324,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
         final IV serviceUriIV = makeIV(store.getValueFactory().createURI(
                 "http://localhost:18080/openrdf/repositories/endpoint1"));
 
-        final IBindingSet[] bsets = new IBindingSet[] { //
+        final IBindingSet[] bsets = new IBindingSet[] {
                 new ListBindingSet()
         };
 

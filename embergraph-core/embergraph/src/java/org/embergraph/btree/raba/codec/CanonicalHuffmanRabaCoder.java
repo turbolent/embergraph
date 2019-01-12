@@ -1318,7 +1318,7 @@ public class CanonicalHuffmanRabaCoder implements IRabaCoder, Externalizable {
             }
             
             // a slice with just the coded data record.
-            final AbstractFixedByteArrayBuffer slice = buf.slice(//
+            final AbstractFixedByteArrayBuffer slice = buf.slice(
                     O_origin, buf.pos() - O_origin);
 
             if (nsymbols == 0) {

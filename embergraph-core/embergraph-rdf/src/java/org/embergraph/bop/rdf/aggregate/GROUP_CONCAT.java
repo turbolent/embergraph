@@ -116,11 +116,11 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
             final IValueExpression<IV> expr, final String namespace,
             final String sep) {
 
-        this(new BOp[] { expr }, NV.asMap(//
-//                new NV(Annotations.FUNCTION_CODE, FunctionCode.GROUP_CONCAT),//
-                new NV(Annotations.DISTINCT, distinct),//
-                new NV(Annotations.NAMESPACE, namespace),//
-                new NV(Annotations.SEPARATOR, sep)//
+        this(new BOp[] { expr }, NV.asMap(
+//                new NV(Annotations.FUNCTION_CODE, FunctionCode.GROUP_CONCAT),
+                new NV(Annotations.DISTINCT, distinct),
+                new NV(Annotations.NAMESPACE, namespace),
+                new NV(Annotations.SEPARATOR, sep)
                 ));
 
     }

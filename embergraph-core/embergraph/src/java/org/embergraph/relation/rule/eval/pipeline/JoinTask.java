@@ -480,16 +480,16 @@ abstract public class JoinTask implements Callable<Void> {
 //	     * part of error handling for the {@link JoinTask}).
 //	     */
 //	    final protected void resetUnsyncBuffers() throws Exception {
-	//
+
 //			final int n = threadLocalBufferFactory.reset();
 //					.close(new Visitor<AbstractUnsynchronizedArrayBuffer<IBindingSet>>() {
-	//
+
 //						@Override
 //						public void meet(
 //								final AbstractUnsynchronizedArrayBuffer<IBindingSet> b)
 //								throws Exception {
-	//
-	//
+
+
 //		}
 
 		/**
