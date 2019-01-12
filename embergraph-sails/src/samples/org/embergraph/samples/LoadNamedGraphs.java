@@ -73,10 +73,10 @@ public class LoadNamedGraphs extends SampleCode {
 		 * not do inference AT ALL.
 		 */
 //		final File propertyFile = new File(
-//				"c:/bigdata-data-sets/LoadNamedGraphs.properties");
+//				"c:/embergraph-data-sets/LoadNamedGraphs.properties");
     	
 //        // create a backing file
-//        final File journalFile = new File("c:/bigdata.jnl");
+//        final File journalFile = new File("c:/embergraph.jnl");
 ////        final File journalFile = File.createTempFile("embergraph", ".jnl");
 ////        journalFile.deleteOnExit();
 //        properties.setProperty(EmbergraphSail.Options.FILE, journalFile
