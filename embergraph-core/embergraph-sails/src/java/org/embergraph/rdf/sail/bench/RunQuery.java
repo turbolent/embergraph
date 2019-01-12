@@ -10,15 +10,15 @@ import java.io.LineNumberReader;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.sail.SailTupleQuery;
 
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 
 /**
  * Open a journal and run a query against it - pretty much the only reason to
@@ -123,7 +123,7 @@ public class RunQuery {
 
 	        // override the namespace.
 	        if (namespace != null)
-	        	properties.setProperty(BigdataSail.Options.NAMESPACE,namespace);
+	        	properties.setProperty(EmbergraphSail.Options.NAMESPACE,namespace);
 	      
 			if (query == null) {
 				
@@ -139,14 +139,14 @@ public class RunQuery {
 				
 			}
 			
-			final BigdataSail sail = new BigdataSail(properties);
-			final BigdataSailRepository repository = new BigdataSailRepository(sail);
+			final EmbergraphSail sail = new EmbergraphSail(properties);
+			final EmbergraphSailRepository repository = new EmbergraphSailRepository(sail);
 			repository.initialize();
 			
 			try {
 				
-				final BigdataSailRepositoryConnection cxn = 
-					(BigdataSailRepositoryConnection) repository.getReadOnlyConnection();
+				final EmbergraphSailRepositoryConnection cxn =
+					(EmbergraphSailRepositoryConnection) repository.getReadOnlyConnection();
 
 				try {
 

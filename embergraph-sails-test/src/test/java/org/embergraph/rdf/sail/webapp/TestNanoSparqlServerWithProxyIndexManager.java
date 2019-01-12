@@ -32,16 +32,16 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import junit.textui.ResultPrinter;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.RWStrategy;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutClient;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 
@@ -257,11 +257,11 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
          suite.addTestSuite(Test_REST_ASK.class);
          suite.addTestSuite(Test_REST_DESCRIBE.class);
          suite.addTestSuite(Test_REST_ESTCARD.class);
-         if(BigdataStatics.runKnownBadTests) {// FIXME Restore for BLZG-1195
+         if(EmbergraphStatics.runKnownBadTests) {// FIXME Restore for BLZG-1195
              suite.addTestSuite(Test_REST_ESTCARD.ReadWriteTx.class);
          }
          suite.addTestSuite(Test_REST_HASSTMT.class);
-         if(BigdataStatics.runKnownBadTests) {// FIXME Restore for BLZG-1195
+         if(EmbergraphStatics.runKnownBadTests) {// FIXME Restore for BLZG-1195
              suite.addTestSuite(Test_REST_HASSTMT.ReadWriteTx.class);
          }
          if (testMode.isTruthMaintenanceSupported()) {
@@ -286,11 +286,11 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
          suite.addTestSuite(Test_REST_TX_API.ReadWriteTx.class); // with isolatable indices.
 
          /*
-          * BigdataSailRemoteRepository(Connection) test suite (openrdf
+          * EmbergraphSailRemoteRepository(Connection) test suite (openrdf
           * compliant client).
           */
-         suite.addTestSuite(TestBigdataSailRemoteRepository.class); // without isolatable indices.
-         suite.addTestSuite(TestBigdataSailRemoteRepository.ReadWriteTx.class); // with isolatable indices.
+         suite.addTestSuite(TestEmbergraphSailRemoteRepository.class); // without isolatable indices.
+         suite.addTestSuite(TestEmbergraphSailRemoteRepository.ReadWriteTx.class); // with isolatable indices.
 
          // Insert tests from trac issues
          suite.addTestSuite(TestInsertFilterFalse727.class);
@@ -450,10 +450,10 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
                     } finally {
                         is.close();
                     }
-                    if (System.getProperty(BigdataSail.Options.FILE) != null) {
+                    if (System.getProperty(EmbergraphSail.Options.FILE) != null) {
                         // Override/set from the environment.
-                        properties.setProperty(BigdataSail.Options.FILE, System
-                                .getProperty(BigdataSail.Options.FILE));
+                        properties.setProperty(EmbergraphSail.Options.FILE, System
+                                .getProperty(EmbergraphSail.Options.FILE));
                     }
 					if (properties
 							.getProperty(org.embergraph.journal.Options.FILE) == null) {
@@ -484,7 +484,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
     }
 
 	/**
-	 * Runs the test suite against an {@link IBigdataFederation} or a
+	 * Runs the test suite against an {@link IEmbergraphFederation} or a
 	 * {@link Journal}. The federation must already be up and running. An
 	 * embedded {@link NanoSparqlServer} instance will be created for each test
 	 * run. Each test will run against a distinct KB instance within a unique
@@ -503,7 +503,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 	 *            where propertyFile is the configuration file for a
 	 *            {@link Journal}. <br/>
 	 *            where configFile is the configuration file for an
-	 *            {@link IBigdataFederation}.<br/>
+	 *            {@link IEmbergraphFederation}.<br/>
 	 *            where <i>triples</i> or <i>sids</i> or <i>quads</i> is the
 	 *            database mode.</br> where <i>tm</i> indicates that truth
 	 *            maintenance should be enabled (only valid with triples or

@@ -21,6 +21,8 @@ package org.embergraph.rdf.internal.impl.extensions;
 import java.util.Collections;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
@@ -30,10 +32,8 @@ import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.vocab.decls.BSBMVocabularyDecl;
 
 /**
@@ -42,9 +42,9 @@ import org.embergraph.rdf.vocab.decls.BSBMVocabularyDecl;
  * datatype, which is treated as <code>xsd:float</code>.
  */
 @SuppressWarnings("rawtypes")
-public class USDFloatExtension<V extends BigdataValue> implements IExtension<V> {
+public class USDFloatExtension<V extends EmbergraphValue> implements IExtension<V> {
 
-    private final BigdataURI datatype;
+    private final EmbergraphURI datatype;
     
     public USDFloatExtension(final IDatatypeURIResolver resolver) {
 
@@ -52,7 +52,7 @@ public class USDFloatExtension<V extends BigdataValue> implements IExtension<V> 
         
     }
     
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
         return Collections.singleton(datatype);
         
@@ -70,7 +70,7 @@ public class USDFloatExtension<V extends BigdataValue> implements IExtension<V> 
         
         final Literal lit = (Literal) value;
         
-        final AbstractLiteralIV delegate = new XSDNumericIV<BigdataLiteral>(
+        final AbstractLiteralIV delegate = new XSDNumericIV<EmbergraphLiteral>(
                 XMLDatatypeUtil.parseFloat(lit.getLabel()));
 
         return new LiteralExtensionIV(delegate, datatype.getIV());
@@ -78,7 +78,7 @@ public class USDFloatExtension<V extends BigdataValue> implements IExtension<V> 
     }
     
     @SuppressWarnings("unchecked")
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
 
         final String s = Float.toString(iv.getDelegate().floatValue());
 

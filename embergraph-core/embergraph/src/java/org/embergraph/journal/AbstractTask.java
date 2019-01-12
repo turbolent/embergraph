@@ -47,7 +47,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bfs.GlobalFileSystemHelper;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
@@ -2789,12 +2789,12 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
          * acquired a lock.
          */
         @Override
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
             
             // did the task declare the resource name?
             final String namespace = GlobalFileSystemHelper.GLOBAL_FILE_SYSTEM_NAMESPACE;
-            if (isResource(namespace + "."+BigdataFileSystem.FILE_METADATA_INDEX_BASENAME)
-                    && isResource(namespace + "."+BigdataFileSystem.FILE_DATA_INDEX_BASENAME)) {
+            if (isResource(namespace + "."+ EmbergraphFileSystem.FILE_METADATA_INDEX_BASENAME)
+                    && isResource(namespace + "."+ EmbergraphFileSystem.FILE_DATA_INDEX_BASENAME)) {
 
                 // unisolated view - will create if it does not exist.
                 return new GlobalFileSystemHelper(this).getGlobalFileSystem();
@@ -3462,7 +3462,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
          * and <code>null</code> otherwise.
          */
         @Override
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
 
             /*
              * Note: This goes around getIndex(name,timestamp) on this method
@@ -3808,7 +3808,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
         }
 
         @Override
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
             return delegate.getGlobalFileSystem();
         }
 

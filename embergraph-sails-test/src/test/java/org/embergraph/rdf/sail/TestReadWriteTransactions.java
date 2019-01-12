@@ -20,6 +20,7 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -33,7 +34,6 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
@@ -41,7 +41,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
+public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
 
     /**
      * 
@@ -61,12 +61,12 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -95,22 +95,22 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
     public void test_commit() throws Exception {
 
         // final LocalTripleStore store = (LocalTripleStore) getStore();
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection isolated = 
-            (BigdataSailRepositoryConnection) repo.getReadWriteConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection isolated =
+            (EmbergraphSailRepositoryConnection) repo.getReadWriteConnection();
         isolated.setAutoCommit(false);
-//        final BigdataSailRepositoryConnection unisolated = 
-//            (BigdataSailRepositoryConnection) repo.getUnisolatedConnection();
+//        final EmbergraphSailRepositoryConnection unisolated =
+//            (EmbergraphSailRepositoryConnection) repo.getUnisolatedConnection();
 //        unisolated.setAutoCommit(false);
 
 
         // read-committed view of the same database.
         // final AbstractTripleStore view = store.asReadCommittedView();
         RepositoryConnection readView = 
-            (BigdataSailRepositoryConnection) repo.getReadOnlyConnection();
+            (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection();
 
         try {
 
@@ -185,10 +185,10 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
         }
 
 //        final LocalTripleStore store = (LocalTripleStore) getStore();
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         final RepositoryConnection store = repo.getReadWriteConnection();
         store.setAutoCommit(false);
 
@@ -230,10 +230,10 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
     public void test_multiple_transaction() throws Exception {
 
         // final LocalTripleStore store = (LocalTripleStore) getStore();
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         final RepositoryConnection tx1 = repo.getReadWriteConnection();
         tx1.setAutoCommit(false);
         final RepositoryConnection tx2 = repo.getReadWriteConnection();
@@ -277,7 +277,7 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
             
             RepositoryResult<Statement> it = view.getStatements(s, p, o, false);
             
-            BigdataStatement stmt = (BigdataStatement) it.next();
+            EmbergraphStatement stmt = (EmbergraphStatement) it.next();
             
             Resource sid = stmt.getContext();
             
@@ -320,9 +320,9 @@ public class TestReadWriteTransactions extends ProxyBigdataSailTestCase {
 //     */
 //    public void test_stress() throws Exception {
 //        
-//        final BigdataSail sail = getSail();
+//        final EmbergraphSail sail = getSail();
 //        sail.initialize();
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //
 //        try {
 //

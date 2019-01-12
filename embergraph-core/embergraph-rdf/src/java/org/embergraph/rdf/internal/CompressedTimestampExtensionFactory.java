@@ -22,8 +22,8 @@ package org.embergraph.rdf.internal;
 import java.util.Collection;
 
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Extension factory that adds a compressed timestamp literal datatype, namely
@@ -36,10 +36,10 @@ public class CompressedTimestampExtensionFactory extends DefaultExtensionFactory
 
     @Override
     protected void _init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<BigdataValue> lex,
-            final Collection<IExtension<? extends BigdataValue>> extensions) {
+            final ILexiconConfiguration<EmbergraphValue> lex,
+            final Collection<IExtension<? extends EmbergraphValue>> extensions) {
 
-        extensions.add(new CompressedTimestampExtension<BigdataLiteral>(resolver));
+        extensions.add(new CompressedTimestampExtension<EmbergraphLiteral>(resolver));
 
     }
     

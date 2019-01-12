@@ -36,7 +36,7 @@ import org.embergraph.gom.alchemy.owl.OWLSkins;
 import org.embergraph.gom.gpo.IGPO;
 
 public class TestOWLSkin extends LocalGOMTestCase {
-//	BigdataSailRepository m_repo = null;
+//	EmbergraphSailRepository m_repo = null;
 //	ObjectManager m_om = null;
 //	ValueFactory m_vf = null;
 
@@ -99,7 +99,7 @@ public class TestOWLSkin extends LocalGOMTestCase {
 //
 //		// create a backing file for the database
 //		File journal = File.createTempFile("bigdata", ".jnl");
-//		properties.setProperty(BigdataSail.Options.FILE, journal
+//		properties.setProperty(EmbergraphSail.Options.FILE, journal
 //				.getAbsolutePath());
 //		properties
 //				.setProperty("org.embergraph.rdf.sail.truthMaintenance", "false");
@@ -135,8 +135,8 @@ public class TestOWLSkin extends LocalGOMTestCase {
 //						"200");
 //
 //		// instantiate a sail and a Sesame repository
-//		BigdataSail sail = new BigdataSail(properties);
-//		m_repo = new BigdataSailRepository(sail);
+//		EmbergraphSail sail = new EmbergraphSail(properties);
+//		m_repo = new EmbergraphSailRepository(sail);
 //		m_repo.initialize();
 //
 //		m_om = new ObjectManager(m_repo);

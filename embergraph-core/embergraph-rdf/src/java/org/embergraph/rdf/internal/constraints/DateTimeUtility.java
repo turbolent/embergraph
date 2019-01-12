@@ -4,6 +4,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
@@ -13,8 +15,6 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 public class DateTimeUtility implements IMathOpHandler {
@@ -44,7 +44,7 @@ public class DateTimeUtility implements IMathOpHandler {
     		final Literal l1, final IV iv1,
     		final Literal l2, final IV iv2,
     		final MathOp op,
-    		final BigdataValueFactory vf) {
+    		final EmbergraphValueFactory vf) {
 
         if (!canInvokeMathOp(l1, l2))
         	throw new SparqlTypeErrorException();
@@ -60,15 +60,15 @@ public class DateTimeUtility implements IMathOpHandler {
                 throw new IllegalArgumentException("Cannot add 2 calendar literals:" + l1 + ":" + l2);
             } else if (c1 != null && d2 != null) {
                 c1.add(d2);
-                final BigdataLiteral str = vf.createLiteral(c1);
+                final EmbergraphLiteral str = vf.createLiteral(c1);
                 return DummyConstantNode.toDummyIV(str);
             } else if (c2 != null && d1 != null) {
                 c2.add(d1);
-                final BigdataLiteral str = vf.createLiteral(c2);
+                final EmbergraphLiteral str = vf.createLiteral(c2);
                 return DummyConstantNode.toDummyIV(str);
             } else if (d1 != null && d2 != null) {
                 Duration result = d1.add(d2);
-                final BigdataLiteral str = vf.createLiteral(result.toString(), XMLSchema.DURATION);
+                final EmbergraphLiteral str = vf.createLiteral(result.toString(), XMLSchema.DURATION);
                 return DummyConstantNode.toDummyIV(str);
             } else {
                 throw new IllegalArgumentException("Cannot add process datatype literals:" + l1 + ":" + l2);
@@ -80,7 +80,7 @@ public class DateTimeUtility implements IMathOpHandler {
                 return new XSDNumericIV(days);
             } else if (d1 != null && d2 != null) {
                 Duration result = d1.subtract(d2);
-                final BigdataLiteral str = vf.createLiteral(result.toString(), XMLSchema.DURATION);
+                final EmbergraphLiteral str = vf.createLiteral(result.toString(), XMLSchema.DURATION);
                 return DummyConstantNode.toDummyIV(str);
             } else {
                 throw new IllegalArgumentException("Cannot add process datatype literals:" + l1 + ":" + l2);

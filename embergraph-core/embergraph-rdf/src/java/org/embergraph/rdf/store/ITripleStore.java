@@ -21,14 +21,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.store;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataStatementImpl;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphStatementImpl;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rules.InferenceEngine;
 import org.embergraph.rdf.spo.ISPO;
@@ -247,7 +247,7 @@ public interface ITripleStore {
      * <p>
      * Note: If the parameters are from an {@link AbstractTripleStore} using a
      * different lexicon then you MUST either
-     * {@link BigdataValue#clearInternalValue()} or create a new {@link Value}
+     * {@link EmbergraphValue#clearInternalValue()} or create a new {@link Value}
      * object which either is not aware of the term identifier or does not have
      * its term identifier set in order to avoid lookup using the term
      * identifier rather than indirecting through the lexicon.
@@ -266,15 +266,15 @@ public interface ITripleStore {
      * 
      * @see #asValue(Value)
      */
-    BigdataStatement getStatement(Resource s, URI p, Value o, Resource c);
+    EmbergraphStatement getStatement(Resource s, URI p, Value o, Resource c);
 
     /**
      * @deprecated by {@link #getStatement(Resource, URI, Value, Resource)}
      */
-    BigdataStatement getStatement(Resource s, URI p, Value o);
+    EmbergraphStatement getStatement(Resource s, URI p, Value o);
 
     /**
-     * Return an iterator that will visit all {@link BigdataStatement}s in the
+     * Return an iterator that will visit all {@link EmbergraphStatement}s in the
      * database matching the triple pattern.
      * 
      * @param s
@@ -288,25 +288,25 @@ public interface ITripleStore {
      *            
      * @return The iterator.
      */
-    BigdataStatementIterator getStatements(Resource s, URI p, Value o,
+    EmbergraphStatementIterator getStatements(Resource s, URI p, Value o,
             Resource c);
 
     /**
      * @deprecated by {@link #getStatements(Resource, URI, Value, Resource)}
      */
-    BigdataStatementIterator getStatements(Resource s, URI p, Value o);
+    EmbergraphStatementIterator getStatements(Resource s, URI p, Value o);
 
     /**
-     * Converts a {@link BigdataValue} to a Sesame {@link Value} object.
+     * Converts a {@link EmbergraphValue} to a Sesame {@link Value} object.
      * 
      * @param value
-     *            Either a {@link BigdataValue}, a Sesame {@link Value}
+     *            Either a {@link EmbergraphValue}, a Sesame {@link Value}
      *            object, or <code>null</code>.
      * 
      * @return A corresponding Sesame {@link Value} object -or-
      *         <code>null</code> iff <i>value</i> is <code>null</code>.
      */
-    BigdataValue asValue(Value value);
+    EmbergraphValue asValue(Value value);
 
     /**
      * Unconditionally removes statement(s) matching the triple pattern (NO
@@ -360,32 +360,32 @@ public interface ITripleStore {
 
     /**
      * Wraps an {@link IChunkedOrderedIterator} as a
-     * {@link BigdataStatementIterator}.
+     * {@link EmbergraphStatementIterator}.
      * <p>
-     * Note: The object visited will be {@link BigdataStatementImpl}s.
+     * Note: The object visited will be {@link EmbergraphStatementImpl}s.
      * 
      * @param src
      *            An {@link IChunkedOrderedIterator} visiting {@link SPO}s
      * 
-     * @return The {@link BigdataStatementIterator}.
+     * @return The {@link EmbergraphStatementIterator}.
      * 
      * @see IAccessPath
      * @see #getAccessPath(Resource, URI, Value)
      */
-    BigdataStatementIterator asStatementIterator(
+    EmbergraphStatementIterator asStatementIterator(
             IChunkedOrderedIterator<ISPO> src);
 
     /**
      * Convert an internal {@link ISPO} into a Sesame {@link Statement}.
      * <p>
-     * Note: The object returned will be a {@link BigdataStatement}
+     * Note: The object returned will be a {@link EmbergraphStatement}
      * 
      * @param spo
      *            The {@link ISPO}.
      * 
      * @return The Sesame {@link Statement} -or- <code>null</code>.
      */
-    BigdataStatement asStatement(ISPO spo);
+    EmbergraphStatement asStatement(ISPO spo);
 
     /**
      * Return a {@link DataLoader} singleton configured using the properties

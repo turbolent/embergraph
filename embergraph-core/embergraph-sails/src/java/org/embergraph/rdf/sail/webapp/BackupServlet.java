@@ -54,7 +54,7 @@ import org.embergraph.journal.Journal;
  * <code>
  * 
  */
-public class BackupServlet extends BigdataRDFServlet {
+public class BackupServlet extends EmbergraphRDFServlet {
 	 /**
      * Logger.
      */

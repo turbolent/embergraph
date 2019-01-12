@@ -23,16 +23,16 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Statement;
 import org.openrdf.model.vocabulary.RDF;
 
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.DescribeModeEnum;
 import org.embergraph.rdf.sparql.ast.QueryType;
@@ -120,7 +120,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      *         expected description for that resource.
      */
     protected Set<Statement> getExpectedDescription(
-            final BigdataValue resource, final TestHelper h) {
+            final EmbergraphValue resource, final TestHelper h) {
 
         // The expected solutions for the DESCRIBE query.
         final Set<Statement> expectedStatements = h.expectedGraphQueryResult;
@@ -155,7 +155,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      *            
      * @param h The {@link TestHelper}
      */
-    private void assertDescribedResource(final BigdataValue describedResource,
+    private void assertDescribedResource(final EmbergraphValue describedResource,
             final IDescribeCache describeCache, final TestHelper h) {
 
         // Found in the cache after the DESCRIBE query.
@@ -174,11 +174,11 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         for(Statement stmt : actualGraph) {
             
             // Verify that we are getting back BigdataStatements.
-            assertTrue(stmt instanceof BigdataStatement);
+            assertTrue(stmt instanceof EmbergraphStatement);
             
             // Verify that the IVs are set on those statements.
             
-            final BigdataStatement st = (BigdataStatement) stmt;
+            final EmbergraphStatement st = (EmbergraphStatement) stmt;
             
             assertNotNull(st.s());
             
@@ -225,11 +225,11 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { dc };
+        final EmbergraphValue[] values = new EmbergraphValue[] { dc };
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -237,7 +237,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -249,7 +249,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 
@@ -301,12 +301,12 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
-        final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+        final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
+        final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataValue[] values = new BigdataValue[] { mike, bryan};
+        final EmbergraphValue[] values = new EmbergraphValue[] { mike, bryan};
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -314,7 +314,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -326,7 +326,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 
@@ -364,13 +364,13 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
-        final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
-        final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+        final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
+        final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataValue[] values = new BigdataValue[] { dc, mike, bryan};
+        final EmbergraphValue[] values = new EmbergraphValue[] { dc, mike, bryan};
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -378,7 +378,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -390,7 +390,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 
@@ -431,11 +431,11 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI mike = f.createURI("http://www.embergraph.org/mike");
+        final EmbergraphURI mike = f.createURI("http://www.embergraph.org/mike");
 
-        final BigdataValue[] values = new BigdataValue[] { mike };
+        final EmbergraphValue[] values = new EmbergraphValue[] { mike };
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -443,7 +443,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -455,7 +455,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 
@@ -489,12 +489,12 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI mike = f.createURI("http://www.embergraph.org/mike");
-        final BigdataURI rdf = f.createURI("http://www.embergraph.org/rdf");
+        final EmbergraphURI mike = f.createURI("http://www.embergraph.org/mike");
+        final EmbergraphURI rdf = f.createURI("http://www.embergraph.org/rdf");
 
-        final BigdataValue[] values = new BigdataValue[] { mike, rdf };
+        final EmbergraphValue[] values = new EmbergraphValue[] { mike, rdf };
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -502,7 +502,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -514,7 +514,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 
@@ -549,22 +549,22 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataURI foafPerson = f.asValue(FOAFVocabularyDecl.Person);
+        final EmbergraphURI foafPerson = f.asValue(FOAFVocabularyDecl.Person);
 
-        final BigdataURI rdfType = f.asValue(RDF.TYPE);
+        final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
-        final BigdataValue[] values = new BigdataValue[] {
+        final EmbergraphValue[] values = new EmbergraphValue[] {
                 dc, foafPerson, rdfType 
                 };
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
 
-        for (BigdataValue v : values) {
+        for (EmbergraphValue v : values) {
 
             assertNotNull(v.toString(), v.getIV());
 
@@ -573,7 +573,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
 
                 assertNull(describeCache.lookup(v.getIV()));
 
@@ -585,7 +585,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         if (describeCache != null) {
 
-//            for (BigdataValue v : values) {
+//            for (EmbergraphValue v : values) {
 
             assertDescribedResource(dc, describeCache, h);
 
@@ -595,14 +595,14 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
              * Should cause the cache entry to be invalidated.
              * 
              * TODO The DescribeServiceFactory will only notice an update that
-             * goes through a BigdataSailConnection. This issue is documented at
+             * goes through a EmbergraphSailConnection. This issue is documented at
              * CustomServiceFactory. This should probably be fixed as part of a
              * broader overhaul.
              */
-            final BigdataSail sail = new BigdataSail(h.getTripleStore());
+            final EmbergraphSail sail = new EmbergraphSail(h.getTripleStore());
             try {
                 sail.initialize();
-                final BigdataSailConnection conn = sail.getConnection();
+                final EmbergraphSailConnection conn = sail.getConnection();
                 try {
                     conn.addStatement(dc, rdfType, foafPerson);
                     conn.commit();
@@ -652,11 +652,11 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { dc };
+        final EmbergraphValue[] values = new EmbergraphValue[] { dc };
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -664,7 +664,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -676,7 +676,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 
@@ -733,11 +733,11 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         final IDescribeCache describeCache = getDescribeCache(
                 h.getASTContainer(), h.getTripleStore());
 
-        final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+        final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
 
-        final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { dc };
+        final EmbergraphValue[] values = new EmbergraphValue[] { dc };
 
         h.getTripleStore().getLexiconRelation()
                 .addTerms(values, values.length, true/* readOnly */);
@@ -745,7 +745,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         if (describeCache != null) {
 
             // Not in the cache before we run the DESCRIBE query.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
              
                 assertNull(describeCache.lookup(v.getIV()));
                 
@@ -757,7 +757,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         
         if (describeCache != null) {
 
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
                 
                 assertDescribedResource(v, describeCache, h);
                 

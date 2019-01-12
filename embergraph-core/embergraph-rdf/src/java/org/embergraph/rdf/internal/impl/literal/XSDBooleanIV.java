@@ -18,15 +18,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.impl.literal;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 
 /** Implementation for inline <code>xsd:boolean</code>. */
-public class XSDBooleanIV<V extends BigdataLiteral> extends
+public class XSDBooleanIV<V extends EmbergraphLiteral> extends
         AbstractLiteralIV<V, Boolean> implements Literal {
 
     /**
@@ -40,8 +40,8 @@ public class XSDBooleanIV<V extends BigdataLiteral> extends
      * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as
      *      constants
      */
-    static private transient final XSDBooleanIV<BigdataLiteral> TRUE = 
-    	new XSDBooleanIV<BigdataLiteral>(true);
+    static private transient final XSDBooleanIV<EmbergraphLiteral> TRUE =
+    	new XSDBooleanIV<EmbergraphLiteral>(true);
 
     /**
      * DO NOT ALLOW THIS REFERENCE TO ESCAPE.  SIDE EFFECTS ON ITS [cache] CAUSE PROBLEMS!
@@ -49,8 +49,8 @@ public class XSDBooleanIV<V extends BigdataLiteral> extends
      * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as
      *      constants
      */
-    static private transient final XSDBooleanIV<BigdataLiteral> FALSE = 
-    	new XSDBooleanIV<BigdataLiteral>(false);
+    static private transient final XSDBooleanIV<EmbergraphLiteral> FALSE =
+    	new XSDBooleanIV<EmbergraphLiteral>(false);
     
     /**
      * Return a <strong>strong</strong> new instance of an {@link XSDBooleanIV}
@@ -67,8 +67,8 @@ public class XSDBooleanIV<V extends BigdataLiteral> extends
      * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as
      *      constants
      */
-    static public final XSDBooleanIV<BigdataLiteral> valueOf(final boolean b) {
-    	return (XSDBooleanIV<BigdataLiteral>) (b ? TRUE : FALSE).clone(true/*clearCache*/);
+    static public final XSDBooleanIV<EmbergraphLiteral> valueOf(final boolean b) {
+    	return (XSDBooleanIV<EmbergraphLiteral>) (b ? TRUE : FALSE).clone(true/*clearCache*/);
     }
     
     private final boolean value;

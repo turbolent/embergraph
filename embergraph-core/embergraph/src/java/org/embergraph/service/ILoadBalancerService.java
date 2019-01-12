@@ -128,7 +128,7 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
      * 
      * @todo generalize to also accept the class or interface of the service so
      *       that it can be used with services other than data services, e.g.,
-     *       metadata services, map/reduce services, {@link IBigdataClient}s,
+     *       metadata services, map/reduce services, {@link IEmbergraphClient}s,
      *       etc.
      * 
      * @todo probably should use {@link Integer#MAX_VALUE} rather than ZERO for

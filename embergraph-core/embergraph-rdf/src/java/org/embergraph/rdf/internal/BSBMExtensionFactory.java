@@ -24,8 +24,8 @@ package org.embergraph.rdf.internal;
 import java.util.Collection;
 
 import org.embergraph.rdf.internal.impl.extensions.USDFloatExtension;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Adds inlining for the
@@ -39,11 +39,11 @@ public class BSBMExtensionFactory extends DefaultExtensionFactory {
 
     @Override
     protected void _init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<BigdataValue> lex,
-            final Collection<IExtension<? extends BigdataValue>> extensions) {
+            final ILexiconConfiguration<EmbergraphValue> lex,
+            final Collection<IExtension<? extends EmbergraphValue>> extensions) {
 
         // Extension to inline "USD" datatypes.
-        extensions.add(new USDFloatExtension<BigdataLiteral>(resolver));
+        extensions.add(new USDFloatExtension<EmbergraphLiteral>(resolver));
 
     }
     

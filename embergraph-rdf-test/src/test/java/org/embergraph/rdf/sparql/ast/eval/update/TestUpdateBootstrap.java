@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
@@ -46,10 +48,8 @@ import org.embergraph.bop.rdf.update.InsertStatementsOp;
 import org.embergraph.bop.rdf.update.ParseOp;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
@@ -250,19 +250,19 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
             log.info(store.dumpStore());
         
         {
-            final BigdataValueFactory f = store.getValueFactory();
-            final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
-            final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
-            final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
-            final BigdataURI g1 = f.createURI("http://www.embergraph.org/g1");
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfsLabel = f.asValue(RDFS.LABEL);
-            final BigdataURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
-            final BigdataLiteral mikeL = f.createLiteral("Mike");
-            final BigdataLiteral bryanL = f.createLiteral("Bryan");
-            final BigdataLiteral DCL = f.createLiteral("DC");
+            final EmbergraphValueFactory f = store.getValueFactory();
+            final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
+            final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+            final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
+            final EmbergraphURI g1 = f.createURI("http://www.embergraph.org/g1");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
+            final EmbergraphURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
+            final EmbergraphLiteral mikeL = f.createLiteral("Mike");
+            final EmbergraphLiteral bryanL = f.createLiteral("Bryan");
+            final EmbergraphLiteral DCL = f.createLiteral("DC");
 
-            final BigdataValue[] values = new BigdataValue[] { mike, bryan, dc,
+            final EmbergraphValue[] values = new EmbergraphValue[] { mike, bryan, dc,
                     g1, rdfType, rdfsLabel, foafPerson, mikeL, bryanL, DCL };
 
             // Batch resolve (read-only).
@@ -270,7 +270,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
                     .addTerms(values, values.length, true/* readOnly */);
             
             // Verify IV assignment.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
 
                 final IV<?, ?> iv = v.getIV();
 
@@ -451,19 +451,19 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
             log.info(store.dumpStore());
         
         {
-            final BigdataValueFactory f = store.getValueFactory();
-            final BigdataURI mike = f.createURI("http://www.embergraph.org/Mike");
-            final BigdataURI bryan = f.createURI("http://www.embergraph.org/Bryan");
-            final BigdataURI dc = f.createURI("http://www.embergraph.org/DC");
-            final BigdataURI g1 = f.createURI("http://www.embergraph.org/g1");
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfsLabel = f.asValue(RDFS.LABEL);
-            final BigdataURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
-            final BigdataLiteral mikeL = f.createLiteral("Mike");
-            final BigdataLiteral bryanL = f.createLiteral("Bryan");
-            final BigdataLiteral DCL = f.createLiteral("DC");
+            final EmbergraphValueFactory f = store.getValueFactory();
+            final EmbergraphURI mike = f.createURI("http://www.embergraph.org/Mike");
+            final EmbergraphURI bryan = f.createURI("http://www.embergraph.org/Bryan");
+            final EmbergraphURI dc = f.createURI("http://www.embergraph.org/DC");
+            final EmbergraphURI g1 = f.createURI("http://www.embergraph.org/g1");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
+            final EmbergraphURI foafPerson = f.createURI("http://xmlns.com/foaf/0.1/Person");
+            final EmbergraphLiteral mikeL = f.createLiteral("Mike");
+            final EmbergraphLiteral bryanL = f.createLiteral("Bryan");
+            final EmbergraphLiteral DCL = f.createLiteral("DC");
 
-            final BigdataValue[] values = new BigdataValue[] { mike, bryan, dc,
+            final EmbergraphValue[] values = new EmbergraphValue[] { mike, bryan, dc,
                     g1, rdfType, rdfsLabel, foafPerson, mikeL, bryanL, DCL };
 
             // Batch resolve (read-only).
@@ -471,7 +471,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
                     .addTerms(values, values.length, true/* readOnly */);
             
             // Verify IV assignment.
-            for (BigdataValue v : values) {
+            for (EmbergraphValue v : values) {
 
                 final IV<?, ?> iv = v.getIV();
 

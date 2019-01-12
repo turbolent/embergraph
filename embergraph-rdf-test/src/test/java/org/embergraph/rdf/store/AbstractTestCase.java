@@ -37,6 +37,9 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.rio.RDFHandler;
@@ -56,10 +59,7 @@ import org.embergraph.journal.Options;
 import org.embergraph.journal.TestHelper;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.BasicRioLoader;
 import org.embergraph.rdf.spo.ISPO;
@@ -535,7 +535,7 @@ abstract public class AbstractTestCase
     }
     
     static public void assertSameStatements(Statement[] expected,
-            BigdataStatementIterator actual) {
+            EmbergraphStatementIterator actual) {
 
         assertSameStatements("", expected, actual);
 
@@ -547,7 +547,7 @@ abstract public class AbstractTestCase
      *       this should test for the same statements in any order
      */
     static public void assertSameStatements(final String msg,
-            final Statement[] expected, final BigdataStatementIterator actual) {
+            final Statement[] expected, final EmbergraphStatementIterator actual) {
 
         int i = 0;
 
@@ -599,7 +599,7 @@ abstract public class AbstractTestCase
 
         final IIndex id2t = store.getLexiconRelation().getId2TermIndex();
 
-        final BigdataValueSerializer<BigdataValue> valSer = store
+        final EmbergraphValueSerializer<EmbergraphValue> valSer = store
                 .getValueFactory().getValueSerializer();
 
         /*
@@ -631,7 +631,7 @@ abstract public class AbstractTestCase
                 assertNotNull(encodedValue);
 
                 // Decode the Value.
-                final BigdataValue decodedValue = valSer
+                final EmbergraphValue decodedValue = valSer
                         .deserialize(encodedValue);
 
                 // Generate key for T2ID index.
@@ -675,11 +675,11 @@ abstract public class AbstractTestCase
             final IKeyBuilder keyBuilder = id2t.getIndexMetadata()
                     .getTupleSerializer().getKeyBuilder();
 
-            final ITupleIterator<BigdataValue> itr = id2t.rangeIterator();
+            final ITupleIterator<EmbergraphValue> itr = id2t.rangeIterator();
 
             while (itr.hasNext()) {
 
-                final BigdataValue v = itr.next().getObject();
+                final EmbergraphValue v = itr.next().getObject();
 
                 final IV<?, ?> iv = v.getIV();
 
@@ -1018,7 +1018,7 @@ abstract public class AbstractTestCase
 
         private void verifyStatements(final int n, final Statement[] a) {
 
-            final Map<Value, BigdataValue> termSet = new LinkedHashMap<Value, BigdataValue>(
+            final Map<Value, EmbergraphValue> termSet = new LinkedHashMap<Value, EmbergraphValue>(
                     n);
             {
 
@@ -1039,10 +1039,10 @@ abstract public class AbstractTestCase
 
                 final int nterms = termSet.size();
 
-                final BigdataValue[] terms = new BigdataValue[nterms];
+                final EmbergraphValue[] terms = new EmbergraphValue[nterms];
 
                 int i = 0;
-                for (BigdataValue term : termSet.values()) {
+                for (EmbergraphValue term : termSet.values()) {
 
                     terms[i++] = term;
 
@@ -1052,7 +1052,7 @@ abstract public class AbstractTestCase
                         .addTerms(terms, nterms, true/* readOnly */);
 
                 int nunknown = 0;
-                for (BigdataValue term : terms) {
+                for (EmbergraphValue term : terms) {
 
                     if (term.getIV() == null) {
 
@@ -1084,7 +1084,7 @@ abstract public class AbstractTestCase
                 
                 final Set<IV<?,?>> ivs  = new LinkedHashSet<IV<?,?>>(termSet.size());
                 
-                for(BigdataValue term : termSet.values()) {
+                for(EmbergraphValue term : termSet.values()) {
                     
                     final IV<?,?> iv = term.getIV();
                     
@@ -1100,10 +1100,10 @@ abstract public class AbstractTestCase
                 }
 
                 // batch resolve ids to terms.
-                final Map<IV<?, ?>, BigdataValue> reverseMap = db
+                final Map<IV<?, ?>, EmbergraphValue> reverseMap = db
                         .getLexiconRelation().getTerms(ivs);
 
-                for(BigdataValue expectedTerm : termSet.values()) {
+                for(EmbergraphValue expectedTerm : termSet.values()) {
                     
                     final IV<?,?> iv = expectedTerm.getIV();
                     
@@ -1114,7 +1114,7 @@ abstract public class AbstractTestCase
                         
                     }
 
-                    final BigdataValue actualTerm = reverseMap.get(iv);
+                    final EmbergraphValue actualTerm = reverseMap.get(iv);
 
                     if (actualTerm == null || !actualTerm.equals(expectedTerm)) {
 
@@ -1144,13 +1144,13 @@ abstract public class AbstractTestCase
 
                     final Statement stmt = a[i];
 
-                    final BigdataResource s = (BigdataResource) db
+                    final EmbergraphResource s = (EmbergraphResource) db
                             .asValue(termSet.get(stmt.getSubject()));
 
-                    final BigdataURI p = (BigdataURI) db.asValue(termSet
+                    final EmbergraphURI p = (EmbergraphURI) db.asValue(termSet
                             .get(stmt.getPredicate()));
 
-                    final BigdataValue o = (BigdataValue) db.asValue(termSet
+                    final EmbergraphValue o = (EmbergraphValue) db.asValue(termSet
                             .get(stmt.getObject()));
 
                     boolean ok = true;

@@ -3,7 +3,7 @@ package org.embergraph.rdf.lexicon;
 import java.util.Iterator;
 import java.util.concurrent.Callable;
 
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Index terms for keyword search.
@@ -17,10 +17,10 @@ class FullTextIndexWriterTask implements Callable<Long> {
     
     private final int capacity;
     
-    private final Iterator<BigdataValue> itr;
+    private final Iterator<EmbergraphValue> itr;
 
     public FullTextIndexWriterTask(final IValueCentricTextIndexer<?> textIndexer,
-            final int capacity, final Iterator<BigdataValue> itr) {
+            final int capacity, final Iterator<EmbergraphValue> itr) {
 
         if (textIndexer == null)
             throw new IllegalArgumentException();

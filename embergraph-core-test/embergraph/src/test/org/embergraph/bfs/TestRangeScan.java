@@ -23,11 +23,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bfs;
 
-import org.embergraph.bfs.BigdataFileSystem;
 import org.embergraph.sparse.SparseRowStore;
 
 /**
- * Test suite for {@link BigdataFileSystem#getDocumentHeaders(String, String)}.
+ * Test suite for {@link EmbergraphFileSystem#getDocumentHeaders(String, String)}.
  * <p>
  * Note: The correct behavior of this method depends on the
  * {@link SparseRowStore}'s logical row iterator.

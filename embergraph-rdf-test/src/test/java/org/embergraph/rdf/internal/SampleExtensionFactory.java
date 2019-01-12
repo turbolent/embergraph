@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Simple {@link IExtensionFactory} implementation that creates two
@@ -14,17 +14,17 @@ import org.embergraph.rdf.model.BigdataValue;
  */
 public class SampleExtensionFactory implements IExtensionFactory {
 
-    private final List<IExtension<? extends BigdataValue>> extensions;
+    private final List<IExtension<? extends EmbergraphValue>> extensions;
         
     public SampleExtensionFactory() {
         
-        extensions = new LinkedList<IExtension<? extends BigdataValue>>(); 
+        extensions = new LinkedList<IExtension<? extends EmbergraphValue>>();
             
     }
     
     @Override
     public void init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<BigdataValue> config) {
+            final ILexiconConfiguration<EmbergraphValue> config) {
 
 //       	if (lex.isInlineDateTimes())
 //    		extensions.add(new DateTimeExtension(
@@ -36,7 +36,7 @@ public class SampleExtensionFactory implements IExtensionFactory {
     }
     
     @Override
-    public Iterator<IExtension<? extends BigdataValue>> getExtensions() {
+    public Iterator<IExtension<? extends EmbergraphValue>> getExtensions() {
         return Collections.unmodifiableList(extensions).iterator();
     }
     

@@ -34,7 +34,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.util.NV;
 
@@ -322,7 +322,7 @@ public class Configuration {
      * @return The {@link UUID} of the identified service -or- <code>null</code>
      *         if no service is identified for that value or if the
      *         <i>indexManager</i> is either not given or not an
-     *         {@link IBigdataFederation}.
+     *         {@link IEmbergraphFederation}.
      * 
      * @throws IllegalArgumentException
      *             if the <i>val</i> is <code>null</code>.
@@ -336,10 +336,10 @@ public class Configuration {
         if (val == null)
             throw new IllegalArgumentException();
 
-        if (!(indexManager instanceof IBigdataFederation))
+        if (!(indexManager instanceof IEmbergraphFederation))
             return null;
         
-        final IBigdataFederation fed = ((IBigdataFederation) indexManager);
+        final IEmbergraphFederation fed = ((IEmbergraphFederation) indexManager);
 
         /*
          * Value is a UUID?

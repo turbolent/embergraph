@@ -23,7 +23,7 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 import org.openrdf.model.impl.URIImpl;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
@@ -69,7 +69,7 @@ public class GeoSpatialTestWKTLiteralSerializer extends GeoSpatialDefaultLiteral
     
     @Override
     public IV<?,?> serializeLocation(
-        final BigdataValueFactory vf, final Object latitude, final Object longitude) {
+        final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
 
         final StringBuffer buf = new StringBuffer();
         buf.append("Point(");

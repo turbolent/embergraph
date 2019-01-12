@@ -21,7 +21,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import org.embergraph.Banner;
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTree.IBTreeCounters;
 import org.embergraph.btree.AbstractNode;
 import org.embergraph.btree.BTree;
@@ -780,7 +780,7 @@ abstract public class AbstractHTree implements ICounterSetAccess,
 
         }
 
-        if (INFO || BigdataStatics.debug) {
+        if (INFO || EmbergraphStatics.debug) {
 
             final String msg = "HTree close: name="
                     + metadata.getName()
@@ -1336,7 +1336,7 @@ abstract public class AbstractHTree implements ICounterSetAccess,
              */
             
             return new HardReferenceQueueWithBatchingUpdates<PO>(
-                    BigdataStatics.threadLocalBuffers, // threadLocalBuffers
+                    EmbergraphStatics.threadLocalBuffers, // threadLocalBuffers
                     16,// concurrencyLevel
                     new HardReferenceQueue<PO>(new DefaultEvictionListener(),
                             writeRetentionQueueCapacity, 0/* nscan */),
@@ -1776,7 +1776,7 @@ abstract public class AbstractHTree implements ICounterSetAccess,
 
             ndirty++;
             
-//            if (BigdataStatics.debug && ndirty > 0 && ndirty % 1000 == 0) {
+//            if (EmbergraphStatics.debug && ndirty > 0 && ndirty % 1000 == 0) {
 //				System.out.println("nwritten=" + ndirty + " in "
 //						+ (System.currentTimeMillis() - begin) + "ms");
 //            }

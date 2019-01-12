@@ -46,6 +46,12 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -102,20 +108,15 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.constraints.RangeBOp;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
-import org.embergraph.rdf.lexicon.BigdataSubjectCentricFullTextIndex;
-import org.embergraph.rdf.lexicon.BigdataValueCentricFullTextIndex;
+import org.embergraph.rdf.lexicon.EmbergraphSubjectCentricFullTextIndex;
+import org.embergraph.rdf.lexicon.EmbergraphValueCentricFullTextIndex;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
 import org.embergraph.rdf.lexicon.ITextIndexer;
 import org.embergraph.rdf.lexicon.IValueCentricTextIndexer;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.lexicon.TermIdEncoder;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.BaseClosure;
@@ -143,7 +144,7 @@ import org.embergraph.rdf.vocab.BaseVocabulary;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.rdf.vocab.VocabularyDecl;
-import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20160317;
+import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20160317;
 import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IDatabase;
 import org.embergraph.relation.IMutableDatabase;
@@ -166,7 +167,6 @@ import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.search.FullTextIndex;
-import org.embergraph.service.IBigdataFederation;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
 import org.embergraph.service.geospatial.GeoSpatialConfigOptions;
 import org.embergraph.sparse.GlobalRowStoreUtil;
@@ -467,7 +467,7 @@ abstract public class AbstractTripleStore extends
     }
     
     /**
-     * The {@link BigdataValueFactoryImpl} for namespace of the
+     * The {@link EmbergraphValueFactoryImpl} for namespace of the
      * {@link LexiconRelation} associated with this {@link AbstractTripleStore}.
      * 
      * @throws UnsupportedOperationException
@@ -475,7 +475,7 @@ abstract public class AbstractTripleStore extends
      * 
      * @todo allow a {@link TempTripleStore} to specify another db's lexicon?
      */
-    final public BigdataValueFactory getValueFactory() {
+    final public EmbergraphValueFactory getValueFactory() {
 
         if (valueFactory == null) {
 
@@ -500,7 +500,7 @@ abstract public class AbstractTripleStore extends
         return valueFactory;
         
     }
-    private volatile BigdataValueFactory valueFactory;
+    private volatile EmbergraphValueFactory valueFactory;
     
     /*
      * IDatabase, ILocatableResource
@@ -694,7 +694,7 @@ abstract public class AbstractTripleStore extends
          * which it provides for {@link AbstractTripleStore}s created using that
          * class.
          */
-        String DEFAULT_VOCABULARY_CLASS = BigdataCoreVocabulary_v20160317.class.getName();
+        String DEFAULT_VOCABULARY_CLASS = EmbergraphCoreVocabulary_v20160317.class.getName();
         
         /**
          * The {@link Axioms} model that will be used (default
@@ -922,12 +922,12 @@ abstract public class AbstractTripleStore extends
         String DEFAULT_QUADS_MODE = "false";
 
         /**
-         * The name of the {@link BigdataValueFactory} class. The implementation
+         * The name of the {@link EmbergraphValueFactory} class. The implementation
          * MUST declare a method with the following signature which will be used
          * as a canonicalizing factory for the instances of that class.
          * 
          * <pre>
-         * public static BigdataValueFactory getInstance(final String namespace)
+         * public static EmbergraphValueFactory getInstance(final String namespace)
          * </pre>
          * 
          * @see #DEFAULT_VALUE_FACTORY_CLASS
@@ -935,7 +935,7 @@ abstract public class AbstractTripleStore extends
 		String VALUE_FACTORY_CLASS = AbstractTripleStore.class.getName()
 				+ ".valueFactoryClass";
 
-		String DEFAULT_VALUE_FACTORY_CLASS = BigdataValueFactoryImpl.class
+		String DEFAULT_VALUE_FACTORY_CLASS = EmbergraphValueFactoryImpl.class
 				.getName();
 
 		/*
@@ -1016,7 +1016,7 @@ abstract public class AbstractTripleStore extends
 		String TEXT_INDEXER_CLASS = AbstractTripleStore.class.getName()
 				+ ".textIndexerClass";
 
-		String DEFAULT_TEXT_INDEXER_CLASS = BigdataValueCentricFullTextIndex.class
+		String DEFAULT_TEXT_INDEXER_CLASS = EmbergraphValueCentricFullTextIndex.class
 				.getName();
 
         /**
@@ -1035,7 +1035,7 @@ abstract public class AbstractTripleStore extends
 		String SUBJECT_CENTRIC_TEXT_INDEXER_CLASS = AbstractTripleStore.class.getName()
 				+ ".subjectCentricTextIndexerClass";
 
-		String DEFAULT_SUBJECT_CENTRIC_TEXT_INDEXER_CLASS = BigdataSubjectCentricFullTextIndex.class
+		String DEFAULT_SUBJECT_CENTRIC_TEXT_INDEXER_CLASS = EmbergraphSubjectCentricFullTextIndex.class
 				.getName();
 
         /*
@@ -1618,7 +1618,7 @@ abstract public class AbstractTripleStore extends
      * and writers. This property depends on primarily on the concurrency
      * control mechanisms (if any) that are used to prevent concurrent access to
      * an unisolated index while a thread is writing on that index. Stores based
-     * on the {@link IBigdataFederation} automatically inherent the
+     * on the {@link IEmbergraphFederation} automatically inherent the
      * appropriate concurrency controls as would a store whose index access was
      * intermediated by the executor service of an {@link IConcurrencyManager}.
      * <p>
@@ -2016,7 +2016,7 @@ abstract public class AbstractTripleStore extends
         assertWritable();
 
         // Conditionally destroyed below. See #948.
-        final BigdataValueFactory tmp = valueFactory;
+        final EmbergraphValueFactory tmp = valueFactory;
         
         // FIXME unit tests fail here during tear down if the federation has
         // already been disconnected/destroyed since they can not reach the
@@ -2073,7 +2073,7 @@ abstract public class AbstractTripleStore extends
              * AtomicDelete operation on the GRS winds up de-serializing the
              * Vocabulary class as part of the delete of the declaration of
              * the KB instance. This causes the Vocabulary object to be re-created
-             * within the BigdataValueFactoryImpl cache.  So we need to wipe it out
+             * within the EmbergraphValueFactoryImpl cache.  So we need to wipe it out
              * again here.
              * 
              * @see #948
@@ -2146,7 +2146,7 @@ abstract public class AbstractTripleStore extends
 
     /**
      * Return the configured {@link Vocabulary}. This consists of
-     * {@link BigdataValue}s of interest that have been pre-evaluated against
+     * {@link EmbergraphValue}s of interest that have been pre-evaluated against
      * the lexicon and are associated with their correct term identifiers.
      * 
      * @return The predefined vocabulary.
@@ -2702,7 +2702,7 @@ abstract public class AbstractTripleStore extends
 
     public IV addTerm(final Value value) {
 
-        final BigdataValue[] terms = new BigdataValue[] {
+        final EmbergraphValue[] terms = new EmbergraphValue[] {
 
             getValueFactory().asValue(value)
 
@@ -2718,11 +2718,11 @@ abstract public class AbstractTripleStore extends
      * This method is extremely inefficient for scale-out as it does one RMI per
      * request!
      * 
-     * @return the corresponding {@link BigdataValue} if found and
+     * @return the corresponding {@link EmbergraphValue} if found and
      *         <code>null</code> if not found or if the {@link LexiconRelation}
      *         is not available (e.g., a {@link TempTripleStore} .
      */
-    final public BigdataValue getTerm(final IV iv) {
+    final public EmbergraphValue getTerm(final IV iv) {
 
         final LexiconRelation r = getLexiconRelation();
 
@@ -2751,7 +2751,7 @@ abstract public class AbstractTripleStore extends
     }
         
     @Override
-    public void addTerms(final BigdataValue[] terms) {
+    public void addTerms(final EmbergraphValue[] terms) {
 
         getLexiconRelation().addTerms(terms, terms.length, false/*readOnly*/);
         
@@ -2983,7 +2983,7 @@ abstract public class AbstractTripleStore extends
         /*
          * convert other Value object types to our object types.
          */
-        final BigdataValueFactory valueFactory = getValueFactory();
+        final EmbergraphValueFactory valueFactory = getValueFactory();
         
         s = (Resource) valueFactory.asValue(s);
 
@@ -3060,7 +3060,7 @@ abstract public class AbstractTripleStore extends
 
     }
 
-    final public BigdataStatement getStatement(final Statement s) {
+    final public EmbergraphStatement getStatement(final Statement s) {
 
         return getStatement(s.getSubject(), s.getPredicate(), 
                 s.getObject(), s.getContext());
@@ -3068,7 +3068,7 @@ abstract public class AbstractTripleStore extends
     }
 
     @Override
-    final public BigdataStatement getStatement(final Resource s, final URI p,
+    final public EmbergraphStatement getStatement(final Resource s, final URI p,
             final Value o) {
 
         return getStatement(s, p, o, null/* c */);
@@ -3076,7 +3076,7 @@ abstract public class AbstractTripleStore extends
     }
 
     @Override
-    final public BigdataStatement getStatement(final Resource s, final URI p,
+    final public EmbergraphStatement getStatement(final Resource s, final URI p,
             final Value o, final Resource c) {
 
         if (s == null || p == null || o == null || (quads && c == null)) {
@@ -3085,7 +3085,7 @@ abstract public class AbstractTripleStore extends
 
         }
 
-        final BigdataStatementIterator itr = getStatements(s, p, o, c);
+        final EmbergraphStatementIterator itr = getStatements(s, p, o, c);
 
         try {
 
@@ -3106,7 +3106,7 @@ abstract public class AbstractTripleStore extends
     }
 
     @Override
-    final public BigdataStatementIterator getStatements(final Resource s,
+    final public EmbergraphStatementIterator getStatements(final Resource s,
             final URI p, final Value o) {
 
         return getStatements(s, p, o, null/* c */);
@@ -3114,7 +3114,7 @@ abstract public class AbstractTripleStore extends
     }
 
     @Override
-    final public BigdataStatementIterator getStatements(final Resource s,
+    final public EmbergraphStatementIterator getStatements(final Resource s,
             final URI p, final Value o, final Resource c) {
 
         return asStatementIterator(getAccessPath(s, p, o, c).iterator());
@@ -3140,24 +3140,24 @@ abstract public class AbstractTripleStore extends
      * @see <a href="http://trac.blazegraph.com/ticket/866" > Efficient batch
      *      remove of a collection of triple patterns </a>
      */
-    public BigdataStatementIterator getStatements(
-            final IChunkedOrderedIterator<BigdataTriplePattern> triplePatterns) {
+    public EmbergraphStatementIterator getStatements(
+            final IChunkedOrderedIterator<EmbergraphTriplePattern> triplePatterns) {
 
         return asStatementIterator(new ChunkedWrappedIterator<ISPO>(
-                new BigdataTriplePatternMaterializer(this, triplePatterns)
+                new EmbergraphTriplePatternMaterializer(this, triplePatterns)
                         .start(getExecutorService())));
 
     }
 
     @Override
-    final public BigdataValue asValue(final Value value) {
+    final public EmbergraphValue asValue(final Value value) {
 
         return getValueFactory().asValue(value);
 
     }
 
     @Override
-    public BigdataStatement asStatement(final ISPO spo) {
+    public EmbergraphStatement asStatement(final ISPO spo) {
 
         /*
          * Use batch API to resolve the term identifiers.
@@ -3178,7 +3178,7 @@ abstract public class AbstractTripleStore extends
 
         }
 
-        final Map<IV<?,?>, BigdataValue> terms = getLexiconRelation()
+        final Map<IV<?,?>, EmbergraphValue> terms = getLexiconRelation()
                 .getTerms(ivs);
 
         /*
@@ -3186,20 +3186,20 @@ abstract public class AbstractTripleStore extends
          */
 
         return getValueFactory().createStatement(
-                (BigdataResource)  terms.get(spo.s()),
-                (BigdataURI)       terms.get(spo.p()),
-                (BigdataValue)     terms.get(spo.o()),
-                (BigdataResource)  (c != null ? terms.get(c) : null),
+                (EmbergraphResource)  terms.get(spo.s()),
+                (EmbergraphURI)       terms.get(spo.p()),
+                (EmbergraphValue)     terms.get(spo.o()),
+                (EmbergraphResource)  (c != null ? terms.get(c) : null),
                 spo.getStatementType(),
                 spo.getUserFlag());
         
     }
 
     @Override
-    public BigdataStatementIterator asStatementIterator(
+    public EmbergraphStatementIterator asStatementIterator(
             final IChunkedOrderedIterator<ISPO> src) {
 
-        return new BigdataStatementIteratorImpl(this, src)
+        return new EmbergraphStatementIteratorImpl(this, src)
                 .start(getExecutorService());
 
     }
@@ -3241,27 +3241,27 @@ abstract public class AbstractTripleStore extends
          * lexicon was not associated with the store.
          */
 
-        final BigdataValueFactory valueFactory = (s != null || p != null || o != null
+        final EmbergraphValueFactory valueFactory = (s != null || p != null || o != null
                 | c != null) ? getValueFactory() : null;
         
-        final BigdataResource _s = valueFactory == null ? null : valueFactory
+        final EmbergraphResource _s = valueFactory == null ? null : valueFactory
                 .asValue(s);
 
-        final BigdataURI _p = valueFactory == null ? null : valueFactory
+        final EmbergraphURI _p = valueFactory == null ? null : valueFactory
                 .asValue(p);
 
-        final BigdataValue _o = valueFactory == null ? null : valueFactory
+        final EmbergraphValue _o = valueFactory == null ? null : valueFactory
                 .asValue(o);
 
         // Note: _c is null unless quads.
-        final BigdataValue _c = quads ? valueFactory == null ? null
+        final EmbergraphValue _c = quads ? valueFactory == null ? null
                 : valueFactory.asValue(c) : null;
 
         /*
          * Batch resolve all non-null values to get their term identifiers.
          */
         int nnonNull = 0;
-        final BigdataValue[] values = new BigdataValue[spoKeyArity];
+        final EmbergraphValue[] values = new EmbergraphValue[spoKeyArity];
         {
 
             if (s != null)
@@ -3368,27 +3368,27 @@ abstract public class AbstractTripleStore extends
          * lexicon was not associated with the store.
          */
 
-        final BigdataValueFactory valueFactory = (s != null || p != null || o != null
+        final EmbergraphValueFactory valueFactory = (s != null || p != null || o != null
                 | c != null) ? getValueFactory() : null;
         
-        final BigdataResource _s = valueFactory == null ? null : valueFactory
+        final EmbergraphResource _s = valueFactory == null ? null : valueFactory
                 .asValue(s);
 
-        final BigdataURI _p = valueFactory == null ? null : valueFactory
+        final EmbergraphURI _p = valueFactory == null ? null : valueFactory
                 .asValue(p);
 
-        final BigdataValue _o = valueFactory == null ? null : valueFactory
+        final EmbergraphValue _o = valueFactory == null ? null : valueFactory
                 .asValue(o);
 
         // Note: _c is null unless quads.
-        final BigdataValue _c = quads ? valueFactory == null ? null
+        final EmbergraphValue _c = quads ? valueFactory == null ? null
                 : valueFactory.asValue(c) : null;
 
         /*
          * Batch resolve all non-null values to get their term identifiers.
          */
         int nnonNull = 0;
-        final BigdataValue[] values = new BigdataValue[spoKeyArity];
+        final EmbergraphValue[] values = new EmbergraphValue[spoKeyArity];
         {
 
             if (s != null)
@@ -3698,7 +3698,7 @@ abstract public class AbstractTripleStore extends
         
         try {
 	        
-        	final BigdataValue v = getTerm(iv);
+        	final EmbergraphValue v = getTerm(iv);
 	
 	        if (v == null)
 	            return "<NOT_FOUND#" + iv + ">";
@@ -3773,7 +3773,7 @@ abstract public class AbstractTripleStore extends
 //                quads ? SPOKeyOrder.POCS : SPOKeyOrder.POS);
 //
 //        // resolve term identifiers to terms efficiently during iteration.
-//        final BigdataValueIterator itr2 = new BigdataValueIteratorImpl(
+//        final EmbergraphValueIterator itr2 = new EmbergraphValueIteratorImpl(
 //                resolveTerms, itr);
 //        
 //        try {
@@ -3782,7 +3782,7 @@ abstract public class AbstractTripleStore extends
 //
 //            while (itr2.hasNext()) {
 //
-//                final BigdataValue term = itr2.next();
+//                final EmbergraphValue term = itr2.next();
 //
 //                final IV p = term.getIV();
 //                
@@ -3913,7 +3913,7 @@ abstract public class AbstractTripleStore extends
         {
 
             // Full SPO scan efficiently resolving SPOs to BigdataStatements.
-            final BigdataStatementIterator itr = resolveTerms
+            final EmbergraphStatementIterator itr = resolveTerms
                     .asStatementIterator(getAccessPath(keyOrder)
                             .iterator());
 
@@ -3923,7 +3923,7 @@ abstract public class AbstractTripleStore extends
                 
                 while (itr.hasNext()) {
 
-                    final BigdataStatement stmt = itr.next();
+                    final EmbergraphStatement stmt = itr.next();
 
                     if (!sids && stmt.getSubject().getIV().isStatement()) {
                         continue;
@@ -4022,7 +4022,7 @@ abstract public class AbstractTripleStore extends
                 
         final StringBuilder sb = new StringBuilder();
 
-        final BigdataStatementIterator itr = asStatementIterator(accessPath
+        final EmbergraphStatementIterator itr = asStatementIterator(accessPath
                 .iterator());
 
         try {
@@ -4867,7 +4867,7 @@ abstract public class AbstractTripleStore extends
          * computing or updating the closure of the db) and reflects the use of
          * the UnisolatedReadWriteIndex to allow interleaved reads and writes on
          * the unisolated indices when using a Journal or Temporary(Raw)Store.
-         * When running against an IBigdataFederation, the ConcurrencyManager
+         * When running against an IEmbergraphFederation, the ConcurrencyManager
          * will be interposed and unisolated writes will result in commits.
          * 
          * Note: If we are only reading (Query) then we just use the timestamp
@@ -4917,7 +4917,7 @@ abstract public class AbstractTripleStore extends
                 
             }
 
-            if (getIndexManager() instanceof IBigdataFederation<?>) {
+            if (getIndexManager() instanceof IEmbergraphFederation<?>) {
 
                 /*
                  * Use historical reads.
@@ -5035,7 +5035,7 @@ abstract public class AbstractTripleStore extends
      *            class.
      * 
      * @return An {@link ICloseableIterator} visiting {@link IBindingSet}s. Each
-     *         {@link IBindingSet} will have bound {@link BigdataValue}s for
+     *         {@link IBindingSet} will have bound {@link EmbergraphValue}s for
      *         <code>s</code>, <code>t</code>, <code>p</code>, and
      *         <code>lit</code> where those variables are defined per the
      *         pseudo-code JOIN above.
@@ -5063,10 +5063,10 @@ abstract public class AbstractTripleStore extends
          * Batch resolve BigdataValues with their associated term identifiers
          * for the given predicates and cls.
          */
-        final BigdataValue[] terms = new BigdataValue[preds.length + 1/* cls */];
+        final EmbergraphValue[] terms = new EmbergraphValue[preds.length + 1/* cls */];
         {
 
-            final BigdataValueFactory valueFactory = getValueFactory();
+            final EmbergraphValueFactory valueFactory = getValueFactory();
             
             for (int i = 0; i < preds.length; i++) {
 
@@ -5148,7 +5148,7 @@ abstract public class AbstractTripleStore extends
          */
         try {
         
-            return new BigdataSolutionResolverator(this, joinNexus
+            return new EmbergraphSolutionResolverator(this, joinNexus
                     .runQuery(program)).start(getExecutorService());
             
         } catch(Exception ex) {

@@ -64,7 +64,7 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.rwstore.sector.MemoryManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.Haltable;
 import org.embergraph.util.concurrent.IHaltable;
@@ -1548,7 +1548,7 @@ abstract public class AbstractRunningQuery implements IRunningQuery {
     }
 
     @Override
-    public IBigdataFederation<?> getFederation() {
+    public IEmbergraphFederation<?> getFederation() {
 
         return queryEngine.getFederation();
 

@@ -109,7 +109,7 @@ public class Banner {
      */
     static {
     
-		String s = System.getProperty(BigdataStatics.HOSTNAME);
+		String s = System.getProperty(EmbergraphStatics.HOSTNAME);
         if (s != null) {
             // Trim whitespace.
             s = s.trim();

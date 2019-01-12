@@ -26,8 +26,8 @@ import java.util.List;
 
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.BSBMQ5Setup;
@@ -187,14 +187,14 @@ public class TestASTAttachJoinFiltersOptimizer extends AbstractASTEvaluationTest
 	public void test_redundantFilter() {
 
         final String sampleInstance = "http://www.example.com/I";
-        final BigdataURI someUri = valueFactory.createURI(sampleInstance);
-        final BigdataValue[] terms = new BigdataValue[] { someUri };
+        final EmbergraphURI someUri = valueFactory.createURI(sampleInstance);
+        final EmbergraphValue[] terms = new EmbergraphValue[] { someUri };
 
         // resolve terms.
         store.getLexiconRelation()
                 .addTerms(terms, terms.length, false/* readOnly */);
 
-        for (BigdataValue bv : terms) {
+        for (EmbergraphValue bv : terms) {
             // Cache the Value on the IV.
             bv.getIV().setValue(bv);
         }

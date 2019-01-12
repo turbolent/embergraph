@@ -24,6 +24,10 @@ package org.embergraph.rdf.internal.encoder;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
+import org.embergraph.rdf.model.EmbergraphBNodeImpl;
+import org.embergraph.rdf.model.EmbergraphLiteralImpl;
+import org.embergraph.rdf.model.EmbergraphURIImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
@@ -44,11 +48,7 @@ import org.embergraph.rdf.internal.impl.bnode.FullyInlineUnicodeBNodeIV;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.MockedValueIV;
 import org.embergraph.rdf.internal.impl.uri.FullyInlineURIIV;
-import org.embergraph.rdf.model.BigdataBNodeImpl;
-import org.embergraph.rdf.model.BigdataLiteralImpl;
-import org.embergraph.rdf.model.BigdataURIImpl;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * A utility class for generating and processing compact representations of
@@ -71,7 +71,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder,
     /**
      * Value factory
      */
-    protected final BigdataValueFactory vf;
+    protected final EmbergraphValueFactory vf;
     
     /**
      * <code>true</code> iff this is in support of a DISTINCT filter.
@@ -109,7 +109,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder,
      *            DISTINCT filter since the original solutions flow through the
      *            filter.
      */
-    public IVBindingSetEncoder(final BigdataValueFactory vf, final boolean filter) {
+    public IVBindingSetEncoder(final EmbergraphValueFactory vf, final boolean filter) {
 
         this.vf = vf;
         
@@ -261,25 +261,25 @@ public class IVBindingSetEncoder implements IBindingSetEncoder,
                     final Object val = iv.getValue();
                     
                     final IV<?,?> ivToEncode;
-                    if (val instanceof BigdataURIImpl) {
+                    if (val instanceof EmbergraphURIImpl) {
 
                         // create fully inlined URI IV
-                        ivToEncode = new FullyInlineURIIV<>((BigdataURIImpl)val);
+                        ivToEncode = new FullyInlineURIIV<>((EmbergraphURIImpl)val);
                         
-                    } else if (val instanceof BigdataLiteralImpl) {
+                    } else if (val instanceof EmbergraphLiteralImpl) {
                         
                         // create fully inlined literal IV
-                        final BigdataLiteralImpl valAsLiteral = (BigdataLiteralImpl)val;
+                        final EmbergraphLiteralImpl valAsLiteral = (EmbergraphLiteralImpl)val;
                         ivToEncode = 
                             new FullyInlineTypedLiteralIV<>(
                                 valAsLiteral.getLabel(), 
-                                ((BigdataLiteralImpl) val).getLanguage(),
-                                ((BigdataLiteralImpl) val).getDatatype());
+                                ((EmbergraphLiteralImpl) val).getLanguage(),
+                                ((EmbergraphLiteralImpl) val).getDatatype());
                         
-                    } else if (val instanceof BigdataBNodeImpl) {
+                    } else if (val instanceof EmbergraphBNodeImpl) {
 
                         // create fully inlined blank node IV
-                        final BigdataBNodeImpl valAsBNode = (BigdataBNodeImpl)val;
+                        final EmbergraphBNodeImpl valAsBNode = (EmbergraphBNodeImpl)val;
                         ivToEncode = new FullyInlineUnicodeBNodeIV<>(valAsBNode.getID());
                         
                     } else {
@@ -364,7 +364,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder,
                 final MockedValueIV mvIv = (MockedValueIV)iv;
                 final IV<?,?> innerIv = mvIv.getIV();
                 
-                final BigdataValue value; // set inside subsequent if block
+                final EmbergraphValue value; // set inside subsequent if block
                 final TermId mockIv; // populated subsequently
                 if (innerIv instanceof FullyInlineURIIV) {
                     

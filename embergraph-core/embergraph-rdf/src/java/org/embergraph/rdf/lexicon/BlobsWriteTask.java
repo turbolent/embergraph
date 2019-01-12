@@ -13,8 +13,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.BlobsWriteProc.BlobsWriteProcConstructor;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
@@ -23,23 +23,23 @@ import org.embergraph.service.ndx.pipeline.KVOList;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
+public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
 
     private static transient final Logger log = Logger.getLogger(BlobsWriteTask.class);
             
 //    private final LexiconRelation r;
     final IIndex ndx;
-    final BigdataValueFactory valueFactory;
+    final EmbergraphValueFactory valueFactory;
     private final boolean readOnly;
     private final boolean storeBlankNodes;
     private final int numTerms;
-    private final BigdataValue[] terms;
+    private final EmbergraphValue[] terms;
     private final WriteTaskStats stats;
     
     public BlobsWriteTask(final IIndex ndx,
-            final BigdataValueFactory valueFactory, final boolean readOnly,
+            final EmbergraphValueFactory valueFactory, final boolean readOnly,
             final boolean storeBlankNodes, final int numTerms,
-            final BigdataValue[] terms, final WriteTaskStats stats) {
+            final EmbergraphValue[] terms, final WriteTaskStats stats) {
 
         if (ndx == null)
             throw new IllegalArgumentException();
@@ -75,20 +75,20 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
     }
 
     /**
-     * Unify the {@link BigdataValue}s with the TERMS index, setting the
-     * {@link IV}s on the {@link BigdataValue}s as a side-effect.
+     * Unify the {@link EmbergraphValue}s with the TERMS index, setting the
+     * {@link IV}s on the {@link EmbergraphValue}s as a side-effect.
      * 
      * @return A dense {@link KVO}[] chunk consisting of only those distinct
-     *         {@link BigdataValue}s whose {@link IV}s were not already known.
+     *         {@link EmbergraphValue}s whose {@link IV}s were not already known.
      *         (This may be used to write on the full text index).
      * 
      * @throws Exception
      */
-    public KVO<BigdataValue>[] call() throws Exception {
+    public KVO<EmbergraphValue>[] call() throws Exception {
 
 		/*
 		 * Insert into the TERMS index ({termCode,hash(Value),counter} ->
-		 * Value). This will set the IV on the BigdataValue. If the Value was
+		 * Value). This will set the IV on the EmbergraphValue. If the Value was
 		 * not in the lexicon, then a new entry is created in the TERMS index
 		 * for the Value and the key for that entry is wrapped as its IV. If the
 		 * Value is in the lexicon, then the key for the existing entry is
@@ -105,10 +105,10 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
         int ndistinct = 0;
 
         // A dense array of correlated tuples.
-        final KVO<BigdataValue>[] a;
+        final KVO<EmbergraphValue>[] a;
         {
             
-            final KVO<BigdataValue>[] b;
+            final KVO<EmbergraphValue>[] b;
 
             /*
              * Make sure that each term has an assigned sort key.
@@ -247,11 +247,11 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
 
     /**
      * Class applies the term identifiers assigned by the
-     * {@link Term2IdWriteProc} to the {@link BigdataValue} references in the
+     * {@link Term2IdWriteProc} to the {@link EmbergraphValue} references in the
      * {@link KVO} correlated with each {@link Split} of data processed by that
      * procedure.
      * <p>
-     * Note: Of necessity, this requires access to the {@link BigdataValue}s
+     * Note: Of necessity, this requires access to the {@link EmbergraphValue}s
      * whose term identifiers are being resolved. This implementation presumes
      * that the array specified to the ctor and the array returned for each
      * chunk that is processed have correlated indices and that the offset into
@@ -262,7 +262,7 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
 	static class BlobsWriteProcResultHandler implements
 			IResultHandler<BlobsWriteProc.Result, Void> {
 
-        private final KVO<BigdataValue>[] a;
+        private final KVO<EmbergraphValue>[] a;
         private final boolean readOnly;
         
         /**
@@ -281,7 +281,7 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
 		 * @param stats
 		 *            Various atomic fields are updated as a side effect.
 		 */
-		public BlobsWriteProcResultHandler(final KVO<BigdataValue>[] a,
+		public BlobsWriteProcResultHandler(final KVO<EmbergraphValue>[] a,
 				final boolean readOnly, final WriteTaskStats stats) {
 
             if (a == null)
@@ -338,7 +338,7 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
 				} else {
 
 					// The value whose IV we have discovered/asserted.
-					final BigdataValue value = a[i].obj;
+					final EmbergraphValue value = a[i].obj;
 
 					// Rebuild the IV.
 					final BlobIV<?> iv = new BlobIV(VTE.valueOf(value), value
@@ -349,7 +349,7 @@ public class BlobsWriteTask implements Callable<KVO<BigdataValue>[]> {
 
                     if(a[i] instanceof KVOList) {
                         
-                        final KVOList<BigdataValue> tmp = (KVOList<BigdataValue>) a[i];
+                        final KVOList<EmbergraphValue> tmp = (KVOList<EmbergraphValue>) a[i];
 
                         if (!tmp.isDuplicateListEmpty()) {
 

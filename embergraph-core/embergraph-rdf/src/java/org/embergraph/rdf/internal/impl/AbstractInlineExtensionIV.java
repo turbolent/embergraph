@@ -24,7 +24,7 @@ package org.embergraph.rdf.internal.impl;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IExtensionIV;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Abstract base class for fully inline {@link IExtensionIV}s.
@@ -32,7 +32,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractInlineExtensionIV<V extends BigdataValue, T>
+abstract public class AbstractInlineExtensionIV<V extends EmbergraphValue, T>
         extends AbstractInlineIV<V, T> implements IExtensionIV {
 
     /**

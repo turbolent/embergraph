@@ -28,6 +28,9 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
 import org.embergraph.bop.BOpContext;
@@ -61,10 +64,7 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
@@ -429,12 +429,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<?> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -475,10 +475,10 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price7 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(7)));
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price21 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(21)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { org, totalPrice },  new IConstant [] { org1, _price21 } )
@@ -597,14 +597,14 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price12 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(12));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price12 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(12));
 
         final IValueExpression<?> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -647,10 +647,10 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price7 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(7)));
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price21 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(21)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { org, totalPrice, z },  new IConstant [] { org1, _price21, price12 } )
@@ -774,12 +774,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -787,7 +787,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                 new CompareBOp(
                         totalPrice,
-                        new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
+                        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
                         CompareOp.GT));
         
         final GroupByOp query = newFixture(
@@ -825,8 +825,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price21 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(21)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { org, totalPrice },  new IConstant [] { org1, _price21 } )
@@ -944,16 +944,16 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final BigdataValueFactory f = BigdataValueFactoryImpl.getInstance(getName());
-        final TermId tid1 = new TermId<BigdataValue>(VTE.LITERAL, 1);
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
+        final TermId tid1 = new TermId<EmbergraphValue>(VTE.LITERAL, 1);
         tid1.setValue(f.createLiteral("blue"));
         final IConstant<IV> blue = new Constant<IV>(tid1);
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -961,7 +961,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                 new CompareBOp(
                         totalPrice,
-                        new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(5)),
+                        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(5)),
                         CompareOp.GT));
         
         final GroupByOp query = newFixture(
@@ -999,8 +999,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price7 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(7)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { org, totalPrice },  new IConstant [] { org2, _price7 } )
@@ -1117,16 +1117,16 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final BigdataValueFactory f = BigdataValueFactoryImpl.getInstance(getName());
-        final TermId tid1 = new TermId<BigdataValue>(VTE.LITERAL, 1);
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
+        final TermId tid1 = new TermId<EmbergraphValue>(VTE.LITERAL, 1);
         tid1.setValue(f.createLiteral("blue"));
         final IConstant<IV> blue = new Constant<IV>(tid1);
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -1167,8 +1167,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price7 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(7)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
         final IBindingSet expected[] = new IBindingSet[]
         {
                 new ListBindingSet ( new IVariable<?> [] { org,            },  new IConstant [] { org1,         } ),
@@ -1286,12 +1286,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -1299,7 +1299,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                 new CompareBOp(
                         totalPrice,
-                        new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
+                        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
                         CompareOp.GT));
         
         final GroupByOp query = newFixture(
@@ -1337,8 +1337,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price28 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(28)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { totalPrice },  new IConstant [] { _price28 } )
@@ -1449,12 +1449,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -1462,7 +1462,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                 new CompareBOp(
                         totalPrice,
-                        new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(50)),
+                        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(50)),
                         CompareOp.GT));
         
         final GroupByOp query = newFixture(
@@ -1610,12 +1610,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(false/* distinct */, (IValueExpression<IV>) lprice));
@@ -1655,8 +1655,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price28 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(28)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { totalPrice },  new IConstant [] { _price28 } )
@@ -1776,12 +1776,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
                 new SUM(true/* distinct */, (IValueExpression<IV>) lprice));
@@ -1821,8 +1821,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          */
         
         // Note: The aggregates will have gone through type promotion.
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _price21 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(21)));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
         final IBindingSet expected[] = new IBindingSet[]
         {
               new ListBindingSet ( new IVariable<?> [] { totalPrice },  new IConstant [] { _price21 } )
@@ -1954,12 +1954,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
         
         final IValueExpression<IV> totalCountExpr = new Bind(totalCount,
                 new COUNT(false/* distinct */, star));
@@ -1998,10 +1998,10 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          * </pre>
          */
         
-//        final IConstant<XSDNumericIV<BigdataLiteral>> _totalCount = new Constant<XSDNumericIV<BigdataLiteral>>(
-//                new XSDNumericIV<BigdataLiteral>(4L));
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _totalCount = new Constant<XSDIntegerIV<BigdataLiteral>>(
-            new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(4L)));
+//        final IConstant<XSDNumericIV<EmbergraphLiteral>> _totalCount = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+//                new XSDNumericIV<EmbergraphLiteral>(4L));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _totalCount = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+            new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(4L)));
         
         final IBindingSet expected[] = new IBindingSet[]
         {
@@ -2120,12 +2120,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
         
         final IValueExpression<IV> totalCountExpr = new Bind(totalCount,
                 new COUNT(true/* distinct */, star));
@@ -2166,10 +2166,10 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
          * </pre>
          */
         
-//        final IConstant<XSDNumericIV<BigdataLiteral>> _totalCount = new Constant<XSDNumericIV<BigdataLiteral>>(
-//                new XSDNumericIV<BigdataLiteral>(4L));
-        final IConstant<XSDIntegerIV<BigdataLiteral>> _totalCount = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(4L)));
+//        final IConstant<XSDNumericIV<EmbergraphLiteral>> _totalCount = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+//                new XSDNumericIV<EmbergraphLiteral>(4L));
+        final IConstant<XSDIntegerIV<EmbergraphLiteral>> _totalCount = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(4L)));
         
         final IBindingSet expected[] = new IBindingSet[]
         {
@@ -2306,12 +2306,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstant<String> book2 = new Constant<String>("book2");
            final IConstant<String> book3 = new Constant<String>("book3");
            final IConstant<String> book4 = new Constant<String>("book4");
-           final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(5));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(7));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(5));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(7));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
    
            // SUM(?lprice)
            final IValueExpression<IV> sumLPrice = new SUM(false/* distinct */,
@@ -2328,7 +2328,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                    new CompareBOp(
                            totalPrice,
-                           new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
+                           new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
                            CompareOp.GT));
            
            final GroupByOp query = newFixture(
@@ -2366,8 +2366,8 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
             */
            
            // Note: The aggregates will have gone through type promotion.
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price140 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(140)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price140 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(140)));
            final IBindingSet expected[] = new IBindingSet[]
            {
                  new ListBindingSet ( new IVariable<?> [] { totalPrice },  new IConstant [] { _price140 } )
@@ -2507,12 +2507,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstant<String> book2 = new Constant<String>("book2");
            final IConstant<String> book3 = new Constant<String>("book3");
            final IConstant<String> book4 = new Constant<String>("book4");
-           final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(5));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(7));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(5));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(7));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
    
            // SUM(?lprice)
            final IValueExpression<IV> sumLPrice = new SUM(false/* distinct */,
@@ -2529,7 +2529,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                    new CompareBOp(
                            totalPrice,
-                           new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
+                           new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
                            CompareOp.GT));
            
            final GroupByOp query = newFixture(
@@ -2568,10 +2568,10 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
             */
            
            // Note: The aggregates will have gone through type promotion.
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price84 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(84)));
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price14 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(14)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price84 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(84)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price14 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(14)));
            final IBindingSet expected[] = new IBindingSet[]
            {
                    new ListBindingSet ( new IVariable<?> [] { org, totalPrice },  new IConstant [] { org1, _price84 } ),
@@ -2719,12 +2719,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstant<String> book2 = new Constant<String>("book2");
            final IConstant<String> book3 = new Constant<String>("book3");
            final IConstant<String> book4 = new Constant<String>("book4");
-           final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(5));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(7));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(5));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(7));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
    
            // SUM(?lprice)
            final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
@@ -2738,7 +2738,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
                    new CompareBOp(
                            totalPrice,
-                           new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
+                           new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
                            CompareOp.GT));
            
            final GroupByOp query = newFixture(
@@ -2776,10 +2776,10 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
             */
            
            // Note: The aggregates will have gone through type promotion.
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price28 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(28)));
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price56 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(56)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price56 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(56)));
            final IBindingSet expected[] = new IBindingSet[]
            {
                  new ListBindingSet ( new IVariable<?> [] { totalPrice, inflatedPrice },  new IConstant [] { _price28, _price56 } )
@@ -2913,12 +2913,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstant<String> book2 = new Constant<String>("book2");
            final IConstant<String> book3 = new Constant<String>("book3");
            final IConstant<String> book4 = new Constant<String>("book4");
-           final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(5));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(7));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(5));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(7));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
    
            // SUM(?lprice)
            final IValueExpression<IV> totalPriceExpr = new Bind(totalPrice,
@@ -2932,7 +2932,7 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
    //        final IConstraint totalPriceConstraint = new SPARQLConstraint<XSDBooleanIV>(
    //                new CompareBOp(
    //                        totalPrice,
-   //                        new Constant<XSDNumericIV<BigdataLiteral>>(new XSDNumericIV(10)),
+   //                        new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV(10)),
    //                        CompareOp.GT));
            
            final GroupByOp query = newFixture(
@@ -2971,14 +2971,14 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
             */
            
            // Note: The aggregates will have gone through type promotion.
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price7 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(7)));
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price14 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(14)));
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price21 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(21)));
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _price42 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(42)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price14 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(14)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price42 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(42)));
            final IBindingSet expected[] = new IBindingSet[]
            {
                    new ListBindingSet ( new IVariable<?> [] { org, totalPrice, inflatedPrice },  new IConstant [] { org1, _price21, _price42 } ),
@@ -3091,12 +3091,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
    
            final IConstant<String> s1 = new Constant<String>("s1");
            final IConstant<String> s2 = new Constant<String>("s2");
-           final IConstant<XSDNumericIV<BigdataLiteral>> num1 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(1));
-           final IConstant<XSDNumericIV<BigdataLiteral>> num2 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(2));
-           final IConstant<XSDNumericIV<BigdataLiteral>> num9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num1 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(1));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num2 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(2));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
            
            // SAMPLE(?v) AS ?S
            final IValueExpression<IV> sampleVAsS = new Bind(S,
@@ -3257,12 +3257,12 @@ abstract public class AbstractAggregationTestCase extends TestCase2 {
            final IConstant<String> s1 = new Constant<String>("s1");
            final IConstant<String> s2 = new Constant<String>("s2");
            final IConstant<String> s3 = new Constant<String>("s3");
-           final IConstant<XSDNumericIV<BigdataLiteral>> num1 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(1));
-           final IConstant<XSDNumericIV<BigdataLiteral>> num2 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(2));
-           final IConstant<XSDNumericIV<BigdataLiteral>> num9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num1 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(1));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num2 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(2));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
            
            
    

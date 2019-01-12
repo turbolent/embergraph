@@ -19,6 +19,7 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.bop.BOp;
@@ -26,7 +27,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 public class UcaseBOp extends IVValueExpression<IV> implements INeedsMaterialization {
@@ -58,13 +58,13 @@ public class UcaseBOp extends IVValueExpression<IV> implements INeedsMaterializa
         final Literal lit = getAndCheckLiteralValue(0, bs);
 
         if (lit.getLanguage() != null) {
-            final BigdataLiteral str = getValueFactory().createLiteral(lit.getLabel().toUpperCase(), lit.getLanguage());
+            final EmbergraphLiteral str = getValueFactory().createLiteral(lit.getLabel().toUpperCase(), lit.getLanguage());
             return super.asIV(str, bs);
         } else if (lit.getDatatype() != null) {
-            final BigdataLiteral str = getValueFactory().createLiteral(lit.getLabel().toUpperCase(), lit.getDatatype());
+            final EmbergraphLiteral str = getValueFactory().createLiteral(lit.getLabel().toUpperCase(), lit.getDatatype());
             return super.asIV(str, bs);
         } else {
-            final BigdataLiteral str = getValueFactory().createLiteral(lit.getLabel().toUpperCase());
+            final EmbergraphLiteral str = getValueFactory().createLiteral(lit.getLabel().toUpperCase());
             return super.asIV(str, bs);
         }
     }

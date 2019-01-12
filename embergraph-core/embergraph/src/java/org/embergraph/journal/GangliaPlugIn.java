@@ -28,8 +28,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Logger;
 
 import org.embergraph.counters.AbstractStatisticsCollector;
-import org.embergraph.counters.ganglia.BigdataGangliaService;
-import org.embergraph.counters.ganglia.BigdataMetadataFactory;
+import org.embergraph.counters.ganglia.EmbergraphGangliaService;
+import org.embergraph.counters.ganglia.EmbergraphMetadataFactory;
 import org.embergraph.counters.ganglia.HostMetricsCollector;
 import org.embergraph.counters.ganglia.QueryEngineMetricsCollector;
 import org.embergraph.ganglia.DefaultMetadataFactory;
@@ -151,7 +151,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
     /**
      * The embedded ganglia peer.
      */
-    private final AtomicReference<BigdataGangliaService> gangliaService = new AtomicReference<BigdataGangliaService>();
+    private final AtomicReference<EmbergraphGangliaService> gangliaService = new AtomicReference<EmbergraphGangliaService>();
 
     /**
      * {@inheritDoc}
@@ -272,12 +272,12 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
              * by ganglia and; (b) provide nice declarations for various
              * application counters of interest.
              */
-            metadataFactory.add(new BigdataMetadataFactory(hostName,
+            metadataFactory.add(new EmbergraphMetadataFactory(hostName,
                     serviceName, defaultSlope, defaultTMax, defaultDMax,
                     heartbeatInterval));
 
             // The embedded ganglia peer.
-            final BigdataGangliaService gangliaService = new BigdataGangliaService(
+            final EmbergraphGangliaService gangliaService = new EmbergraphGangliaService(
                     hostName,
                     serviceName,
                     metricsServers,

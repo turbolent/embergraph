@@ -23,7 +23,7 @@ import org.openrdf.model.impl.URIImpl;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -122,7 +122,7 @@ public abstract class InlineURIHandler {
     /**
      * Unpack the inline value into the localName portion of the uri.
      */
-	public String getLocalNameFromDelegate(final AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+	public String getLocalNameFromDelegate(final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
     	return delegate.getInlineValue().toString();
     	

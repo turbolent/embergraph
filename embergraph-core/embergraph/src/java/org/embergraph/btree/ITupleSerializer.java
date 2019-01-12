@@ -190,8 +190,8 @@ public interface ITupleSerializer<K extends Object, V extends Object> extends
      * </ol>
      * <p>
      * Note: The B+Tree does NOT rely on this method. It is used to support the
-     * materialization of the key required to allow {@link BigdataMap} and
-     * {@link BigdataSet} to fulfill their respective APIs.
+     * materialization of the key required to allow {@link EmbergraphMap} and
+     * {@link EmbergraphSet} to fulfill their respective APIs.
      * 
      * @throws UnsupportedOperationException
      *             if this operation is not implemented.

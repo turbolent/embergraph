@@ -52,57 +52,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import info.aduna.iteration.Iterations;
-
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.openrdf.model.Resource;
-import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
-import org.openrdf.query.dawg.DAWGTestResultSetUtil;
-import org.openrdf.query.impl.TupleQueryResultBuilder;
-import org.openrdf.query.resultio.BooleanQueryResultFormat;
-import org.openrdf.query.resultio.BooleanQueryResultParserRegistry;
-import org.openrdf.query.resultio.QueryResultIO;
-import org.openrdf.query.resultio.TupleQueryResultFormat;
-import org.openrdf.query.resultio.TupleQueryResultParser;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParser;
-import org.openrdf.rio.RDFParser.DatatypeHandling;
-import org.openrdf.rio.RDFParserFactory;
-import org.openrdf.rio.RDFParserRegistry;
-import org.openrdf.rio.Rio;
-import org.openrdf.rio.helpers.RDFHandlerBase;
-import org.openrdf.rio.helpers.StatementCollector;
 
-import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
-import org.embergraph.rdf.sparql.ast.QueryRoot;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 
 /**
  * The idea here is that the subclasses provide the data for the test
@@ -150,7 +113,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
         
         private TupleQueryResult executeSelect(String sparql) throws QueryEvaluationException, MalformedQueryException {
         	String prefixes = sparqlPrefixes();
-            astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(prefixes+sparql, FILL_IN_URI);
+            astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(prefixes+sparql, FILL_IN_URI);
         	return ASTEvalHelper.evaluateTupleQuery(store, astContainer, new QueryBindingSet(), null /* dataset */);
         }
         

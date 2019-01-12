@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -37,9 +39,7 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * This implementation of {@link IExtension} implements inlining for literals
@@ -51,16 +51,16 @@ import org.embergraph.rdf.model.BigdataValueFactory;
  * <li>xsd:positiveInteger</li>
  * </ul>
  */
-public class DerivedNumericsExtension<V extends BigdataValue> implements IExtension<V> {
+public class DerivedNumericsExtension<V extends EmbergraphValue> implements IExtension<V> {
 
 	private static final transient Logger log = Logger.getLogger(DerivedNumericsExtension.class);
 	
 	
-    private final Map<IV,BigdataURI> datatypes;
+    private final Map<IV, EmbergraphURI> datatypes;
     
     public DerivedNumericsExtension(final IDatatypeURIResolver resolver) {
 
-        this.datatypes = new LinkedHashMap<IV,BigdataURI>();
+        this.datatypes = new LinkedHashMap<IV, EmbergraphURI>();
         resolve(resolver, XSD.POSITIVE_INTEGER);
         resolve(resolver, XSD.NEGATIVE_INTEGER);
         resolve(resolver, XSD.NON_POSITIVE_INTEGER);
@@ -74,14 +74,14 @@ public class DerivedNumericsExtension<V extends BigdataValue> implements IExtens
     		log.debug("resolving: " + uri);
     	}
     	
-        final BigdataURI val = resolver.resolve(uri);
+        final EmbergraphURI val = resolver.resolve(uri);
         datatypes.put(val.getIV(), val);
         
     }
         
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
-        return new LinkedHashSet<BigdataURI>(datatypes.values());
+        return new LinkedHashSet<EmbergraphURI>(datatypes.values());
         
     }
     
@@ -103,8 +103,8 @@ public class DerivedNumericsExtension<V extends BigdataValue> implements IExtens
         
         final String dts = dt.stringValue();
         
-        BigdataURI resolvedDT = null;
-        for (BigdataURI val : datatypes.values()) {
+        EmbergraphURI resolvedDT = null;
+        for (EmbergraphURI val : datatypes.values()) {
             // Note: URI.stringValue() is efficient....
             if (val.stringValue().equals(dts)) {
                 resolvedDT = val;
@@ -145,7 +145,7 @@ public class DerivedNumericsExtension<V extends BigdataValue> implements IExtens
      * Use the BigInteger value of the {@link XSDIntegerIV} delegate to create a 
      * datatype literal value with the appropriate datatype.
      */
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
         
         if (!datatypes.containsKey(iv.getExtensionIV())) {
             throw new IllegalArgumentException("unrecognized datatype");
@@ -153,7 +153,7 @@ public class DerivedNumericsExtension<V extends BigdataValue> implements IExtens
         
         final BigInteger bi = iv.getDelegate().integerValue();
         
-        final BigdataURI dt = datatypes.get(iv.getExtensionIV());
+        final EmbergraphURI dt = datatypes.get(iv.getExtensionIV());
         
         final String s = bi.toString();
         

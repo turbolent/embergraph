@@ -35,8 +35,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
@@ -100,7 +100,7 @@ public class XsdUnsignedLongBOp extends IVValueExpression<IV>
         }
         
         // use to create my simple literals
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
         try {
             if (val instanceof Literal) {
@@ -112,7 +112,7 @@ public class XsdUnsignedLongBOp extends IVValueExpression<IV>
             	else {
             	    final BigInteger valAsBigInt = new BigInteger(lit.getLabel());
             	    if (valAsBigInt.compareTo(MIN_UNSIGNED_LONG)>=0 && valAsBigInt.compareTo(MAX_UNSIGNED_LONG)<=0) {
-                        final BigdataLiteral str = 
+                        final EmbergraphLiteral str =
                             vf.createLiteral(String.valueOf(valAsBigInt.toString()), XSD.UNSIGNED_LONG);
                         return super.asIV(str, bs);
             	    }

@@ -2585,7 +2585,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
                     if (exprNode instanceof FunctionNode) {
 
                         /*
-                         * Hack used when the BigdataExprBuilder needs to decide
+                         * Hack used when the EmbergraphExprBuilder needs to decide
                          * on the validity of aggregate expressions before we
                          * get around to caching the value expressions during
                          * evaluation (i.e., to pass the compliance tests for

@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.btree.HTreeIndexMetadata;
 import org.embergraph.btree.view.FusedView;
@@ -421,7 +421,7 @@ public class CacheConnectionImpl implements ICacheConnection {
         }
 
         @Override
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
             
             return getLocalIndexManager().getGlobalFileSystem();
             

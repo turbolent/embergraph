@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -17,7 +19,6 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
@@ -25,9 +26,6 @@ import org.openrdf.query.BindingSet;
 import org.embergraph.gom.om.IObjectManager;
 import org.embergraph.gom.om.ObjectMgrModel;
 import org.embergraph.gom.skin.GenericSkinRegistry;
-import org.embergraph.rdf.model.BigdataLiteralImpl;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
 
 import cutthecrap.utils.striterators.EmptyIterator;
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -89,9 +87,9 @@ public class GPO implements IGPO {
 	/**
 	 * The identifier for this {@link IGPO}.
 	 */
-	private final BigdataResource m_id;
+	private final EmbergraphResource m_id;
 
-	private final BigdataStatement m_stmt;
+	private final EmbergraphStatement m_stmt;
 	
 	/**
 	 * <code>true</code> iff the forward link set has been materialized.
@@ -154,7 +152,7 @@ public class GPO implements IGPO {
 
 		}
 
-		public boolean contains(BigdataResource id) {
+		public boolean contains(EmbergraphResource id) {
 			LinkValue tst = this;
 			while (tst != null) {
 				if (tst.m_value.equals(id)) {
@@ -461,7 +459,7 @@ public class GPO implements IGPO {
 			return m_size;
 		}
 
-		public boolean contains(BigdataResource id) {
+		public boolean contains(EmbergraphResource id) {
 			return (m_values != null && m_values.contains(id))
 				   || (m_addedValues != null && m_addedValues.contains(id));
 		}
@@ -597,7 +595,7 @@ public class GPO implements IGPO {
 
         m_id = om.getValueFactory().asValue(id);
         
-        final BigdataStatement stmt2 = om.getValueFactory().createStatement(
+        final EmbergraphStatement stmt2 = om.getValueFactory().createStatement(
                 ((ObjectMgrModel)om).bestEffortIntern(stmt.getSubject()),
                 ((ObjectMgrModel)om).internKey(stmt.getPredicate()),
                 ((ObjectMgrModel)om).bestEffortIntern(stmt.getObject())
@@ -632,7 +630,7 @@ public class GPO implements IGPO {
 	}
 
 	@Override
-	public BigdataResource getId() {
+	public EmbergraphResource getId() {
 		checkLive();
 		
 		return m_id;
@@ -645,7 +643,7 @@ public class GPO implements IGPO {
      * @return The {@link Statement} or <code>null</code> if the {@link IGPO}
      *         does not represent a {@link Statement}.
      */
-    public BigdataStatement getStatement() {
+    public EmbergraphStatement getStatement() {
 	    
 	    return m_stmt;
 	    

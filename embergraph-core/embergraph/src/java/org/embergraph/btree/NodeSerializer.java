@@ -23,7 +23,7 @@ package org.embergraph.btree;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.data.AbstractReadOnlyNodeData;
 import org.embergraph.btree.data.DefaultLeafCoder;
 import org.embergraph.btree.data.DefaultNodeCoder;
@@ -361,7 +361,7 @@ public class NodeSerializer {
             final byte[] tmp = new byte[buf.remaining()];
             buf.get(tmp);
             slice = FixedByteArrayBuffer.wrap(tmp);
-            if(BigdataStatics.debug)
+            if(EmbergraphStatics.debug)
                 System.err.print("[RO]");
         } else {
             // backing array is accessible, so wrap as slice.

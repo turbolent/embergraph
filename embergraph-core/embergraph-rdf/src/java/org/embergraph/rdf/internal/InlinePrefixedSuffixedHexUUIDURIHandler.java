@@ -1,7 +1,7 @@
 package org.embergraph.rdf.internal;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * 
@@ -42,7 +42,7 @@ public class InlinePrefixedSuffixedHexUUIDURIHandler extends InlineHexUUIDURIHan
 
 	@Override
 	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
 		final String localName = prefix + super.getLocalNameFromDelegate(delegate)
 				+ suffix;

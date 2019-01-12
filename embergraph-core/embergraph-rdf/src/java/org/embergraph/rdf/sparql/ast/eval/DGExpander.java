@@ -23,7 +23,7 @@ import org.embergraph.rdf.spo.SPOAccessPath;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
@@ -65,7 +65,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
      * 
      * @todo A parallelism limitation is placed on the ClientIndexView through
      *       the
-     *       {@link IBigdataClient.Options#CLIENT_MAX_PARALLEL_TASKS_PER_REQUEST}
+     *       {@link IEmbergraphClient.Options#CLIENT_MAX_PARALLEL_TASKS_PER_REQUEST}
      *       . We should be able to override that through annotations on a query
      *       plan.
      */

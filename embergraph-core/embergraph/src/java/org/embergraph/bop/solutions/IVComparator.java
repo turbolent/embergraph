@@ -30,6 +30,7 @@ import info.aduna.lang.ObjectUtil;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
@@ -41,7 +42,6 @@ import org.openrdf.query.algebra.evaluation.util.ValueComparator;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * A comparator that compares {@link IV}s according the SPARQL value ordering as
@@ -122,8 +122,8 @@ public class IVComparator implements Comparator<IV>, Serializable {
         }
 
         // 4. RDF literals
-        return compareLiterals((IV<BigdataLiteral, ?>) o1,
-                (IV<BigdataLiteral, ?>) o2);
+        return compareLiterals((IV<EmbergraphLiteral, ?>) o1,
+                (IV<EmbergraphLiteral, ?>) o2);
     
     }
 
@@ -167,7 +167,7 @@ public class IVComparator implements Comparator<IV>, Serializable {
 	}
 
     private int compareLiterals(
-			final IV<BigdataLiteral, ?> left, final IV<BigdataLiteral, ?> right) {
+			final IV<EmbergraphLiteral, ?> left, final IV<EmbergraphLiteral, ?> right) {
 		
 		/*
 		 * Only thing we need to special case are LiteralExtensionIVs, which

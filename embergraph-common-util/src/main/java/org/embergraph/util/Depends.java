@@ -185,7 +185,7 @@ public class Depends {
      * Note: This bigdata module is under a different license (Apache 2.0) than
      * the other bigdata modules.
      */
-    private final static Dep bigdataGanglia = new ApacheDep("embergraph-ganglia",
+    private final static Dep embergraphGanglia = new ApacheDep("embergraph-ganglia",
             "https://sourceforge.net/projects/embergraph/");
 
     private final static Dep colt = new Dep("colt",
@@ -322,7 +322,7 @@ public class Depends {
             jacksonCore,
             blueprintsCore,
             rexsterCore,
-            bigdataGanglia,
+            embergraphGanglia,
             // scale-out
             jini,
             zookeeper,

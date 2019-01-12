@@ -30,7 +30,7 @@ import org.embergraph.rdf.internal.impl.literal.XSDUnsignedByteIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedIntIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Test suite for the xsd:unsigned IV which are internally represented by Java
@@ -98,19 +98,19 @@ public class TestUnsignedIVs extends TestCase2 {
          * interpreted as unsigned data.
          */
 
-        final XSDUnsignedByteIV<BigdataLiteral> MIN_VALUE = new XSDUnsignedByteIV<BigdataLiteral>(
+        final XSDUnsignedByteIV<EmbergraphLiteral> MIN_VALUE = new XSDUnsignedByteIV<EmbergraphLiteral>(
                 Byte.MIN_VALUE);
 
-        final XSDUnsignedByteIV<BigdataLiteral> MINUS_ONE = new XSDUnsignedByteIV<BigdataLiteral>(
+        final XSDUnsignedByteIV<EmbergraphLiteral> MINUS_ONE = new XSDUnsignedByteIV<EmbergraphLiteral>(
                 (byte) -1);
 
-        final XSDUnsignedByteIV<BigdataLiteral> ZERO = new XSDUnsignedByteIV<BigdataLiteral>(
+        final XSDUnsignedByteIV<EmbergraphLiteral> ZERO = new XSDUnsignedByteIV<EmbergraphLiteral>(
                 (byte) 0);
 
-        final XSDUnsignedByteIV<BigdataLiteral> ONE = new XSDUnsignedByteIV<BigdataLiteral>(
+        final XSDUnsignedByteIV<EmbergraphLiteral> ONE = new XSDUnsignedByteIV<EmbergraphLiteral>(
                 (byte) 1);
 
-        final XSDUnsignedByteIV<BigdataLiteral> MAX_VALUE = new XSDUnsignedByteIV<BigdataLiteral>(
+        final XSDUnsignedByteIV<EmbergraphLiteral> MAX_VALUE = new XSDUnsignedByteIV<EmbergraphLiteral>(
                 Byte.MAX_VALUE);
 
         // Verify IV self-reports as unsigned.
@@ -175,19 +175,19 @@ public class TestUnsignedIVs extends TestCase2 {
          * interpreted as unsigned data.
          */
 
-        final XSDUnsignedShortIV<BigdataLiteral> MIN_VALUE = new XSDUnsignedShortIV<BigdataLiteral>(
+        final XSDUnsignedShortIV<EmbergraphLiteral> MIN_VALUE = new XSDUnsignedShortIV<EmbergraphLiteral>(
                 Short.MIN_VALUE);
 
-        final XSDUnsignedShortIV<BigdataLiteral> MINUS_ONE = new XSDUnsignedShortIV<BigdataLiteral>(
+        final XSDUnsignedShortIV<EmbergraphLiteral> MINUS_ONE = new XSDUnsignedShortIV<EmbergraphLiteral>(
                 (short) -1);
 
-        final XSDUnsignedShortIV<BigdataLiteral> ZERO = new XSDUnsignedShortIV<BigdataLiteral>(
+        final XSDUnsignedShortIV<EmbergraphLiteral> ZERO = new XSDUnsignedShortIV<EmbergraphLiteral>(
                 (short) 0);
 
-        final XSDUnsignedShortIV<BigdataLiteral> ONE = new XSDUnsignedShortIV<BigdataLiteral>(
+        final XSDUnsignedShortIV<EmbergraphLiteral> ONE = new XSDUnsignedShortIV<EmbergraphLiteral>(
                 (short) 1);
 
-        final XSDUnsignedShortIV<BigdataLiteral> MAX_VALUE = new XSDUnsignedShortIV<BigdataLiteral>(
+        final XSDUnsignedShortIV<EmbergraphLiteral> MAX_VALUE = new XSDUnsignedShortIV<EmbergraphLiteral>(
                 Short.MAX_VALUE);
 
         // Verify IV self-reports as unsigned.
@@ -245,19 +245,19 @@ public class TestUnsignedIVs extends TestCase2 {
          * interpreted as unsigned data.
          */
 
-        final XSDUnsignedIntIV<BigdataLiteral> MIN_VALUE = new XSDUnsignedIntIV<BigdataLiteral>(
+        final XSDUnsignedIntIV<EmbergraphLiteral> MIN_VALUE = new XSDUnsignedIntIV<EmbergraphLiteral>(
                 Integer.MIN_VALUE);
 
-        final XSDUnsignedIntIV<BigdataLiteral> MINUS_ONE = new XSDUnsignedIntIV<BigdataLiteral>(
+        final XSDUnsignedIntIV<EmbergraphLiteral> MINUS_ONE = new XSDUnsignedIntIV<EmbergraphLiteral>(
                 -1);
 
-        final XSDUnsignedIntIV<BigdataLiteral> ZERO = new XSDUnsignedIntIV<BigdataLiteral>(
+        final XSDUnsignedIntIV<EmbergraphLiteral> ZERO = new XSDUnsignedIntIV<EmbergraphLiteral>(
                 0);
 
-        final XSDUnsignedIntIV<BigdataLiteral> ONE = new XSDUnsignedIntIV<BigdataLiteral>(
+        final XSDUnsignedIntIV<EmbergraphLiteral> ONE = new XSDUnsignedIntIV<EmbergraphLiteral>(
                 1);
 
-        final XSDUnsignedIntIV<BigdataLiteral> MAX_VALUE = new XSDUnsignedIntIV<BigdataLiteral>(
+        final XSDUnsignedIntIV<EmbergraphLiteral> MAX_VALUE = new XSDUnsignedIntIV<EmbergraphLiteral>(
                 Integer.MAX_VALUE);
 
         // Verify IV self-reports as unsigned.
@@ -315,19 +315,19 @@ public class TestUnsignedIVs extends TestCase2 {
          * interpreted as unsigned data.
          */
 
-        final XSDUnsignedLongIV<BigdataLiteral> MIN_VALUE = new XSDUnsignedLongIV<BigdataLiteral>(
+        final XSDUnsignedLongIV<EmbergraphLiteral> MIN_VALUE = new XSDUnsignedLongIV<EmbergraphLiteral>(
                 Long.MIN_VALUE);
 
-        final XSDUnsignedLongIV<BigdataLiteral> MINUS_ONE = new XSDUnsignedLongIV<BigdataLiteral>(
+        final XSDUnsignedLongIV<EmbergraphLiteral> MINUS_ONE = new XSDUnsignedLongIV<EmbergraphLiteral>(
                 -1L);
 
-        final XSDUnsignedLongIV<BigdataLiteral> ZERO = new XSDUnsignedLongIV<BigdataLiteral>(
+        final XSDUnsignedLongIV<EmbergraphLiteral> ZERO = new XSDUnsignedLongIV<EmbergraphLiteral>(
                 0L);
 
-        final XSDUnsignedLongIV<BigdataLiteral> ONE = new XSDUnsignedLongIV<BigdataLiteral>(
+        final XSDUnsignedLongIV<EmbergraphLiteral> ONE = new XSDUnsignedLongIV<EmbergraphLiteral>(
                 1L);
 
-        final XSDUnsignedLongIV<BigdataLiteral> MAX_VALUE = new XSDUnsignedLongIV<BigdataLiteral>(
+        final XSDUnsignedLongIV<EmbergraphLiteral> MAX_VALUE = new XSDUnsignedLongIV<EmbergraphLiteral>(
                 Long.MAX_VALUE);
 
         // Verify IV self-reports as unsigned.

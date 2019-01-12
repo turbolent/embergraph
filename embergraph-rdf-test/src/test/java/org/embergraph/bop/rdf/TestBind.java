@@ -33,10 +33,10 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 
 /**
  * Test suite for logic which "joins" two solutions, propagating bindings,
@@ -91,7 +91,7 @@ public class TestBind extends TestCase2 {
 
         final IVariable<?> x = Var.var("x");
         
-        final IConstant<?> val = new Constant(new XSDNumericIV<BigdataLiteral>(
+        final IConstant<?> val = new Constant(new XSDNumericIV<EmbergraphLiteral>(
                 1)); 
         
         final ListBindingSet expected = new ListBindingSet();
@@ -124,7 +124,7 @@ public class TestBind extends TestCase2 {
 
         final IVariable<?> x = Var.var("x");
 
-        final IConstant<?> val = new Constant(new XSDNumericIV<BigdataLiteral>(
+        final IConstant<?> val = new Constant(new XSDNumericIV<EmbergraphLiteral>(
                 1));
 
         final ListBindingSet expected = new ListBindingSet();
@@ -159,10 +159,10 @@ public class TestBind extends TestCase2 {
         final IVariable<?> x = Var.var("x");
 
         final IConstant<?> val1 = new Constant(
-                new XSDNumericIV<BigdataLiteral>(1));
+                new XSDNumericIV<EmbergraphLiteral>(1));
 
         final IConstant<?> val2 = new Constant(
-                new XSDNumericIV<BigdataLiteral>(2));
+                new XSDNumericIV<EmbergraphLiteral>(2));
 
         final ListBindingSet left = new ListBindingSet();
         left.set(x, val1);
@@ -187,26 +187,26 @@ public class TestBind extends TestCase2 {
 
     /**
      * Unit test for join of two consistent solutions when only of them has the
-     * {@link BigdataValue} cached on the {@link IV} and the other does not. The
+     * {@link EmbergraphValue} cached on the {@link IV} and the other does not. The
      * cached reference should be propagated to the result.
      */
     public void test_bind05() {
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl
                 .getInstance(getName());
         
-        final BigdataLiteral lit = f.createLiteral(1);
+        final EmbergraphLiteral lit = f.createLiteral(1);
         
         final IVariable<?> x = Var.var("x");
         
-        final IV iv1 = new XSDNumericIV<BigdataLiteral>(1);
-        final IV iv2 = new XSDNumericIV<BigdataLiteral>(1);
-        final IV iv3 = new XSDNumericIV<BigdataLiteral>(1);
+        final IV iv1 = new XSDNumericIV<EmbergraphLiteral>(1);
+        final IV iv2 = new XSDNumericIV<EmbergraphLiteral>(1);
+        final IV iv3 = new XSDNumericIV<EmbergraphLiteral>(1);
         final IConstant<?> val1 = new Constant(iv1);
         final IConstant<?> val2 = new Constant(iv2);
         final IConstant<?> val3 = new Constant(iv3);
-        iv1.setValue((BigdataValue) lit);
-        iv3.setValue((BigdataValue) lit);
+        iv1.setValue((EmbergraphValue) lit);
+        iv3.setValue((EmbergraphValue) lit);
 
         final ListBindingSet expected = new ListBindingSet();
         expected.set(x, val3);
@@ -228,26 +228,26 @@ public class TestBind extends TestCase2 {
 
     /**
      * A variant on {@link #test_bind05()} where the {@link IV} having the
-     * cached {@link BigdataValue} is in the other source solution (test of
+     * cached {@link EmbergraphValue} is in the other source solution (test of
      * symmetry).
      */
     public void test_bind05b() {
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl
                 .getInstance(getName());
         
-        final BigdataLiteral lit = f.createLiteral(1);
+        final EmbergraphLiteral lit = f.createLiteral(1);
         
         final IVariable<?> x = Var.var("x");
         
-        final IV iv1 = new XSDNumericIV<BigdataLiteral>(1);
-        final IV iv2 = new XSDNumericIV<BigdataLiteral>(1);
-        final IV iv3 = new XSDNumericIV<BigdataLiteral>(1);
+        final IV iv1 = new XSDNumericIV<EmbergraphLiteral>(1);
+        final IV iv2 = new XSDNumericIV<EmbergraphLiteral>(1);
+        final IV iv3 = new XSDNumericIV<EmbergraphLiteral>(1);
         final IConstant<?> val1 = new Constant(iv1);
         final IConstant<?> val2 = new Constant(iv2);
         final IConstant<?> val3 = new Constant(iv3);
-        iv2.setValue((BigdataValue) lit);
-        iv3.setValue((BigdataValue) lit);
+        iv2.setValue((EmbergraphValue) lit);
+        iv3.setValue((EmbergraphValue) lit);
 
         final ListBindingSet expected = new ListBindingSet();
         expected.set(x, val3);
@@ -273,21 +273,21 @@ public class TestBind extends TestCase2 {
      */
     public void test_bind06() {
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl
                 .getInstance(getName());
         
-        final BigdataLiteral lit = f.createLiteral(1);
+        final EmbergraphLiteral lit = f.createLiteral(1);
         
         final IVariable<?> x = Var.var("x");
         
-        final IV iv1 = new XSDNumericIV<BigdataLiteral>(1);
-        final IV iv2 = new XSDNumericIV<BigdataLiteral>(1);
-        final IV iv3 = new XSDNumericIV<BigdataLiteral>(1);
+        final IV iv1 = new XSDNumericIV<EmbergraphLiteral>(1);
+        final IV iv2 = new XSDNumericIV<EmbergraphLiteral>(1);
+        final IV iv3 = new XSDNumericIV<EmbergraphLiteral>(1);
         final IConstant<?> val1 = new Constant(iv1);
         final IConstant<?> val2 = new Constant(iv2);
         final IConstant<?> val3 = new Constant(iv3);
-        iv2.setValue((BigdataValue) lit);
-        iv3.setValue((BigdataValue) lit);
+        iv2.setValue((EmbergraphValue) lit);
+        iv3.setValue((EmbergraphValue) lit);
 
         final ListBindingSet expected = new ListBindingSet();
         expected.set(x, val3);

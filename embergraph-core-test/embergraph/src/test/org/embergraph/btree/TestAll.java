@@ -75,8 +75,8 @@ public class TestAll extends TestCase {
         /*
          * Test the Map and Set implementations.
          */
-        suite.addTestSuite(TestBigdataMap.class);
-        suite.addTestSuite(TestBigdataSet.class);
+        suite.addTestSuite(TestEmbergraphMap.class);
+        suite.addTestSuite(TestEmbergraphSet.class);
 
         /*
          * Test fused views, including iterators for the fused view.

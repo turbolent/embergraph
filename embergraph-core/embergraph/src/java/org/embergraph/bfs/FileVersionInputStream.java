@@ -102,7 +102,7 @@ public class FileVersionInputStream extends InputStream {
 
         if (!src.hasNext()) {
 
-            BigdataFileSystem.log.info("No more blocks: id=" + id
+            EmbergraphFileSystem.log.info("No more blocks: id=" + id
                     + ", version=" + version);
 
             b = null;
@@ -146,7 +146,7 @@ public class FileVersionInputStream extends InputStream {
 
             len = 0;
 
-            BigdataFileSystem.log.info("Read zero bytes: id=" + id
+            EmbergraphFileSystem.log.info("Read zero bytes: id=" + id
                     + ", version=" + version + ", block=" + block);
 
         } else {
@@ -186,7 +186,7 @@ public class FileVersionInputStream extends InputStream {
 
             }
 
-            BigdataFileSystem.log.info("Read " + b.length + " bytes: id=" + id
+            EmbergraphFileSystem.log.info("Read " + b.length + " bytes: id=" + id
                     + ", version=" + version + ", block=" + block);
 
         }

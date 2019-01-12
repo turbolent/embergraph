@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.internal;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * 
@@ -71,7 +71,7 @@ public class InlineSuffixedIntegerURIHandler extends
 
 	@Override
 	public String getLocalNameFromDelegate(
-			final AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+			final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
 		return getUnpackedValueFromString(super
 				.getLocalNameFromDelegate(delegate)) + this.suffix;

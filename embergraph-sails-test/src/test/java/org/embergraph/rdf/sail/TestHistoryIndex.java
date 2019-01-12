@@ -26,6 +26,9 @@ package org.embergraph.rdf.sail;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.sail.SailException;
 
@@ -33,10 +36,7 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.changesets.ChangeAction;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
 import org.embergraph.rdf.sparql.ast.service.history.HistoryChangeRecord;
 import org.embergraph.rdf.sparql.ast.service.history.HistoryServiceFactory;
 import org.embergraph.rdf.spo.ISPO;
@@ -72,7 +72,7 @@ import cutthecrap.utils.striterators.Striterator;
  *          can reconcile on the statement indices, but this needs to be worked
  *          through in detail.
  */
-public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
+public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
 
 //    private static final Logger log = Logger.getLogger(TestHistoryIndex.class);
     
@@ -124,13 +124,13 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                         org.embergraph.rdf.store.AbstractTripleStore.Options.HISTORY_SERVICE,
                         "false");
 
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
 
         try {
 
             sail.initialize();
 
-            final BigdataSailConnection conn = sail.getConnection();
+            final EmbergraphSailConnection conn = sail.getConnection();
 
             try {
 
@@ -177,7 +177,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                 org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
 
         try {
 
@@ -191,7 +191,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
             final ISPO stmt0, stmt1;
             {
 
-                final BigdataSailConnection conn = sail.getConnection();
+                final EmbergraphSailConnection conn = sail.getConnection();
 
                 try {
 
@@ -208,16 +208,16 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                     // The index should be empty.
                     assertEquals(0L, ndx.rangeCount());
 
-                    final BigdataValueFactory f = (BigdataValueFactory) sail
+                    final EmbergraphValueFactory f = (EmbergraphValueFactory) sail
                             .getValueFactory();
 
-                    final BigdataURI A = f
+                    final EmbergraphURI A = f
                             .createURI("http://www.embergraph.org/A");
-                    final BigdataURI B = f
+                    final EmbergraphURI B = f
                             .createURI("http://www.embergraph.org/B");
-                    final BigdataURI C = f
+                    final EmbergraphURI C = f
                             .createURI("http://www.embergraph.org/C");
-                    final BigdataURI rdfType = f.asValue(RDF.TYPE);
+                    final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.addStatement(A, rdfType, B);
                     conn.addStatement(A, rdfType, C);
@@ -276,7 +276,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
             final long revisionTime1;
             {
                 
-                final BigdataSailConnection conn = sail.getConnection();
+                final EmbergraphSailConnection conn = sail.getConnection();
 
                 try {
 
@@ -293,16 +293,16 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                     // The index should not be empty.
                     assertEquals(2L, ndx.rangeCount());
 
-                    final BigdataValueFactory f = (BigdataValueFactory) sail
+                    final EmbergraphValueFactory f = (EmbergraphValueFactory) sail
                             .getValueFactory();
 
-                    final BigdataURI A = f
+                    final EmbergraphURI A = f
                             .createURI("http://www.embergraph.org/A");
-                    final BigdataURI B = f
+                    final EmbergraphURI B = f
                             .createURI("http://www.embergraph.org/B");
-//                    final BigdataURI C = f
+//                    final EmbergraphURI C = f
 //                            .createURI("http://www.bigdata.com/C");
-                    final BigdataURI rdfType = f.asValue(RDF.TYPE);
+                    final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.removeStatements(A, rdfType, B);
 
@@ -386,7 +386,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                 org.embergraph.rdf.store.AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
 
         try {
 
@@ -400,7 +400,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
             final ISPO stmt0, stmt1;
             {
 
-                final BigdataSailConnection conn = sail.getConnection();
+                final EmbergraphSailConnection conn = sail.getConnection();
 
                 try {
 
@@ -417,16 +417,16 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                     // The index should be empty.
                     assertEquals(0L, ndx.rangeCount());
 
-                    final BigdataValueFactory f = (BigdataValueFactory) sail
+                    final EmbergraphValueFactory f = (EmbergraphValueFactory) sail
                             .getValueFactory();
 
-                    final BigdataURI A = f
+                    final EmbergraphURI A = f
                             .createURI("http://www.embergraph.org/A");
-                    final BigdataURI B = f
+                    final EmbergraphURI B = f
                             .createURI("http://www.embergraph.org/B");
-                    final BigdataURI C = f
+                    final EmbergraphURI C = f
                             .createURI("http://www.embergraph.org/C");
-                    final BigdataURI rdfType = f.asValue(RDF.TYPE);
+                    final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.addStatement(A, rdfType, B);
                     conn.addStatement(A, rdfType, C);
@@ -485,7 +485,7 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
             final long revisionTime1;
             {
                 
-                final BigdataSailConnection conn = sail.getConnection();
+                final EmbergraphSailConnection conn = sail.getConnection();
 
                 try {
 
@@ -502,16 +502,16 @@ public class TestHistoryIndex extends ProxyBigdataSailTestCase  {
                     // The index should not be empty.
                     assertEquals(2L, ndx.rangeCount());
 
-                    final BigdataValueFactory f = (BigdataValueFactory) sail
+                    final EmbergraphValueFactory f = (EmbergraphValueFactory) sail
                             .getValueFactory();
 
-                    final BigdataURI A = f
+                    final EmbergraphURI A = f
                             .createURI("http://www.embergraph.org/A");
-                    final BigdataURI B = f
+                    final EmbergraphURI B = f
                             .createURI("http://www.embergraph.org/B");
-//                    final BigdataURI C = f
+//                    final EmbergraphURI C = f
 //                            .createURI("http://www.bigdata.com/C");
-                    final BigdataURI rdfType = f.asValue(RDF.TYPE);
+                    final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.removeStatements(A, rdfType, B);
 

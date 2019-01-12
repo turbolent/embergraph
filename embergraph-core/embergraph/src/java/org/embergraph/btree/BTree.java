@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
 import org.embergraph.btree.Leaf.ILeafListener;
 import org.embergraph.btree.data.ILeafData;
@@ -1033,12 +1033,12 @@ public class BTree extends AbstractBTree implements //ICommitter,
         // write it on the store.
         checkpoint.write(store);
         
-        if (BigdataStatics.debug||INFO) {
+        if (EmbergraphStatics.debug||INFO) {
             final String msg = "name=" + metadata.getName()
                     + ", writeQueue{size=" + writeRetentionQueue.size()
                     + ",distinct=" + ndistinctOnWriteRetentionQueue + "} : "
                     + checkpoint;
-            if (BigdataStatics.debug)
+            if (EmbergraphStatics.debug)
                 System.err.println(msg);
             if (INFO)
                 log.info(msg);

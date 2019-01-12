@@ -26,23 +26,23 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.model.Resource;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.InsertData;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
@@ -69,7 +69,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  *          TODO Test recursive embedded at depth GT 1.
  */
 public class TestReificationDoneRightParser extends
-        AbstractBigdataExprBuilderTestCase {
+    AbstractEmbergraphExprBuilderTestCase {
 
 	private static final Logger log = Logger
 			.getLogger(TestReificationDoneRightParser.class);
@@ -655,7 +655,7 @@ public class TestReificationDoneRightParser extends
     public void test_triple_ref_pattern_all_vars()
             throws MalformedQueryException, TokenMgrError, ParseException {
 
-        if (!BigdataStatics.runKnownBadTests) // FIXME RDR TEST KNOWN TO FAIL.
+        if (!EmbergraphStatics.runKnownBadTests) // FIXME RDR TEST KNOWN TO FAIL.
             return;
 
         final String sparql
@@ -914,11 +914,11 @@ public class TestReificationDoneRightParser extends
 
             expected.addChild(op);
 
-            final BigdataURI s = valueFactory.createURI("http://example/s");
-            final BigdataURI p = valueFactory.createURI("http://example/p");
-            final BigdataURI order = valueFactory.createURI("http://example/order");
-            final BigdataLiteral d = valueFactory.createLiteral("d");
-            final BigdataLiteral five = valueFactory.createLiteral(5);
+            final EmbergraphURI s = valueFactory.createURI("http://example/s");
+            final EmbergraphURI p = valueFactory.createURI("http://example/p");
+            final EmbergraphURI order = valueFactory.createURI("http://example/order");
+            final EmbergraphLiteral d = valueFactory.createLiteral("d");
+            final EmbergraphLiteral five = valueFactory.createLiteral(5);
 
          /*
           * TODO The following is my proposal for how this should be
@@ -929,18 +929,18 @@ public class TestReificationDoneRightParser extends
           */
             
             // SP(:s :p d) as ?sid1) .
-            final BigdataStatement s1 = valueFactory.createStatement(
-                  (BigdataResource)s,
-                  (BigdataURI)p,
-                  (BigdataValue)d);
-            final BigdataBNode sid1 = valueFactory.createBNode(s1);
+            final EmbergraphStatement s1 = valueFactory.createStatement(
+                  (EmbergraphResource)s,
+                  (EmbergraphURI)p,
+                  (EmbergraphValue)d);
+            final EmbergraphBNode sid1 = valueFactory.createBNode(s1);
 
             // SP(?sid, :p, 5).
-            final BigdataStatement s2 = valueFactory.createStatement(
+            final EmbergraphStatement s2 = valueFactory.createStatement(
                   (Resource)sid1,
-                  (BigdataURI)order,
-                  (BigdataValue) five);
-            final BigdataStatement[] data = new BigdataStatement[] {
+                  (EmbergraphURI)order,
+                  (EmbergraphValue) five);
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                   s1, s2
             };
             op.setData(data);

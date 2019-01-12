@@ -1,5 +1,5 @@
-org.embergraph.rdf.rio.turtle.BigdataTurtleWriterFactory
-org.embergraph.rdf.rio.json.BigdataSPARQLResultsJSONWriterForConstructFactory
+org.embergraph.rdf.rio.turtle.EmbergraphTurtleWriterFactory
+org.embergraph.rdf.rio.json.EmbergraphSPARQLResultsJSONWriterForConstructFactory
 org.openrdf.rio.binary.BinaryRDFWriterFactory
 org.openrdf.rio.n3.N3WriterFactory
 org.openrdf.rio.nquads.NQuadsWriterFactory

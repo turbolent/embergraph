@@ -7,8 +7,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 
 /**
  * A {@link URI} modeled as a namespace {@link IV} plus an inline Unicode
@@ -18,7 +18,7 @@ import org.embergraph.rdf.model.BigdataURI;
  * @version $Id$
  * @param <V>
  */
-public class PartlyInlineURIIV<V extends BigdataURI> extends
+public class PartlyInlineURIIV<V extends EmbergraphURI> extends
         AbstractNonInlineExtensionIVWithDelegateIV<V, URI> {
 
 	/**
@@ -51,7 +51,7 @@ public class PartlyInlineURIIV<V extends BigdataURI> extends
     }
 
 	public PartlyInlineURIIV(
-			final AbstractLiteralIV<BigdataLiteral, ?> delegate, 
+			final AbstractLiteralIV<EmbergraphLiteral, ?> delegate,
 			final IV<?, ?> namespace) {
 
         super(VTE.URI, delegate, namespace);

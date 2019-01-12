@@ -35,6 +35,10 @@ import java.util.TimeZone;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
@@ -67,12 +71,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
 import org.embergraph.rdf.internal.impl.uri.FullyInlineURIIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
@@ -84,7 +84,7 @@ import org.embergraph.util.InnerCause;
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class LexiconConfiguration<V extends BigdataValue>
+public class LexiconConfiguration<V extends EmbergraphValue>
         implements ILexiconConfiguration<V> {
 
     private static final Logger log =
@@ -185,7 +185,7 @@ public class LexiconConfiguration<V extends BigdataValue>
     /**
      * The value factory for the lexicon.
      */
-    private final BigdataValueFactory valueFactory;
+    private final EmbergraphValueFactory valueFactory;
 
     /**
      * The inline URI factory for the lexicon.
@@ -197,13 +197,13 @@ public class LexiconConfiguration<V extends BigdataValue>
      * extension to the {@link IExtension}.
      */
     @SuppressWarnings("rawtypes")
-    private final Map<IV, IExtension<? extends BigdataValue>> iv2ext;
+    private final Map<IV, IExtension<? extends EmbergraphValue>> iv2ext;
 
     /**
      * Mapping from the string value of the datatype URI for a registered
      * extension to the {@link IExtension}.
      */
-    private final Map<String, IExtension<? extends BigdataValue>> datatype2ext;
+    private final Map<String, IExtension<? extends EmbergraphValue>> datatype2ext;
     
     /**
      * The set of inline datatypes that should be included in the text index 
@@ -219,7 +219,7 @@ public class LexiconConfiguration<V extends BigdataValue>
     private final ArrayList<IMathOpHandler> typeHandlers = new ArrayList<IMathOpHandler>();
     
     @Override
-    public final BigdataValueFactory getValueFactory() {
+    public final EmbergraphValueFactory getValueFactory() {
 
         return valueFactory;
 
@@ -354,7 +354,7 @@ public class LexiconConfiguration<V extends BigdataValue>
             final boolean enableRawRecordsSupport,
             final IExtensionFactory xFactory,
             final Vocabulary vocab,
-            final BigdataValueFactory valueFactory,
+            final EmbergraphValueFactory valueFactory,
             final IInlineURIFactory uriFactory,
             final boolean geoSpatial,
             final GeoSpatialConfig geoSpatialConfig) {
@@ -400,9 +400,9 @@ public class LexiconConfiguration<V extends BigdataValue>
 		 * synchronization.
 		 */
 
-        iv2ext = new LinkedHashMap<IV, IExtension<? extends BigdataValue>>();
+        iv2ext = new LinkedHashMap<IV, IExtension<? extends EmbergraphValue>>();
 
-        datatype2ext = new LinkedHashMap<String, IExtension<? extends BigdataValue>>();
+        datatype2ext = new LinkedHashMap<String, IExtension<? extends EmbergraphValue>>();
 
     }
 
@@ -410,17 +410,17 @@ public class LexiconConfiguration<V extends BigdataValue>
     @SuppressWarnings("unchecked")
     public void initExtensions(final IDatatypeURIResolver resolver) {
 
-        xFactory.init(resolver, (ILexiconConfiguration<BigdataValue>) this/* config */);
+        xFactory.init(resolver, (ILexiconConfiguration<EmbergraphValue>) this/* config */);
 
         @SuppressWarnings("rawtypes")
-        final Iterator<IExtension<? extends BigdataValue>> itr = xFactory.getExtensions();
+        final Iterator<IExtension<? extends EmbergraphValue>> itr = xFactory.getExtensions();
 
         while(itr.hasNext()) {
             
             final IExtension<?> extension = itr.next();
             
-//            final BigdataURI datatype = extension.getDatatype();
-        	for (BigdataURI datatype : extension.getDatatypes()) {
+//            final EmbergraphURI datatype = extension.getDatatype();
+        	for (EmbergraphURI datatype : extension.getDatatypes()) {
 
 	            if (datatype == null)
 	                continue;
@@ -453,14 +453,14 @@ public class LexiconConfiguration<V extends BigdataValue>
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public V asValue(final LiteralExtensionIV<?> iv
-//            ,final BigdataValueFactory vf
+//            ,final EmbergraphValueFactory vf
             ) {
 
         // The datatypeIV for the ExtensionIV.
         final IV datatypeIV = iv.getExtensionIV();
 
         // Find the IExtension from the datatype IV.
-        final IExtension<? extends BigdataValue> ext = iv2ext.get(datatypeIV);
+        final IExtension<? extends EmbergraphValue> ext = iv2ext.get(datatypeIV);
 
         if (ext == null)
             throw new RuntimeException("Unknown extension: " + datatypeIV);
@@ -525,10 +525,10 @@ public class LexiconConfiguration<V extends BigdataValue>
 
         }
 
-        if (iv != null && value instanceof BigdataValue) {
+        if (iv != null && value instanceof EmbergraphValue) {
 
-            // Cache the IV on the BigdataValue.
-            ((BigdataValue) value).setIV(iv);
+            // Cache the IV on the EmbergraphValue.
+            ((EmbergraphValue) value).setIV(iv);
 
         }
 
@@ -547,7 +547,7 @@ public class LexiconConfiguration<V extends BigdataValue>
 	 *         can not be inlined into the statement indices.
 	 */
     @SuppressWarnings("unchecked")
-    private IV<BigdataURI, ?> createInlineURIIV(final URI value) {
+    private IV<EmbergraphURI, ?> createInlineURIIV(final URI value) {
 
 // deprecated in favor of the extensible InlineURIFactory mechanism
 //    	try {
@@ -585,7 +585,7 @@ public class LexiconConfiguration<V extends BigdataValue>
 
         if (value.stringValue().length() <= maxInlineTextLength) {
 
-            return new FullyInlineURIIV<BigdataURI>(value);
+            return new FullyInlineURIIV<EmbergraphURI>(value);
 
         }
 
@@ -595,15 +595,15 @@ public class LexiconConfiguration<V extends BigdataValue>
 
             final String namespace = ((URI) value).getNamespace();
 
-            final IV<BigdataURI, ?> namespaceIV = vocab.get(new URIImpl(namespace));
+            final IV<EmbergraphURI, ?> namespaceIV = vocab.get(new URIImpl(namespace));
 
             if (namespaceIV != null) {
 
-                final FullyInlineTypedLiteralIV<BigdataLiteral> localNameIV =
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                final FullyInlineTypedLiteralIV<EmbergraphLiteral> localNameIV =
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                                 localName);
 
-                return new URIExtensionIV<BigdataURI>(localNameIV, namespaceIV);
+                return new URIExtensionIV<EmbergraphURI>(localNameIV, namespaceIV);
 
             }
 
@@ -622,7 +622,7 @@ public class LexiconConfiguration<V extends BigdataValue>
      */
     @Override
     public String getInlineURILocalNameFromDelegate(final URI namespace,
-            final AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+            final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
         return uriFactory.getLocalNameFromDelegate(namespace, delegate);
     }
 
@@ -636,11 +636,11 @@ public class LexiconConfiguration<V extends BigdataValue>
      * @return The inline {@link IV} -or- <code>null</code> if the
      *         {@link Literal} can not be inlined into the statement indices.
      */
-    private IV<BigdataLiteral,?> createInlineLiteralIV(final Literal value) {
+    private IV<EmbergraphLiteral,?> createInlineLiteralIV(final Literal value) {
 
         final URI datatype = value.getDatatype();
 
-        IV<BigdataLiteral, ?> iv = null;
+        IV<EmbergraphLiteral, ?> iv = null;
 
         if (datatype != null && datatype2ext.containsKey(datatype.stringValue())) {
 
@@ -693,16 +693,16 @@ public class LexiconConfiguration<V extends BigdataValue>
      *         TODO Should we explicitly disallow extensions which override the
      *         basic inlining behavior for xsd datatypes?
      */
-    private AbstractInlineIV<BigdataLiteral, ?> createExtensionIV(
+    private AbstractInlineIV<EmbergraphLiteral, ?> createExtensionIV(
             final Literal value, final URI datatype) {
 
-        final IExtension<? extends BigdataValue> xFactory =
+        final IExtension<? extends EmbergraphValue> xFactory =
             datatype2ext.get(datatype.stringValue());
 
         try {
 
             @SuppressWarnings("unchecked")
-            final AbstractInlineIV<BigdataLiteral, ?> iv = xFactory
+            final AbstractInlineIV<EmbergraphLiteral, ?> iv = xFactory
                     .createIV(value);
 
             return iv;
@@ -749,7 +749,7 @@ public class LexiconConfiguration<V extends BigdataValue>
      * @return The fully inline IV -or- <code>null</code> if the {@link Literal}
      *         could not be inlined within the configured constraints.
      */
-    private AbstractInlineIV<BigdataLiteral, ?> createInlineUnicodeLiteral(
+    private AbstractInlineIV<EmbergraphLiteral, ?> createInlineUnicodeLiteral(
             final Literal value) {
 
         if (maxInlineTextLength > 0) {
@@ -759,11 +759,11 @@ public class LexiconConfiguration<V extends BigdataValue>
              * a fully inline IV.
              */
 
-            final long totalLength = BigdataValueSerializer.getStringLength(value);
+            final long totalLength = EmbergraphValueSerializer.getStringLength(value);
 
             if (totalLength <= maxInlineTextLength) {
 
-                return new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                         value.getLabel(), value.getLanguage(),
                         value.getDatatype());
 
@@ -793,7 +793,7 @@ public class LexiconConfiguration<V extends BigdataValue>
 	 *         
 	 * @see BLZG-1507 (Implement support for DTE extension types for URIs)
 	 */
-    private AbstractInlineIV<BigdataLiteral, ?> createInlineDatatypeIV(
+    private AbstractInlineIV<EmbergraphLiteral, ?> createInlineDatatypeIV(
             final Literal value, final URI datatype) {
 
         // Get the native (intrinsic) DTE.
@@ -839,12 +839,12 @@ public class LexiconConfiguration<V extends BigdataValue>
 					 * Extension for IPv4. Throws UnknownHostException if not
 					 * parseable as an IPv4.
 					 */
-					return new IPv4AddrIV<BigdataLiteral>(v);
+					return new IPv4AddrIV<EmbergraphLiteral>(v);
                 case PACKED_LONG:
 				    /*
 				     * Extension for packed long value in the range [0;72057594037927935L].
 				     */
-				    return new PackedLongIV<BigdataLiteral>(v);					
+				    return new PackedLongIV<EmbergraphLiteral>(v);
 				default:
 					// Not handled.
 					return null;
@@ -856,41 +856,41 @@ public class LexiconConfiguration<V extends BigdataValue>
 			 */
             switch (dte) {
             case XSDBoolean:
-                return new XSDBooleanIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDBooleanIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseBoolean(v));
             case XSDByte:
-                return new XSDNumericIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseByte(v));
             case XSDShort:
-                return new XSDNumericIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseShort(v));
             case XSDInt:
-                return new XSDNumericIV<BigdataLiteral>(XMLDatatypeUtil.parseInt(v));
+                return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil.parseInt(v));
             case XSDLong:
-                return new XSDNumericIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseLong(v));
             case XSDFloat:
-                return new XSDNumericIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseFloat(v));
             case XSDDouble:
-                return new XSDNumericIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDNumericIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseDouble(v));
             case XSDInteger:
-                return new XSDIntegerIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDIntegerIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseInteger(v));
             case XSDDecimal:
-                return new XSDDecimalIV<BigdataLiteral>(XMLDatatypeUtil
+                return new XSDDecimalIV<EmbergraphLiteral>(XMLDatatypeUtil
                         .parseDecimal(v));
             case UUID:
-                return new UUIDLiteralIV<BigdataLiteral>(UUID.fromString(v));
+                return new UUIDLiteralIV<EmbergraphLiteral>(UUID.fromString(v));
             case XSDUnsignedByte:
-                return new XSDUnsignedByteIV<BigdataLiteral>(parseUnsignedByte(v));
+                return new XSDUnsignedByteIV<EmbergraphLiteral>(parseUnsignedByte(v));
             case XSDUnsignedShort:
-                return new XSDUnsignedShortIV<BigdataLiteral>(parseUnsignedShort(v));
+                return new XSDUnsignedShortIV<EmbergraphLiteral>(parseUnsignedShort(v));
            case XSDUnsignedInt:
-                return new XSDUnsignedIntIV<BigdataLiteral>(parseUnsignedInt(v));
+                return new XSDUnsignedIntIV<EmbergraphLiteral>(parseUnsignedInt(v));
             case XSDUnsignedLong:
-				return new XSDUnsignedLongIV<BigdataLiteral>(parseUnsignedLong(v));
+				return new XSDUnsignedLongIV<EmbergraphLiteral>(parseUnsignedLong(v));
 			case Extension: 
 				// Fall through. Should have been handled above.
             default:
@@ -998,7 +998,7 @@ public class LexiconConfiguration<V extends BigdataValue>
      * @return The inline {@link IV} -or- <code>null</code> if the {@link BNode}
      *         can not be inlined into the statement indices.
      */
-    private IV<BigdataBNode, ?> createInlineBNodeIV(final BNode value) {
+    private IV<EmbergraphBNode, ?> createInlineBNodeIV(final BNode value) {
 
         final String id = value.getID();
 
@@ -1026,7 +1026,7 @@ public class LexiconConfiguration<V extends BigdataValue>
 
                 if (uuid.toString().equals(subStr)) {
 
-                    return new UUIDBNodeIV<BigdataBNode>(uuid);
+                    return new UUIDBNodeIV<EmbergraphBNode>(uuid);
 
                 }
 
@@ -1055,7 +1055,7 @@ public class LexiconConfiguration<V extends BigdataValue>
 
                 if (i.toString().equals(subStr)) {
 
-                    return new NumericBNodeIV<BigdataBNode>(i);
+                    return new NumericBNodeIV<EmbergraphBNode>(i);
 
                 }
 
@@ -1076,7 +1076,7 @@ public class LexiconConfiguration<V extends BigdataValue>
              * Inline as [Unicode].
              */
 
-            return new FullyInlineUnicodeBNodeIV<BigdataBNode>(id);
+            return new FullyInlineUnicodeBNodeIV<EmbergraphBNode>(id);
 
         }
 

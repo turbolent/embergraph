@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 import org.embergraph.btree.IIndex;
@@ -16,8 +17,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Batch resolve {@link BlobIV}s to RDF {@link Value}s.
@@ -33,18 +33,18 @@ class BatchResolveBlobIVsTask implements Callable<Void> {
     private final ExecutorService service;
     private final IIndex ndx;
     private final Collection<BlobIV<?>> ivs;
-    private final ConcurrentHashMap<IV<?,?>/* iv */, BigdataValue/* term */> ret;
-    private final ITermCache<IV<?,?>, BigdataValue> termCache;
-    private final BigdataValueFactory valueFactory;
+    private final ConcurrentHashMap<IV<?,?>/* iv */, EmbergraphValue/* term */> ret;
+    private final ITermCache<IV<?,?>, EmbergraphValue> termCache;
+    private final EmbergraphValueFactory valueFactory;
     private final int MAX_CHUNK;
 
     public BatchResolveBlobIVsTask(
             final ExecutorService service,
             final IIndex ndx,
             final Collection<BlobIV<?>> ivs,
-            final ConcurrentHashMap<IV<?, ?>/* iv */, BigdataValue/* term */> ret,
-            final ITermCache<IV<?,?>, BigdataValue> termCache,
-            final BigdataValueFactory valueFactory,
+            final ConcurrentHashMap<IV<?, ?>/* iv */, EmbergraphValue/* term */> ret,
+            final ITermCache<IV<?,?>, EmbergraphValue> termCache,
+            final EmbergraphValueFactory valueFactory,
             final int chunkSize) {
 
         this.service = service;

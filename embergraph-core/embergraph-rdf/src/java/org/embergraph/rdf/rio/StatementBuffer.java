@@ -36,6 +36,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphBNodeImpl;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -51,13 +58,6 @@ import org.embergraph.jsr166.LinkedBlockingQueue;
 import org.embergraph.rdf.changesets.ChangeAction;
 import org.embergraph.rdf.changesets.ChangeRecord;
 import org.embergraph.rdf.changesets.IChangeLog;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataBNodeImpl;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
@@ -101,12 +101,12 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     /**
      * Buffer for parsed RDF {@link Value}s.
      */
-    protected final BigdataValue[] values;
+    protected final EmbergraphValue[] values;
     
     /**
      * Buffer for parsed RDF {@link Statement}s.
      */
-    protected final BigdataStatement[] stmts;
+    protected final EmbergraphStatement[] stmts;
 
     /**
      * #of valid entries in {@link #values}.
@@ -142,7 +142,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
      * Map used to filter out duplicate terms.  The use of this map provides
      * a ~40% performance gain.
      */
-	final private Map<Value, BigdataValue> distinctTermMap;
+	final private Map<Value, EmbergraphValue> distinctTermMap;
 
     /**
      * A canonicalizing map for blank nodes. This map MUST be cleared before you
@@ -152,7 +152,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
      * loading a large document with a lot of blank nodes the map will also
      * become large.
      */
-    private Map<String, BigdataBNode> bnodes;
+    private Map<String, EmbergraphBNode> bnodes;
     
     /**
      * The #of blank nodes, which are not resolved and thus will require adding
@@ -181,7 +181,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
      * always blank nodes and we do not need to defer statements, only maintain
      * the canonicalizing {@link #bnodes} mapping.
      */
-    private Set<BigdataStatement> deferredStmts;
+    private Set<EmbergraphStatement> deferredStmts;
     
     /**
      * RDR statements.  Map to a bnode used in other statements.  Need to defer
@@ -189,7 +189,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
      * statements about it (since we need to make sure the ground version is 
      * present).
      */
-    private Map<BigdataBNodeImpl, ReifiedStmt> reifiedStmts;
+    private Map<EmbergraphBNodeImpl, ReifiedStmt> reifiedStmts;
 
     /**
      * <code>true</code> if statement identifiers are enabled.
@@ -246,16 +246,16 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
         
     }
 
-    protected final BigdataValueFactory valueFactory;
+    protected final EmbergraphValueFactory valueFactory;
 
     /**
      * Reification vocabulary.
      */
-    private final BigdataURI RDF_SUBJECT;
-    private final BigdataURI RDF_PREDICATE;
-    private final BigdataURI RDF_OBJECT;
-    private final BigdataURI RDF_STATEMENT;
-    private final BigdataURI RDF_TYPE;
+    private final EmbergraphURI RDF_SUBJECT;
+    private final EmbergraphURI RDF_PREDICATE;
+    private final EmbergraphURI RDF_OBJECT;
+    private final EmbergraphURI RDF_STATEMENT;
+    private final EmbergraphURI RDF_TYPE;
     
     /**
      * The maximum #of Statements, URIs, Literals, or BNodes that the buffer can
@@ -394,7 +394,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 		counters.addCounter("bnodesSize", new Instrument<Integer>() {
 			@Override
 			public void sample() {
-				final Map<String, BigdataBNode> t = bnodes;
+				final Map<String, EmbergraphBNode> t = bnodes;
 				if (t != null)
 					setValue(t.size());
 			}
@@ -417,7 +417,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 		counters.addCounter("distinctTermMapSize", new Instrument<Integer>() {
 			@Override
 			public void sample() {
-				final Map<Value, BigdataValue> t = distinctTermMap;
+				final Map<Value, EmbergraphValue> t = distinctTermMap;
 				if (t != null)
 					setValue(t.size());
 			}
@@ -632,9 +632,9 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 
         this.queueCapacity = queueCapacity;
         
-        values = new BigdataValue[capacity * arity + 5];
+        values = new EmbergraphValue[capacity * arity + 5];
         
-        stmts = new BigdataStatement[capacity];
+        stmts = new EmbergraphStatement[capacity];
 
         /*
          * initialize capacity to N times the #of statements allowed. this
@@ -646,7 +646,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
          * hash map.
          */
         
-        distinctTermMap = new HashMap<Value, BigdataValue>(capacity * arity);
+        distinctTermMap = new HashMap<Value, EmbergraphValue>(capacity * arity);
             
         this.statementIdentifiers = database.getStatementIdentifiers();
         
@@ -675,7 +675,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     
 		/**
 		 * TODO BLZG-1522. There is some odd interaction with SIDS that causes a
-		 * thrown exception from BigdataBNodeImpl.getIV() when the queue is used
+		 * thrown exception from EmbergraphBNodeImpl.getIV() when the queue is used
 		 * with sids....
 		 * 
 		 * <pre>
@@ -976,7 +976,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //     * 
 //     * <li>Collect all deferred statements whose blank node bindings never show
 //     * up in the context position of a statement (
-//     * {@link BigdataBNode#getStatementIdentifier()} is <code>false</code>).
+//     * {@link EmbergraphBNode#getStatementIdentifier()} is <code>false</code>).
 //     * Those blank nodes are NOT statement identifiers so we insert them into
 //     * the lexicon and the insert the collected statements as well.</li>
 //     * 
@@ -1024,9 +1024,9 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //            // stage 0
 //            if (reifiedStmts != null) {
 //            	
-//            	for (Map.Entry<BigdataBNodeImpl, ReifiedStmt> e : reifiedStmts.entrySet()) {
+//            	for (Map.Entry<EmbergraphBNodeImpl, ReifiedStmt> e : reifiedStmts.entrySet()) {
 //            	
-//            		final BigdataBNodeImpl sid = e.getKey();
+//            		final EmbergraphBNodeImpl sid = e.getKey();
 //            		
 //            		final ReifiedStmt reifiedStmt = e.getValue();
 //            		
@@ -1038,7 +1038,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //            			
 //            		}
 //
-//            		final BigdataStatement stmt = valueFactory.createStatement(
+//            		final EmbergraphStatement stmt = valueFactory.createStatement(
 //            				reifiedStmt.getSubject(), 
 //            				reifiedStmt.getPredicate(), 
 //            				reifiedStmt.getObject(), 
@@ -1057,7 +1057,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //            	
 //            	if (log.isInfoEnabled()) {
 //            	
-//            		for (BigdataBNodeImpl sid : reifiedStmts.keySet()) {
+//            		for (EmbergraphBNodeImpl sid : reifiedStmts.keySet()) {
 //            	
 //            			log.info("sid: " + sid + ", iv=" + sid.getIV());
 //            			
@@ -1074,18 +1074,18 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //                
 //                int n = 0;
 //                
-//                final Iterator<BigdataStatement> itr = deferredStmts.iterator();
+//                final Iterator<EmbergraphStatement> itr = deferredStmts.iterator();
 //                
 //                while(itr.hasNext()) {
 //                    
-//                    final BigdataStatement stmt = itr.next();
+//                    final EmbergraphStatement stmt = itr.next();
 //
 //                    if (stmt.getSubject() instanceof BNode
-//                            && ((BigdataBNode) stmt.getSubject()).isStatementIdentifier())
+//                            && ((EmbergraphBNode) stmt.getSubject()).isStatementIdentifier())
 //                        continue;
 //
 //                    if (stmt.getObject() instanceof BNode
-//                            && ((BigdataBNode) stmt.getObject()).isStatementIdentifier())
+//                            && ((EmbergraphBNode) stmt.getObject()).isStatementIdentifier())
 //                        continue;
 //
 //                    if(log.isDebugEnabled()) {
@@ -1135,23 +1135,23 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //                    
 //                    final int nbefore = deferredStmts.size();
 //                    
-//                    final Iterator<BigdataStatement> itr = deferredStmts.iterator();
+//                    final Iterator<EmbergraphStatement> itr = deferredStmts.iterator();
 //                    
 //                    while(itr.hasNext()) {
 //                        
-//                        final BigdataStatement stmt = itr.next();
+//                        final EmbergraphStatement stmt = itr.next();
 //
 //                        if (log.isDebugEnabled()) {
 //                        	log.debug(stmt.getSubject() + ", iv=" + stmt.s());
 //                        }
 //                        
 //                        if (stmt.getSubject() instanceof BNode
-//                                && ((BigdataBNode) stmt.getSubject()).isStatementIdentifier()
+//                                && ((EmbergraphBNode) stmt.getSubject()).isStatementIdentifier()
 //                                && stmt.s() == null)
 //                            continue;
 //
 //                        if (stmt.getObject() instanceof BNode
-//                                && ((BigdataBNode) stmt.getObject()).isStatementIdentifier()
+//                                && ((EmbergraphBNode) stmt.getObject()).isStatementIdentifier()
 //                                && stmt.o() == null)
 //                            continue;
 //
@@ -1198,7 +1198,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //
 //                	if (log.isDebugEnabled()) {
 //                		
-//                		for (BigdataStatement s : deferredStmts) {
+//                		for (EmbergraphStatement s : deferredStmts) {
 //                			log.debug("could not ground: " + s);
 //                		}
 //                		
@@ -1272,10 +1272,10 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     }
     
     /**
-     * @todo could be replaced with {@link BigdataValueFactory
+     * @todo could be replaced with {@link EmbergraphValueFactory
      */
     @Override
-    public void setBNodeMap(final Map<String, BigdataBNode> bnodes) {
+    public void setBNodeMap(final Map<String, EmbergraphBNode> bnodes) {
     
         if (bnodes == null)
             throw new IllegalArgumentException();
@@ -1289,7 +1289,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
         
         bnodesResolvedCount = 0;
         
-        for (BigdataBNode bnode: bnodes.values()) {
+        for (EmbergraphBNode bnode: bnodes.values()) {
         	if (bnode.getIV() == null) {
         		bnodesTotalCount++;
         	}
@@ -1434,8 +1434,8 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 		 * used by merge(). single threaded access.
 		 */
 		private int numValues;
-		private BigdataValue[] values;
-    	private Map<BigdataValue, BigdataValue> distinctTermMap;
+		private EmbergraphValue[] values;
+    	private Map<EmbergraphValue, EmbergraphValue> distinctTermMap;
     	
     	MergeUtility() {
     		
@@ -1497,30 +1497,30 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 				}
 
 				// we will de-dup the values below.
-				values = new BigdataValue[maxValues];
+				values = new EmbergraphValue[maxValues];
 
 				// set map to find the distinct Values.
-				distinctTermMap = new HashMap<BigdataValue, BigdataValue>(maxValues);
+				distinctTermMap = new HashMap<EmbergraphValue, EmbergraphValue>(maxValues);
 
 			}
 
 			// copy statements, finding distinct Values.
 			final int numStmts;
-			final BigdataStatement[] stmts;
+			final EmbergraphStatement[] stmts;
 			{
 				// we will not de-dup the statements.
-				stmts = new BigdataStatement[maxStmts];
+				stmts = new EmbergraphStatement[maxStmts];
 
 				int n = 0;
 				for (Batch<S> sb : avail) {
 					for (int i = 0; i < sb.numStmts; i++, n++) {
 						// Create new statement using distinct values.
-						final BigdataStatement stmt = (BigdataStatement) sb.stmts[i];
-						final BigdataResource s = (BigdataResource) getDistinctTerm(stmt.getSubject());
-						final BigdataURI p = (BigdataURI) getDistinctTerm(stmt.getPredicate());
-						final BigdataValue o = getDistinctTerm(stmt.getObject());
-						final BigdataResource c = stmt.getContext() == null ? null
-								: (BigdataResource) getDistinctTerm(stmt.getContext());
+						final EmbergraphStatement stmt = (EmbergraphStatement) sb.stmts[i];
+						final EmbergraphResource s = (EmbergraphResource) getDistinctTerm(stmt.getSubject());
+						final EmbergraphURI p = (EmbergraphURI) getDistinctTerm(stmt.getPredicate());
+						final EmbergraphValue o = getDistinctTerm(stmt.getObject());
+						final EmbergraphResource c = stmt.getContext() == null ? null
+								: (EmbergraphResource) getDistinctTerm(stmt.getContext());
 						stmts[n] = s.getValueFactory().createStatement(s, p, o, c, stmt.getStatementType());
 					}
 				}
@@ -1556,19 +1556,19 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 		 *             if the argument is null (so do not pass a null context in
 		 *             here!)
 		 */
-		private BigdataValue getDistinctTerm(final BigdataValue term) {
+		private EmbergraphValue getDistinctTerm(final EmbergraphValue term) {
 
 			if (term == null)
 				throw new IllegalArgumentException();
 			
-			if (term instanceof BigdataBNode && term.getIV() != null) {
+			if (term instanceof EmbergraphBNode && term.getIV() != null) {
 				// Skip already resolved blank nodes
 				// @see https://jira.blazegraph.com/browse/BLZG-1889 (ArrayIndexOutOfBound Exception)
 				return term;
 			}
 
 			// TODO BLZG-1532 (JAVA8) replace with putIfAbsent()
-			final BigdataValue existingTerm = distinctTermMap.get(term);
+			final EmbergraphValue existingTerm = distinctTermMap.get(term);
 
 			if (existingTerm != null) {
 
@@ -1671,11 +1671,11 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 
     	private final int numValues;
     	
-    	private final BigdataValue[] values;
+    	private final EmbergraphValue[] values;
     	
     	private final int numStmts;
     	
-    	private final BigdataStatement[] stmts;
+    	private final EmbergraphStatement[] stmts;
 
     	/**
     	 * Singleton instance constructor.
@@ -1701,9 +1701,9 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 				final IChangeLog changeLog,
 				final IWrittenSPOArray didWriteCallback,
 				final int numValues,
-				final BigdataValue[] values,
+				final EmbergraphValue[] values,
 				final int numStmts,
-				final BigdataStatement[] stmts
+				final EmbergraphStatement[] stmts
 		) {
 			this.database = database;
 			this.statementStore = statementStore;
@@ -1748,11 +1748,11 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 	    	 * Look for non-sid bnodes and add them to the values to be written
 	    	 * to the database (if they haven't already been written).
 	    	 */
-    		List<BigdataValue> bnodes = new ArrayList<>();
+    		List<EmbergraphValue> bnodes = new ArrayList<>();
     		
 	    	if (sb.bnodes != null) {
 
-		    	for (BigdataBNode bnode : sb.bnodes.values()) {
+		    	for (EmbergraphBNode bnode : sb.bnodes.values()) {
 		    		
 		    		// sid, skip
 		    		if (bnode.isStatementIdentifier())
@@ -1788,7 +1788,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 			    } else {
 				
 					// Need to recreate values array to ensure capacity for blank nodes
-					this.values = new BigdataValue[sb.numValues + bnodes.size()];
+					this.values = new EmbergraphValue[sb.numValues + bnodes.size()];
 					
 					cloned = true;
 					
@@ -1819,7 +1819,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 				// Clone array data.
 				
 				this.numStmts = sb.numStmts;
-				this.stmts = new BigdataStatement[sb.numStmts];
+				this.stmts = new EmbergraphStatement[sb.numStmts];
 				System.arraycopy(sb.stmts/* src */, 0/* srcPos */, this.stmts/* dest */, 0/* destPos */,
 						sb.numStmts);
 				
@@ -1862,21 +1862,21 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
                                         + values[i].getIV()
                                         + ")"
                                         + ((values[i] instanceof BNode) ? "sid="
-                                                + ((BigdataBNode) values[i]).isStatementIdentifier()
+                                                + ((EmbergraphBNode) values[i]).isStatementIdentifier()
                                                 : ""));
                     }
                 }
                 // Calculate #of bnodes, which were unresolved
-                for (BigdataValue v: values) {
-                	if (v instanceof BigdataBNode && v.getIV() == null) {
+                for (EmbergraphValue v: values) {
+                	if (v instanceof EmbergraphBNode && v.getIV() == null) {
                 		nBnodesResolved++;
                 	}
                 }
                 addTerms(database, values, numValues, readOnly);
                 // Substract #of bnodes, which remain unresolved
                 // as a result we have number of bnodes, which were resolved
-                for (BigdataValue v: values) {
-                	if (v instanceof BigdataBNode && v.getIV() == null) {
+                for (EmbergraphValue v: values) {
+                	if (v instanceof EmbergraphBNode && v.getIV() == null) {
                 		nBnodesResolved--;
                 	}
                 }
@@ -1889,7 +1889,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
                                         + values[i].getIV()
                                         + ")"
                                         + ((values[i] instanceof BNode) ? "sid="
-                                                + ((BigdataBNode) values[i]).isStatementIdentifier()
+                                                + ((EmbergraphBNode) values[i]).isStatementIdentifier()
                                                 : ""));
                     }
                 }
@@ -1926,7 +1926,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     	
     	static private void addTerms(
     			final AbstractTripleStore database,
-    			final BigdataValue[] terms,
+    			final EmbergraphValue[] terms,
     			final int numTerms,
     			final boolean readOnly
     			) {
@@ -1955,7 +1955,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
          * Adds the statements to each index (batch api, NO truth maintenance).
          * <p>
          * Pre-conditions: The {s,p,o} term identifiers for each
-         * {@link BigdataStatement} are defined.
+         * {@link EmbergraphStatement} are defined.
          * <p>
          * Note: If statement identifiers are enabled and the context position is
          * non-<code>null</code> then it will be unified with the statement
@@ -1983,7 +1983,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
          * @return The #of statements written on the database.
          */
     	final private static <S> long addStatements(final AbstractTripleStore database,
-    			final AbstractTripleStore statementStore, final BigdataStatement[] stmts, final int numStmts,
+    			final AbstractTripleStore statementStore, final EmbergraphStatement[] stmts, final int numStmts,
     			final IChangeLog changeLog,
     			final IWrittenSPOArray didWriteCallback) {
 
@@ -1991,7 +1991,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 
             for (int i = 0; i < tmp.length; i++) {
 
-                final BigdataStatement stmt = stmts[i];
+                final EmbergraphStatement stmt = stmts[i];
                 
                 final SPO spo = new SPO(stmt);
 
@@ -2031,14 +2031,14 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 //                    
 //                    final SPO spo = tmp[i];
 //                    
-//                    final BigdataStatement stmt = stmts[i];
+//                    final EmbergraphStatement stmt = stmts[i];
 
-//                    // verify that the BigdataStatement and SPO are the same triple.
+//                    // verify that the EmbergraphStatement and SPO are the same triple.
 //                    assert stmt.s() == spo.s;
 //                    assert stmt.p() == spo.p;
 //                    assert stmt.o() == spo.o;
 //                    
-//                    final BigdataResource c = stmt.getContext();
+//                    final EmbergraphResource c = stmt.getContext();
 //                    
 //                    if (c == null)
 //                        continue;
@@ -2240,8 +2240,8 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
                  * reset()).
                  */
                 flush();
-                bnodes = new HashMap<String, BigdataBNode>(bufferCapacity);
-                deferredStmts = new HashSet<BigdataStatement>(stmts.length);
+                bnodes = new HashMap<String, EmbergraphBNode>(bufferCapacity);
+                deferredStmts = new HashSet<EmbergraphStatement>(stmts.length);
             }
         }
         
@@ -2254,7 +2254,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     public void add(final Statement e) {
 
         add(e.getSubject(), e.getPredicate(), e.getObject(), e.getContext(),
-                (e instanceof BigdataStatement ? ((BigdataStatement) e)
+                (e instanceof EmbergraphStatement ? ((EmbergraphStatement) e)
                         .getStatementType() : null));
 
     }
@@ -2298,7 +2298,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
      * @return Either the term or the pre-existing term in the buffer with the
      *         same data.
      */
-    private BigdataValue getDistinctTerm(final BigdataValue term, final boolean addIfAbsent) {
+    private EmbergraphValue getDistinctTerm(final EmbergraphValue term, final boolean addIfAbsent) {
 
         if (term == null)
         	return null;
@@ -2313,16 +2313,16 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
              * another source.
              */
             
-            final BigdataBNode bnode = (BigdataBNode)term;
+            final EmbergraphBNode bnode = (EmbergraphBNode)term;
             
-        	final BigdataStatement stmt = bnode.getStatement();
+        	final EmbergraphStatement stmt = bnode.getStatement();
         	
             if (stmt != null) {
             	
             	bnode.setStatement(valueFactory.createStatement(
-            			(BigdataResource) getDistinctTerm(stmt.getSubject(), true),
-            			(BigdataURI) getDistinctTerm(stmt.getPredicate(), true),
-            			(BigdataValue) getDistinctTerm(stmt.getObject(), true)
+            			(EmbergraphResource) getDistinctTerm(stmt.getSubject(), true),
+            			(EmbergraphURI) getDistinctTerm(stmt.getPredicate(), true),
+            			(EmbergraphValue) getDistinctTerm(stmt.getObject(), true)
             			));
             	
             	/*
@@ -2346,7 +2346,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
                      * https://jira.blazegraph.com/browse/BLZG-1708 (DataLoader
                      * fails with ArrayIndexOutOfBoundsException).
                      */
-	                bnodes = new LinkedHashMap<String, BigdataBNode>(bufferCapacity);
+	                bnodes = new LinkedHashMap<String, EmbergraphBNode>(bufferCapacity);
 	                
 	                bnodesTotalCount = 0;
 	                
@@ -2358,7 +2358,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 	            } else {
 	
 	                // test canonicalizing map for blank nodes.
-	                final BigdataBNode existingBNode = bnodes.get(id);
+	                final EmbergraphBNode existingBNode = bnodes.get(id);
 	
 	                if (existingBNode != null) {
 	
@@ -2398,7 +2398,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 	         */
 	        
 			// TODO BLZG-1532 (JAVA8) replace with putIfAbsent()
-	        final BigdataValue existingTerm = distinctTermMap.get(term);
+	        final EmbergraphValue existingTerm = distinctTermMap.get(term);
 	        
 	        if (existingTerm != null) {
 	            
@@ -2453,7 +2453,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
         
     }
     
-    private void addTerm(final BigdataValue term) {
+    private void addTerm(final EmbergraphValue term) {
     	
     	if (term == null)
     		return;
@@ -2521,20 +2521,20 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     	
 //    	if (arity == 3) c = null;
     	
-        final BigdataResource s = (BigdataResource) 
+        final EmbergraphResource s = (EmbergraphResource)
         		getDistinctTerm(valueFactory.asValue(_s), true);
-        final BigdataURI p = (BigdataURI) 
+        final EmbergraphURI p = (EmbergraphURI)
         		getDistinctTerm(valueFactory.asValue(_p), true);
-        final BigdataValue o = 
+        final EmbergraphValue o =
         		getDistinctTerm(valueFactory.asValue(_o), true);
-        final BigdataResource c = (BigdataResource) 
+        final EmbergraphResource c = (EmbergraphResource)
         		getDistinctTerm(valueFactory.asValue(_c), true);
         
         /*
-         * Form the BigdataStatement object now that we have the bindings.
+         * Form the EmbergraphStatement object now that we have the bindings.
          */
 
-        final BigdataStatement stmt = valueFactory.createStatement(s, p, o, c, type);
+        final EmbergraphStatement stmt = valueFactory.createStatement(s, p, o, c, type);
 
         /*
          * Specifically looking for reification syntax:
@@ -2547,7 +2547,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
         	
         	if (equals(p, RDF_SUBJECT, RDF_PREDICATE, RDF_OBJECT)) {
         		
-	    		final BigdataBNodeImpl sid = (BigdataBNodeImpl) s;
+	    		final EmbergraphBNodeImpl sid = (EmbergraphBNodeImpl) s;
 	    		
 	        	if (sid.getStatement() != null) {
 
@@ -2561,7 +2561,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 	
 	    		if (reifiedStmts == null) {
 	    			
-	    			reifiedStmts = new HashMap<BigdataBNodeImpl, ReifiedStmt>();
+	    			reifiedStmts = new HashMap<EmbergraphBNodeImpl, ReifiedStmt>();
 	    			
 	    		}
 	    		
@@ -2643,15 +2643,15 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
         
 //        if (c != null && statementIdentifiers && c instanceof BNode) {
 //        	
-//        	((BigdataBNodeImpl) c).setStatement(stmt);
+//        	((EmbergraphBNodeImpl) c).setStatement(stmt);
 //        	
 //        }
 
     }
     
-    private void checkSid(final BigdataBNode sid, final URI p, final Value o) {
+    private void checkSid(final EmbergraphBNode sid, final URI p, final Value o) {
     	
-    	final BigdataStatement stmt = sid.getStatement();
+    	final EmbergraphStatement stmt = sid.getStatement();
     	
     	if ((p == RDF_SUBJECT && stmt.getSubject() != o) ||
     			(p == RDF_PREDICATE && stmt.getPredicate() != o) ||
@@ -2663,7 +2663,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     	
     }
     
-    private boolean equals(final BigdataValue v1, final BigdataValue... v2) {
+    private boolean equals(final EmbergraphValue v1, final EmbergraphValue... v2) {
     	
 		if (v2.length == 1) {
 			
@@ -2671,7 +2671,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 			
 		} else {
 			
-			for (BigdataValue v : v2) {
+			for (EmbergraphValue v : v2) {
 				
 				if (_equals(v1, v))
 					return true;
@@ -2684,7 +2684,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 
     }
     
-    private boolean _equals(final BigdataValue v1, final BigdataValue v2) {
+    private boolean _equals(final EmbergraphValue v1, final EmbergraphValue v2) {
 		
 		return v1 == v2;
 		
@@ -2707,10 +2707,10 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 		 */
 		private static final long serialVersionUID = -7706421769807306702L;
 		
-		private BigdataResource s;
-    	private BigdataURI p;
-    	private BigdataValue o;
-    	private BigdataResource c;
+		private EmbergraphResource s;
+    	private EmbergraphURI p;
+    	private EmbergraphValue o;
+    	private EmbergraphResource c;
     	
     	public ReifiedStmt() {
     	}
@@ -2720,34 +2720,34 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
     	}
     	
 		@Override
-		public BigdataResource getContext() {
+		public EmbergraphResource getContext() {
 			return c;
 		}
 
 		@Override
-		public BigdataValue getObject() {
+		public EmbergraphValue getObject() {
 			return o;
 		}
 
 		@Override
-		public BigdataURI getPredicate() {
+		public EmbergraphURI getPredicate() {
 			return p;
 		}
 
 		@Override
-		public BigdataResource getSubject() {
+		public EmbergraphResource getSubject() {
 			return s;
 		}
 
-		public void set(final URI p, final BigdataValue o) {
+		public void set(final URI p, final EmbergraphValue o) {
 			
 			if (p.toString().equals(RDF.SUBJECT.toString())) {
 				
-				setSubject((BigdataResource) o);
+				setSubject((EmbergraphResource) o);
 			
 			} else if (p.toString().equals(RDF.PREDICATE.toString())) {
 				
-				setPredicate((BigdataURI) o);
+				setPredicate((EmbergraphURI) o);
 			
 			} else if (p.toString().equals(RDF.OBJECT.toString())) {
 				
@@ -2765,19 +2765,19 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 			
 		}
 		
-		public void setSubject(final BigdataResource s) {
+		public void setSubject(final EmbergraphResource s) {
 			this.s = s;
 		}
 
-		public void setPredicate(final BigdataURI p) {
+		public void setPredicate(final EmbergraphURI p) {
 			this.p = p;
 		}
 
-		public void setObject(final BigdataValue o) {
+		public void setObject(final EmbergraphValue o) {
 			this.o = o;
 		}
 
-//		public void setContext(final BigdataResource c) {
+//		public void setContext(final EmbergraphResource c) {
 //			this.c = c;
 //		}
 		
@@ -2788,7 +2788,7 @@ public class StatementBuffer<S extends Statement> implements IStatementBuffer<S>
 
 	    }
 	    
-	    public BigdataStatement toStatement(final BigdataValueFactory vf) {
+	    public EmbergraphStatement toStatement(final EmbergraphValueFactory vf) {
 	    	
 	    	return vf.createStatement(s, p, o, c);
 	    	

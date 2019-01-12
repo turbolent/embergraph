@@ -42,22 +42,22 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.store.BigdataBindingSetResolverator;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.store.EmbergraphBindingSetResolverator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 
 /**
  * A vectored materialization operator based on pretty much the same logic as
- * {@link BigdataBindingSetResolverator}. However, this class caches the
- * resolved {@link BigdataValue} reference on the {@link IV} while the
- * {@link BigdataBindingSetResolverator} replaces the {@link IV} in the solution
- * with the {@link BigdataValue}. Also, this class does not filter out variables
+ * {@link EmbergraphBindingSetResolverator}. However, this class caches the
+ * resolved {@link EmbergraphValue} reference on the {@link IV} while the
+ * {@link EmbergraphBindingSetResolverator} replaces the {@link IV} in the solution
+ * with the {@link EmbergraphValue}. Also, this class does not filter out variables
  * which are not being materialized.
  * 
  * @see ChunkedMaterializationIterator
- * @see BigdataBindingSetResolverator
+ * @see EmbergraphBindingSetResolverator
  */
 public class ChunkedMaterializationOp extends PipelineOp {
 
@@ -262,7 +262,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     /**
      * Resolve a chunk of {@link IBindingSet}s into a chunk of
      * {@link IBindingSet}s in which {@link IV}s have been resolved to
-     * {@link BigdataValue}s.
+     * {@link EmbergraphValue}s.
      * 
      * @param required
      *            The variable(s) to be materialized or <code>null</code> to
@@ -387,7 +387,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
 
         // batch resolve term identifiers to terms; as a side-effect, this sets the cache
         // on the IVs that we pass in
-        final Map<IV<?, ?>, BigdataValue> terms = lex.getTerms(idToConstMap.keySet());
+        final Map<IV<?, ?>, EmbergraphValue> terms = lex.getTerms(idToConstMap.keySet());
         
         /*
          * Resolve the duplicates
@@ -461,11 +461,11 @@ public class ChunkedMaterializationOp extends PipelineOp {
      *            variables should have been resolved.
      * @param bindingSetIn
      *            A solution whose {@link IV}s will be resolved to the
-     *            corresponding {@link BigdataValue}s in the caller's
+     *            corresponding {@link EmbergraphValue}s in the caller's
      *            <code>terms</code> map. The {@link IVCache} associations are
      *            set as a side-effect.
      * @param terms
-     *            A map from {@link IV}s to {@link BigdataValue}s.
+     *            A map from {@link IV}s to {@link EmbergraphValue}s.
      *            
      * @param idsToConstMap mapping from IVs to the constant value containing the IV;
      *                      this map will be used to replace the binding set values 
@@ -478,7 +478,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     static private IBindingSet getBindingSet(
             final IVariable<?>[] required,
             final IBindingSet bindingSetIn,
-            final Map<IV<?, ?>, BigdataValue> terms,
+            final Map<IV<?, ?>, EmbergraphValue> terms,
             final Map<IV<?, ?>, IConstant<?>> idsToConstMap) {
 
         if (bindingSetIn == null)
@@ -540,7 +540,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
                     }
                     
                 } else {
-                    final BigdataValue value = terms.get(iv);
+                    final EmbergraphValue value = terms.get(iv);
                     conditionallySetIVCache(iv,value);
                 }                
 
@@ -571,7 +571,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
 
                 final IV<?, ?> iv = (IV<?, ?>) boundValue;
 
-                final BigdataValue value = terms.get(iv);
+                final EmbergraphValue value = terms.get(iv);
                 
                 /**
                  * As per https://jira.blazegraph.com/browse/BLZG-1591, we distinguish 
@@ -609,24 +609,24 @@ public class ChunkedMaterializationOp extends PipelineOp {
 	}
 
     /**
-	 * If the {@link BigdataValue} is non-null, then set it on the
+	 * If the {@link EmbergraphValue} is non-null, then set it on the
 	 * {@link IVCache} interface.
 	 * 
 	 * @param iv
 	 *            The {@link IV}
 	 * @param value
-	 *            The {@link BigdataValue} for that {@link IV} (from the
+	 *            The {@link EmbergraphValue} for that {@link IV} (from the
 	 *            dictionary).
 	 * 
 	 * @throws RuntimeException
-	 *             If the {@link BigdataValue} is null (could not be discovered
+	 *             If the {@link EmbergraphValue} is null (could not be discovered
 	 *             in the dictionary) and the {@link IV} requires
 	 *             materialization ({@link IV#needsMaterialization() is
 	 *             <code>true</code>).
 	 * 
 	 * @see #1028 (xsd:boolean materialization issue)
 	 */
-	private static void conditionallySetIVCache(IV<?, ?> iv, BigdataValue value) {
+	private static void conditionallySetIVCache(IV<?, ?> iv, EmbergraphValue value) {
 
 		if (value == null) {
 
@@ -641,7 +641,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
 			/*
 			 * Value was found in the dictionary, so replace the binding.
 			 * 
-			 * FIXME This probably needs to strip out the BigdataSail#NULL_GRAPH
+			 * FIXME This probably needs to strip out the EmbergraphSail#NULL_GRAPH
 			 * since that should not become bound.
 			 */
 			((IV) iv).setValue(value);

@@ -28,6 +28,11 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -42,17 +47,12 @@ import org.openrdf.query.Update;
 import org.openrdf.repository.RepositoryResult;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Test suite for SPARQL* features
  */
-public class TestSparqlStar extends ProxyBigdataSailTestCase {
+public class TestSparqlStar extends ProxyEmbergraphSailTestCase {
 
     @Override
     public Properties getProperties() {
@@ -66,10 +66,10 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
         final Properties props = super.getProperties();
         
         // no inference
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -94,19 +94,19 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
      */
     public void testSubject() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
 			assertEquals(0, cxn.getTripleStore().getStatementCount(true));
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
 
             // check insert
             {
@@ -123,15 +123,15 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
                 final URI p = vf.createURI("x:p");
                 final Literal o = vf.createLiteral("d");
 
-                final BigdataURI p1 = vf.createURI("x:order");
-                final BigdataLiteral o1 = vf.createLiteral(5);
+                final EmbergraphURI p1 = vf.createURI("x:order");
+                final EmbergraphLiteral o1 = vf.createLiteral(5);
             	
             	final RepositoryResult<Statement> result = cxn.getStatements(s,p,o,true);
             	try {
                 int cnt = 0;
             	while (result.hasNext()) {
-            		final BigdataStatement resultStmt = (BigdataStatement) result.next();
-            		final BigdataBNode bNode = vf.createBNode(resultStmt);
+            		final EmbergraphStatement resultStmt = (EmbergraphStatement) result.next();
+            		final EmbergraphBNode bNode = vf.createBNode(resultStmt);
 					assertTrue(cxn.hasStatement(bNode, p1, o1, true));
 					cnt++;
             	}
@@ -158,7 +158,7 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 	            final TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, selectStr);
 				final TupleQueryResult tqr = tq.evaluate();
 				try {
-	            final BigdataValue o2 = vf.createLiteral(5);
+	            final EmbergraphValue o2 = vf.createLiteral(5);
 					int cnt = 0;
 					while (tqr.hasNext()) {
 						BindingSet bs = tqr.next();
@@ -180,7 +180,7 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 	            final TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, selectStr);
 				final TupleQueryResult tqr = tq.evaluate();
 				try {
-	            final BigdataValue o2 = vf.createLiteral(5);
+	            final EmbergraphValue o2 = vf.createLiteral(5);
 					int cnt = 0;
 					while (tqr.hasNext()) {
 						BindingSet bs = tqr.next();
@@ -203,13 +203,13 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 					"}";
 	            final GraphQuery tg = cxn.prepareGraphQuery(QueryLanguage.SPARQL, selectStr);
 				GraphQueryResult tgr = tg.evaluate();
-	            final BigdataValue o2 = vf.createLiteral(5);
+	            final EmbergraphValue o2 = vf.createLiteral(5);
 				try {
 					int cnt = 0;
 					while (tgr.hasNext()) {
 						Statement st = tgr.next();
 						assertEquals(o2, st.getObject());
-						assertTrue(((BigdataBNode)st.getSubject()).isStatementIdentifier());
+						assertTrue(((EmbergraphBNode)st.getSubject()).isStatementIdentifier());
 						cnt++;
 					}
 					assertEquals(1, cnt);
@@ -243,19 +243,19 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
      */
     public void testObject() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
 			assertEquals(0, cxn.getTripleStore().getStatementCount(true));
 
-			final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+			final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
 
 			// check insert
 			{
@@ -272,15 +272,15 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
                 final URI p = vf.createURI("x:p");
                 final Literal o = vf.createLiteral("d");
 
-                final BigdataURI s1 = vf.createURI("x:r");
-                final BigdataURI p1 = vf.createURI("x:refers");
+                final EmbergraphURI s1 = vf.createURI("x:r");
+                final EmbergraphURI p1 = vf.createURI("x:refers");
             	
                 final RepositoryResult<Statement> result = cxn.getStatements(s,p,o,true);
                 try {
                 int cnt = 0;
             	while (result.hasNext()) {
-            		final BigdataStatement resultStmt = (BigdataStatement) result.next();
-            		final BigdataBNode bNode = vf.createBNode(resultStmt);
+            		final EmbergraphStatement resultStmt = (EmbergraphStatement) result.next();
+            		final EmbergraphBNode bNode = vf.createBNode(resultStmt);
 					assertTrue(cxn.hasStatement(s1, p1, bNode, true));
 					cnt++;
             	}
@@ -307,7 +307,7 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 	            final TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, selectStr);
 				final TupleQueryResult tqr = tq.evaluate();
 				try {
-	            final BigdataURI s2 = vf.createURI("x:r");
+	            final EmbergraphURI s2 = vf.createURI("x:r");
 					int cnt = 0;
 					while (tqr.hasNext()) {
 					    final BindingSet bs = tqr.next();
@@ -329,7 +329,7 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 	            final TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, selectStr);
 				final TupleQueryResult tqr = tq.evaluate();
 				try {
-	            final BigdataURI s2 = vf.createURI("x:r");
+	            final EmbergraphURI s2 = vf.createURI("x:r");
 					int cnt = 0;
 					while (tqr.hasNext()) {
 					    final BindingSet bs = tqr.next();
@@ -351,13 +351,13 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 					"}";
 	            final GraphQuery tg = cxn.prepareGraphQuery(QueryLanguage.SPARQL, selectStr);
 				GraphQueryResult tgr = tg.evaluate();
-	            final BigdataURI s2 = vf.createURI("x:r");
+	            final EmbergraphURI s2 = vf.createURI("x:r");
 				try {
 					int cnt = 0;
 					while (tgr.hasNext()) {
 						Statement st = tgr.next();
 						assertEquals(s2, st.getSubject());
-						assertTrue(((BigdataBNode)st.getObject()).isStatementIdentifier());
+						assertTrue(((EmbergraphBNode)st.getObject()).isStatementIdentifier());
 						cnt++;
 					}
 					assertEquals(1, cnt);
@@ -391,19 +391,19 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
      */
     public void testRecursion() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
 			assertEquals(0, cxn.getTripleStore().getStatementCount(true));
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
             
             // check insert
             {
@@ -421,23 +421,23 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
                 final URI p = vf.createURI("x:p");
                 final Literal o = vf.createLiteral("d");
 
-                final BigdataURI s1 = vf.createURI("x:r");
-                final BigdataURI p1 = vf.createURI("x:refers");
+                final EmbergraphURI s1 = vf.createURI("x:r");
+                final EmbergraphURI p1 = vf.createURI("x:refers");
 
-                final BigdataURI s2 = vf.createURI("x:z");
-                final BigdataURI p2 = vf.createURI("x:recurs");
+                final EmbergraphURI s2 = vf.createURI("x:z");
+                final EmbergraphURI p2 = vf.createURI("x:recurs");
 
             	final RepositoryResult<Statement> result = cxn.getStatements(s,p,o,true);
             	try {
             	int cnt = 0;
             	while (result.hasNext()) {
-            		final BigdataStatement resultStmt = (BigdataStatement) result.next();
-            		final BigdataBNode bNode = vf.createBNode(resultStmt);
+            		final EmbergraphStatement resultStmt = (EmbergraphStatement) result.next();
+            		final EmbergraphBNode bNode = vf.createBNode(resultStmt);
                     	final RepositoryResult<Statement> result2 = cxn.getStatements(s1,p1,bNode,true);
                     	try {
                 	while (result2.hasNext()) {
-                		final BigdataStatement result2Stmt = (BigdataStatement) result2.next();
-                		final BigdataBNode bNode2 = vf.createBNode(result2Stmt);
+                		final EmbergraphStatement result2Stmt = (EmbergraphStatement) result2.next();
+                		final EmbergraphBNode bNode2 = vf.createBNode(result2Stmt);
                 		assertTrue(cxn.hasStatement(s2, p2, bNode2, true));
                 		cnt++;
                 	}
@@ -467,7 +467,7 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 					"}";
 	            final TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, selectStr);
 				TupleQueryResult tqr = tq.evaluate();
-	            final BigdataURI s2 = vf.createURI("x:z");
+	            final EmbergraphURI s2 = vf.createURI("x:z");
 				try {
 					int cnt = 0;
 					while (tqr.hasNext()) {
@@ -489,7 +489,7 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 					"}";
 	            final TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, selectStr);
 				TupleQueryResult tqr = tq.evaluate();
-	            final BigdataURI s2 = vf.createURI("x:z");
+	            final EmbergraphURI s2 = vf.createURI("x:z");
 				try {
 					int cnt = 0;
 					while (tqr.hasNext()) {
@@ -512,13 +512,13 @@ public class TestSparqlStar extends ProxyBigdataSailTestCase {
 					"}";
 	            final GraphQuery tg = cxn.prepareGraphQuery(QueryLanguage.SPARQL, selectStr);
 				GraphQueryResult tgr = tg.evaluate();
-	            final BigdataURI s2 = vf.createURI("x:z");
+	            final EmbergraphURI s2 = vf.createURI("x:z");
 				try {
 					int cnt = 0;
 					while (tgr.hasNext()) {
 						Statement st = tgr.next();
 						assertEquals(s2, st.getSubject());
-						assertTrue(((BigdataBNode)st.getObject()).isStatementIdentifier());
+						assertTrue(((EmbergraphBNode)st.getObject()).isStatementIdentifier());
 						cnt++;
 					}
 					assertEquals(1, cnt);

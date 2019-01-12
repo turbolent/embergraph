@@ -42,7 +42,7 @@ import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.journal.ITransactionService;
 
 /**
- * An event. Events are queued by the {@link IBigdataClient} and self-reported
+ * An event. Events are queued by the {@link IEmbergraphClient} and self-reported
  * periodically to the {@link ILoadBalancerService}. The event is assigned a
  * {@link UUID} when it is created and the {@link ILoadBalancerService} assigned
  * start and end event times based on its local clock as the events are received
@@ -69,7 +69,7 @@ public class Event implements Serializable {
      */
     private static final long serialVersionUID = 2651293369056916231L;
 
-    protected transient IBigdataFederation fed;
+    protected transient IEmbergraphFederation fed;
 
     /**
      * Unique event identifier.
@@ -249,7 +249,7 @@ public class Event implements Serializable {
         
     }
     
-    public Event(final IBigdataFederation fed, final EventResource resource,
+    public Event(final IEmbergraphFederation fed, final EventResource resource,
             final Object majorEventType) {
         
         this(fed, resource, majorEventType, (Map<String,Object>) null/* details */);
@@ -270,7 +270,7 @@ public class Event implements Serializable {
      * @param details
      *            Optional details for the event.
      */
-    public Event(final IBigdataFederation fed, final EventResource resource,
+    public Event(final IEmbergraphFederation fed, final EventResource resource,
             final Object majorEventType, final Map<String,Object> details) {
 
         this(fed, resource, majorEventType, ""/* minorEventType */, details);
@@ -296,7 +296,7 @@ public class Event implements Serializable {
      * @todo consider passing along the {@link UUID} of the parent event but
      *       then must correlate that {@link UUID} when the event is received.
      */
-    protected Event(final IBigdataFederation fed, final EventResource resource,
+    protected Event(final IEmbergraphFederation fed, final EventResource resource,
             final Object majorEventType, final Object minorEventType,
             final Map<String,Object> details) {
 

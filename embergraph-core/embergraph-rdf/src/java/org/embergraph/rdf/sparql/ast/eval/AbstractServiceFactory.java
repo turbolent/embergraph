@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
@@ -39,12 +39,12 @@ public abstract class AbstractServiceFactory extends AbstractServiceFactoryBase 
     }
 
     /**
-     * Create a {@link BigdataServiceCall}.  Does the work of collecting
+     * Create a {@link EmbergraphServiceCall}.  Does the work of collecting
      * the service parameter triples and then delegates to 
      * {@link #create(ServiceCallCreateParams, ServiceParams)}.
      */
     @Override
-    final public BigdataServiceCall create(final ServiceCallCreateParams params) {
+    final public EmbergraphServiceCall create(final ServiceCallCreateParams params) {
 
         if (params == null)
             throw new IllegalArgumentException();
@@ -68,7 +68,7 @@ public abstract class AbstractServiceFactory extends AbstractServiceFactoryBase 
     /**
      * Implemented by subclasses - verify the group and create the service call.
      */
-    public abstract BigdataServiceCall create(
+    public abstract EmbergraphServiceCall create(
     		final ServiceCallCreateParams params,
     		final ServiceParams serviceParams);
     

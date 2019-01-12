@@ -17,11 +17,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -44,7 +44,7 @@ public class NoInlineURIFactory implements IInlineURIFactory {
 
     @Override
     public String getLocalNameFromDelegate(URI namespace,
-            AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+            AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
         throw new UnsupportedOperationException(
                 "Since there can't be inlined URIs this should never be attempted.");
     }

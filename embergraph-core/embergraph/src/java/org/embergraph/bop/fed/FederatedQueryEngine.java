@@ -44,13 +44,13 @@ import org.embergraph.bop.engine.QueryEngineCounters;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 
 /**
- * An {@link IBigdataFederation} aware {@link QueryEngine}.
+ * An {@link IEmbergraphFederation} aware {@link QueryEngine}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -80,13 +80,13 @@ public class FederatedQueryEngine extends QueryEngine {
     private final UUID serviceUUID;
     
     /**
-     * The {@link IBigdataFederation} iff running in scale-out.
+     * The {@link IEmbergraphFederation} iff running in scale-out.
      * <p>
-     * Note: The {@link IBigdataFederation} is required in scale-out in order to
+     * Note: The {@link IEmbergraphFederation} is required in scale-out in order to
      * perform shard locator scans when mapping binding sets across the next
      * join in a query plan.
      */
-    private final IBigdataFederation<?> fed;
+    private final IEmbergraphFederation<?> fed;
 
     /**
      * The service used to expose {@link ByteBuffer}s and managed index
@@ -135,7 +135,7 @@ public class FederatedQueryEngine extends QueryEngine {
     }
 
     @Override
-    public IBigdataFederation<?> getFederation() {
+    public IEmbergraphFederation<?> getFederation() {
 
         return fed;
 
@@ -244,7 +244,7 @@ public class FederatedQueryEngine extends QueryEngine {
      */
     public FederatedQueryEngine(
             final UUID thisService,
-            final IBigdataFederation<?> fed,
+            final IEmbergraphFederation<?> fed,
             final IIndexManager indexManager,
             final ManagedResourceService resourceService
     ) {
@@ -255,7 +255,7 @@ public class FederatedQueryEngine extends QueryEngine {
 
     private FederatedQueryEngine(
                 final UUID thisService,
-                final IBigdataFederation<?> fed,
+                final IEmbergraphFederation<?> fed,
                 final IIndexManager localIndexManager,
                 final ManagedResourceService resourceService,
                 final boolean isDataService

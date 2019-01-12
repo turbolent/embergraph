@@ -25,8 +25,8 @@ import java.util.Map;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.openrdf.model.Literal;
-import org.openrdf.model.vocabulary.XMLSchema;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.function.datetime.Timezone;
 import org.openrdf.query.algebra.evaluation.function.datetime.Tz;
@@ -43,12 +43,9 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
-import com.ibm.icu.text.DateFormat;
 
 /**
  * A date expression involving a left IValueExpression operand. The operation to be applied to the operands is specified by the {@link Annotations#OP}
@@ -145,7 +142,7 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
                 throw new NotMaterializedException();
             }
 
-            BigdataLiteral bl = (BigdataLiteral) left.getValue();
+            EmbergraphLiteral bl = (EmbergraphLiteral) left.getValue();
             if (XSD.DATETIME.equals(bl.getDatatype())||XSD.DATE.equals(bl.getDatatype())||XSD.TIME.equals(bl.getDatatype())) {
                 XMLGregorianCalendar cal=bl.calendarValue();
                 switch (op()) {
@@ -204,15 +201,15 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
         return Requirement.SOMETIMES;
     }
     
-    protected IV tz(final BigdataLiteral l) {
+    protected IV tz(final EmbergraphLiteral l) {
      
         final Tz func = new Tz();
         
-        final BigdataValueFactory vf = super.getValueFactory();
+        final EmbergraphValueFactory vf = super.getValueFactory();
         
         try {
             
-            final BigdataLiteral l2 = (BigdataLiteral) func.evaluate(vf, l);
+            final EmbergraphLiteral l2 = (EmbergraphLiteral) func.evaluate(vf, l);
             
             return DummyConstantNode.toDummyIV(l2);
             
@@ -224,15 +221,15 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
         
     }
 
-    protected IV timezone(final BigdataLiteral l) {
+    protected IV timezone(final EmbergraphLiteral l) {
         
         final Timezone func = new Timezone();
         
-        final BigdataValueFactory vf = super.getValueFactory();
+        final EmbergraphValueFactory vf = super.getValueFactory();
         
         try {
             
-            final BigdataLiteral l2 = (BigdataLiteral) func.evaluate(vf, l);
+            final EmbergraphLiteral l2 = (EmbergraphLiteral) func.evaluate(vf, l);
             
             return DummyConstantNode.toDummyIV(l2);
             

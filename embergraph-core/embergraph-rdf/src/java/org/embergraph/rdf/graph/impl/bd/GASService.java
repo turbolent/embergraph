@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -54,13 +56,11 @@ import org.embergraph.rdf.graph.analytics.CC;
 import org.embergraph.rdf.graph.analytics.PR;
 import org.embergraph.rdf.graph.impl.GASEngine;
 import org.embergraph.rdf.graph.impl.GASState;
-import org.embergraph.rdf.graph.impl.bd.BigdataGASEngine.BigdataGraphAccessor;
+import org.embergraph.rdf.graph.impl.bd.EmbergraphGASEngine.EmbergraphGraphAccessor;
 import org.embergraph.rdf.graph.impl.scheduler.CHMScheduler;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueImpl;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.model.EmbergraphValueImpl;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
@@ -68,8 +68,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
@@ -322,11 +322,11 @@ public class GASService extends CustomServiceFactoryBase {
                     Options.OUT3, Options.OUT4, Options.OUT5, Options.OUT6,
                     Options.OUT7, Options.OUT8, Options.OUT9 }));
 
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public GASService() {
 
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         
         /*
          * TODO Review decision to make this a runFirst service. The rational is
@@ -371,7 +371,7 @@ public class GASService extends CustomServiceFactoryBase {
      * {@inheritDoc}
      */
     @Override
-    public void startConnection(BigdataSailConnection conn) {
+    public void startConnection(EmbergraphSailConnection conn) {
         // NOP
     }
 
@@ -405,7 +405,7 @@ public class GASService extends CustomServiceFactoryBase {
      *         TODO Validate the service call parameters, including whether they
      *         are understood by the specific algorithm.
      */
-    private static class GASServiceCall<VS, ES, ST> implements BigdataServiceCall {
+    private static class GASServiceCall<VS, ES, ST> implements EmbergraphServiceCall {
 
         private final AbstractTripleStore store;
         private final GraphPatternGroup<IGroupMemberNode> graphPattern;
@@ -771,7 +771,7 @@ public class GASService extends CustomServiceFactoryBase {
                 final IBindingSet[] bindingSets) throws Exception {
 
             /*
-             * Try/finally pattern to setup the BigdataGASEngine, execute the
+             * Try/finally pattern to setup the EmbergraphGASEngine, execute the
              * algorithm, and return the results.
              */
             IGASEngine gasEngine = null;
@@ -900,7 +900,7 @@ public class GASService extends CustomServiceFactoryBase {
         }
 
         /**
-         * Convert a {@link Value}[] of {@link BigdataValue} instances into an
+         * Convert a {@link Value}[] of {@link EmbergraphValue} instances into an
          * {@link IV}[].
          */
         private static IV[] toIV(final Value[] values) {
@@ -912,7 +912,7 @@ public class GASService extends CustomServiceFactoryBase {
             int i = 0;
             for (Value v : values) {
 
-                tmp[i++] = ((BigdataValue) v).getIV();
+                tmp[i++] = ((EmbergraphValue) v).getIV();
 
             }
 
@@ -1092,24 +1092,24 @@ public class GASService extends CustomServiceFactoryBase {
                 } else {
 
                     /*
-                     * The Value is a BigdataValueImpl (if the bind() method
+                     * The Value is a EmbergraphValueImpl (if the bind() method
                      * used the supplied ValueFactory). We need to convert
                      * it to an IV and this code ASSUMES that we can do this
                      * using an inline IV with the as configured KB. (This
                      * will work for anything numeric, but not for strings.)
                      */
-                    final IV<BigdataValueImpl, ?> iv = lex
+                    final IV<EmbergraphValueImpl, ?> iv = lex
                             .getLexiconConfiguration().createInlineIV(val);
 
                     if (iv != null) {
 
-                    	iv.setValue((BigdataValueImpl) val);
+                    	iv.setValue((EmbergraphValueImpl) val);
 
                     	bs.set(var, new Constant(iv));
                     	
-                    } else if (val instanceof BigdataValue) {
+                    } else if (val instanceof EmbergraphValue) {
                     	
-                    	bs.set(var, new Constant(DummyConstantNode.toDummyIV((BigdataValue) val)));
+                    	bs.set(var, new Constant(DummyConstantNode.toDummyIV((EmbergraphValue) val)));
                     	
                     } else {
                     	
@@ -1136,7 +1136,7 @@ public class GASService extends CustomServiceFactoryBase {
         private IGASEngine newGasEngine(final IIndexManager indexManager,
                 final int nthreads) {
 
-            return new BigdataGASEngine(indexManager, nthreads);
+            return new EmbergraphGASEngine(indexManager, nthreads);
 
         }
 
@@ -1176,7 +1176,7 @@ public class GASService extends CustomServiceFactoryBase {
              * Use a read-only view (sampling depends on access to the BTree rather
              * than the ReadCommittedIndex).
              */
-            final BigdataGraphAccessor graphAccessor = new BigdataGraphAccessor(
+            final EmbergraphGraphAccessor graphAccessor = new EmbergraphGraphAccessor(
                     kb.getIndexManager(), kb.getNamespace(), kb
                             .getIndexManager().getLastCommitTime());
 

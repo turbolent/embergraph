@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.embergraph.rdf.rio.ntriples.EmbergraphNTriplesParser;
+import org.embergraph.rdf.rio.turtle.EmbergraphTurtleParser;
 import org.junit.Test;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Statement;
@@ -12,9 +14,6 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFHandlerBase;
-
-import org.embergraph.rdf.rio.ntriples.BigdataNTriplesParser;
-import org.embergraph.rdf.rio.turtle.BigdataTurtleParser;
 
 /**
  * Test suite for standalone usage of Bigdata RDF Parsers.
@@ -24,13 +23,13 @@ public class TestStandaloneRDRParsers {
 	boolean bNodeFound;
 
 	@Test
-	public void testStandaloneBigdataTurtleParser() throws RDFParseException, RDFHandlerException, IOException {
-		testStandaloneParser(new BigdataTurtleParser(), "org/embergraph/rdf/rio/rdr_test.ttlx");
+	public void testStandaloneEmbergraphTurtleParser() throws RDFParseException, RDFHandlerException, IOException {
+		testStandaloneParser(new EmbergraphTurtleParser(), "org/embergraph/rdf/rio/rdr_test.ttlx");
 	}
 	
 	@Test
-	public void testStandaloneBigdataNTriplesParser() throws RDFParseException, RDFHandlerException, IOException {
-		testStandaloneParser(new BigdataNTriplesParser(), "org/embergraph/rdf/rio/rdr_test.ntx");
+	public void testStandaloneEmbergraphNTriplesParser() throws RDFParseException, RDFHandlerException, IOException {
+		testStandaloneParser(new EmbergraphNTriplesParser(), "org/embergraph/rdf/rio/rdr_test.ntx");
 	}
 	
 	private void testStandaloneParser(RDFParser parser, String resourceName) throws IOException,

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
@@ -39,7 +40,6 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
@@ -54,10 +54,10 @@ import org.embergraph.util.InnerCause;
  * Test suite for the BINDINGS clause.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestBigdataExprBuilder.java 5073 2011-08-23 00:33:54Z
+ * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z
  *          thompsonbry $
  */
-public class TestBindingsClause extends AbstractBigdataExprBuilderTestCase {
+public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
 
     private static final Logger log = Logger
             .getLogger(TestBindingsClause.class);

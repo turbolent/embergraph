@@ -22,32 +22,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail.graph;
 
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
-import org.embergraph.rdf.vocab.BaseVocabulary;
+import org.embergraph.rdf.sail.ProxyEmbergraphSailTestCase;
 import org.embergraph.rdf.vocab.NoVocabulary;
-import org.embergraph.rdf.vocab.RDFSVocabulary;
-import org.embergraph.rdf.vocab.VocabularyDecl;
 
-public class TestPaths extends ProxyBigdataSailTestCase {
+public class TestPaths extends ProxyEmbergraphSailTestCase {
 
     protected static final Logger log = Logger.getLogger(TestPaths.class);
 
@@ -58,11 +49,11 @@ public class TestPaths extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
 
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -81,7 +72,7 @@ public class TestPaths extends ProxyBigdataSailTestCase {
         super(arg0);
     }
     
-    protected void load(final BigdataSailRepositoryConnection cxn, final String resource) throws Exception {
+    protected void load(final EmbergraphSailRepositoryConnection cxn, final String resource) throws Exception {
     	
     	final InputStream is = getClass().getResourceAsStream(resource);
     	
@@ -97,11 +88,11 @@ public class TestPaths extends ProxyBigdataSailTestCase {
     
 //    public void testSimpleBFS() throws Exception {
 //    	
-//    	final BigdataSail sail = getSail();
+//    	final EmbergraphSail sail = getSail();
 //    	sail.initialize();
-//    	final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//    	final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //    	
-//    	final BigdataSailRepositoryConnection cxn = repo.getConnection();
+//    	final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 //        cxn.setAutoCommit(false);
 //        
 //        try {
@@ -136,11 +127,11 @@ public class TestPaths extends ProxyBigdataSailTestCase {
 //
 	public void testSimpleSSSP() throws Exception {
 
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		sail.initialize();
-		final BigdataSailRepository repo = new BigdataSailRepository(sail);
+		final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-		final BigdataSailRepositoryConnection cxn = repo.getConnection();
+		final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 		cxn.setAutoCommit(false);
 
 		try {
@@ -176,11 +167,11 @@ public class TestPaths extends ProxyBigdataSailTestCase {
 
 //    public void testPaths() throws Exception {
 //    	
-//    	final BigdataSail sail = getSail();
+//    	final EmbergraphSail sail = getSail();
 //    	sail.initialize();
-//    	final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//    	final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //    	
-//    	final BigdataSailRepositoryConnection cxn = repo.getConnection();
+//    	final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 //        cxn.setAutoCommit(false);
 //        
 //        try {

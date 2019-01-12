@@ -1,7 +1,7 @@
 package org.embergraph.rdf.internal;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * 
@@ -39,7 +39,7 @@ public class InlineSuffixedUUIDURIHandler extends InlineUUIDURIHandler {
 
 	@Override
 	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
 		final String localName = super.getLocalNameFromDelegate(delegate)
 				+ suffix;

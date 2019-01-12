@@ -26,6 +26,7 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.BNodeImpl;
@@ -41,7 +42,6 @@ import org.embergraph.btree.keys.IKeyBuilderFactory;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataValueSerializer;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
@@ -540,7 +540,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
      */
     public void test_consistencyIssue() {
 
-        final BigdataValueSerializer<Value> fixture = new BigdataValueSerializer<Value>(
+        final EmbergraphValueSerializer<Value> fixture = new EmbergraphValueSerializer<Value>(
                 ValueFactoryImpl.getInstance());
 
         final byte[] newValBytes = new byte[] { 0, 2, 0, 14, 66, 114, 105, 97, 110, 32,

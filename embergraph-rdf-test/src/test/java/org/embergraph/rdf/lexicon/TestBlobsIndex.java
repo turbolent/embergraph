@@ -31,6 +31,10 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.XMLSchema;
 
 import org.embergraph.btree.BTree;
@@ -47,12 +51,8 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.BlobsWriteTask.BlobsWriteProcResultHandler;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.util.DumpLexicon;
 import org.embergraph.util.BytesUtil;
 
@@ -71,7 +71,7 @@ public class TestBlobsIndex extends TestCase2 {
 	}
 
 	/**
-	 * Unit test for generation of sort keys from {@link BigdataValue}s to be
+	 * Unit test for generation of sort keys from {@link EmbergraphValue}s to be
 	 * represented as {@link BlobIV}s.
 	 */
 	public void test_generateSortKeys() {
@@ -80,31 +80,31 @@ public class TestBlobsIndex extends TestCase2 {
 		
 		final String namespace = getName();
 
-		final BigdataValueFactory vf = BigdataValueFactoryImpl
+		final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
 				.getInstance(namespace);
 
 		/*
 		 * Generate Values that we will use to read and write on the TERMS
 		 * index.
 		 */
-		final BigdataValue[] values;
+		final EmbergraphValue[] values;
 		{
 		
-			final BigdataURI uri1 = vf
+			final EmbergraphURI uri1 = vf
 					.createURI("http://www.embergraph.org/testTerm");
 
-			final BigdataLiteral lit1 = vf.createLiteral("embergraph");
+			final EmbergraphLiteral lit1 = vf.createLiteral("embergraph");
 
-			final BigdataLiteral lit2 = vf.createLiteral("embergraph", "en");
+			final EmbergraphLiteral lit2 = vf.createLiteral("embergraph", "en");
 
-			final BigdataLiteral lit3 = vf.createLiteral("embergraph",
+			final EmbergraphLiteral lit3 = vf.createLiteral("embergraph",
 					XMLSchema.STRING);
 
-			final BigdataBNode bnode1 = vf.createBNode();
+			final EmbergraphBNode bnode1 = vf.createBNode();
 
-			final BigdataBNode bnode2 = vf.createBNode("abc");
+			final EmbergraphBNode bnode2 = vf.createBNode("abc");
 
-			values = new BigdataValue[] { 
+			values = new EmbergraphValue[] {
 					uri1, 
 					lit1,
 					lit2, 
@@ -116,7 +116,7 @@ public class TestBlobsIndex extends TestCase2 {
 		}
 
 		// Generate the sort keys.
-		final KVO<BigdataValue>[] a = h.generateKVOs(vf
+		final KVO<EmbergraphValue>[] a = h.generateKVOs(vf
 				.getValueSerializer(), values, values.length);
 
 		/*
@@ -129,7 +129,7 @@ public class TestBlobsIndex extends TestCase2 {
 
 			for (int i = 0; i < a.length; i++) {
 
-				final KVO<BigdataValue> kvo = a[i];
+				final KVO<EmbergraphValue> kvo = a[i];
 				
 				final byte[] baseKey = kvo.key;
 
@@ -197,11 +197,11 @@ public class TestBlobsIndex extends TestCase2 {
 ////            assertEquals(4L, ndx.rangeCount());
 //
 ////            // Verify we visit each of those NullIVs.
-////	        final ITupleIterator<BigdataValue> itr = ndx.rangeIterator();
+////	        final ITupleIterator<EmbergraphValue> itr = ndx.rangeIterator();
 //
 ////	        while(itr.hasNext()) {
 ////	            
-////	            final ITuple<BigdataValue> tuple = itr.next();
+////	            final ITuple<EmbergraphValue> tuple = itr.next();
 ////	            
 ////	            assertTrue(tuple.isNull());
 ////	            
@@ -230,7 +230,7 @@ public class TestBlobsIndex extends TestCase2 {
 	    
         final String name = namespace + ".TERMS";
 
-        final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+        final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                 .getInstance(namespace);
         
         final IndexMetadata metadata = new IndexMetadata(name, UUID
@@ -338,8 +338,8 @@ public class TestBlobsIndex extends TestCase2 {
 
 	/**
 	 * Test helper exercises the basic operations on the TERMS index, including
-	 * (a) scanning a collision buckets to resolve {@link BigdataValue}s from
-	 * their prefix keys; (b) adding a {@link BigdataValue}s to the TERMS index;
+	 * (a) scanning a collision buckets to resolve {@link EmbergraphValue}s from
+	 * their prefix keys; (b) adding a {@link EmbergraphValue}s to the TERMS index;
 	 * and (c) point lookups using an {@link IV} as a fully qualified key for
 	 * the TERMS index.
 	 * 
@@ -357,7 +357,7 @@ public class TestBlobsIndex extends TestCase2 {
 		    
 			final BTree ndx = createTermsIndex(store, namespace);
 
-			final BigdataValueFactory vf = BigdataValueFactoryImpl
+			final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
 					.getInstance(namespace);
 			
 			final BlobsIndexHelper h = new BlobsIndexHelper();
@@ -366,26 +366,26 @@ public class TestBlobsIndex extends TestCase2 {
 			 * Generate Values that we will use to read and write on the TERMS
 			 * index.
 			 */
-			final BigdataValue[] values;
+			final EmbergraphValue[] values;
 			{
 			
-				final BigdataURI uri1 = vf
+				final EmbergraphURI uri1 = vf
 						.createURI("http://www.embergraph.org/testTerm");
 
                 // Note: These three literals wind up with the same hash code.
                 // The hash code of the literal is based only on its label.
-				final BigdataLiteral lit1 = vf.createLiteral("embergraph");
+				final EmbergraphLiteral lit1 = vf.createLiteral("embergraph");
 
-				final BigdataLiteral lit2 = vf.createLiteral("embergraph", "en");
+				final EmbergraphLiteral lit2 = vf.createLiteral("embergraph", "en");
 
-				final BigdataLiteral lit3 = vf.createLiteral("embergraph",
+				final EmbergraphLiteral lit3 = vf.createLiteral("embergraph",
 						XMLSchema.STRING);
 
-				final BigdataBNode bnode1 = vf.createBNode();
+				final EmbergraphBNode bnode1 = vf.createBNode();
 
-				final BigdataBNode bnode2 = vf.createBNode("abc");
+				final EmbergraphBNode bnode2 = vf.createBNode("abc");
 
-				values = new BigdataValue[] { 
+				values = new EmbergraphValue[] {
 						uri1, 
 						lit1,
 						lit2, 
@@ -396,7 +396,7 @@ public class TestBlobsIndex extends TestCase2 {
 
 			}
 
-			final KVO<BigdataValue>[] a = h.generateKVOs(vf
+			final KVO<EmbergraphValue>[] a = h.generateKVOs(vf
 					.getValueSerializer(), values, values.length);
 
 			final byte[][] keys = new byte[a.length][];
@@ -453,11 +453,11 @@ public class TestBlobsIndex extends TestCase2 {
 				
 				for (int i = 0; i < a.length; i++) {
 
-					final BigdataValue expected = a[i].obj;
+					final EmbergraphValue expected = a[i].obj;
 					
 					final IV<?,?> iv = expected.getIV();
 
-					// An IV was assigned to the BigdataValue.
+					// An IV was assigned to the EmbergraphValue.
 					assertNotNull(iv);
 					
 					// Verify the VTE is consistent.
@@ -488,7 +488,7 @@ public class TestBlobsIndex extends TestCase2 {
 					}
 
 					// Decode the returned byte[] as a Value.
-					final BigdataValue actual = vf.getValueSerializer()
+					final EmbergraphValue actual = vf.getValueSerializer()
 							.deserialize(val);
 				
 					// Verify BigdataValues are equal()
@@ -512,22 +512,22 @@ public class TestBlobsIndex extends TestCase2 {
 
 				/*
 				 * Setup an array of the expected IVs and clear out the old IVs
-				 * on the BigdataValue objects.
+				 * on the EmbergraphValue objects.
 				 * 
 				 * Note: Since we can not clear the IV once it has been set, this
 				 * replaces the BigdataValues in the array with new values having
 				 * the same data.
 				 */
 				final IV[] expected = new IV[a.length];
-				final BigdataValueFactory vf2 = BigdataValueFactoryImpl
+				final EmbergraphValueFactory vf2 = EmbergraphValueFactoryImpl
 						.getInstance(namespace + "-not-the-same");
 				for (int i = 0; i < a.length; i++) {
-					final BigdataValue tmp = a[i].obj;
+					final EmbergraphValue tmp = a[i].obj;
 					assertNotNull(a[i].obj.getIV()); // IV is known (from above)
 					expected[i] = a[i].obj.getIV(); // make a note of it.
-					final BigdataValue newVal = vf.asValue(vf2.asValue(tmp));
+					final EmbergraphValue newVal = vf.asValue(vf2.asValue(tmp));
 					// replace entry in a[].
-					a[i] = new KVO<BigdataValue>(a[i].key, a[i].val, newVal);
+					a[i] = new KVO<EmbergraphValue>(a[i].key, a[i].val, newVal);
 					assertEquals(tmp, a[i].obj);// same Value.
 					assertNull(a[i].obj.getIV()); // but IV is not set.
 				}
@@ -602,7 +602,7 @@ public class TestBlobsIndex extends TestCase2 {
 
             final BTree ndx = BTree.create(store, metadata);
 
-            final BigdataValueFactory vf = BigdataValueFactoryImpl
+            final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
 
             final BlobsIndexHelper h = new BlobsIndexHelper();
@@ -615,18 +615,18 @@ public class TestBlobsIndex extends TestCase2 {
                  * Generate Values that we will use to read and write on the
                  * TERMS index.
                  */
-                final BigdataValue[] values;
+                final EmbergraphValue[] values;
                 {
 
-                    final BigdataBNode bnode1 = vf.createBNode();
+                    final EmbergraphBNode bnode1 = vf.createBNode();
 
-                    final BigdataBNode bnode2 = vf.createBNode("abc");
+                    final EmbergraphBNode bnode2 = vf.createBNode("abc");
 
-                    values = new BigdataValue[] { bnode1, bnode2 };
+                    values = new EmbergraphValue[] { bnode1, bnode2 };
 
                 }
 
-                final KVO<BigdataValue>[] a = h.generateKVOs(vf
+                final KVO<EmbergraphValue>[] a = h.generateKVOs(vf
                         .getValueSerializer(), values, values.length);
 
                 final byte[][] keys = new byte[a.length][];
@@ -663,20 +663,20 @@ public class TestBlobsIndex extends TestCase2 {
                 /*
                  * Generate Values that we will use to read and write on the
                  * TERMS index (we need distinct instances since the IV once
-                 * set can not be cleared from the BigdataValue).
+                 * set can not be cleared from the EmbergraphValue).
                  */
-                final BigdataValue[] values;
+                final EmbergraphValue[] values;
                 {
 
-                    final BigdataBNode bnode1 = vf.createBNode();
+                    final EmbergraphBNode bnode1 = vf.createBNode();
 
-                    final BigdataBNode bnode2 = vf.createBNode("abc");
+                    final EmbergraphBNode bnode2 = vf.createBNode("abc");
 
-                    values = new BigdataValue[] { bnode1, bnode2 };
+                    values = new EmbergraphValue[] { bnode1, bnode2 };
 
                 }
 
-                final KVO<BigdataValue>[] a = h.generateKVOs(vf
+                final KVO<EmbergraphValue>[] a = h.generateKVOs(vf
                         .getValueSerializer(), values, values.length);
 
                 final byte[][] keys = new byte[a.length][];
@@ -792,7 +792,7 @@ public class TestBlobsIndex extends TestCase2 {
 //	}
 //
 //	/**
-//	 * Test helper attempts to insert the given number of {@link BigdataValue}s
+//	 * Test helper attempts to insert the given number of {@link EmbergraphValue}s
 //	 * into the terms index. If the maximum collision bucket size is reached,
 //	 * then the exception is thrown back to the caller.
 //	 * <p>
@@ -818,34 +818,34 @@ public class TestBlobsIndex extends TestCase2 {
 //
 //			final BTree ndx = BTree.create(store, metadata);
 //
-//			final BigdataValueFactory vf = BigdataValueFactoryImpl
+//			final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
 //					.getInstance(namespace);
 //
 //			/*
 //			 * Generate Values that we will use to read and write on the TERMS
 //			 * index.
 //			 */
-//			final BigdataValue[] values;
+//			final EmbergraphValue[] values;
 //			{
 //
-//				final ArrayList<BigdataValue> tmp = new ArrayList<BigdataValue>(
+//				final ArrayList<EmbergraphValue> tmp = new ArrayList<EmbergraphValue>(
 //						ncollisions);
 //
 //				for (int i = 0; i < ncollisions; i++) {
 //
-//					final BigdataURI uri = vf
+//					final EmbergraphURI uri = vf
 //							.createURI("http://www.bigdata.com/testTerm/" + i);
 //
 //					tmp.add(uri);
 //
 //				}
 //
-//				values = tmp.toArray(new BigdataValue[ncollisions]);
+//				values = tmp.toArray(new EmbergraphValue[ncollisions]);
 //
 //			}
 //
 //			final int hashCode = 12;
-//			final KVO<BigdataValue>[] a = mockGenerateKVOs(vf
+//			final KVO<EmbergraphValue>[] a = mockGenerateKVOs(vf
 //					.getValueSerializer(), values, values.length, hashCode);
 //
 //			final byte[][] keys = new byte[a.length][];
@@ -882,7 +882,7 @@ public class TestBlobsIndex extends TestCase2 {
 //
 //				for (int i = 0; i < a.length; i++) {
 //
-//					final BigdataValue expectedValue = a[i].obj;
+//					final EmbergraphValue expectedValue = a[i].obj;
 //
 //					final IV<?, ?> actualIV = expectedValue.getIV();
 //
@@ -924,7 +924,7 @@ public class TestBlobsIndex extends TestCase2 {
 //					}
 //
 //					// Decode the returned byte[] as a Value.
-//					final BigdataValue actual = vf.getValueSerializer()
+//					final EmbergraphValue actual = vf.getValueSerializer()
 //							.deserialize(val);
 //
 //					// Verify BigdataValues are equal()
@@ -962,36 +962,36 @@ public class TestBlobsIndex extends TestCase2 {
 
             final BlobsIndexHelper h = new BlobsIndexHelper();
 
-            final BigdataValueFactory vf = BigdataValueFactoryImpl
+            final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
 
             /*
              * Generate Values that we will use to read and write on the TERMS
              * index.
              */
-            final BigdataValue[] values;
+            final EmbergraphValue[] values;
             {
 
-                final BigdataURI uri1 = vf
+                final EmbergraphURI uri1 = vf
                         .createURI("http://www.embergraph.org/testTerm");
 
-                final BigdataLiteral lit1 = vf.createLiteral("embergraph");
+                final EmbergraphLiteral lit1 = vf.createLiteral("embergraph");
 
-                final BigdataLiteral lit2 = vf.createLiteral("embergraph", "en");
+                final EmbergraphLiteral lit2 = vf.createLiteral("embergraph", "en");
 
-                final BigdataLiteral lit3 = vf.createLiteral("embergraph",
+                final EmbergraphLiteral lit3 = vf.createLiteral("embergraph",
                         XMLSchema.STRING);
 
-                final BigdataBNode bnode1 = vf.createBNode();
+                final EmbergraphBNode bnode1 = vf.createBNode();
 
-                final BigdataBNode bnode2 = vf.createBNode("abc");
+                final EmbergraphBNode bnode2 = vf.createBNode("abc");
 
-                values = new BigdataValue[] { uri1, lit1, lit2, lit3, bnode1,
+                values = new EmbergraphValue[] { uri1, lit1, lit2, lit3, bnode1,
                         bnode2 };
 
             }
 
-            final KVO<BigdataValue>[] a = h.generateKVOs(vf
+            final KVO<EmbergraphValue>[] a = h.generateKVOs(vf
                     .getValueSerializer(), values, values.length);
 
             final byte[][] keys = new byte[a.length][];
@@ -1028,7 +1028,7 @@ public class TestBlobsIndex extends TestCase2 {
                 final BlobsTupleSerializer tupSer = (BlobsTupleSerializer) ndx
                         .getIndexMetadata().getTupleSerializer();
                 
-                for(BigdataValue value : values) {
+                for(EmbergraphValue value : values) {
                     
                     final IV<?,?> iv = value.getIV();
                     
@@ -1039,7 +1039,7 @@ public class TestBlobsIndex extends TestCase2 {
 
                     final byte[] val = ndx.lookup(key);
 
-                    final BigdataValue actualValue = vf.getValueSerializer()
+                    final EmbergraphValue actualValue = vf.getValueSerializer()
                             .deserialize(val);
 
                     assertEquals(value, actualValue);
@@ -1064,7 +1064,7 @@ public class TestBlobsIndex extends TestCase2 {
 
 //	/**
 //	 * Mock variant of
-//	 * {@link TermsIndexHelper#generateKVOs(BigdataValueSerializer, BigdataValue[], int)}
+//	 * {@link TermsIndexHelper#generateKVOs(EmbergraphValueSerializer, EmbergraphValue[], int)}
 //	 * which uses a constant value for the assigned hash codes.
 //	 * 
 //	 * @param valSer
@@ -1080,9 +1080,9 @@ public class TestBlobsIndex extends TestCase2 {
 //	 * @return An array of correlated key-value-object tuples.
 //	 */
 //	@SuppressWarnings("unchecked")
-//	static private KVO<BigdataValue>[] mockGenerateKVOs(
-//			final BigdataValueSerializer<BigdataValue> valSer,
-//			final BigdataValue[] terms, final int numTerms, final int hashCode) {
+//	static private KVO<EmbergraphValue>[] mockGenerateKVOs(
+//			final EmbergraphValueSerializer<EmbergraphValue> valSer,
+//			final EmbergraphValue[] terms, final int numTerms, final int hashCode) {
 //
 //		if (valSer == null)
 //			throw new IllegalArgumentException();
@@ -1091,7 +1091,7 @@ public class TestBlobsIndex extends TestCase2 {
 //		if (numTerms <= 0 || numTerms > terms.length)
 //			throw new IllegalArgumentException();
 //
-//		final KVO<BigdataValue>[] a = new KVO[numTerms];
+//		final KVO<EmbergraphValue>[] a = new KVO[numTerms];
 //
 //		final TermsIndexHelper helper = new TermsIndexHelper();
 //		
@@ -1103,7 +1103,7 @@ public class TestBlobsIndex extends TestCase2 {
 //
 //		for (int i = 0; i < numTerms; i++) {
 //
-//			final BigdataValue term = terms[i];
+//			final EmbergraphValue term = terms[i];
 //
 //			final VTE vte = VTE.valueOf(term);
 //
@@ -1112,7 +1112,7 @@ public class TestBlobsIndex extends TestCase2 {
 //
 //			final byte[] val = valSer.serialize(term, out.reset(), tmp);
 //
-//			a[i] = new KVO<BigdataValue>(key, val, term);
+//			a[i] = new KVO<EmbergraphValue>(key, val, term);
 //
 //		}
 //

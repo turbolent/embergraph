@@ -17,24 +17,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal.constraints;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.ImmutableBOp;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
@@ -88,19 +81,19 @@ public class UUIDBOp extends IVValueExpression<IV> implements INeedsMaterializat
 
     final public IV get(final IBindingSet bs) {
 
-        final BigdataValueFactory vf = super.getValueFactory();
+        final EmbergraphValueFactory vf = super.getValueFactory();
         
         final UUID uuid = UUID.randomUUID();
         
         if (str()) {
             
-            final BigdataLiteral l = vf.createLiteral(uuid.toString());
+            final EmbergraphLiteral l = vf.createLiteral(uuid.toString());
             
             return DummyConstantNode.toDummyIV(l);
             
         } else {
             
-            final BigdataURI uri = vf.createURI("urn:uuid:" + uuid.toString());
+            final EmbergraphURI uri = vf.createURI("urn:uuid:" + uuid.toString());
             
             return DummyConstantNode.toDummyIV(uri);
             

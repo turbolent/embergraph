@@ -30,7 +30,7 @@ import org.embergraph.rdf.graph.analytics.SSSP;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestSSSP extends AbstractBigdataGraphTestCase {
+public class TestSSSP extends AbstractEmbergraphGraphTestCase {
 
     public TestSSSP() {
         

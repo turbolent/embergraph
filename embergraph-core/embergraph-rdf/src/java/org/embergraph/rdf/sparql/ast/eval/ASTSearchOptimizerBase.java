@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
@@ -34,7 +35,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.DatasetNode;
@@ -449,7 +449,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
         }
 
         @SuppressWarnings("unchecked")
-        final TermId<BigdataURI> iv = (TermId<BigdataURI>) TermId
+        final TermId<EmbergraphURI> iv = (TermId<EmbergraphURI>) TermId
                 .mockIV(VTE.URI);
 
         iv.setValue(ctx.db.getValueFactory().asValue(searchPredicate));

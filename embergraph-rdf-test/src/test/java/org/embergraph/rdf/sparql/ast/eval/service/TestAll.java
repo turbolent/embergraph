@@ -63,7 +63,7 @@ public class TestAll extends TestCase {
          * Internal service support (bigdata aware services in the same JVM).
          */
 
-        suite.addTestSuite(TestBigdataNativeServiceEvaluation.class);
+        suite.addTestSuite(TestEmbergraphNativeServiceEvaluation.class);
 
         /*
          * Bundled "internal" services.

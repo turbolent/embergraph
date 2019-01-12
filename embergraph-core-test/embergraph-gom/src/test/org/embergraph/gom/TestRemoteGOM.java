@@ -38,6 +38,9 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
+import org.embergraph.EmbergraphStatics;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
@@ -45,7 +48,6 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.BigdataStatics;
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.gpo.ILinkSet;
 import org.embergraph.gom.om.IObjectManager;
@@ -55,9 +57,7 @@ import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal.Options;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.ConfigParams;
 import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
@@ -88,9 +88,9 @@ public class TestRemoteGOM extends TestCase {
 
 	private String m_namespace;
 
-	private BigdataSailRepository repo;
+	private EmbergraphSailRepository repo;
 
-//	private BigdataSailRepositoryConnection m_cxn;
+//	private EmbergraphSailRepositoryConnection m_cxn;
 
     public void setUp() throws Exception {
 
@@ -98,12 +98,12 @@ public class TestRemoteGOM extends TestCase {
 
         // create a backing file for the database
         final File journal = File.createTempFile("embergraph", ".jnl");
-        properties.setProperty(BigdataSail.Options.FILE, journal
+        properties.setProperty(EmbergraphSail.Options.FILE, journal
                 .getAbsolutePath());
         properties.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW
                 .toString());
         properties.setProperty(AbstractTripleStore.Options.TEXT_INDEX, "false");
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 //        properties.setProperty(
 //                IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY, "200");
 //        properties
@@ -132,14 +132,14 @@ public class TestRemoteGOM extends TestCase {
 //                        "200");
 
         // instantiate a sail and a Sesame repository
-        final BigdataSail sail = new BigdataSail(properties);
-        repo = new BigdataSailRepository(sail);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
+        repo = new EmbergraphSailRepository(sail);
         repo.initialize();
 
         //m_cxn = repo.getConnection();
         //m_cxn.setAutoCommit(false);
 
-        m_namespace = BigdataSail.Options.DEFAULT_NAMESPACE;
+        m_namespace = EmbergraphSail.Options.DEFAULT_NAMESPACE;
 
         final Map<String, String> initParams = new LinkedHashMap<String, String>();
         {
@@ -168,8 +168,8 @@ public class TestRemoteGOM extends TestCase {
         }
 
         m_serviceURL = new URL("http", hostAddr, port,
-                BigdataStatics.getContextPath()/* file */)
-        		// BigdataStatics.getContextPath() + "/sparql"/* file */)
+                EmbergraphStatics.getContextPath()/* file */)
+        		// EmbergraphStatics.getContextPath() + "/sparql"/* file */)
                 .toExternalForm();
 
         // final HttpClient httpClient = new DefaultHttpClient();
@@ -431,7 +431,7 @@ public class TestRemoteGOM extends TestCase {
 
             // FIXME: Loads into server directly, should change later to load
             // view ObjectManager
-            final BigdataSailRepositoryConnection m_cxn = repo.getConnection();
+            final EmbergraphSailRepositoryConnection m_cxn = repo.getConnection();
             try {
                 m_cxn.setAutoCommit(false);
                 m_cxn.add(reader, "kb", rdfFormat);

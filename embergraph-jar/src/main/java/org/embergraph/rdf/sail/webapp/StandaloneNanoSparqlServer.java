@@ -61,7 +61,7 @@ public class StandaloneNanoSparqlServer extends NanoSparqlServer {
                 );
         
         String propertyFile = System.getProperty(
-        		SystemProperties.BIGDATA_PROPERTY_FILE ,
+        		SystemProperties.EMBERGRAPH_PROPERTY_FILE,
         		"RWStore.properties"
         		);
         

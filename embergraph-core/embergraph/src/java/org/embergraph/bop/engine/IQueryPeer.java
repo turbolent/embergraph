@@ -22,7 +22,7 @@ public interface IQueryPeer extends Remote {
      * @return The {@link UUID} of the service in which this {@link QueryEngine}
      *         is running -or- a unique and distinct UUID if the
      *         {@link QueryEngine} is not running against an
-     *         IBigdataFederation.
+     *         IEmbergraphFederation.
      * 
      * @see IService#getServiceUUID()
      */

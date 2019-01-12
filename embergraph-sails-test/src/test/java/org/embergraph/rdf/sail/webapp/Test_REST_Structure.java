@@ -30,7 +30,7 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.server.Server;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sail.webapp.client.HttpException;
@@ -94,7 +94,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends
            ).toExternalForm();
 
            final String altserviceURL = new URL("http", hostAddr, altport,
-                   BigdataStatics.getContextPath()).toExternalForm();
+                   EmbergraphStatics.getContextPath()).toExternalForm();
            
            final String resp1 = doGET(m_serviceURL + "/status");
            final String resp2 = doGET(altserviceURL + "/status");

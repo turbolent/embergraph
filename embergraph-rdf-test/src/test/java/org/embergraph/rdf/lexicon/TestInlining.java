@@ -34,6 +34,10 @@ import java.util.Properties;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.axioms.NoAxioms;
@@ -44,11 +48,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.SampleExtensionFactory;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
@@ -104,10 +104,10 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         
         try {
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values, ensure range is beyond max signed values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             terms.add(f.createLiteral("135", f
                     .createURI(XSD.UNSIGNED_BYTE.toString())));
@@ -128,7 +128,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 //            terms.add(f.createBNode());
 //            terms.add(f.createBNode("a"));
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             if (store.isStable()) {
                 
@@ -138,12 +138,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> id = e.getKey();
 
@@ -186,10 +186,10 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         
         try {
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values, ensure range is beyond max signed values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             assertTrue(f.createLiteral("198", f
                     .createURI(XSD.UNSIGNED_BYTE.toString())).intValue() == 198);
@@ -253,10 +253,10 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         
         try {
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values, ensure range is beyond max signed values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             // Out of range values cannot be inlined
             terms.add(f.createLiteral("-12", f
@@ -281,7 +281,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 //            terms.add(f.createBNode());
 //            terms.add(f.createBNode("a"));
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             if (store.isStable()) {
                 
@@ -291,12 +291,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> id = e.getKey();
 
@@ -362,17 +362,17 @@ public class TestInlining extends AbstractTripleStoreTestCase {
                 
             }
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataBNode b1 = f.createBNode("i1");
-            final BigdataBNode b01 = f.createBNode("i01");
-            final BigdataBNode b2 = f.createBNode("u"+UUID.randomUUID().toString());
-            final BigdataBNode b3 = f.createBNode("foo");
-            final BigdataBNode b4 = f.createBNode("foo12345");
-            final BigdataBNode b5 = f.createBNode("12345");
+            final EmbergraphBNode b1 = f.createBNode("i1");
+            final EmbergraphBNode b01 = f.createBNode("i01");
+            final EmbergraphBNode b2 = f.createBNode("u"+UUID.randomUUID().toString());
+            final EmbergraphBNode b3 = f.createBNode("foo");
+            final EmbergraphBNode b4 = f.createBNode("foo12345");
+            final EmbergraphBNode b5 = f.createBNode("12345");
 
             terms.add(b1);
             terms.add(b01);
@@ -381,7 +381,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
             terms.add(b4);
             terms.add(b5);
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             assertTrue(b1.getIV().isInline());
             assertFalse(b01.getIV().isInline());
@@ -398,12 +398,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> iv = e.getKey();
 
@@ -460,22 +460,22 @@ public class TestInlining extends AbstractTripleStoreTestCase {
                 
             }
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataLiteral l1 = f.createLiteral("1", EpochExtension.EPOCH);
-            final BigdataLiteral l2 = f.createLiteral(String.valueOf(System.currentTimeMillis()), EpochExtension.EPOCH);
-//            final BigdataLiteral l3 = f.createLiteral("-100", EpochExtension.EPOCH);
-            final BigdataURI datatype = f.createURI(EpochExtension.EPOCH.stringValue());
+            final EmbergraphLiteral l1 = f.createLiteral("1", EpochExtension.EPOCH);
+            final EmbergraphLiteral l2 = f.createLiteral(String.valueOf(System.currentTimeMillis()), EpochExtension.EPOCH);
+//            final EmbergraphLiteral l3 = f.createLiteral("-100", EpochExtension.EPOCH);
+            final EmbergraphURI datatype = f.createURI(EpochExtension.EPOCH.stringValue());
 
             terms.add(l1);
             terms.add(l2);
 //            terms.add(l3);
             terms.add(datatype);
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             assertTrue(l1.getIV().isInline());
             assertTrue(l2.getIV().isInline());
@@ -495,12 +495,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> iv = e.getKey();
 
@@ -607,17 +607,17 @@ public class TestInlining extends AbstractTripleStoreTestCase {
                 
             }
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataLiteral l1 = f.createLiteral("Blue", ColorsEnumExtension.COLOR);
-            final BigdataLiteral l2 = f.createLiteral("Brown", ColorsEnumExtension.COLOR);
-            final BigdataLiteral l3 = f.createLiteral("Yellow", ColorsEnumExtension.COLOR);
-            final BigdataLiteral l4 = f.createLiteral("Dog", ColorsEnumExtension.COLOR);
-            final BigdataLiteral l5 = f.createLiteral("yellow", ColorsEnumExtension.COLOR);
-            final BigdataURI datatype = f.createURI(ColorsEnumExtension.COLOR.stringValue());
+            final EmbergraphLiteral l1 = f.createLiteral("Blue", ColorsEnumExtension.COLOR);
+            final EmbergraphLiteral l2 = f.createLiteral("Brown", ColorsEnumExtension.COLOR);
+            final EmbergraphLiteral l3 = f.createLiteral("Yellow", ColorsEnumExtension.COLOR);
+            final EmbergraphLiteral l4 = f.createLiteral("Dog", ColorsEnumExtension.COLOR);
+            final EmbergraphLiteral l5 = f.createLiteral("yellow", ColorsEnumExtension.COLOR);
+            final EmbergraphURI datatype = f.createURI(ColorsEnumExtension.COLOR.stringValue());
 
             terms.add(l1);
             terms.add(l2);
@@ -626,7 +626,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
             terms.add(l5);
             terms.add(datatype);
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             assertTrue(l1.getIV().isInline());
             assertTrue(l2.getIV().isInline());
@@ -654,12 +654,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> iv = e.getKey();
 
@@ -686,13 +686,13 @@ public class TestInlining extends AbstractTripleStoreTestCase {
      * @param terms
      * @return
      */
-    private Map<IV<?,?>, BigdataValue> doAddTermsTest(
+    private Map<IV<?,?>, EmbergraphValue> doAddTermsTest(
             final AbstractTripleStore store,
-            final Collection<BigdataValue> terms) {
+            final Collection<EmbergraphValue> terms) {
 
         final int size = terms.size();
 
-        final BigdataValue[] a = terms.toArray(new BigdataValue[size]);
+        final EmbergraphValue[] a = terms.toArray(new EmbergraphValue[size]);
         
         // resolve term ids.
         store
@@ -702,7 +702,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         // populate map w/ the assigned term identifiers.
         final Collection<IV<?,?>> ids = new ArrayList<IV<?, ?>>();
 
-        for(BigdataValue t : a) {
+        for(EmbergraphValue t : a) {
             
             ids.add(t.getIV());
             
@@ -711,7 +711,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         /*
          * Resolve the assigned term identifiers against the lexicon.
          */
-        final Map<IV<?,?>, BigdataValue> tmp = store.getLexiconRelation()
+        final Map<IV<?,?>, EmbergraphValue> tmp = store.getLexiconRelation()
                 .getTerms(ids);
         
         assertEquals(size,tmp.size());
@@ -721,12 +721,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
          * identifiers (they will be "equals()" to the values that we added to
          * the lexicon).
          */
-        for(BigdataValue expected : a) {
+        for(EmbergraphValue expected : a) {
 
             assertNotSame("Did not assign internal value? : " + expected,
                     null, expected.getIV());
 
-            final BigdataValue actual = tmp.get(expected.getIV());
+            final EmbergraphValue actual = tmp.get(expected.getIV());
 
             if (actual == null) {
 
@@ -765,10 +765,10 @@ public class TestInlining extends AbstractTripleStoreTestCase {
         
         try {
 
-            final Collection<BigdataValue> terms = new LinkedHashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new LinkedHashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             terms.add(f.createLiteral("2008-03-22T00:00:00", f
                     .createURI(XSD.DATETIME.toString())));
@@ -818,7 +818,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
             terms.add(f.createLiteral("1976-12", f
                     .createURI(XSD.GYEARMONTH.toString())));
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             if (store.isStable()) {
                 
@@ -828,12 +828,12 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> id = e.getKey();
 

@@ -25,15 +25,15 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.UUID;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.BNode;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
@@ -70,27 +70,27 @@ public class TestRestartSafe extends AbstractTripleStoreTestCase {
              * setup the database.
              */
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI x = f.createURI("http://www.foo.org/x");
-            final BigdataURI y = f.createURI("http://www.foo.org/y");
-            final BigdataURI z = f.createURI("http://www.foo.org/z");
+            final EmbergraphURI x = f.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = f.createURI("http://www.foo.org/y");
+            final EmbergraphURI z = f.createURI("http://www.foo.org/z");
 
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
 
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
-            final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
-            final BigdataLiteral lit1 = f.createLiteral("abc");
-            final BigdataLiteral lit2 = f.createLiteral("abc", A);
-            final BigdataLiteral lit3 = f.createLiteral("abc", "en");
+            final EmbergraphLiteral lit1 = f.createLiteral("abc");
+            final EmbergraphLiteral lit2 = f.createLiteral("abc", A);
+            final EmbergraphLiteral lit3 = f.createLiteral("abc", "en");
 
-            final BigdataBNode bn1 = f.createBNode(UUID.randomUUID()
+            final EmbergraphBNode bn1 = f.createBNode(UUID.randomUUID()
                     .toString());
-            final BigdataBNode bn2 = f.createBNode("a12");
+            final EmbergraphBNode bn2 = f.createBNode("a12");
 
             store.addStatement(x, rdfType, C);
             store.addStatement(y, rdfType, B);

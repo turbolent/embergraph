@@ -17,27 +17,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.gom;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
-
-import junit.extensions.proxy.IProxyTest;
-import junit.framework.Test;
-import junit.framework.TestCase;
 
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParseException;
 
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.gpo.ILinkSet;
-import org.embergraph.gom.om.IObjectManager;
-import org.embergraph.gom.om.ObjectManager;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
 
 public class TestGPO extends ProxyGOMTest {
 

@@ -52,7 +52,7 @@ import org.embergraph.resources.StoreManager;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 import org.embergraph.service.EventType;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ResourceService;
 
 /**
@@ -268,7 +268,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     /**
      * Optional.  When defined, {@link Event}s are reported out.
      */
-    protected final IBigdataFederation<?> fed;
+    protected final IEmbergraphFederation<?> fed;
     private volatile Event openCloseEvent;
     
     /**
@@ -298,13 +298,13 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
 
     /**
-     * Constructor variant that accepts an {@link IBigdataFederation} reference
+     * Constructor variant that accepts an {@link IEmbergraphFederation} reference
      * and will report out {@link Event}s.
      * 
      * @param file
      * @param fed
      */
-    public IndexSegmentStore(final File file, final IBigdataFederation<?> fed) {
+    public IndexSegmentStore(final File file, final IEmbergraphFederation<?> fed) {
 
         if (file == null)
             throw new IllegalArgumentException();

@@ -25,14 +25,14 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSetValueExpressionsOptimizer;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -71,13 +71,13 @@ public class BSBMQ5Setup {
      */
     final AtomicInteger nextId = new AtomicInteger(-1); 
 
-    public final BigdataURI rdfsLabel; 
-    public final BigdataURI productFeature;
-    public final BigdataURI productPropertyNumeric1;
-    public final BigdataURI productPropertyNumeric2;
-    public final BigdataURI product53999;
-    public final BigdataLiteral _120;
-    public final BigdataLiteral _170;
+    public final EmbergraphURI rdfsLabel;
+    public final EmbergraphURI productFeature;
+    public final EmbergraphURI productPropertyNumeric1;
+    public final EmbergraphURI productPropertyNumeric2;
+    public final EmbergraphURI product53999;
+    public final EmbergraphLiteral _120;
+    public final EmbergraphLiteral _170;
 
     public final QueryRoot queryRoot;
     public final ProjectionNode projection;
@@ -142,7 +142,7 @@ public class BSBMQ5Setup {
         /*
          * Resolve terms against the lexicon.
          */
-        final BigdataValueFactory valueFactory = store.getLexiconRelation()
+        final EmbergraphValueFactory valueFactory = store.getLexiconRelation()
                 .getValueFactory();
 
         final String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
@@ -167,7 +167,7 @@ public class BSBMQ5Setup {
 
         _170 = valueFactory.createLiteral("170", XSD.INTEGER);
 
-        final BigdataValue[] terms = new BigdataValue[] { rdfsLabel,
+        final EmbergraphValue[] terms = new EmbergraphValue[] { rdfsLabel,
                 productFeature, productPropertyNumeric1,
                 productPropertyNumeric2, product53999, _120, _170 };
 
@@ -175,7 +175,7 @@ public class BSBMQ5Setup {
         store.getLexiconRelation()
                 .addTerms(terms, terms.length, false/* readOnly */);
 
-        for (BigdataValue bv : terms) {
+        for (EmbergraphValue bv : terms) {
             // Cache the Value on the IV.
             bv.getIV().setValue(bv);
         }

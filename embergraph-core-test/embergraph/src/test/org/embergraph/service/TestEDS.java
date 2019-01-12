@@ -66,14 +66,14 @@ public class TestEDS extends
 
         // Don't collect statistics from the OS.
         properties.setProperty(
-                IBigdataClient.Options.COLLECT_PLATFORM_STATISTICS, "false");
+                IEmbergraphClient.Options.COLLECT_PLATFORM_STATISTICS, "false");
         
         // Don't sample the various queues.
-        properties.setProperty(IBigdataClient.Options.COLLECT_QUEUE_STATISTICS,
+        properties.setProperty(IEmbergraphClient.Options.COLLECT_QUEUE_STATISTICS,
                 "false");
 
         // Don't run the httpd service.
-        properties.setProperty(IBigdataClient.Options.HTTPD_PORT, "-1");
+        properties.setProperty(IEmbergraphClient.Options.HTTPD_PORT, "-1");
 
         // Only one data service for the embedded data service.
         properties.setProperty(EmbeddedClient.Options.NDATA_SERVICES, "1");

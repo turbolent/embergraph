@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal.impl.uri;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
@@ -28,8 +29,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -41,7 +41,7 @@ import org.embergraph.rdf.vocab.Vocabulary;
  * 
  * @author thompsonbry
  */
-public class VocabURIShortIV<V extends BigdataURI> extends AbstractInlineIV<V, Short> 
+public class VocabURIShortIV<V extends EmbergraphURI> extends AbstractInlineIV<V, Short>
 		implements URI {
 
 	/**
@@ -86,7 +86,7 @@ public class VocabURIShortIV<V extends BigdataURI> extends AbstractInlineIV<V, S
 	@Override
 	public int _compareTo(final IV o) {
 
-		final short value2 = ((VocabURIShortIV<BigdataURI>) o).value;
+		final short value2 = ((VocabURIShortIV<EmbergraphURI>) o).value;
 
 		return value == value2 ? 0 : value < value2 ? -1 : 1;
 
@@ -118,7 +118,7 @@ public class VocabURIShortIV<V extends BigdataURI> extends AbstractInlineIV<V, S
 		
     	if (v == null) {
     		
-			final BigdataValueFactory f = lex.getValueFactory();
+			final EmbergraphValueFactory f = lex.getValueFactory();
 			
 			v = (V) lex.getContainer().getVocabulary().asValue(this);
 			

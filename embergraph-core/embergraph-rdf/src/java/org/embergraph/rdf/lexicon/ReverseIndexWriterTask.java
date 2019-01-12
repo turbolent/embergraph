@@ -2,6 +2,8 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.concurrent.Callable;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
@@ -12,9 +14,7 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rdf.lexicon.Id2TermWriteProc.Id2TermWriteProcConstructor;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.spo.ISPO;
 
 /**
@@ -33,9 +33,9 @@ public class ReverseIndexWriterTask implements Callable<Long> {
 
     private final IIndex idTermIndex;
 
-    private final BigdataValueSerializer<BigdataValue> ser;
+    private final EmbergraphValueSerializer<EmbergraphValue> ser;
 
-    private final KVO<BigdataValue>[] a;
+    private final KVO<EmbergraphValue>[] a;
 
     private final int ndistinct;
 
@@ -54,8 +54,8 @@ public class ReverseIndexWriterTask implements Callable<Long> {
      *            The #of elements in <i>a</i>.
      */
     public ReverseIndexWriterTask(final IIndex idTermIndex,
-            final BigdataValueFactory valueFactory,
-            final KVO<BigdataValue>[] a, final int ndistinct,
+            final EmbergraphValueFactory valueFactory,
+            final KVO<EmbergraphValue>[] a, final int ndistinct,
             final boolean storeBlankNodes) {
 
         if (idTermIndex == null)
@@ -113,7 +113,7 @@ public class ReverseIndexWriterTask implements Callable<Long> {
             
             for (int i = 0; i < ndistinct; i++) {
 
-                final BigdataValue x =  a[i].obj;
+                final EmbergraphValue x =  a[i].obj;
 
                 if (!storeBlankNodes && x instanceof BNode) {
 

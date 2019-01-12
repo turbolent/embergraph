@@ -34,6 +34,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.query.BindingSet;
 
 import org.embergraph.bop.BOp;
@@ -50,8 +51,7 @@ import org.embergraph.bop.join.JoinAnnotations;
 import org.embergraph.bop.join.JoinTypeEnum;
 import org.embergraph.htree.HTree;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ExternalServiceCall;
 import org.embergraph.rdf.sparql.ast.service.MockIVReturningServiceCall;
 import org.embergraph.rdf.sparql.ast.service.RemoteServiceCall;
@@ -314,7 +314,7 @@ public class ServiceCallJoin extends PipelineOp {
          */
         private void doServiceCallWithConstant() throws Exception {
 
-            final BigdataURI serviceURI = ServiceCallUtility
+            final EmbergraphURI serviceURI = ServiceCallUtility
                     .getConstantServiceURI(serviceRef);
 
             if (serviceURI == null)
@@ -394,7 +394,7 @@ public class ServiceCallJoin extends PipelineOp {
 
                 while (sitr.hasNext()) {
 
-                    final Map<BigdataURI, ServiceCallChunk> serviceCallChunks = new HashMap<BigdataURI, ServiceCallChunk>();
+                    final Map<EmbergraphURI, ServiceCallChunk> serviceCallChunks = new HashMap<EmbergraphURI, ServiceCallChunk>();
 
                     final IBindingSet[] chunk = sitr.next();
 
@@ -402,7 +402,7 @@ public class ServiceCallJoin extends PipelineOp {
 
                         final IBindingSet bset = chunk[i];
 
-                        final BigdataURI serviceURI = ServiceCallUtility
+                        final EmbergraphURI serviceURI = ServiceCallUtility
                                 .getServiceURI(serviceRef, bset);
 
                         ServiceCallChunk serviceCallChunk = serviceCallChunks
@@ -531,7 +531,7 @@ public class ServiceCallJoin extends PipelineOp {
          * @return The {@link ServiceCall} and never <code>null</code>.
          */
         private ServiceCall<? extends Object> resolveService(
-                final BigdataURI serviceURI) {
+                final EmbergraphURI serviceURI) {
 
             final ServiceCall<?> serviceCall = ServiceRegistry.getInstance()
                     .toServiceCall(db, cm, serviceURI, serviceNode, (BaseJoinStats)context.getStats());
@@ -553,7 +553,7 @@ public class ServiceCallJoin extends PipelineOp {
             private final IBindingSet[] chunk;
 
             /** The service URI. */
-            private final BigdataURI serviceURI;
+            private final EmbergraphURI serviceURI;
 
             /** The object used to talk to that service. */
             private final ServiceCall<?> serviceCall;
@@ -696,10 +696,10 @@ public class ServiceCallJoin extends PipelineOp {
                     
                     final ICloseableIterator<IBindingSet> itr;
                     
-                    if (serviceCall instanceof BigdataServiceCall) {
+                    if (serviceCall instanceof EmbergraphServiceCall) {
 
-                        itr = doBigdataServiceCall(
-                                (BigdataServiceCall) serviceCall, left);
+                        itr = doEmbergraphServiceCall(
+                                (EmbergraphServiceCall) serviceCall, left);
 
                     } else if (serviceCall instanceof ExternalServiceCall) {
 
@@ -757,8 +757,8 @@ public class ServiceCallJoin extends PipelineOp {
             /**
              * Evaluate a bigdata aware "service" call in the same JVM.
              */
-            private ICloseableIterator<IBindingSet> doBigdataServiceCall(
-                    final BigdataServiceCall serviceCall,
+            private ICloseableIterator<IBindingSet> doEmbergraphServiceCall(
+                    final EmbergraphServiceCall serviceCall,
                     final IBindingSet left[]) throws Exception {
 
                 return serviceCall.call(left);
@@ -772,7 +772,7 @@ public class ServiceCallJoin extends PipelineOp {
                     final MockIVReturningServiceCall serviceCall,
                     final IBindingSet left[]) throws Exception {
 
-                return doNonBigdataMockIVServiceCall(serviceCall, left);
+                return doNonEmbergraphMockIVServiceCall(serviceCall, left);
                 
             }
 
@@ -783,7 +783,7 @@ public class ServiceCallJoin extends PipelineOp {
                     final ExternalServiceCall serviceCall,
                     final IBindingSet left[]) throws Exception {
 
-                return doNonBigdataSesameServiceCall(serviceCall, left);
+                return doNonEmbergraphSesameServiceCall(serviceCall, left);
                 
             }
 
@@ -794,7 +794,7 @@ public class ServiceCallJoin extends PipelineOp {
                     final RemoteServiceCall serviceCall,
                     final IBindingSet left[]) throws Exception {
 
-                return doNonBigdataSesameServiceCall(serviceCall, left);
+                return doNonEmbergraphSesameServiceCall(serviceCall, left);
                 
             }
             
@@ -810,7 +810,7 @@ public class ServiceCallJoin extends PipelineOp {
              *            
              * @return The solutions.
              */
-            private ICloseableIterator<IBindingSet> doNonBigdataSesameServiceCall(
+            private ICloseableIterator<IBindingSet> doNonEmbergraphSesameServiceCall(
                     final ServiceCall<BindingSet> serviceCall,
                     final IBindingSet left[]) throws Exception {
 
@@ -873,7 +873,7 @@ public class ServiceCallJoin extends PipelineOp {
              *            
              * @return The solutions.
              */
-            private ICloseableIterator<IBindingSet> doNonBigdataMockIVServiceCall(
+            private ICloseableIterator<IBindingSet> doNonEmbergraphMockIVServiceCall(
                     final ServiceCall<IBindingSet> serviceCall,
                     final IBindingSet left[]) throws Exception {
                
@@ -896,7 +896,7 @@ public class ServiceCallJoin extends PipelineOp {
      */
     private static class ServiceCallChunk {
 
-        public final BigdataURI serviceURI;
+        public final EmbergraphURI serviceURI;
 
         public final ServiceCall<?> serviceCall;
 
@@ -904,7 +904,7 @@ public class ServiceCallJoin extends PipelineOp {
         
         private final List<IBindingSet> sourceSolutions;
         
-        public ServiceCallChunk(final BigdataURI serviceURI,
+        public ServiceCallChunk(final EmbergraphURI serviceURI,
                 final ServiceCall<?> serviceCall, final IBindingSet[] chunk) {
 
             if(serviceURI == null)
@@ -929,7 +929,7 @@ public class ServiceCallJoin extends PipelineOp {
 
         }
 
-        public ServiceCallChunk(final BigdataURI serviceURI,
+        public ServiceCallChunk(final EmbergraphURI serviceURI,
                 final ServiceCall<?> serviceCall) {
     
             if(serviceURI == null)

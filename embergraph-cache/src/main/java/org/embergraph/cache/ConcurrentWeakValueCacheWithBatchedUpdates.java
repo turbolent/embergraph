@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 
 
 /**
@@ -274,7 +274,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V> implements
             throw new IllegalArgumentException();
         
         this.queue = new HardReferenceQueueWithBatchingUpdates<V>(
-                BigdataStatics.threadLocalBuffers,// threadLocalBuffers
+                EmbergraphStatics.threadLocalBuffers,// threadLocalBuffers
                 16,  // concurrencyLevel
                 queue, // sharedQueue
                 10, // threadLocalQueueNScan

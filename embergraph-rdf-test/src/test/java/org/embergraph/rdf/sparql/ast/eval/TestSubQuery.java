@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import org.openrdf.model.Value;
 
-import org.embergraph.BigdataStatics;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
 import org.embergraph.rdf.sparql.ast.QueryHints;

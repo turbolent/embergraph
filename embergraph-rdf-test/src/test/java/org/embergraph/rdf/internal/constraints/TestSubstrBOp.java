@@ -25,9 +25,9 @@ import org.embergraph.bop.Constant;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -60,7 +60,7 @@ public class TestSubstrBOp extends ProxyTestCase {
 //    @Override
 //    public Properties getProperties() {
 //    	final Properties props = super.getProperties();
-//    	props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES, "true");
+//    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
 //    	return props;
 //    }
     
@@ -71,11 +71,11 @@ public class TestSubstrBOp extends ProxyTestCase {
 
         try {
 
-            final BigdataValueFactory vf = db.getValueFactory();
+            final EmbergraphValueFactory vf = db.getValueFactory();
             
-            final BigdataLiteral plain_text = vf.createLiteral("plain text");
+            final EmbergraphLiteral plain_text = vf.createLiteral("plain text");
             
-            db.addTerms( new BigdataValue[] { plain_text} );
+            db.addTerms( new EmbergraphValue[] { plain_text} );
             
             final IV _0 = DummyConstantNode.toDummyIV(vf.createLiteral(0));
             final IV _1 = DummyConstantNode.toDummyIV(vf.createLiteral(1));

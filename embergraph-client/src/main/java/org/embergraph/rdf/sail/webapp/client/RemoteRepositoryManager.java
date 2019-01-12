@@ -1617,7 +1617,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
             final long queryTimeoutMillis;
             {
-                final String s = opts.getHeader(HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS);
+                final String s = opts.getHeader(HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS);
 
                 queryTimeoutMillis = s == null ? -1L : StringUtil.toLong(s);
             }

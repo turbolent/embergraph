@@ -21,6 +21,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.LiteralImpl;
@@ -36,12 +41,7 @@ import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -74,15 +74,15 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_extension_xsdString() {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
         final int maxInlineStringLength = 128;
         
-        final XSDStringExtension<BigdataValue> ext = 
-            new XSDStringExtension<BigdataValue>(
+        final XSDStringExtension<EmbergraphValue> ext =
+            new XSDStringExtension<EmbergraphValue>(
                 new IDatatypeURIResolver() {
-                    public BigdataURI resolve(final URI uri) {
-                        final BigdataURI buri = vf.createURI(uri.stringValue());
+                    public EmbergraphURI resolve(final URI uri) {
+                        final EmbergraphURI buri = vf.createURI(uri.stringValue());
                         buri.setIV(newTermId(VTE.URI));
                         return buri;
                     }
@@ -118,11 +118,11 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_URI() {
         
         final IV<?, ?>[] e = {
-                new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")),
-                new FullyInlineURIIV<BigdataURI>(RDF.TYPE),
-                new FullyInlineURIIV<BigdataURI>(RDF.SUBJECT),
-                new FullyInlineURIIV<BigdataURI>(RDF.BAG),
-                new FullyInlineURIIV<BigdataURI>(RDF.OBJECT),
+                new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")),
+                new FullyInlineURIIV<EmbergraphURI>(RDF.TYPE),
+                new FullyInlineURIIV<EmbergraphURI>(RDF.SUBJECT),
+                new FullyInlineURIIV<EmbergraphURI>(RDF.BAG),
+                new FullyInlineURIIV<EmbergraphURI>(RDF.OBJECT),
         };
 
         doEncodeDecodeTest(e);
@@ -140,18 +140,18 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_Extension_URI() {
 
         final IV<?, ?>[] e = {
-                new URIExtensionIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                new URIExtensionIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                                 "http://www.example.com/"),
-                        new VocabURIByteIV<BigdataURI>((byte) 1)),
-                new URIExtensionIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                        new VocabURIByteIV<EmbergraphURI>((byte) 1)),
+                new URIExtensionIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                                 "http://www.example.com/foo"),
-                        new VocabURIByteIV<BigdataURI>((byte) 1)),
-                new URIExtensionIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(
+                        new VocabURIByteIV<EmbergraphURI>((byte) 1)),
+                new URIExtensionIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                                 "http://www.example.com/foobar"),
-                        new VocabURIByteIV<BigdataURI>((byte) 1)),
+                        new VocabURIByteIV<EmbergraphURI>((byte) 1)),
         };
 
         doEncodeDecodeTest(e);
@@ -166,14 +166,14 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_BNode_UnicodeID() {
 
         final IV<?, ?>[] e = {
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("FOO"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("_bar"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("bar"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("baz"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("12"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("1298"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("asassdao"),
-                new FullyInlineUnicodeBNodeIV<BigdataBNode>("1"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("FOO"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("_bar"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("bar"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("baz"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("12"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("1298"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("asassdao"),
+                new FullyInlineUnicodeBNodeIV<EmbergraphBNode>("1"),
         };
 
         doEncodeDecodeTest(e);
@@ -193,19 +193,19 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_Literal_plainLiteral() {
         
         final IV<?, ?>[] e = {
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null/* language */,
                         null/* datatype */),
         };
 
@@ -226,49 +226,49 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_Literal_languageCodeLiteral() {
 
         final IV<?, ?>[] e = {
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("2", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("2", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("2", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("2", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", "de"/* language */,
                         null/* datatype */),
         };
 
@@ -294,34 +294,34 @@ public class TestEncodeDecodeUnicodeIVs extends
         final URI dt2 = new URIImpl("http://www.embergraph.org/mock-datatype-2");
         
         final IV<?, ?>[] e = {
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */, dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", null/* language */, dt2),
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", null/* language */, dt2),
         };
 
         doEncodeDecodeTest(e);
@@ -345,55 +345,55 @@ public class TestEncodeDecodeUnicodeIVs extends
                 /*
                  * Plain literals.
                  */
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("23", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23", null/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("3", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3", null/* language */,
                         null/* datatype */),
                 /*
                  * Language code literals.
                  */
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "en"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", "en"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", "de"/* language */,
                         null/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", "de"/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", "de"/* language */,
                         null/* datatype */),
                 /*
                  * Datatype literals.
                  */
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", null/* language */,
                         dt1),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         dt2),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("goo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("goo", null/* language */,
                         dt2),
         };
         
@@ -417,11 +417,11 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_Inline_Literal_XSDString_DeconflictionTest() {
     
         final IV<?, ?>[] e = {
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("foo", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("foo", null/* language */,
                         XSD.STRING/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("bar", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar", null/* language */,
                         XSD.STRING/* datatype */),
-                new FullyInlineTypedLiteralIV<BigdataLiteral>("baz", null/* language */,
+                new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz", null/* language */,
                         XSD.STRING/* datatype */),
         };
 
@@ -442,16 +442,16 @@ public class TestEncodeDecodeUnicodeIVs extends
         final IV<?,?> namespaceIV = newTermId(VTE.URI);
         
         final IV<?, ?>[] e = {
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), namespaceIV),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), namespaceIV),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), namespaceIV),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), namespaceIV),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), namespaceIV),
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), namespaceIV),
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), namespaceIV),
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), namespaceIV),
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), namespaceIV),
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), namespaceIV),
         };
 
         doEncodeDecodeTest(e);
@@ -472,38 +472,38 @@ public class TestEncodeDecodeUnicodeIVs extends
         final IV<?,?> datatypeIV2 = newTermId(VTE.URI);
 
         final IV<?, ?>[] e = {
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(""), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>(" "), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIV2),
         };
 
         doEncodeDecodeTest(e);
@@ -519,45 +519,45 @@ public class TestEncodeDecodeUnicodeIVs extends
     public void test_encodeDecode_URINamespaceIV() {
 
         final IV<?, ?>[] e = {
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 1) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 1) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 1) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 1) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
-                new PartlyInlineURIIV<BigdataURI>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"),// localName
-                        new VocabURIShortIV<BigdataURI>((short) 2) // namespace
+                new PartlyInlineURIIV<EmbergraphURI>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"),// localName
+                        new VocabURIShortIV<EmbergraphURI>((short) 2) // namespace
                 ),
         };
 
@@ -574,30 +574,30 @@ public class TestEncodeDecodeUnicodeIVs extends
      */
     public void test_encodeDecode_LiteralNamespaceIV() {
 
-        final IV<?,?> datatypeIV = new VocabURIShortIV<BigdataURI>((short) 1);
-        final IV<?,?> datatypeIV2 = new VocabURIShortIV<BigdataURI>((short) 2);
+        final IV<?,?> datatypeIV = new VocabURIShortIV<EmbergraphURI>((short) 1);
+        final IV<?,?> datatypeIV2 = new VocabURIShortIV<EmbergraphURI>((short) 2);
 
         final IV<?, ?>[] e = {
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("bar"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("baz"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("123"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("23"), datatypeIV2),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV),
-                new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                        new FullyInlineTypedLiteralIV<BigdataLiteral>("3"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("bar"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("baz"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("23"), datatypeIV2),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIV),
+                new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                        new FullyInlineTypedLiteralIV<EmbergraphLiteral>("3"), datatypeIV2),
         };
 
         doEncodeDecodeTest(e);

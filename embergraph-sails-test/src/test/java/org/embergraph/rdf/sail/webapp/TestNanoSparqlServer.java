@@ -27,11 +27,11 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.CreateKBTask;
 import org.embergraph.rdf.sail.DestroyKBTask;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
@@ -157,7 +157,7 @@ public class TestNanoSparqlServer extends TestCase2 {
 
         final AbstractTripleStore tripleStore2 = (AbstractTripleStore) m_indexManager
                 .getResourceLocator().locate(
-                        BigdataSail.Options.DEFAULT_NAMESPACE, ITx.UNISOLATED);
+                        EmbergraphSail.Options.DEFAULT_NAMESPACE, ITx.UNISOLATED);
 
         /*
          * Note: A failure here means that our override of
@@ -172,9 +172,9 @@ public class TestNanoSparqlServer extends TestCase2 {
 	     {
 	         
 	         tripleStoreProperties.setProperty(
-	                 BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+	                 EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 	
-	         tripleStoreProperties.setProperty(BigdataSail.Options.TRIPLES_MODE,
+	         tripleStoreProperties.setProperty(EmbergraphSail.Options.TRIPLES_MODE,
 	                 "true");
 	
 	     }
@@ -250,7 +250,7 @@ public class TestNanoSparqlServer extends TestCase2 {
 	        ).toExternalForm();
 	
 	        m_serviceURL = new URL("http", hostAddr, port,
-	                BigdataStatics.getContextPath()).toExternalForm();
+	                EmbergraphStatics.getContextPath()).toExternalForm();
 	
 	        if (log.isInfoEnabled())
 	            log.info("Setup done: \nname=" + getName() + "\nnamespace="

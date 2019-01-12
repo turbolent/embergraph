@@ -30,8 +30,8 @@ import org.openrdf.model.Value;
 
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.vocab.Vocabulary;
 
@@ -44,7 +44,7 @@ import org.embergraph.rdf.vocab.Vocabulary;
  * @param <T>
  *            The generic type for the inline value.
  */
-public interface IV<V extends BigdataValue, T> extends Serializable, 
+public interface IV<V extends EmbergraphValue, T> extends Serializable,
         Comparable<IV>, IVCache<V,T>, Value {
 
     /**
@@ -224,7 +224,7 @@ public interface IV<V extends BigdataValue, T> extends Serializable,
      * the information needed by those interfaces with or without
      * materialization. For example, inline numerics can implement the entire
      * {@link Literal} interface without needing to be materialized into a
-     * {@link BigdataLiteral}. {@link TermId}s cannot answer any of the requests
+     * {@link EmbergraphLiteral}. {@link TermId}s cannot answer any of the requests
      * in the openrdf interfaces without materialization (all the relevant
      * information is in the lexicon indices). Even some inlines need
      * materialization. For example, ...

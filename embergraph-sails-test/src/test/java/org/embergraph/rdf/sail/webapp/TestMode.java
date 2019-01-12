@@ -25,9 +25,9 @@ import java.util.Properties;
 
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.axioms.OwlAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.vocab.DefaultBigdataVocabulary;
+import org.embergraph.rdf.vocab.DefaultEmbergraphVocabulary;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
@@ -85,8 +85,8 @@ enum TestMode {
       switch (this) {
       case quads:
          properties.setProperty(AbstractTripleStore.Options.QUADS_MODE, "true");
-         properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-         properties.setProperty(BigdataSail.Options.JUSTIFY, "false");
+         properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+         properties.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
          properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                NoAxioms.class.getName());
          properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
@@ -95,8 +95,8 @@ enum TestMode {
                AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
          break;
       case triples:
-         properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-         properties.setProperty(BigdataSail.Options.JUSTIFY, "false");
+         properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+         properties.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
          properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                NoAxioms.class.getName());
          properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
@@ -105,8 +105,8 @@ enum TestMode {
                AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
          break;
       case sids:
-         properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-         properties.setProperty(BigdataSail.Options.JUSTIFY, "false");
+         properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+         properties.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
          properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                NoAxioms.class.getName());
          properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
@@ -115,12 +115,12 @@ enum TestMode {
                AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "true");
          break;
       case triplesPlusTruthMaintenance:
-         properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "true");
-         properties.setProperty(BigdataSail.Options.JUSTIFY, "true");
-         properties.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+         properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "true");
+         properties.setProperty(EmbergraphSail.Options.JUSTIFY, "true");
+         properties.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
                OwlAxioms.class.getName());
          properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
-               DefaultBigdataVocabulary.class.getName());
+               DefaultEmbergraphVocabulary.class.getName());
          properties.setProperty(
                AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
          break;

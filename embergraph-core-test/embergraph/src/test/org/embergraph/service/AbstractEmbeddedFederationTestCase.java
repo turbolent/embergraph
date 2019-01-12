@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.embergraph.bfs.BigdataFileSystem;
-import org.embergraph.bfs.BigdataFileSystem.Options;
+import org.embergraph.bfs.EmbergraphFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem.Options;
 import org.embergraph.btree.AbstractBTreeTestCase;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
@@ -53,7 +53,7 @@ import org.embergraph.util.BytesUtil;
  * FIXME modify this and {@link TestLDS} to
  * be proxy test suites so that I can run tests against both with ease and make
  * use of them for testing the {@link FullTextIndex} and
- * {@link BigdataFileSystem}.
+ * {@link EmbergraphFileSystem}.
  */
 abstract public class AbstractEmbeddedFederationTestCase extends AbstractBTreeTestCase {
 
@@ -71,8 +71,8 @@ abstract public class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
         super(arg0);
     }
 
-    protected IBigdataClient<?> client;
-    protected IBigdataFederation<?> fed;
+    protected IEmbergraphClient<?> client;
+    protected IEmbergraphFederation<?> fed;
     protected IMetadataService metadataService;
     protected IDataService dataService0;
     protected IDataService dataService1;

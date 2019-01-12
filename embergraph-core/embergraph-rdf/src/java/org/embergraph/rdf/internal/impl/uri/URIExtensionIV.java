@@ -1,5 +1,7 @@
 package org.embergraph.rdf.internal.impl.uri;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
@@ -10,9 +12,7 @@ import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -26,7 +26,7 @@ import org.embergraph.rdf.vocab.Vocabulary;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <V>
  */
-public class URIExtensionIV<V extends BigdataURI> 
+public class URIExtensionIV<V extends EmbergraphURI>
     	extends AbstractInlineExtensionIV<V, Object> 
 		implements URI { 
 
@@ -38,12 +38,12 @@ public class URIExtensionIV<V extends BigdataURI>
     /**
      * The namespace.
      */
-    private final AbstractInlineIV<BigdataURI, ?> namespaceIV;
+    private final AbstractInlineIV<EmbergraphURI, ?> namespaceIV;
 
     /**
      * The localName.
      */
-    private final AbstractLiteralIV<BigdataLiteral, ?> delegateIV;
+    private final AbstractLiteralIV<EmbergraphLiteral, ?> delegateIV;
 
     /**
      * {@inheritDoc}
@@ -80,7 +80,7 @@ public class URIExtensionIV<V extends BigdataURI>
      */
     @SuppressWarnings("unchecked")
     public URIExtensionIV(
-    		final AbstractLiteralIV<BigdataLiteral, ?> delegateIV, 
+    		final AbstractLiteralIV<EmbergraphLiteral, ?> delegateIV,
     		final IV<?,?> namespaceIV) {
         
         super(VTE.URI, true/* extension */, delegateIV.getDTE());
@@ -96,7 +96,7 @@ public class URIExtensionIV<V extends BigdataURI>
 
         this.delegateIV = delegateIV;
 
-        this.namespaceIV = (AbstractInlineIV<BigdataURI, ?>) namespaceIV;
+        this.namespaceIV = (AbstractInlineIV<EmbergraphURI, ?>) namespaceIV;
 
     }
     
@@ -111,7 +111,7 @@ public class URIExtensionIV<V extends BigdataURI>
     	            || namespaceIV.needsMaterialization();
     }
     
-    public AbstractLiteralIV<BigdataLiteral, ?> getLocalNameIV() {
+    public AbstractLiteralIV<EmbergraphLiteral, ?> getLocalNameIV() {
         return delegateIV;
     }
     
@@ -124,7 +124,7 @@ public class URIExtensionIV<V extends BigdataURI>
      * Extension IV is the <code>namespace</code> for the {@link URI}.
      */
     @Override
-    public IV<BigdataURI, ?> getExtensionIV() {
+    public IV<EmbergraphURI, ?> getExtensionIV() {
         return namespaceIV;
     }
     
@@ -220,7 +220,7 @@ public class URIExtensionIV<V extends BigdataURI>
 		
 		if (v == null) {
 			
-			final BigdataValueFactory f = lex.getValueFactory();
+			final EmbergraphValueFactory f = lex.getValueFactory();
 			
 //			final ILexiconConfiguration config = lex.getLexiconConfiguration();
 //

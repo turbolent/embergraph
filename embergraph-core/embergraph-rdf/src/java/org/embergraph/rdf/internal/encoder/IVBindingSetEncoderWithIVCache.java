@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.BOp;
@@ -58,9 +60,7 @@ import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.BlobsTupleSerializer;
 import org.embergraph.rdf.lexicon.Id2TermTupleSerializer;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.util.Bytes;
 
@@ -93,10 +93,10 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     private final String namespace;
 
     /**
-     * The {@link BigdataValueFactory} for the {@link LexiconRelation} IFF we
+     * The {@link EmbergraphValueFactory} for the {@link LexiconRelation} IFF we
      * need to maintain the {@link #ivCache}.
      */
-    private final BigdataValueFactory valueFactory;
+    private final EmbergraphValueFactory valueFactory;
 
     /**
      * The set of variables for which materialized {@link IV}s have been
@@ -107,14 +107,14 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     /**
      * A cache mapping from non-inline {@link IV}s ({@link TermId}s and
      * {@link BlobIV}s) whose {@link IVCache} association was set to the
-     * corresponding {@link BigdataValue}. Used to batch updates into
+     * corresponding {@link EmbergraphValue}. Used to batch updates into
      * the ID2TERM and BLOBS indices.
      */
-    final Map<IV<?, ?>, BigdataValue> cache;    
+    final Map<IV<?, ?>, EmbergraphValue> cache;
     
     /**
-     * The {@link IV}:{@link BigdataValue} mapping for non-{@link BlobIV}s. This
-     * captures any cached BigdataValue references encountered on {@link IV}s.
+     * The {@link IV}:{@link EmbergraphValue} mapping for non-{@link BlobIV}s. This
+     * captures any cached EmbergraphValue references encountered on {@link IV}s.
      * This map does not store duplicate entries for the same {@link IV}.
      * <p>
      * Note: This is precisely the same mapping we use for the ID2TERM index.
@@ -122,8 +122,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     private final AtomicReference<BTree> ivCache = new AtomicReference<BTree>();
 
     /**
-     * The {@link IV}:{@link BigdataValue} mapping for {@link BlobIV}s with
-     * cached {@link BigdataValue}s. This captures any cached BigdataValue
+     * The {@link IV}:{@link EmbergraphValue} mapping for {@link BlobIV}s with
+     * cached {@link EmbergraphValue}s. This captures any cached EmbergraphValue
      * references encountered on {@link BlobIV}s. This map does not store
      * duplicate entries for the same {@link IV}.
      * <p>
@@ -132,8 +132,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     private final AtomicReference<BTree> blobsCache = new AtomicReference<BTree>();
     
     /**
-     * The {@link IV}:{@link BigdataValue} mapping for {@link LiteralExtensionIV}s
-     * with cached {@link BigdataValue}s. This captures any cached BigdataValue
+     * The {@link IV}:{@link EmbergraphValue} mapping for {@link LiteralExtensionIV}s
+     * with cached {@link EmbergraphValue}s. This captures any cached EmbergraphValue
      * references encountered on {@link LiteralExtensionIV}s. This map does not
      * store duplicate entries for the same {@link IV}.
      */
@@ -340,7 +340,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     /**
      * @param store
      *            The backing {@link IRawStore} for the {@link IV} to
-     *            {@link BigdataValue} cache.
+     *            {@link EmbergraphValue} cache.
      * @param filter
      *            <code>true</code> iff this is in support of a DISTINCT filter.
      *            <p>
@@ -350,26 +350,26 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
      * @param op
      *            The operator whose annotations are used to parameterize the
      *            creation of the backing indices for the {@link IV} to
-     *            {@link BigdataValue} cache.
+     *            {@link EmbergraphValue} cache.
      */
     public IVBindingSetEncoderWithIVCache(final IRawStore store,
             final boolean filter, final BOp op) {
 
-        super(BigdataValueFactoryImpl.getInstance(((String[]) op
+        super(EmbergraphValueFactoryImpl.getInstance(((String[]) op
                 .getRequiredProperty(Predicate.Annotations.RELATION_NAME))[0]), filter);
         
         if (!filter) {
 
             /*
-             * Setup the IV => BigdataValue mapping. This captures any cached
-             * BigdataValue references encountered on IVs. This map does not store
+             * Setup the IV => EmbergraphValue mapping. This captures any cached
+             * EmbergraphValue references encountered on IVs. This map does not store
              * duplicate entries for the same IV.
              */
 
             namespace = ((String[]) op
                     .getRequiredProperty(Predicate.Annotations.RELATION_NAME))[0];
 
-            valueFactory = BigdataValueFactoryImpl.getInstance(namespace);
+            valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
 
             ivCache.set(BTree.create(store, getIVCacheIndexMetadata(op)));
 
@@ -379,7 +379,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
 
             ivCacheSchema = new LinkedHashSet<IVariable<?>>();
 
-            cache = new HashMap<IV<?, ?>, BigdataValue>();
+            cache = new HashMap<IV<?, ?>, EmbergraphValue>();
 
         } else {
 
@@ -516,11 +516,11 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
         final Id2TermTupleSerializer tupSer = (Id2TermTupleSerializer) ivCache
                 .getIndexMetadata().getTupleSerializer();
 
-        for (Map.Entry<IV<?, ?>, BigdataValue> e : cache.entrySet()) {
+        for (Map.Entry<IV<?, ?>, EmbergraphValue> e : cache.entrySet()) {
 
             final IV<?, ?> iv = e.getKey();
 
-            final BigdataValue value = e.getValue();
+            final EmbergraphValue value = e.getValue();
 
             if (iv instanceof BlobIV<?>) {
 
@@ -680,7 +680,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
                  * TODO Factor out the buffers used to do the de-serialization
                  * when we vector the resolution of IVs.
                  */
-                final BigdataValue value = valueFactory.getValueSerializer()
+                final EmbergraphValue value = valueFactory.getValueSerializer()
                         .deserialize(val);
 
                 iv.setValue(value);
@@ -699,7 +699,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
 
                 }
                 
-                final BigdataValue value = tupSer.deserialize(ivCacheTuple);
+                final EmbergraphValue value = tupSer.deserialize(ivCacheTuple);
 
                 iv.setValue(value);
                 
@@ -715,7 +715,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
 
                 }
 
-                final BigdataValue value = tupSer.deserialize(ivCacheTuple);
+                final EmbergraphValue value = tupSer.deserialize(ivCacheTuple);
 
                 iv.setValue(value);
 

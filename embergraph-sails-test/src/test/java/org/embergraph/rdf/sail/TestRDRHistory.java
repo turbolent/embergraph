@@ -24,6 +24,8 @@ package org.embergraph.rdf.sail;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -35,16 +37,14 @@ import org.openrdf.repository.RepositoryResult;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * Test suite {@link RDRHistory}.
  */
-public class TestRDRHistory extends ProxyBigdataSailTestCase {
+public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
     private static final Logger log = Logger.getLogger(TestRDRHistory.class);
     
@@ -60,10 +60,10 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
         final Properties props = super.getProperties();
         
         // no inference
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         // turn on RDR history
         props.setProperty(AbstractTripleStore.Options.RDR_HISTORY_CLASS, cls.getName());
@@ -91,23 +91,23 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
      */
     public void testAddAndRemove() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail
                   .getValueFactory();
             final URI s = vf.createURI(":s");
             final URI p = vf.createURI(":p");
             final URI o = vf.createURI(":o");
 
-            final BigdataStatement stmt = vf.createStatement(s, p, o);
+            final EmbergraphStatement stmt = vf.createStatement(s, p, o);
             
             // Add statement (first time added).
             cxn.add(stmt);
@@ -128,7 +128,7 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
                         s, p, o, true);
                 try {
                     assertTrue(stmts.hasNext());
-                    final BigdataStatement tmp = (BigdataStatement) stmts.next();
+                    final EmbergraphStatement tmp = (EmbergraphStatement) stmts.next();
                     assertEquals(StatementEnum.Explicit, tmp.getStatementType());
                     assertFalse(stmts.hasNext()); // Should be no more statements.
                 } finally {
@@ -137,12 +137,12 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
             }
 
             {
-                final BigdataBNode sid = vf.createBNode(stmt);
+                final EmbergraphBNode sid = vf.createBNode(stmt);
                 final RepositoryResult<Statement> stmts = cxn.getStatements(
                         sid, RDRHistory.Vocab.ADDED, null, true);
                 try {
                     assertTrue(stmts.hasNext());
-                    final BigdataStatement tmp = (BigdataStatement) stmts.next();
+                    final EmbergraphStatement tmp = (EmbergraphStatement) stmts.next();
                     final Literal l = (Literal) tmp.getObject();
                     assertEquals(XSD.DATETIME, l.getDatatype());
                     assertFalse(stmts.hasNext()); // Should be no more statements.
@@ -178,12 +178,12 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
 
             // Verify blaze:history:removed now found.
             {
-                final BigdataBNode sid = vf.createBNode(stmt);
+                final EmbergraphBNode sid = vf.createBNode(stmt);
                 final RepositoryResult<Statement> stmts = cxn.getStatements(
                         sid, RDRHistory.Vocab.REMOVED, null, true);
                 try {
                     assertTrue(stmts.hasNext());
-                    final BigdataStatement tmp = (BigdataStatement) stmts.next();
+                    final EmbergraphStatement tmp = (EmbergraphStatement) stmts.next();
                     final Literal l = (Literal) tmp.getObject();
                     assertEquals(XSD.DATETIME, l.getDatatype());
                 } finally {
@@ -218,7 +218,7 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
             }
 
             {
-                final BigdataBNode sid = vf.createBNode(stmt);
+                final EmbergraphBNode sid = vf.createBNode(stmt);
                 final RepositoryResult<Statement> stmts = cxn.getStatements(
                         sid, null, null, true);
                 try {
@@ -257,25 +257,25 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
      */
     public void testCustomHistory() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties(CustomRDRHistory.class));
+        final EmbergraphSail sail = getSail(getProperties(CustomRDRHistory.class));
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail
                   .getValueFactory();
             final URI s = vf.createURI(":s");
             final URI p = vf.createURI(":p");
             final URI o = vf.createURI(":o");
             final Literal l = vf.createLiteral("o");
 
-            BigdataStatement stmt1 = vf.createStatement(s, p, o);
-            BigdataStatement stmt2 = vf.createStatement(s, p, l);
+            EmbergraphStatement stmt1 = vf.createStatement(s, p, o);
+            EmbergraphStatement stmt2 = vf.createStatement(s, p, l);
             cxn.add(stmt1);
             cxn.add(stmt2);
             cxn.commit();
@@ -307,7 +307,7 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
             }
 
             {
-                final BigdataBNode sid = vf.createBNode(stmt1);
+                final EmbergraphBNode sid = vf.createBNode(stmt1);
                 final RepositoryResult<Statement> stmts = cxn.getStatements(
                         sid, RDRHistory.Vocab.ADDED, null, true);
                 try {
@@ -318,7 +318,7 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
             }
             
             {
-                final BigdataBNode sid = vf.createBNode(stmt2);
+                final EmbergraphBNode sid = vf.createBNode(stmt2);
                 final RepositoryResult<Statement> stmts = cxn.getStatements(
                         sid, RDRHistory.Vocab.ADDED, null, true);
                 try {
@@ -343,18 +343,18 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
      */
     public void testSparqlIntegration() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             
             {
                 
-                final BigdataSailRepositoryConnection read =
+                final EmbergraphSailRepositoryConnection read =
                         repo.getReadOnlyConnection();
                 
                 try {
@@ -365,7 +365,7 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
                 
             }
             
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
             {
                 final String sparql =
@@ -512,23 +512,23 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
      */
     public void testFullyRedundantEvents() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail
                     .getValueFactory();
             final URI s = vf.createURI(":s");
             final URI p = vf.createURI(":p");
             final Literal o = vf.createLiteral("foo");
-            final BigdataStatement stmt = vf.createStatement(s, p, o);
-            final BigdataBNode sid = vf.createBNode(stmt);
+            final EmbergraphStatement stmt = vf.createStatement(s, p, o);
+            final EmbergraphBNode sid = vf.createBNode(stmt);
 
             cxn.add(stmt);
             cxn.commit();
@@ -555,26 +555,26 @@ public class TestRDRHistory extends ProxyBigdataSailTestCase {
      */
     public void testPartiallyRedundantEvents() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail
                     .getValueFactory();
             final URI s = vf.createURI(":s");
             final URI p = vf.createURI(":p");
             final Literal o = vf.createLiteral("foo");
             final Literal bar = vf.createLiteral("bar");
-            final BigdataStatement stmt = vf.createStatement(s, p, o);
-            final BigdataStatement stmt2 = vf.createStatement(s, p, bar);
-            final BigdataBNode sid = vf.createBNode(stmt);
-            final BigdataBNode sid2 = vf.createBNode(stmt2);
+            final EmbergraphStatement stmt = vf.createStatement(s, p, o);
+            final EmbergraphStatement stmt2 = vf.createStatement(s, p, bar);
+            final EmbergraphBNode sid = vf.createBNode(stmt);
+            final EmbergraphBNode sid2 = vf.createBNode(stmt2);
 
             cxn.add(stmt);
             cxn.commit();

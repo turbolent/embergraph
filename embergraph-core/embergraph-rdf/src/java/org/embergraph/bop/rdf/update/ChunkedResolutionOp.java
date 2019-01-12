@@ -28,6 +28,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.BOp;
@@ -45,13 +46,12 @@ import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Vectored operator adds and/or resolves the RDF {@link Value}s associated with
  * mock {@link IV}s. On input, the variables must be mock {@link IV}s whose
- * {@link IVCache} is set to the corresponding {@link BigdataValue}. On output,
+ * {@link IVCache} is set to the corresponding {@link EmbergraphValue}. On output,
  * the bindings of the variables will be replaced by the corresponding
  * {@link IV} if it exists or is an inline {@link IV} and (it writing is
  * enabled) the newly assigned {@link IV} for the term.
@@ -169,9 +169,9 @@ public class ChunkedResolutionOp extends PipelineOp {
         @SuppressWarnings({ "rawtypes", "unchecked" })
         private IBindingSet[] resolve(final IBindingSet[] bindingSets) {
 
-            final Map<Value, BigdataValue> values = new LinkedHashMap<Value, BigdataValue>();
+            final Map<Value, EmbergraphValue> values = new LinkedHashMap<Value, EmbergraphValue>();
 
-            final BigdataValueFactory valueFactory = lex.getValueFactory();
+            final EmbergraphValueFactory valueFactory = lex.getValueFactory();
 
             for (IBindingSet bindings : bindingSets) {
 
@@ -189,7 +189,7 @@ public class ChunkedResolutionOp extends PipelineOp {
 
                         final Value val = iv.getValue();
 
-                        // add BigdataValue variant of the var's Value.
+                        // add EmbergraphValue variant of the var's Value.
                         values.put(val, valueFactory.asValue(val));
 
                     }
@@ -206,9 +206,9 @@ public class ChunkedResolutionOp extends PipelineOp {
 
                         final IV<?, ?> iv = (IV<?, ?>) c.get();
 
-                        final BigdataValue val = iv.getValue();
+                        final EmbergraphValue val = iv.getValue();
 
-                        // add BigdataValue variant of the var's Value.
+                        // add EmbergraphValue variant of the var's Value.
                         values.put(val, valueFactory.asValue(val));
 
                     }
@@ -226,8 +226,8 @@ public class ChunkedResolutionOp extends PipelineOp {
             final long mutationCount;
             {
 
-                final BigdataValue[] terms = values.values().toArray(
-                        new BigdataValue[] {});
+                final EmbergraphValue[] terms = values.values().toArray(
+                        new EmbergraphValue[] {});
 
                 final long ndistinct = lex.addTerms(terms, terms.length,
                         readOnly);
@@ -239,7 +239,7 @@ public class ChunkedResolutionOp extends PipelineOp {
                 }
 
                 // cache the BigdataValues on the IVs for later
-                for (BigdataValue term : terms) {
+                for (EmbergraphValue term : terms) {
 
                     final IV iv = term.getIV();
 
@@ -301,8 +301,8 @@ public class ChunkedResolutionOp extends PipelineOp {
 
                         final Value val = (Value) iv.getValue();
 
-                        // Lookup the resolved BigdataValue object.
-                        final BigdataValue val2 = values.get(val);
+                        // Lookup the resolved EmbergraphValue object.
+                        final EmbergraphValue val2 = values.get(val);
 
                         // Note: if read-only, then val2 can be null.
                         assert readOnly || val2 != null : "value not found: "
@@ -329,10 +329,10 @@ public class ChunkedResolutionOp extends PipelineOp {
 
                         final IV<?, ?> iv = (IV<?, ?>) c.get();
 
-                        final BigdataValue val = iv.getValue();
+                        final EmbergraphValue val = iv.getValue();
 
-                        // Lookup the resolved BigdataValue object.
-                        final BigdataValue val2 = values.get(val);
+                        // Lookup the resolved EmbergraphValue object.
+                        final EmbergraphValue val2 = values.get(val);
 
                         // Note: if read-only, then val2 can be null.
                         assert readOnly || val2 != null : "value not found: "

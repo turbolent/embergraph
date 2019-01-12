@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Statement;
 
 import org.embergraph.bop.BOp;
@@ -30,8 +31,7 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -198,14 +198,14 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
         
         try {
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI s1 = f.createURI("http://www.embergraph.org/rdf#s1");
-            final BigdataURI s2 = f.createURI("http://www.embergraph.org/rdf#s2");
-            final BigdataURI p1 = f.createURI("http://www.embergraph.org/rdf#p1");
-            final BigdataURI o1 = f.createURI("http://www.embergraph.org/rdf#o1");
-            final BigdataURI p2 = f.createURI("http://www.embergraph.org/rdf#p2");
-            final BigdataURI o2 = f.createURI("http://www.embergraph.org/rdf#o2");
+            final EmbergraphURI s1 = f.createURI("http://www.embergraph.org/rdf#s1");
+            final EmbergraphURI s2 = f.createURI("http://www.embergraph.org/rdf#s2");
+            final EmbergraphURI p1 = f.createURI("http://www.embergraph.org/rdf#p1");
+            final EmbergraphURI o1 = f.createURI("http://www.embergraph.org/rdf#o1");
+            final EmbergraphURI p2 = f.createURI("http://www.embergraph.org/rdf#p2");
+            final EmbergraphURI o2 = f.createURI("http://www.embergraph.org/rdf#o2");
 
             {
 
@@ -305,15 +305,15 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
                 
             }
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI graphA = f.createURI("http://www.embergraph.org/graphA");
-            final BigdataURI graphB = f.createURI("http://www.embergraph.org/graphB");
-            final BigdataURI s = f.createURI("http://www.embergraph.org/rdf#s");
-            final BigdataURI p1 = f.createURI("http://www.embergraph.org/rdf#p1");
-            final BigdataURI o1 = f.createURI("http://www.embergraph.org/rdf#o1");
-            final BigdataURI p2 = f.createURI("http://www.embergraph.org/rdf#p2");
-            final BigdataURI o2 = f.createURI("http://www.embergraph.org/rdf#o2");
+            final EmbergraphURI graphA = f.createURI("http://www.embergraph.org/graphA");
+            final EmbergraphURI graphB = f.createURI("http://www.embergraph.org/graphB");
+            final EmbergraphURI s = f.createURI("http://www.embergraph.org/rdf#s");
+            final EmbergraphURI p1 = f.createURI("http://www.embergraph.org/rdf#p1");
+            final EmbergraphURI o1 = f.createURI("http://www.embergraph.org/rdf#o1");
+            final EmbergraphURI p2 = f.createURI("http://www.embergraph.org/rdf#p2");
+            final EmbergraphURI o2 = f.createURI("http://www.embergraph.org/rdf#o2");
 
             {
 

@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.store.EmbergraphValueIteratorImpl;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Resource;
@@ -37,15 +40,12 @@ import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.NotMaterializedException;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphResource;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BigdataValueIterator;
-import org.embergraph.rdf.store.BigdataValueIteratorImpl;
+import org.embergraph.rdf.store.EmbergraphValueIterator;
 import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
 import org.embergraph.striterator.IChunkedIterator;
@@ -254,7 +254,7 @@ public class VoID {
             final IChunkedIterator<IV> itr = r.distinctTermScan(keyOrder);
 
             // resolve IVs to terms efficiently during iteration.
-            final BigdataValueIterator itr2 = new BigdataValueIteratorImpl(
+            final EmbergraphValueIterator itr2 = new EmbergraphValueIteratorImpl(
                     tripleStore/* resolveTerms */, itr);
 
             try {
@@ -273,7 +273,7 @@ public class VoID {
                      * done because we do not have a CPxx index.
                      */
 
-                    final BigdataResource graph = (BigdataResource) itr2.next();
+                    final EmbergraphResource graph = (EmbergraphResource) itr2.next();
 
                     final IVCount[] predicatePartitionCounts2 = predicateUsage(
                             tripleStore, graph.getIV(),
@@ -412,7 +412,7 @@ public class VoID {
 
                 final BNode classPartition = f.createBNode();
 
-                final BigdataValue cls = tmp.getValue();
+                final EmbergraphValue cls = tmp.getValue();
 
                 g.add(graph, VoidVocabularyDecl.classPartition,
                         classPartition);
@@ -437,17 +437,17 @@ public class VoID {
 
         public final long count;
 
-        private BigdataValue val;
+        private EmbergraphValue val;
         
         /**
-         * Return the associated {@link BigdataValue}.
+         * Return the associated {@link EmbergraphValue}.
          * <p>
          * Note: A resolution set is necessary if you want to attach the
-         * {@link BigdataValue} to the {@link IV}.
+         * {@link EmbergraphValue} to the {@link IV}.
          * 
          * @throws NotMaterializedException
          */
-        public BigdataValue getValue() {
+        public EmbergraphValue getValue() {
 
             if(val == null)
                 throw new NotMaterializedException(iv.toString());
@@ -456,7 +456,7 @@ public class VoID {
             
         }
         
-        public void setValue(final BigdataValue val) {
+        public void setValue(final EmbergraphValue val) {
 
             if (val == null)
                 throw new IllegalArgumentException();
@@ -500,7 +500,7 @@ public class VoID {
     /**
      * Return an array of the distinct predicates in the KB ordered by their
      * descending frequency of use. The {@link IV}s in the returned array will
-     * have been resolved to the corresponding {@link BigdataURI}s which can be
+     * have been resolved to the corresponding {@link EmbergraphURI}s which can be
      * accessed using {@link IV#getValue()}.
      * 
      * @param kb
@@ -527,7 +527,7 @@ public class VoID {
         final IChunkedIterator<IV> itr = r.distinctTermScan(keyOrder);
 
         // resolve term identifiers to terms efficiently during iteration.
-        final BigdataValueIterator itr2 = new BigdataValueIteratorImpl(
+        final EmbergraphValueIterator itr2 = new EmbergraphValueIteratorImpl(
                 kb/* resolveTerms */, itr);
 
         try {
@@ -538,7 +538,7 @@ public class VoID {
 
             while (itr2.hasNext()) {
 
-                final BigdataValue term = itr2.next();
+                final EmbergraphValue term = itr2.next();
 
                 final IV<?,?> iv = term.getIV();
 
@@ -552,10 +552,10 @@ public class VoID {
             }
 
             // Batch resolve IVs to Values
-            final Map<IV<?, ?>, BigdataValue> x = kb.getLexiconRelation()
+            final Map<IV<?, ?>, EmbergraphValue> x = kb.getLexiconRelation()
                     .getTerms(ivs);
 
-            for (Map.Entry<IV<?, ?>, BigdataValue> e : x.entrySet()) {
+            for (Map.Entry<IV<?, ?>, EmbergraphValue> e : x.entrySet()) {
 
                 final IVCount count = counts.get(e.getKey());
 
@@ -677,9 +677,9 @@ public class VoID {
         final SPOKeyOrder keyOrder = quads ? SPOKeyOrder.POCS : SPOKeyOrder.POS;
 
         // Resolve IV for rdf:type
-        final BigdataURI rdfType = kb.getValueFactory().asValue(RDF.TYPE);
+        final EmbergraphURI rdfType = kb.getValueFactory().asValue(RDF.TYPE);
 
-        kb.getLexiconRelation().addTerms(new BigdataValue[] { rdfType },
+        kb.getLexiconRelation().addTerms(new EmbergraphValue[] { rdfType },
                 1/* numTerms */, true/* readOnly */);
 
         if (rdfType.getIV() == null) {
@@ -695,7 +695,7 @@ public class VoID {
                 new IV[] { rdfType.getIV() }/* knownTerms */);
 
         // resolve term identifiers to terms efficiently during iteration.
-        final BigdataValueIterator itr2 = new BigdataValueIteratorImpl(
+        final EmbergraphValueIterator itr2 = new EmbergraphValueIteratorImpl(
                 kb/* resolveTerms */, itr);
 
         try {
@@ -706,7 +706,7 @@ public class VoID {
 
             while (itr2.hasNext()) {
 
-                final BigdataValue term = itr2.next();
+                final EmbergraphValue term = itr2.next();
 
                 final IV<?,?> iv = term.getIV();
 
@@ -720,10 +720,10 @@ public class VoID {
             }
 
             // Batch resolve IVs to Values
-            final Map<IV<?, ?>, BigdataValue> x = kb.getLexiconRelation()
+            final Map<IV<?, ?>, EmbergraphValue> x = kb.getLexiconRelation()
                     .getTerms(ivs);
 
-            for (Map.Entry<IV<?, ?>, BigdataValue> e : x.entrySet()) {
+            for (Map.Entry<IV<?, ?>, EmbergraphValue> e : x.entrySet()) {
 
                 final IVCount count = counts.get(e.getKey());
 
@@ -773,9 +773,9 @@ public class VoID {
         }
 
         // Resolve IV for rdf:type
-        final BigdataURI rdfType = kb.getValueFactory().asValue(RDF.TYPE);
+        final EmbergraphURI rdfType = kb.getValueFactory().asValue(RDF.TYPE);
 
-        kb.getLexiconRelation().addTerms(new BigdataValue[] { rdfType },
+        kb.getLexiconRelation().addTerms(new EmbergraphValue[] { rdfType },
                 1/* numTerms */, true/* readOnly */);
 
         if (rdfType.getIV() == null) {

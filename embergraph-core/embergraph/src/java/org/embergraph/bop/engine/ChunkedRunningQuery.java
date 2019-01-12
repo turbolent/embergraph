@@ -59,7 +59,7 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IMultiSourceCloseableIterator;
 import org.embergraph.relation.accesspath.MultiSourceSequentialCloseableIterator;
 import org.embergraph.rwstore.sector.IMemoryManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.concurrent.Memoizer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -73,7 +73,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * shard (shardId). In scale-out, binding sets will be mapped across the target
  * access path and may be replicated to one or more nodes depending on the
  * distribution of the shards. This evaluation strategy is compatible with both
- * the {@link Journal} (aka standalone) and the {@link IBigdataFederation} (aka
+ * the {@link Journal} (aka standalone) and the {@link IEmbergraphFederation} (aka
  * clustered or scale-out).
  * <p>
  * Note: The challenge with this implementation is managing the amount of data

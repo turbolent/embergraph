@@ -42,7 +42,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 /**
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
-public class TestInlineValues extends ProxyBigdataSailTestCase {
+public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
 	protected static final Logger log = Logger.getLogger(TestInlineValues.class);
 	
@@ -51,11 +51,11 @@ public class TestInlineValues extends ProxyBigdataSailTestCase {
         
         final Properties props = new Properties(super.getProperties());
         
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -76,11 +76,11 @@ public class TestInlineValues extends ProxyBigdataSailTestCase {
 
     public void testInlineValuesLT() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {
@@ -143,11 +143,11 @@ public class TestInlineValues extends ProxyBigdataSailTestCase {
     
     public void testInlineValuesGT() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {
@@ -210,11 +210,11 @@ public class TestInlineValues extends ProxyBigdataSailTestCase {
     
     public void testIsLiteral() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {

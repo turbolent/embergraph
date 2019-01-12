@@ -37,7 +37,7 @@ import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedureConstructor;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.Term2IdWriteProc.Term2IdWriteProcConstructor;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
@@ -47,7 +47,7 @@ import org.embergraph.service.ndx.pipeline.KVOList;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class Term2IdWriteTask implements
-        Callable<KVO<BigdataValue>[]> {
+        Callable<KVO<EmbergraphValue>[]> {
 
     private static transient final Logger log = Logger
             .getLogger(Term2IdWriteTask.class);
@@ -58,12 +58,12 @@ public class Term2IdWriteTask implements
     private final boolean storeBlankNodes;
     private final int termIdBitsToReverse;
     private final int numTerms;
-    private final BigdataValue[] terms;
+    private final EmbergraphValue[] terms;
     private final WriteTaskStats stats;
     
     public Term2IdWriteTask(final IIndex termIdIndex, final boolean readOnly,
             final boolean storeBlankNodes, final int termIdBitsToReverse,
-            final int numTerms, final BigdataValue[] terms,
+            final int numTerms, final EmbergraphValue[] terms,
             final WriteTaskStats stats) {
 
         if (termIdIndex == null)
@@ -97,7 +97,7 @@ public class Term2IdWriteTask implements
     }
     
     /**
-     * Unify the {@link BigdataValue}s with the TERM2ID index, setting the
+     * Unify the {@link EmbergraphValue}s with the TERM2ID index, setting the
      * term identifiers (TIDs) on those values as a side-effect.
      * 
      * @return A dense {@link KVO}[] chunk consisting of only those
@@ -106,7 +106,7 @@ public class Term2IdWriteTask implements
      * 
      * @throws Exception
      */
-    public KVO<BigdataValue>[] call() throws Exception {
+    public KVO<EmbergraphValue>[] call() throws Exception {
         
         /*
          * Insert into the forward index (term -> id). This will either assign a
@@ -118,10 +118,10 @@ public class Term2IdWriteTask implements
         int ndistinct = 0;
 
         // A dense array of correlated tuples.
-        final KVO<BigdataValue>[] a;
+        final KVO<EmbergraphValue>[] a;
         {
             
-            final KVO<BigdataValue>[] b;
+            final KVO<EmbergraphValue>[] b;
 
             /*
              * First make sure that each term has an assigned sort key.
@@ -258,11 +258,11 @@ public class Term2IdWriteTask implements
 
     /**
      * Class applies the term identifiers assigned by the
-     * {@link Term2IdWriteProc} to the {@link BigdataValue} references in the
+     * {@link Term2IdWriteProc} to the {@link EmbergraphValue} references in the
      * {@link KVO} correlated with each {@link Split} of data processed by that
      * procedure.
      * <p>
-     * Note: Of necessity, this requires access to the {@link BigdataValue}s
+     * Note: Of necessity, this requires access to the {@link EmbergraphValue}s
      * whose term identifiers are being resolved. This implementation presumes
      * that the array specified to the ctor and the array returned for each
      * chunk that is processed have correlated indices and that the offset into
@@ -273,7 +273,7 @@ public class Term2IdWriteTask implements
     static private class Term2IdWriteProcResultHandler implements
             IResultHandler<Term2IdWriteProc.Result, Void> {
 
-        private final KVO<BigdataValue>[] a;
+        private final KVO<EmbergraphValue>[] a;
         private final boolean readOnly;
         
         /**
@@ -292,7 +292,7 @@ public class Term2IdWriteTask implements
          *            Incremented as a side effect for each terms that could not
          *            be resolved (iff readOnly == true).
          */
-        public Term2IdWriteProcResultHandler(final KVO<BigdataValue>[] a,
+        public Term2IdWriteProcResultHandler(final KVO<EmbergraphValue>[] a,
                 final boolean readOnly, final AtomicInteger nunknown) {
 
             if (a == null)
@@ -335,7 +335,7 @@ public class Term2IdWriteTask implements
 
                     if(a[i] instanceof KVOList) {
                         
-                        final KVOList<BigdataValue> tmp = (KVOList<BigdataValue>) a[i];
+                        final KVOList<EmbergraphValue> tmp = (KVOList<EmbergraphValue>) a[i];
 
                         if (!tmp.isDuplicateListEmpty()) {
 
@@ -383,17 +383,17 @@ public class Term2IdWriteTask implements
      * @see LexiconKeyBuilder
      */
     @SuppressWarnings("unchecked")
-    final private KVO<BigdataValue>[] generateSortKeys(
-            final LexiconKeyBuilder keyBuilder, final BigdataValue[] terms,
+    final private KVO<EmbergraphValue>[] generateSortKeys(
+            final LexiconKeyBuilder keyBuilder, final EmbergraphValue[] terms,
             final int numTerms) {
 
-        final KVO<BigdataValue>[] a = new KVO[numTerms];
+        final KVO<EmbergraphValue>[] a = new KVO[numTerms];
 
         for (int i = 0; i < numTerms; i++) {
 
-            final BigdataValue term = terms[i];
+            final EmbergraphValue term = terms[i];
 
-            a[i] = new KVO<BigdataValue>(keyBuilder.value2Key(term),
+            a[i] = new KVO<EmbergraphValue>(keyBuilder.value2Key(term),
                     null/* val */, term);
 
         }

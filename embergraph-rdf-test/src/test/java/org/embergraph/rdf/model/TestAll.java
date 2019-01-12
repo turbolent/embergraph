@@ -46,7 +46,7 @@ public class TestAll extends TestCase {
 	 * Returns a test that will run each of the implementation specific test
 	 * suites in turn.
 	 * 
-	 * @todo The {@link BigdataValue} and {@link BigdataStatement}
+	 * @todo The {@link EmbergraphValue} and {@link EmbergraphStatement}
 	 *       implementation and those implementations should be tested for
 	 *       Sesame 2 API compatibility.
 	 */
@@ -62,7 +62,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(TestEquals.class);
 
         // test suite for serialization semantics.
-        suite.addTestSuite(TestBigdataValueSerialization.class);
+        suite.addTestSuite(TestEmbergraphValueSerialization.class);
 
         return suite;
         

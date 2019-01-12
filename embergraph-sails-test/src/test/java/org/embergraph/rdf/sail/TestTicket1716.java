@@ -41,19 +41,19 @@ public class TestTicket1716 extends QuadsTestCase {
 
 	public void testBug() throws Exception {
 
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
-			executeQuery(new BigdataSailRepository(sail));
+			executeQuery(new EmbergraphSailRepository(sail));
 		} finally {
 			sail.__tearDownUnitTest();
 		}
 	}
 
-	private void executeQuery(final BigdataSailRepository repo)
+	private void executeQuery(final EmbergraphSailRepository repo)
 			throws UpdateExecutionException, RepositoryException, MalformedQueryException {
 		try {
 			repo.initialize();
-			final BigdataSailRepositoryConnection conn = repo.getConnection();
+			final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 			try {
 				String update = "insert {" + 
 						"<http://dbpedia.org/resource/Jules_Verne> <http://dbpedia.org/property/period> \"\"^^<http://www.w3.org/2001/XMLSchema#int>\r\n" + 

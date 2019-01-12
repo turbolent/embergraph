@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bfs.GlobalFileSystemHelper;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
@@ -516,7 +516,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     }
     
     @Override
-    public BigdataFileSystem getGlobalFileSystem() {
+    public EmbergraphFileSystem getGlobalFileSystem() {
 
         assertOpen();
         

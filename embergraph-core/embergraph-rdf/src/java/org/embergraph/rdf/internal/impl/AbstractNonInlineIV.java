@@ -23,6 +23,7 @@ import java.math.BigInteger;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
@@ -32,13 +33,12 @@ import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Abstract base class for {@link IV}s which CAN NOT be fully materialized
  * from their inline representation.
  */
-abstract public class AbstractNonInlineIV<V extends BigdataValue, T> 
+abstract public class AbstractNonInlineIV<V extends EmbergraphValue, T>
 		extends AbstractIV<V, T> implements Literal, BNode, URI  {
 
     /**
@@ -77,7 +77,7 @@ abstract public class AbstractNonInlineIV<V extends BigdataValue, T>
      * <p>
      * {@inheritDoc}
      * 
-     * @see #setValue(BigdataValue)
+     * @see #setValue(EmbergraphValue)
      */
     final public V asValue(final LexiconRelation lex) {
     
@@ -117,7 +117,7 @@ abstract public class AbstractNonInlineIV<V extends BigdataValue, T>
     }
 
     /**
-     * Override default serialization to send the cached {@link BigdataValue}.
+     * Override default serialization to send the cached {@link EmbergraphValue}.
      */
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
@@ -128,7 +128,7 @@ abstract public class AbstractNonInlineIV<V extends BigdataValue, T>
     }
 
     /**
-     * Override default serialization to recover the cached {@link BigdataValue}
+     * Override default serialization to recover the cached {@link EmbergraphValue}
      * .
      */
     @SuppressWarnings("unchecked")

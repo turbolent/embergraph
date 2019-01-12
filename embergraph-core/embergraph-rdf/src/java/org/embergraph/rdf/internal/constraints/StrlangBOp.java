@@ -19,15 +19,14 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
-import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 public class StrlangBOp extends IVValueExpression<IV> implements INeedsMaterialization {
@@ -69,7 +68,7 @@ public class StrlangBOp extends IVValueExpression<IV> implements INeedsMateriali
         final Literal l = getAndCheckLiteralValue(1, bs);
         String label = lit.getLabel();
         String langLit = l.getLabel();
-        final BigdataLiteral str = getValueFactory().createLiteral(label, langLit);
+        final EmbergraphLiteral str = getValueFactory().createLiteral(label, langLit);
         return super.asIV(str, bs);
 
     }

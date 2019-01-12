@@ -29,7 +29,7 @@ import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.proxy.RemoteBuffer;
@@ -125,8 +125,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements
 
         super(rule, joinNexus, buffer);
 
-        if (!(joinNexus.getIndexManager() instanceof IBigdataFederation)
-                || !(((IBigdataFederation) joinNexus.getIndexManager())
+        if (!(joinNexus.getIndexManager() instanceof IEmbergraphFederation)
+                || !(((IEmbergraphFederation) joinNexus.getIndexManager())
                         .isScaleOut())) {
 
             /*

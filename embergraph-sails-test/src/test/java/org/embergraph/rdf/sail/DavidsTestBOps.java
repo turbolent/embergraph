@@ -52,7 +52,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class DavidsTestBOps extends ProxyBigdataSailTestCase {
+public class DavidsTestBOps extends ProxyEmbergraphSailTestCase {
 
     private static final Logger log = Logger.getLogger(DavidsTestBOps.class);
     
@@ -61,11 +61,11 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -87,7 +87,7 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
     public void testImplementationDefinedDefaultGraph ()
         throws Exception
     {
-        final BigdataSail sail = getTheSail () ;
+        final EmbergraphSail sail = getTheSail () ;
         final ValueFactory vf = sail.getValueFactory();
         final RepositoryConnection cxn = getRepositoryConnection ( sail ) ;
         try {
@@ -110,7 +110,7 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
     public void testExplicitDefaultGraph ()
         throws Exception
     {
-        final BigdataSail sail = getTheSail () ;
+        final EmbergraphSail sail = getTheSail () ;
         final ValueFactory vf = sail.getValueFactory();
         final RepositoryConnection cxn = getRepositoryConnection ( sail ) ;
         try {
@@ -133,7 +133,7 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
     public void testNamedGraphNoGraphKeyword1 ()
         throws Exception
     {
-        final BigdataSail sail = getTheSail () ;
+        final EmbergraphSail sail = getTheSail () ;
         final ValueFactory vf = sail.getValueFactory();
         final RepositoryConnection cxn = getRepositoryConnection ( sail ) ;
         try {
@@ -154,7 +154,7 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
     public void testNamedGraphNoGraphKeyword2 ()
         throws Exception
     {
-        final BigdataSail sail = getTheSail () ;
+        final EmbergraphSail sail = getTheSail () ;
         final ValueFactory vf = sail.getValueFactory();
         final RepositoryConnection cxn = getRepositoryConnection ( sail ) ;
         try {
@@ -175,7 +175,7 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
     public void testExplicitDefaultAndNamedGraphNoGraphKeyword ()
         throws Exception
     {
-        final BigdataSail sail = getTheSail () ;
+        final EmbergraphSail sail = getTheSail () ;
         final ValueFactory vf = sail.getValueFactory();
         final RepositoryConnection cxn = getRepositoryConnection ( sail ) ;
         try {
@@ -193,26 +193,26 @@ public class DavidsTestBOps extends ProxyBigdataSailTestCase {
         }
     }
 
-    private BigdataSail getTheSail ()
+    private EmbergraphSail getTheSail ()
         throws SailException
     {
-        BigdataSail sail = getSail () ;
+        EmbergraphSail sail = getSail () ;
         sail.initialize () ;
         return sail ;
     }
 
-    private RepositoryConnection getRepositoryConnection ( final BigdataSail sail )
+    private RepositoryConnection getRepositoryConnection ( final EmbergraphSail sail )
         throws RepositoryException
     {
-        final BigdataSailRepository repo = new BigdataSailRepository ( sail ) ;
-        final BigdataSailRepositoryConnection cxn = ( BigdataSailRepositoryConnection )repo.getConnection () ;
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository( sail ) ;
+        final EmbergraphSailRepositoryConnection cxn = (EmbergraphSailRepositoryConnection)repo.getConnection () ;
         cxn.setAutoCommit ( false ) ;
         return cxn ;
     }
 
-    private void run ( final BigdataSail sail, final RepositoryConnection rc, final String kb, final Resource graphs [], final String qs, final Collection<BindingSet> expected )
+    private void run ( final EmbergraphSail sail, final RepositoryConnection rc, final String kb, final Resource graphs [], final String qs, final Collection<BindingSet> expected )
     {
-        if (!((BigdataSailRepositoryConnection) rc).getSailConnection().isQuads()) {
+        if (!((EmbergraphSailRepositoryConnection) rc).getSailConnection().isQuads()) {
             log.info("This test requires quads.");
             return;
         }

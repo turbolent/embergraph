@@ -33,8 +33,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.NotMaterializedException;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -128,7 +127,7 @@ public class FuncBOp extends IVValueExpression<IV> implements
     	
     	final Function func = getFunc();
 
-	    final BigdataValueFactory vf = getValueFactory();
+	    final EmbergraphValueFactory vf = getValueFactory();
     
 	    try {
 	    

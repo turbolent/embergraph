@@ -37,9 +37,9 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ArbitraryLengthPathNode;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
@@ -605,11 +605,11 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     @SuppressWarnings({ "rawtypes", "serial" })
     public void testServiceSparql11Constant() {
        
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI serviceEndpoint = f.createURI("http://custom.endpoint");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI serviceEndpoint = f.createURI("http://custom.endpoint");
       final IV serviceEndpointIV = makeIV(serviceEndpoint);
       
-      final BigdataValue[] values = new BigdataValue[] { serviceEndpoint };       
+      final EmbergraphValue[] values = new EmbergraphValue[] { serviceEndpoint };
       store.getLexiconRelation().addTerms(
          values, values.length, false/* readOnly */);
       
@@ -671,14 +671,14 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
      */
     public void testServiceBDS() {
        
-       final BigdataValueFactory f = store.getValueFactory();
-       final BigdataURI bdsSearch = f.createURI(BDS.NAMESPACE + "search");
-       final BigdataURI predSearch = f.createURI(BDS.SEARCH.toString());
-       final BigdataURI predSearchTimeout = f.createURI(BDS.SEARCH_TIMEOUT.toString());
-       final BigdataURI predMatchExact = f.createURI(BDS.MATCH_EXACT.toString());
+       final EmbergraphValueFactory f = store.getValueFactory();
+       final EmbergraphURI bdsSearch = f.createURI(BDS.NAMESPACE + "search");
+       final EmbergraphURI predSearch = f.createURI(BDS.SEARCH.toString());
+       final EmbergraphURI predSearchTimeout = f.createURI(BDS.SEARCH_TIMEOUT.toString());
+       final EmbergraphURI predMatchExact = f.createURI(BDS.MATCH_EXACT.toString());
        
-       final BigdataValue[] values = 
-          new BigdataValue[] { bdsSearch, predSearch, predSearchTimeout, predMatchExact };       
+       final EmbergraphValue[] values =
+          new EmbergraphValue[] { bdsSearch, predSearch, predSearchTimeout, predMatchExact };
        store.getLexiconRelation().addTerms(values, values.length, false/* readOnly */);
 
        final ServiceNode serviceNode = 
@@ -711,22 +711,22 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     @SuppressWarnings("serial")
    public void testServiceFTS() {
        
-       final BigdataValueFactory f = store.getValueFactory();
-       final BigdataURI ftsSearch = f.createURI(FTS.NAMESPACE + "search");
-       final BigdataURI predSearch = f.createURI(FTS.SEARCH.toString());
-       final BigdataURI predEndpoint = f.createURI(FTS.ENDPOINT.toString());
-       final BigdataURI predEndpointType = f.createURI(FTS.ENDPOINT_TYPE.toString());
-       final BigdataURI predParams = f.createURI(FTS.PARAMS.toString());
-       final BigdataURI predScore = f.createURI(FTS.SCORE.toString());
-       final BigdataURI predScoreField = f.createURI(FTS.SCORE_FIELD.toString());
-       final BigdataURI predSearchField = f.createURI(FTS.SEARCH_FIELD.toString());
-       final BigdataURI predSnippet = f.createURI(FTS.SNIPPET.toString());
-       final BigdataURI predSnippetField = f.createURI(FTS.SNIPPET_FIELD.toString());
-       final BigdataURI predTimeout = f.createURI(FTS.TIMEOUT.toString());
-       final BigdataURI predSearchResultType = f.createURI(FTS.SEARCH_RESULT_TYPE.toString());
+       final EmbergraphValueFactory f = store.getValueFactory();
+       final EmbergraphURI ftsSearch = f.createURI(FTS.NAMESPACE + "search");
+       final EmbergraphURI predSearch = f.createURI(FTS.SEARCH.toString());
+       final EmbergraphURI predEndpoint = f.createURI(FTS.ENDPOINT.toString());
+       final EmbergraphURI predEndpointType = f.createURI(FTS.ENDPOINT_TYPE.toString());
+       final EmbergraphURI predParams = f.createURI(FTS.PARAMS.toString());
+       final EmbergraphURI predScore = f.createURI(FTS.SCORE.toString());
+       final EmbergraphURI predScoreField = f.createURI(FTS.SCORE_FIELD.toString());
+       final EmbergraphURI predSearchField = f.createURI(FTS.SEARCH_FIELD.toString());
+       final EmbergraphURI predSnippet = f.createURI(FTS.SNIPPET.toString());
+       final EmbergraphURI predSnippetField = f.createURI(FTS.SNIPPET_FIELD.toString());
+       final EmbergraphURI predTimeout = f.createURI(FTS.TIMEOUT.toString());
+       final EmbergraphURI predSearchResultType = f.createURI(FTS.SEARCH_RESULT_TYPE.toString());
        
-       final BigdataValue[] values = 
-          new BigdataValue[] { 
+       final EmbergraphValue[] values =
+          new EmbergraphValue[] {
              ftsSearch, predSearch, predEndpoint, predEndpointType, predParams,
              predScore, predScoreField, predSearchField, predSnippet,
              predSnippetField, predTimeout, predSearchResultType };       

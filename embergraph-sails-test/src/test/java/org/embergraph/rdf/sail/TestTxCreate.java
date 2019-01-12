@@ -42,7 +42,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestTxCreate extends ProxyBigdataSailTestCase {
+public class TestTxCreate extends ProxyEmbergraphSailTestCase {
 
     /**
      * 
@@ -67,7 +67,7 @@ public class TestTxCreate extends ProxyBigdataSailTestCase {
         final Properties properties = getProperties();
 
         // truth maintenance is not compatible with full transactions.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
@@ -75,14 +75,14 @@ public class TestTxCreate extends ProxyBigdataSailTestCase {
         properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
                 NoVocabulary.class.getName());
 
-        properties.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
         properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
 
         properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
                 "false");
 
-        final BigdataSail sail = new BigdataSail(properties);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
         
         try {
 
@@ -107,7 +107,7 @@ public class TestTxCreate extends ProxyBigdataSailTestCase {
         final Properties properties = getProperties();
 
         // truth maintenance is not compatible with full transactions.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
@@ -117,12 +117,12 @@ public class TestTxCreate extends ProxyBigdataSailTestCase {
 
         properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
 
-        properties.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
         properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
                 "true");
 
-        final BigdataSail sail = new BigdataSail(properties);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
 
         try {
 

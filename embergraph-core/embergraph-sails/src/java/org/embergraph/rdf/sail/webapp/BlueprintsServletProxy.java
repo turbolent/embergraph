@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-public class BlueprintsServletProxy extends BigdataRDFServlet {
+public class BlueprintsServletProxy extends EmbergraphRDFServlet {
 	
 	private static final String DEFAULT_PROVIDER = "org.embergraph.blueprints.webapp.BlueprintsServlet";
 	

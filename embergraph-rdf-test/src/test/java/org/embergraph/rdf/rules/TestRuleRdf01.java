@@ -23,11 +23,11 @@ package org.embergraph.rdf.rules;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.rule.Rule;
 
@@ -71,7 +71,7 @@ public class TestRuleRdf01 extends AbstractRuleTestCase {
 
         try {
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             final URI A = f.createURI("http://www.foo.org/A");
             final URI B = f.createURI("http://www.foo.org/B");
@@ -121,7 +121,7 @@ public class TestRuleRdf01 extends AbstractRuleTestCase {
 
         try {
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             final URI A = f.createURI("http://www.foo.org/A");
             final URI B = f.createURI("http://www.foo.org/B");

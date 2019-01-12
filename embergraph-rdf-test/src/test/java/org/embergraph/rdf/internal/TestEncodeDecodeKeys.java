@@ -31,6 +31,12 @@ import java.util.UUID;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.LiteralImpl;
@@ -52,12 +58,6 @@ import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.vocab.Vocabulary;
@@ -141,7 +141,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
                     }
 
                     @Override
-                    public BigdataValue asValue(final LexiconRelation lex)
+                    public EmbergraphValue asValue(final LexiconRelation lex)
                             throws UnsupportedOperationException {
                         return null;
                     }
@@ -246,8 +246,8 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_XSDBoolean() {
 
         final IV<?, ?>[] e = {
-                new XSDBooleanIV<BigdataLiteral>(true),
-                new XSDBooleanIV<BigdataLiteral>(false),
+                new XSDBooleanIV<EmbergraphLiteral>(true),
+                new XSDBooleanIV<EmbergraphLiteral>(false),
         };
 
         doEncodeDecodeTest(e);
@@ -262,11 +262,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_XSDByte() {
 
         final IV<?, ?>[] e = {
-                new XSDNumericIV<BigdataLiteral>((byte)Byte.MIN_VALUE),
-                new XSDNumericIV<BigdataLiteral>((byte)-1),
-                new XSDNumericIV<BigdataLiteral>((byte)0),
-                new XSDNumericIV<BigdataLiteral>((byte)1),
-                new XSDNumericIV<BigdataLiteral>((byte)Byte.MAX_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>((byte)Byte.MIN_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>((byte)-1),
+                new XSDNumericIV<EmbergraphLiteral>((byte)0),
+                new XSDNumericIV<EmbergraphLiteral>((byte)1),
+                new XSDNumericIV<EmbergraphLiteral>((byte)Byte.MAX_VALUE),
         };
 
         doEncodeDecodeTest(e);
@@ -281,11 +281,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_XSDShort() {
 
         final IV<?, ?>[] e = {
-                new XSDNumericIV<BigdataLiteral>((short)-1),
-                new XSDNumericIV<BigdataLiteral>((short)0),
-                new XSDNumericIV<BigdataLiteral>((short)1),
-                new XSDNumericIV<BigdataLiteral>((short)Short.MIN_VALUE),
-                new XSDNumericIV<BigdataLiteral>((short)Short.MAX_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>((short)-1),
+                new XSDNumericIV<EmbergraphLiteral>((short)0),
+                new XSDNumericIV<EmbergraphLiteral>((short)1),
+                new XSDNumericIV<EmbergraphLiteral>((short)Short.MIN_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>((short)Short.MAX_VALUE),
         };
 
         doEncodeDecodeTest(e);
@@ -300,11 +300,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_XSDInt() {
 
         final IV<?, ?>[] e = {
-                new XSDNumericIV<BigdataLiteral>(1),
-                new XSDNumericIV<BigdataLiteral>(0),
-                new XSDNumericIV<BigdataLiteral>(-1),
-                new XSDNumericIV<BigdataLiteral>(Integer.MAX_VALUE),
-                new XSDNumericIV<BigdataLiteral>(Integer.MIN_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(1),
+                new XSDNumericIV<EmbergraphLiteral>(0),
+                new XSDNumericIV<EmbergraphLiteral>(-1),
+                new XSDNumericIV<EmbergraphLiteral>(Integer.MAX_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(Integer.MIN_VALUE),
         };
 
         doEncodeDecodeTest(e);
@@ -319,11 +319,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_XSDLong() {
 
         final IV<?, ?>[] e = {
-                new XSDNumericIV<BigdataLiteral>(1L),
-                new XSDNumericIV<BigdataLiteral>(0L),
-                new XSDNumericIV<BigdataLiteral>(-1L),
-                new XSDNumericIV<BigdataLiteral>(Long.MIN_VALUE),
-                new XSDNumericIV<BigdataLiteral>(Long.MAX_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(1L),
+                new XSDNumericIV<EmbergraphLiteral>(0L),
+                new XSDNumericIV<EmbergraphLiteral>(-1L),
+                new XSDNumericIV<EmbergraphLiteral>(Long.MIN_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(Long.MAX_VALUE),
         };
 
         doEncodeDecodeTest(e);
@@ -340,18 +340,18 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         /*
          * Note: -0f and +0f are converted to the same point in the value space.
          */
-//        new XSDNumericIV<BigdataLiteral>(-0f);
+//        new XSDNumericIV<EmbergraphLiteral>(-0f);
 
         final IV<?, ?>[] e = {
-                new XSDNumericIV<BigdataLiteral>(1f),
-                new XSDNumericIV<BigdataLiteral>(-1f),
-                new XSDNumericIV<BigdataLiteral>(+0f),
-                new XSDNumericIV<BigdataLiteral>(Float.MAX_VALUE),
-                new XSDNumericIV<BigdataLiteral>(Float.MIN_VALUE),
-                new XSDNumericIV<BigdataLiteral>(Float.MIN_NORMAL),
-                new XSDNumericIV<BigdataLiteral>(Float.POSITIVE_INFINITY),
-                new XSDNumericIV<BigdataLiteral>(Float.NEGATIVE_INFINITY),
-                new XSDNumericIV<BigdataLiteral>(Float.NaN),
+                new XSDNumericIV<EmbergraphLiteral>(1f),
+                new XSDNumericIV<EmbergraphLiteral>(-1f),
+                new XSDNumericIV<EmbergraphLiteral>(+0f),
+                new XSDNumericIV<EmbergraphLiteral>(Float.MAX_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(Float.MIN_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(Float.MIN_NORMAL),
+                new XSDNumericIV<EmbergraphLiteral>(Float.POSITIVE_INFINITY),
+                new XSDNumericIV<EmbergraphLiteral>(Float.NEGATIVE_INFINITY),
+                new XSDNumericIV<EmbergraphLiteral>(Float.NaN),
         };
 
         doEncodeDecodeTest(e);
@@ -368,18 +368,18 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         /*
          * Note: -0d and +0d are converted to the same point in the value space.
          */
-//      new XSDNumericIV<BigdataLiteral>(-0d);
+//      new XSDNumericIV<EmbergraphLiteral>(-0d);
 
         final IV<?, ?>[] e = {
-                new XSDNumericIV<BigdataLiteral>(1d),
-                new XSDNumericIV<BigdataLiteral>(-1d),
-                new XSDNumericIV<BigdataLiteral>(+0d),
-                new XSDNumericIV<BigdataLiteral>(Double.MAX_VALUE),
-                new XSDNumericIV<BigdataLiteral>(Double.MIN_VALUE),
-                new XSDNumericIV<BigdataLiteral>(Double.MIN_NORMAL),
-                new XSDNumericIV<BigdataLiteral>(Double.POSITIVE_INFINITY),
-                new XSDNumericIV<BigdataLiteral>(Double.NEGATIVE_INFINITY),
-                new XSDNumericIV<BigdataLiteral>(Double.NaN),
+                new XSDNumericIV<EmbergraphLiteral>(1d),
+                new XSDNumericIV<EmbergraphLiteral>(-1d),
+                new XSDNumericIV<EmbergraphLiteral>(+0d),
+                new XSDNumericIV<EmbergraphLiteral>(Double.MAX_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(Double.MIN_VALUE),
+                new XSDNumericIV<EmbergraphLiteral>(Double.MIN_NORMAL),
+                new XSDNumericIV<EmbergraphLiteral>(Double.POSITIVE_INFINITY),
+                new XSDNumericIV<EmbergraphLiteral>(Double.NEGATIVE_INFINITY),
+                new XSDNumericIV<EmbergraphLiteral>(Double.NaN),
         };
 
         doEncodeDecodeTest(e);
@@ -397,7 +397,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         
         for (int i = 0; i < e.length; i++) {
         
-            e[i] = new UUIDLiteralIV<BigdataLiteral>(UUID.randomUUID());
+            e[i] = new UUIDLiteralIV<EmbergraphLiteral>(UUID.randomUUID());
             
         }
 
@@ -417,7 +417,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
         for (int i = 0; i < e.length; i++) {
 
-            e[i] = new UUIDBNodeIV<BigdataBNode>(UUID.randomUUID());
+            e[i] = new UUIDBNodeIV<EmbergraphBNode>(UUID.randomUUID());
 
         }
 
@@ -435,13 +435,13 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_BNode_INT_ID() {
         
         final IV<?, ?>[] e = {
-                new NumericBNodeIV<BigdataBNode>(-1),
-                new NumericBNodeIV<BigdataBNode>(0),
-                new NumericBNodeIV<BigdataBNode>(1),
-                new NumericBNodeIV<BigdataBNode>(-52),
-                new NumericBNodeIV<BigdataBNode>(52),
-                new NumericBNodeIV<BigdataBNode>(Integer.MAX_VALUE),
-                new NumericBNodeIV<BigdataBNode>(Integer.MIN_VALUE),
+                new NumericBNodeIV<EmbergraphBNode>(-1),
+                new NumericBNodeIV<EmbergraphBNode>(0),
+                new NumericBNodeIV<EmbergraphBNode>(1),
+                new NumericBNodeIV<EmbergraphBNode>(-52),
+                new NumericBNodeIV<EmbergraphBNode>(52),
+                new NumericBNodeIV<EmbergraphBNode>(Integer.MAX_VALUE),
+                new NumericBNodeIV<EmbergraphBNode>(Integer.MIN_VALUE),
         };
 
         doEncodeDecodeTest(e);
@@ -455,12 +455,12 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecodeEpoch() {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
-        final EpochExtension<BigdataValue> ext = 
-            new EpochExtension<BigdataValue>(new IDatatypeURIResolver() {
-            public BigdataURI resolve(final URI uri) {
-                final BigdataURI buri = vf.createURI(uri.stringValue());
+        final EpochExtension<EmbergraphValue> ext =
+            new EpochExtension<EmbergraphValue>(new IDatatypeURIResolver() {
+            public EmbergraphURI resolve(final URI uri) {
+                final EmbergraphURI buri = vf.createURI(uri.stringValue());
                 buri.setIV(newTermId(VTE.URI));
                 return buri;
             }
@@ -498,12 +498,12 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecodeColor() {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
-        final ColorsEnumExtension<BigdataValue> ext = 
-            new ColorsEnumExtension<BigdataValue>(new IDatatypeURIResolver() {
-            public BigdataURI resolve(URI uri) {
-                final BigdataURI buri = vf.createURI(uri.stringValue());
+        final ColorsEnumExtension<EmbergraphValue> ext =
+            new ColorsEnumExtension<EmbergraphValue>(new IDatatypeURIResolver() {
+            public EmbergraphURI resolve(URI uri) {
+                final EmbergraphURI buri = vf.createURI(uri.stringValue());
                 buri.setIV(newTermId(VTE.URI));
                 return buri;
             }
@@ -531,14 +531,14 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecodeDateTime() throws Exception {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
         final DatatypeFactory df = DatatypeFactory.newInstance();
 
-        final DateTimeExtension<BigdataValue> ext = 
-            new DateTimeExtension<BigdataValue>(new IDatatypeURIResolver() {
-                public BigdataURI resolve(URI uri) {
-                    final BigdataURI buri = vf.createURI(uri.stringValue());
+        final DateTimeExtension<EmbergraphValue> ext =
+            new DateTimeExtension<EmbergraphValue>(new IDatatypeURIResolver() {
+                public EmbergraphURI resolve(URI uri) {
+                    final EmbergraphURI buri = vf.createURI(uri.stringValue());
                     buri.setIV(newTermId(VTE.URI));
                     return buri;
                 }
@@ -546,7 +546,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
             TimeZone.getDefault()
             );
         
-        final BigdataLiteral[] dt = {
+        final EmbergraphLiteral[] dt = {
             vf.createLiteral(
                 df.newXMLGregorianCalendar("2001-10-26T21:32:52")),
             vf.createLiteral(
@@ -599,15 +599,15 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_dateTime_preservesMillis()
             throws DatatypeConfigurationException {
 
-        final BigdataValueFactory vf = BigdataValueFactoryImpl
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                 .getInstance("test");
 
         final DatatypeFactory df = DatatypeFactory.newInstance();
 
-        final DateTimeExtension<BigdataValue> ext = new DateTimeExtension<BigdataValue>(
+        final DateTimeExtension<EmbergraphValue> ext = new DateTimeExtension<EmbergraphValue>(
                 new IDatatypeURIResolver() {
-                    public BigdataURI resolve(URI uri) {
-                        final BigdataURI buri = vf.createURI(uri.stringValue());
+                    public EmbergraphURI resolve(URI uri) {
+                        final EmbergraphURI buri = vf.createURI(uri.stringValue());
                         buri.setIV(newTermId(VTE.URI));
                         return buri;
                     }
@@ -632,7 +632,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
          * A bigdata literal w/o inlining from the *givenStr*. This
          * representation has greater milliseconds+ precision.
          */
-        final BigdataLiteral lit = vf.createLiteral(df
+        final EmbergraphLiteral lit = vf.createLiteral(df
                 .newXMLGregorianCalendar(givenStr));
         
         // Verify the representation is exact.
@@ -646,7 +646,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         final LiteralExtensionIV<?> iv = ext.createIV(lit);
 
         // Convert the IV back into a bigdata literal.
-        final BigdataLiteral lit2 = (BigdataLiteral) ext.asValue(iv, vf);
+        final EmbergraphLiteral lit2 = (EmbergraphLiteral) ext.asValue(iv, vf);
 
         // Verify that millisecond precision was retained.
         assertEquals(expectedStr, lit2.stringValue());
@@ -658,18 +658,18 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecodeDerivedNumerics() throws Exception {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
-        final DerivedNumericsExtension<BigdataValue> ext = 
-            new DerivedNumericsExtension<BigdataValue>(new IDatatypeURIResolver() {
-                public BigdataURI resolve(URI uri) {
-                    final BigdataURI buri = vf.createURI(uri.stringValue());
+        final DerivedNumericsExtension<EmbergraphValue> ext =
+            new DerivedNumericsExtension<EmbergraphValue>(new IDatatypeURIResolver() {
+                public EmbergraphURI resolve(URI uri) {
+                    final EmbergraphURI buri = vf.createURI(uri.stringValue());
                     buri.setIV(newTermId(VTE.URI));
                     return buri;
                 }
             });
         
-        final BigdataLiteral[] dt = {
+        final EmbergraphLiteral[] dt = {
             vf.createLiteral("1", XSD.POSITIVE_INTEGER),
             vf.createLiteral("-1", XSD.NEGATIVE_INTEGER),
             vf.createLiteral("-1", XSD.NON_POSITIVE_INTEGER),
@@ -708,7 +708,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecodeGeoSpatialLiterals01() throws Exception {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
         /**
          * Initialize geo spatial config with default
@@ -717,16 +717,16 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         datatypeConfigs.add(GEO_SPATIAL_DATATYPE_CONFIG);
         final GeoSpatialConfig conf = new GeoSpatialConfig(datatypeConfigs, GEO_SPATIAL_DATATYPE /* default */);
         final GeoSpatialDatatypeConfiguration datatypeConfig = conf.getDatatypeConfigs().get(0);
-        final GeoSpatialLiteralExtension<BigdataValue> ext = 
-            new GeoSpatialLiteralExtension<BigdataValue>(new IDatatypeURIResolver() {
-                public BigdataURI resolve(URI uri) {
-                    final BigdataURI buri = vf.createURI(uri.stringValue());
+        final GeoSpatialLiteralExtension<EmbergraphValue> ext =
+            new GeoSpatialLiteralExtension<EmbergraphValue>(new IDatatypeURIResolver() {
+                public EmbergraphURI resolve(URI uri) {
+                    final EmbergraphURI buri = vf.createURI(uri.stringValue());
                     buri.setIV(newTermId(VTE.URI));
                     return buri;
                 }
             }, datatypeConfig);
         
-        final BigdataLiteral[] dt = {
+        final EmbergraphLiteral[] dt = {
            vf.createLiteral("2#2#1", GEO_SPATIAL_DATATYPE_URI),
            vf.createLiteral("3#3#1", GEO_SPATIAL_DATATYPE_URI),
            vf.createLiteral("4#4#1", GEO_SPATIAL_DATATYPE_URI),
@@ -765,7 +765,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
      */
     public void test_encodeDecodeGeoSpatialLiterals02() throws Exception {
         
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
         
         /**
          * Initialize geo spatial config with default
@@ -774,16 +774,16 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         datatypeConfigs.add(GEO_SPATIAL_DATATYPE_CONFIG);
         final GeoSpatialConfig conf = new GeoSpatialConfig(datatypeConfigs, GEO_SPATIAL_DATATYPE /* default */);
         final GeoSpatialDatatypeConfiguration datatypeConfig = conf.getDatatypeConfigs().get(0);
-        final GeoSpatialLiteralExtension<BigdataValue> ext = 
-            new GeoSpatialLiteralExtension<BigdataValue>(new IDatatypeURIResolver() {
-                public BigdataURI resolve(URI uri) {
-                    final BigdataURI buri = vf.createURI(uri.stringValue());
+        final GeoSpatialLiteralExtension<EmbergraphValue> ext =
+            new GeoSpatialLiteralExtension<EmbergraphValue>(new IDatatypeURIResolver() {
+                public EmbergraphURI resolve(URI uri) {
+                    final EmbergraphURI buri = vf.createURI(uri.stringValue());
                     buri.setIV(newTermId(VTE.URI));
                     return buri;
                 }
             }, datatypeConfig);
         
-        final BigdataLiteral[] dt = {
+        final EmbergraphLiteral[] dt = {
            vf.createLiteral("8#8#1", GEO_SPATIAL_DATATYPE_URI)
         };
         
@@ -855,23 +855,23 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
                 .getStatementIdentifier(), StatementEnum.Explicit);
 
         final IV<?, ?>[] e = {
-                new SidIV<BigdataBNode>(spo1),
-                new SidIV<BigdataBNode>(spo2),
-                new SidIV<BigdataBNode>(spo3),
-                new SidIV<BigdataBNode>(spo4),
-                new SidIV<BigdataBNode>(spo5),
-                new SidIV<BigdataBNode>(spo6),
-                new SidIV<BigdataBNode>(spo7),
-                new SidIV<BigdataBNode>(spo8),
-                new SidIV<BigdataBNode>(spo9),
-                new SidIV<BigdataBNode>(spo10),
-                new SidIV<BigdataBNode>(spo11),
-                new SidIV<BigdataBNode>(spo12),
-                new SidIV<BigdataBNode>(spo13),
-                new SidIV<BigdataBNode>(spo14),
-                new SidIV<BigdataBNode>(spo15),
-                new SidIV<BigdataBNode>(spo16),
-                new SidIV<BigdataBNode>(spo17),
+                new SidIV<EmbergraphBNode>(spo1),
+                new SidIV<EmbergraphBNode>(spo2),
+                new SidIV<EmbergraphBNode>(spo3),
+                new SidIV<EmbergraphBNode>(spo4),
+                new SidIV<EmbergraphBNode>(spo5),
+                new SidIV<EmbergraphBNode>(spo6),
+                new SidIV<EmbergraphBNode>(spo7),
+                new SidIV<EmbergraphBNode>(spo8),
+                new SidIV<EmbergraphBNode>(spo9),
+                new SidIV<EmbergraphBNode>(spo10),
+                new SidIV<EmbergraphBNode>(spo11),
+                new SidIV<EmbergraphBNode>(spo12),
+                new SidIV<EmbergraphBNode>(spo13),
+                new SidIV<EmbergraphBNode>(spo14),
+                new SidIV<EmbergraphBNode>(spo15),
+                new SidIV<EmbergraphBNode>(spo16),
+                new SidIV<EmbergraphBNode>(spo17),
         };
 
         doEncodeDecodeTest(e);
@@ -891,11 +891,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_URIByteIV() {
 
         final IV<?, ?>[] e = {
-                new VocabURIByteIV<BigdataURI>((byte) Byte.MIN_VALUE),
-                new VocabURIByteIV<BigdataURI>((byte) -1),
-                new VocabURIByteIV<BigdataURI>((byte) 0),
-                new VocabURIByteIV<BigdataURI>((byte) 1),
-                new VocabURIByteIV<BigdataURI>((byte) Byte.MAX_VALUE),
+                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
+                new VocabURIByteIV<EmbergraphURI>((byte) -1),
+                new VocabURIByteIV<EmbergraphURI>((byte) 0),
+                new VocabURIByteIV<EmbergraphURI>((byte) 1),
+                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
         };
 
         doEncodeDecodeTest(e);
@@ -915,11 +915,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_URIShortIV() {
 
         final IV<?, ?>[] e = {
-                new VocabURIShortIV<BigdataURI>((short) Short.MIN_VALUE),
-                new VocabURIShortIV<BigdataURI>((short) -1),
-                new VocabURIShortIV<BigdataURI>((short) 0),
-                new VocabURIShortIV<BigdataURI>((short) 1),
-                new VocabURIShortIV<BigdataURI>((short) Short.MAX_VALUE),
+                new VocabURIShortIV<EmbergraphURI>((short) Short.MIN_VALUE),
+                new VocabURIShortIV<EmbergraphURI>((short) -1),
+                new VocabURIShortIV<EmbergraphURI>((short) 0),
+                new VocabURIShortIV<EmbergraphURI>((short) 1),
+                new VocabURIShortIV<EmbergraphURI>((short) Short.MAX_VALUE),
         };
 
         doEncodeDecodeTest(e);

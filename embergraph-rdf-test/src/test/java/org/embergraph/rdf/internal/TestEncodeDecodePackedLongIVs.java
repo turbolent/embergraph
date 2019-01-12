@@ -21,17 +21,17 @@ package org.embergraph.rdf.internal;
 
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Unit tests for {@link PackedLongIV} and its associated 
@@ -119,21 +119,21 @@ public class TestEncodeDecodePackedLongIVs extends
     public void testRoundTripAndCompareCompressedTimestamp() throws Exception {
         
         // namespaces should never be reused in test suites.
-        final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance(getName() + UUID.randomUUID());
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance(getName() + UUID.randomUUID());
 
-        final CompressedTimestampExtension<BigdataValue> ext = 
-            new CompressedTimestampExtension<BigdataValue>(
+        final CompressedTimestampExtension<EmbergraphValue> ext =
+            new CompressedTimestampExtension<EmbergraphValue>(
                 new IDatatypeURIResolver() {
                       @Override
-                      public BigdataURI resolve(final URI uri) {
-                         final BigdataURI buri = vf.createURI(uri.stringValue());
+                      public EmbergraphURI resolve(final URI uri) {
+                         final EmbergraphURI buri = vf.createURI(uri.stringValue());
                          buri.setIV(newTermId(VTE.URI));
                          return buri;
                       }
                 });
 
         // we'll create a permutation over all values above
-        final BigdataLiteral[] dt = {
+        final EmbergraphLiteral[] dt = {
              vf.createLiteral("0", CompressedTimestampExtension.COMPRESSED_TIMESTAMP),
              vf.createLiteral("100", CompressedTimestampExtension.COMPRESSED_TIMESTAMP),
              vf.createLiteral("101", CompressedTimestampExtension.COMPRESSED_TIMESTAMP),
@@ -191,7 +191,7 @@ public class TestEncodeDecodePackedLongIVs extends
          }
         
         for (int i = 0; i < e.length; i++) {
-            final BigdataValue val = ext.asValue((LiteralExtensionIV) e[i], vf);
+            final EmbergraphValue val = ext.asValue((LiteralExtensionIV) e[i], vf);
             
             // verify val has been correctly round-tripped
               if (log.isInfoEnabled())

@@ -31,9 +31,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -93,7 +92,7 @@ public class StrBOp extends IVValueExpression<IV>
         }
         
         // use to create my simple literals
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
         if (val instanceof Literal) {
         	final Literal lit = (Literal) val;
@@ -103,12 +102,12 @@ public class StrBOp extends IVValueExpression<IV>
         	}
         	else {
                 // else return new simple literal using Literal.getLabel
-                final BigdataLiteral str = vf.createLiteral(lit.getLabel());
+                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel());
                 return super.asIV(str, bs);
             }
         } else if (val instanceof URI) {
             // return new simple literal using URI label
-            final BigdataLiteral str = vf.createLiteral(val.stringValue());
+            final EmbergraphLiteral str = vf.createLiteral(val.stringValue());
             return super.asIV(str, bs);
         } else {
             throw new SparqlTypeErrorException();
@@ -127,17 +126,17 @@ public class StrBOp extends IVValueExpression<IV>
 //        if (iv.isURI()) {
 //            // return new simple literal using URI label
 //            final URI uri = (URI) iv.getValue();
-//            final BigdataLiteral str = vf.createLiteral(uri.toString());
+//            final EmbergraphLiteral str = vf.createLiteral(uri.toString());
 //            return super.asIV(str, bs);
 //        } else if (iv.isLiteral()) {
-//            final BigdataLiteral lit = (BigdataLiteral) iv.getValue();
+//            final EmbergraphLiteral lit = (EmbergraphLiteral) iv.getValue();
 //            if (lit.getDatatype() == null && lit.getLanguage() == null) {
 //                // if simple literal return it
 //                return iv;
 //        	}
 //        	else {
 //                // else return new simple literal using Literal.getLabel
-//                final BigdataLiteral str = vf.createLiteral(lit.getLabel());
+//                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel());
 //                return super.asIV(str, bs);
 //            }
 //        } else {

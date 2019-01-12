@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Unit tests for {@link XSDIntegerIV}.
@@ -55,11 +55,11 @@ public class TestEncodeDecodeXSDIntegerIVs extends
     public void test_encodeDecode_XSDInteger() {
 
         final IV<?, ?>[] e = {
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(-1L)),
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(0L)),
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)),
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MAX_VALUE)),
-                new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(Long.MIN_VALUE)),
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(-1L)),
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(0L)),
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1L)),
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MAX_VALUE)),
+                new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(Long.MIN_VALUE)),
         };
 
         doEncodeDecodeTest(e);
@@ -81,10 +81,10 @@ public class TestEncodeDecodeXSDIntegerIVs extends
         final BigInteger m2 = new BigInteger("-151");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDIntegerIV<BigdataLiteral>(p1),
-                new XSDIntegerIV<BigdataLiteral>(p2),
-                new XSDIntegerIV<BigdataLiteral>(m1),
-                new XSDIntegerIV<BigdataLiteral>(m2),
+                new XSDIntegerIV<EmbergraphLiteral>(p1),
+                new XSDIntegerIV<EmbergraphLiteral>(p2),
+                new XSDIntegerIV<EmbergraphLiteral>(m1),
+                new XSDIntegerIV<EmbergraphLiteral>(m2),
                 };
         
         doEncodeDecodeTest(e);
@@ -120,15 +120,15 @@ public class TestEncodeDecodeXSDIntegerIVs extends
             final BigInteger t6 = t1.add(BigInteger.valueOf(5));
             final BigInteger t7 = t1.add(BigInteger.valueOf(9));
 
-            a.add(new XSDIntegerIV<BigdataLiteral>(t1));
-            a.add(new XSDIntegerIV<BigdataLiteral>(v2));
-            a.add(new XSDIntegerIV<BigdataLiteral>(v4));
-            a.add(new XSDIntegerIV<BigdataLiteral>(t2));
-            a.add(new XSDIntegerIV<BigdataLiteral>(t4));
-            a.add(new XSDIntegerIV<BigdataLiteral>(t5));
-            a.add(new XSDIntegerIV<BigdataLiteral>(t3));
-            a.add(new XSDIntegerIV<BigdataLiteral>(t6));
-            a.add(new XSDIntegerIV<BigdataLiteral>(t7));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t1));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(v2));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(v4));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t2));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t4));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t5));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t3));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t6));
+            a.add(new XSDIntegerIV<EmbergraphLiteral>(t7));
             
         }
         

@@ -24,7 +24,7 @@ package org.embergraph.journal;
  * @author bryan
  * @see http://jira.blazegraph.com/browse/BLZG-181 (Add critical section
  *      protection to AbstractJournal.abort() and
- *      BigdataSailConnection.rollback())
+ *      EmbergraphSailConnection.rollback())
  * @see http://jira.blazegraph.com/browse/BLZG-1236 (Recycler error in 1.5.1)
  */
 public class AbortRequiredException extends IllegalStateException {

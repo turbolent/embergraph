@@ -24,17 +24,16 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.ConstructNode;
 import org.embergraph.rdf.sparql.ast.DescribeModeEnum;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
-import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
@@ -227,7 +226,7 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
 
         }
 
-        final BigdataURI rdfSubject;
+        final EmbergraphURI rdfSubject;
         if (describeMode.isForward() && describeMode.isReifiedStatements()) {
             /*
              * We will need to look for the rdf:subject property, so resolve
@@ -240,9 +239,9 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
 
             final AbstractTripleStore db = context.getAbstractTripleStore();
 
-            final BigdataURI tmp = db.getValueFactory().asValue(RDF.SUBJECT);
+            final EmbergraphURI tmp = db.getValueFactory().asValue(RDF.SUBJECT);
 
-            db.getLexiconRelation().addTerms(new BigdataValue[] { tmp },
+            db.getLexiconRelation().addTerms(new EmbergraphValue[] { tmp },
                     1/* numTerms */, true/* readOnly */);
 
             if (tmp.getIV() == null) {
@@ -250,7 +249,7 @@ public class ASTDescribeOptimizer implements IASTOptimizer {
                 rdfSubject = null;
             } else {
                 rdfSubject = tmp;
-                // and set the valueCache on the BigdataURI.
+                // and set the valueCache on the EmbergraphURI.
                 rdfSubject.getIV().setValue(rdfSubject);
             }
 

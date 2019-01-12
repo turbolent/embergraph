@@ -29,6 +29,8 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 
 import org.embergraph.bop.BOp;
@@ -38,8 +40,6 @@ import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -164,7 +164,7 @@ final public class MathBOp extends IVValueExpression
 
 		        // try to create a real IV if possible
 		        if (iv.isNullIV()) {
-		            final BigdataValue val = iv.getValue();
+		            final EmbergraphValue val = iv.getValue();
 		            return asIV(val, bs);
 		        } else {
 		            return iv;
@@ -192,7 +192,7 @@ final public class MathBOp extends IVValueExpression
     	return (MathOp) getRequiredProperty(Annotations.OP);
     }
 
-    public BigdataValueFactory vf(){
+    public EmbergraphValueFactory vf(){
         return super.getValueFactory();
     }
 

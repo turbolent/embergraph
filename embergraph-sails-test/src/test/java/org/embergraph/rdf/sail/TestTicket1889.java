@@ -32,7 +32,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
  * This test case covers 2 ArrayIndexOutOfBoundsException occurrences:
@@ -43,7 +43,7 @@ import org.embergraph.rdf.sail.BigdataSail.Options;
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * 
  * @see https://jira.blazegraph.com/browse/BLZG-1889
  * 		ArrayIndexOutOfBound Exception
@@ -59,12 +59,12 @@ public class TestTicket1889 extends QuadsTestCase {
 
 	public void testBufferCapacity() throws Exception {
 
-		final BigdataSail sail = getSail();
-		final BigdataSailRepository repo = new BigdataSailRepository(sail);
+		final EmbergraphSail sail = getSail();
+		final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 		repo.initialize();
 		try {
 			// This configuration exceeds StatementBuffer capacity 
-			executeQuery(repo, Integer.valueOf(BigdataSail.Options.DEFAULT_BUFFER_CAPACITY) * 5, 1);
+			executeQuery(repo, Integer.valueOf(EmbergraphSail.Options.DEFAULT_BUFFER_CAPACITY) * 5, 1);
 		} finally {
 			repo.shutDown();
 			sail.__tearDownUnitTest();
@@ -73,8 +73,8 @@ public class TestTicket1889 extends QuadsTestCase {
 
 	public void testMergeUtility() throws Exception {
 
-		final BigdataSail sail = getSail();
-		final BigdataSailRepository repo = new BigdataSailRepository(sail);
+		final EmbergraphSail sail = getSail();
+		final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 		repo.initialize();
 		try {
 			// This configuration uses MergeUtility, ensuring its capacity is sufficient
@@ -94,10 +94,10 @@ public class TestTicket1889 extends QuadsTestCase {
 	 * @param n Number of statements to be loaded
 	 * @param k Number of subjects to be loaded
 	 */
-	protected void executeQuery(final BigdataSailRepository repo, final int n, final int k)
+	protected void executeQuery(final EmbergraphSailRepository repo, final int n, final int k)
 			throws RepositoryException, MalformedQueryException,
 			QueryEvaluationException, RDFParseException, IOException, UpdateExecutionException {
-		final BigdataSailRepositoryConnection conn = repo.getConnection();
+		final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 		conn.setAutoCommit(false);
 		conn.clear();
 		try {

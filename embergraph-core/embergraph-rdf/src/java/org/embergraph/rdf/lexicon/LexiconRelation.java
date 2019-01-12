@@ -52,6 +52,14 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
+import org.embergraph.service.IEmbergraphFederation;
 import org.omg.CORBA.portable.ValueFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -79,7 +87,6 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.IResourceLock;
 import org.embergraph.journal.ITx;
-import org.embergraph.journal.Journal;
 import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.internal.IDatatypeURIResolver;
@@ -98,18 +105,9 @@ import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sail.BigdataSailHelper;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.AbstractRelation;
@@ -121,7 +119,6 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.relation.locator.IResourceLocator;
 import org.embergraph.search.FullTextIndex;
-import org.embergraph.service.IBigdataFederation;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.striterator.ChunkedArrayIterator;
@@ -143,14 +140,14 @@ import cutthecrap.utils.striterators.Striterator;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class LexiconRelation extends AbstractRelation<BigdataValue> 
+public class LexiconRelation extends AbstractRelation<EmbergraphValue>
         implements IDatatypeURIResolver {
 
     private final static Logger log = Logger.getLogger(LexiconRelation.class);
 
     private final Set<String> indexNames;
 
-    private final List<IKeyOrder<BigdataValue>> keyOrders;
+    private final List<IKeyOrder<EmbergraphValue>> keyOrders;
     
     private final AtomicReference<IValueCentricTextIndexer<?>> viewRef = new AtomicReference<IValueCentricTextIndexer<?>>();
 
@@ -165,7 +162,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     private final BlobsIndexHelper h = new BlobsIndexHelper();
 
 	@SuppressWarnings("unchecked")
-    protected Class<BigdataValueFactory> determineValueFactoryClass() {
+    protected Class<EmbergraphValueFactory> determineValueFactoryClass() {
 
         final String className = getProperty(
                 AbstractTripleStore.Options.VALUE_FACTORY_CLASS,
@@ -178,14 +175,14 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                     + AbstractTripleStore.Options.VALUE_FACTORY_CLASS, e);
         }
 
-        if (!BigdataValueFactory.class.isAssignableFrom(cls)) {
+        if (!EmbergraphValueFactory.class.isAssignableFrom(cls)) {
             throw new RuntimeException(
                     AbstractTripleStore.Options.VALUE_FACTORY_CLASS
                             + ": Must implement: "
-                            + BigdataValueFactory.class.getName());
+                            + EmbergraphValueFactory.class.getName());
         }
 
-        return (Class<BigdataValueFactory>) cls;
+        return (Class<EmbergraphValueFactory>) cls;
 
 	}
 
@@ -293,7 +290,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
              * XSD.IPV4 uri is not present in the vocabulary then either you are
              * using NoVocabulary.class or an older version of the vocabulary
              * that does not have that URI in it. Newer journals should be using
-             * DefaultBigdataVocabulary.
+             * DefaultEmbergraphVocabulary.
              */
             defaultClassName = NoInlineURIFactory.class.getName();
         } else {
@@ -416,8 +413,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
         {
 
-            if (indexManager instanceof IBigdataFederation<?>
-                    && ((IBigdataFederation<?>) indexManager).isScaleOut()) {
+            if (indexManager instanceof IEmbergraphFederation<?>
+                    && ((IEmbergraphFederation<?>) indexManager).isScaleOut()) {
 
                 final String defaultValue = AbstractTripleStore.Options.DEFAULT_TERMID_BITS_TO_REVERSE;
 
@@ -461,7 +458,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             this.indexNames = Collections.unmodifiableSet(set);
 
             this.keyOrders = Arrays
-                    .asList((IKeyOrder<BigdataValue>[]) new IKeyOrder[] {
+                    .asList((IKeyOrder<EmbergraphValue>[]) new IKeyOrder[] {
                             LexiconKeyOrder.TERM2ID,
                             LexiconKeyOrder.ID2TERM,
                             LexiconKeyOrder.BLOBS
@@ -496,11 +493,11 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
          * read-committed, and unisolated views of the lexicon for a given
          * triple store.
          */
-//        valueFactory = BigdataValueFactoryImpl.getInstance(namespace);
+//        valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
         try {
-			final Class<BigdataValueFactory> vfc = determineValueFactoryClass();
+			final Class<EmbergraphValueFactory> vfc = determineValueFactoryClass();
 			final Method gi = vfc.getMethod("getInstance", String.class);
-			this.valueFactory = (BigdataValueFactory) gi.invoke(null, namespace);
+			this.valueFactory = (EmbergraphValueFactory) gi.invoke(null, namespace);
 		} catch (NoSuchMethodException e) {
 			throw new IllegalArgumentException(
 					AbstractTripleStore.Options.VALUE_FACTORY_CLASS, e);
@@ -546,8 +543,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 /*
                  * Unshared for any other view of the triple store.
                  */
-                termCache = new TermCache<IV<?,?>, BigdataValue>(
-                        new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue>(
+                termCache = new TermCache<IV<?,?>, EmbergraphValue>(
+                        new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, EmbergraphValue>(
                         termCacheCapacity, // queueCapacity
                         .75f, // loadFactor (.75 is the default)
                         16 // concurrency level (16 is the default)
@@ -647,7 +644,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
              * Setup the lexicon configuration.
              */
             
-            lexiconConfiguration = new LexiconConfiguration<BigdataValue>(
+            lexiconConfiguration = new LexiconConfiguration<EmbergraphValue>(
                     blobsThreshold,
                     inlineLiterals, inlineTextLiterals,
                     maxInlineTextLength, inlineBNodes, inlineDateTimes,
@@ -660,16 +657,16 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     }
     
     /**
-     * The canonical {@link BigdataValueFactoryImpl} reference (JVM wide) for the
+     * The canonical {@link EmbergraphValueFactoryImpl} reference (JVM wide) for the
      * lexicon namespace.
      */
-	public BigdataValueFactory getValueFactory() {
+	public EmbergraphValueFactory getValueFactory() {
         
         return valueFactory;
         
     }
 
-	final private BigdataValueFactory valueFactory;
+	final private EmbergraphValueFactory valueFactory;
     
     /**
      * Strengthens the return type.
@@ -1042,7 +1039,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 	 * Overridden to use local cache of the index reference.
 	 */
     @Override
-    public IIndex getIndex(final IKeyOrder<? extends BigdataValue> keyOrder) {
+    public IIndex getIndex(final IKeyOrder<? extends EmbergraphValue> keyOrder) {
 
         if (keyOrder == LexiconKeyOrder.ID2TERM) {
 
@@ -1401,8 +1398,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
          */
         metadata.setMaxRecLen(0);
 
-        if ((getIndexManager() instanceof IBigdataFederation<?>)
-                && ((IBigdataFederation<?>) getIndexManager()).isScaleOut()) {
+        if ((getIndexManager() instanceof IEmbergraphFederation<?>)
+                && ((IEmbergraphFederation<?>) getIndexManager()).isScaleOut()) {
 
             /*
              * Apply a constraint such that all entries within the same
@@ -1423,7 +1420,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
     }
 
-    public Iterator<IKeyOrder<BigdataValue>> getKeyOrders() {
+    public Iterator<IKeyOrder<EmbergraphValue>> getKeyOrders() {
         
         return keyOrders.iterator();
         
@@ -1442,15 +1439,15 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * 
      * @throws UnsupportedOperationException
      */
-    public BigdataValue newElement(List<BOp> a, IBindingSet bindingSet) {
+    public EmbergraphValue newElement(List<BOp> a, IBindingSet bindingSet) {
 
         throw new UnsupportedOperationException();
         
     }
     
-    public Class<BigdataValue> getElementClass() {
+    public Class<EmbergraphValue> getElementClass() {
 
-        return BigdataValue.class;
+        return EmbergraphValue.class;
 
     }
 
@@ -1461,7 +1458,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * 
      * @throws UnsupportedOperationException
      */
-    public long delete(IChunkedOrderedIterator<BigdataValue> itr) {
+    public long delete(IChunkedOrderedIterator<EmbergraphValue> itr) {
 
         throw new UnsupportedOperationException();
 
@@ -1474,7 +1471,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * 
      * @throws UnsupportedOperationException
      */
-    public long insert(IChunkedOrderedIterator<BigdataValue> itr) {
+    public long insert(IChunkedOrderedIterator<EmbergraphValue> itr) {
 
         throw new UnsupportedOperationException();
         
@@ -1592,7 +1589,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                                 0/* capacity */,
                                 IRangeQuery.DEFAULT | IRangeQuery.CURSOR,
                                 // prefix filter.
-                                new PrefixFilter<BigdataValue>(keys)))
+                                new PrefixFilter<EmbergraphValue>(keys)))
                 .addFilter(new Resolver() {
 
                     private static final long serialVersionUID = 1L;
@@ -1619,13 +1616,13 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * 
      * @see IDatatypeURIResolver
      */
-    public BigdataURI resolve(final URI uri) {
+    public EmbergraphURI resolve(final URI uri) {
 
         if(uri == null)
             throw new IllegalArgumentException();
 
-        // Turn the caller's argument into a BigdataURI.
-        final BigdataURI value = valueFactory.asValue(uri);
+        // Turn the caller's argument into a EmbergraphURI.
+        final EmbergraphURI value = valueFactory.asValue(uri);
 
         // Lookup against the Vocabulary.
         final IV<?, ?> iv = vocab.get(value);
@@ -1640,12 +1637,12 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
         }
         
-        // Cache the IV on the BigdataValue.
+        // Cache the IV on the EmbergraphValue.
         value.setIV(iv);
 
         return value;
         
-//        final BigdataURI buri = valueFactory.asValue(uri);
+//        final EmbergraphURI buri = valueFactory.asValue(uri);
 //        
 //        if (buri.getIV() == null) {
 //            
@@ -1655,7 +1652,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 //            if (iv == null) {
 //
 //                // Will set IV as a side effect
-//                addTerms(new BigdataValue[] { buri }, 1, false);
+//                addTerms(new EmbergraphValue[] { buri }, 1, false);
 //
 //            }
 //
@@ -1684,7 +1681,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         if (blobsThreshold == 0)
             return true;
         
-        final long strlen = BigdataValueSerializer.getStringLength(v);
+        final long strlen = EmbergraphValueSerializer.getStringLength(v);
         
 		if (strlen >= blobsThreshold) {
 
@@ -1716,7 +1713,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     /**
      * Batch insert of terms into the database.
      * <p>
-     * Note: Duplicate {@link BigdataValue} references and {@link BigdataValue}s
+     * Note: Duplicate {@link EmbergraphValue} references and {@link EmbergraphValue}s
      * that already have an assigned term identifiers are ignored by this
      * operation.
      * <p>
@@ -1743,28 +1740,28 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      *         the assertion and retraction of statements (writes on the
      *         statement indices) rather than with ID2TERM writes.
      */
-    public long addTerms(final BigdataValue[] values, final int numTerms,
+    public long addTerms(final EmbergraphValue[] values, final int numTerms,
             final boolean readOnly) {
 
         if (log.isDebugEnabled())
             log.debug("numTerms=" + numTerms + ", readOnly=" + readOnly);
 
         /*
-         * Ensure that BigdataValue objects belong to the correct ValueFactory
+         * Ensure that EmbergraphValue objects belong to the correct ValueFactory
          * for this LexiconRelation.
          * 
          * @see BLZG-1593 (LexiconRelation.addTerms() does not reject
-         * BigdataValue objects from another namespace nor call asValue() on
+         * EmbergraphValue objects from another namespace nor call asValue() on
          * them to put them in the correct namespace)
          */
         {
-            final BigdataValueFactory vf = getValueFactory();
+            final EmbergraphValueFactory vf = getValueFactory();
             for (int i = 0; i < numTerms; i++) {
-                final BigdataValue tmp = vf.asValue(values[i]);
+                final EmbergraphValue tmp = vf.asValue(values[i]);
                 if (tmp != values[i]) {
                     /*
-                     * Note: When the BigdataValue does not belong to this
-                     * namespace the IV can not be set on the BigdataValue as a
+                     * Note: When the EmbergraphValue does not belong to this
+                     * namespace the IV can not be set on the EmbergraphValue as a
                      * side-effect.
                      */
                     throw new RuntimeException("Value does not belong to this namespace: value=" + values[i]);
@@ -1782,26 +1779,26 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
          */
 
         // Will be resolved against TERM2ID/ID2TERM.
-        final LinkedHashMap<BigdataValue, BigdataValue> terms = new LinkedHashMap<BigdataValue, BigdataValue>(
+        final LinkedHashMap<EmbergraphValue, EmbergraphValue> terms = new LinkedHashMap<EmbergraphValue, EmbergraphValue>(
                 numTerms);
 
         // Will be resolved against BLOBS.
-        final LinkedHashMap<BigdataValue, BigdataValue> blobs = new LinkedHashMap<BigdataValue, BigdataValue>(/* default */);
+        final LinkedHashMap<EmbergraphValue, EmbergraphValue> blobs = new LinkedHashMap<EmbergraphValue, EmbergraphValue>(/* default */);
 
         // Either same reference -or- distinct reference but equals().
-        final List<BigdataValue> dups = new LinkedList<BigdataValue>();
+        final List<EmbergraphValue> dups = new LinkedList<EmbergraphValue>();
         
         // Inline literals that should still make it into the text index.
-        final LinkedHashSet<BigdataValue> textIndex = new LinkedHashSet<BigdataValue>(/* default */);
+        final LinkedHashSet<EmbergraphValue> textIndex = new LinkedHashSet<EmbergraphValue>(/* default */);
 
         int nunknown = 0, nblobs = 0, nterms = 0;
 
         for (int i = 0; i < numTerms; i++) {
 
-            final BigdataValue v = values[i];
+            final EmbergraphValue v = values[i];
 
             /*
-             * Try to get an inline IV for the BigdataValue (sets the IV as a
+             * Try to get an inline IV for the EmbergraphValue (sets the IV as a
              * side effect if not null).
              */
             
@@ -1842,13 +1839,13 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 
                 nunknown++;
                 
-            } else if (!readOnly && this.textIndex && v instanceof BigdataLiteral) {
+            } else if (!readOnly && this.textIndex && v instanceof EmbergraphLiteral) {
                 
                 /*
                  * Some inline IVs will be text indexed per the 
                  * LexiconConfiguration.
                  */
-                final URI dt = ((BigdataLiteral) v).getDatatype();
+                final URI dt = ((EmbergraphLiteral) v).getDatatype();
                 if (dt == null || dt.equals(XSD.STRING)) {
                     // always text index strings, even inline ones
                     textIndex.add(v);
@@ -1881,8 +1878,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
         if (nblobs > 0) {
             
-            final BigdataValue[] a = blobs.keySet().toArray(
-                    new BigdataValue[nblobs]);
+            final EmbergraphValue[] a = blobs.keySet().toArray(
+                    new EmbergraphValue[nblobs]);
 
             addBlobs(a, a.length, readOnly, stats);
             
@@ -1890,8 +1887,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         
         if (nterms > 0) {
 
-            final BigdataValue[] a = terms.keySet().toArray(
-                    new BigdataValue[nterms]);
+            final EmbergraphValue[] a = terms.keySet().toArray(
+                    new EmbergraphValue[nterms]);
 
             addTerms(a, a.length, readOnly, stats);
         
@@ -1923,7 +1920,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         if(!dups.isEmpty()) {
 
             /*
-             * There was at least one BigdataValue which was a duplicate (either
+             * There was at least one EmbergraphValue which was a duplicate (either
              * the same reference or a distinct reference which is equals()).
              * Now that we have resolved the IVs against the indices, we run
              * through the List of duplicates and resolve the IVs against the
@@ -1931,9 +1928,9 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
              * IV if it was found/written on the appropriate index.
              */
             
-            for(BigdataValue dup : dups) {
+            for(EmbergraphValue dup : dups) {
 
-                BigdataValue resolved = blobs.get(dup);
+                EmbergraphValue resolved = blobs.get(dup);
 
                 if (resolved == null)
                     resolved = terms.get(dup);
@@ -1966,10 +1963,10 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     }
     
     // BLOBS+SEARCH
-    private void addBlobs(final BigdataValue[] terms, final int numTerms,
+    private void addBlobs(final EmbergraphValue[] terms, final int numTerms,
             final boolean readOnly, final WriteTaskStats stats) {
 
-        final KVO<BigdataValue>[] a;
+        final KVO<EmbergraphValue>[] a;
         try {
             // write on the BLOBS index (rync sharded RPC in scale-out)
             a = new BlobsWriteTask(getBlobsIndex(), valueFactory, readOnly,
@@ -2012,7 +2009,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                  * the distinct terms in a[] (it is dense) to do the indexing.
                  */
                 @SuppressWarnings({ "unchecked", "rawtypes" })
-                final Iterator<BigdataValue> itr = new Striterator(
+                final Iterator<EmbergraphValue> itr = new Striterator(
                         new ChunkedArrayIterator(ndistinct, a, null/* keyOrder */))
                         .addFilter(new Resolver() {
 
@@ -2021,7 +2018,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                             @Override
                             protected Object resolve(final Object obj) {
 
-                                return ((KVO<BigdataValue>) obj).obj;
+                                return ((KVO<EmbergraphValue>) obj).obj;
 
                             }
 
@@ -2045,10 +2042,10 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     }
 
     // TERM2ID/ID2TERM+SEARCH
-    private void addTerms(final BigdataValue[] terms, final int numTerms,
+    private void addTerms(final EmbergraphValue[] terms, final int numTerms,
             final boolean readOnly, final WriteTaskStats stats) {
 
-        final KVO<BigdataValue>[] a;
+        final KVO<EmbergraphValue>[] a;
         try {
             // write on the forward index (sync RPC)
             a = new Term2IdWriteTask(getTerm2IdIndex(), readOnly,
@@ -2117,7 +2114,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                      */
 
                     @SuppressWarnings({ "unchecked", "rawtypes" })
-                    final Iterator<BigdataValue> itr = new Striterator(
+                    final Iterator<EmbergraphValue> itr = new Striterator(
                             new ChunkedArrayIterator(ndistinct, a, null/* keyOrder */))
                             .addFilter(new Resolver() {
 
@@ -2126,7 +2123,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                         @Override
                         protected Object resolve(final Object obj) {
                         
-                            return ((KVO<BigdataValue>) obj).obj;
+                            return ((KVO<EmbergraphValue>) obj).obj;
                             
                         }
                         
@@ -2243,14 +2240,14 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
              * out non-literal terms before they are shipped from a remote index
              * shard.
              */
-            final Iterator<BigdataValue> itr = new Striterator(
+            final Iterator<EmbergraphValue> itr = new Striterator(
                     terms.rangeIterator(null/* fromKey */, null/* toKey */,
                             0/* capacity */, IRangeQuery.DEFAULT,
-                            new TupleFilter<BigdataValue>() {
+                            new TupleFilter<EmbergraphValue>() {
                                 private static final long serialVersionUID = 1L;
 
                                 protected boolean isValid(
-                                        final ITuple<BigdataValue> obj) {
+                                        final ITuple<EmbergraphValue> obj) {
                                     @SuppressWarnings("rawtypes")
                                     final IV iv = (IV) tupSer
                                             .deserializeKey(obj);
@@ -2263,7 +2260,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 private static final long serialVersionUID = 1L;
 
                 protected Object resolve(final Object obj) {
-                    final BigdataLiteral lit = (BigdataLiteral) tupSer
+                    final EmbergraphLiteral lit = (EmbergraphLiteral) tupSer
                             .deserialize((ITuple<?>) obj);
                     // System.err.println("lit: "+lit);
                     return lit;
@@ -2294,14 +2291,14 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
              * out non-literal terms before they are shipped from a remote index
              * shard.
              */
-            final Iterator<BigdataValue> itr = new Striterator(
+            final Iterator<EmbergraphValue> itr = new Striterator(
                     terms.rangeIterator(null/* fromKey */, null/* toKey */,
                             0/* capacity */, IRangeQuery.DEFAULT,
-                            new TupleFilter<BigdataValue>() {
+                            new TupleFilter<EmbergraphValue>() {
                                 private static final long serialVersionUID = 1L;
 
                                 protected boolean isValid(
-                                        final ITuple<BigdataValue> obj) {
+                                        final ITuple<EmbergraphValue> obj) {
                                     @SuppressWarnings("rawtypes")
                                     final IV iv = (IV) tupSer
                                             .deserializeKey(obj);
@@ -2314,7 +2311,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 private static final long serialVersionUID = 1L;
 
                 protected Object resolve(final Object obj) {
-                    final BigdataLiteral lit = (BigdataLiteral) tupSer
+                    final EmbergraphLiteral lit = (EmbergraphLiteral) tupSer
                             .deserialize((ITuple<?>) obj);
                     // System.err.println("lit: "+lit);
                     return lit;
@@ -2361,16 +2358,16 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     }
     
     /**
-     * Batch resolution of internal values to {@link BigdataValue}s.
+     * Batch resolution of internal values to {@link EmbergraphValue}s.
      * 
      * @param ivs
      *            An collection of internal values
      * 
-     * @return A map from internal value to the {@link BigdataValue}. If an
+     * @return A map from internal value to the {@link EmbergraphValue}. If an
      *         internal value was not resolved then the map will not contain an
      *         entry for that internal value.
      */
-    final public Map<IV<?, ?>, BigdataValue> getTerms(
+    final public Map<IV<?, ?>, EmbergraphValue> getTerms(
             final Collection<IV<?, ?>> ivs) {
 
         /*
@@ -2684,18 +2681,18 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 //    }
     
     /**
-     * Batch resolution of internal values to {@link BigdataValue}s.
+     * Batch resolution of internal values to {@link EmbergraphValue}s.
      * 
      * @param ivs
      *            An collection of internal values
      * 
-     * @return A map from internal value to the {@link BigdataValue}. If an
+     * @return A map from internal value to the {@link EmbergraphValue}. If an
      *         internal value was not resolved then the map will not contain an
      *         entry for that internal value.
      * 
      * @see #getTerms(Collection)
      */
-    final public Map<IV<?, ?>, BigdataValue> getTerms(
+    final public Map<IV<?, ?>, EmbergraphValue> getTerms(
             final Collection<IV<?, ?>> ivs, final int termsChunksSize,
             final int blobsChunkSize) {
 
@@ -2720,7 +2717,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
          * Note: The also needs to be concurrent since the request can be split
          * across the ID2TERM and BLOBS indices.
          */
-        final ConcurrentHashMap<IV<?,?>/* iv */, BigdataValue/* term */> ret = new ConcurrentHashMap<IV<?,?>, BigdataValue>(
+        final ConcurrentHashMap<IV<?,?>/* iv */, EmbergraphValue/* term */> ret = new ConcurrentHashMap<IV<?,?>, EmbergraphValue>(
                 n/* initialCapacity */);
 
         // TermIVs which must be resolved against an index.
@@ -2787,7 +2784,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
             } else {
 
-                final BigdataValue value = _getTermId(iv);
+                final EmbergraphValue value = _getTermId(iv);
 
                 if (value != null) {
 
@@ -2977,12 +2974,12 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     
     /**
      * We need to cache the BigdataValues on the IV components within the
-     * SidIV so that the SidIV can materialize itself into a BigdataBNode
+     * SidIV so that the SidIV can materialize itself into a EmbergraphBNode
      * properly.
      */
     @SuppressWarnings("rawtypes")
 	final private void cacheTerms(final SidIV sid, 
-    		final Map<IV<?, ?>, BigdataValue> terms) {
+    		final Map<IV<?, ?>, EmbergraphValue> terms) {
     	
     	final ISPO spo = sid.getInlineValue();
     	
@@ -3002,12 +2999,12 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     
     /**
      * We need to cache the BigdataValues on the IV components within the
-     * SidIV so that the SidIV can materialize itself into a BigdataBNode
+     * SidIV so that the SidIV can materialize itself into a EmbergraphBNode
      * properly.
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	final private void cacheTerm(final IV iv, 
-			final Map<IV<?, ?>, BigdataValue> terms) {
+			final Map<IV<?, ?>, EmbergraphValue> terms) {
     	
     	if (iv instanceof SidIV) {
     		
@@ -3033,19 +3030,19 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      *       Or perhaps this can be rolled into the {@link ValueFactory} impl
      *       along with the reverse bnodes mapping?
      */
-//    final private ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue> termCache;
-    final private ITermCache<IV<?,?>,BigdataValue> termCache;
+//    final private ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, EmbergraphValue> termCache;
+    final private ITermCache<IV<?,?>, EmbergraphValue> termCache;
     
     /**
      * Factory used for {@link #termCache} for read-only views of the lexicon.
      */
-    static private CanonicalFactory<NT/* key */, ITermCache<IV<?,?>, BigdataValue>, Integer/* state */> termCacheFactory = new CanonicalFactory<NT, ITermCache<IV<?,?>, BigdataValue>, Integer>(
+    static private CanonicalFactory<NT/* key */, ITermCache<IV<?,?>, EmbergraphValue>, Integer/* state */> termCacheFactory = new CanonicalFactory<NT, ITermCache<IV<?,?>, EmbergraphValue>, Integer>(
             1/* queueCapacity */) {
         @Override
-        protected ITermCache<IV<?,?>, BigdataValue> newInstance(
+        protected ITermCache<IV<?,?>, EmbergraphValue> newInstance(
                 NT key, Integer termCacheCapacity) {
-            return new TermCache<IV<?,?>,BigdataValue>(
-                    new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, BigdataValue>(
+            return new TermCache<IV<?,?>, EmbergraphValue>(
+                    new ConcurrentWeakValueCacheWithBatchedUpdates<IV<?,?>, EmbergraphValue>(
                     termCacheCapacity.intValue(),// backing hard reference LRU queue capacity.
                     .75f, // loadFactor (.75 is the default)
                     16 // concurrency level (16 is the default)
@@ -3078,7 +3075,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * The {@link ILexiconConfiguration} instance, which will determine how
      * terms are encoded and decoded in the key space.
      */
-    private final ILexiconConfiguration<BigdataValue> lexiconConfiguration;
+    private final ILexiconConfiguration<EmbergraphValue> lexiconConfiguration;
 
     /**
      * Constant for the {@link LexiconRelation} namespace component.
@@ -3093,7 +3090,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     public static final transient String NAME_LEXICON_RELATION = "lex";
 
     /**
-     * Handles non-inline {@link IV}s by synthesizing a {@link BigdataBNode}
+     * Handles non-inline {@link IV}s by synthesizing a {@link EmbergraphBNode}
      * using {@link IV#bnodeId()} (iff told bnodes support is enabled and the
      * {@link IV} represents a blank node) and testing the {@link #termCache
      * term cache} otherwise.
@@ -3101,7 +3098,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * @param iv
      *            A non-inline {@link IV}.
      * 
-     * @return The corresponding {@link BigdataValue} if the {@link IV}
+     * @return The corresponding {@link EmbergraphValue} if the {@link IV}
      *         represents a blank node or is found in the {@link #termCache},
      *         and <code>null</code> otherwise.
      * 
@@ -3112,7 +3109,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * @throws IllegalArgumentException
      *             if the {@link IV} is {@link IV#isInline()}.
      */
-    private BigdataValue _getTermId(final IV<?,?> iv) {
+    private EmbergraphValue _getTermId(final IV<?,?> iv) {
 
         if (iv == null)
             throw new IllegalArgumentException();
@@ -3137,7 +3134,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
             final String id = 't' + ((BNode) iv).getID();
 
-            final BigdataBNode bnode = valueFactory.createBNode(id);
+            final EmbergraphBNode bnode = valueFactory.createBNode(id);
 
             // set the term identifier on the object.
             bnode.setIV(iv);
@@ -3166,16 +3163,16 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * <p>
      * Note: Handles both unisolatable and isolatable indices.
      * <P>
-     * Note: Sets {@link BigdataValue#getIV()} as a side-effect.
+     * Note: Sets {@link EmbergraphValue#getIV()} as a side-effect.
      * <p>
      * Note: this always mints a new {@link BNode} instance when the term
      * identifier identifies a {@link BNode} or a {@link Statement}.
      * 
-     * @return The {@link BigdataValue} -or- <code>null</code> iff there is no
-     *         {@link BigdataValue} for that term identifier in the lexicon.
+     * @return The {@link EmbergraphValue} -or- <code>null</code> iff there is no
+     *         {@link EmbergraphValue} for that term identifier in the lexicon.
      */
     @SuppressWarnings("rawtypes")
-    final public BigdataValue getTerm(final IV iv) {
+    final public EmbergraphValue getTerm(final IV iv) {
     	
     	return getValue(iv, true);
     	
@@ -3193,12 +3190,12 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      *            succeed.
      */
     @SuppressWarnings("rawtypes")
-    final private BigdataValue getValue(final IV iv, final boolean readFromIndex) {
+    final private EmbergraphValue getValue(final IV iv, final boolean readFromIndex) {
 
         // if (false) { // alternative forces the standard code path.
         // final Collection<IV> ivs = new LinkedList<IV>();
         // ivs.add(iv);
-        // final Map<IV, BigdataValue> values = getTerms(ivs);
+        // final Map<IV, EmbergraphValue> values = getTerms(ivs);
         // return values.get(iv);
         // }
 
@@ -3206,7 +3203,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             return iv.asValue(this);
 
         // handle bnodes, the termCache.
-        BigdataValue value = _getTermId(iv);
+        EmbergraphValue value = _getTermId(iv);
         
         if (value != null || !readFromIndex)
             return value;
@@ -3221,7 +3218,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
     }
     
-    private BigdataValue __getTerm(final TermId<?> iv) {
+    private EmbergraphValue __getTerm(final TermId<?> iv) {
         
         final IIndex ndx = getId2TermIndex();
 
@@ -3236,13 +3233,13 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             return null;
 
         // This also sets the value factory.
-        BigdataValue value = valueFactory.getValueSerializer().deserialize(data);
+        EmbergraphValue value = valueFactory.getValueSerializer().deserialize(data);
         
         // This sets the term identifier.
         value.setIV(iv);
 
         // Note: passing the IV object as the key.
-        final BigdataValue tmp = termCache.putIfAbsent(iv, value);
+        final EmbergraphValue tmp = termCache.putIfAbsent(iv, value);
 
         if (tmp != null) {
 
@@ -3258,7 +3255,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
     }
     
-    private BigdataValue __getBlob(final BlobIV<?> iv) {
+    private EmbergraphValue __getBlob(final BlobIV<?> iv) {
     
         final IIndex ndx = getBlobsIndex();
 
@@ -3273,13 +3270,13 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             return null;
 
         // This also sets the value factory.
-        BigdataValue value = valueFactory.getValueSerializer().deserialize(data);
+        EmbergraphValue value = valueFactory.getValueSerializer().deserialize(data);
         
         // This sets the term identifier.
         value.setIV(iv);
 
         // Note: passing the IV object as the key.
-        final BigdataValue tmp = termCache.putIfAbsent(iv, value);
+        final EmbergraphValue tmp = termCache.putIfAbsent(iv, value);
 
         if (tmp != null) {
 
@@ -3301,10 +3298,10 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * method is extremely inefficient for scale-out as it does one RMI per
      * request!
      * <p>
-     * Note: If {@link BigdataValue#getIV()} is set, then returns that value
+     * Note: If {@link EmbergraphValue#getIV()} is set, then returns that value
      * immediately. Next, try to get an inline internal value for the value.
      * Otherwise looks up the termId in the index and
-     * {@link BigdataValue#setIV(IV) sets the term identifier} as a side-effect.
+     * {@link EmbergraphValue#setIV(IV) sets the term identifier} as a side-effect.
      * 
      * @deprecated Not even the unit tests should be doing this.
      * 
@@ -3318,8 +3315,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             return null;
 
         // see if it already has a value
-        if (value instanceof BigdataValue) {
-            final IV iv = ((BigdataValue) value).getIV();
+        if (value instanceof EmbergraphValue) {
+            final IV iv = ((EmbergraphValue) value).getIV();
             if (iv != null)
                 return iv;
         }
@@ -3338,8 +3335,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
     /**
      * Attempt to convert the value to an inline internal value. If the caller
-     * provides a {@link BigdataValue} and this method is successful, then the
-     * {@link IV} will be set as a side-effect on the {@link BigdataValue}.
+     * provides a {@link EmbergraphValue} and this method is successful, then the
+     * {@link IV} will be set as a side-effect on the {@link EmbergraphValue}.
      * 
      * @param value
      *            The value to convert
@@ -3416,9 +3413,9 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 
         final TermId<?> iv = (TermId<?>) IVUtility.decode(tmp);
 
-        if(value instanceof BigdataValue) {
+        if(value instanceof EmbergraphValue) {
 
-            final BigdataValue impl = (BigdataValue) value;
+            final EmbergraphValue impl = (EmbergraphValue) value;
             
             // set as side-effect.
             impl.setIV(iv);
@@ -3460,7 +3457,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         
         final IKeyBuilder keyBuilder = h.newKeyBuilder();
         
-        final BigdataValue asValue = valueFactory.asValue(value);
+        final EmbergraphValue asValue = valueFactory.asValue(value);
         
         final byte[] baseKey = h.makePrefixKey(keyBuilder.reset(), asValue);
 
@@ -3477,12 +3474,12 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
             
         }
         
-		final BlobIV<?> iv = new BlobIV<BigdataValue>(VTE.valueOf(asValue),
+		final BlobIV<?> iv = new BlobIV<EmbergraphValue>(VTE.valueOf(asValue),
 				asValue.hashCode(), (short) counter);
 
-        if(value instanceof BigdataValue) {
+        if(value instanceof EmbergraphValue) {
 
-			final BigdataValue impl = (BigdataValue) value;
+			final EmbergraphValue impl = (EmbergraphValue) value;
             
             // set as side-effect.
             impl.setIV(iv);
@@ -3543,7 +3540,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * Return the {@link #lexiconConfiguration} instance.  Used to determine
      * how to encode and decode terms in the key space.
      */
-    public ILexiconConfiguration<BigdataValue> getLexiconConfiguration() {
+    public ILexiconConfiguration<EmbergraphValue> getLexiconConfiguration() {
 
         return lexiconConfiguration;
         
@@ -3559,7 +3556,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * the index for the {@link IV} => {@link Value} mapping as that index will
      * be faster (ID2TERM has a shorter key and higher fan-out than TERM2ID).
      */
-    public IKeyOrder<BigdataValue> getKeyOrder(final IPredicate<BigdataValue> p) {
+    public IKeyOrder<EmbergraphValue> getKeyOrder(final IPredicate<EmbergraphValue> p) {
 
         /*
          * Examine the IV slot first. Reverse lookup (IV => Value). This is
@@ -3593,12 +3590,12 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         {
 
             @SuppressWarnings("unchecked")
-            final IVariableOrConstant<BigdataValue> v = (IVariableOrConstant<BigdataValue>) p
+            final IVariableOrConstant<EmbergraphValue> v = (IVariableOrConstant<EmbergraphValue>) p
                     .get(LexiconKeyOrder.SLOT_TERM);
 
             if (v != null) {
 
-                final BigdataValue value = v.get();
+                final EmbergraphValue value = v.get();
 
                 if (isBlob(value)) {
 
@@ -3619,11 +3616,11 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
     /**
      * Necessary for lexicon joins, which are injected into query plans as
      * necessary by the query planner. You can use a {@link LexPredicate} to
-     * perform either a forward ({@link BigdataValue} to {@link IV}) or reverse
-     * ( {@link IV} to {@link BigdataValue}) lookup. Either lookup will cache
-     * the {@link BigdataValue} on the {@link IV} as a side effect.
+     * perform either a forward ({@link EmbergraphValue} to {@link IV}) or reverse
+     * ( {@link IV} to {@link EmbergraphValue}) lookup. Either lookup will cache
+     * the {@link EmbergraphValue} on the {@link IV} as a side effect.
      * <p>
-     * Note: If you query with {@link IV} or {@link BigdataValue} which is
+     * Note: If you query with {@link IV} or {@link EmbergraphValue} which is
      * already cached (either on one another or in the termsCache) then the
      * cached value will be returned (fast path).
      * <p>
@@ -3631,31 +3628,31 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      * told blank node semantics.
      * <p>
      * Note: <strong> This has the side effect of caching materialized
-     * {@link BigdataValue}s on {@link IV}s using
-     * {@link IV#setValue(BigdataValue)} for use in downstream operators that
+     * {@link EmbergraphValue}s on {@link IV}s using
+     * {@link IV#setValue(EmbergraphValue)} for use in downstream operators that
      * need materialized values to evaluate properly. The query planner is
      * responsible for managing when we materialize and cache values. This keeps
-     * us from wiring {@link BigdataValue} onto {@link IV}s all the
+     * us from wiring {@link EmbergraphValue} onto {@link IV}s all the
      * time.</strong>
      * <p>
      * The lexicon has a single TERMS index. The keys are {@link BlobIV}s formed
-     * from the {@link VTE} of the {@link BigdataValue},
-     * {@link BigdataValue#hashCode()}, and a collision counter. The value is
-     * the {@link BigdataValue} as serialized by the
-     * {@link BigdataValueSerializer}.
+     * from the {@link VTE} of the {@link EmbergraphValue},
+     * {@link EmbergraphValue#hashCode()}, and a collision counter. The value is
+     * the {@link EmbergraphValue} as serialized by the
+     * {@link EmbergraphValueSerializer}.
      * <p>
      * There are four possible ways to query this index using the
      * {@link LexPredicate}.
      * <dl>
-     * <dt>lex(-BigdataValue,+IV)</dt>
-     * <dd>The {@link IV} is given and its {@link BigdataValue} will be sought.</dd>
-     * <dt>lex(+BigdataValue,-IV)</dt>
-     * <dd>The {@link BigdataValue}is given and its {@link IV} will be sought.
+     * <dt>lex(-EmbergraphValue,+IV)</dt>
+     * <dd>The {@link IV} is given and its {@link EmbergraphValue} will be sought.</dd>
+     * <dt>lex(+EmbergraphValue,-IV)</dt>
+     * <dd>The {@link EmbergraphValue}is given and its {@link IV} will be sought.
      * This case requires a key-range scan with a filter. It has to scan the
      * collision bucket and filter for the specified Value. We get the collision
      * bucket by creating a prefix key for the Value (using its VTE and
      * hashCode). This will either return the IV for that Value or nothing.</dd>
-     * <dt>lex(+BigdataValue,+IV)</dt>
+     * <dt>lex(+EmbergraphValue,+IV)</dt>
      * <dd>The predicate is fully bound. In this case we can immediately verify
      * that the Value is consistent with the IV (same VTE and hashCode) and then
      * do a point lookup on the IV.</dd>
@@ -3667,10 +3664,10 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public IAccessPath<BigdataValue> newAccessPath(
+    public IAccessPath<EmbergraphValue> newAccessPath(
             final IIndexManager localIndexManager, 
-            final IPredicate<BigdataValue> predicate, 
-            final IKeyOrder<BigdataValue> keyOrder 
+            final IPredicate<EmbergraphValue> predicate,
+            final IKeyOrder<EmbergraphValue> keyOrder
             ) {
 
         /*
@@ -3687,7 +3684,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
              * against the TERMS index.
              */
 
-            final BigdataValue val = (BigdataValue) predicate.get(
+            final EmbergraphValue val = (EmbergraphValue) predicate.get(
                     LexiconKeyOrder.SLOT_TERM).get();
 
             final IV iv = (IV) predicate.get(LexiconKeyOrder.SLOT_IV).get();
@@ -3699,7 +3696,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                  * empty.
                  */
                 
-                return new EmptyAccessPath<BigdataValue>();
+                return new EmptyAccessPath<EmbergraphValue>();
                 
             }
 
@@ -3710,7 +3707,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                  * provably empty.
                  */
                 
-                return new EmptyAccessPath<BigdataValue>();
+                return new EmptyAccessPath<EmbergraphValue>();
                 
             }
 
@@ -3727,7 +3724,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
 //                log.debug("materializing: " + iv);
 
             // Attempt to resolve the IV directly to a Value (no IO).
-            final BigdataValue val = getValue(iv, false/* readIndex */);
+            final EmbergraphValue val = getValue(iv, false/* readIndex */);
 
             if (val != null) {
 
@@ -3740,8 +3737,8 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 // cache the value on the IV
                 iv.setValue(val);
 
-                return new ArrayAccessPath<BigdataValue>(
-                        new BigdataValue[] { val }, predicate, keyOrder);
+                return new ArrayAccessPath<EmbergraphValue>(
+                        new EmbergraphValue[] { val }, predicate, keyOrder);
 
             }
 
@@ -3755,17 +3752,17 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                  * told blank nodes semantics.
                  */
                 
-                return new EmptyAccessPath<BigdataValue>();
+                return new EmptyAccessPath<EmbergraphValue>();
                 
             }
 
             final CacheValueFilter filter = CacheValueFilter.newInstance();
 
-            final IPredicate<BigdataValue> tmp = (IPredicate<BigdataValue>) predicate
+            final IPredicate<EmbergraphValue> tmp = (IPredicate<EmbergraphValue>) predicate
                     .setProperty(Predicate.Annotations.ACCESS_PATH_FILTER,
                             filter);
 
-            final AccessPath<BigdataValue> ap = new AccessPath<BigdataValue>(
+            final AccessPath<EmbergraphValue> ap = new AccessPath<EmbergraphValue>(
                     this, localIndexManager, tmp, keyOrder).init();
 
             return ap;
@@ -3773,7 +3770,7 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
         }
         case ValueBound: {
 
-            final BigdataValue val = (BigdataValue) predicate.get(
+            final EmbergraphValue val = (EmbergraphValue) predicate.get(
                     LexiconKeyOrder.SLOT_TERM).get();
 
             // See if it already has an IV or can be assigned an inline IV
@@ -3793,18 +3790,18 @@ public class LexiconRelation extends AbstractRelation<BigdataValue>
                 // cache the value on the IV
                 iv.setValue(val);
 
-                return new ArrayAccessPath<BigdataValue>(
-                        new BigdataValue[] { val }, predicate, keyOrder);
+                return new ArrayAccessPath<EmbergraphValue>(
+                        new EmbergraphValue[] { val }, predicate, keyOrder);
 
             }
 
             final CacheValueFilter filter = CacheValueFilter.newInstance();
 
-            final IPredicate<BigdataValue> tmp = (IPredicate<BigdataValue>) predicate
+            final IPredicate<EmbergraphValue> tmp = (IPredicate<EmbergraphValue>) predicate
                     .setProperty(Predicate.Annotations.ACCESS_PATH_FILTER,
                             filter);
 
-            final AccessPath<BigdataValue> ap = new AccessPath<BigdataValue>(this,
+            final AccessPath<EmbergraphValue> ap = new AccessPath<EmbergraphValue>(this,
                     localIndexManager, tmp, keyOrder);
             
             return ap;

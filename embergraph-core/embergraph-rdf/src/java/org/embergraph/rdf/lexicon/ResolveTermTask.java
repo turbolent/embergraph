@@ -12,8 +12,8 @@ import org.embergraph.btree.proc.BatchLookup.BatchLookupConstructor;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Task resolves a chunk of {@link TermIV}s against the
@@ -32,9 +32,9 @@ class ResolveTermTask implements Callable<Void> {
     private final int toIndex;
     private final byte[][] keys;
     private final TermId<?>[] notFound;
-    private final ConcurrentHashMap<IV<?,?>, BigdataValue> map;
-    private final ITermCache<IV<?,?>, BigdataValue> termCache;
-    private final BigdataValueFactory valueFactory;
+    private final ConcurrentHashMap<IV<?,?>, EmbergraphValue> map;
+    private final ITermCache<IV<?,?>, EmbergraphValue> termCache;
+    private final EmbergraphValueFactory valueFactory;
 
     /**
      * 
@@ -49,7 +49,7 @@ class ResolveTermTask implements Callable<Void> {
      *            The serialized term identifiers.
      * @param notFound
      *            An array of term identifiers whose corresponding
-     *            {@link BigdataValue} must be resolved against the index.
+     *            {@link EmbergraphValue} must be resolved against the index.
      *            The indices in this array are correlated 1:1 with those
      *            for <i>keys</i>.
      * @param map
@@ -60,9 +60,9 @@ class ResolveTermTask implements Callable<Void> {
      */
     ResolveTermTask(final IIndex ndx, final int fromIndex,
             final int toIndex, final byte[][] keys, final TermId<?>[] notFound,
-            final ConcurrentHashMap<IV<?,?>, BigdataValue> map,
-            final ITermCache<IV<?,?>, BigdataValue> termCache,
-            final BigdataValueFactory valueFactory) {
+            final ConcurrentHashMap<IV<?,?>, EmbergraphValue> map,
+            final ITermCache<IV<?,?>, EmbergraphValue> termCache,
+            final EmbergraphValueFactory valueFactory) {
 
         this.ndx = ndx;
         this.fromIndex = fromIndex;
@@ -111,13 +111,13 @@ class ResolveTermTask implements Callable<Void> {
                  * Note: This automatically sets the valueFactory reference
                  * on the de-serialized value.
                  */
-                BigdataValue value = valueFactory.getValueSerializer()
+                EmbergraphValue value = valueFactory.getValueSerializer()
                         .deserialize(data);
                 
                 // Set the term identifier.
                 value.setIV(tid);
 
-                final BigdataValue tmp = termCache.putIfAbsent(tid, value);
+                final EmbergraphValue tmp = termCache.putIfAbsent(tid, value);
 
                 if (tmp != null) {
 

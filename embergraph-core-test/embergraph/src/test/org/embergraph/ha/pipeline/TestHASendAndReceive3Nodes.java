@@ -27,7 +27,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.ha.msg.HAMessageWrapper;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.IBufferAccess;
@@ -235,7 +235,7 @@ public class TestHASendAndReceive3Nodes extends
     public void testPipelineChange_smallMessage() throws InterruptedException,
             ExecutionException, IOException, TimeoutException {
 
-        if (!BigdataStatics.runKnownBadTests) {
+        if (!EmbergraphStatics.runKnownBadTests) {
             // Conditionally disabled to clean up CI. See BLZG-1279
             return;
         }

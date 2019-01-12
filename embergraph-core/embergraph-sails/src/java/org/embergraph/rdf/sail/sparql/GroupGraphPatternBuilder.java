@@ -38,7 +38,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.ast.ASTBasicGraphPattern;
 import org.embergraph.rdf.sail.sparql.ast.ASTBind;
 import org.embergraph.rdf.sail.sparql.ast.ASTBindingSet;
@@ -65,7 +65,6 @@ import org.embergraph.rdf.sparql.ast.ConstructNode;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
-import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.UnionNode;
@@ -90,7 +89,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
     private static final Logger log = Logger.getLogger(GroupGraphPatternBuilder.class);
     
-    public GroupGraphPatternBuilder(final BigdataASTContext context) {
+    public GroupGraphPatternBuilder(final EmbergraphASTContext context) {
 
         super(context);
 
@@ -576,7 +575,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     /**
      * @return An object which encapsulates both the ordered set of variables
      *         for which bindings exist and the set of binding sets. The
-     *         bindings are {@link BigdataValue}s. They must be translated into
+     *         bindings are {@link EmbergraphValue}s. They must be translated into
      *         {@link IV} through a batch resolution process before they can be
      *         passed into the query engine.
      */

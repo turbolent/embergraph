@@ -20,6 +20,7 @@ package org.embergraph.rdf.sail;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
@@ -30,14 +31,12 @@ import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.TempTripleStore;
 import org.embergraph.relation.accesspath.AbstractArrayBuffer;
 import org.embergraph.striterator.ChunkedArrayIterator;
@@ -142,9 +141,9 @@ public class RDRHistory implements IChangeLog {
      */
     protected IV<?,?>[] resolveTerms(final URI[] terms) throws Exception {
         
-        final BigdataValueFactory vf = database.getValueFactory();
+        final EmbergraphValueFactory vf = database.getValueFactory();
         
-        final BigdataValue[] values = new BigdataValue[terms.length];
+        final EmbergraphValue[] values = new EmbergraphValue[terms.length];
         for (int i = 0; i < terms.length; i++) {
             values[i] = vf.asValue(terms[i]);
         }

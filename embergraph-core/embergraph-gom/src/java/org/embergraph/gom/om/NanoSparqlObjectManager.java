@@ -29,8 +29,8 @@ import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
 import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
 import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
@@ -56,7 +56,7 @@ public class NanoSparqlObjectManager extends ObjectMgrModel {
 	
 	public NanoSparqlObjectManager(final RemoteRepository repo, final String namespace) {
 		
-        super(repo.getSparqlEndPoint(), BigdataValueFactoryImpl
+        super(repo.getSparqlEndPoint(), EmbergraphValueFactoryImpl
                 .getInstance(namespace));
 
 		m_repo = repo;
@@ -80,7 +80,7 @@ public class NanoSparqlObjectManager extends ObjectMgrModel {
             final TupleQueryResult res = q.evaluate();
 
             // Will close the TupleQueryResult.
-            return new Sesame2BigdataIterator<BindingSet, QueryEvaluationException>(
+            return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
                     res);
             
         } catch (Exception ex) {
@@ -114,7 +114,7 @@ public class NanoSparqlObjectManager extends ObjectMgrModel {
             final GraphQueryResult res = q.evaluate();
 
             // Will close the GraphQueryResult.
-            return new Sesame2BigdataIterator<Statement, QueryEvaluationException>(
+            return new Sesame2EmbergraphIterator<Statement, QueryEvaluationException>(
                     res);
 
         } catch (Exception ex) {

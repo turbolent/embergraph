@@ -23,16 +23,16 @@ package org.embergraph.rdf.internal;
 
 import java.util.TimeZone;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
 
 /**
  * Unit tests for {@link XSDIntegerIV}.
@@ -61,11 +61,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeDateLiterals() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01", XSD.DATE),
                vf.createLiteral("-2015-12-31", XSD.DATE),
                vf.createLiteral("9999-01-01", XSD.DATE),
@@ -80,7 +80,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            
            assertEquals(valRoundTrip, dt[i] /* original value */);
         }
@@ -95,11 +95,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeGDay() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01", XSD.GDAY),
                vf.createLiteral("-2015-12-31", XSD.GDAY),
                vf.createLiteral("9999-01-01", XSD.GDAY),
@@ -116,7 +116,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + "\"^^<http://www.w3.org/2001/XMLSchema#gDay>" );
         }
        
@@ -130,11 +130,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeGMonth() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01", XSD.GMONTH),
                vf.createLiteral("-2015-12-31", XSD.GMONTH),
                vf.createLiteral("9999-01-01", XSD.GMONTH),
@@ -151,7 +151,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + "\"^^<http://www.w3.org/2001/XMLSchema#gMonth>" );
         }
        
@@ -165,11 +165,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeGMonthDay() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01", XSD.GMONTHDAY),
                vf.createLiteral("-2015-12-31", XSD.GMONTHDAY),
                vf.createLiteral("9999-01-01", XSD.GMONTHDAY),
@@ -186,7 +186,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + "\"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>" );
         }
        
@@ -200,11 +200,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeGYear() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01", XSD.GYEAR),
                vf.createLiteral("-1000-12-31", XSD.GYEAR),
                vf.createLiteral("0001-01-01", XSD.GYEAR),
@@ -221,7 +221,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + "\"^^<http://www.w3.org/2001/XMLSchema#gYear>" );
         }
        
@@ -235,11 +235,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeGYearMonth() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01", XSD.GYEARMONTH),
                vf.createLiteral("-1000-12-31", XSD.GYEARMONTH),
                vf.createLiteral("0001-01-01", XSD.GYEARMONTH),
@@ -256,7 +256,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + "\"^^<http://www.w3.org/2001/XMLSchema#gYearMonth>" );
         }
        
@@ -271,11 +271,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeDateTime() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("-2015-01-01T10:10:10", XSD.DATETIME),
                vf.createLiteral("-1000-12-31T00:00:00", XSD.DATETIME),
                vf.createLiteral("0001-01-01T23:59:59", XSD.DATETIME),
@@ -296,7 +296,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + ".000Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>" );
         }
@@ -311,11 +311,11 @@ public class TestEncodeDecodeXSDDateIVs extends
      */
     public void test_encodeDecodeTime() throws Exception {
 
-       final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+       final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
        
-       final DateTimeExtension<BigdataValue> ext =  getDateTimeExtensionGMT(vf);
+       final DateTimeExtension<EmbergraphValue> ext =  getDateTimeExtensionGMT(vf);
        
-       final BigdataLiteral[] dt = {
+       final EmbergraphLiteral[] dt = {
                vf.createLiteral("00:00:00", XSD.TIME),
                vf.createLiteral("01:02:03", XSD.TIME),
                vf.createLiteral("10:20:30", XSD.TIME),
@@ -332,7 +332,7 @@ public class TestEncodeDecodeXSDDateIVs extends
        
        for (int i = 0; i < e.length; i++) {
            @SuppressWarnings("rawtypes")
-           final BigdataValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
+           final EmbergraphValue valRoundTrip = ext.asValue((LiteralExtensionIV) e[i], vf);
            
            assertEquals(valRoundTrip.toString(), "\"" + expected[i] + ".000Z\"^^<http://www.w3.org/2001/XMLSchema#time>" );
         }
@@ -346,13 +346,13 @@ public class TestEncodeDecodeXSDDateIVs extends
     /**
      * Get a {@link DateTimeExtension} object.
      */
-    protected DateTimeExtension<BigdataValue> getDateTimeExtensionGMT(final BigdataValueFactory vf) {
+    protected DateTimeExtension<EmbergraphValue> getDateTimeExtensionGMT(final EmbergraphValueFactory vf) {
        
        return 
-          new DateTimeExtension<BigdataValue>(
+          new DateTimeExtension<EmbergraphValue>(
              new IDatatypeURIResolver() {
-                public BigdataURI resolve(URI uri) {
-                   final BigdataURI buri = vf.createURI(uri.stringValue());
+                public EmbergraphURI resolve(URI uri) {
+                   final EmbergraphURI buri = vf.createURI(uri.stringValue());
                    buri.setIV(newTermId(VTE.URI));
                    return buri;
                 }

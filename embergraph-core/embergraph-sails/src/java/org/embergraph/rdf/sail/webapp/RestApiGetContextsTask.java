@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.openrdf.model.Resource;
 import org.openrdf.repository.RepositoryResult;
 
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
 
 /**
@@ -51,7 +51,7 @@ class RestApiGetContextsTask extends AbstractRestApiTask<Void> {
    @Override
    public Void call() throws Exception {
 
-      BigdataSailRepositoryConnection conn = null;
+      EmbergraphSailRepositoryConnection conn = null;
       try {
 
          conn = getQueryConnection();

@@ -6,12 +6,12 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
@@ -52,10 +52,10 @@ public class TestMultiInlineURIHandlersSingleNamespace extends
 		/*
 		 * Turn off inference.
 		 */
-		props.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+		props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
 				NoAxioms.class.getName());
-		props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-		props.setProperty(BigdataSail.Options.JUSTIFY, "false");
+		props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+		props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
 
 		// Test with TestVocabulary Vocabulary
 		props.setProperty(Options.VOCABULARY_CLASS,
@@ -100,21 +100,21 @@ public class TestMultiInlineURIHandlersSingleNamespace extends
 
 		try {
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-			final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(
+			final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(
 					store, 4 /* capacity */);
 
-			BigdataURI pred = vf
+			EmbergraphURI pred = vf
 					.createURI("http://embergraph.org/Position#hasMarketValue");
-			BigdataValue obj = vf.createLiteral("100.00");
+			EmbergraphValue obj = vf.createLiteral("100.00");
 
 			// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E
 			// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_TaxCost
 			// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_UnrealizedGain
 			// http://blazegraph.com/Data#Position_010072F0000038090100000000D56C9E_WashSale
 
-			final BigdataURI[] uris = new BigdataURI[] {
+			final EmbergraphURI[] uris = new EmbergraphURI[] {
 					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E_TaxCost"),
 					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E_UnrealizedGain"),
 					vf.createURI("http://embergraph.org/Data#Position_010072F0000038090100000000D56C9E"),
@@ -139,7 +139,7 @@ public class TestMultiInlineURIHandlersSingleNamespace extends
 
 			for (int i = 0; i < uris.length; i++) {
 
-				final BigdataURI uri = uris[i];
+				final EmbergraphURI uri = uris[i];
 
 				if (log.isDebugEnabled()) {
 					log.debug("Checking " + uri.getNamespace() + " "

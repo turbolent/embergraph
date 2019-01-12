@@ -10,7 +10,7 @@ import java.util.HashSet;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 
 /**
  * "IN" filter for the context position based on a sorted long[] of the
@@ -61,7 +61,7 @@ public final class InGraphBinarySearchFilter<E extends ISPO> extends SPOFilter<E
         
         for (URI uri : graphs) {
         
-            final IV termId = ((BigdataURI) uri).getIV();
+            final IV termId = ((EmbergraphURI) uri).getIV();
             
             if (termId != null) {
 

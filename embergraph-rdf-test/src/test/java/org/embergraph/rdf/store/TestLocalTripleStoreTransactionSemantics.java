@@ -3,6 +3,9 @@ package org.embergraph.rdf.store;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Statement;
 
 import org.embergraph.journal.IIndexManager;
@@ -10,9 +13,6 @@ import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.spo.SPO;
@@ -48,13 +48,13 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
         
         try {
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataValue s = f.createURI("http://www.embergraph.org/s");
-            final BigdataValue p = f.createURI("http://www.embergraph.org/p");
-            final BigdataValue o = f.createURI("http://www.embergraph.org/o");
+            final EmbergraphValue s = f.createURI("http://www.embergraph.org/s");
+            final EmbergraphValue p = f.createURI("http://www.embergraph.org/p");
+            final EmbergraphValue o = f.createURI("http://www.embergraph.org/o");
 
-            final BigdataValue[] values = new BigdataValue[]{s,p,o};
+            final EmbergraphValue[] values = new EmbergraphValue[]{s,p,o};
             
             store.getLexiconRelation()
                     .addTerms(values, values.length, false/* readOnly */);
@@ -151,7 +151,7 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
             private static final long serialVersionUID = 1L;
         }
 
-        BigdataValue s = null, p = null, o = null;
+        EmbergraphValue s = null, p = null, o = null;
 
         final LocalTripleStore store = (LocalTripleStore) getStore();
 
@@ -160,13 +160,13 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
             // Should be a nop.
             store.abort();
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             s = f.createURI("http://www.embergraph.org/s");
             p = f.createURI("http://www.embergraph.org/p");
             o = f.createURI("http://www.embergraph.org/o");
             
-            final BigdataValue[] values = new BigdataValue[]{s,p,o};
+            final EmbergraphValue[] values = new EmbergraphValue[]{s,p,o};
             
             store.getLexiconRelation()
                     .addTerms(values, values.length, false/* readOnly */);
@@ -304,14 +304,14 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
             final AbstractTripleStore unisolatedStore = ((AbstractTripleStore) indexManager
                     .getResourceLocator().locate(namespace, ITx.UNISOLATED));
             
-            final BigdataValueFactory f = unisolatedStore.getValueFactory();
+            final EmbergraphValueFactory f = unisolatedStore.getValueFactory();
 
-            final BigdataURI john = f.createURI("http://www.embergraph.org/john");
-            final BigdataURI loves = f
+            final EmbergraphURI john = f.createURI("http://www.embergraph.org/john");
+            final EmbergraphURI loves = f
                     .createURI("http://www.embergraph.org/loves");
-            final BigdataURI mary = f.createURI("http://www.embergraph.org/mary");
+            final EmbergraphURI mary = f.createURI("http://www.embergraph.org/mary");
 
-            final BigdataValue[] terms = new BigdataValue[] {
+            final EmbergraphValue[] terms = new EmbergraphValue[] {
 
             john, loves, mary
 

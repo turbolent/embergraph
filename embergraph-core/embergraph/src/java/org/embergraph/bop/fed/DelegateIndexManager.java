@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
@@ -39,7 +39,7 @@ import org.embergraph.relation.rule.eval.pipeline.JoinTaskFactoryTask;
 import org.embergraph.resources.IndexManager;
 import org.embergraph.resources.StoreManager.ManagedJournal;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.SparseRowStore;
 
 /**
@@ -49,7 +49,7 @@ import org.embergraph.sparse.SparseRowStore;
  * entire index partition view. However, {@link IndexManager} does not implement
  * {@link IIndexManager} or even {@link IIndexStore}. Therefore this class was
  * introduced. It passes most of the methods on to the
- * {@link IBigdataFederation} but {@link #getIndex(String, long)} is delegated
+ * {@link IEmbergraphFederation} but {@link #getIndex(String, long)} is delegated
  * to {@link IndexManager#getIndex(String, long)} which is the method that knows
  * how to create the index partition view.
  * 
@@ -58,7 +58,7 @@ import org.embergraph.sparse.SparseRowStore;
  * @todo While this class solves our problem I do not know whether or not this
  *       class should this class have more visibility? The downside is that it
  *       is a bit incoherent how it passes along one method to the
- *       {@link IndexManager}, most methods to the {@link IBigdataFederation}
+ *       {@link IndexManager}, most methods to the {@link IEmbergraphFederation}
  *       and disallows {@link #dropIndex(String)} and
  *       {@link #registerIndex(IndexMetadata)} in an attempt to stay out of
  *       trouble. That may be enough reason to keep it private.
@@ -128,7 +128,7 @@ class DelegateIndexManager implements IIndexManager {
     }
 
     @Override
-    public BigdataFileSystem getGlobalFileSystem() {
+    public EmbergraphFileSystem getGlobalFileSystem() {
 
         return dataService.getFederation().getGlobalFileSystem();
 

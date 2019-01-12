@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast.eval.rto;
 import java.util.Properties;
 
 import org.embergraph.bop.rdf.joinGraph.GenerateBarData;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 
 /**
  * Data driven test suite for the Runtime Query Optimizer (RTO) using BAR data
@@ -58,7 +58,7 @@ public class TestRTO_BAR extends AbstractRTOTestCase {
         // Note: clone to avoid modifying!!!
         final Properties properties = (Properties) super.getProperties().clone();
 
-        properties.setProperty(BigdataSail.Options.QUADS_MODE, "true");
+        properties.setProperty(EmbergraphSail.Options.QUADS_MODE, "true");
 
         return properties;
         

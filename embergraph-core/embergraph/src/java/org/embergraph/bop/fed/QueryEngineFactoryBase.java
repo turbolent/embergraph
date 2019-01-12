@@ -15,8 +15,8 @@ import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.relation.locator.IResourceLocator;
-import org.embergraph.service.IBigdataClient;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphClient;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 import org.embergraph.util.config.NicUtil;
@@ -50,7 +50,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     
     /**
      * Weak value cache to enforce the singleton pattern for
-     * {@link IBigdataClient}s (the data services are query engine peers rather
+     * {@link IEmbergraphClient}s (the data services are query engine peers rather
      * than controllers and handle their own query engine initialization so as
      * to expose their resources to other peers).
      * <p>
@@ -58,7 +58,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
      * to keep any {@link QueryEngine} objects wired into the cache unless the
      * application is holding a hard reference to the {@link QueryEngine}.
      */
-    private static ConcurrentWeakValueCache<IBigdataFederation<?>, FederatedQueryEngine> federationQECache = new ConcurrentWeakValueCache<IBigdataFederation<?>, FederatedQueryEngine>(
+    private static ConcurrentWeakValueCache<IEmbergraphFederation<?>, FederatedQueryEngine> federationQECache = new ConcurrentWeakValueCache<IEmbergraphFederation<?>, FederatedQueryEngine>(
             0/* queueCapacity */
     );
 
@@ -69,9 +69,9 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
 	public QueryEngine getExistingQueryController(
             final IBTreeManager indexManager) {
 
-        if (indexManager instanceof IBigdataFederation<?>) {
+        if (indexManager instanceof IEmbergraphFederation<?>) {
 
-            return federationQECache.get((IBigdataFederation<?>) indexManager);
+            return federationQECache.get((IEmbergraphFederation<?>) indexManager);
             
         }
         // Note: Also supports TemporaryStore.
@@ -85,9 +85,9 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     @Override
 	public QueryEngine getQueryController(final IIndexManager indexManager) {
 
-        if (indexManager instanceof IBigdataFederation<?>) {
+        if (indexManager instanceof IEmbergraphFederation<?>) {
 
-            return getFederatedQueryController((IBigdataFederation<?>) indexManager);
+            return getFederatedQueryController((IEmbergraphFederation<?>) indexManager);
             
         }
         // Note: Also supports TemporaryStore.
@@ -150,11 +150,11 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     }
     
     /* (non-Javadoc)
-	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getFederatedQueryController(org.embergraph.service.IBigdataFederation)
+	 * @see org.embergraph.bop.fed.IQueryEngineFactory#getFederatedQueryController(org.embergraph.service.IEmbergraphFederation)
 	 */
     @Override
 	public FederatedQueryEngine getFederatedQueryController(
-            final IBigdataFederation<?> fed) {
+            final IEmbergraphFederation<?> fed) {
 
         if (fed == null)
             throw new IllegalArgumentException();
@@ -194,7 +194,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
      *         by a MemStore?
      */
     private FederatedQueryEngine newFederatedQueryEngine(
-            final IBigdataFederation<?> fed) {
+            final IEmbergraphFederation<?> fed) {
 
 		if (log.isInfoEnabled())
 			log.info("Initiallizing query engine: " + fed);
@@ -296,7 +296,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
          * @param resourceService
          */
         public FederatedQueryController(final UUID thisService,
-                final IBigdataFederation<?> fed, final Journal indexManager,
+                final IEmbergraphFederation<?> fed, final Journal indexManager,
                 final ManagedResourceService resourceService) {
 
             super(thisService, fed, indexManager, resourceService);

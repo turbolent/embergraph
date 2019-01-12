@@ -78,17 +78,17 @@ public class TestAll extends TestCase {
         // test suite for the SPARQL parse tree => bigdata AST translation.
         suite.addTest(org.embergraph.rdf.sail.sparql.TestAll.suite());
         
-        // bootstrap tests for the BigdataSail
-        suite.addTestSuite(TestBootstrapBigdataSail.class);
+        // bootstrap tests for the EmbergraphSail
+        suite.addTestSuite(TestBootstrapEmbergraphSail.class);
 
         // run the test suite with statement identifiers enabled.
-        suite.addTest(TestBigdataSailWithSids.suite());
+        suite.addTest(TestEmbergraphSailWithSids.suite());
         
         // run the test suite without statement identifiers enabled.
-        suite.addTest(TestBigdataSailWithoutSids.suite());
+        suite.addTest(TestEmbergraphSailWithoutSids.suite());
         
         // quad store test suite w/ pipeline joins.
-        suite.addTest(TestBigdataSailWithQuads.suite());
+        suite.addTest(TestEmbergraphSailWithQuads.suite());
 
         // SPARQL Updates
         suite.addTest(org.embergraph.rdf.sail.tck.TestAll.suite());
@@ -101,7 +101,7 @@ public class TestAll extends TestCase {
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/196 (Journal Leaks Memory)
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/523 (Temporary Journals in CI)
          */
-//        suite.addTest(TestBigdataSailEmbeddedFederationWithQuads.suite());
+//        suite.addTest(TestEmbergraphSailEmbeddedFederationWithQuads.suite());
         
         return suite;
 

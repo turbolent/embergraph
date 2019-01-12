@@ -24,7 +24,7 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 import junit.framework.Test;
@@ -90,7 +90,7 @@ public class Test_Ticket_2091 extends AbstractProtocolTest {
 	public void test_simple() throws Exception {
 
 		setMethodisPostUrlEncodedData();
-		BigdataSailRemoteRepositoryConnection conn = m_repo.getBigdataSailRemoteRepository().getConnection();
+		EmbergraphSailRemoteRepositoryConnection conn = m_repo.getEmbergraphSailRemoteRepository().getConnection();
 		conn.prepareUpdate(QueryLanguage.SPARQL, "prefix wd: <http://wd/> \n" + 
 				"prefix wdt: <http://wdt/> " +
 				"INSERT DATA { wd:Q2 wdt:P31 wd:Q3917681 } ").execute();

@@ -63,7 +63,7 @@ import org.apache.log4j.Logger;
  * @author mikepersonick
  *
  */
-public abstract class ImmortalGraph extends BigdataGraph {
+public abstract class ImmortalGraph extends EmbergraphGraph {
 
     private static final transient Logger log = Logger.getLogger(ImmortalGraph.class);
     

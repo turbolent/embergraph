@@ -33,9 +33,9 @@ import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
@@ -97,18 +97,18 @@ public class TestNativeDistinctFilter extends TestCase2 {
 
             // Setup the vocabulary.
             {
-                final BigdataValueFactory vf = kb.getValueFactory();
+                final EmbergraphValueFactory vf = kb.getValueFactory();
                 final String uriString = "http://embergraph.org/";
-                final BigdataURI _knows = vf.asValue(FOAFVocabularyDecl.knows);
-                final BigdataURI _brad = vf.createURI(uriString+"brad");
-                final BigdataURI _john = vf.createURI(uriString+"john");
-                final BigdataURI _fred = vf.createURI(uriString+"fred");
-                final BigdataURI _mary = vf.createURI(uriString+"mary");
-                final BigdataURI _paul = vf.createURI(uriString+"paul");
-                final BigdataURI _leon = vf.createURI(uriString+"leon");
-                final BigdataURI _luke = vf.createURI(uriString+"luke");
+                final EmbergraphURI _knows = vf.asValue(FOAFVocabularyDecl.knows);
+                final EmbergraphURI _brad = vf.createURI(uriString+"brad");
+                final EmbergraphURI _john = vf.createURI(uriString+"john");
+                final EmbergraphURI _fred = vf.createURI(uriString+"fred");
+                final EmbergraphURI _mary = vf.createURI(uriString+"mary");
+                final EmbergraphURI _paul = vf.createURI(uriString+"paul");
+                final EmbergraphURI _leon = vf.createURI(uriString+"leon");
+                final EmbergraphURI _luke = vf.createURI(uriString+"luke");
 
-                final BigdataValue[] a = new BigdataValue[] {
+                final EmbergraphValue[] a = new EmbergraphValue[] {
                       _knows,
                       _brad,
                       _john,

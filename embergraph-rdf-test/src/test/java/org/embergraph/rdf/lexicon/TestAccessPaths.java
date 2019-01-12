@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.bop.Constant;
@@ -36,8 +37,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
@@ -49,7 +49,7 @@ import org.embergraph.striterator.IKeyOrder;
  * Test suite for
  * {@link LexiconRelation#newAccessPath(IIndexManager, IPredicate, IKeyOrder)}.
  * <p>
- * Note: If you query with {@link IV} or {@link BigdataValue} already cached (on
+ * Note: If you query with {@link IV} or {@link EmbergraphValue} already cached (on
  * one another or in the termsCache) then the cached value will be returned.
  * <p>
  * Note: Blank nodes will not unify with themselves unless you are using told
@@ -94,13 +94,13 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
         
         try {
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataValue rdfType;
-            final BigdataValue largeLiteral;
+            final EmbergraphValue rdfType;
+            final EmbergraphValue largeLiteral;
             terms.add(rdfType=f.asValue(RDF.TYPE));
             terms.add(f.asValue(RDF.PROPERTY));
             terms.add(f.createLiteral("test"));
@@ -133,7 +133,7 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
 
             final int size = terms.size();
 
-            final BigdataValue[] a = terms.toArray(new BigdataValue[size]);
+            final EmbergraphValue[] a = terms.toArray(new EmbergraphValue[size]);
 
             // resolve term ids.
             store.getLexiconRelation().addTerms(a, size, false/* readOnly */);
@@ -141,7 +141,7 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
             // populate map w/ the assigned term identifiers.
             final Collection<IV> ids = new ArrayList<IV>();
 
-            for (BigdataValue t : a) {
+            for (EmbergraphValue t : a) {
 
                 ids.add(t.getIV());
 
@@ -165,14 +165,14 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
 	 * Test the access path.
 	 * 
 	 * @param expected
-	 *            The {@link BigdataValue} with its {@link IV}.
+	 *            The {@link EmbergraphValue} with its {@link IV}.
 	 * @param expectedKeyOrder
 	 *            The keyorder to be used.
 	 * @param store
 	 *            The store.
 	 */
-	private void doAccessPathTest(final BigdataValue expected,
-			final IKeyOrder<BigdataValue> expectedKeyOrder,
+	private void doAccessPathTest(final EmbergraphValue expected,
+			final IKeyOrder<EmbergraphValue> expectedKeyOrder,
 			final AbstractTripleStore store) {
 
 		assertNotNull(expected.getIV());
@@ -180,25 +180,25 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
 		final LexiconRelation r = store.getLexiconRelation();
 
 		@SuppressWarnings("unchecked")
-        final IVariable<BigdataValue> termvar = Var.var("termvar");
+        final IVariable<EmbergraphValue> termvar = Var.var("termvar");
 		
-		final IPredicate<BigdataValue> predicate = LexPredicate
+		final IPredicate<EmbergraphValue> predicate = LexPredicate
 				.reverseInstance(r.getNamespace(), ITx.UNISOLATED, termvar,
 						new Constant<IV>(expected.getIV()));
 
-		final IKeyOrder<BigdataValue> keyOrder = r.getKeyOrder(predicate);
+		final IKeyOrder<EmbergraphValue> keyOrder = r.getKeyOrder(predicate);
 
 		assertEquals(expectedKeyOrder, keyOrder);
 
-		final IAccessPath<BigdataValue> ap = r.newAccessPath(
+		final IAccessPath<EmbergraphValue> ap = r.newAccessPath(
 				store.getIndexManager(), predicate, keyOrder);
 
 		assertEquals(1, ap.rangeCount(false/* exact */));
 		assertEquals(1, ap.rangeCount(true/* exact */));
 
-		final Iterator<BigdataValue> itr = ap.iterator();
+		final Iterator<EmbergraphValue> itr = ap.iterator();
 		assertTrue(itr.hasNext());
-		final BigdataValue actual = itr.next();
+		final EmbergraphValue actual = itr.next();
 		assertFalse(itr.hasNext());
 
 		assertEquals(expected, actual);

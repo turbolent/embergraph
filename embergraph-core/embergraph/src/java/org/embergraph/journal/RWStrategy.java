@@ -573,7 +573,7 @@ public class RWStrategy extends AbstractRawStore implements IBufferStrategy,
     }
 
     /**
-     * Supports protocol in BigdataSailConnection to check for modifications
+     * Supports protocol in EmbergraphSailConnection to check for modifications
      * prior to calling rollback().
      * 
      * @return true if store has been modified since last commit()

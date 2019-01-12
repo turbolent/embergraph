@@ -28,16 +28,17 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.embergraph.service.IEmbergraphClient;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.lexicon.BigdataValueCentricFullTextIndex;
+import org.embergraph.rdf.lexicon.EmbergraphValueCentricFullTextIndex;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
@@ -45,7 +46,6 @@ import org.embergraph.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation;
 import org.embergraph.rdf.util.DumpLexicon;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.EmbeddedClient;
-import org.embergraph.service.IBigdataClient;
 
 /**
  * Test suite for {@link AsynchronousStatementBufferFactory}. To run this test
@@ -110,9 +110,9 @@ public class TestAsynchronousStatementBufferFactory extends
         final Properties properties = new Properties(super.getProperties());
 
         // Disable reporting.
-        properties.setProperty(IBigdataClient.Options.REPORT_DELAY, "0");
-        properties.setProperty(IBigdataClient.Options.COLLECT_QUEUE_STATISTICS, "false");
-        properties.setProperty(IBigdataClient.Options.COLLECT_PLATFORM_STATISTICS, "false");
+        properties.setProperty(IEmbergraphClient.Options.REPORT_DELAY, "0");
+        properties.setProperty(IEmbergraphClient.Options.COLLECT_QUEUE_STATISTICS, "false");
+        properties.setProperty(IEmbergraphClient.Options.COLLECT_PLATFORM_STATISTICS, "false");
 
         // One DS is enough.
         properties.setProperty(EmbeddedClient.Options.NDATA_SERVICES, "1");
@@ -301,7 +301,7 @@ public class TestAsynchronousStatementBufferFactory extends
             }
 
             // only do load since we expect an error to be reported.
-            final AsynchronousStatementBufferFactory<BigdataStatement, File> factory = doLoad2(
+            final AsynchronousStatementBufferFactory<EmbergraphStatement, File> factory = doLoad2(
                     store, new File(resource), parallel);
             
             assertEquals("errorCount", 1, factory.getDocumentErrorCount());
@@ -438,7 +438,7 @@ public class TestAsynchronousStatementBufferFactory extends
 
                     // Full text index.
                     
-                    final ITupleIterator<?> itr = ((BigdataValueCentricFullTextIndex) store
+                    final ITupleIterator<?> itr = ((EmbergraphValueCentricFullTextIndex) store
                             .getLexiconRelation().getSearchEngine()).getIndex()
                             .rangeIterator();
 
@@ -520,14 +520,14 @@ public class TestAsynchronousStatementBufferFactory extends
     /**
      * Load using {@link AsynchronousStatementBufferFactory}.
      */
-    protected AsynchronousStatementBufferFactory<BigdataStatement,File> doLoad2(
+    protected AsynchronousStatementBufferFactory<EmbergraphStatement,File> doLoad2(
             final AbstractTripleStore store, final File resource,
             final boolean parallel) throws Exception {
 
         final RDFParserOptions parserOptions = new RDFParserOptions();
         parserOptions.setVerifyData(false);
         
-        final AsynchronousStatementBufferFactory<BigdataStatement,File> statementBufferFactory = new AsynchronousStatementBufferFactory<BigdataStatement,File>(
+        final AsynchronousStatementBufferFactory<EmbergraphStatement,File> statementBufferFactory = new AsynchronousStatementBufferFactory<EmbergraphStatement,File>(
                 (ScaleOutTripleStore) store,
                 chunkSize,
                 valuesInitialCapacity,
@@ -544,7 +544,7 @@ public class TestAsynchronousStatementBufferFactory extends
                 unbufferedStatementThreshold
                 );
 
-//        final AsynchronousWriteBufferFactoryWithoutSids2<BigdataStatement, File> statementBufferFactory = new AsynchronousWriteBufferFactoryWithoutSids2<BigdataStatement, File>(
+//        final AsynchronousWriteBufferFactoryWithoutSids2<EmbergraphStatement, File> statementBufferFactory = new AsynchronousWriteBufferFactoryWithoutSids2<EmbergraphStatement, File>(
 //                (ScaleOutTripleStore) store, chunkSize, valuesInitialCapacity,
 //                bnodesInitialCapacity);
 

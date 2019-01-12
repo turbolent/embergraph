@@ -60,7 +60,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.RelationSchema;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.NT;
@@ -80,15 +80,15 @@ import org.embergraph.util.NT;
  * handled:
  * <dl>
  *
- * <dt>{@link IBigdataFederation}</dt>
+ * <dt>{@link IEmbergraphFederation}</dt>
  *
  * <dd>The {@link IRelation} will be resolved using the
- * {@link IBigdataFederation#getGlobalRowStore(long)} and the
- * {@link IBigdataFederation} as its {@link IIndexManager}. The makes access to
+ * {@link IEmbergraphFederation#getGlobalRowStore(long)} and the
+ * {@link IEmbergraphFederation} as its {@link IIndexManager}. The makes access to
  * a remote and potentially distributed {@link IIndex} transparent to the
  * {@link IRelation}. However, it is NOT possible to resolve local resources on
  * other JVMs - only scale-out indices registered against the
- * {@link IBigdataFederation}.</dd>
+ * {@link IEmbergraphFederation}.</dd>
  *
  * <dt>{@link Journal}</dt>
  *
@@ -740,7 +740,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
                  * works poorly if a new tx is obtained for each query. Use a
                  * shared read lock for better performance on the federation!
                  *
-                 * TODO The IBigdataFederation does not expose the backing
+                 * TODO The IEmbergraphFederation does not expose the backing
                  * commit time, which is why using a shared read lock is
                  * important for good performance.
                  *

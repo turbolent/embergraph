@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase2;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
@@ -97,13 +97,13 @@ public class TestEventReceiver extends TestCase2 {
          * @param resource
          * @param majorEventType
          */
-        public MyEvent(IBigdataFederation fed, EventResource resource, Object majorEventType) {
+        public MyEvent(IEmbergraphFederation fed, EventResource resource, Object majorEventType) {
             
             super(fed, resource, majorEventType);
 
         }
 
-        protected MyEvent(final IBigdataFederation fed,
+        protected MyEvent(final IEmbergraphFederation fed,
                 final EventResource resource, final Object majorEventType,
                 final Object minorEventType, final Map<String, Object> details) {
 
@@ -149,7 +149,7 @@ public class TestEventReceiver extends TestCase2 {
         final EventReceiver eventReceiver = new EventReceiver(
                 1000/* eventHistoryMillis */, eventBTree);
 
-        final IBigdataFederation fed = new MockFederation(eventReceiver);
+        final IEmbergraphFederation fed = new MockFederation(eventReceiver);
         
         final Event e = new MyEvent(fed, new EventResource("testIndex"),
                 "testEventType");
@@ -230,7 +230,7 @@ public class TestEventReceiver extends TestCase2 {
         final EventReceiver eventReceiver = new EventReceiver(
                 1000/* eventHistoryMillis */, eventBTree);
 
-        final IBigdataFederation fed = new MockFederation(eventReceiver);
+        final IEmbergraphFederation fed = new MockFederation(eventReceiver);
         
         final Event e = new MyEvent(fed, new EventResource("testIndex"),
                 "testEventType");
@@ -306,7 +306,7 @@ public class TestEventReceiver extends TestCase2 {
         final EventReceiver eventReceiver = new EventReceiver(
                 eventHistoryMillis, eventBTree);
 
-        final IBigdataFederation fed = new MockFederation(eventReceiver);
+        final IEmbergraphFederation fed = new MockFederation(eventReceiver);
 
         final Random r = new Random();
         
@@ -376,7 +376,7 @@ public class TestEventReceiver extends TestCase2 {
         final EventReceiver eventReceiver = new EventReceiver(
                 eventHistoryMillis, eventBTree);
 
-        final IBigdataFederation fed = new MockFederation(eventReceiver);
+        final IEmbergraphFederation fed = new MockFederation(eventReceiver);
 
         final ExecutorService exService = Executors
                 .newCachedThreadPool(DaemonThreadFactory.defaultThreadFactory());
@@ -420,10 +420,10 @@ public class TestEventReceiver extends TestCase2 {
      */
     private static class EventFactory implements Callable<Void> {
         
-        private final IBigdataFederation fed;
+        private final IEmbergraphFederation fed;
         private final int nevents;
 
-        public EventFactory(final IBigdataFederation fed,
+        public EventFactory(final IEmbergraphFederation fed,
                 final int nevents) {
 
             this.fed = fed;
@@ -524,7 +524,7 @@ public class TestEventReceiver extends TestCase2 {
      * 
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      */
-    static class MockFederation implements IBigdataFederation<IEventReceivingService> {
+    static class MockFederation implements IEmbergraphFederation<IEventReceivingService> {
 
         private final IEventReceivingService eventReceiver;
         private final UUID serviceUUID = UUID.randomUUID();
@@ -586,7 +586,7 @@ public class TestEventReceiver extends TestCase2 {
         }
 
         @Override
-        public IBigdataClient getClient() {
+        public IEmbergraphClient getClient() {
             return null;
         }
 
@@ -706,7 +706,7 @@ public class TestEventReceiver extends TestCase2 {
         }
 
         @Override
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
             return null;
         }
 

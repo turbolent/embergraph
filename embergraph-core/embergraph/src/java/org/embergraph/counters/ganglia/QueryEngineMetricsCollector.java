@@ -12,7 +12,7 @@ import org.embergraph.ganglia.GangliaMunge;
 import org.embergraph.ganglia.IGangliaMetricsCollector;
 import org.embergraph.ganglia.IGangliaMetricsReporter;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IFederationDelegate;
 
 /**
@@ -43,7 +43,7 @@ public class QueryEngineMetricsCollector implements IGangliaMetricsCollector {
 //        
 //    }
 
-//    private final IBigdataFederation<?> fed;
+//    private final IEmbergraphFederation<?> fed;
     private final IIndexManager indexManager;
 	private final AbstractStatisticsCollector statisticsCollector;
 
@@ -82,7 +82,7 @@ public class QueryEngineMetricsCollector implements IGangliaMetricsCollector {
 		 */
 		final String pathPrefix = basePrefix + "Query Engine";
 
-        if (indexManager instanceof IBigdataFederation) {
+        if (indexManager instanceof IEmbergraphFederation) {
          
             // Note: Necessary for some kinds of things (lazily created).
             ((IFederationDelegate<?>) indexManager).reattachDynamicCounters();

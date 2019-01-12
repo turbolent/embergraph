@@ -13,7 +13,7 @@ import org.embergraph.sparse.ITPV;
 
 /**
  * A read-only view of a {@link Document} that has been read from a
- * {@link BigdataFileSystem}.
+ * {@link EmbergraphFileSystem}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -21,7 +21,7 @@ import org.embergraph.sparse.ITPV;
 public class RepositoryDocumentImpl implements DocumentHeader, Document 
 {
     
-    final private BigdataFileSystem repo;
+    final private EmbergraphFileSystem repo;
     
     final private String id;
     
@@ -54,7 +54,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
      *            The logical row describing the metadata for some file in
      *            the repository.
      */
-    public RepositoryDocumentImpl(final BigdataFileSystem repo, final String id,
+    public RepositoryDocumentImpl(final EmbergraphFileSystem repo, final String id,
             final ITPS tps) {
         
         if (repo == null)
@@ -88,7 +88,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
                 
                 this.metadata = tps.asMap();
 
-                BigdataFileSystem.log.info("id="+id+", current version="+version);
+                EmbergraphFileSystem.log.info("id="+id+", current version="+version);
 
             } else {
                 
@@ -100,7 +100,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
 
                 this.metadata = null;
                 
-                BigdataFileSystem.log.warn("id="+id+" : no current version");
+                EmbergraphFileSystem.log.warn("id="+id+" : no current version");
 
             }
 
@@ -114,11 +114,11 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
             
             this.metadata = null;
             
-            BigdataFileSystem.log.warn("id="+id+" : no record of any version(s)");
+            EmbergraphFileSystem.log.warn("id="+id+" : no record of any version(s)");
 
         }
         
-        if (BigdataFileSystem.DEBUG && metadata != null) {
+        if (EmbergraphFileSystem.DEBUG && metadata != null) {
 
             Iterator<Map.Entry<String,Object>> itr = metadata.entrySet().iterator();
             
@@ -126,7 +126,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
                 
                 Map.Entry<String, Object> entry = itr.next();
                 
-                BigdataFileSystem.log.debug("id=" + id + ", version=" + getVersion() + ", ["
+                EmbergraphFileSystem.log.debug("id=" + id + ", version=" + getVersion() + ", ["
                         + entry.getKey() + "]=[" + entry.getValue() + "]");
                 
             }
@@ -142,10 +142,10 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
      * @param id
      *            The file identifier.
      */
-    public RepositoryDocumentImpl(final BigdataFileSystem repo, final String id) {
+    public RepositoryDocumentImpl(final EmbergraphFileSystem repo, final String id) {
 
         this(repo, id, repo.getFileMetadataIndex().read(
-                BigdataFileSystem.metadataSchema, id,
+                EmbergraphFileSystem.metadataSchema, id,
                 IRowStoreConstants.MIN_TIMESTAMP,
                 IRowStoreConstants.CURRENT_ROW, null/* filter */));
 
@@ -243,7 +243,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document
      * {@link FileMetadataSchema#VERSION} property for this file as of the time
      * that this view was constructed.
      * 
-     * @see BigdataFileSystem#getAllVersionInfo(String)
+     * @see EmbergraphFileSystem#getAllVersionInfo(String)
      */
     final public ITPV[] getAllVersionInfo() {
         

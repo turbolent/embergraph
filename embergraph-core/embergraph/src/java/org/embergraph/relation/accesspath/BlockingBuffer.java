@@ -41,8 +41,8 @@ import org.apache.log4j.Logger;
 import cern.colt.Arrays;
 
 import org.embergraph.bop.engine.QueryTimeoutException;
-import org.embergraph.rdf.store.BigdataSolutionResolverator;
-import org.embergraph.rdf.store.BigdataStatementIteratorImpl;
+import org.embergraph.rdf.store.EmbergraphSolutionResolverator;
+import org.embergraph.rdf.store.EmbergraphStatementIteratorImpl;
 import org.embergraph.relation.rule.IQueryOptions;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.util.InnerCause;
@@ -67,9 +67,9 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * <p>
  * Note: {@link BlockingBuffer} is used (a) for {@link IAccessPath} iterators
  * that exceed the fully-buffered read threshold; (b) for high-level query with
- * at least one join; (c) by the {@link BigdataStatementIteratorImpl}, which is
+ * at least one join; (c) by the {@link EmbergraphStatementIteratorImpl}, which is
  * used by the RDF DB for high-level query with no joins; and by the
- * {@link BigdataSolutionResolverator}, which is used by the RDF DB high-level
+ * {@link EmbergraphSolutionResolverator}, which is used by the RDF DB high-level
  * query that produces binding sets.
  * </p>
  * 

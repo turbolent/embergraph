@@ -21,6 +21,9 @@ package org.embergraph.rdf.internal.impl.extensions;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -30,18 +33,15 @@ import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * This implementation of {@link IExtension} supports fully inlined
  * <code>xsd:string</code> values.
  */
-public class XSDStringExtension<V extends BigdataValue> implements IExtension<V> {
+public class XSDStringExtension<V extends EmbergraphValue> implements IExtension<V> {
 
-    private final BigdataURI xsdStringURI;
+    private final EmbergraphURI xsdStringURI;
     private final int maxInlineStringLength;
     
     public XSDStringExtension(final IDatatypeURIResolver resolver,
@@ -59,9 +59,9 @@ public class XSDStringExtension<V extends BigdataValue> implements IExtension<V>
         
     }
         
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
-        final Set<BigdataURI> datatypes = new LinkedHashSet<BigdataURI>();
+        final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
         datatypes.add(xsdStringURI);
         return datatypes;
         
@@ -87,17 +87,17 @@ public class XSDStringExtension<V extends BigdataValue> implements IExtension<V>
         
         final String s = value.stringValue();
 
-        final FullyInlineTypedLiteralIV<BigdataLiteral> delegate = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+        final FullyInlineTypedLiteralIV<EmbergraphLiteral> delegate = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                 s, // label
                 null, // no language
                 null // no datatype
         );
 
-        return new LiteralExtensionIV<BigdataLiteral>(delegate, xsdStringURI.getIV());
+        return new LiteralExtensionIV<EmbergraphLiteral>(delegate, xsdStringURI.getIV());
 
     }
     
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
 
         return (V) vf.createLiteral(iv.getDelegate().stringValue(),
                 xsdStringURI);

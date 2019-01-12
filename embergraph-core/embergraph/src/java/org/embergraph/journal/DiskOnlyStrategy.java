@@ -31,7 +31,7 @@ import java.util.concurrent.Exchanger;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.BTree.Counter;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
@@ -2298,7 +2298,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements
         storeCounters.bytesWrittenOnDisk += nbytes;
         storeCounters.elapsedDiskWriteNanos += elapsed;
 
-        if (false&&BigdataStatics.debug) {
+        if (false&& EmbergraphStatics.debug) {
 			/*
 			 * Note: There are only two places where the journal writes on the
 			 * disk using this backing buffer implementation. Here and when it

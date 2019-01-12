@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Utility to provide a map of multiple inline URI handlers for a single
@@ -83,7 +83,7 @@ public class InlineIntegerURIHandlerMap extends InlineLocalNameIntegerURIHandler
      * unpack the ID encoded in the value and select the correct handler to use.
      * 
      */
-	public String getLocalNameFromDelegate(final AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+	public String getLocalNameFromDelegate(final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 		
 		final String str = delegate.getInlineValue().toString();
 

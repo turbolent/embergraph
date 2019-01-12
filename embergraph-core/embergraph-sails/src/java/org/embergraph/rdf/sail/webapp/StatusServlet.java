@@ -45,7 +45,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import org.embergraph.Banner;
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.AbstractRunningQuery;
@@ -57,21 +57,18 @@ import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.QuorumService;
-import org.embergraph.ha.msg.HASnapshotRequest;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.DumpJournal;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.journal.ISnapshotResult;
 import org.embergraph.journal.Journal;
-import org.embergraph.journal.BasicSnapshotFactory;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.rdf.sail.QueryCancellationHelper;
 import org.embergraph.rdf.sail.model.JsonHelper;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.RunningQuery;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.TaskAndFutureTask;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.UpdateTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.RunningQuery;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.TaskAndFutureTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.UpdateTask;
 import org.embergraph.rdf.sail.webapp.QueryServlet.SparqlQueryTask;
 import org.embergraph.rdf.sail.webapp.QueryServlet.SparqlUpdateTask;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
@@ -94,7 +91,7 @@ import org.embergraph.util.InnerCause;
  * @author thompsonbry
  * @author martyncutcher
  */
-public class StatusServlet extends BigdataRDFServlet {
+public class StatusServlet extends EmbergraphRDFServlet {
 
     /**
      * 
@@ -234,7 +231,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
         if (cancelQuery) {
 
-            doCancelQuery(req, resp, getIndexManager(), getBigdataRDFContext());
+            doCancelQuery(req, resp, getIndexManager(), getEmbergraphRDFContext());
 
             // Fall through so we will also deliver the status page.
 
@@ -281,7 +278,7 @@ public class StatusServlet extends BigdataRDFServlet {
      */
     static void doCancelQuery(final HttpServletRequest req,
             final HttpServletResponse resp, final IIndexManager indexManager,
-            final BigdataRDFContext context)
+            final EmbergraphRDFContext context)
             throws IOException {
 
         final String[] a = req.getParameterValues(QUERY_ID);
@@ -340,7 +337,7 @@ public class StatusServlet extends BigdataRDFServlet {
      * @param queryId
      * @return
      */
-    static private boolean tryCancelUpdate(final BigdataRDFContext context,
+    static private boolean tryCancelUpdate(final EmbergraphRDFContext context,
             final UUID queryId) {
 
         final RunningQuery query = context.getQueryById(queryId);
@@ -380,7 +377,7 @@ public class StatusServlet extends BigdataRDFServlet {
      *      operations should be cancelable from both REST API and workbench
      *      </a>
      */
-    static private boolean tryCancelTask(final BigdataRDFContext context,
+    static private boolean tryCancelTask(final EmbergraphRDFContext context,
             final UUID queryId) {
 
         final TaskAndFutureTask<?> tmp = context.getTaskById(queryId);
@@ -493,10 +490,10 @@ public class StatusServlet extends BigdataRDFServlet {
         
 		final String acceptHeader = ConnegUtil
 				.getMimeTypeForQueryParameterServiceRequest(
-						req.getParameter(BigdataRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER),
+						req.getParameter(EmbergraphRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER),
 						req.getHeader(ConnectOptions.ACCEPT_HEADER));
 
-      if(BigdataRDFServlet.MIME_JSON.equals(acceptHeader))
+      if(EmbergraphRDFServlet.MIME_JSON.equals(acceptHeader))
     	  doGetJsonResponse(req, resp);
       else {
     	  doGetHtmlResponse(req, resp);
@@ -633,7 +630,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
             XMLBuilder.Node current = doc.root("html");
 
-            BigdataRDFContext.addHtmlHeader(current, charset);
+            EmbergraphRDFContext.addHtmlHeader(current, charset);
             
             // Dump Journal?
             final boolean dumpJournal = req.getParameter(DUMP_JOURNAL) != null;
@@ -744,13 +741,13 @@ public class StatusServlet extends BigdataRDFServlet {
 			
             current.node("p").text("Accepted query count=")
                .node("span").attr("id", "accepted-query-count")
-               .text("" +getBigdataRDFContext().getQueryIdFactory().get())
+               .text("" + getEmbergraphRDFContext().getQueryIdFactory().get())
                .close()
             .close();
 
             current.node("p").text("Running query count=")
                .node("span").attr("id", "running-query-count")
-               .text("" + getBigdataRDFContext().getQueries().size()).close()
+               .text("" + getEmbergraphRDFContext().getQueries().size()).close()
             .close();
 
             // Offer a link to the "showQueries" page.
@@ -777,7 +774,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
 			if (showNamespaces) {
 			    
-                final List<String> namespaces = getBigdataRDFContext()
+                final List<String> namespaces = getEmbergraphRDFContext()
                         .getNamespaces(getTimestamp(req));
 
                 current.node("h3", "Namespaces: ");
@@ -804,7 +801,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
                 final CounterSet counterSet = queryEngine.getCounters();
 
-                if (getBigdataRDFContext().getSampleTask() != null) {
+                if (getEmbergraphRDFContext().getSampleTask() != null) {
 
                     /*
                      * Performance counters for the NSS queries.
@@ -818,7 +815,7 @@ public class StatusServlet extends BigdataRDFServlet {
                      * evaluation.
                      */
                     counterSet.makePath("queryService").attach(
-                            getBigdataRDFContext().getSampleTask()
+                            getEmbergraphRDFContext().getSampleTask()
                                     .getCounters());
 
                 }
@@ -1443,7 +1440,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
         {
 
-            final Iterator<RunningQuery> itr = getBigdataRDFContext()
+            final Iterator<RunningQuery> itr = getEmbergraphRDFContext()
                     .getQueries().values().iterator();
 
             while (itr.hasNext()) {
@@ -1500,7 +1497,7 @@ public class StatusServlet extends BigdataRDFServlet {
 
 		try {
 
-			BigdataStatics.threadDump(w);
+			EmbergraphStatics.threadDump(w);
 
 			w.flush();
 			
@@ -1679,7 +1676,7 @@ public class StatusServlet extends BigdataRDFServlet {
 	
 		final LinkedList<RunningQuery> pendingUpdates = new LinkedList<RunningQuery>();
 		
-		final Iterator<RunningQuery> itr = getBigdataRDFContext().getQueries()
+		final Iterator<RunningQuery> itr = getEmbergraphRDFContext().getQueries()
 				.values().iterator();
 
 		while (itr.hasNext()) {
@@ -1748,7 +1745,7 @@ public class StatusServlet extends BigdataRDFServlet {
 		
 		final LinkedList<TaskAndFutureTask<?>> otherTasks = new LinkedList<TaskAndFutureTask<?>>();
 		
-		final Iterator<TaskAndFutureTask<?>> itr = getBigdataRDFContext()
+		final Iterator<TaskAndFutureTask<?>> itr = getEmbergraphRDFContext()
                 .getTasks().values().iterator();
 
         while (itr.hasNext()) {

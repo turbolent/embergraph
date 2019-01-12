@@ -112,8 +112,8 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ASTUtil;
@@ -1045,7 +1045,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         final Set<IVariable<IV>> varsToMockResolve = new HashSet<IVariable<IV>>();
         if(serviceRef instanceof IConstant) {
 
-            final BigdataURI serviceURI = ServiceCallUtility
+            final EmbergraphURI serviceURI = ServiceCallUtility
                     .getConstantServiceURI(serviceRef);
             
             final ServiceCall<?> serviceCall = ServiceRegistry.getInstance()
@@ -1058,7 +1058,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
              * the same JVM.
              */
             final boolean isBigdata = serviceCall.getServiceOptions()
-                    .isBigdataNativeService();
+                    .isEmbergraphNativeService();
 
             /*
              * In case we are dealing with a run last service (either implicit
@@ -3742,7 +3742,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
         for (FilterNode filter : joinConstraints) {
         
             constraints
-                    .add(new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+                    .add(new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                             filter.getValueExpression()));
             
         }
@@ -4151,7 +4151,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
 
         }
 
-        final IConstraint c = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+        final IConstraint c = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                 ve);
 
         left = applyQueryHints(new ConditionalRoutingOp(leftOrEmpty(left),

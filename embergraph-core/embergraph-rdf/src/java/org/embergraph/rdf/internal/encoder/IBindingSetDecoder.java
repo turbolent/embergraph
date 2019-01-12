@@ -24,7 +24,7 @@ package org.embergraph.rdf.internal.encoder;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Interface for decoding {@link IBindingSet}s comprised of {@link IV}s.
@@ -72,7 +72,7 @@ public interface IBindingSetDecoder {
 
     /**
      * Resolve any {@link IV}s in the solution for which there are cached
-     * {@link BigdataValue}s to those values. This method may be used to resolve
+     * {@link EmbergraphValue}s to those values. This method may be used to resolve
      * {@link IVCache} associations for {@link IBindingSet}s NOT produced by
      * {@link #decodeSolution(byte[], int, int, boolean)}. For example, when
      * joining a decoded solution with another solution, the resolution step may
@@ -80,7 +80,7 @@ public interface IBindingSetDecoder {
      * 
      * @param bset
      *            A solution having {@link IV}s which need to be reunited with
-     *            their cached {@link BigdataValue}s.
+     *            their cached {@link EmbergraphValue}s.
      */
     void resolveCachedValues(final IBindingSet bset);
 

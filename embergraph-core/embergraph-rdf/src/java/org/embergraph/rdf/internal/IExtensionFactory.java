@@ -20,11 +20,11 @@ package org.embergraph.rdf.internal;
 
 import java.util.Iterator;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphURI;
 
 /**
  * IExtensionFactories are responsible for enumerating what extensions are
@@ -45,16 +45,16 @@ public interface IExtensionFactory {
      * 
      * @param resolver
      *            The interface used to resolve an {@link URI} to an
-     *            {@link BigdataURI}.
+     *            {@link EmbergraphURI}.
      * @param config
      *            The {@link ILexiconConfiguration}.
      */
     void init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<BigdataValue> config);
+            final ILexiconConfiguration<EmbergraphValue> config);
 
     /**
      * Return the supported extensions.
      */
-    Iterator<IExtension<? extends BigdataValue>> getExtensions();
+    Iterator<IExtension<? extends EmbergraphValue>> getExtensions();
     
 }

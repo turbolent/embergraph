@@ -49,8 +49,8 @@ import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
@@ -135,24 +135,24 @@ public class SampleServiceFactory extends AbstractServiceFactory
      * Note: This could extend the base class to allow for search service
      * configuration options.
      */
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public SampleServiceFactory() {
         
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         serviceOptions.setRunFirst(true);
         
     }
     
     @Override
-    public BigdataNativeServiceOptions getServiceOptions() {
+    public EmbergraphNativeServiceOptions getServiceOptions() {
 
         return serviceOptions;
         
     }
     
     @Override
-    public BigdataServiceCall create(
+    public EmbergraphServiceCall create(
     		final ServiceCallCreateParams params, 
     		final ServiceParams serviceParams) {
 
@@ -253,7 +253,7 @@ public class SampleServiceFactory extends AbstractServiceFactory
      * is not a {@link Serializable} object. It MUST run on the query
      * controller.
      */
-    private static class SampleCall implements BigdataServiceCall {
+    private static class SampleCall implements EmbergraphServiceCall {
 
         private final AbstractTripleStore db;
         private final StatementPatternNode sp;

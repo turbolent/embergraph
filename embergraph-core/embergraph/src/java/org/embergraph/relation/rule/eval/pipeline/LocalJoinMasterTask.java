@@ -15,7 +15,7 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Implementation for local join execution on a {@link Journal}.
@@ -41,8 +41,8 @@ public class LocalJoinMasterTask extends JoinMasterTask {
 
         super(rule, joinNexus, buffer);
 
-        if ((joinNexus.getIndexManager() instanceof IBigdataFederation<?>)
-                && (((IBigdataFederation<?>) joinNexus.getIndexManager())
+        if ((joinNexus.getIndexManager() instanceof IEmbergraphFederation<?>)
+                && (((IEmbergraphFederation<?>) joinNexus.getIndexManager())
                         .isScaleOut())) {
             
             /*

@@ -47,7 +47,7 @@ public interface IRemoteExecutor extends Remote {
     /**
      * Submit a {@link Callable} and return its {@link Future}. The
      * {@link Callable} will execute on the
-     * {@link IBigdataFederation#getExecutorService()}.
+     * {@link IEmbergraphFederation#getExecutorService()}.
      * 
      * @return The {@link Future} for that task.
      * 

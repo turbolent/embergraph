@@ -16,17 +16,17 @@ import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
 /**
  * Test suite for {@link IV#getValue()}, which provides a cache on the
- * {@link IV} for a materialized {@link BigdataValue}.
+ * {@link IV} for a materialized {@link EmbergraphValue}.
  * 
  * @author thompsonbry
  */
@@ -50,13 +50,13 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
     		
     		final LexiconRelation lex = store.getLexiconRelation();
 
-    		final BigdataValueFactory f = lex.getValueFactory();
+    		final EmbergraphValueFactory f = lex.getValueFactory();
     		
-    		final BigdataURI uri = f.createURI("http://www.embergraph.org");
-    		final BigdataBNode bnd = f.createBNode();//"12");
-    		final BigdataLiteral lit = f.createLiteral("embergraph");
+    		final EmbergraphURI uri = f.createURI("http://www.embergraph.org");
+    		final EmbergraphBNode bnd = f.createBNode();//"12");
+    		final EmbergraphLiteral lit = f.createLiteral("embergraph");
     		
-    		final BigdataValue[] a = new BigdataValue[] {
+    		final EmbergraphValue[] a = new EmbergraphValue[] {
     			uri, bnd, lit
     		};
     		
@@ -67,20 +67,20 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
     		doTest(lex,bnd.getIV(), bnd);
     		doTest(lex,lit.getIV(), lit);
     		
-			doTest(lex, new XSDBooleanIV<BigdataLiteral>(true));
-			doTest(lex, new XSDNumericIV<BigdataLiteral>((byte)1));
-			doTest(lex, new XSDNumericIV<BigdataLiteral>((short)1));
-			doTest(lex, new XSDNumericIV<BigdataLiteral>(1));
-			doTest(lex, new XSDNumericIV<BigdataLiteral>(1L));
-			doTest(lex, new XSDNumericIV<BigdataLiteral>(1f));
-			doTest(lex, new XSDNumericIV<BigdataLiteral>(1d));
-			doTest(lex, new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1L)));
-			doTest(lex, new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1d)));
+			doTest(lex, new XSDBooleanIV<EmbergraphLiteral>(true));
+			doTest(lex, new XSDNumericIV<EmbergraphLiteral>((byte)1));
+			doTest(lex, new XSDNumericIV<EmbergraphLiteral>((short)1));
+			doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1));
+			doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1L));
+			doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1f));
+			doTest(lex, new XSDNumericIV<EmbergraphLiteral>(1d));
+			doTest(lex, new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1L)));
+			doTest(lex, new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1d)));
 			
-			doTest(lex, new UUIDBNodeIV<BigdataBNode>(UUID.randomUUID()));
-			doTest(lex, new NumericBNodeIV<BigdataBNode>(1));
+			doTest(lex, new UUIDBNodeIV<EmbergraphBNode>(UUID.randomUUID()));
+			doTest(lex, new NumericBNodeIV<EmbergraphBNode>(1));
 			
-			doTest(lex, new UUIDLiteralIV<BigdataLiteral>(UUID.randomUUID()));
+			doTest(lex, new UUIDLiteralIV<EmbergraphLiteral>(UUID.randomUUID()));
 			
     	} finally {
     		
@@ -109,7 +109,7 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
 	 */
 	@SuppressWarnings("unchecked")
     private void doTest(final LexiconRelation lex, final IV iv,
-			final BigdataValue given) {
+			final EmbergraphValue given) {
 
 		// not found in the cache.
 		try {
@@ -123,9 +123,9 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
 		 * Set on the cache (TermId) or materialize in the cache (everthing
 		 * else).
 		 */
-		final BigdataValue val;
+		final EmbergraphValue val;
 		if(!iv.isInline()) {
-			((AbstractIV<BigdataValue, ?>)iv).setValue(val = given);
+			((AbstractIV<EmbergraphValue, ?>)iv).setValue(val = given);
 		} else {
 			val = iv.asValue(lex);
 		}
@@ -164,13 +164,13 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
 
 			/*
 			 * For a non-inline IV, the value is found in the cache, even though
-			 * it is not the same BigdataValue.
+			 * it is not the same EmbergraphValue.
 			 */
 
-			final BigdataValue val2 = iv2.getValue();
+			final EmbergraphValue val2 = iv2.getValue();
 			// found in the cache.
 			assertNotNull(val2);
-			// but distinct BigdataValue
+			// but distinct EmbergraphValue
 			assertTrue(val != val2);
 			// but same value factory.
 			assertTrue(val.getValueFactory() == val2.getValueFactory());

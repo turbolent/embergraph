@@ -48,7 +48,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import org.embergraph.Banner;
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
 import org.embergraph.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
 import org.embergraph.btree.IndexMetadata.Options;
@@ -1171,7 +1171,7 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
              */
             
             return new HardReferenceQueueWithBatchingUpdates<PO>(
-                    BigdataStatics.threadLocalBuffers, // threadLocalBuffers
+                    EmbergraphStatics.threadLocalBuffers, // threadLocalBuffers
                     16,// concurrencyLevel
                     new HardReferenceQueue<PO>(new DefaultEvictionListener(),
                             metadata.getWriteRetentionQueueCapacity(), 0/* nscan */),
@@ -1258,7 +1258,7 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 
         }
 
-        if (INFO || BigdataStatics.debug) {
+        if (INFO || EmbergraphStatics.debug) {
 
             final String msg = "BTree close: name="
                     + metadata.getName()
@@ -1275,7 +1275,7 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
             if (INFO)
                 log.info(msg);
 
-            if (BigdataStatics.debug)
+            if (EmbergraphStatics.debug)
                 System.err.println(msg);
 
         }
@@ -3909,7 +3909,7 @@ abstract public class AbstractBTree implements IIndex, IAutoboxBTree,
 
             ndirty++;
             
-//            if (BigdataStatics.debug && ndirty > 0 && ndirty % 1000 == 0) {
+//            if (EmbergraphStatics.debug && ndirty > 0 && ndirty % 1000 == 0) {
 //				System.out.println("nwritten=" + ndirty + " in "
 //						+ (System.currentTimeMillis() - begin) + "ms");
 //            }

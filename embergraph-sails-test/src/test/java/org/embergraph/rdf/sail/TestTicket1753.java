@@ -18,14 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.Update;
 import org.openrdf.query.UpdateExecutionException;
 import org.openrdf.repository.RepositoryException;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * Test suite for an issue where IV resolution of having clause fails
@@ -44,19 +41,19 @@ public class TestTicket1753 extends QuadsTestCase {
 
 	public void testBug() throws Exception {
 
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
-			executeQuery(new BigdataSailRepository(sail));
+			executeQuery(new EmbergraphSailRepository(sail));
 		} finally {
 			sail.__tearDownUnitTest();
 		}
 	}
 
-	private void executeQuery(final BigdataSailRepository repo)
+	private void executeQuery(final EmbergraphSailRepository repo)
 			throws UpdateExecutionException, RepositoryException, MalformedQueryException {
 		try {
 			repo.initialize();
-			final BigdataSailRepositoryConnection conn = repo.getConnection();
+			final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 			try {
 				String update = "insert\r\n" + 
 						"{ <http://dbpedia.org/resource/Jules_Verne> <http://ll.com.br/related> ?ss}\r\n" + 

@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.relation.locator.IResourceLocator;
@@ -71,9 +71,9 @@ public interface IIndexStore {
      * Return the global file system used to store block-structured files and
      * their metadata and as a source and sink for map/reduce processing.
      * 
-     * @see BigdataFileSystem
+     * @see EmbergraphFileSystem
      */
-    BigdataFileSystem getGlobalFileSystem();
+    EmbergraphFileSystem getGlobalFileSystem();
     
     /**
      * A factory for {@link TemporaryStore}s. {@link TemporaryStore}s are

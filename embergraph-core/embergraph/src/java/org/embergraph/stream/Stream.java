@@ -36,7 +36,7 @@ import java.util.zip.InflaterInputStream;
 import org.apache.log4j.Logger;
 
 import org.embergraph.Banner;
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.bop.solutions.SolutionSetStream;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.AbstractNode;
@@ -59,7 +59,7 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 
@@ -386,7 +386,7 @@ abstract public class Stream implements ICheckpointProtocol {
          * 
          * @param indexManager
          *            Optional. When given and when the {@link IIndexManager} is a
-         *            scale-out {@link IBigdataFederation}, this object will be used
+         *            scale-out {@link IEmbergraphFederation}, this object will be used
          *            to interpret the {@link Options#INITIAL_DATA_SERVICE}
          *            property.
          * @param properties
@@ -1094,10 +1094,10 @@ abstract public class Stream implements ICheckpointProtocol {
         // write it on the store.
         checkpoint.write(store);
 
-        if (BigdataStatics.debug || log.isInfoEnabled()) {
+        if (EmbergraphStatics.debug || log.isInfoEnabled()) {
             final String msg = "name=" + metadata.getName() + "} : "
                     + checkpoint;
-            if (BigdataStatics.debug)
+            if (EmbergraphStatics.debug)
                 System.err.println(msg);
             if (log.isInfoEnabled())
                 log.info(msg);

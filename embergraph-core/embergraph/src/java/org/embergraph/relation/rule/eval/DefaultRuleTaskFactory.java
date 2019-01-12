@@ -15,7 +15,7 @@ import org.embergraph.relation.rule.eval.pipeline.DistributedJoinMasterTask;
 import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
 import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 import org.embergraph.relation.rule.eval.pipeline.LocalJoinMasterTask;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Default factory for tasks to execute {@link IRule}s.
@@ -98,9 +98,9 @@ public class DefaultRuleTaskFactory implements IRuleTaskFactory, Externalizable 
          * pipeline join.
          */
 
-        if (indexManager instanceof IBigdataFederation) {
+        if (indexManager instanceof IEmbergraphFederation) {
             
-            final IBigdataFederation fed = (IBigdataFederation)indexManager;
+            final IEmbergraphFederation fed = (IEmbergraphFederation)indexManager;
             
             if(fed.isScaleOut()) {
 

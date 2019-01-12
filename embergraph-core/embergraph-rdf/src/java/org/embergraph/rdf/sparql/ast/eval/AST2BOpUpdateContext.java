@@ -23,6 +23,9 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.sail.SailException;
@@ -30,10 +33,7 @@ import org.openrdf.sail.SailException;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.store.BD;
 
@@ -45,11 +45,11 @@ import org.embergraph.rdf.store.BD;
  */
 public class AST2BOpUpdateContext extends AST2BOpContext {
 
-    public final BigdataSail sail;
+    public final EmbergraphSail sail;
     
-    public final BigdataValueFactory f;
+    public final EmbergraphValueFactory f;
 
-    public final BigdataSailRepositoryConnection conn;
+    public final EmbergraphSailRepositoryConnection conn;
     
     private boolean includeInferred;
     
@@ -100,15 +100,15 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
      * @throws SailException
      */
     public AST2BOpUpdateContext(final ASTContainer astContainer,
-            final BigdataSailRepositoryConnection conn) throws SailException {
+            final EmbergraphSailRepositoryConnection conn) throws SailException {
 
         super(astContainer, conn.getTripleStore());
 
         this.conn = conn;
         
-        this.sail = conn.getSailConnection().getBigdataSail();
+        this.sail = conn.getSailConnection().getEmbergraphSail();
        
-        this.f = (BigdataValueFactory) sail.getValueFactory();
+        this.f = (EmbergraphValueFactory) sail.getValueFactory();
         
     }
 
@@ -131,7 +131,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
      * be set (which is always true for the vocabulary).
      */
     @SuppressWarnings("unchecked")
-    public BigdataURI getNullGraph() {
+    public EmbergraphURI getNullGraph() {
 
         if (nullGraph == null) {
 
@@ -171,7 +171,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
         
     }
 
-    private BigdataURI nullGraph = null;
+    private EmbergraphURI nullGraph = null;
 
     public void setDataset(Dataset dataset) {
         this.dataset = dataset;

@@ -33,7 +33,7 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.ProjectionNode;
@@ -55,7 +55,7 @@ import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
  *          thompsonbry $
  */
 public class TestTriplePatternBuilder extends
-        AbstractBigdataExprBuilderTestCase {
+    AbstractEmbergraphExprBuilderTestCase {
 
     /**
      * 

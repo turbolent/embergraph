@@ -37,7 +37,7 @@ import org.embergraph.rdf.sail.webapp.client.MiniMime;
 /**
  * Helper servlet for workbench requests.
  */
-public class WorkbenchServlet extends BigdataRDFServlet {
+public class WorkbenchServlet extends EmbergraphRDFServlet {
 
     /**
      * 
@@ -159,7 +159,7 @@ public class WorkbenchServlet extends BigdataRDFServlet {
 	        
         } catch (Throwable t) {
 
-            BigdataRDFServlet.launderThrowable(t, resp, null);
+            EmbergraphRDFServlet.launderThrowable(t, resp, null);
 
         }
 

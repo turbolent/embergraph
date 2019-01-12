@@ -30,7 +30,7 @@ import org.embergraph.journal.ITx;
  * @version $Id$
  */
 public class AbstractEmbeddedTripleStoreTestCase extends
-        AbstractEmbeddedBigdataFederationTestCase {
+    AbstractEmbeddedEmbergraphFederationTestCase {
 
     /**
      * 

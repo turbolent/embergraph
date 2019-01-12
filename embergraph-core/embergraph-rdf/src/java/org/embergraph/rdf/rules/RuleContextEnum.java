@@ -28,7 +28,7 @@ import org.embergraph.rdf.store.TempTripleStore;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * <p>
@@ -112,7 +112,7 @@ import org.embergraph.service.IBigdataFederation;
  *       <p>
  *       For database at once closure, we only need to jump through hoops when
  *       the database is on a {@link Journal}. If it is on an
- *       {@link IBigdataFederation} then the concurrency control layer ensures
+ *       {@link IEmbergraphFederation} then the concurrency control layer ensures
  *       that none of the problems can arise.
  * 
  * @todo we need to recognize the use case and then recognize which relations

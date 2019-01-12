@@ -35,7 +35,7 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 import org.embergraph.service.AbstractFederation;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ILoadBalancerService;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
@@ -80,7 +80,7 @@ public interface IAsynchronousWriteBufferFactory {
      * has been {@link IBlockingBuffer#close() closed}. The {@link Future}
      * evaluates to an {@link IndexAsyncWriteStats} object. Those statistics are
      * also reported to the {@link ILoadBalancerService} via the
-     * {@link IBigdataFederation}.
+     * {@link IEmbergraphFederation}.
      * <p>
      * Each buffer returned by this method is independent, and writes onto
      * independent sinks which write through to the index partitions. This is

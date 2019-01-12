@@ -50,7 +50,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestMultiGraphs extends ProxyBigdataSailTestCase {
+public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
 
     protected static final Logger log = Logger.getLogger(TestMultiGraphs.class);
     
@@ -59,11 +59,11 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
         
         final Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -93,7 +93,7 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
          */
         if (true) {
             
-            final BigdataSail bdSail = getSail();
+            final EmbergraphSail bdSail = getSail();
             sail = bdSail;
             
 //            if (bdSail.getDatabase().isQuads() == false) {
@@ -101,7 +101,7 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
 //                return;
 //            }
             
-            repo = new BigdataSailRepository(bdSail);
+            repo = new EmbergraphSailRepository(bdSail);
             
         } else {
             sail = new MemoryStore();
@@ -113,9 +113,9 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
         
         try {
 
-            if (cxn instanceof BigdataSailRepositoryConnection
-                    && ((BigdataSailRepositoryConnection) cxn).getTripleStore().isQuads() == false) {
-                ((BigdataSail) sail).__tearDownUnitTest();
+            if (cxn instanceof EmbergraphSailRepositoryConnection
+                    && ((EmbergraphSailRepositoryConnection) cxn).getTripleStore().isQuads() == false) {
+                ((EmbergraphSail) sail).__tearDownUnitTest();
                 return;
             }
             
@@ -152,8 +152,8 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
             cxn.commit();
             
             if (log.isInfoEnabled()) {
-                if (sail instanceof BigdataSail)
-                    log.info("\n" + ((BigdataSailRepositoryConnection)cxn).getTripleStore().dumpStore());
+                if (sail instanceof EmbergraphSail)
+                    log.info("\n" + ((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
             }
 
             {
@@ -237,8 +237,8 @@ public class TestMultiGraphs extends ProxyBigdataSailTestCase {
             
         } finally {
             cxn.close();
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();
         }
 
     }

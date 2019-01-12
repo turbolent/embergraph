@@ -30,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.Statement;
 
 import org.embergraph.journal.Journal;
@@ -37,7 +38,6 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.axioms.Axioms;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.rio.AbstractStatementBuffer.StatementBuffer2;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.BackchainAccessPath;
@@ -96,13 +96,13 @@ public class TripleStoreUtility {
         boolean sameStatements1 = true;
         {
 
-            final ICloseableIterator<BigdataStatement> it = notFoundInTarget(actual, expected);
+            final ICloseableIterator<EmbergraphStatement> it = notFoundInTarget(actual, expected);
 
             try {
 
                 while (it.hasNext()) {
 
-                    final BigdataStatement stmt = it.next();
+                    final EmbergraphStatement stmt = it.next();
 
                     sameStatements1 = false;
 
@@ -128,13 +128,13 @@ public class TripleStoreUtility {
         boolean sameStatements2 = true;
         {
 
-            final ICloseableIterator<BigdataStatement> it = notFoundInTarget(expected, actual);
+            final ICloseableIterator<EmbergraphStatement> it = notFoundInTarget(expected, actual);
 
             try {
 
                 while (it.hasNext()) {
 
-                    final BigdataStatement stmt = it.next();
+                    final EmbergraphStatement stmt = it.next();
 
                     sameStatements2 = false;
 
@@ -152,7 +152,7 @@ public class TripleStoreUtility {
 
             }
 
-            //          BigdataStatementIterator it = expected.asStatementIterator(expected
+            //          EmbergraphStatementIterator it = expected.asStatementIterator(expected
             //          .getInferenceEngine().backchainIterator(
             //                  expected.getAccessPath(NULL, NULL, NULL)));
 
@@ -160,7 +160,7 @@ public class TripleStoreUtility {
 
             //                while(it.hasNext()) {
 
-            //                BigdataStatement stmt = it.next();
+            //                EmbergraphStatement stmt = it.next();
 
             //                if (!hasStatement(actual,
             //                        (Resource)actual.getValueFactory().asValue(stmt.getSubject()),
@@ -212,18 +212,18 @@ public class TripleStoreUtility {
     }
 
     /**
-     * Visits <i>expected</i> {@link BigdataStatement}s not found in <i>actual</i>.
+     * Visits <i>expected</i> {@link EmbergraphStatement}s not found in <i>actual</i>.
      * 
      * @param expected
      * @param actual
      * 
-     * @return An iterator visiting {@link BigdataStatement}s present in
+     * @return An iterator visiting {@link EmbergraphStatement}s present in
      *         <i>expected</i> but not found in <i>actual</i>.
      * 
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public static ICloseableIterator<BigdataStatement> notFoundInTarget(
+    public static ICloseableIterator<EmbergraphStatement> notFoundInTarget(
             final AbstractTripleStore expected,
             final AbstractTripleStore actual
     ) throws InterruptedException, ExecutionException {
@@ -238,15 +238,15 @@ public class TripleStoreUtility {
          * Efficiently convert SPOs to BigdataStatements (externalizes
          * statements).
          */
-        final BigdataStatementIterator itr2 = expected
+        final EmbergraphStatementIterator itr2 = expected
                 .asStatementIterator(expectedAccessPath.iterator());
 
         final int capacity = 100000;
 
-        final BlockingBuffer<BigdataStatement> buffer = new BlockingBuffer<BigdataStatement>(
+        final BlockingBuffer<EmbergraphStatement> buffer = new BlockingBuffer<EmbergraphStatement>(
                 capacity);
 
-        final StatementBuffer2<Statement, BigdataStatement> sb = new StatementBuffer2<Statement, BigdataStatement>(
+        final StatementBuffer2<Statement, EmbergraphStatement> sb = new StatementBuffer2<Statement, EmbergraphStatement>(
                 actual, true/* readOnly */, capacity) {
 
             /**
@@ -256,7 +256,7 @@ public class TripleStoreUtility {
              * @return The #of statements that were not found.
              */
             @Override
-            protected int handleProcessedStatements(final BigdataStatement[] a) {
+            protected int handleProcessedStatements(final EmbergraphStatement[] a) {
 
                 if (log.isInfoEnabled())
                     log.info("Given " + a.length + " statements");
@@ -276,7 +276,7 @@ public class TripleStoreUtility {
                         if (log.isInfoEnabled())
                             log.info("Not found: " + notFoundStmt);
 
-                        buffer.add((BigdataStatement) notFoundStmt);
+                        buffer.add((EmbergraphStatement) notFoundStmt);
 
                         nnotFound++;
 
@@ -311,7 +311,7 @@ public class TripleStoreUtility {
                         while (itr2.hasNext()) {
 
                             // a statement from the source db.
-                            final BigdataStatement stmt = itr2.next();
+                            final EmbergraphStatement stmt = itr2.next();
 
                             // if (log.isInfoEnabled()) log.info("Source: "
                             // + stmt);
@@ -408,13 +408,13 @@ public class TripleStoreUtility {
             final IChunkedOrderedIterator<ISPO> itr1 = new BackchainAccessPath(
                     db, db.getAccessPath(NULL, NULL, NULL)).iterator();
 
-            final BigdataStatementIterator itr2 = db.asStatementIterator(itr1);
+            final EmbergraphStatementIterator itr2 = db.asStatementIterator(itr1);
 
             try {
 
                 while (itr2.hasNext()) {
 
-                    final BigdataStatement stmt = itr2.next();
+                    final EmbergraphStatement stmt = itr2.next();
 
                     sb.add(stmt);
 

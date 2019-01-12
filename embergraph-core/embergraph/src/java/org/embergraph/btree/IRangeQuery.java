@@ -29,11 +29,11 @@ package org.embergraph.btree;
 
 import java.util.Iterator;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
 import org.embergraph.btree.filter.ITupleFilter;
 import org.embergraph.btree.filter.TupleRemover;
-import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ndx.IClientIndex;
 
@@ -195,7 +195,7 @@ public interface IRangeQuery {
      * unisolated view then the entries MUST be buffered and removed as the
      * {@link ResultSet} is populated.
      * <p>
-     * Note: The {@link BigdataFileSystem#deleteHead(String, int)} relies on
+     * Note: The {@link EmbergraphFileSystem#deleteHead(String, int)} relies on
      * this atomic guarantee.
      * 
      * @todo define rangeRemove(fromKey,toKey,filter)? This method would return
@@ -347,7 +347,7 @@ public interface IRangeQuery {
      *            #of results to be buffered before sending them across a
      *            network interface. (Note that you can control the default
      *            value using
-     *            {@link IBigdataClient.Options#DEFAULT_CLIENT_RANGE_QUERY_CAPACITY}).
+     *            {@link IEmbergraphClient.Options#DEFAULT_CLIENT_RANGE_QUERY_CAPACITY}).
      * @param flags
      *            A bitwise OR of {@link #KEYS}, {@link #VALS}, etc.
      * @param filterCtor

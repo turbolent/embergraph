@@ -21,14 +21,14 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -95,11 +95,11 @@ public class LcaseBOp extends IVValueExpression<IV> implements INeedsMaterializa
 
         final Literal in = getAndCheckLiteralValue(0, bs);
 
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
         final String label = in.getLabel().toLowerCase();
 
-        final BigdataLiteral out;
+        final EmbergraphLiteral out;
 
         if (in.getLanguage() != null) {
 

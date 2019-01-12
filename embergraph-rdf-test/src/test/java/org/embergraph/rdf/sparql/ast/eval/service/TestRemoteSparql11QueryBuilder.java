@@ -29,6 +29,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.BNodeImpl;
@@ -46,11 +49,8 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sail.sparql.PrefixDeclProcessor;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.BindingsClause;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
@@ -77,7 +77,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
  *          thompsonbry $
  */
 public class TestRemoteSparql11QueryBuilder extends
-        AbstractBigdataExprBuilderTestCase {
+    AbstractEmbergraphExprBuilderTestCase {
 
     private static final Logger log = Logger
             .getLogger(TestRemoteSparql11QueryBuilder.class);
@@ -113,7 +113,7 @@ public class TestRemoteSparql11QueryBuilder extends
     }
 
     @SuppressWarnings("unchecked")
-    private void addResolveIVs(final BigdataValue... values) {
+    private void addResolveIVs(final EmbergraphValue... values) {
 
         tripleStore.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
@@ -125,7 +125,7 @@ public class TestRemoteSparql11QueryBuilder extends
          * order to have an exact structural match when we parse the generated
          * SPARQL query and then verify the AST model.
          */
-        for (BigdataValue v : values) {
+        for (EmbergraphValue v : values) {
 
             v.getIV().setValue(v);
             
@@ -153,7 +153,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_001() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -233,7 +233,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_001b() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -321,15 +321,15 @@ public class TestRemoteSparql11QueryBuilder extends
         /*
          * Resolve IVs that we will use below.
          */
-        final BigdataURI dcCreator = valueFactory.asValue(DC.CREATOR);
-        final BigdataURI book1 = valueFactory.createURI("http://example.org/book/book1");
-        final BigdataURI book2 = valueFactory.createURI("http://example.org/book/book2");
-        final BigdataURI author1 = valueFactory.createURI("http://example.org/author/author1");
-        final BigdataURI author2 = valueFactory.createURI("http://example.org/author/author2");
+        final EmbergraphURI dcCreator = valueFactory.asValue(DC.CREATOR);
+        final EmbergraphURI book1 = valueFactory.createURI("http://example.org/book/book1");
+        final EmbergraphURI book2 = valueFactory.createURI("http://example.org/book/book2");
+        final EmbergraphURI author1 = valueFactory.createURI("http://example.org/author/author1");
+        final EmbergraphURI author2 = valueFactory.createURI("http://example.org/author/author2");
 
         addResolveIVs(dcCreator, book1, book2, author1, author2);
 
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -451,17 +451,17 @@ public class TestRemoteSparql11QueryBuilder extends
         /*
          * Resolve IVs that we will use below.
          */
-        final BigdataURI dcCreator = valueFactory.asValue(DC.CREATOR);
-        final BigdataURI book1 = valueFactory.createURI("http://example.org/book/book1");
-        final BigdataURI book2 = valueFactory.createURI("http://example.org/book/book2");
-        final BigdataLiteral book3 = valueFactory.createLiteral("Semantic Web Primer");
-        final BigdataLiteral book4 = valueFactory.createLiteral("Semantic Web Primer", "DE");
-        final BigdataLiteral book5 = valueFactory.createLiteral("12", XSD.INT);
-        final BigdataLiteral book6 = valueFactory.createLiteral("true", XSD.BOOLEAN);
+        final EmbergraphURI dcCreator = valueFactory.asValue(DC.CREATOR);
+        final EmbergraphURI book1 = valueFactory.createURI("http://example.org/book/book1");
+        final EmbergraphURI book2 = valueFactory.createURI("http://example.org/book/book2");
+        final EmbergraphLiteral book3 = valueFactory.createLiteral("Semantic Web Primer");
+        final EmbergraphLiteral book4 = valueFactory.createLiteral("Semantic Web Primer", "DE");
+        final EmbergraphLiteral book5 = valueFactory.createLiteral("12", XSD.INT);
+        final EmbergraphLiteral book6 = valueFactory.createLiteral("true", XSD.BOOLEAN);
 
         addResolveIVs(dcCreator, book1, book2, book3, book4, book5, book6);
 
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -608,7 +608,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_004() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -712,7 +712,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_005() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -834,7 +834,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_006() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -969,7 +969,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_007() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();
@@ -1057,7 +1057,7 @@ public class TestRemoteSparql11QueryBuilder extends
      */
     public void test_service_008() throws Exception {
         
-        final BigdataURI serviceURI = valueFactory
+        final EmbergraphURI serviceURI = valueFactory
                 .createURI("http://www.embergraph.org/myService");
 
         final GraphPatternGroup<IGroupMemberNode> groupNode = new JoinGroupNode();

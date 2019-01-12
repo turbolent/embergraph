@@ -23,12 +23,9 @@ import java.io.InputStream;
 
 import junit.framework.Test;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.ServiceProviderHook;
-import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
-import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
-import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
@@ -198,7 +195,7 @@ public class TestRDROperations<S extends IIndexManager> extends
 	 */
 	public void test_EXPORT_TURTLE_RDR() throws Exception {
 
-	   if(!BigdataStatics.runKnownBadTests) {
+	   if(!EmbergraphStatics.runKnownBadTests) {
 	      return;
 	   }
 	   

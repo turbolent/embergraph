@@ -26,10 +26,10 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.ap.filter.BOpResolver;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
- * Cache the {@link BigdataValue} on the {@link IV} (create a cross linkage).
+ * Cache the {@link EmbergraphValue} on the {@link IV} (create a cross linkage).
  * This is useful for lexicon joins and SPARQL operators that need to use
  * materialized RDF values.
  */
@@ -63,14 +63,14 @@ public class CacheValueFilter extends BOpResolver {
     }
 
     /**
-     * Cache the BigdataValue on its IV (cross-link).
+     * Cache the EmbergraphValue on its IV (cross-link).
      */
     @Override
     protected Object resolve(final Object obj) {
 
-		final BigdataValue val = (BigdataValue) obj;
+		final EmbergraphValue val = (EmbergraphValue) obj;
 		
-		// the link from BigdataValue to IV is pre-existing (set by the
+		// the link from EmbergraphValue to IV is pre-existing (set by the
 		// materialization of the index tuple)
 		final IV iv = val.getIV();
     	

@@ -24,6 +24,12 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
@@ -31,17 +37,11 @@ import org.openrdf.rio.RDFParser.DatatypeHandling;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.RDFParserOptions;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.AddGraph;
 import org.embergraph.rdf.sparql.ast.ClearGraph;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -71,10 +71,10 @@ import org.embergraph.rdf.sparql.ast.VarNode;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
+public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase {
 
 //    private static final Logger log = Logger
-//            .getLogger(TestBigdataExprBuilder.class);
+//            .getLogger(TestEmbergraphExprBuilder.class);
     
     public TestUpdateExprBuilder() {
     }
@@ -1386,23 +1386,23 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataURI book1 = valueFactory.createURI("http://example/book1");
-            final BigdataURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
-            final BigdataURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
-            final BigdataLiteral label1 = valueFactory.createLiteral("A new book");
-            final BigdataLiteral label2 = valueFactory.createLiteral("A.N.Other");
+            final EmbergraphURI book1 = valueFactory.createURI("http://example/book1");
+            final EmbergraphURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
+            final EmbergraphURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
+            final EmbergraphLiteral label1 = valueFactory.createLiteral("A new book");
+            final EmbergraphLiteral label2 = valueFactory.createLiteral("A.N.Other");
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcTitle,
-                            (BigdataValue)label1,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcTitle,
+                            (EmbergraphValue)label1,
                             null,
                             StatementEnum.Explicit),
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcCreator,
-                            (BigdataValue) label2,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcCreator,
+                            (EmbergraphValue) label2,
                             null,
                             StatementEnum.Explicit),
 //                    new SPO(book1, dcTitle, label1, null,
@@ -1444,17 +1444,17 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataURI bookstore = valueFactory.createURI("http://example/bookStore");
-            final BigdataURI book1 = valueFactory.createURI("http://example/book1");
-            final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
-            final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
+            final EmbergraphURI bookstore = valueFactory.createURI("http://example/bookStore");
+            final EmbergraphURI book1 = valueFactory.createURI("http://example/book1");
+            final EmbergraphURI price = valueFactory.createURI("http://example.org/ns#price");
+            final EmbergraphLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)price,
-                            (BigdataValue)i42,
-                            (BigdataResource)bookstore,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)price,
+                            (EmbergraphValue)i42,
+                            (EmbergraphResource)bookstore,
                             StatementEnum.Explicit),
             };
 
@@ -1489,12 +1489,12 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataBNode bnode = valueFactory.createBNode("-anon-1");
-//            final BigdataBNode bnode = valueFactory.createBNode("bnode");
-            final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.toString());
-            final BigdataURI foo = valueFactory.createURI("http://example/Foo");
+            final EmbergraphBNode bnode = valueFactory.createBNode("-anon-1");
+//            final EmbergraphBNode bnode = valueFactory.createBNode("bnode");
+            final EmbergraphURI rdfType = valueFactory.createURI(RDF.TYPE.toString());
+            final EmbergraphURI foo = valueFactory.createURI("http://example/Foo");
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     valueFactory.createStatement(
                             bnode,
                             rdfType,
@@ -1547,33 +1547,33 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataURI book1 = valueFactory.createURI("http://example/book1");
-            final BigdataURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
-            final BigdataURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
-            final BigdataLiteral label1 = valueFactory.createLiteral("A new book");
-            final BigdataLiteral label2 = valueFactory.createLiteral("A.N.Other");
-            final BigdataURI bookstore = valueFactory.createURI("http://example/bookStore");
-            final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
-            final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
+            final EmbergraphURI book1 = valueFactory.createURI("http://example/book1");
+            final EmbergraphURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
+            final EmbergraphURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
+            final EmbergraphLiteral label1 = valueFactory.createLiteral("A new book");
+            final EmbergraphLiteral label2 = valueFactory.createLiteral("A.N.Other");
+            final EmbergraphURI bookstore = valueFactory.createURI("http://example/bookStore");
+            final EmbergraphURI price = valueFactory.createURI("http://example.org/ns#price");
+            final EmbergraphLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcTitle,
-                            (BigdataValue)label1,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcTitle,
+                            (EmbergraphValue)label1,
                             null,
                             StatementEnum.Explicit),
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcCreator,
-                            (BigdataValue)label2,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcCreator,
+                            (EmbergraphValue)label2,
                             null,
                             StatementEnum.Explicit),
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)price,
-                            (BigdataValue)i42,
-                            (BigdataResource)bookstore,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)price,
+                            (EmbergraphValue)i42,
+                            (EmbergraphResource)bookstore,
                             StatementEnum.Explicit),
             };
             
@@ -1636,32 +1636,32 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataURI book1 = valueFactory.createURI("http://example/book1");
-            final BigdataURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
-            final BigdataURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
-            final BigdataLiteral label1 = valueFactory.createLiteral("A new book");
-            final BigdataLiteral label2 = valueFactory.createLiteral("A.N.Other");
-            final BigdataURI bookstore = valueFactory.createURI("http://example/bookStore");
-            final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
-            final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
+            final EmbergraphURI book1 = valueFactory.createURI("http://example/book1");
+            final EmbergraphURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
+            final EmbergraphURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
+            final EmbergraphLiteral label1 = valueFactory.createLiteral("A new book");
+            final EmbergraphLiteral label2 = valueFactory.createLiteral("A.N.Other");
+            final EmbergraphURI bookstore = valueFactory.createURI("http://example/bookStore");
+            final EmbergraphURI price = valueFactory.createURI("http://example.org/ns#price");
+            final EmbergraphLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)price,
-                            (BigdataValue)i42,
-                            (BigdataResource)bookstore,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)price,
+                            (EmbergraphValue)i42,
+                            (EmbergraphResource)bookstore,
                             StatementEnum.Explicit),
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcTitle,
-                            (BigdataValue)label1,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcTitle,
+                            (EmbergraphValue)label1,
                             null,
                             StatementEnum.Explicit),
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcCreator,
-                            (BigdataValue)label2,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcCreator,
+                            (EmbergraphValue)label2,
                             null,
                             StatementEnum.Explicit),
             };
@@ -1707,35 +1707,35 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataURI book1 = valueFactory.createURI("http://example/book1");
-            final BigdataURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
-            final BigdataURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
-            final BigdataLiteral label1 = valueFactory.createLiteral("A new book");
-            final BigdataLiteral label2 = valueFactory.createLiteral("A.N.Other");
-            final BigdataURI bookstore = valueFactory.createURI("http://example/bookStore");
-            final BigdataURI price = valueFactory.createURI("http://example.org/ns#price");
-            final BigdataLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
+            final EmbergraphURI book1 = valueFactory.createURI("http://example/book1");
+            final EmbergraphURI dcCreator = valueFactory.createURI("http://purl.org/dc/elements/1.1/creator");
+            final EmbergraphURI dcTitle = valueFactory.createURI("http://purl.org/dc/elements/1.1/title");
+            final EmbergraphLiteral label1 = valueFactory.createLiteral("A new book");
+            final EmbergraphLiteral label2 = valueFactory.createLiteral("A.N.Other");
+            final EmbergraphURI bookstore = valueFactory.createURI("http://example/bookStore");
+            final EmbergraphURI price = valueFactory.createURI("http://example.org/ns#price");
+            final EmbergraphLiteral i42 = valueFactory.createLiteral("42",XSD.INTEGER);
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcTitle,
-                            (BigdataValue)label1,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcTitle,
+                            (EmbergraphValue)label1,
                             null,
                             StatementEnum.Explicit),
                     
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)price,
-                            (BigdataValue)i42,
-                            (BigdataResource)bookstore,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)price,
+                            (EmbergraphValue)i42,
+                            (EmbergraphResource)bookstore,
                             StatementEnum.Explicit),
                     
                     valueFactory.createStatement(
-                            (BigdataResource)book1,
-                            (BigdataURI)dcCreator,
-                            (BigdataValue)label2,
+                            (EmbergraphResource)book1,
+                            (EmbergraphURI)dcCreator,
+                            (EmbergraphValue)label2,
                             null,// 
                             StatementEnum.Explicit),
             
@@ -1786,13 +1786,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     
             valueFactory.createStatement(
-                    (BigdataResource) book1.getValue(),
-                    (BigdataURI) dcTitle.getValue(),
-                    (BigdataValue) label1.getValue(),
-                    (BigdataResource) bookstore.getValue(),
+                    (EmbergraphResource) book1.getValue(),
+                    (EmbergraphURI) dcTitle.getValue(),
+                    (EmbergraphValue) label1.getValue(),
+                    (EmbergraphResource) bookstore.getValue(),
                     StatementEnum.Explicit
                     ),
 
@@ -1807,13 +1807,13 @@ public class TestUpdateExprBuilder extends AbstractBigdataExprBuilderTestCase {
 
             expected.addChild(op);
 
-            final BigdataStatement[] data = new BigdataStatement[] {
+            final EmbergraphStatement[] data = new EmbergraphStatement[] {
                     
                     valueFactory.createStatement(
-                            (BigdataResource) book1.getValue(),
-                            (BigdataURI) dcTitle.getValue(),
-                            (BigdataValue) label2.getValue(),
-                            (BigdataResource) bookstore.getValue(),
+                            (EmbergraphResource) book1.getValue(),
+                            (EmbergraphURI) dcTitle.getValue(),
+                            (EmbergraphValue) label2.getValue(),
+                            (EmbergraphResource) bookstore.getValue(),
                             StatementEnum.Explicit
                             ),
 //            new SPO(book1, dcTitle, label2, bookstore, StatementEnum.Explicit),

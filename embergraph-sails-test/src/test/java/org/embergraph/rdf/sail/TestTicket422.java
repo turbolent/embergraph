@@ -25,24 +25,24 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.sail.SailException;
 
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.TempTripleStore;
 
 import info.aduna.iteration.CloseableIteration;
 
 /**
- * Test suite for wrapping a {@link TempTripleStore} as a {@link BigdataSail}.
+ * Test suite for wrapping a {@link TempTripleStore} as a {@link EmbergraphSail}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestTicket422 extends ProxyBigdataSailTestCase {
+public class TestTicket422 extends ProxyEmbergraphSailTestCase {
 
     /**
      * 
@@ -59,7 +59,7 @@ public class TestTicket422 extends ProxyBigdataSailTestCase {
 
     public void test_wrapTempTripleStore() throws SailException, ExecutionException, InterruptedException {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         
         try {
 
@@ -67,7 +67,7 @@ public class TestTicket422 extends ProxyBigdataSailTestCase {
             
             final String namespace = sail.getNamespace();
             
-            final BigdataSailConnection mainConn = sail.getUnisolatedConnection();
+            final EmbergraphSailConnection mainConn = sail.getUnisolatedConnection();
             
             try {
             
@@ -83,7 +83,7 @@ public class TestTicket422 extends ProxyBigdataSailTestCase {
             try {
     
                     // Note: The namespace of the tempSail MUST be distinct from the namespace of the main Sail.
-                    final BigdataSail tempSail = new BigdataSail(namespace+"-"+UUID.randomUUID(), tempStore.getIndexManager(),
+                    final EmbergraphSail tempSail = new EmbergraphSail(namespace+"-"+UUID.randomUUID(), tempStore.getIndexManager(),
                             mainTripleStore.getIndexManager());
     
                 try {
@@ -92,7 +92,7 @@ public class TestTicket422 extends ProxyBigdataSailTestCase {
     
                         tempSail.create(new Properties());
                         
-                    final BigdataSailConnection con = tempSail.getConnection();
+                    final EmbergraphSailConnection con = tempSail.getConnection();
     
                     try {
     

@@ -22,10 +22,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
 /**
@@ -144,19 +144,19 @@ public class InMemChangeLog implements IChangeLog {
     
     /**
      * Use the supplied database to turn a set of ISPO change records into
-     * BigdataStatement change records.  BigdataStatements also implement
+     * EmbergraphStatement change records.  BigdataStatements also implement
      * ISPO, the difference being that BigdataStatements also contain
      * materialized RDF terms for the 3 (or 4) positions, in addition to just
      * the internal identifiers (IVs) for those terms.
      * 
      * @param db
      *          the database containing the lexicon needed to materialize
-     *          the BigdataStatement objects
+     *          the EmbergraphStatement objects
      * @param unresolved
      *          the ISPO change records that came from IChangeLog notification
      *          events
      * @return
-     *          the fully resolves BigdataStatement change records
+     *          the fully resolves EmbergraphStatement change records
      */
     private Collection<IChangeRecord> resolve(final AbstractTripleStore db, 
             final Collection<IChangeRecord> unresolved) {
@@ -172,17 +172,17 @@ public class InMemChangeLog implements IChangeLog {
         }
         
         // use the database to resolve them into BigdataStatements
-        final BigdataStatementIterator it = 
+        final EmbergraphStatementIterator it =
             db.asStatementIterator(
                     new ChunkedArrayIterator<ISPO>(i, spos, null/* keyOrder */));
         
         /* 
-         * the BigdataStatementIterator will produce BigdataStatement objects
+         * the EmbergraphStatementIterator will produce EmbergraphStatement objects
          * in the same order as the original ISPO array
          */
         for (IChangeRecord rec : unresolved) {
             
-            final BigdataStatement stmt = it.next();
+            final EmbergraphStatement stmt = it.next();
             
             resolved.add(new ChangeRecord(stmt, rec.getChangeAction()));
             

@@ -4,12 +4,12 @@ import java.beans.Statement;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.spo.ISPO;
@@ -83,7 +83,7 @@ public class VerifyStatementBuffer extends StatementBuffer {
 
         for( int i=0; i<numValues; i++ ) {
             
-            final BigdataValue v = values[i];
+            final EmbergraphValue v = values[i];
 
             nterms.incrementAndGet();
 
@@ -101,14 +101,14 @@ public class VerifyStatementBuffer extends StatementBuffer {
         if (numStmts > 0) {
 
             final SPO[] a = new SPO[numStmts];
-            final BigdataStatement[] b = new BigdataStatement[numStmts];
+            final EmbergraphStatement[] b = new EmbergraphStatement[numStmts];
             
             // #of SPOs generated for testing.
             int n = 0;
             
             for (int i = 0; i < numStmts; i++) {
 
-                final BigdataStatement stmt = stmts[i];
+                final EmbergraphStatement stmt = stmts[i];
 
                 ntriples.incrementAndGet();
 

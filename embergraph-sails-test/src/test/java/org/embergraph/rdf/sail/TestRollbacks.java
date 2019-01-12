@@ -43,8 +43,6 @@ import org.openrdf.repository.sail.SailRepository;
 
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
@@ -52,13 +50,13 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -92,21 +90,21 @@ public class TestRollbacks extends QuadsTestCase {
          * For example, here is a set of five properties that turns off
          * inference, truth maintenance, and the free text index.
          */
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS,
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
                 NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
 
         // transactions are off in the base version of this class.
-        props.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "false");
+        props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "false");
 
-//		props.setProperty(BigdataSail.Options.CREATE_TEMP_FILE, "true");
-//		props.setProperty(BigdataSail.Options.BUFFER_MODE, BufferMode.DiskRW
+//		props.setProperty(EmbergraphSail.Options.CREATE_TEMP_FILE, "true");
+//		props.setProperty(EmbergraphSail.Options.BUFFER_MODE, BufferMode.DiskRW
 //				.toString());
         
-//        props.setProperty(BigdataSail.Options.EXACT_SIZE, "true");
+//        props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
 
         return props;
     }
@@ -174,20 +172,20 @@ public class TestRollbacks extends QuadsTestCase {
 
         /*
          * Note: Each run needs to be in a distinct namespace since we otherwise
-         * can have side-effects through the BigdataValueFactoryImpl for a given
+         * can have side-effects through the EmbergraphValueFactoryImpl for a given
          * namespace.
          */
         
         final Properties properties = new Properties(getProperties());
         
-        properties.setProperty(BigdataSail.Options.NAMESPACE,
+        properties.setProperty(EmbergraphSail.Options.NAMESPACE,
                 "kb" + runCount.incrementAndGet());
         
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
         
         try {
-        	// Note: Modified to use the BigdataSailRepository rather than the base SailRepository class.
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        	// Note: Modified to use the EmbergraphSailRepository rather than the base SailRepository class.
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             repo.initialize();
             runConcurrentStuff(repo,maxCounter);
         } finally {

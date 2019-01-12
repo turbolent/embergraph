@@ -28,7 +28,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 public class EncodeForURIBOp extends IVValueExpression<IV> implements INeedsMaterialization {
@@ -59,7 +59,7 @@ public class EncodeForURIBOp extends IVValueExpression<IV> implements INeedsMate
     public IV get(final IBindingSet bs) throws SparqlTypeErrorException {
         final Literal lit = getAndCheckLiteralValue(0, bs);
         try {
-            final BigdataLiteral str = getValueFactory().createLiteral(URLEncoder.encode(lit.getLabel(), "UTF-8").replace("+", "%20"));
+            final EmbergraphLiteral str = getValueFactory().createLiteral(URLEncoder.encode(lit.getLabel(), "UTF-8").replace("+", "%20"));
             return super.asIV(str, bs);
         } catch (UnsupportedEncodingException uee) {
             throw new SparqlTypeErrorException();

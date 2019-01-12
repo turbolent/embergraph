@@ -70,11 +70,11 @@ public class TestAll extends TestCase {
              */
 
             // non-manifest driven suite for debugging.
-            suite.addTestSuite(BigdataSPARQL2ASTParserTest.class);
+            suite.addTestSuite(EmbergraphSPARQL2ASTParserTest.class);
             
-            suite.addTest(Bigdata2ASTSPARQLSyntaxTest.suite());
+            suite.addTest(Embergraph2ASTSPARQLSyntaxTest.suite());
 
-            suite.addTest(Bigdata2ASTSPARQL11SyntaxTest.suite());
+            suite.addTest(Embergraph2ASTSPARQL11SyntaxTest.suite());
             
             //BLZG-1773
             suite.addTestSuite(TestPrefixDeclProcessor.class);

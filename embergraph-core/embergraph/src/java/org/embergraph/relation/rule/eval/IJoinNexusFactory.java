@@ -32,7 +32,7 @@ import org.embergraph.journal.IIndexStore;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.IProgram;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * A factory for {@link IJoinNexus} instances.
@@ -40,7 +40,7 @@ import org.embergraph.service.IBigdataFederation;
  * Note: This factory plays a critical role in (re-)constructing a suitable
  * {@link IJoinNexus} instance when an {@link IProgram} is executed on a remote
  * {@link DataService} or when its execution is distributed across an
- * {@link IBigdataFederation} using RMI. Implementations are presumed to carry
+ * {@link IEmbergraphFederation} using RMI. Implementations are presumed to carry
  * some state relating to the desired execution context, including the
  * <i>solutionFlags</i>, any {@link IElementFilter} to be applied to the
  * created buffers, etc.

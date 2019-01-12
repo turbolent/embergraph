@@ -25,7 +25,7 @@ import org.openrdf.model.Value;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
@@ -75,9 +75,9 @@ public interface IRawTripleStore extends ITripleStore {
      * @param terms
      *            An array to be inserted.
      * 
-     * @see LexiconRelation#addTerms(BigdataValue[], int, boolean)
+     * @see LexiconRelation#addTerms(EmbergraphValue[], int, boolean)
      */
-    public void addTerms(BigdataValue[] terms);
+    public void addTerms(EmbergraphValue[] terms);
 
     /**
      * Return the RDF {@link Value} given an internal value (non-batch api).

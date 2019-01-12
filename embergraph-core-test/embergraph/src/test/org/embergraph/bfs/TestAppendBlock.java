@@ -26,11 +26,9 @@ package org.embergraph.bfs;
 import java.io.IOException;
 import java.util.Random;
 
-import org.embergraph.bfs.BigdataFileSystem;
-
 /**
  * Test atomic append operations on the file data index for the
- * {@link BigdataFileSystem}. This also tests the correct assignment of block
+ * {@link EmbergraphFileSystem}. This also tests the correct assignment of block
  * identifiers, the ability to count the #of blocks in a file version, the
  * ability to visit the block identifiers for a file version, the ability to
  * read a specific block for a file version, and the ability to read all data

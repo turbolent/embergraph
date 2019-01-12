@@ -24,7 +24,7 @@ package org.embergraph.rdf.internal;
 import java.util.Collections;
 import java.util.Iterator;
 
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 
 /**
@@ -37,12 +37,12 @@ public class NoExtensionFactory implements IExtensionFactory {
 
     @Override
     public void init(final IDatatypeURIResolver lex,
-            final ILexiconConfiguration<BigdataValue> config) {
+            final ILexiconConfiguration<EmbergraphValue> config) {
 
     }
 
     @Override
-    public Iterator<IExtension<? extends BigdataValue>> getExtensions() {
+    public Iterator<IExtension<? extends EmbergraphValue>> getExtensions() {
         return Collections.emptyIterator();
     }
 

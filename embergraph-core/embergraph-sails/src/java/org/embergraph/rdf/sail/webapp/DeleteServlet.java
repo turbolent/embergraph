@@ -31,6 +31,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -45,10 +48,7 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
 import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
 import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
@@ -58,7 +58,7 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
  * 
  * @author martyncutcher
  */
-public class DeleteServlet extends BigdataRDFServlet {
+public class DeleteServlet extends EmbergraphRDFServlet {
 
 	/**
      * 
@@ -248,13 +248,13 @@ public class DeleteServlet extends BigdataRDFServlet {
              */
             
             // Setup the baseURI for this request. 
-            final String baseURI = BigdataRDFContext.getBaseURI(req, resp);
+            final String baseURI = EmbergraphRDFContext.getBaseURI(req, resp);
 
             // Parse the query.
-            final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+            final ASTContainer astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
             
-         BigdataSailRepositoryConnection repoConn = null;
-         BigdataSailConnection conn = null;
+         EmbergraphSailRepositoryConnection repoConn = null;
+         EmbergraphSailConnection conn = null;
          boolean success = false;
          try {
 
@@ -275,8 +275,8 @@ public class DeleteServlet extends BigdataRDFServlet {
                if (log.isInfoEnabled())
                   log.info("delete with query: " + queryStr);
 
-               final BigdataRDFContext context = BigdataServlet
-                     .getBigdataRDFContext(req.getServletContext());
+               final EmbergraphRDFContext context = EmbergraphServlet
+                     .getEmbergraphRDFContext(req.getServletContext());
 
                /*
                 * Note: pipe is drained by this thread to consume the query
@@ -285,7 +285,7 @@ public class DeleteServlet extends BigdataRDFServlet {
                final PipedOutputStream os = new PipedOutputStream();
 
                // The read-only connection for the query.
-               BigdataSailRepositoryConnection roconn = null;
+               EmbergraphSailRepositoryConnection roconn = null;
                try {
 
                   final long readOnlyTimestamp = ITx.READ_COMMITTED;
@@ -459,13 +459,13 @@ public class DeleteServlet extends BigdataRDFServlet {
           */
          
          // Setup the baseURI for this request. 
-         final String baseURI = BigdataRDFContext.getBaseURI(req, resp);
+         final String baseURI = EmbergraphRDFContext.getBaseURI(req, resp);
 
          // Parse the query.
-         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+         final ASTContainer astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
-         BigdataSailRepositoryConnection repoConn = null;
-         BigdataSailConnection conn = null;
+         EmbergraphSailRepositoryConnection repoConn = null;
+         EmbergraphSailConnection conn = null;
          boolean success = false;
          try {
 
@@ -486,8 +486,8 @@ public class DeleteServlet extends BigdataRDFServlet {
                if (log.isInfoEnabled())
                   log.info("delete with query: " + queryStr);
 
-               final BigdataRDFContext context = BigdataServlet
-                     .getBigdataRDFContext(req.getServletContext());
+               final EmbergraphRDFContext context = EmbergraphServlet
+                     .getEmbergraphRDFContext(req.getServletContext());
 
                /*
                 * Note: pipe is drained by this thread to consume the query
@@ -704,7 +704,7 @@ public class DeleteServlet extends BigdataRDFServlet {
 
         } catch (Throwable t) {
 
-            BigdataRDFServlet.launderThrowable(t, resp,
+            EmbergraphRDFServlet.launderThrowable(t, resp,
                     "DELETE-WITH-BODY: baseURI=" + baseURI + ", context-uri="
                             + Arrays.toString(defaultContext));
 
@@ -759,8 +759,8 @@ public class DeleteServlet extends BigdataRDFServlet {
 
             final long begin = System.currentTimeMillis();
             
-            BigdataSailRepositoryConnection repoConn = null;
-            BigdataSailConnection conn = null;
+            EmbergraphSailRepositoryConnection repoConn = null;
+            EmbergraphSailConnection conn = null;
             boolean success = false;
             try {
 
@@ -843,13 +843,13 @@ public class DeleteServlet extends BigdataRDFServlet {
     */
    static class BufferStatementHandler extends RDFHandlerBase {
 
-      private final BigdataSailConnection conn;
+      private final EmbergraphSailConnection conn;
       private final AtomicLong nmodified;
       private final Resource[] defaultContext;
 
       private final Set<Statement> stmts = new LinkedHashSet<Statement>();
 
-      public BufferStatementHandler(final BigdataSailConnection conn,
+      public BufferStatementHandler(final EmbergraphSailConnection conn,
             final AtomicLong nmodified, final Resource... defaultContext) {
          this.conn = conn;
          this.nmodified = nmodified;
@@ -908,11 +908,11 @@ public class DeleteServlet extends BigdataRDFServlet {
      */
     static class RemoveStatementHandler extends RDFHandlerBase {
 
-        private final BigdataSailConnection conn;
+        private final EmbergraphSailConnection conn;
         private final AtomicLong nmodified;
         private final Resource[] defaultContext;
         
-        public RemoveStatementHandler(final BigdataSailConnection conn,
+        public RemoveStatementHandler(final EmbergraphSailConnection conn,
                 final AtomicLong nmodified, final Resource... defaultContext) {
             this.conn = conn;
             this.nmodified = nmodified;
@@ -998,7 +998,7 @@ public class DeleteServlet extends BigdataRDFServlet {
 
         } catch (Throwable t) {
 
-            BigdataRDFServlet.launderThrowable(t, resp,
+            EmbergraphRDFServlet.launderThrowable(t, resp,
                     "DELETE-WITH-ACCESS-PATH: (s=" + s + ",p=" + p + ",o=" + o
                             + ",c=" + Arrays.toString(c) + ")");
 
@@ -1055,8 +1055,8 @@ public class DeleteServlet extends BigdataRDFServlet {
 
             final long begin = System.currentTimeMillis();
 
-            BigdataSailRepositoryConnection repoConn = null;
-            BigdataSailConnection conn = null;
+            EmbergraphSailRepositoryConnection repoConn = null;
+            EmbergraphSailConnection conn = null;
             boolean success = false;
             try {
 
@@ -1074,7 +1074,7 @@ public class DeleteServlet extends BigdataRDFServlet {
 
                 // Remove all statements matching that access path.
                 // final long nmodified = conn.getSailConnection()
-                // .getBigdataSail().getDatabase()
+                // .getEmbergraphSail().getDatabase()
                 // .removeStatements(s, p, o, c);
 
                 // Remove all statements matching that access path.

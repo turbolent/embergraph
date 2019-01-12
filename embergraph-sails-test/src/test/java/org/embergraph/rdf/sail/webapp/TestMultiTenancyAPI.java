@@ -44,6 +44,7 @@ import javax.servlet.http.HttpServletResponse;
 import junit.framework.Test;
 
 import org.eclipse.jetty.util.IO;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -56,7 +57,6 @@ import org.openrdf.query.TupleQueryResult;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.sail.BigdataSail;
 import org.embergraph.rdf.sail.webapp.client.HttpException;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
@@ -491,7 +491,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
     	
         final Properties properties = new Properties();
 
-        properties.setProperty(BigdataSail.Options.NAMESPACE, namespace2);
+        properties.setProperty(EmbergraphSail.Options.NAMESPACE, namespace2);
 
         { // verify does not exist.
             try {
@@ -659,9 +659,9 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
                 try {
                     m_mgr.getRepositoryProperties(ns);
                     
-                    fail("Expecting " + BigdataServlet.HTTP_NOTFOUND);
+                    fail("Expecting " + EmbergraphServlet.HTTP_NOTFOUND);
                 } catch (HttpException ex) {
-                    assertEquals(BigdataServlet.HTTP_NOTFOUND,
+                    assertEquals(EmbergraphServlet.HTTP_NOTFOUND,
                             ex.getStatusCode());
                 }
             }
@@ -671,9 +671,9 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
                 try {
                     tmp.getServiceDescription();
                     
-                    fail("Expecting " + BigdataServlet.HTTP_NOTFOUND);
+                    fail("Expecting " + EmbergraphServlet.HTTP_NOTFOUND);
                 } catch (HttpException ex) {
-                    assertEquals(BigdataServlet.HTTP_NOTFOUND,
+                    assertEquals(EmbergraphServlet.HTTP_NOTFOUND,
                             ex.getStatusCode());
                 }
             }
@@ -686,9 +686,9 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
                             "SELECT (COUNT(*) as ?count) {?s ?p ?o}")
                             .evaluate();
                     
-                    fail("Expecting " + BigdataServlet.HTTP_NOTFOUND);
+                    fail("Expecting " + EmbergraphServlet.HTTP_NOTFOUND);
                 } catch (HttpException ex) {
-                    assertEquals(BigdataServlet.HTTP_NOTFOUND,
+                    assertEquals(EmbergraphServlet.HTTP_NOTFOUND,
                             ex.getStatusCode());
                 } finally {
                     if (result != null)
@@ -705,9 +705,9 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
                             "PREFIX : <http://www.embergraph.org> \n"
                                     + "INSERT DATA {:a :b :c}").evaluate();
 
-                    fail("Expecting " + BigdataServlet.HTTP_NOTFOUND);
+                    fail("Expecting " + EmbergraphServlet.HTTP_NOTFOUND);
                 } catch (HttpException ex) {
-                    assertEquals(BigdataServlet.HTTP_NOTFOUND,
+                    assertEquals(EmbergraphServlet.HTTP_NOTFOUND,
                             ex.getStatusCode());
                 }
             }

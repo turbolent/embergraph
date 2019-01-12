@@ -58,7 +58,7 @@ import info.aduna.iteration.CloseableIteration;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestSingleTailRule extends ProxyBigdataSailTestCase {
+public class TestSingleTailRule extends ProxyEmbergraphSailTestCase {
 
     protected static final Logger log = Logger.getLogger(TestSingleTailRule.class);
     
@@ -67,11 +67,11 @@ public class TestSingleTailRule extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "true");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "true");
         
         return props;
         
@@ -92,10 +92,10 @@ public class TestSingleTailRule extends ProxyBigdataSailTestCase {
 
     public void testSingleTail() throws Exception {
 
-        final BigdataSail sail = getSail();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSail sail = getSail();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         repo.initialize();
-        final BigdataSailRepositoryConnection cxn = repo.getConnection();
+        final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {
@@ -118,18 +118,18 @@ public class TestSingleTailRule extends ProxyBigdataSailTestCase {
             
         } finally {
             cxn.close();
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();
         }
 
     }
     
     public void testSingleTailSearch() throws Exception {
 
-        final BigdataSail sail = getSail();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSail sail = getSail();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         repo.initialize();
-        final BigdataSailRepositoryConnection cxn = repo.getConnection();
+        final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {
@@ -216,8 +216,8 @@ public class TestSingleTailRule extends ProxyBigdataSailTestCase {
             
         } finally {
             cxn.close();
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();
         }
 
     }
@@ -274,8 +274,8 @@ public class TestSingleTailRule extends ProxyBigdataSailTestCase {
     public void testOptionalFilter()
         throws Exception
     {
-        final BigdataSail sail = getSail();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSail sail = getSail();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //        final Sail sail = new MemoryStore();
 //        final Repository repo = new SailRepository(sail);
         
@@ -328,8 +328,8 @@ public class TestSingleTailRule extends ProxyBigdataSailTestCase {
             
         } finally {
             cxn.close();
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();
         }
             
     }

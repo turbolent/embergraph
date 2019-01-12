@@ -34,17 +34,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.embergraph.bfs.BigdataFileSystem;
-import org.embergraph.bfs.Document;
-import org.embergraph.bfs.DocumentImpl;
-import org.embergraph.bfs.FileMetadataSchema;
-import org.embergraph.bfs.RepositoryDocumentImpl;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 
 /**
- * Test operations on the file metadata index for the {@link BigdataFileSystem}.
+ * Test operations on the file metadata index for the {@link EmbergraphFileSystem}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

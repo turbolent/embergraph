@@ -45,7 +45,7 @@ import junit.framework.TestCase2;
 
 
 /**
- * Unit tests for the {@link BigdataRDFContext#getQueryTimeout} method.
+ * Unit tests for the {@link EmbergraphRDFContext#getQueryTimeout} method.
  */
 public class TestGetRequestTimeout extends TestCase2 {
 	
@@ -60,7 +60,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
-        long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
+        long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
         long expected = configTimeout;
        	
@@ -78,7 +78,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
-        final long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
+        final long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
         final long expected = Long.parseLong(httpHeaderBigdataMaxQueryMillis);
        	
@@ -98,7 +98,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
-        final long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
+        final long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
         final long expected = Long.parseLong(maxQuryTimeMillis);
        	
@@ -118,7 +118,7 @@ public class TestGetRequestTimeout extends TestCase2 {
 		final HttpServletRequest req = new MockRequest(
 				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
         
-        final long actual = BigdataRDFContext.getQueryTimeout(req, configTimeout);
+        final long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
         final long expected = Long.parseLong(timeout)*1000;
        	
@@ -134,28 +134,28 @@ public class TestGetRequestTimeout extends TestCase2 {
 		
 		private String maxQuryTimeMillis;
 		private String timeout;
-		private String httpHeaderBigdataMaxQueryMillis;
+		private String httpHeaderEmbergraphMaxQueryMillis;
 
-		private MockRequest(String httpHeaderBigdataMaxQueryMillis, String maxQuryTimeMillis, String timeout) {
+		private MockRequest(String httpHeaderEmbergraphMaxQueryMillis, String maxQuryTimeMillis, String timeout) {
 			
-			this.httpHeaderBigdataMaxQueryMillis = httpHeaderBigdataMaxQueryMillis;
+			this.httpHeaderEmbergraphMaxQueryMillis = httpHeaderEmbergraphMaxQueryMillis;
 			this.maxQuryTimeMillis = maxQuryTimeMillis;
 			this.timeout = timeout;
 			
 		}
 
 		public String getParameter(String name) {
-			if (name.equals(BigdataRDFContext.TIMEOUT))
+			if (name.equals(EmbergraphRDFContext.TIMEOUT))
 				return timeout;
-			else if (name.equals(BigdataRDFContext.MAX_QUERY_TIME_MILLIS)) 
+			else if (name.equals(EmbergraphRDFContext.MAX_QUERY_TIME_MILLIS))
 				return maxQuryTimeMillis;
 			return null;
 		}
 
 		@Override
 		public String getHeader(String name) {
-			if (name.equals(BigdataRDFContext.HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS))
-				return httpHeaderBigdataMaxQueryMillis;
+			if (name.equals(EmbergraphRDFContext.HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS))
+				return httpHeaderEmbergraphMaxQueryMillis;
 			else 
 				return null;
 		}

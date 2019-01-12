@@ -23,14 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.spo;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Statement;
 
 import org.embergraph.bop.IElement;
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -108,7 +108,7 @@ public interface ISPO extends IElement, Statement {
      * <code>true</code> if the "triple pattern" is fully bound and
      * <code>false</code> if there are any unbound positions.
      * <p>
-     * Note: {@link BigdataStatement}s are not fully bound when they are
+     * Note: {@link EmbergraphStatement}s are not fully bound when they are
      * instantiated during parsing until their term identifiers have been
      * resolved against a database's lexicon.
      */
@@ -265,7 +265,7 @@ public interface ISPO extends IElement, Statement {
     public boolean isModified();
 
     /**
-     * Method may be used to externalize the {@link BigdataValue}s in the
+     * Method may be used to externalize the {@link EmbergraphValue}s in the
      * {@link ISPO}.
      * 
      * @param db

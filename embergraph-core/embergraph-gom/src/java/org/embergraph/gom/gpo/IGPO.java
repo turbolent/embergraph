@@ -28,7 +28,7 @@ import org.openrdf.model.Value;
 
 import org.embergraph.gom.om.IObjectManager;
 import org.embergraph.gom.skin.GenericSkinRegistry;
-import org.embergraph.rdf.model.BigdataResource;
+import org.embergraph.rdf.model.EmbergraphResource;
 
 /**
  * A generic object has identity and an extensible, loosely-typed property set.
@@ -68,7 +68,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
     /**
      * Returns the persistent identity of the generic object.
      */
-    BigdataResource getId();
+    EmbergraphResource getId();
 
     /**
      * Returns true iff <i>other</i> has the same identity as <i>this</i>

@@ -68,7 +68,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.striterator.ChunkedConvertingIterator;
 import org.embergraph.striterator.DistinctFilter;
@@ -938,10 +938,10 @@ abstract public class AbstractJoinNexus implements IJoinNexus {
 
         final IIndexManager indexManager = getIndexManager();
 
-        if (indexManager instanceof IBigdataFederation<?>) {
+        if (indexManager instanceof IEmbergraphFederation<?>) {
 
             // distributed program execution.
-            return runDistributedProgram((IBigdataFederation<?>) indexManager,
+            return runDistributedProgram((IEmbergraphFederation<?>) indexManager,
                     action, step);
 
         } else {
@@ -975,7 +975,7 @@ abstract public class AbstractJoinNexus implements IJoinNexus {
      * Runs a distributed {@link IProgram} (key-range partitioned indices, RMI,
      * and multi-machine).
      */
-    final protected Object runDistributedProgram(final IBigdataFederation<?> fed,
+    final protected Object runDistributedProgram(final IEmbergraphFederation<?> fed,
             final ActionEnum action, final IStep step) throws Exception {
 
         if (log.isInfoEnabled()) {
@@ -999,7 +999,7 @@ abstract public class AbstractJoinNexus implements IJoinNexus {
 //     * Note: This can only be done if all indices for the relation(s) are (a)
 //     * unpartitioned; and (b) located on the SAME {@link DataService}. This is
 //     * <code>true</code> for {@link LocalDataServiceFederation}. All other
-//     * {@link IBigdataFederation} implementations are scale-out (use key-range
+//     * {@link IEmbergraphFederation} implementations are scale-out (use key-range
 //     * partitioned indices).
 //     */
 //    protected Object runDataServiceProgram(final DataService dataService,

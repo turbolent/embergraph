@@ -17,15 +17,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 
 /**
  * Interface declaring the <code>config-param</code>s understood by the
- * {@link BigdataRDFServletContextListener}.
+ * {@link EmbergraphRDFServletContextListener}.
  * <p>
  * Note: When used in a jini/River configuration, the name of the component for
  * those configuration options is the fully qualified class name for the

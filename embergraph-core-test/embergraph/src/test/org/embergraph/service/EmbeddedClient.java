@@ -77,7 +77,7 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
 
     }
     
-    synchronized public IBigdataFederation<T> getFederation() {
+    synchronized public IEmbergraphFederation<T> getFederation() {
 
         if (fed == null) {
 
@@ -109,7 +109,7 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      * @version $Id$
      */
-    public static interface Options extends IBigdataClient.Options,
+    public static interface Options extends IEmbergraphClient.Options,
             MetadataService.Options {
 
         /**

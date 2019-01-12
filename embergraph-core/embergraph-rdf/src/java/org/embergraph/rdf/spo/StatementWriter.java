@@ -1,16 +1,10 @@
 package org.embergraph.rdf.spo;
 
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
-import org.embergraph.rdf.changesets.ChangeRecord;
 import org.embergraph.rdf.changesets.IChangeLog;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BigdataStatementIteratorImpl;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 

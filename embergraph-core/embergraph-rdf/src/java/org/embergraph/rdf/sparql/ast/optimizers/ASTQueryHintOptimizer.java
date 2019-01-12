@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -35,8 +37,6 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
@@ -520,12 +520,12 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
         if(!(sp.p() instanceof ConstantNode))
             return false;
         
-        final BigdataValue p = ((ConstantNode) sp.p()).getValue();
+        final EmbergraphValue p = ((ConstantNode) sp.p()).getValue();
         
         if(!(p instanceof URI))
             return false;
         
-        final BigdataURI u = (BigdataURI) p;
+        final EmbergraphURI u = (EmbergraphURI) p;
         
         final String str = u.stringValue();
         
@@ -560,12 +560,12 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
             throw new RuntimeException(
                     "Subject position of query hint must be a constant.");
 
-        final BigdataValue v = ((ConstantNode) t).getValue();
+        final EmbergraphValue v = ((ConstantNode) t).getValue();
 
-        if (!(v instanceof BigdataURI))
+        if (!(v instanceof EmbergraphURI))
             throw new RuntimeException("Query hint scope is not a URI.");
 
-        final BigdataURI u = (BigdataURI) v;
+        final EmbergraphURI u = (EmbergraphURI) v;
 
         return QueryHintScope.valueOf(u);
 
@@ -587,12 +587,12 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
                     "Predicate position of query hint must be a constant.");
         }
 
-        final BigdataValue v = ((ConstantNode) t).getValue();
+        final EmbergraphValue v = ((ConstantNode) t).getValue();
 
-        if (!(v instanceof BigdataURI))
+        if (!(v instanceof EmbergraphURI))
             throw new RuntimeException("Predicate position of query hint is not a URI.");
 
-        final BigdataURI u = (BigdataURI) v;
+        final EmbergraphURI u = (EmbergraphURI) v;
 
         final String name = u.getLocalName();
         
@@ -620,7 +620,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
             return '?'+((VarNode) t).getValueExpression().getName();
         }
 
-        final BigdataValue v = ((ConstantNode) t).getValue();
+        final EmbergraphValue v = ((ConstantNode) t).getValue();
 
         if (!(v instanceof Literal))
             throw new RuntimeException(

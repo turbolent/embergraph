@@ -52,7 +52,7 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.service.AbstractEmbeddedFederationTestCase;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.Dechunkerator;
 
@@ -742,7 +742,7 @@ public class TestMapBindingSetsOverShards extends
          *            The capacity of this buffer
          */
         public MockMapBindingSetsOverShardsBuffer(
-                final IBigdataFederation<?> fed, final IPredicate<F> pred,
+                final IEmbergraphFederation<?> fed, final IPredicate<F> pred,
                 final long timestamp,
                 final int capacity) {
 

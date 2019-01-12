@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase2;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.util.httpd.Config;
 
 /**
@@ -386,7 +386,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
     private String toRequestURI(final String hostname) {
 
         return "http://" + hostname + ":" + nextPort.getAndIncrement()
-                + BigdataStatics.getContextPath();
+                + EmbergraphStatics.getContextPath();
 
     }
 

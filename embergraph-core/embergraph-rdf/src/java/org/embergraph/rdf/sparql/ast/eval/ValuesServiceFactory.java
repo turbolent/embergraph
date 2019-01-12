@@ -28,38 +28,25 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
-import org.embergraph.bop.BOp;
-import org.embergraph.bop.BOpContextBase;
-import org.embergraph.bop.Constant;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
-import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.IVariable;
-import org.embergraph.bop.NV;
-import org.embergraph.bop.ap.SampleIndex;
 import org.embergraph.bop.bindingSet.EmptyBindingSet;
 import org.embergraph.bop.bindingSet.ListBindingSet;
-import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
-import org.embergraph.rdf.sparql.ast.eval.SampleServiceFactory.SampleParams;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
-import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
-import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
-import org.embergraph.relation.accesspath.EmptyCloseableIterator;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -107,23 +94,23 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
      * Note: This could extend the base class to allow for search service
      * configuration options.
      */
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public ValuesServiceFactory() {
         
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         serviceOptions.setRunFirst(true);
         
     }
     
     @Override
-    public BigdataNativeServiceOptions getServiceOptions() {
+    public EmbergraphNativeServiceOptions getServiceOptions() {
 
         return serviceOptions;
         
     }
     
-    public BigdataServiceCall create(
+    public EmbergraphServiceCall create(
     		final ServiceCallCreateParams params, 
     		final ServiceParams serviceParams) {
 
@@ -209,7 +196,7 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
      * is not a {@link Serializable} object. It MUST run on the query
      * controller.
      */
-    private static class ValuesCall implements BigdataServiceCall {
+    private static class ValuesCall implements EmbergraphServiceCall {
 
         private final AbstractTripleStore db;
         private final IServiceOptions serviceOptions;

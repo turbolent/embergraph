@@ -42,7 +42,7 @@ import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.sparql.ast.ssets.SolutionSetManager;
@@ -53,7 +53,7 @@ import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.rwstore.sector.IMemoryManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.ChunkedFilter;
 import org.embergraph.striterator.Chunkerator;
 import org.embergraph.striterator.CloseableChunkedIteratorWrapperConverter;
@@ -279,7 +279,7 @@ public class BOpContext<E> extends BOpContextBase {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     BOpContext(
                 final IRunningQuery runningQuery,
-                final IBigdataFederation<?> fed,
+                final IEmbergraphFederation<?> fed,
                 final IIndexManager localIndexManager,
                 final int partitionId,
                 final BOpStats stats,
@@ -328,7 +328,7 @@ public class BOpContext<E> extends BOpContextBase {
      */
     public static <E> BOpContext<E> newMock(
             final IRunningQuery runningQuery,
-            final IBigdataFederation<?> fed,
+            final IEmbergraphFederation<?> fed,
             final IIndexManager localIndexManager,
             final int partitionId,
             final BOpStats stats,
@@ -929,7 +929,7 @@ public class BOpContext<E> extends BOpContextBase {
 				final IV p = (IV) e.get(1);
 				final IV o = (IV) e.get(2);
 				final ISPO spo = new SPO(s, p, o);
-				final SidIV sidIV = new SidIV<BigdataBNode>(spo);
+				final SidIV sidIV = new SidIV<EmbergraphBNode>(spo);
 
 				bindingSet.set(sidVar, new Constant(sidIV));
 

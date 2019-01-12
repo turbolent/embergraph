@@ -27,6 +27,10 @@ import java.util.UUID;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
@@ -37,11 +41,7 @@ import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.test.MockTermIdFactory;
 
 /**
@@ -66,52 +66,52 @@ public class TestPackedLongIVs extends TestCase2 {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void testMath() {
         
-        final BigdataValueFactory vf = 
-            BigdataValueFactoryImpl.getInstance(getName() + UUID.randomUUID());
+        final EmbergraphValueFactory vf =
+            EmbergraphValueFactoryImpl.getInstance(getName() + UUID.randomUUID());
 
         final MockTermIdFactory termIdFactory = new MockTermIdFactory();
         
-        final CompressedTimestampExtension<BigdataValue> ext = 
-            new CompressedTimestampExtension<BigdataValue>(
+        final CompressedTimestampExtension<EmbergraphValue> ext =
+            new CompressedTimestampExtension<EmbergraphValue>(
                 new IDatatypeURIResolver() {
                       @Override
-                      public BigdataURI resolve(final URI uri) {
-                         final BigdataURI buri = vf.createURI(uri.stringValue());
+                      public EmbergraphURI resolve(final URI uri) {
+                         final EmbergraphURI buri = vf.createURI(uri.stringValue());
                          buri.setIV(termIdFactory.newTermId(VTE.URI));
                          return buri;
                       }
                 });
 
         
-        final BigdataValue bvZero = 
+        final EmbergraphValue bvZero =
             vf.createLiteral("0", CompressedTimestampExtension.COMPRESSED_TIMESTAMP);
         final LiteralExtensionIV zero = ext.createIV(bvZero);
         zero.setValue(bvZero);
 
-        final BigdataValue bfOne = 
+        final EmbergraphValue bfOne =
             vf.createLiteral("1", CompressedTimestampExtension.COMPRESSED_TIMESTAMP);
         final LiteralExtensionIV one = ext.createIV(bfOne);
         one.setValue(bfOne);
         
-        final BigdataValue bfTen = 
+        final EmbergraphValue bfTen =
             vf.createLiteral("10", CompressedTimestampExtension.COMPRESSED_TIMESTAMP);
         final LiteralExtensionIV ten = ext.createIV(bfTen);
         ten.setValue(bfTen);
         
-        final BigdataValue bfTwenty = 
+        final EmbergraphValue bfTwenty =
             vf.createLiteral("20", CompressedTimestampExtension.COMPRESSED_TIMESTAMP);
         final LiteralExtensionIV twenty = ext.createIV(bfTwenty);
         twenty.setValue(bfTwenty);
 
-        final NumericIV<BigdataLiteral, ?> result10a_int_act = MathUtility.literalMath(zero, ten, MathOp.PLUS);
-        final NumericIV<BigdataLiteral, ?> result10b_int_act = MathUtility.literalMath(twenty, ten, MathOp.MINUS);
-        final NumericIV<BigdataLiteral, ?> result10c_int_act = MathUtility.literalMath(ten, one, MathOp.MULTIPLY);
-        final NumericIV<BigdataLiteral, ?> result10d_dec_act = MathUtility.literalMath(ten, one, MathOp.DIVIDE);
-        final NumericIV<BigdataLiteral, ?> result10e_int_act = MathUtility.literalMath(ten, twenty, MathOp.MIN);
-        final NumericIV<BigdataLiteral, ?> result10f_int_act = MathUtility.literalMath(twenty, ten, MathOp.MIN);
-        final NumericIV<BigdataLiteral, ?> result20a_int_act = MathUtility.literalMath(ten, ten, MathOp.PLUS);
-        final NumericIV<BigdataLiteral, ?> result20b_int_act = MathUtility.literalMath(ten, twenty, MathOp.MAX);
-        final NumericIV<BigdataLiteral, ?> result20c_int_act = MathUtility.literalMath(twenty, ten, MathOp.MAX);
+        final NumericIV<EmbergraphLiteral, ?> result10a_int_act = MathUtility.literalMath(zero, ten, MathOp.PLUS);
+        final NumericIV<EmbergraphLiteral, ?> result10b_int_act = MathUtility.literalMath(twenty, ten, MathOp.MINUS);
+        final NumericIV<EmbergraphLiteral, ?> result10c_int_act = MathUtility.literalMath(ten, one, MathOp.MULTIPLY);
+        final NumericIV<EmbergraphLiteral, ?> result10d_dec_act = MathUtility.literalMath(ten, one, MathOp.DIVIDE);
+        final NumericIV<EmbergraphLiteral, ?> result10e_int_act = MathUtility.literalMath(ten, twenty, MathOp.MIN);
+        final NumericIV<EmbergraphLiteral, ?> result10f_int_act = MathUtility.literalMath(twenty, ten, MathOp.MIN);
+        final NumericIV<EmbergraphLiteral, ?> result20a_int_act = MathUtility.literalMath(ten, ten, MathOp.PLUS);
+        final NumericIV<EmbergraphLiteral, ?> result20b_int_act = MathUtility.literalMath(ten, twenty, MathOp.MAX);
+        final NumericIV<EmbergraphLiteral, ?> result20c_int_act = MathUtility.literalMath(twenty, ten, MathOp.MAX);
         
         final XSDIntegerIV<?> result10_int = new XSDIntegerIV<>(new BigInteger("10"));
         final XSDDecimalIV<?> result10_dec = new XSDDecimalIV<>(new BigDecimal(new BigInteger("10")));

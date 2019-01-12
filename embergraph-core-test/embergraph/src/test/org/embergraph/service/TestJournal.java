@@ -79,7 +79,7 @@ public class TestJournal extends AbstractJournalTestCase {
      * Extends the basic behavior to force a commit of the {@link Journal}.
      * This makes the {@link Journal} appear to have "auto-commit" semantics
      * from the perspective of the unit tests that are written to the assumption
-     * that the {@link IIndexManager} is an {@link IBigdataFederation}.
+     * that the {@link IIndexManager} is an {@link IEmbergraphFederation}.
      * Otherwise those unit tests tend not to force a commit and hence
      * restart-safe tests tend to fail for one reason or another.
      */

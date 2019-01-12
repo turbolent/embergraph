@@ -33,7 +33,7 @@ import org.embergraph.Banner;
 
 /**
  * A service for distributing application {@link Callable}s across an
- * {@link IBigdataFederation}.
+ * {@link IEmbergraphFederation}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ abstract public class ClientService extends AbstractService implements
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      * @version $Id$
      */
-    public interface Options extends IBigdataClient.Options {
+    public interface Options extends IEmbergraphClient.Options {
         
     }
     

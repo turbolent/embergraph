@@ -38,6 +38,8 @@ import java.util.concurrent.ExecutionException;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -67,10 +69,8 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 import org.openrdf.sail.SailException;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
 import org.embergraph.rdf.sail.DestroyKBTask;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
 import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
@@ -173,7 +173,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
 			log.info("KB namespace=" + namespace);
 
        boolean ok = false;
-       final BigdataSail sail = new BigdataSail(namespace,indexManager);
+       final EmbergraphSail sail = new EmbergraphSail(namespace,indexManager);
        try {
            sail.initialize();
            sail.create(properties);
@@ -247,10 +247,10 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
         // Open an unisolated connection on that namespace and figure out what
         // mode the namespace is using.
         {
-            final BigdataSail sail = new BigdataSail(lnamespace, indexManager);
+            final EmbergraphSail sail = new EmbergraphSail(lnamespace, indexManager);
             try {
                 sail.initialize();
-                final BigdataSailConnection con = sail.getUnisolatedConnection();
+                final EmbergraphSailConnection con = sail.getUnisolatedConnection();
                 try {
                     final AbstractTripleStore tripleStore = con.getTripleStore();
         if (tripleStore.isStatementIdentifiers()) {
@@ -345,7 +345,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
         ).toExternalForm();
 
         m_serviceURL = new URL("http", hostAddr, port,
-                BigdataStatics.getContextPath()).toExternalForm();
+                EmbergraphStatics.getContextPath()).toExternalForm();
 
         if (log.isInfoEnabled())
             log.info("Setup done: \nname=" + getName() + "\nnamespace="
@@ -439,12 +439,12 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
 //    * FIXME DO NOT CIRCUMVENT! Use the REST API throughout this test suite.
 //    */
 //    @Deprecated
-//    protected BigdataSail getSail() {
+//    protected EmbergraphSail getSail() {
 //
 //		final AbstractTripleStore tripleStore = (AbstractTripleStore) getIndexManager()
 //				.getResourceLocator().locate(namespace, ITx.UNISOLATED);
 //
-//        return new BigdataSail(tripleStore);
+//        return new EmbergraphSail(tripleStore);
 //
 //    }
 

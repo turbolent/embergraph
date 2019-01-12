@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.BytesUtil;
 
 /**
@@ -36,12 +36,12 @@ public class AssignedSplits {
     /**
      * Register the index against the federation using the index partitions and
      * data services described by this instance. if the {@link IIndexManager} is
-     * NOT an {@link IBigdataFederation} then the indices will be registered
+     * NOT an {@link IEmbergraphFederation} then the indices will be registered
      * normally using {@link IIndexManager#registerIndex(IndexMetadata)}.
      * 
      * @param indexManager
      *            The {@link IIndexManager} and ideally an
-     *            {@link IBigdataFederation}.
+     *            {@link IEmbergraphFederation}.
      * @param indexMetadata
      *            The metadata describing the index to be registered.
      */
@@ -54,9 +54,9 @@ public class AssignedSplits {
         if (indexMetadata == null)
             throw new IllegalArgumentException();
 
-        if (indexManager instanceof IBigdataFederation) {
+        if (indexManager instanceof IEmbergraphFederation) {
 
-            ((IBigdataFederation) indexManager).registerIndex(indexMetadata,
+            ((IEmbergraphFederation) indexManager).registerIndex(indexMetadata,
                     separatorKeys, dataServiceUUIDs);
 
         } else {

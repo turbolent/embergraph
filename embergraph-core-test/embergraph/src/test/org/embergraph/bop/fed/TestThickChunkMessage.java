@@ -46,9 +46,9 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.striterator.Dechunkerator;
 
 /**
@@ -72,7 +72,7 @@ public class TestThickChunkMessage extends TestCase2 {
     }
 
     private String namespace;
-    private BigdataValueFactory valueFactory;
+    private EmbergraphValueFactory valueFactory;
     private long nextId = 1;
     
     @Override
@@ -82,7 +82,7 @@ public class TestThickChunkMessage extends TestCase2 {
         
         this.namespace = getName();
         
-        this.valueFactory = BigdataValueFactoryImpl.getInstance(namespace);
+        this.valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
         
     }
     
@@ -98,7 +98,7 @@ public class TestThickChunkMessage extends TestCase2 {
     }
 
     /**
-     * Create an {@link IV} for a {@link BigdataLiteral}, set the
+     * Create an {@link IV} for a {@link EmbergraphLiteral}, set the
      * {@link IVCache} association, and wrap it as an {@link IConstant}.
      * 
      * @param s
@@ -108,9 +108,9 @@ public class TestThickChunkMessage extends TestCase2 {
      */
     private IConstant<IV<?, ?>> makeLiteral(final String s) {
 
-        final BigdataLiteral value = valueFactory.createLiteral(s);
+        final EmbergraphLiteral value = valueFactory.createLiteral(s);
 
-        final TermId<BigdataLiteral> termId = new TermId<BigdataLiteral>(
+        final TermId<EmbergraphLiteral> termId = new TermId<EmbergraphLiteral>(
                 VTE.LITERAL, nextId++);
 
         termId.setValue(value);

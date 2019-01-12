@@ -23,6 +23,10 @@ package org.embergraph.gom.om;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Statement;
 import org.openrdf.query.BindingSet;
@@ -40,12 +44,8 @@ import org.embergraph.gom.gpo.GPO;
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
 import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
 import org.embergraph.rdf.sparql.ast.cache.ICacheConnection;
 import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
@@ -64,7 +64,7 @@ public class ObjectManager extends ObjectMgrModel {
     
 	private static final Logger log = Logger.getLogger(ObjectManager.class);
 	
-	final private BigdataSailRepository m_repo;
+	final private EmbergraphSailRepository m_repo;
 	final private boolean readOnly;
 	final private IDescribeCache m_describeCache;
 	
@@ -78,9 +78,9 @@ public class ObjectManager extends ObjectMgrModel {
      *            
      * @throws RepositoryException 
      */
-    public ObjectManager(final String endpoint, final BigdataSailRepository cxn) throws RepositoryException {
+    public ObjectManager(final String endpoint, final EmbergraphSailRepository cxn) throws RepositoryException {
 
-        super(endpoint, (BigdataValueFactory) cxn.getValueFactory());
+        super(endpoint, (EmbergraphValueFactory) cxn.getValueFactory());
 
         m_repo = cxn;
 
@@ -155,7 +155,7 @@ public class ObjectManager extends ObjectMgrModel {
 	/**
 	 * @return direct repository connection
 	 */
-	public BigdataSailRepository getRepository() {
+	public EmbergraphSailRepository getRepository() {
 		return m_repo;
 	}
 	
@@ -174,7 +174,7 @@ public class ObjectManager extends ObjectMgrModel {
 	@Override
     public ICloseableIterator<BindingSet> evaluate(final String query) {
 
-        final BigdataSailRepositoryConnection cxn;
+        final EmbergraphSailRepositoryConnection cxn;
         try {
             cxn = getQueryConnection();
         } catch (RepositoryException e1) {
@@ -191,7 +191,7 @@ public class ObjectManager extends ObjectMgrModel {
             final TupleQueryResult res = q.evaluate();
 
             // Will close the TupleQueryResult.
-            return new Sesame2BigdataIterator<BindingSet, QueryEvaluationException>(
+            return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
                     res) {
                 public void close() {
                     // Close the TupleQueryResult.
@@ -223,7 +223,7 @@ public class ObjectManager extends ObjectMgrModel {
 
 	public ICloseableIterator<Statement> evaluateGraph(final String query) {
 
-        final BigdataSailRepositoryConnection cxn;
+        final EmbergraphSailRepositoryConnection cxn;
         try {
             cxn = getQueryConnection();
         } catch (RepositoryException e1) {
@@ -240,7 +240,7 @@ public class ObjectManager extends ObjectMgrModel {
             final GraphQueryResult res = q.evaluate();
 
             // Will close the TupleQueryResult.
-            return new Sesame2BigdataIterator<Statement, QueryEvaluationException>(
+            return new Sesame2EmbergraphIterator<Statement, QueryEvaluationException>(
                     res) {
                 public void close() {
                     // Close the TupleQueryResult.
@@ -320,7 +320,7 @@ public class ObjectManager extends ObjectMgrModel {
      *            The {@link IGPO}.
      *            
      * @return The {@link IV} -or- <code>null</code> iff this is a read-only
-     *         connection and the {@link BigdataResource} associated with that
+     *         connection and the {@link EmbergraphResource} associated with that
      *         {@link IGPO} is not in the lexicon.
      * 
      *         FIXME This code path is horribly inefficient. It is create a new
@@ -331,7 +331,7 @@ public class ObjectManager extends ObjectMgrModel {
      */
     private IV<?, ?> addResolveIV(final IGPO gpo) {
 
-        final BigdataResource id = gpo.getId();
+        final EmbergraphResource id = gpo.getId();
 
         IV<?, ?> iv = id.getIV();
 
@@ -343,9 +343,9 @@ public class ObjectManager extends ObjectMgrModel {
              * already in the lexicon.
              */
             
-            final BigdataValue[] values = new BigdataValue[] { id };
+            final EmbergraphValue[] values = new EmbergraphValue[] { id };
 
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             
             try {
             
@@ -384,7 +384,7 @@ public class ObjectManager extends ObjectMgrModel {
     protected void flushStatements(final List<Statement> m_inserts,
             final List<Statement> m_removes) {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
         try {
             
             // Connection supporting updates.
@@ -436,10 +436,10 @@ public class ObjectManager extends ObjectMgrModel {
      * 
      * @throws RepositoryException
      */
-    private BigdataSailRepositoryConnection getConnection()
+    private EmbergraphSailRepositoryConnection getConnection()
             throws RepositoryException {
 
-        final BigdataSailRepositoryConnection c = m_repo.getConnection();
+        final EmbergraphSailRepositoryConnection c = m_repo.getConnection();
 
         c.setAutoCommit(false);
 
@@ -452,10 +452,10 @@ public class ObjectManager extends ObjectMgrModel {
      * 
      * @throws RepositoryException
      */
-    private BigdataSailRepositoryConnection getQueryConnection()
+    private EmbergraphSailRepositoryConnection getQueryConnection()
             throws RepositoryException {
 
-        final BigdataSailRepositoryConnection c = m_repo
+        final EmbergraphSailRepositoryConnection c = m_repo
                 .getReadOnlyConnection();
 
         return c;

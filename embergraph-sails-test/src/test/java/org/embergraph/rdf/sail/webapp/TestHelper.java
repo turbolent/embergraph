@@ -7,7 +7,7 @@ import org.openrdf.model.vocabulary.FOAF;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
 
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepository;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.embergraph.util.httpd.Config;
 
@@ -41,8 +41,8 @@ public class TestHelper extends TestCase {
 
       try {
 
-         final BigdataSailRemoteRepository repo = mgr.getRepositoryForURL(
-               sparqlEndpointURL).getBigdataSailRemoteRepository();
+         final EmbergraphSailRemoteRepository repo = mgr.getRepositoryForURL(
+               sparqlEndpointURL).getEmbergraphSailRemoteRepository();
 
          RepositoryConnection cxn = null;
          try {

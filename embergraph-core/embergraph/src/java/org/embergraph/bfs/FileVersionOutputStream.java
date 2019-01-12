@@ -19,7 +19,7 @@ import java.io.OutputStream;
  */
 public class FileVersionOutputStream extends OutputStream {
 
-    protected final BigdataFileSystem repo;
+    protected final EmbergraphFileSystem repo;
     protected final String id;
     protected final int version;
     
@@ -91,7 +91,7 @@ public class FileVersionOutputStream extends OutputStream {
      * @param version
      *            The version identifier.
      */
-    public FileVersionOutputStream(BigdataFileSystem repo, String id, int version) {
+    public FileVersionOutputStream(EmbergraphFileSystem repo, String id, int version) {
         
         if (repo == null)
             throw new IllegalArgumentException();
@@ -140,7 +140,7 @@ public class FileVersionOutputStream extends OutputStream {
         
         if (len > 0) {
 
-            BigdataFileSystem.log.info("Flushing buffer: id="+id+", version="+version+", len="+len);
+            EmbergraphFileSystem.log.info("Flushing buffer: id="+id+", version="+version+", len="+len);
             
             repo.appendBlock(id, version, buffer, 0, len);
 
@@ -201,7 +201,7 @@ public class FileVersionOutputStream extends OutputStream {
 
                 // the input stream is exhausted.
                 
-                BigdataFileSystem.log.info("Copied " + ncopied + " bytes: id=" + id
+                EmbergraphFileSystem.log.info("Copied " + ncopied + " bytes: id=" + id
                         + ", version=" + version);
 
                 try {
@@ -210,7 +210,7 @@ public class FileVersionOutputStream extends OutputStream {
                     
                 } catch (IOException ex) {
                     
-                    BigdataFileSystem.log.warn("Problem closing input stream: id=" + id
+                    EmbergraphFileSystem.log.warn("Problem closing input stream: id=" + id
                             + ", version=" + version, ex);
                     
                 }

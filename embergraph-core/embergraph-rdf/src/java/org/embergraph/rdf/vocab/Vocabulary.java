@@ -24,12 +24,12 @@ package org.embergraph.rdf.vocab;
 
 import java.util.Iterator;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.IConstant;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Interface for a pre-defined vocabulary.
@@ -95,7 +95,7 @@ public interface Vocabulary {
      * @param iv
      *            The {@link IV}.
      * 
-     * @return The {@link BigdataValue} -or- <code>null</code> if the {@link IV}
+     * @return The {@link EmbergraphValue} -or- <code>null</code> if the {@link IV}
      *         was not defined by the vocabulary.
      * 
      * @since TERMS_REFACTOR_BRANCH

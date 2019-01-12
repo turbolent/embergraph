@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphURIImpl;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
@@ -21,7 +22,6 @@ import org.embergraph.bop.joinGraph.IEvaluationPlanFactory;
 import org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlanFactory2;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURIImpl;
 import org.embergraph.rdf.rules.RuleContextEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
@@ -97,14 +97,14 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
             
             final ValueFactory vf = store.getValueFactory();
             
-            final BigdataURIImpl fc1 = (BigdataURIImpl) vf.createURI(ns+"fc1");
-            final BigdataURIImpl fc2 = (BigdataURIImpl) vf.createURI(ns+"fc2");
-            final BigdataURIImpl fp1 = (BigdataURIImpl) vf.createURI(ns+"fp1");
-            final BigdataURIImpl fp2 = (BigdataURIImpl) vf.createURI(ns+"fp2");
-            final BigdataURIImpl class1 = (BigdataURIImpl) vf.createURI(ns+"class1");
-            final BigdataURIImpl ontologyClass = (BigdataURIImpl) vf.createURI(ns+"ontologyClass");
-            final BigdataURIImpl frameProperty = (BigdataURIImpl) vf.createURI(ns+"frameProperty");
-            final BigdataURIImpl frameClass = (BigdataURIImpl) vf.createURI(ns+"FrameClass");
+            final EmbergraphURIImpl fc1 = (EmbergraphURIImpl) vf.createURI(ns+"fc1");
+            final EmbergraphURIImpl fc2 = (EmbergraphURIImpl) vf.createURI(ns+"fc2");
+            final EmbergraphURIImpl fp1 = (EmbergraphURIImpl) vf.createURI(ns+"fp1");
+            final EmbergraphURIImpl fp2 = (EmbergraphURIImpl) vf.createURI(ns+"fp2");
+            final EmbergraphURIImpl class1 = (EmbergraphURIImpl) vf.createURI(ns+"class1");
+            final EmbergraphURIImpl ontologyClass = (EmbergraphURIImpl) vf.createURI(ns+"ontologyClass");
+            final EmbergraphURIImpl frameProperty = (EmbergraphURIImpl) vf.createURI(ns+"frameProperty");
+            final EmbergraphURIImpl frameClass = (EmbergraphURIImpl) vf.createURI(ns+"FrameClass");
             
             store.addStatement(fc1, RDF.TYPE, frameClass);
             store.addStatement(fc2, RDF.TYPE, frameClass);
@@ -243,17 +243,17 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
             
             final ValueFactory vf = store.getValueFactory();
             
-            final BigdataURIImpl fp1 = (BigdataURIImpl) vf.createURI(ns+"fp1");
-            final BigdataURIImpl fp2 = (BigdataURIImpl) vf.createURI(ns+"fp2");
-            final BigdataURIImpl ontologyProperty = (BigdataURIImpl) vf.createURI(ns+"ontologyProperty");
-            final BigdataURIImpl multiValued = (BigdataURIImpl) vf.createURI(ns+"multiValued");
-            final BigdataURIImpl propertyRange = (BigdataURIImpl) vf.createURI(ns+"propertyRange");
-            final BigdataURIImpl v1 = (BigdataURIImpl) vf.createURI(ns+"v1");
-            final BigdataURIImpl v2 = (BigdataURIImpl) vf.createURI(ns+"v2");
-            final BigdataURIImpl mv1 = (BigdataURIImpl) vf.createURI(ns+"mv1");
-            final BigdataURIImpl mv2 = (BigdataURIImpl) vf.createURI(ns+"mv2");
-            final BigdataURIImpl r1 = (BigdataURIImpl) vf.createURI(ns+"r1");
-            final BigdataURIImpl r2 = (BigdataURIImpl) vf.createURI(ns+"r2");
+            final EmbergraphURIImpl fp1 = (EmbergraphURIImpl) vf.createURI(ns+"fp1");
+            final EmbergraphURIImpl fp2 = (EmbergraphURIImpl) vf.createURI(ns+"fp2");
+            final EmbergraphURIImpl ontologyProperty = (EmbergraphURIImpl) vf.createURI(ns+"ontologyProperty");
+            final EmbergraphURIImpl multiValued = (EmbergraphURIImpl) vf.createURI(ns+"multiValued");
+            final EmbergraphURIImpl propertyRange = (EmbergraphURIImpl) vf.createURI(ns+"propertyRange");
+            final EmbergraphURIImpl v1 = (EmbergraphURIImpl) vf.createURI(ns+"v1");
+            final EmbergraphURIImpl v2 = (EmbergraphURIImpl) vf.createURI(ns+"v2");
+            final EmbergraphURIImpl mv1 = (EmbergraphURIImpl) vf.createURI(ns+"mv1");
+            final EmbergraphURIImpl mv2 = (EmbergraphURIImpl) vf.createURI(ns+"mv2");
+            final EmbergraphURIImpl r1 = (EmbergraphURIImpl) vf.createURI(ns+"r1");
+            final EmbergraphURIImpl r2 = (EmbergraphURIImpl) vf.createURI(ns+"r2");
             
             store.addStatement(fp1, RDF.TYPE, RDFS.RESOURCE);
             store.addStatement(fp1, ontologyProperty, v1);

@@ -21,13 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest;
-import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest2;
-import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest2DiskRW;
-import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTest2DiskWORM;
-import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTxTest;
-import org.embergraph.rdf.sail.tck.BigdataSPARQLUpdateTxTest2;
-
 /**
  * Aggregates test suites into increasing dependency order.
  * 
@@ -66,10 +59,10 @@ public class TestAll extends TestCase {
          */
 
         // Unisolated operations.
-        suite.addTestSuite(BigdataSPARQLUpdateTest.class);
+        suite.addTestSuite(EmbergraphSPARQLUpdateTest.class);
 
         // Fully isolated read/write operations.
-        suite.addTestSuite(BigdataSPARQLUpdateTxTest.class);
+        suite.addTestSuite(EmbergraphSPARQLUpdateTxTest.class);
 
         /**
          * The bigdata extensions to SPARQL UPDATE to support solution sets as
@@ -91,12 +84,12 @@ public class TestAll extends TestCase {
         {
 
             // Unisolated operations
-            suite.addTestSuite(BigdataSPARQLUpdateTest2.class); // MemStore.
-            suite.addTestSuite(BigdataSPARQLUpdateTest2DiskRW.class);
-            suite.addTestSuite(BigdataSPARQLUpdateTest2DiskWORM.class);
+            suite.addTestSuite(EmbergraphSPARQLUpdateTest2.class); // MemStore.
+            suite.addTestSuite(EmbergraphSPARQLUpdateTest2DiskRW.class);
+            suite.addTestSuite(EmbergraphSPARQLUpdateTest2DiskWORM.class);
 
             // Fully isolated read/write operations.
-            suite.addTestSuite(BigdataSPARQLUpdateTxTest2.class); // MemStore
+            suite.addTestSuite(EmbergraphSPARQLUpdateTxTest2.class); // MemStore
 
         }
 

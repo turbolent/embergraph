@@ -27,20 +27,20 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.vocabulary.DC;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.DatasetImpl;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.DatasetNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
@@ -59,7 +59,7 @@ import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
+public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
 
     public TestVirtualGraphs() {
     }
@@ -131,21 +131,21 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
         /*
          * Setup the virtual graph associations in the data.
          */
-        final BigdataURI virtualGraph = valueFactory.asValue(BD.VIRTUAL_GRAPH);
+        final EmbergraphURI virtualGraph = valueFactory.asValue(BD.VIRTUAL_GRAPH);
 
-        final BigdataURI vg = valueFactory
+        final EmbergraphURI vg = valueFactory
                 .createURI("http://example.org/vg");
 
-        final BigdataURI context = valueFactory
+        final EmbergraphURI context = valueFactory
                 .createURI("http://www.embergraph.org/context");
 
-        final BigdataURI uri1 = valueFactory
+        final EmbergraphURI uri1 = valueFactory
                 .createURI("http://example.org/dft.ttl");
 
-        final BigdataURI alice = valueFactory
+        final EmbergraphURI alice = valueFactory
                 .createURI("http://example.org/alice");
 
-        final BigdataURI bob = valueFactory.createURI("http://example.org/bob");
+        final EmbergraphURI bob = valueFactory.createURI("http://example.org/bob");
         
         /*
          * Most URIs wind up declared when we insert the statements, but not
@@ -153,14 +153,14 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
          * that explicitly.
          */
         {
-            final BigdataValue[] values = new BigdataValue[] { virtualGraph,
+            final EmbergraphValue[] values = new EmbergraphValue[] { virtualGraph,
                     vg, context, uri1, alice, bob };
 
             tripleStore.getLexiconRelation().addTerms(values, values.length,
                     false/* readOnly */);
             
 //            // Cache the Value on the IV.
-//            for(BigdataValue v : values) {
+//            for(EmbergraphValue v : values) {
 //                v.getIV().setValue(v);
 //            }
             
@@ -169,7 +169,7 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
         // Insert the statements.
         {
 
-            final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(
                     tripleStore, 10/* capacity */);
 
             sb.add(valueFactory.createStatement(vg, virtualGraph, alice,
@@ -285,21 +285,21 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
         /*
          * Setup the virtual graph associations in the data.
          */
-        final BigdataURI virtualGraph = valueFactory.asValue(BD.VIRTUAL_GRAPH);
+        final EmbergraphURI virtualGraph = valueFactory.asValue(BD.VIRTUAL_GRAPH);
 
-        final BigdataURI vg = valueFactory
+        final EmbergraphURI vg = valueFactory
                 .createURI("http://example.org/vg");
 
-        final BigdataURI context = valueFactory
+        final EmbergraphURI context = valueFactory
                 .createURI("http://www.embergraph.org/context");
 
-        final BigdataURI uri1 = valueFactory
+        final EmbergraphURI uri1 = valueFactory
                 .createURI("http://example.org/dft.ttl");
 
-        final BigdataURI alice = valueFactory
+        final EmbergraphURI alice = valueFactory
                 .createURI("http://example.org/alice");
 
-        final BigdataURI bob = valueFactory.createURI("http://example.org/bob");
+        final EmbergraphURI bob = valueFactory.createURI("http://example.org/bob");
         
         /*
          * Most URIs wind up declared when we insert the statements, but not
@@ -307,14 +307,14 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
          * that explicitly.
          */
         {
-            final BigdataValue[] values = new BigdataValue[] { virtualGraph,
+            final EmbergraphValue[] values = new EmbergraphValue[] { virtualGraph,
                     vg, context, uri1, alice, bob };
 
             tripleStore.getLexiconRelation().addTerms(values, values.length,
                     false/* readOnly */);
             
 //            // Cache the Value on the IV.
-//            for(BigdataValue v : values) {
+//            for(EmbergraphValue v : values) {
 //                v.getIV().setValue(v);
 //            }
             
@@ -323,7 +323,7 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
         // Insert the statements.
         {
 
-            final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(
                     tripleStore, 10/* capacity */);
 
             sb.add(valueFactory.createStatement(vg, virtualGraph, alice,
@@ -366,10 +366,10 @@ public class TestVirtualGraphs extends AbstractBigdataExprBuilderTestCase {
                  * Value is not resolved when we resolve the virtual graph IV to
                  * the IVs of the virtual graph membership.
                  */
-//                final BigdataURI alice2 = valueFactory.createURI(alice
+//                final EmbergraphURI alice2 = valueFactory.createURI(alice
 //                        .stringValue());
 //                alice2.setIV(alice.getIV().clone(true/* clearCache */));
-//                final BigdataURI bob2 = valueFactory.createURI(bob
+//                final EmbergraphURI bob2 = valueFactory.createURI(bob
 //                        .stringValue());
 //                bob2.setIV(bob.getIV().clone(true/* clearCache */));
                 @SuppressWarnings("rawtypes")

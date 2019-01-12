@@ -38,6 +38,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -70,9 +73,6 @@ import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
@@ -83,8 +83,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTRangeOptimizer;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
@@ -136,24 +136,24 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     * Note: This could extend the base class to allow for search service
     * configuration options.
     */
-   private final BigdataNativeServiceOptions serviceOptions;
+   private final EmbergraphNativeServiceOptions serviceOptions;
 
    public GeoSpatialServiceFactory() {
 
-      serviceOptions = new BigdataNativeServiceOptions();
+      serviceOptions = new EmbergraphNativeServiceOptions();
 
       serviceOptions.setRunFirst(true);
 
    }
 
    @Override
-   public BigdataNativeServiceOptions getServiceOptions() {
+   public EmbergraphNativeServiceOptions getServiceOptions() {
 
       return serviceOptions;
 
    }
 
-   public BigdataServiceCall create(final ServiceCallCreateParams createParams) {
+   public EmbergraphServiceCall create(final ServiceCallCreateParams createParams) {
 
       if (createParams == null)
          throw new IllegalArgumentException();
@@ -442,7 +442,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     * Note: This has the {@link AbstractTripleStore} reference attached. This is
     * not a {@link Serializable} object. It MUST run on the query controller.
     */
-   private static class GeoSpatialServiceCall implements BigdataServiceCall {
+   private static class GeoSpatialServiceCall implements EmbergraphServiceCall {
       
       private final IServiceOptions serviceOptions;
       
@@ -560,7 +560,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                .getLexiconRelation().getNamespace(), kb.getSPORelation()
                .getTimestamp());
          
-         final BigdataValueFactory vf = kb.getValueFactory();
+         final EmbergraphValueFactory vf = kb.getValueFactory();
 
          final BlockingBuffer<IBindingSet[]> buffer = 
             new BlockingBuffer<IBindingSet[]>(globalBufferChunkOfChunksCapacity);
@@ -604,7 +604,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
          
          final private BOpContextBase context;
          final private GlobalAnnotations globals;
-         final private BigdataValueFactory vf;
+         final private EmbergraphValueFactory vf;
          final private GeoSpatialConfig geoSpatialConfig;
          
          private final int numTasks;
@@ -629,7 +629,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
             final List<IGeoSpatialQuery> queries,
             final AbstractTripleStore kb, final IVariable<?>[] vars,
             final BOpContextBase context,
-            final GlobalAnnotations globals, final BigdataValueFactory vf,
+            final GlobalAnnotations globals, final EmbergraphValueFactory vf,
             final GeoSpatialCounters geoSpatialCounters, final Executor executor,
             final int numTasks, final int minDatapointsPerTask, 
             final int threadLocalBufferCapacity, final BaseJoinStats stats) {
@@ -706,8 +706,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                         GeoSpatialSearchException.INVALID_PARAMETER_EXCEPTION + ": search datatype unknown.");
                 }
                 
-                final GeoSpatialLiteralExtension<BigdataValue> litExt = 
-                    new GeoSpatialLiteralExtension<BigdataValue>(kb.getLexiconRelation(), datatypeConfig);
+                final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
+                    new GeoSpatialLiteralExtension<EmbergraphValue>(kb.getLexiconRelation(), datatypeConfig);
                 
                 
                 // this debug code (currently broken) might be re-enabled once needed
@@ -803,8 +803,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
             // set up datatype configuration for the datatype URI
             final GeoSpatialDatatypeConfiguration datatypeConfig = query.getDatatypeConfig();
-            final GeoSpatialLiteralExtension<BigdataValue> litExt = 
-                new GeoSpatialLiteralExtension<BigdataValue>(kb.getLexiconRelation(), datatypeConfig);
+            final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
+                new GeoSpatialLiteralExtension<EmbergraphValue>(kb.getLexiconRelation(), datatypeConfig);
             
             switch (query.getSearchFunction()) {
             case IN_CIRCLE: 
@@ -815,7 +815,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                   filter = new GeoSpatialInCircleFilter(
                      query.getSpatialCircleCenter(),  query.getSpatialCircleRadius(), 
                      query.getSpatialUnit(), query.getTimeStart(), query.getTimeEnd(), 
-                     new GeoSpatialLiteralExtension<BigdataValue>(kb.getLexiconRelation(), datatypeConfig), geoSpatialCounters);
+                     new GeoSpatialLiteralExtension<EmbergraphValue>(kb.getLexiconRelation(), datatypeConfig), geoSpatialCounters);
                   
                }
                break;
@@ -829,7 +829,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                   // we also use such a dummy filter if the geospatial search function is undefined
                   // (which might be the case if we query an index without latitude and longitude)
                   filter = new AcceptAllSolutionsFilter(
-                     new GeoSpatialLiteralExtension<BigdataValue>(kb.getLexiconRelation(), datatypeConfig), geoSpatialCounters);
+                     new GeoSpatialLiteralExtension<EmbergraphValue>(kb.getLexiconRelation(), datatypeConfig), geoSpatialCounters);
                }
                break;
 
@@ -852,16 +852,16 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
             final TermNode ctxTermNode = query.getContext(); 
             if (ctxTermNode!=null) {
                
-               final BigdataValue ctx = 
+               final EmbergraphValue ctx =
                   ctxTermNode==null ? null : ctxTermNode.getValue();
-               if (ctx!=null && !(ctx instanceof BigdataURI)) {
+               if (ctx!=null && !(ctx instanceof EmbergraphURI)) {
                   throw new IllegalArgumentException(
                      "Context in GeoSpatial search must be a URI");
                }  
 
                // register context check in the filter
                filter.addContextCheck(
-                  keyOrder.getPositionInIndex(SPOKeyOrder.C), (BigdataURI)ctx);
+                  keyOrder.getPositionInIndex(SPOKeyOrder.C), (EmbergraphURI)ctx);
                
             }
 
@@ -905,7 +905,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                 new GeoSpatialServiceCallResolver(var, incomingBindingSet, locationVar,
                     timeVar, locationAndTimeVar, latVar, lonVar, coordSystemVar, 
                     customFieldsVar, literalVar, distanceVar, subjectPos, objectPos, vf, 
-                    new GeoSpatialLiteralExtension<BigdataValue>(kb.getLexiconRelation(), datatypeConfig),
+                    new GeoSpatialLiteralExtension<EmbergraphValue>(kb.getLexiconRelation(), datatypeConfig),
                     query.getCustomFieldsConstraints().keySet(), centerPointDD, query.getSpatialUnit());
             
             // and construct the sub range task
@@ -922,7 +922,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
              // set up datatype configuration and literal extension object for the datatype URI
              final GeoSpatialDatatypeConfiguration datatypeConfig = query.getDatatypeConfig();
              final GeoSpatialLiteralExtension litExt = 
-                 new GeoSpatialLiteralExtension<BigdataValue>(kb.getLexiconRelation(), datatypeConfig);
+                 new GeoSpatialLiteralExtension<EmbergraphValue>(kb.getLexiconRelation(), datatypeConfig);
              
             // set up range scan
             final Var oVar = Var.var(); // object position variable
@@ -1332,14 +1332,14 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
          public static class GeoSpatialSearchRange {
              
              final GeoSpatialDatatypeConfiguration datatypeConfig;
-             final GeoSpatialLiteralExtension<BigdataValue> litExt;
+             final GeoSpatialLiteralExtension<EmbergraphValue> litExt;
              
              private final Object[] lowerBorderComponents;
              private final Object[] upperBorderComponents;
              
              public GeoSpatialSearchRange(
                  final GeoSpatialDatatypeConfiguration datatypeConfig,
-                 final GeoSpatialLiteralExtension<BigdataValue> litExt,
+                 final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
                  final Object[] lowerBorderComponents, final Object[] upperBorderComponents) {
                  
                  this.datatypeConfig = datatypeConfig;
@@ -1350,7 +1350,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                  
              }
              
-             public GeoSpatialLiteralExtension<BigdataValue> getLitExt() {
+             public GeoSpatialLiteralExtension<EmbergraphValue> getLitExt() {
                  return litExt;
              }
              
@@ -1399,8 +1399,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
          final private UNITS unit;
          
          
-         final private BigdataValueFactory vf;
-         final private GeoSpatialLiteralExtension<BigdataValue> litExt;
+         final private EmbergraphValueFactory vf;
+         final private GeoSpatialLiteralExtension<EmbergraphValue> litExt;
          final private IGeoSpatialLiteralSerializer literalSerializer;
          
          // true if the resolver needs to dereference the object, e.g. because
@@ -1414,8 +1414,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
             final Var<?> locationVar, final Var<?> timeVar, final Var<?> locationAndTimeVar, 
             final Var<?> latVar, final Var<?> lonVar, final Var<?> coordSystemVar, 
             final Var<?> customFieldsVar, final Var<?> literalVar, final Var<?> distanceVar,
-            final int subjectPos, final int objectPos, final BigdataValueFactory vf, 
-            final GeoSpatialLiteralExtension<BigdataValue> litExt, final Set<String> customFieldStrings, 
+            final int subjectPos, final int objectPos, final EmbergraphValueFactory vf,
+            final GeoSpatialLiteralExtension<EmbergraphValue> litExt, final Set<String> customFieldStrings,
             final CoordinateDD centerPoint, final UNITS unit) {
             
             this.var = var;
@@ -1744,7 +1744,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
       private static final long serialVersionUID = 2271038531634362860L;
       
-      protected final GeoSpatialLiteralExtension<BigdataValue> litExt;
+      protected final GeoSpatialLiteralExtension<EmbergraphValue> litExt;
 
       protected final GeoSpatialDatatypeConfiguration datatypeConfig;
 
@@ -1757,14 +1757,14 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       
       // value of the constrained context (only used in quads mode if 
       // geo:context predicate is used)
-      BigdataURI context = null;
+      EmbergraphURI context = null;
       
       // counters objects
       GeoSpatialCounters geoSpatialCounters;
       
       
       public GeoSpatialFilterBase(
-         final GeoSpatialLiteralExtension<BigdataValue> litExt,
+         final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
          final GeoSpatialCounters geoSpatialCounters) {
          
          this.litExt = litExt;
@@ -1774,7 +1774,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       
       // sets member variables that imply an additional context check
       public void addContextCheck(
-         final Integer contextPos, final BigdataURI context) {
+         final Integer contextPos, final EmbergraphURI context) {
          
          this.contextPos = contextPos;
          this.context = context;
@@ -1792,7 +1792,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
        * 
        * @return the object
        */
-      public GeoSpatialLiteralExtension<BigdataValue> getGeoSpatialLiteralExtension() {
+      public GeoSpatialLiteralExtension<EmbergraphValue> getGeoSpatialLiteralExtension() {
          return litExt;
       }
 
@@ -1864,7 +1864,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       public GeoSpatialInCircleFilter(
          final PointLatLon spatialPoint, Double distance,
          final UNITS unit, final Long timeMin, final Long timeMax, 
-         final GeoSpatialLiteralExtension<BigdataValue> litExt,
+         final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
          final GeoSpatialCounters geoSpatialCounters) {
          
          super(litExt, geoSpatialCounters);
@@ -1944,7 +1944,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       private static final long serialVersionUID = -314581671447912352L;
       
       public AcceptAllSolutionsFilter(
-         final GeoSpatialLiteralExtension<BigdataValue> litExt,
+         final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
          final GeoSpatialCounters geoSpatialCounters) {
          
          super(litExt, geoSpatialCounters);
@@ -2425,7 +2425,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                   } else if (obj instanceof IV) {
 
                      @SuppressWarnings("rawtypes")
-                     final BigdataValue bdVal = ((IV)obj).getValue();
+                     final EmbergraphValue bdVal = ((IV)obj).getValue();
 
                       if (bdVal!=null) {
                           return (Literal)bdVal;
@@ -2516,7 +2516,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
                  } else if (obj instanceof IV) {
                      
                     @SuppressWarnings("rawtypes")
-                    final BigdataValue bdVal = ((IV)obj).getValue();
+                    final EmbergraphValue bdVal = ((IV)obj).getValue();
 
                      if (bdVal!=null) {
                          return bdVal.stringValue();

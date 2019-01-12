@@ -5,6 +5,8 @@ import java.math.BigInteger;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -18,8 +20,6 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.AbstractInlineExtensionIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * Class provides support for datatype {@link Literal}s for which an
@@ -36,7 +36,7 @@ import org.embergraph.rdf.model.BigdataURI;
  * @version $Id$
  * @param <V>
  */
-public class LiteralExtensionIV<V extends BigdataLiteral> 
+public class LiteralExtensionIV<V extends EmbergraphLiteral>
     	extends AbstractInlineExtensionIV<V, Object> 
 		implements Literal, InlineLiteralIV<V, Object> { 
 
@@ -45,9 +45,9 @@ public class LiteralExtensionIV<V extends BigdataLiteral>
      */
     private static final long serialVersionUID = 8267554196603121194L;
     
-    private final AbstractLiteralIV<BigdataLiteral, ?> delegate;
+    private final AbstractLiteralIV<EmbergraphLiteral, ?> delegate;
     
-    private final IV<BigdataURI, ?> datatype;
+    private final IV<EmbergraphURI, ?> datatype;
 
     /**
      * {@inheritDoc}
@@ -75,8 +75,8 @@ public class LiteralExtensionIV<V extends BigdataLiteral>
     }
     
     public LiteralExtensionIV(
-    		final AbstractLiteralIV<BigdataLiteral, ?> delegate, 
-    		final IV<BigdataURI, ?> datatype) {
+    		final AbstractLiteralIV<EmbergraphLiteral, ?> delegate,
+    		final IV<EmbergraphURI, ?> datatype) {
         
         super(VTE.LITERAL, true/*extension*/, delegate.getDTE());
         
@@ -85,7 +85,7 @@ public class LiteralExtensionIV<V extends BigdataLiteral>
         
         this.delegate = delegate;
         
-        this.datatype = (AbstractIV<BigdataURI, ?>) datatype;
+        this.datatype = (AbstractIV<EmbergraphURI, ?>) datatype;
         
     }
     
@@ -100,7 +100,7 @@ public class LiteralExtensionIV<V extends BigdataLiteral>
     	return true;
     }
     
-    public AbstractLiteralIV<BigdataLiteral, ?> getDelegate() {
+    public AbstractLiteralIV<EmbergraphLiteral, ?> getDelegate() {
         return delegate;
     }
     
@@ -118,7 +118,7 @@ public class LiteralExtensionIV<V extends BigdataLiteral>
      * Extension IV is the datatype for this literal.
      */
     @Override
-    public IV<BigdataURI, ?> getExtensionIV() {
+    public IV<EmbergraphURI, ?> getExtensionIV() {
         return datatype;
     }
     
@@ -177,7 +177,7 @@ public class LiteralExtensionIV<V extends BigdataLiteral>
 		
 		if (v == null) {
 			
-//			final BigdataValueFactory f = lex.getValueFactory();
+//			final EmbergraphValueFactory f = lex.getValueFactory();
 			
 			final ILexiconConfiguration config = lex.getLexiconConfiguration();
 

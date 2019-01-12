@@ -42,7 +42,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.BTree;
 import org.embergraph.concurrent.NonBlockingLockManager;
 import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign;
@@ -51,7 +51,7 @@ import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.resources.StoreManager;
 import org.embergraph.service.AbstractDistributedFederation;
-import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IServiceShutdown;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.TaskCounters;
@@ -883,11 +883,11 @@ public class ConcurrencyManager implements IConcurrencyManager {
             collectQueueStatistics = Boolean
                     .parseBoolean(properties
                             .getProperty(
-                                    IBigdataClient.Options.COLLECT_QUEUE_STATISTICS,
-                                    IBigdataClient.Options.DEFAULT_COLLECT_QUEUE_STATISTICS));
+                                    IEmbergraphClient.Options.COLLECT_QUEUE_STATISTICS,
+                                    IEmbergraphClient.Options.DEFAULT_COLLECT_QUEUE_STATISTICS));
 
             if (log.isInfoEnabled())
-                log.info(IBigdataClient.Options.COLLECT_QUEUE_STATISTICS + "="
+                log.info(IEmbergraphClient.Options.COLLECT_QUEUE_STATISTICS + "="
                         + collectQueueStatistics);
 
         }
@@ -1364,7 +1364,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
                          * the CORE pool size.
                          */
 
-                        if (BigdataStatics.debug)
+                        if (EmbergraphStatics.debug)
                             System.err.print("z");
 
                         Thread.sleep(50/* ms */);

@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151210;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
 
-public class TestMultiVocabulary extends BigdataCoreVocabulary_v20151210 {
+public class TestMultiVocabulary extends EmbergraphCoreVocabulary_v20151210 {
 
 	/**
 	 * De-serialization ctor.

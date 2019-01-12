@@ -27,7 +27,7 @@ import java.util.Locale;
 import org.openrdf.model.Value;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.search.FullTextIndex;
 import org.embergraph.search.IHit;
@@ -63,6 +63,6 @@ public interface ISubjectCentricTextIndexer<A extends IHit> extends ITextIndexer
      * @todo allow registeration of datatype specific tokenizers (we already
      *       have language family based lookup).
      */
-    public void index(IV<?,?> subject, Iterator<BigdataValue> valuesIterator);
+    public void index(IV<?,?> subject, Iterator<EmbergraphValue> valuesIterator);
 
 }

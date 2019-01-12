@@ -29,6 +29,10 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.AssertionFailedError;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.store.EmbergraphValueIteratorImpl;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
@@ -36,14 +40,10 @@ import org.openrdf.model.vocabulary.XMLSchema;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.spo.TestSPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.rdf.store.BD;
-import org.embergraph.rdf.store.BigdataValueIteratorImpl;
 import org.embergraph.search.Hit;
 import org.embergraph.search.Hiterator;
 import org.embergraph.striterator.ChunkedWrappedIterator;
@@ -101,7 +101,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 //     *            The term.
 //     */
 //    protected void doAddTermTest(final AbstractTripleStore store,
-//            final BigdataValue term) {
+//            final EmbergraphValue term) {
 //
 //        assertEquals(NULL, store.getIV(term));
 //
@@ -119,7 +119,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 
     private void assertExpectedHits(final AbstractTripleStore store,
             final String query, final String languageCode, 
-            final BigdataValue[] expected) {
+            final EmbergraphValue[] expected) {
         
         assertExpectedHits(store, query, languageCode, 0f/* minCosine */,
                 expected);
@@ -129,7 +129,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
     @SuppressWarnings("unchecked")
     private void assertExpectedHits(final AbstractTripleStore store,
             final String query, final String languageCode,
-            final float minCosine, final BigdataValue[] expected) {
+            final float minCosine, final EmbergraphValue[] expected) {
 
         final Hiterator hitr = store.getLexiconRelation().getSubjectCentricSearchEngine()
                 .search(new FullTextQuery(
@@ -145,7 +145,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 
         // assertEquals("#hits", (long) expected.length, itr.size());
 
-        final ICloseableIterator<BigdataValue> itr2 = new BigdataValueIteratorImpl(
+        final ICloseableIterator<EmbergraphValue> itr2 = new EmbergraphValueIteratorImpl(
                 store, new ChunkedWrappedIterator<IV>(new Striterator(hitr)
                         .addFilter(new Resolver() {
                             private static final long serialVersionUID = 1L;
@@ -220,15 +220,15 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 
             assertNotNull(store.getLexiconRelation().getSearchEngine());
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI s = f.createURI(BD.NAMESPACE+"s");
+            final EmbergraphURI s = f.createURI(BD.NAMESPACE+"s");
             
-            final BigdataURI p = f.createURI(BD.NAMESPACE+"p");
+            final EmbergraphURI p = f.createURI(BD.NAMESPACE+"p");
             
             final LiteralImpl largeLiteral = getLargeLiteral(store);
 
-            final BigdataValue[] terms = new BigdataValue[] {
+            final EmbergraphValue[] terms = new EmbergraphValue[] {
                     f.createLiteral("abc"),
                     f.createLiteral("abc", "en"),
                     f.createLiteral("good day", "en"),
@@ -248,7 +248,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 
             };
 
-            for (BigdataValue o : terms) {
+            for (EmbergraphValue o : terms) {
             	
             	store.addStatement(s, p, o);
             	
@@ -269,43 +269,43 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
              */
             
             assertExpectedHits(store, "abc", null/* languageCode */,
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
             			s
                     });
 
-            assertExpectedHits(store, "tag", "en", new BigdataValue[] {
+            assertExpectedHits(store, "tag", "en", new EmbergraphValue[] {
 					s
 					});
 
-            assertExpectedHits(store, "tag", "de", new BigdataValue[] {
+            assertExpectedHits(store, "tag", "de", new EmbergraphValue[] {
             		s
                     });
 
             assertExpectedHits(store, "GOOD DAY", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
             		s
                     });
 
             assertExpectedHits(store, "GOOD DAY", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
             		s
                     });
 
             assertExpectedHits(store, "day", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
             		s
                     });
 
             // 'the' is a stopword, so there are no hits.
-            assertExpectedHits(store, "the", "en", new BigdataValue[] {});
+            assertExpectedHits(store, "the", "en", new EmbergraphValue[] {});
 
             // BLOB
             assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
                     s
                     });
 
@@ -327,40 +327,40 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
                 assertNotNull(store.getLexiconRelation().getSubjectCentricSearchEngine());
                 
                 assertExpectedHits(store, "abc", null/* languageCode */,
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "tag", "en", new BigdataValue[] {
+                assertExpectedHits(store, "tag", "en", new EmbergraphValue[] {
                 		s
                         });
 
-                assertExpectedHits(store, "tag", "de", new BigdataValue[] {
-                		s
-                        });
-
-                assertExpectedHits(store, "GOOD DAY", "en",
-                        .0f, // minCosine
-                        new BigdataValue[] {
+                assertExpectedHits(store, "tag", "de", new EmbergraphValue[] {
                 		s
                         });
 
                 assertExpectedHits(store, "GOOD DAY", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
+                		s
+                        });
+
+                assertExpectedHits(store, "GOOD DAY", "en",
+                        .0f, // minCosine
+                        new EmbergraphValue[] {
                 		s
                         });
 
                 assertExpectedHits(store, "day", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                 		s
                 		});
                 
                 // BLOB
                 assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                         .0f, // minCosine
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                         s
                         });
                 
@@ -382,19 +382,19 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 
             assertNotNull(store.getLexiconRelation().getSearchEngine());
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI s1 = f.createURI(BD.NAMESPACE+"s1");
+            final EmbergraphURI s1 = f.createURI(BD.NAMESPACE+"s1");
             
-            final BigdataURI s2 = f.createURI(BD.NAMESPACE+"s2");
+            final EmbergraphURI s2 = f.createURI(BD.NAMESPACE+"s2");
             
-            final BigdataURI s3 = f.createURI(BD.NAMESPACE+"s3");
+            final EmbergraphURI s3 = f.createURI(BD.NAMESPACE+"s3");
             
-            final BigdataURI p = f.createURI(BD.NAMESPACE+"p");
+            final EmbergraphURI p = f.createURI(BD.NAMESPACE+"p");
             
             final LiteralImpl largeLiteral = getLargeLiteral(store);
 
-            final BigdataValue[] terms = new BigdataValue[] {
+            final EmbergraphValue[] terms = new EmbergraphValue[] {
                     f.createLiteral("abc"),
                     f.createLiteral("abc", "en"),
                     f.createLiteral("good day", "en"),
@@ -414,7 +414,7 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
 
             };
 
-            for (BigdataValue o : terms) {
+            for (EmbergraphValue o : terms) {
             	
             	store.addStatement(s1, p, o);
             	
@@ -447,37 +447,37 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
              */
             
             assertExpectedHits(store, "abc", null/* languageCode */,
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
         			s1, s2
                     });
 
-            assertExpectedHits(store, "tag", "en", new BigdataValue[] {
+            assertExpectedHits(store, "tag", "en", new EmbergraphValue[] {
 					s1, s3
 					});
 
-            assertExpectedHits(store, "tag", "de", new BigdataValue[] {
+            assertExpectedHits(store, "tag", "de", new EmbergraphValue[] {
             		s1, s3
                     });
 
             assertExpectedHits(store, "GOOD DAY", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
             		s1, s2, s3
                     });
 
             assertExpectedHits(store, "day", "en",
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
             		s1, s2, s3
                     });
 
             // 'the' is a stopword, so there are no hits.
-            assertExpectedHits(store, "the", "en", new BigdataValue[] {});
+            assertExpectedHits(store, "the", "en", new EmbergraphValue[] {});
 
             // BLOB
             assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                     .0f, // minCosine
-                    new BigdataValue[] {
+                    new EmbergraphValue[] {
                     s1
                     });
 
@@ -499,34 +499,34 @@ public class TestSubjectCentricFullTextIndex extends AbstractTripleStoreTestCase
                 assertNotNull(store.getLexiconRelation().getSubjectCentricSearchEngine());
                 
                 assertExpectedHits(store, "abc", null/* languageCode */,
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                 		s1, s2
                         });
 
-                assertExpectedHits(store, "tag", "en", new BigdataValue[] {
+                assertExpectedHits(store, "tag", "en", new EmbergraphValue[] {
                 		s1, s3
                         });
 
-                assertExpectedHits(store, "tag", "de", new BigdataValue[] {
+                assertExpectedHits(store, "tag", "de", new EmbergraphValue[] {
                 		s1, s3
                         });
 
                 assertExpectedHits(store, "GOOD DAY", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                 		s1, s2, s3
                         });
 
                 assertExpectedHits(store, "day", "en",
                         .0f, // minCosine
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                 		s1, s2, s3
                 		});
                 
                 // BLOB
                 assertExpectedHits(store, largeLiteral.getLabel(), null/*lang*/,
                         .0f, // minCosine
-                        new BigdataValue[] {
+                        new EmbergraphValue[] {
                         s1
                         });
                 

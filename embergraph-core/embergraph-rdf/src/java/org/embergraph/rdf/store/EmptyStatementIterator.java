@@ -23,7 +23,7 @@ package org.embergraph.rdf.store;
 
 import java.util.NoSuchElementException;
 
-import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
  * Empty iterator.
@@ -31,9 +31,9 @@ import org.embergraph.rdf.model.BigdataStatement;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class EmptyStatementIterator implements BigdataStatementIterator {
+public class EmptyStatementIterator implements EmbergraphStatementIterator {
 
-    public static transient final BigdataStatementIterator INSTANCE = new EmptyStatementIterator();
+    public static transient final EmbergraphStatementIterator INSTANCE = new EmptyStatementIterator();
     
     private EmptyStatementIterator() {
         
@@ -49,7 +49,7 @@ public class EmptyStatementIterator implements BigdataStatementIterator {
         
     }
 
-    public BigdataStatement next() throws RuntimeException {
+    public EmbergraphStatement next() throws RuntimeException {
         
         throw new NoSuchElementException();
         

@@ -17,6 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.impl;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
@@ -28,7 +29,6 @@ import org.embergraph.rdf.internal.INonInlineExtensionCodes;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Implementation for any kind of RDF {@link Value} when the value is not being
@@ -54,7 +54,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * the TERM2ID / ID2TERM indices while larger values should be inserted as
  * {@link BlobIV}s into the TERMS index.
  */
-public class BlobIV<V extends BigdataValue> extends
+public class BlobIV<V extends EmbergraphValue> extends
         AbstractNonInlineExtensionIV<V, Void> {
 
     /**
@@ -104,7 +104,7 @@ public class BlobIV<V extends BigdataValue> extends
 //	/**
 //	 * Create a mock {@link IV} having the indicated {@link VTE} which will
 //	 * report <code>true</code> for {@link #isNullIV()}. This is used by some
-//	 * code patterns where we need to associate a {@link BigdataValue} not in
+//	 * code patterns where we need to associate a {@link EmbergraphValue} not in
 //	 * the database with an {@link IV} on a temporary basis.
 //	 * 
 //	 * @param vte
@@ -252,7 +252,7 @@ public class BlobIV<V extends BigdataValue> extends
 //     * <p>
 //     * {@inheritDoc}
 //     * 
-//     * @see #setValue(BigdataValue)
+//     * @see #setValue(EmbergraphValue)
 //     */
 //    final public V asValue(final LexiconRelation lex) {
 //        throw new UnsupportedOperationException();
@@ -347,7 +347,7 @@ public class BlobIV<V extends BigdataValue> extends
     }
 
 //	/**
-//	 * Override default serialization to send the cached {@link BigdataValue}.
+//	 * Override default serialization to send the cached {@link EmbergraphValue}.
 //	 */
 //	private void writeObject(final java.io.ObjectOutputStream out)
 //			throws IOException {
@@ -359,7 +359,7 @@ public class BlobIV<V extends BigdataValue> extends
 //	}
 //
 //	/**
-//	 * Override default serialization to recover the cached {@link BigdataValue}
+//	 * Override default serialization to recover the cached {@link EmbergraphValue}
 //	 * .
 //	 */
 //	@SuppressWarnings("unchecked")

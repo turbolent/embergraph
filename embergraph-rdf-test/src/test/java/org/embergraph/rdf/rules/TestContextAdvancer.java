@@ -25,6 +25,8 @@ import java.util.Properties;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.bop.BOp;
@@ -37,10 +39,8 @@ import org.embergraph.btree.IRangeQuery;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ContextAdvancer;
 import org.embergraph.rdf.spo.ISPO;
@@ -91,20 +91,20 @@ public class TestContextAdvancer extends TestCase2 {
             
             db.create();
             
-//            final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(
+//            final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(
 //                    db, 100/* capacity */);
 
-            final BigdataValueFactory f = db.getValueFactory();
+            final EmbergraphValueFactory f = db.getValueFactory();
             
-            final BigdataURI u1 = f.createURI("http://www.embergraph.org/u1");
-            final BigdataURI u2 = f.createURI("http://www.embergraph.org/u2");
-            final BigdataURI v1 = f.createURI("http://www.embergraph.org/v1");
-            final BigdataURI v2 = f.createURI("http://www.embergraph.org/v2");
-            final BigdataURI c1 = f.createURI("http://www.embergraph.org/c1");
-            final BigdataURI c2 = f.createURI("http://www.embergraph.org/c2");
-            final BigdataURI rdfType = f.createURI(RDF.TYPE.stringValue());
+            final EmbergraphURI u1 = f.createURI("http://www.embergraph.org/u1");
+            final EmbergraphURI u2 = f.createURI("http://www.embergraph.org/u2");
+            final EmbergraphURI v1 = f.createURI("http://www.embergraph.org/v1");
+            final EmbergraphURI v2 = f.createURI("http://www.embergraph.org/v2");
+            final EmbergraphURI c1 = f.createURI("http://www.embergraph.org/c1");
+            final EmbergraphURI c2 = f.createURI("http://www.embergraph.org/c2");
+            final EmbergraphURI rdfType = f.createURI(RDF.TYPE.stringValue());
 
-            final BigdataValue[] terms = new BigdataValue[] {
+            final EmbergraphValue[] terms = new EmbergraphValue[] {
                     u1,u2,
                     v1,v2,
                     c1,c2,
@@ -115,7 +115,7 @@ public class TestContextAdvancer extends TestCase2 {
                     .addTerms(terms, terms.length, false/* readOnly */);
 
             final StatementEnum explicit = StatementEnum.Explicit;
-            final BigdataStatement[] stmts = new BigdataStatement[]{
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[]{
                     f.createStatement(u1, rdfType, v1, c1, explicit), 
                     f.createStatement(u1, rdfType, v1, c2, explicit), 
                     f.createStatement(u1, rdfType, v2, c1, explicit), 
@@ -134,7 +134,7 @@ public class TestContextAdvancer extends TestCase2 {
                 log.info(db.dumpStore());
 
             // The expected distinct statements w/o their context info. 
-            final BigdataStatement[] expectedDistinct = new BigdataStatement[]{
+            final EmbergraphStatement[] expectedDistinct = new EmbergraphStatement[]{
                     f.createStatement(u1, rdfType, v1), 
                     f.createStatement(u1, rdfType, v2), 
                     f.createStatement(u2, rdfType, v1), 

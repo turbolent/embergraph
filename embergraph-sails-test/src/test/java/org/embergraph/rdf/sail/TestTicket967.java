@@ -1,7 +1,6 @@
 package org.embergraph.rdf.sail;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -41,7 +40,7 @@ public class TestTicket967 extends QuadsTestCase {
 
 		// try with Bigdata:
 		try {
-			executeTest(new BigdataSailRepository(getSail()));
+			executeTest(new EmbergraphSailRepository(getSail()));
 		} finally {
 			getSail().__tearDownUnitTest();
 		}

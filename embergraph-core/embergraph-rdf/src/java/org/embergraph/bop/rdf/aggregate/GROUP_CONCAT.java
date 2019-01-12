@@ -28,8 +28,8 @@ import org.embergraph.bop.solutions.PipelinedAggregationOp;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.IVValueExpression;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /**
@@ -154,15 +154,15 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
 
     private transient int characterLimit;
 
-    private BigdataValueFactory getValueFactory(){
+    private EmbergraphValueFactory getValueFactory(){
         if (vf == null) {
             final String namespace = (String) getRequiredProperty(Annotations.NAMESPACE);
-            vf = BigdataValueFactoryImpl.getInstance(namespace);
+            vf = EmbergraphValueFactoryImpl.getInstance(namespace);
         }
         return vf;
     }
 
-    protected transient BigdataValueFactory vf;
+    protected transient EmbergraphValueFactory vf;
 
     /**
      * The running concatenation of observed bound values.
@@ -229,7 +229,7 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
 
         }
 
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
         IV ret;
         if (aggregated == null) {

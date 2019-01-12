@@ -42,7 +42,7 @@ import org.embergraph.bop.aggregate.IAggregate;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.FunctionNode;
@@ -134,13 +134,13 @@ public class VerifyAggregates {
     
                 final IValueExpression<? extends IV> ve = node.getValueExpression();
                 if (ve!=null) {
-                    exprs2[i] = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+                    exprs2[i] = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                             ve);
                 } else if (node instanceof FunctionNode) {
                     
                     final FunctionNode exprNode = (FunctionNode)node;
                     final BOp expr = convertAggregates(exprNode);
-                    exprs2[i] = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(new BOp[]{
+                    exprs2[i] = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(new BOp[]{
                             expr}, null);
                     
                     log.debug("Unknown node "+node);
@@ -546,7 +546,7 @@ public class VerifyAggregates {
          * However, the code is still hitting some edge cases.
          * 
          * MP: I fixed this by running the ASTSetValueOptimizer earlier in the
-         * parsing process - ie. in Bigdata2ASTSPARQLParser.parseQuery2.
+         * parsing process - ie. in Embergraph2ASTSPARQLParser.parseQuery2.
          * 
          * There is some commented out code from openrdf that depends on setting
          * a flag for the expression if an AggregationCollector reports at least

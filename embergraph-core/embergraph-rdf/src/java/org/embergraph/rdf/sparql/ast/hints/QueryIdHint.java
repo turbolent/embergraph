@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast.hints;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
@@ -34,12 +34,12 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 
 /**
  * This just strips the {@link QueryHints#QUERYID} out of the AST. The
- * {@link Bigdata2ASTSPARQLParser} is responsible for traversing the AST and, if
+ * {@link Embergraph2ASTSPARQLParser} is responsible for traversing the AST and, if
  * it finds the {@link QueryHints#QUERYID}, attaching it to the
  * {@link ASTContainer}'s query hints {@link Properties} object.
  * <P>
  * Note: The timing for interpreting this query hint is critical, which is why
- * it is handled by the {@link Bigdata2ASTSPARQLParser}. We need to know if the
+ * it is handled by the {@link Embergraph2ASTSPARQLParser}. We need to know if the
  * QueryID was set long before the {@link ASTQueryHintOptimizer} runs.
  */
 final class QueryIdHint extends AbstractQueryHint<UUID> {

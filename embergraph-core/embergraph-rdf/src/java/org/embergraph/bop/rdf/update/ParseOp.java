@@ -37,6 +37,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -63,7 +64,6 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.rio.IRDFParserOptions;
 import org.embergraph.rdf.rio.PresortRioLoader;
 import org.embergraph.rdf.rio.RDFParserOptions;
@@ -475,7 +475,7 @@ public class ParseOp extends PipelineOp {
             /*
              * Note: This is used as the default context position for the
              * statement if the database mode is quads. It needs to be a
-             * BigdataURI from the value factory for the target database - the
+             * EmbergraphURI from the value factory for the target database - the
              * same factory that is used by the parser.
              */
             this.targetUri = (URI) database.asValue((URI) op
@@ -841,7 +841,7 @@ public class ParseOp extends PipelineOp {
 
                 final IV iv = TermId.mockIV(VTE.valueOf(v));
 
-                iv.setValue((BigdataValue)v);
+                iv.setValue((EmbergraphValue)v);
 
                 return new Constant<IV>(iv);
 

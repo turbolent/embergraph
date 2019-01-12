@@ -23,13 +23,13 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
@@ -90,17 +90,17 @@ public class TestVocabulary extends AbstractTripleStoreTestCase {
             doRoundTripTest(vocab);
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             // Must be using the same namespace.
             assertTrue(vocab.getNamespace()==f.getNamespace());
             
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfProperty = f.asValue(RDF.PROPERTY);
+            final EmbergraphURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
-            store.addTerms(new BigdataValue[] { rdfType, rdfProperty, unknownURI });
+            store.addTerms(new EmbergraphValue[] { rdfType, rdfProperty, unknownURI });
 
             // point tests for unknown values (there are no known values).
             assertNull(vocab.get(RDF.TYPE));
@@ -185,14 +185,14 @@ public class TestVocabulary extends AbstractTripleStoreTestCase {
             doRoundTripTest(vocab);
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfProperty = f.asValue(RDF.PROPERTY);
+            final EmbergraphURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
-            store.addTerms(new BigdataValue[] { rdfType, rdfProperty, unknownURI });
+            store.addTerms(new EmbergraphValue[] { rdfType, rdfProperty, unknownURI });
 
             // point tests for known values.
             

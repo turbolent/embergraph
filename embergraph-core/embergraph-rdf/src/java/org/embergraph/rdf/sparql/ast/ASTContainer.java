@@ -29,7 +29,6 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
-import org.embergraph.rdf.lexicon.BigdataValueCentricFullTextIndex;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 

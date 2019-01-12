@@ -6,7 +6,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Factory for a {@link QueryEngine} or derived class.
@@ -66,7 +66,7 @@ public interface IQueryEngineFactory {
 	 * 
 	 * @return The query controller.
 	 */
-	FederatedQueryEngine getFederatedQueryController(IBigdataFederation<?> fed);
+	FederatedQueryEngine getFederatedQueryController(IEmbergraphFederation<?> fed);
 
 	/**
 	 * Return the #of live query controllers.

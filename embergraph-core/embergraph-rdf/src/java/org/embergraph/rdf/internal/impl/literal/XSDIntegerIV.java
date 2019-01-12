@@ -21,17 +21,17 @@ package org.embergraph.rdf.internal.impl.literal;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
 
 /** Implementation for inline <code>xsd:integer</code>. */
-public class XSDIntegerIV<V extends BigdataLiteral> extends
+public class XSDIntegerIV<V extends EmbergraphLiteral> extends
         NumericIV<V, BigInteger> implements Literal {
     
     /**
@@ -126,7 +126,7 @@ public class XSDIntegerIV<V extends BigdataLiteral> extends
 	public V asValue(final LexiconRelation lex) {
 		V v = getValueCache();
 		if (v == null) {
-			final BigdataValueFactory f = lex.getValueFactory();
+			final EmbergraphValueFactory f = lex.getValueFactory();
 			v = (V) f.createLiteral(
 					value.toString(), DTE.XSDInteger.getDatatypeURI());
 			v.setIV(this);

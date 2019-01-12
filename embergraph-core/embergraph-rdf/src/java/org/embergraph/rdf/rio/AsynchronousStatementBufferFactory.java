@@ -64,6 +64,14 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphBNodeImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueImpl;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
@@ -88,7 +96,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.AssignTermId;
-import org.embergraph.rdf.lexicon.BigdataValueCentricFullTextIndex;
+import org.embergraph.rdf.lexicon.EmbergraphValueCentricFullTextIndex;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.BlobsWriteProc;
 import org.embergraph.rdf.lexicon.BlobsWriteProc.BlobsWriteProcConstructor;
@@ -99,16 +107,8 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.lexicon.Term2IdTupleSerializer;
 import org.embergraph.rdf.lexicon.Term2IdWriteProc;
 import org.embergraph.rdf.lexicon.Term2IdWriteProc.Term2IdWriteProcConstructor;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataBNodeImpl;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOIndexWriteProc;
@@ -313,7 +313,7 @@ import cutthecrap.utils.striterators.Striterator;
  *       a performance benefit then refactor accordingly (requires asynchronous
  *       write API for BTree and friends).
  */
-public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
+public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R>
         implements IAsynchronousWriteStatementBufferFactory<S> {
 
     final private transient static Logger log = Logger
@@ -405,10 +405,10 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
      * Asynchronous index write buffers.
      */
     
-    final private IRunnableBuffer<KVO<BigdataValue>[]> buffer_t2id;
-    final private IRunnableBuffer<KVO<BigdataValue>[]> buffer_id2t;
-    final private IRunnableBuffer<KVO<BigdataValue>[]> buffer_blobs;
-    final private IRunnableBuffer<KVO<BigdataValue>[]> buffer_text;
+    final private IRunnableBuffer<KVO<EmbergraphValue>[]> buffer_t2id;
+    final private IRunnableBuffer<KVO<EmbergraphValue>[]> buffer_id2t;
+    final private IRunnableBuffer<KVO<EmbergraphValue>[]> buffer_blobs;
+    final private IRunnableBuffer<KVO<EmbergraphValue>[]> buffer_text;
 
     /**
      * A map containing an entry for each statement index on which this
@@ -1445,7 +1445,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                         .getTerm2IdIndex())
                         .newWriteBuffer(
                                 new Term2IdWriteProcAsyncResultHandler(false/* readOnly */),
-                                new DefaultDuplicateRemover<BigdataValue>(true/* testRefs */),
+                                new DefaultDuplicateRemover<EmbergraphValue>(true/* testRefs */),
                                 new Term2IdWriteProcConstructor(
                                         false/* readOnly */, lexiconRelation
                                                 .isStoreBlankNodes(),
@@ -1456,7 +1456,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                         .getId2TermIndex())
                         .newWriteBuffer(
                                 null/* resultHandler */,
-                                new DefaultDuplicateRemover<BigdataValue>(true/* testRefs */),
+                                new DefaultDuplicateRemover<EmbergraphValue>(true/* testRefs */),
                                 Id2TermWriteProcConstructor.INSTANCE);
 
             }
@@ -1476,7 +1476,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                         .getBlobsIndex())
                         .newWriteBuffer(
                                 new BlobsWriteProcAsyncResultHandler(false/* readOnly */),
-                                new DefaultDuplicateRemover<BigdataValue>(true/* testRefs */),
+                                new DefaultDuplicateRemover<EmbergraphValue>(true/* testRefs */),
                                 new BlobsWriteProcConstructor(
                                         false/* readOnly */, lexiconRelation
                                                 .isStoreBlankNodes()));
@@ -1499,12 +1499,12 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                      * unless we change to [s] centric full text indexing).
                      */
                     
-                    final BigdataValueCentricFullTextIndex tmp = (BigdataValueCentricFullTextIndex) lexiconRelation
+                    final EmbergraphValueCentricFullTextIndex tmp = (EmbergraphValueCentricFullTextIndex) lexiconRelation
                             .getSearchEngine();
 
                     buffer_text = ((IScaleOutClientIndex) tmp.getIndex()).newWriteBuffer(
                                     textResultHandler,// counts tuples written on index
-                                    new DefaultDuplicateRemover<BigdataValue>(true/* testRefs */),
+                                    new DefaultDuplicateRemover<EmbergraphValue>(true/* testRefs */),
                                     TextIndexWriteProc.IndexWriteProcConstructor.NO_OVERWRITE);
 
                     indexDatatypeLiterals = Boolean
@@ -2689,11 +2689,11 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
     /**
      * Class applies the term identifiers assigned by the
-     * {@link Term2IdWriteProc} to the {@link BigdataValue} references in the
+     * {@link Term2IdWriteProc} to the {@link EmbergraphValue} references in the
      * {@link KVO} correlated with each {@link Split} of data processed by that
      * procedure.
      * <p>
-     * Note: Of necessity, this requires access to the {@link BigdataValue}s
+     * Note: Of necessity, this requires access to the {@link EmbergraphValue}s
      * whose term identifiers are being resolved. This implementation presumes
      * that the array specified to the ctor and the array returned for each
      * chunk that is processed have correlated indices and that the offset into
@@ -2703,7 +2703,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
      */
     static private class Term2IdWriteProcAsyncResultHandler
             implements
-            IAsyncResultHandler<Term2IdWriteProc.Result, Void, BigdataValue, KVO<BigdataValue>> {
+            IAsyncResultHandler<Term2IdWriteProc.Result, Void, EmbergraphValue, KVO<EmbergraphValue>> {
 
         private final boolean readOnly;
 
@@ -2734,7 +2734,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * Copy the assigned / discovered term identifiers onto the
          * corresponding elements of the terms[].
          */
-        public void aggregateAsync(final KVO<BigdataValue>[] chunk,
+        public void aggregateAsync(final KVO<EmbergraphValue>[] chunk,
                 final Term2IdWriteProc.Result result, final Split split) {
 
             for (int i = 0; i < chunk.length; i++) {
@@ -2754,7 +2754,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
                     if (chunk[i] instanceof KVOList) {
 
-                        final KVOList<BigdataValue> tmp = (KVOList<BigdataValue>) chunk[i];
+                        final KVOList<EmbergraphValue> tmp = (KVOList<EmbergraphValue>) chunk[i];
 
                         if (!tmp.isDuplicateListEmpty()) {
 
@@ -2787,11 +2787,11 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
     /**
      * Class applies the term identifiers assigned by the
-     * {@link BlobsWriteProc} to the {@link BigdataValue} references in the
+     * {@link BlobsWriteProc} to the {@link EmbergraphValue} references in the
      * {@link KVO} correlated with each {@link Split} of data processed by that
      * procedure.
      * <p>
-     * Note: Of necessity, this requires access to the {@link BigdataValue}s
+     * Note: Of necessity, this requires access to the {@link EmbergraphValue}s
      * whose term identifiers are being resolved. This implementation presumes
      * that the array specified to the ctor and the array returned for each
      * chunk that is processed have correlated indices and that the offset into
@@ -2801,7 +2801,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
      */
     static private class BlobsWriteProcAsyncResultHandler
             implements
-            IAsyncResultHandler<BlobsWriteProc.Result, Void, BigdataValue, KVO<BigdataValue>> {
+            IAsyncResultHandler<BlobsWriteProc.Result, Void, EmbergraphValue, KVO<EmbergraphValue>> {
 
         private final boolean readOnly;
 
@@ -2832,7 +2832,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * Copy the assigned / discovered term identifiers onto the
          * corresponding elements of the terms[].
          */
-        public void aggregateAsync(final KVO<BigdataValue>[] chunk,
+        public void aggregateAsync(final KVO<EmbergraphValue>[] chunk,
                 final BlobsWriteProc.Result result, final Split split) {
 
             for (int i = 0; i < chunk.length; i++) {
@@ -2847,7 +2847,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                 } else {
 
                     // The value whose IV we have discovered/asserted.
-                    final BigdataValue value = chunk[i].obj;
+                    final EmbergraphValue value = chunk[i].obj;
                     
                     // Rebuild the IV.
                     @SuppressWarnings("rawtypes")
@@ -2859,7 +2859,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
                     if (chunk[i] instanceof KVOList) {
 
-                        final KVOList<BigdataValue> tmp = (KVOList<BigdataValue>) chunk[i];
+                        final KVOList<EmbergraphValue> tmp = (KVOList<EmbergraphValue>) chunk[i];
 
                         if (!tmp.isDuplicateListEmpty()) {
 
@@ -2891,13 +2891,13 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
     }
 
     /**
-     * Wrap a {@link BigdataValue}[] with a chunked iterator.
+     * Wrap a {@link EmbergraphValue}[] with a chunked iterator.
      * <p>
      * Note: This resolves inline {@link IV}s and filters them out of the
-     * visited {@link BigdataValue}s as a side-effect.
+     * visited {@link EmbergraphValue}s as a side-effect.
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    static <V extends BigdataValue> IChunkedIterator<V> newValuesIterator(
+    static <V extends EmbergraphValue> IChunkedIterator<V> newValuesIterator(
             final LexiconRelation r,
             final Iterator<V> itr, final int chunkSize) {
 
@@ -2918,17 +2918,17 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                          */
                         return r.getInlineIV((Value) obj) == null;
                     }
-                }), chunkSize, BigdataValue.class);
+                }), chunkSize, EmbergraphValue.class);
 
     }
 
     /**
-     * Wrap a {@link BigdataValue}[] with a chunked iterator which filters out
+     * Wrap a {@link EmbergraphValue}[] with a chunked iterator which filters out
      * blank nodes and blobs (neither of which is written onto the reverse
      * index).
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private static <V extends BigdataValue> IChunkedIterator<V> newId2TIterator(
+    private static <V extends EmbergraphValue> IChunkedIterator<V> newId2TIterator(
             final LexiconRelation r, final Iterator<V> itr, final int chunkSize) {
 
         return new ChunkedWrappedIterator(new Striterator(itr)
@@ -2946,7 +2946,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                     @Override
                     public boolean isValid(final Object obj) {
 
-                        final BigdataValue v = (BigdataValue) obj;
+                        final EmbergraphValue v = (EmbergraphValue) obj;
 
                         if (v instanceof BNode)
                             return false;
@@ -2958,12 +2958,12 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
                     }
 
-                }), chunkSize, BigdataValue.class);
+                }), chunkSize, EmbergraphValue.class);
 
     }
 
     /**
-     * Return iterator visiting only the {@link BigdataLiteral}s that we want
+     * Return iterator visiting only the {@link EmbergraphLiteral}s that we want
      * to write on the full text index.
      * @param r
      * @param itr
@@ -2971,7 +2971,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
      * @return
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private static <V extends BigdataValue> IChunkedIterator<V> newTextIterator(
+    private static <V extends EmbergraphValue> IChunkedIterator<V> newTextIterator(
             final LexiconRelation r, final Iterator<V> itr,
             final int chunkSize, final boolean indexDatatypeLiterals) {
 
@@ -2987,12 +2987,12 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                     @Override
                     public boolean isValid(final Object obj) {
 
-                        if (!(obj instanceof BigdataLiteral)) {
+                        if (!(obj instanceof EmbergraphLiteral)) {
                             // Only index Literals.
                             return false;
                         }
 
-                        final BigdataLiteral lit = (BigdataLiteral) obj;
+                        final EmbergraphLiteral lit = (EmbergraphLiteral) obj;
 
                         if (!indexDatatypeLiterals && lit.getDatatype() != null) {
                             // Ignore datatype literals.
@@ -3003,7 +3003,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
                     }
 
-                }), chunkSize, BigdataValue.class);
+                }), chunkSize, EmbergraphValue.class);
 
     }
 
@@ -3022,15 +3022,15 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         private final KVOLatch latch;
 
-        private final IChunkedIterator<BigdataValue> src;
+        private final IChunkedIterator<EmbergraphValue> src;
 
         private final LexiconRelation lexiconRelation;
         
         private final Term2IdTupleSerializer tupleSerTerm2Id;
 //        private final BlobsTupleSerializer tupleSerBlobs;
 
-        private final IRunnableBuffer<KVO<BigdataValue>[]> bufferTerm2Id;
-        private final IRunnableBuffer<KVO<BigdataValue>[]> bufferBlobs;
+        private final IRunnableBuffer<KVO<EmbergraphValue>[]> bufferTerm2Id;
+        private final IRunnableBuffer<KVO<EmbergraphValue>[]> bufferBlobs;
 
         /**
          * 
@@ -3043,9 +3043,9 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          */
         public AsyncTerm2IdIndexWriteTask(final KVOLatch latch,
                 final LexiconRelation r,
-                final IChunkedIterator<BigdataValue> src,
-                final IRunnableBuffer<KVO<BigdataValue>[]> bufferTerm2Id,
-                final IRunnableBuffer<KVO<BigdataValue>[]> bufferBlobs) {
+                final IChunkedIterator<EmbergraphValue> src,
+                final IRunnableBuffer<KVO<EmbergraphValue>[]> bufferTerm2Id,
+                final IRunnableBuffer<KVO<EmbergraphValue>[]> bufferBlobs) {
 
             if (latch == null)
                 throw new IllegalArgumentException();
@@ -3077,21 +3077,21 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
         }
 
         /**
-         * Return <code>true</code> if the {@link BigdataValue} will be stored
+         * Return <code>true</code> if the {@link EmbergraphValue} will be stored
          * against the BLOBS index.
          */
-        private boolean isBlob(final BigdataValue v) {
+        private boolean isBlob(final EmbergraphValue v) {
             
             return lexiconRelation.isBlob(v);
             
         }
 
 //        /**
-//         * Return <code>true</code> iff the {@link BigdataValue} is fully inline
+//         * Return <code>true</code> iff the {@link EmbergraphValue} is fully inline
 //         * (in which case the {@link IV} is set as a side-effect on the
-//         * {@link BigdataValue}).
+//         * {@link EmbergraphValue}).
 //         */
-//        private boolean isInline(final BigdataValue v) {
+//        private boolean isInline(final EmbergraphValue v) {
 //            
 //            return lexiconRelation.getInlineIV(v) != null;
 //            
@@ -3111,7 +3111,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                     : tupleSerTerm2Id.getLexiconKeyBuilder();
 
             // BLOBS stuff.
-            final BigdataValueSerializer<BigdataValue> valSer = lexiconRelation
+            final EmbergraphValueSerializer<EmbergraphValue> valSer = lexiconRelation
                     .getValueFactory().getValueSerializer();
             final BlobsIndexHelper h = new BlobsIndexHelper();
             final IKeyBuilder keyBuilder = h.newKeyBuilder();
@@ -3122,14 +3122,14 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
             try {
 
-                List<KVOC<BigdataValue>> terms = null;
-                List<KVOC<BigdataValue>> blobs = null;
+                List<KVOC<EmbergraphValue>> terms = null;
+                List<KVOC<EmbergraphValue>> blobs = null;
 
                 while (src.hasNext()) {
 
-                    final BigdataValue[] chunkIn = src.nextChunk();
+                    final EmbergraphValue[] chunkIn = src.nextChunk();
 
-                    for (BigdataValue v : chunkIn) {
+                    for (EmbergraphValue v : chunkIn) {
 
                         /*
                          * Note: The iterator we are visiting has already had
@@ -3152,21 +3152,21 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
                             if (blobs == null) {
                                 // Lazily allocate.
-                                blobs = new ArrayList<KVOC<BigdataValue>>();
+                                blobs = new ArrayList<KVOC<EmbergraphValue>>();
                             }
                             // Assign a sort key to each Value.
-                            blobs.add(new KVOC<BigdataValue>(key, val, v, latch));
+                            blobs.add(new KVOC<EmbergraphValue>(key, val, v, latch));
 //                            System.err.println("blob  : "+v);
 
                         } else {
 
                             if (terms == null) {
                                 // Lazily allocate to chunkSize.
-                                terms = new ArrayList<KVOC<BigdataValue>>(
+                                terms = new ArrayList<KVOC<EmbergraphValue>>(
                                         chunkIn.length);
                             }
                             // Assign a sort key to each Value.
-                            terms.add(new KVOC<BigdataValue>(keyBuilderTerm2Id
+                            terms.add(new KVOC<EmbergraphValue>(keyBuilderTerm2Id
                                     .value2Key(v), null/* val */, v, latch));
 //                            System.err.println("term  : "+v);
                             
@@ -3177,7 +3177,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                     if (terms != null && !terms.isEmpty()) {
 
                         @SuppressWarnings("unchecked")
-                        final KVOC<BigdataValue>[] a = terms
+                        final KVOC<EmbergraphValue>[] a = terms
                                 .toArray(new KVOC[terms.size()]);
 
                         // Place in KVO sorted order (by the byte[] keys).
@@ -3198,7 +3198,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                     if (blobs != null && !blobs.isEmpty()) {
 
                         @SuppressWarnings("unchecked")
-                        final KVOC<BigdataValue>[] a = blobs
+                        final KVOC<EmbergraphValue>[] a = blobs
                                 .toArray(new KVOC[blobs.size()]);
 
                         // Place in KVO sorted order (by the byte[] keys).
@@ -3244,11 +3244,11 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         private final KVOLatch latch;
 
-        private final BigdataValueFactory valueFactory;
+        private final EmbergraphValueFactory valueFactory;
 
-        private final IChunkedIterator<BigdataValue> src;
+        private final IChunkedIterator<EmbergraphValue> src;
 
-        private final IRunnableBuffer<KVO<BigdataValue>[]> buffer;
+        private final IRunnableBuffer<KVO<EmbergraphValue>[]> buffer;
 
         /**
          * 
@@ -3258,9 +3258,9 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          *            out.
          */
         public AsyncId2TermIndexWriteTask(final KVOLatch latch,
-                final BigdataValueFactory valueFactory,
-                final IChunkedIterator<BigdataValue> src,
-                final IRunnableBuffer<KVO<BigdataValue>[]> buffer) {
+                final EmbergraphValueFactory valueFactory,
+                final IChunkedIterator<EmbergraphValue> src,
+                final IRunnableBuffer<KVO<EmbergraphValue>[]> buffer) {
 
             if (latch == null)
                 throw new IllegalArgumentException();
@@ -3287,7 +3287,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
         public Void call() throws Exception {
 
             // used to serialize the Values for the BTree.
-            final BigdataValueSerializer<BigdataValue> ser = valueFactory
+            final EmbergraphValueSerializer<EmbergraphValue> ser = valueFactory
                     .getValueSerializer();
 
             // thread-local key builder removes single-threaded constraint.
@@ -3303,14 +3303,14 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
                 while (src.hasNext()) {
 
-                    final BigdataValue[] chunkIn = src.nextChunk();
+                    final EmbergraphValue[] chunkIn = src.nextChunk();
 
                     @SuppressWarnings("unchecked")
-                    final KVOC<BigdataValue>[] chunkOut = new KVOC[chunkIn.length];
+                    final KVOC<EmbergraphValue>[] chunkOut = new KVOC[chunkIn.length];
 
                     int i = 0;
 
-                    for (BigdataValue v : chunkIn) {
+                    for (EmbergraphValue v : chunkIn) {
 
                         assert v != null;
 
@@ -3338,21 +3338,21 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                                 .getKey();
 
                         // Serialize the term.
-                        final byte[] val = ser.serialize((BigdataValueImpl)v, out.reset(), tbuf);
+                        final byte[] val = ser.serialize((EmbergraphValueImpl)v, out.reset(), tbuf);
 
                         /*
-                         * Note: The BigdataValue instance is NOT supplied to
+                         * Note: The EmbergraphValue instance is NOT supplied to
                          * the KVO since we do not want it to be retained and
-                         * since there is no side-effect on the BigdataValue for
+                         * since there is no side-effect on the EmbergraphValue for
                          * writes on ID2TERM (unlike the writes on TERM2ID).
                          */
-                        chunkOut[i++] = new KVOC<BigdataValue>(key, val,
+                        chunkOut[i++] = new KVOC<EmbergraphValue>(key, val,
                                 null/* v */, latch);
 
                     }
 
                     // make dense.
-                    final KVO<BigdataValue>[] dense = KVO.dense(chunkOut, i);
+                    final KVO<EmbergraphValue>[] dense = KVO.dense(chunkOut, i);
 
                     /*
                      * Put into key order in preparation for writing on the
@@ -3391,23 +3391,23 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         private final KVOLatch latch;
 
-        private final BigdataValueCentricFullTextIndex textIndex;
+        private final EmbergraphValueCentricFullTextIndex textIndex;
         
-        private final IChunkedIterator<BigdataValue> src;
+        private final IChunkedIterator<EmbergraphValue> src;
 
-        private final IRunnableBuffer<KVO<BigdataValue>[]> buffer;
+        private final IRunnableBuffer<KVO<EmbergraphValue>[]> buffer;
 
         /**
          * 
          * @param src
-         *            The visits chunks of distinct {@link BigdataLiteral}s with
+         *            The visits chunks of distinct {@link EmbergraphLiteral}s with
          *            their TIDs assigned.  Anything which should not be indexed
          *            has already been filtered out.
          */
         public AsyncTextIndexWriteTask(final KVOLatch latch,
-                final BigdataValueCentricFullTextIndex textIndex,
-                final IChunkedIterator<BigdataValue> src,
-                final IRunnableBuffer<KVO<BigdataValue>[]> buffer) {
+                final EmbergraphValueCentricFullTextIndex textIndex,
+                final IChunkedIterator<EmbergraphValue> src,
+                final IRunnableBuffer<KVO<EmbergraphValue>[]> buffer) {
 
             if (latch == null)
                 throw new IllegalArgumentException();
@@ -3433,14 +3433,14 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         /**
          * FIXME This will on the full text index using the
-         * {@link BigdataValueCentricFullTextIndex} class. That class will wind up doing
+         * {@link EmbergraphValueCentricFullTextIndex} class. That class will wind up doing
          * gathered batch inserts in chunks of up to the capacity set inline in
          * the method below. However, it will use Sync RPC rather than the ASYNC
          * [buffer_text] index write pipeline. While this should be enough to
          * write unit tests for the full text indexing feature, it is not going
          * to scale well.
          * 
-         * @see BigdataValueCentricFullTextIndex
+         * @see EmbergraphValueCentricFullTextIndex
          */
         public Void call() throws Exception {
 
@@ -3565,7 +3565,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                          * Note: The SPO is deliberately not provided to the KVO
                          * instance since it is not required (there is nothing
                          * being passed back from the write via a side-effect on
-                         * the BigdataStatementImpl) and since it otherwise will
+                         * the EmbergraphStatementImpl) and since it otherwise will
                          * force the retention of the RDF Value objects in its
                          * s/p/o/c positions.
                          */
@@ -3626,13 +3626,13 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         private final AbstractTripleStore database;
 
-        private final BigdataValueFactory valueFactory;
+        private final EmbergraphValueFactory valueFactory;
 
         /**
          * A canonicalizing map for RDF {@link Value}s. The use of this map
          * provides a ~40% performance gain.
          */
-        private LinkedHashMap<Value, BigdataValue> values;
+        private LinkedHashMap<Value, EmbergraphValue> values;
 
         /**
          * A canonicalizing map for blank nodes. This map MUST be cleared before
@@ -3642,7 +3642,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * so if you are loading a large document with a lot of blank nodes the
          * map will also become large.
          */
-        private final AtomicReference<Map<String, BigdataBNode>> bnodes = new AtomicReference<Map<String, BigdataBNode>>();
+        private final AtomicReference<Map<String, EmbergraphBNode>> bnodes = new AtomicReference<Map<String, EmbergraphBNode>>();
         
         /**
          * The total #of parsed statements so far.
@@ -3744,7 +3744,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         }
 
-        public void setBNodeMap(final Map<String, BigdataBNode> bnodes) {
+        public void setBNodeMap(final Map<String, EmbergraphBNode> bnodes) {
 
             if (bnodes == null)
                 throw new IllegalArgumentException();
@@ -3801,7 +3801,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
             add(e.getSubject(), e.getPredicate(), e.getObject(),
                     e.getContext(),
-                    (e instanceof BigdataStatement ? ((BigdataStatement) e)
+                    (e instanceof EmbergraphStatement ? ((EmbergraphStatement) e)
                             .getStatementType() : null));
 
         }
@@ -3813,19 +3813,19 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * and MUST be cleared (or set to null) before reading from another
          * source.
          */
-        private BigdataBNode getCanonicalBNode(final BigdataBNodeImpl bnode) {
+        private EmbergraphBNode getCanonicalBNode(final EmbergraphBNodeImpl bnode) {
 
             // the BNode's ID.
             final String id = bnode.getID();
 
-            Map<String, BigdataBNode> bnodes = this.bnodes.get();
+            Map<String, EmbergraphBNode> bnodes = this.bnodes.get();
             if (bnodes == null) {
 
                 /*
                  * Allocate a canonicalizing map for blank nodes. Since this
                  * will be a private map it does not need to be thread-safe.
                  */
-                setBNodeMap(new HashMap<String, BigdataBNode>(
+                setBNodeMap(new HashMap<String, EmbergraphBNode>(
                         bnodesInitialCapacity));
 
                 // fall through.
@@ -3841,7 +3841,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
              */
             if (bnodes instanceof ConcurrentHashMap) {
 
-                final BigdataBNode tmp = ((ConcurrentHashMap<String, BigdataBNode>) bnodes)
+                final EmbergraphBNode tmp = ((ConcurrentHashMap<String, EmbergraphBNode>) bnodes)
                         .putIfAbsent(id, bnode);
 
                 if (tmp != null) {
@@ -3864,7 +3864,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
              */
             synchronized (bnodes) {
 
-                final BigdataBNode tmp = bnodes.get(id);
+                final EmbergraphBNode tmp = bnodes.get(id);
 
                 if (tmp != null) {
 
@@ -3901,7 +3901,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
          * @return Either the term or the pre-existing term in the buffer with
          *         the same data.
          */
-        private BigdataValue getCanonicalValue(final BigdataValue term0) {
+        private EmbergraphValue getCanonicalValue(final EmbergraphValue term0) {
 
             if (term0 == null) {
 
@@ -3910,12 +3910,12 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
             }
 
-            final BigdataValue term;
+            final EmbergraphValue term;
 
             if (term0 instanceof BNode) {
 
                 // impose canonicalizing mapping for blank nodes.
-                term = getCanonicalBNode((BigdataBNodeImpl) term0);
+                term = getCanonicalBNode((EmbergraphBNodeImpl) term0);
 
                 /*
                  * Fall through.
@@ -3941,7 +3941,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                  * Note: A linked hash map is used to make the iterator faster.
                  */
 
-                values = new LinkedHashMap<Value, BigdataValue>(
+                values = new LinkedHashMap<Value, EmbergraphValue>(
                         valuesInitialCapacity);
 
             }
@@ -3950,7 +3950,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
              * Impose a canonicalizing mapping on the term.
              */
 
-            final BigdataValue tmp = values.get(term);
+            final EmbergraphValue tmp = values.get(term);
 
             if (tmp != null) {
 
@@ -3997,20 +3997,20 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
                 final Value o, final Resource c, final StatementEnum type) {
 
             _handleStatement(
-                    (Resource) getCanonicalValue((BigdataResource) valueFactory
+                    (Resource) getCanonicalValue((EmbergraphResource) valueFactory
                             .asValue(s)),
-                    (URI) getCanonicalValue((BigdataURI) valueFactory
+                    (URI) getCanonicalValue((EmbergraphURI) valueFactory
                             .asValue(p)),
-                    (Value) getCanonicalValue((BigdataValue) valueFactory
+                    (Value) getCanonicalValue((EmbergraphValue) valueFactory
                             .asValue(o)),
-                    (Resource) getCanonicalValue((BigdataResource) valueFactory
+                    (Resource) getCanonicalValue((EmbergraphResource) valueFactory
                             .asValue(c)),
                     type);
 
         }
 
         /**
-         * Form the BigdataStatement object using the valueFactory now that we
+         * Form the EmbergraphStatement object using the valueFactory now that we
          * bindings which were (a) allocated by the valueFactory and (b) are
          * canonical for the scope of this document.
          */
@@ -4018,15 +4018,15 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
         private void _handleStatement(final Resource s, final URI p,
                 final Value o, final Resource c, final StatementEnum type) {
 
-            final BigdataStatement stmt = valueFactory.createStatement(
-                    (BigdataResource) s, (BigdataURI) p, (BigdataValue) o,
-                    (BigdataResource) c, type);
+            final EmbergraphStatement stmt = valueFactory.createStatement(
+                    (EmbergraphResource) s, (EmbergraphURI) p, (EmbergraphValue) o,
+                    (EmbergraphResource) c, type);
 
             if (statements == null) {
 
                 statements = new UnsynchronizedUnboundedChunkBuffer<S>(
                         producerChunkSize,
-                        (Class<? extends S>) BigdataStatement.class);
+                        (Class<? extends S>) EmbergraphStatement.class);
 
             }
 
@@ -4042,16 +4042,16 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 
         /**
          * Buffers the asynchronous writes on the TERM2ID and BLOBS indices.
-         * Those indices will assign tids. If {@link BigdataValue} is fully
+         * Those indices will assign tids. If {@link EmbergraphValue} is fully
          * inline, then its {@link IV} is resolved immediately. If the
-         * {@link BigdataValue} will be stored as a BLOB, then it is written
+         * {@link EmbergraphValue} will be stored as a BLOB, then it is written
          * onto the buffer for the BLOBS index. Otherwise it is written onto the
          * buffer for the TERM2ID index.
          */
         private void bufferTidWrites() throws Exception {
 
             if (log.isInfoEnabled()) {
-                final Map<String, BigdataBNode> bnodes = this.bnodes.get();
+                final Map<String, EmbergraphBNode> bnodes = this.bnodes.get();
                 final int bnodeCount = (bnodes == null ? 0 : bnodes.size());
                 log.info("bnodeCount=" + bnodeCount + ", values="
                         + values.size() + ", statementCount=" + statementCount);
@@ -4064,11 +4064,11 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
             }
 
             /*
-             * Run task which will queue BigdataValue[] chunks onto the TERM2ID
+             * Run task which will queue EmbergraphValue[] chunks onto the TERM2ID
              * async write buffers.
              * 
              * Note: This is responsible for assigning the TIDs (term
-             * identifiers) to the {@link BigdataValue}s. We CAN NOT write on
+             * identifiers) to the {@link EmbergraphValue}s. We CAN NOT write on
              * the other indices until we have those TIDs.
              * 
              * Note: If there is not enough load being placed the async index
@@ -4167,7 +4167,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 //        private void bufferBlobsWrites() throws Exception {
 //
 //            if (log.isInfoEnabled()) {
-//                final Map<String, BigdataBNode> bnodes = this.bnodes.get();
+//                final Map<String, EmbergraphBNode> bnodes = this.bnodes.get();
 //                final int bnodeCount = (bnodes == null ? 0 : bnodes.size());
 //                log.info("bnodeCount=" + bnodeCount + ", values="
 //                        + values.size() + ", statementCount=" + statementCount);
@@ -4180,11 +4180,11 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
 //            }
 //
 //            /*
-//             * Run task which will queue BigdataValue[] chunks onto the TERMS
+//             * Run task which will queue EmbergraphValue[] chunks onto the TERMS
 //             * async write buffer.
 //             * 
 //             * Note: This is responsible for assigning the TIDs (term
-//             * identifiers) to the {@link BigdataValue}s. We CAN NOT write on
+//             * identifiers) to the {@link EmbergraphValue}s. We CAN NOT write on
 //             * the other indices until we have those TIDs.
 //             * 
 //             * Note: If there is not enough load being placed the async index
@@ -4383,7 +4383,7 @@ public class AsynchronousStatementBufferFactory<S extends BigdataStatement, R>
             if (buffer_text != null) {
 
                 tasks.add(new AsyncTextIndexWriteTask(documentRestartSafeLatch,
-                        (BigdataValueCentricFullTextIndex) lexiconRelation
+                        (EmbergraphValueCentricFullTextIndex) lexiconRelation
                                 .getSearchEngine(), newTextIterator(
                                 lexiconRelation, values.values().iterator(),
                                 producerChunkSize, indexDatatypeLiterals),

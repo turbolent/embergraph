@@ -29,7 +29,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Operator computes the number of non-null values over the presented binding
@@ -140,8 +140,8 @@ public class COUNT extends AggregateBase<IV> {
 
         }
 
-        return new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(aggregated));
-        //return new XSDNumericIV<BigdataLiteral>(aggregated);
+        return new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(aggregated));
+        //return new XSDNumericIV<EmbergraphLiteral>(aggregated);
 
     }
 

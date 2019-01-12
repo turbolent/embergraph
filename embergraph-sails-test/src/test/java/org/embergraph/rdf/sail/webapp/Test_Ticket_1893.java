@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.MalformedQueryException;
@@ -28,8 +29,6 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
-
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
 
 import junit.framework.Test;
 
@@ -71,7 +70,7 @@ public class Test_Ticket_1893 extends AbstractProtocolTest {
 
 		setMethodisPostUrlEncodedData();
 //		m_repo.getRemoteRepositoryManager().createRepository(namespace, properties);
-		BigdataSailRemoteRepositoryConnection conn = m_repo.getBigdataSailRemoteRepository().getConnection();
+		EmbergraphSailRemoteRepositoryConnection conn = m_repo.getEmbergraphSailRemoteRepository().getConnection();
 		conn.prepareUpdate(QueryLanguage.SPARQL, "INSERT { <http://s1> <http://p> \"Test123\" } WHERE { }").execute();
 		
 		checkResults(conn, 1);
@@ -91,7 +90,7 @@ public class Test_Ticket_1893 extends AbstractProtocolTest {
 	}
 
 
-	private void checkResults(final BigdataSailRemoteRepositoryConnection conn, final int count)
+	private void checkResults(final EmbergraphSailRemoteRepositoryConnection conn, final int count)
 			throws QueryEvaluationException, RepositoryException,
 			MalformedQueryException {
 		final TupleQueryResult result = conn.prepareTupleQuery(QueryLanguage.SPARQL, QUERY).evaluate();

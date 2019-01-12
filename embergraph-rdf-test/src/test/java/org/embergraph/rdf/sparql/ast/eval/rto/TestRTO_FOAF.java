@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast.eval.rto;
 import java.util.Properties;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 
 /**
  * Data driven test suite for the Runtime Query Optimizer (RTO) using quads-mode
@@ -69,9 +69,9 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
         // Note: clone to avoid modifying!!!
         final Properties properties = (Properties) super.getProperties().clone();
 
-        properties.setProperty(BigdataSail.Options.QUADS_MODE, "true");
+        properties.setProperty(EmbergraphSail.Options.QUADS_MODE, "true");
 
-        properties.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+        properties.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
         return properties;

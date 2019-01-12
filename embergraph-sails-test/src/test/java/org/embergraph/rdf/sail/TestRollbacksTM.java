@@ -19,10 +19,7 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
-import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.axioms.RdfsAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.rdf.vocab.RDFSVocabulary;
 
 /**
@@ -47,12 +44,12 @@ public class TestRollbacksTM extends TestRollbacks {
         
     	final Properties props = super.getProperties();
 
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
                 RdfsAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS,
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
                 RDFSVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "true");
-        props.setProperty(BigdataSail.Options.JUSTIFY, "true");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "true");
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "true");
         
         return props;
 

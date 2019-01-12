@@ -9,7 +9,7 @@ import org.eclipse.jetty.client.HttpClient;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.om.IObjectManager;
 import org.embergraph.gom.om.NanoSparqlObjectManager;
@@ -84,7 +84,7 @@ public class Example1 implements Callable<Void> {
          * The top-level SPARQL end point for a NanoSparqlServer instance.
          */
         final String serviceURL = "http://localhost:" + Config.HTTP_PORT + "/"
-                + BigdataStatics.getContextPath();
+                + EmbergraphStatics.getContextPath();
 
         /**
          * The namespace of the KB instance that you want to connect to on that

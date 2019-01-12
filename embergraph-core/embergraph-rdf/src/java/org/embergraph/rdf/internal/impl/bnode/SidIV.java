@@ -25,6 +25,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.math.BigInteger;
 
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
@@ -39,11 +41,9 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
@@ -53,8 +53,8 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
 /**
  * Internal value representing an inline statement identifier. Uses the
  * {@link ISPO} supplied in the ctor as the inline value. The
- * {@link #asValue(BigdataValueFactory, ILexiconConfiguration)} method returns a
- * {@link BigdataBNode} that is used to represent the sid in serialization
+ * {@link #asValue(EmbergraphValueFactory, ILexiconConfiguration)} method returns a
+ * {@link EmbergraphBNode} that is used to represent the sid in serialization
  * formats (such as the custom RDF/XML extension for sids). The bnode is
  * guaranteed to always have the same bnode id for a given inlined SPO. This is
  * accomplished using the byte[] key encoding for the spo along with the
@@ -73,7 +73,7 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
  * <p>
  * {@inheritDoc}
  */
-public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
+public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
         implements Serializable, BNode {
 
     /**
@@ -94,7 +94,7 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
 	private transient byte[] key;
 	
 	/**
-	 * The cached materialized BigdataValue for this sid.
+	 * The cached materialized EmbergraphValue for this sid.
 	 */
 	private transient V bnode;
 
@@ -106,7 +106,7 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
         // Propagate the cached byte[] key.
         tmp.key = key;
         
-        // Propagate the cached BigdataValue.
+        // Propagate the cached EmbergraphValue.
         tmp.bnode = bnode;
         
         if (!clearCache) {
@@ -167,13 +167,13 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
 	        bnode.setIV(this);
 	        bnode.setStatementIdentifier(true);
 	        
-	        final BigdataResource c = spo.c() != null ?
-	        		(BigdataResource) spo.c().asValue(lex) : null;
+	        final EmbergraphResource c = spo.c() != null ?
+	        		(EmbergraphResource) spo.c().asValue(lex) : null;
 	        		
 	        bnode.setStatement(lex.getValueFactory().createStatement(
-	        		(BigdataResource) spo.s().asValue(lex), 
-	        		(BigdataURI) spo.p().asValue(lex), 
-	        		(BigdataValue) spo.o().asValue(lex), 
+	        		(EmbergraphResource) spo.s().asValue(lex),
+	        		(EmbergraphURI) spo.p().asValue(lex),
+	        		(EmbergraphValue) spo.o().asValue(lex),
 	        		c));
         }
         return bnode;

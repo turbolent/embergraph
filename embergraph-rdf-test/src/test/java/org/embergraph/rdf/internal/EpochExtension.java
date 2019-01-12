@@ -21,6 +21,8 @@ package org.embergraph.rdf.internal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -30,9 +32,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.BD;
 
 /**
@@ -40,14 +40,14 @@ import org.embergraph.rdf.store.BD;
  * that represent time in milliseconds since the epoch.  The milliseconds are
  * encoded as an inline long.
  */
-public class EpochExtension<V extends BigdataValue> implements IExtension<V> {
+public class EpochExtension<V extends EmbergraphValue> implements IExtension<V> {
 
     /**
      * The datatype URI for the epoch extension.
      */
     public transient static final URI EPOCH = new URIImpl(BD.NAMESPACE + "Epoch");
     
-    private final BigdataURI epoch;
+    private final EmbergraphURI epoch;
     
     public EpochExtension(final IDatatypeURIResolver resolver) {
 
@@ -55,9 +55,9 @@ public class EpochExtension<V extends BigdataValue> implements IExtension<V> {
         
     }
         
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
-        final Set<BigdataURI> datatypes = new LinkedHashSet<BigdataURI>();
+        final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
         datatypes.add(epoch);
         return datatypes;
         
@@ -97,7 +97,7 @@ public class EpochExtension<V extends BigdataValue> implements IExtension<V> {
      * string value of the native type) to create a literal with the epoch
      * datatype. 
      */
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
         
         return (V) vf.createLiteral(iv.getDelegate().stringValue(), epoch);
         

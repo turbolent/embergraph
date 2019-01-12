@@ -33,8 +33,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -80,7 +79,7 @@ public class DatatypeBOp extends IVValueExpression<IV>
 
     public IV get(final IBindingSet bs) {
 
-	    final BigdataValueFactory vf = super.getValueFactory();
+	    final EmbergraphValueFactory vf = super.getValueFactory();
 
         @SuppressWarnings("rawtypes")
         final IV iv = getAndCheckLiteral(0, bs);

@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval.service;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 
@@ -39,7 +39,7 @@ public class GeoSpatialDummyLiteralSerializer extends GeoSpatialDefaultLiteralSe
     
     @Override
     public IV<?,?> serializeLocation(
-        final BigdataValueFactory vf, final Object latitude, final Object longitude) {
+        final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
 
         return DummyConstantNode.toDummyIV(vf.createLiteral("Location(" + concat(latitude, longitude) + ")"));
 
@@ -48,7 +48,7 @@ public class GeoSpatialDummyLiteralSerializer extends GeoSpatialDefaultLiteralSe
 
     @Override
     public IV<?,?> serializeLocationAndTime(
-        final BigdataValueFactory vf, final Object latitude, 
+        final EmbergraphValueFactory vf, final Object latitude,
         final Object longitude, final Object time) {
 
         return DummyConstantNode.toDummyIV(vf.createLiteral("LocationAndTime(" + concat(latitude, longitude, time) + ")"));
@@ -56,27 +56,27 @@ public class GeoSpatialDummyLiteralSerializer extends GeoSpatialDefaultLiteralSe
     }
 
     @Override
-    public IV<?,?> serializeTime(final BigdataValueFactory vf, final Object time) {
+    public IV<?,?> serializeTime(final EmbergraphValueFactory vf, final Object time) {
         return DummyConstantNode.toDummyIV(vf.createLiteral("Time(" + time.toString() + ")"));
     }
 
     @Override
-    public IV<?,?> serializeLatitude(final BigdataValueFactory vf, final Object latitude) {
+    public IV<?,?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude) {
         return DummyConstantNode.toDummyIV(vf.createLiteral("Lat(" + latitude.toString() + ")"));
     }
 
     @Override
-    public IV<?,?> serializeLongitude(final BigdataValueFactory vf, final Object longitude) {
+    public IV<?,?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude) {
         return DummyConstantNode.toDummyIV(vf.createLiteral("Lon(" + longitude.toString() + ")"));
     }
 
     @Override
-    public IV<?,?> serializeCoordSystem(final BigdataValueFactory vf, final Object coordinateSystem) {
+    public IV<?,?> serializeCoordSystem(final EmbergraphValueFactory vf, final Object coordinateSystem) {
         return DummyConstantNode.toDummyIV(vf.createLiteral("CoordSystem(" + coordinateSystem.toString() + ")"));
     }
 
     @Override
-    public IV<?,?> serializeCustomFields(final BigdataValueFactory vf, final Object... customFields) {
+    public IV<?,?> serializeCustomFields(final EmbergraphValueFactory vf, final Object... customFields) {
         return DummyConstantNode.toDummyIV(vf.createLiteral("CustomFields(" + concat(customFields) + ")"));
     }
     

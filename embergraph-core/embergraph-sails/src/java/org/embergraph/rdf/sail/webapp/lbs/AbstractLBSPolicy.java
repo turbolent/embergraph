@@ -40,7 +40,7 @@ import org.embergraph.quorum.AbstractQuorum;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumEvent;
 import org.embergraph.quorum.QuorumListener;
-import org.embergraph.rdf.sail.webapp.BigdataServlet;
+import org.embergraph.rdf.sail.webapp.EmbergraphServlet;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 import org.embergraph.concurrent.FutureTaskMon;
 
@@ -167,7 +167,7 @@ abstract public class AbstractLBSPolicy implements IHALoadBalancerPolicy,
 
         contextPath.set(servletContext.getContextPath());
 
-        final IHAJournal journal = (IHAJournal) BigdataServlet
+        final IHAJournal journal = (IHAJournal) EmbergraphServlet
                 .getIndexManager(servletContext);
 
         if (journal == null)
@@ -293,7 +293,7 @@ abstract public class AbstractLBSPolicy implements IHALoadBalancerPolicy,
 
         final ServletContext servletContext = request.getServletContext();
 
-        final IHAJournal journal = (IHAJournal) BigdataServlet
+        final IHAJournal journal = (IHAJournal) EmbergraphServlet
                 .getIndexManager(servletContext);
 
         final Quorum<HAGlue, QuorumService<HAGlue>> quorum = journal

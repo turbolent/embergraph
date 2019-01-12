@@ -33,7 +33,7 @@ import org.embergraph.rdf.graph.analytics.BFS;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestBFS extends AbstractBigdataGraphTestCase {
+public class TestBFS extends AbstractEmbergraphGraphTestCase {
 
     public TestBFS() {
         

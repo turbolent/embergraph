@@ -24,6 +24,7 @@ package org.embergraph.rdf.sail.sparql;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.model.vocabulary.FOAF;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
@@ -34,7 +35,6 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.ExistsNode;
@@ -63,7 +63,7 @@ import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
  *          thompsonbry $
  */
 public class TestSubqueryPatterns extends
-        AbstractBigdataExprBuilderTestCase {
+    AbstractEmbergraphExprBuilderTestCase {
 
     /**
      * 
@@ -87,7 +87,7 @@ public class TestSubqueryPatterns extends
      * </pre>
      * 
      * Note: This requires recursion back in through the
-     * {@link BigdataExprBuilder}.
+     * {@link EmbergraphExprBuilder}.
      */
     public void test_subSelect() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -149,7 +149,7 @@ public class TestSubqueryPatterns extends
      * </pre>
      * 
      * Note: This requires recursion back in through the
-     * {@link BigdataExprBuilder}.
+     * {@link EmbergraphExprBuilder}.
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/806>
      *      Incorrect AST generated for OPTIONAL { SELECT }</a>
@@ -347,7 +347,7 @@ public class TestSubqueryPatterns extends
      * </pre>
      * 
      * Note: This requires recursion back in through the
-     * {@link BigdataExprBuilder}.
+     * {@link EmbergraphExprBuilder}.
      */
     public void test_bind_join_subSelect() throws MalformedQueryException,
             TokenMgrError, ParseException {

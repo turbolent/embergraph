@@ -69,7 +69,7 @@ public interface ITextIndexer<A extends IHit> {
 //     * @todo allow registeration of datatype specific tokenizers (we already
 //     *       have language family based lookup).
 //     */
-//    public void index(int capacity, Iterator<BigdataValue> valuesIterator);
+//    public void index(int capacity, Iterator<EmbergraphValue> valuesIterator);
 
     /**
      * Return <code>true</code> iff datatype literals are being indexed.

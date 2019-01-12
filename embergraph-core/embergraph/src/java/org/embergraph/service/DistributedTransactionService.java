@@ -64,7 +64,7 @@ import org.embergraph.journal.RunState;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
 /**
- * Implementation for an {@link IBigdataFederation} supporting both single-phase
+ * Implementation for an {@link IEmbergraphFederation} supporting both single-phase
  * commits (for transactions that execute on a single {@link IDataService}) and
  * distributed commits.
  * 
@@ -2074,7 +2074,7 @@ public abstract class DistributedTransactionService extends
                     
                 }
                 
-                final IBigdataFederation fed = getFederation();
+                final IEmbergraphFederation fed = getFederation();
 
                 final UUID[] a = fed.getDataServiceUUIDs(0/* maxCount */);
 

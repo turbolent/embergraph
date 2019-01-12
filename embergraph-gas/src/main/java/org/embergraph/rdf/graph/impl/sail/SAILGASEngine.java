@@ -215,7 +215,7 @@ public class SAILGASEngine extends GASEngine {
             }
             
             final IStriterator sitr = new Striterator(
-                    new Sesame2BigdataIterator<Statement, SailException>(citr));
+                    new Sesame2EmbergraphIterator<Statement, SailException>(citr));
 
 //            if (linkTypeIV != null && !posOptimization) {
 //                /*

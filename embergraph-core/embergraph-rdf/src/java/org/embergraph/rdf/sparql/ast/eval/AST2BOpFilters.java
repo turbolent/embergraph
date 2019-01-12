@@ -57,8 +57,8 @@ import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
 import org.embergraph.rdf.internal.constraints.TryBeforeMaterializationConstraint;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.lexicon.LexPredicate;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.IJoinNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
@@ -209,7 +209,7 @@ public class AST2BOpFilters extends AST2BOpBase {
          * If the constraint "c" can run without a NotMaterializedException then
          * bypass the rest of the pipeline by routing the solutions to rightId.
          */
-        final IConstraint c2 = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+        final IConstraint c2 = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                 new NeedsMaterializationBOp(ve));
 
         left = applyQueryHints(new ConditionalRoutingOp(leftOrEmpty(left),
@@ -350,7 +350,7 @@ public class AST2BOpFilters extends AST2BOpBase {
 
             }
 
-            final IConstraint c1 = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+            final IConstraint c1 = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                     new IsMaterializedBOp(v, false/* materialized */));
 
             final PipelineOp condOp1 = applyQueryHints(
@@ -366,7 +366,7 @@ public class AST2BOpFilters extends AST2BOpBase {
                 log.debug("adding 1st conditional routing op: " + condOp1);
             }
 
-            final IConstraint c2 = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+            final IConstraint c2 = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                     new IsInlineBOp(v, true/* inline */));
 
             final PipelineOp condOp2 = applyQueryHints(
@@ -393,7 +393,7 @@ public class AST2BOpFilters extends AST2BOpBase {
                  * IV.
                  */
                 @SuppressWarnings("unchecked")
-                final IVariable<BigdataValue> anonvar = Var.var("--"
+                final IVariable<EmbergraphValue> anonvar = Var.var("--"
                         + v.getName() + "-" + ctx.nextId());
                 
                 lexPred = LexPredicate.reverseInstance(ns, timestamp, anonvar,
@@ -913,7 +913,7 @@ public class AST2BOpFilters extends AST2BOpBase {
         for (FilterNode filter : joinFilters) {
         
             constraints
-                    .add(new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+                    .add(new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                             filter.getValueExpression()));
             
         }

@@ -17,6 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.spo;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -31,11 +33,9 @@ import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataStatementImpl;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatementImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.IRawTripleStore;
@@ -382,7 +382,7 @@ public class SPO implements ISPO, java.io.Serializable {
     }
 
     /**
-     * Construct a triple from {@link BigdataValue}s and the specified statement
+     * Construct a triple from {@link EmbergraphValue}s and the specified statement
      * type.
      * 
      * @param s
@@ -390,22 +390,22 @@ public class SPO implements ISPO, java.io.Serializable {
      * @param o
      * @param type
      */
-    public SPO(final BigdataResource s, final BigdataURI p,
-            final BigdataValue o, final StatementEnum type) {
+    public SPO(final EmbergraphResource s, final EmbergraphURI p,
+            final EmbergraphValue o, final StatementEnum type) {
 
         this(s.getIV(), p.getIV(), o.getIV(), type);
 
     }
 
     /**
-     * Construct a triple/quad from a {@link BigdataStatement}. The term
+     * Construct a triple/quad from a {@link EmbergraphStatement}. The term
      * identifiers and statement type information available on the
-     * {@link BigdataStatement} will be used to initialize the {@link SPO}.
+     * {@link EmbergraphStatement} will be used to initialize the {@link SPO}.
      * 
      * @param stmt
      *            The statement.
      */
-    public SPO(final BigdataStatement stmt) {
+    public SPO(final EmbergraphStatement stmt) {
         
         this(   stmt.s(),
                 stmt.p(),
@@ -521,7 +521,7 @@ public class SPO implements ISPO, java.io.Serializable {
      * and the same {@link StatementEnum} are the same.
      * <p>
      * Note: This is NOT the same test as
-     * {@link BigdataStatementImpl#equals(Object)} since the latter is
+     * {@link EmbergraphStatementImpl#equals(Object)} since the latter is
      * implemented per the {@link Statement} interface.
      */
     public boolean equals(final ISPO stmt2) {
@@ -830,7 +830,7 @@ public class SPO implements ISPO, java.io.Serializable {
      * returned IV will act like a Value if it is inline or if it has been
      * materialized. If the IV is not-inline and its value has not been
      * materialized from the appropriate index or explicitly set through
-     * {@link IVCache#setValue(BigdataValue)}, then an attempt to access the
+     * {@link IVCache#setValue(EmbergraphValue)}, then an attempt to access the
      * state of the {@link Value} through its {@link Value} interface will throw
      * a {@link NotMaterializedException}.
      */
@@ -846,7 +846,7 @@ public class SPO implements ISPO, java.io.Serializable {
      * returned IV will act like a Value if it is inline or if it has been
      * materialized. If the IV is not-inline and its value has not been
      * materialized from the appropriate index or explicitly set through
-     * {@link IVCache#setValue(BigdataValue)}, then an attempt to access the
+     * {@link IVCache#setValue(EmbergraphValue)}, then an attempt to access the
      * state of the {@link Value} through its {@link Value} interface will throw
      * a {@link NotMaterializedException}.
      */
@@ -862,7 +862,7 @@ public class SPO implements ISPO, java.io.Serializable {
      * returned IV will act like a Value if it is inline or if it has been
      * materialized. If the IV is not-inline and its value has not been
      * materialized from the appropriate index or explicitly set through
-     * {@link IVCache#setValue(BigdataValue)}, then an attempt to access the
+     * {@link IVCache#setValue(EmbergraphValue)}, then an attempt to access the
      * state of the {@link Value} through its {@link Value} interface will throw
      * a {@link NotMaterializedException}.
      */
@@ -878,7 +878,7 @@ public class SPO implements ISPO, java.io.Serializable {
      * returned IV will act like a Value if it is inline or if it has been
      * materialized. If the IV is not-inline and its value has not been
      * materialized from the appropriate index or explicitly set through
-     * {@link IVCache#setValue(BigdataValue)}, then an attempt to access the
+     * {@link IVCache#setValue(EmbergraphValue)}, then an attempt to access the
      * state of the {@link Value} through its {@link Value} interface will throw
      * a {@link NotMaterializedException}.
      */

@@ -27,6 +27,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.algebra.evaluation.iterator.CollectionIteration;
@@ -34,9 +37,6 @@ import org.openrdf.query.algebra.evaluation.iterator.CollectionIteration;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -95,10 +95,10 @@ public class CBD {
 
     /**
      * A mapping that is used to preserve a consistent assignment from blank
-     * node IDs to {@link BigdataBNode}s scoped to the subgraph reported by the
+     * node IDs to {@link EmbergraphBNode}s scoped to the subgraph reported by the
      * top-level DESCRIBE query.
      */
-    private final Map<String, BigdataBNode> bnodes;
+    private final Map<String, EmbergraphBNode> bnodes;
     
     /**
      * @param store
@@ -114,14 +114,14 @@ public class CBD {
      *            also reached) -or- ZERO (0) for no limit..
      * @param bnodes
      *            A mapping that is used to preserve a consistent assignment
-     *            from blank node IDs to {@link BigdataBNode}s scoped to the
+     *            from blank node IDs to {@link EmbergraphBNode}s scoped to the
      *            subgraph reported by the top-level DESCRIBE query.
      */
     public CBD(final AbstractTripleStore store,
             final DescribeModeEnum describeMode,
             final int describeIterationLimit,
             final int describeStatementLimit,
-            final Map<String, BigdataBNode> bnodes) {
+            final Map<String, EmbergraphBNode> bnodes) {
 
         if (store == null)
             throw new IllegalArgumentException();
@@ -189,8 +189,8 @@ public class CBD {
      * 
      * @throws QueryEvaluationException
      */
-    CloseableIteration<BigdataStatement, QueryEvaluationException> computeClosure(
-            CloseableIteration<BigdataStatement, QueryEvaluationException> src)
+    CloseableIteration<EmbergraphStatement, QueryEvaluationException> computeClosure(
+            CloseableIteration<EmbergraphStatement, QueryEvaluationException> src)
             throws QueryEvaluationException {
 
         // Round ZERO (0) is the top-level describe.
@@ -198,7 +198,7 @@ public class CBD {
         // The blank nodes identified in the previous round.
         final Set<IV<?,?>> bnodes_tm1 = new LinkedHashSet<IV<?,?>>();
         // The statements identified so far.
-        final Set<BigdataStatement> stmts = new LinkedHashSet<BigdataStatement>();
+        final Set<EmbergraphStatement> stmts = new LinkedHashSet<EmbergraphStatement>();
         while (true) {
 
             // CBD expansion begins at round ONE (1).
@@ -274,7 +274,7 @@ public class CBD {
          * top-level DESCRIBE query.
          */
 
-        return new CollectionIteration<BigdataStatement, QueryEvaluationException>(
+        return new CollectionIteration<EmbergraphStatement, QueryEvaluationException>(
                 stmts);
 
     }
@@ -319,7 +319,7 @@ public class CBD {
      *            The bnode {@link IV}s (optional and <code>null</code> if we
      *            are done).
      */
-    private void logState(final Set<BigdataStatement> stmts,
+    private void logState(final Set<EmbergraphStatement> stmts,
             final Set<IV<?, ?>> bnodes_tm1, final Set<IV<?, ?>> newBnodes) {
 
         if (!log.isDebugEnabled())
@@ -328,7 +328,7 @@ public class CBD {
         final StringBuilder sb = new StringBuilder(stmts.size() * 100);
         {
             sb.append("Statements: ("+stmts.size()+")\n");
-            for (BigdataStatement st : stmts) {
+            for (EmbergraphStatement st : stmts) {
                 sb.append(st.toString());
                 sb.append("\n");
             }
@@ -375,8 +375,8 @@ public class CBD {
      * @throws QueryEvaluationException
      */
     private static Set<IV<?, ?>> consumeStatements(
-            final CloseableIteration<BigdataStatement, QueryEvaluationException> src,
-            final Set<BigdataStatement> stmts, final Set<IV<?, ?>> bnodes_tm1)
+            final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src,
+            final Set<EmbergraphStatement> stmts, final Set<IV<?, ?>> bnodes_tm1)
             throws QueryEvaluationException {
 
         final Set<IV<?, ?>> newBnodes = new LinkedHashSet<IV<?, ?>>();
@@ -384,7 +384,7 @@ public class CBD {
 
             while (src.hasNext()) {
 
-                final BigdataStatement stmt = src.next();
+                final EmbergraphStatement stmt = src.next();
 
 //                /*
 //                 * A statement of the form
@@ -402,7 +402,7 @@ public class CBD {
                      * New blank node IVs can only be encountered for new
                      * statements.
                      * 
-                     * TODO Consider using an ISPO => BigdataStatement map for
+                     * TODO Consider using an ISPO => EmbergraphStatement map for
                      * the statements so we can avoid duplicate entries for
                      * BigdataStatements having different blank nodes but the
                      * same IVs for those blank nodes.
@@ -445,7 +445,7 @@ public class CBD {
      *         be read.
      * @throws QueryEvaluationException
      */
-    private CloseableIteration<BigdataStatement, QueryEvaluationException> doRound(
+    private CloseableIteration<EmbergraphStatement, QueryEvaluationException> doRound(
             final Set<IV<?, ?>> bnodeIVs) throws QueryEvaluationException {
 
         /*
@@ -485,7 +485,7 @@ public class CBD {
                 );
 
         // Constructed Statements.
-        final CloseableIteration<BigdataStatement, QueryEvaluationException> src =
+        final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src =
                 new ASTConstructIterator(context, store,
                         optimizedQuery.getConstruct(),
                         optimizedQuery.getWhereClause(),
@@ -512,10 +512,10 @@ public class CBD {
          * BigdataBlankNode objects and that the valueCache relation is set on
          * those bnode IVs.
          */
-        final Map<IV<?, ?>, BigdataValue> terms = store.getLexiconRelation()
+        final Map<IV<?, ?>, EmbergraphValue> terms = store.getLexiconRelation()
                 .getTerms(bnodeIVs);
 
-        for (Map.Entry<IV<?, ?>, BigdataValue> e : terms.entrySet()) {
+        for (Map.Entry<IV<?, ?>, EmbergraphValue> e : terms.entrySet()) {
 
             ((IV) e.getKey()).setValue(e.getValue());
 
@@ -597,7 +597,7 @@ public class CBD {
      * @return The {@link IV} for that blank node and <code>null</code> iff the
      *         value is not a blank node.
      */
-    static private IV<?,?> getBNodeIV(final BigdataValue v) {
+    static private IV<?,?> getBNodeIV(final EmbergraphValue v) {
 
         if (v == null) {
 
@@ -609,7 +609,7 @@ public class CBD {
 
         }
 
-        final BigdataBNode bnode = (BigdataBNode) ((v instanceof BigdataBNode) ? v
+        final EmbergraphBNode bnode = (EmbergraphBNode) ((v instanceof EmbergraphBNode) ? v
                 : null);
 
         if (bnode == null) {

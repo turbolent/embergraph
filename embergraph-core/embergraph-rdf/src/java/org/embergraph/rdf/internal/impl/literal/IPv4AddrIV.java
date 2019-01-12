@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.rdf.internal.DTE;
@@ -31,7 +32,6 @@ import org.embergraph.rdf.internal.IPv4Address;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.util.BytesUtil;
 
 /**
@@ -46,7 +46,7 @@ import org.embergraph.util.BytesUtil;
  * 
  * @see BLZG-1507 (Implement support for DTE extension types for URIs)
  */
-public class IPv4AddrIV<V extends BigdataLiteral> 
+public class IPv4AddrIV<V extends EmbergraphLiteral>
         extends AbstractLiteralIV<V, IPv4Address>
             implements Serializable, Literal {
 
@@ -68,7 +68,7 @@ public class IPv4AddrIV<V extends BigdataLiteral>
 	private transient String hostAddress;
 	
 	/**
-	 * The cached materialized BigdataValue for this InetAddress.
+	 * The cached materialized EmbergraphValue for this InetAddress.
 	 */
 	private transient V uri;
 
@@ -77,7 +77,7 @@ public class IPv4AddrIV<V extends BigdataLiteral>
 
         final IPv4AddrIV<V> tmp = new IPv4AddrIV<V>(value);
 
-        // Propagate the cached BigdataValue.
+        // Propagate the cached EmbergraphValue.
         tmp.uri = uri;
         
         if (!clearCache) {

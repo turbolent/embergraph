@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.api.Response;
 import org.eclipse.jetty.proxy.ProxyServlet;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.counters.CAT;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IIndexManager;
@@ -324,7 +324,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
         final ServletContext servletContext = servletConfig.getServletContext();
 
-        final IIndexManager indexManager = BigdataServlet
+        final IIndexManager indexManager = EmbergraphServlet
                 .getIndexManager(servletContext);
 
         if (! ((AbstractJournal) indexManager).isHAJournal()) {
@@ -400,11 +400,11 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
 //        // Get the as-configured prefix to be stripped from requests.
 //        prefix = servletConfig.getInitParameter(InitParams.PREFIX);
-        prefix = BigdataStatics.getContextPath() + PATH_LBS;
+        prefix = EmbergraphStatics.getContextPath() + PATH_LBS;
         
         final ServletContext servletContext = servletConfig.getServletContext();
 
-        final IIndexManager indexManager = BigdataServlet
+        final IIndexManager indexManager = EmbergraphServlet
                 .getIndexManager(servletContext);
 
         if (((AbstractJournal) indexManager).isHAJournal()
@@ -438,7 +438,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
         }
 
-        servletContext.setAttribute(BigdataServlet.ATTRIBUTE_LBS_PREFIX,
+        servletContext.setAttribute(EmbergraphServlet.ATTRIBUTE_LBS_PREFIX,
                 prefix);
 
         addServlet(servletContext, this/*servlet*/);
@@ -467,13 +467,13 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
             @SuppressWarnings("unchecked")
             CopyOnWriteArraySet<HALoadBalancerServlet> servletSet = (CopyOnWriteArraySet<HALoadBalancerServlet>) servletContext
-                    .getAttribute(BigdataServlet.ATTRIBUTE_LBS_INSTANCES);
+                    .getAttribute(EmbergraphServlet.ATTRIBUTE_LBS_INSTANCES);
 
             if (servletSet == null) {
 
                 servletContext
                         .setAttribute(
-                                BigdataServlet.ATTRIBUTE_LBS_INSTANCES,
+                                EmbergraphServlet.ATTRIBUTE_LBS_INSTANCES,
                                 servletSet = new CopyOnWriteArraySet<HALoadBalancerServlet>());
 
             }
@@ -497,7 +497,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
             @SuppressWarnings("unchecked")
             final CopyOnWriteArraySet<HALoadBalancerServlet> servletSet = (CopyOnWriteArraySet<HALoadBalancerServlet>) servletContext
-                    .getAttribute(BigdataServlet.ATTRIBUTE_LBS_INSTANCES);
+                    .getAttribute(EmbergraphServlet.ATTRIBUTE_LBS_INSTANCES);
 
             if (servletSet != null) {
 
@@ -519,7 +519,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
             @SuppressWarnings("unchecked")
             final CopyOnWriteArraySet<HALoadBalancerServlet> servletSet = (CopyOnWriteArraySet<HALoadBalancerServlet>) servletContext
-                    .getAttribute(BigdataServlet.ATTRIBUTE_LBS_INSTANCES);
+                    .getAttribute(EmbergraphServlet.ATTRIBUTE_LBS_INSTANCES);
 
             if (servletSet == null)
                 return null;
@@ -653,7 +653,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
         prefix = null;
 
-        getServletContext().setAttribute(BigdataServlet.ATTRIBUTE_LBS_PREFIX,
+        getServletContext().setAttribute(EmbergraphServlet.ATTRIBUTE_LBS_PREFIX,
                 null);
 
         super.destroy();
@@ -871,7 +871,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
         // The prefix for the LBS servlet.
         final String prefix = (String) request.getServletContext()
-                .getAttribute(BigdataServlet.ATTRIBUTE_LBS_PREFIX);
+                .getAttribute(EmbergraphServlet.ATTRIBUTE_LBS_PREFIX);
 
         if (prefix == null) {
             // LBS is not running / destroyed.
@@ -1267,7 +1267,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 //
 //            if ( request.getParameter(QueryServlet.ATTR_QUERY) != null ||
 //                 RESTServlet.hasMimeType(request,
-//                            BigdataRDFServlet.MIME_SPARQL_QUERY)
+//                            EmbergraphRDFServlet.MIME_SPARQL_QUERY)
 //                            ) {
 //
 //                /*

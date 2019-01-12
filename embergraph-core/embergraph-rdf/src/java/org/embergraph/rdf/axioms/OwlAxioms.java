@@ -21,12 +21,12 @@ package org.embergraph.rdf.axioms;
 
 import java.util.Collection;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.StatementEnum;
 
 /**
@@ -59,11 +59,11 @@ public class OwlAxioms extends RdfsAxioms {
         
     }
     
-    protected void addAxioms(final Collection<BigdataStatement> axioms) {
+    protected void addAxioms(final Collection<EmbergraphStatement> axioms) {
 
         super.addAxioms(axioms);
 
-        final BigdataValueFactory valueFactory = getValueFactory();
+        final EmbergraphValueFactory valueFactory = getValueFactory();
         
         // axioms for owl:equivalentClass
         axioms.add( valueFactory.createStatement( OWL.EQUIVALENTCLASS, RDFS.SUBPROPERTYOF, RDFS.SUBCLASSOF, null, StatementEnum.Axiom));

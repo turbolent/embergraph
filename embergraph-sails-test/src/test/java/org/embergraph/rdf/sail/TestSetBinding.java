@@ -24,6 +24,7 @@ import java.util.LinkedList;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
@@ -37,9 +38,8 @@ import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Test suite for {@link AbstractQuery#setBinding(String, Value)}
@@ -47,7 +47,7 @@ import org.embergraph.rdf.model.BigdataValueFactory;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestSetBinding extends ProxyBigdataSailTestCase {
+public class TestSetBinding extends ProxyEmbergraphSailTestCase {
 
     private static final Logger log = Logger.getLogger(TestSetBinding.class);
 
@@ -56,9 +56,9 @@ public class TestSetBinding extends ProxyBigdataSailTestCase {
         
         final Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -79,22 +79,22 @@ public class TestSetBinding extends ProxyBigdataSailTestCase {
 
     public void testSetBinding() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
 
         try {
 
             sail.initialize();
 
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-            final BigdataSailRepositoryConnection cxn = (BigdataSailRepositoryConnection) repo
+            final EmbergraphSailRepositoryConnection cxn = (EmbergraphSailRepositoryConnection) repo
                     .getConnection();
 
             try {
 
                 cxn.setAutoCommit(false);
 
-                final BigdataValueFactory vf = cxn.getValueFactory();
+                final EmbergraphValueFactory vf = cxn.getValueFactory();
 
                 // First step, load data.
                 final String data = "@prefix ns:<http://localhost/pets#>. "
@@ -130,11 +130,11 @@ public class TestSetBinding extends ProxyBigdataSailTestCase {
                 }
 
                 // Resolve some Values that we will need below.
-                final BigdataLiteral buffy = vf.createLiteral("Buffy");
-                final BigdataLiteral snowball = vf.createLiteral("Snowball");
-                final BigdataLiteral w1 = vf.createLiteral("8");
-                final BigdataLiteral w2 = vf.createLiteral("10");
-                cxn.getTripleStore().addTerms(new BigdataValue[]{
+                final EmbergraphLiteral buffy = vf.createLiteral("Buffy");
+                final EmbergraphLiteral snowball = vf.createLiteral("Snowball");
+                final EmbergraphLiteral w1 = vf.createLiteral("8");
+                final EmbergraphLiteral w2 = vf.createLiteral("10");
+                cxn.getTripleStore().addTerms(new EmbergraphValue[]{
                         buffy,
                         snowball,
                         w1,

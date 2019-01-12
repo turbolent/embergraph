@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.model.Statement;
 import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
@@ -37,11 +38,7 @@ import org.openrdf.query.QueryEvaluationException;
 
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
-import org.embergraph.rdf.spo.NoAxiomFilter;
-import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.DaemonThreadFactory;
 
 import junit.framework.Test;
@@ -169,7 +166,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager> extends
 //        final Properties properties = new Properties();
 //        final Properties properties = getTestMode().getProperties(); // FIXME BLZG-2023: Use the indicated test mode, but also test for triplesPlusTM.
         final Properties properties = TestMode.triplesPlusTruthMaintenance.getProperties();
-        properties.put(BigdataSail.Options.NAMESPACE, namespace);
+        properties.put(EmbergraphSail.Options.NAMESPACE, namespace);
         log.warn(String.format("Create namespace %s...", namespace));
         m_mgr.createRepository(namespace, properties);
         log.warn(String.format("Create namespace %s done", namespace));

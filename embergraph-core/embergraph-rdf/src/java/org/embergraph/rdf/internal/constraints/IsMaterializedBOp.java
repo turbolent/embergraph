@@ -29,7 +29,7 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Imposes the constraint <code>isMaterialized(x)</code>.
@@ -48,7 +48,7 @@ public class IsMaterializedBOp extends XSDBooleanIVValueExpression {
 
         /**
          * If <code>true</code>, only accept variable bindings for
-         * <code>x</code> that have a materialized RDF {@link BigdataValue}. If
+         * <code>x</code> that have a materialized RDF {@link EmbergraphValue}. If
          * <code>false</code>, only accept those that don't.
          */
     	String MATERIALIZED = IsMaterializedBOp.class.getName() + ".materialized";
@@ -62,7 +62,7 @@ public class IsMaterializedBOp extends XSDBooleanIVValueExpression {
      * @param materialized
      *            If <code>true</code>, only accept variable bindings for
      *            <code>x</code> that have a materialized RDF
-     *            {@link BigdataValue}. If <code>false</code>, only accept those
+     *            {@link EmbergraphValue}. If <code>false</code>, only accept those
      *            that don't.
      * @param lex
      *            The namespace of the lexicon relation.

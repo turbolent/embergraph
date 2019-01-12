@@ -9,9 +9,9 @@ import org.embergraph.rdf.changesets.ChangeAction;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
@@ -39,7 +39,7 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
 
     public DescribeServiceFactory() {
 
-        this.serviceOptions = new BigdataNativeServiceOptions();
+        this.serviceOptions = new EmbergraphNativeServiceOptions();
 
     }
 
@@ -67,7 +67,7 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
      * of the describe cache.
      */
     @Override
-    public void startConnection(final BigdataSailConnection conn) {
+    public void startConnection(final EmbergraphSailConnection conn) {
 
         /**
          * TODO This really should not be using getCacheConnection() but rather
@@ -79,7 +79,7 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
          * the cache connection.
          */
         final ICacheConnection cacheConn = CacheConnectionFactory
-                .getCacheConnection(conn.getBigdataSail().getQueryEngine());
+                .getCacheConnection(conn.getEmbergraphSail().getQueryEngine());
 
         if (cacheConn == null) {
 

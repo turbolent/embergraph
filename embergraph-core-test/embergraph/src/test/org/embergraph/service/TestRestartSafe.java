@@ -28,7 +28,7 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import org.embergraph.bfs.BigdataFileSystem.Options;
+import org.embergraph.bfs.EmbergraphFileSystem.Options;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;

@@ -95,15 +95,15 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
         props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.quadsMode", "true");
         props.setProperty("org.embergraph.journal.AbstractJournal.maximumExtent", "209715200");
         props.setProperty("org.embergraph.service.IBigdataClient.collectPlatformStatistics", "false");
-        props.setProperty("org.embergraph.service.IBigdataClient.httpdPort", "-1");
+        props.setProperty("org.embergraph.service.IEmbergraphClient.httpdPort", "-1");
         props.setProperty("org.embergraph.rdf.sail.bufferCapacity", "100000");
         props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.bloomFilter", "false");
 
-        props.setProperty(BigdataSail.Options.CREATE_TEMP_FILE, Boolean.FALSE.toString());
-        props.setProperty(BigdataSail.Options.FILE, jnlFile.toString());
+        props.setProperty(EmbergraphSail.Options.CREATE_TEMP_FILE, Boolean.FALSE.toString());
+        props.setProperty(EmbergraphSail.Options.FILE, jnlFile.toString());
 
-        final BigdataSail sail = new BigdataSail(props);
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSail sail = new EmbergraphSail(props);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         repo.initialize();
 
         final InsertDeleteRunner mapper = new InsertDeleteRunner(repo);
@@ -129,9 +129,9 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
 
     private class InsertDeleteRunner implements Runnable {
 
-        private final BigdataSailRepository repo;
+        private final EmbergraphSailRepository repo;
 
-        public InsertDeleteRunner(final BigdataSailRepository repo) {
+        public InsertDeleteRunner(final EmbergraphSailRepository repo) {
             this.repo = repo;
         }
 
@@ -226,9 +226,9 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
 
     private class ReadOnlyRunner implements Runnable {
 
-        private final BigdataSailRepository repo;
+        private final EmbergraphSailRepository repo;
 
-        public ReadOnlyRunner(final BigdataSailRepository repo) {
+        public ReadOnlyRunner(final EmbergraphSailRepository repo) {
             this.repo = repo;
         }
 

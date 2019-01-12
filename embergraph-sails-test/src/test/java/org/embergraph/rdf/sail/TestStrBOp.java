@@ -49,11 +49,11 @@ public class TestStrBOp extends QuadsTestCase {
         
         Properties props = super.getProperties();
 
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -79,10 +79,10 @@ public class TestStrBOp extends QuadsTestCase {
 //        sail.initialize();
 //        final Repository repo = new SailRepository(sail);
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         
         final RepositoryConnection cxn = repo.getConnection();
         
@@ -122,7 +122,7 @@ public class TestStrBOp extends QuadsTestCase {
             cxn.commit();
             
             if (log.isInfoEnabled()) {
-                log.info(((BigdataSailRepositoryConnection)cxn).getTripleStore().dumpStore());
+                log.info(((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
             }
             
             {
@@ -153,8 +153,8 @@ public class TestStrBOp extends QuadsTestCase {
                     
                     log.info(query);
                     
-//                    final BigdataSailTupleQuery bdTupleQuery =
-//                        (BigdataSailTupleQuery) tupleQuery;
+//                    final EmbergraphSailTupleQuery bdTupleQuery =
+//                        (EmbergraphSailTupleQuery) tupleQuery;
 //                    final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
 //                    final Projection p = (Projection) root.getArg();
 //                    final TupleExpr tupleExpr = p.getArg();
@@ -190,8 +190,8 @@ public class TestStrBOp extends QuadsTestCase {
             cxn.close();
         }
         } finally {
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();//shutDown();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
         }
 
     }
@@ -203,10 +203,10 @@ public class TestStrBOp extends QuadsTestCase {
 //      sail.initialize();
 //      final Repository repo = new SailRepository(sail);
 
-      final BigdataSail sail = getSail();
+      final EmbergraphSail sail = getSail();
       try {
       sail.initialize();
-      final BigdataSailRepository repo = new BigdataSailRepository(sail);
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       
       final RepositoryConnection cxn = repo.getConnection();
       
@@ -246,7 +246,7 @@ public class TestStrBOp extends QuadsTestCase {
           cxn.commit();
           
           if (log.isInfoEnabled()) {
-              log.info(((BigdataSailRepositoryConnection)cxn).getTripleStore().dumpStore());
+              log.info(((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
           }
           
           {
@@ -274,8 +274,8 @@ public class TestStrBOp extends QuadsTestCase {
                   
                   log.info(query);
                   
-//                  final BigdataSailTupleQuery bdTupleQuery =
-//                      (BigdataSailTupleQuery) tupleQuery;
+//                  final EmbergraphSailTupleQuery bdTupleQuery =
+//                      (EmbergraphSailTupleQuery) tupleQuery;
 //                  final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
 //                  final Projection p = (Projection) root.getArg();
 //                  final TupleExpr tupleExpr = p.getArg();
@@ -311,8 +311,8 @@ public class TestStrBOp extends QuadsTestCase {
             cxn.close();
         }
         } finally {
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();//shutDown();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
         }
 
     }
@@ -334,10 +334,10 @@ SELECT ?s WHERE {
 //      sail.initialize();
 //      final Repository repo = new SailRepository(sail);
 
-      final BigdataSail sail = getSail();
+      final EmbergraphSail sail = getSail();
       try {
       sail.initialize();
-      final BigdataSailRepository repo = new BigdataSailRepository(sail);
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       
       final RepositoryConnection cxn = repo.getConnection();
       
@@ -377,7 +377,7 @@ SELECT ?s WHERE {
           cxn.commit();
           
           if (log.isInfoEnabled()) {
-          	log.info(((BigdataSailRepositoryConnection)cxn).getTripleStore().dumpStore());
+          	log.info(((EmbergraphSailRepositoryConnection)cxn).getTripleStore().dumpStore());
           }
           
           {
@@ -405,8 +405,8 @@ SELECT ?s WHERE {
                   
                   log.info(query);
                   
-//                  final BigdataSailTupleQuery bdTupleQuery =
-//                      (BigdataSailTupleQuery) tupleQuery;
+//                  final EmbergraphSailTupleQuery bdTupleQuery =
+//                      (EmbergraphSailTupleQuery) tupleQuery;
 //                  final QueryRoot root = (QueryRoot) bdTupleQuery.getTupleExpr();
 //                  final Projection p = (Projection) root.getArg();
 //                  final TupleExpr tupleExpr = p.getArg();
@@ -442,8 +442,8 @@ SELECT ?s WHERE {
             cxn.close();
         }
         } finally {
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();//shutDown();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
         }
 
     }

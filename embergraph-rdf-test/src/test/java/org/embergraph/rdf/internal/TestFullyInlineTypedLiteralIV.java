@@ -11,7 +11,7 @@ import org.openrdf.model.impl.URIImpl;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Test suite for {@link FullyInlineTypedLiteralIV}.
@@ -27,22 +27,22 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
 	public void test_InlineLiteralIV_plain() {
 
-        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>(""));
-        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>(" "));
-        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("1"));
-        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("12"));
-        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("123"));
+        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
+        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
+        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
+        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
+        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
 
 	}
 	
 //Removed in backport.    Not used in pre-RDF 1.1 versions
 //	public void test_InlineLiteralIV_languageCode() {
 //
-//        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("","en",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>(" ","en",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("1","en",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("12","fr",null/*datatype*/));
-//        doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("123","de",null/*datatype*/));
+//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("","en",null/*datatype*/));
+//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ","en",null/*datatype*/));
+//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1","en",null/*datatype*/));
+//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12","fr",null/*datatype*/));
+//        doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123","de",null/*datatype*/));
 //
 //	}
 
@@ -50,15 +50,15 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
 		final URI datatype = new URIImpl("http://www.embergraph.org");
 
-		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>(" ", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null, datatype));
-		doTest(new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null, datatype));
+		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
+		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
+		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
+		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
+		doTest(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
 
 	}
 
-	private void doTest(final FullyInlineTypedLiteralIV<BigdataLiteral> iv) {
+	private void doTest(final FullyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
 
 		assertEquals(VTE.LITERAL, iv.getVTE());
 		
@@ -91,23 +91,23 @@ public class TestFullyInlineTypedLiteralIV extends TestCase2 {
 
             final URI datatype = new URIImpl("http://www.embergraph.org");
             
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>(""));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>(" "));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("1"));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("12"));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("123"));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123"));
             
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("","en",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>(" ","en",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("1","en",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("12","fr",null/*datatype*/));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("123","de",null/*datatype*/));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("","en",null/*datatype*/));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ","en",null/*datatype*/));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1","en",null/*datatype*/));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12","fr",null/*datatype*/));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123","de",null/*datatype*/));
 
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>(" ", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("1", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("12", null, datatype));
-            ivs.add(new FullyInlineTypedLiteralIV<BigdataLiteral>("123", null, datatype));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, datatype));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" ", null, datatype));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1", null, datatype));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12", null, datatype));
+            ivs.add(new FullyInlineTypedLiteralIV<EmbergraphLiteral>("123", null, datatype));
 
         }
         

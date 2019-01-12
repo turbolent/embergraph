@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -36,8 +37,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -166,7 +166,7 @@ public class ReplaceBOp extends IVValueExpression<IV> implements INeedsMateriali
         
         try {
 
-        	final BigdataLiteral l = 
+        	final EmbergraphLiteral l =
         		evaluate(getValueFactory(), var, pattern, replacement, flags);
         	
         	return super.asIV(l, bs);
@@ -188,7 +188,7 @@ public class ReplaceBOp extends IVValueExpression<IV> implements INeedsMateriali
      * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/516">
      *      REGEXBOp should cache the Pattern when it is a constant </a>
      */
-	public BigdataLiteral evaluate(final BigdataValueFactory valueFactory, final Value... args)
+	public EmbergraphLiteral evaluate(final EmbergraphValueFactory valueFactory, final Value... args)
 			throws ValueExprEvaluationException {
 		if (args.length < 3 || args.length > 4) {
 			throw new ValueExprEvaluationException(

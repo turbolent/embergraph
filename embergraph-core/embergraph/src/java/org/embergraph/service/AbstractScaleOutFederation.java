@@ -77,7 +77,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     /**
      * @param client
      */
-    public AbstractScaleOutFederation(final IBigdataClient<T> client) {
+    public AbstractScaleOutFederation(final IEmbergraphClient<T> client) {
        
         super(client);
         

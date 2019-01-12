@@ -23,14 +23,14 @@ package org.embergraph.rdf.store;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPORelation;
@@ -79,40 +79,40 @@ public class TestIsModified extends AbstractTripleStoreTestCase {
 
         try {
 
-            final BigdataValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
 
-            final BigdataURI x = valueFactory.createURI("http://www.foo.org/x");
-            final BigdataURI y = valueFactory.createURI("http://www.foo.org/y");
-            final BigdataURI z = valueFactory.createURI("http://www.foo.org/z");
+            final EmbergraphURI x = valueFactory.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = valueFactory.createURI("http://www.foo.org/y");
+            final EmbergraphURI z = valueFactory.createURI("http://www.foo.org/z");
 
-            final BigdataURI A = valueFactory.createURI("http://www.foo.org/A");
-            final BigdataURI B = valueFactory.createURI("http://www.foo.org/B");
-            final BigdataURI C = valueFactory.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = valueFactory.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = valueFactory.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = valueFactory.createURI("http://www.foo.org/C");
 
-            final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
+            final EmbergraphURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
 
-            final BigdataURI rdfsSubClassOf = valueFactory.createURI(RDFS.SUBCLASSOF.stringValue());
+            final EmbergraphURI rdfsSubClassOf = valueFactory.createURI(RDFS.SUBCLASSOF.stringValue());
 
             // resolve term identifiers.
-            store.addTerms(new BigdataValue[] { x, y, z, A, B, C, rdfType,
+            store.addTerms(new EmbergraphValue[] { x, y, z, A, B, C, rdfType,
                     rdfsSubClassOf });
 
             // Add a bunch of statements.
             {
 
-                final BigdataStatement s1 = valueFactory.createStatement(x,
+                final EmbergraphStatement s1 = valueFactory.createStatement(x,
                         rdfType, C, null/* c */, StatementEnum.Explicit);
 
-                final BigdataStatement s2 = valueFactory.createStatement(y,
+                final EmbergraphStatement s2 = valueFactory.createStatement(y,
                         rdfType, B, null/* c */, StatementEnum.Explicit);
 
-                final BigdataStatement s3 = valueFactory.createStatement(z,
+                final EmbergraphStatement s3 = valueFactory.createStatement(z,
                         rdfType, A, null/* c */, StatementEnum.Explicit);
 
-                final BigdataStatement s4 = valueFactory.createStatement(B,
+                final EmbergraphStatement s4 = valueFactory.createStatement(B,
                         rdfsSubClassOf, A, null/* c */, StatementEnum.Explicit);
 
-                final BigdataStatement s5 = valueFactory.createStatement(C,
+                final EmbergraphStatement s5 = valueFactory.createStatement(C,
                         rdfsSubClassOf, B, null/* c */, StatementEnum.Explicit);
 
                 assertFalse(s1.isModified());
@@ -136,11 +136,11 @@ public class TestIsModified extends AbstractTripleStoreTestCase {
             {
 
                 // statement exists.
-                final BigdataStatement s1 = valueFactory.createStatement(x,
+                final EmbergraphStatement s1 = valueFactory.createStatement(x,
                         rdfType, C, null/* c */, StatementEnum.Explicit);
 
                 // statement does not exist.
-                final BigdataStatement s2 = valueFactory.createStatement(x,
+                final EmbergraphStatement s2 = valueFactory.createStatement(x,
                         x, x, null/* c */, StatementEnum.Explicit);
 
                 assertFalse(store.hasStatement(s2.s(), s2.p(), s2.o(), s2.c()));

@@ -25,11 +25,11 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
  */
 package org.embergraph.rdf.sparql.ast.service.storedquery;
 
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailTupleQuery;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.BigdataSailTupleQuery;
 import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 
@@ -54,7 +54,7 @@ abstract public class SimpleStoredQueryService extends StoredQueryService {
      */
     @Override
     protected TupleQueryResult doQuery(
-            final BigdataSailRepositoryConnection cxn,
+            final EmbergraphSailRepositoryConnection cxn,
             final ServiceCallCreateParams createParams,
             final ServiceParams serviceParams) throws Exception {
 
@@ -62,7 +62,7 @@ abstract public class SimpleStoredQueryService extends StoredQueryService {
 
         final String baseURI = createParams.getServiceURI().stringValue();
 
-        final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+        final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
                 .prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
 
         return query.evaluate();

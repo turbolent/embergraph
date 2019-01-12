@@ -36,7 +36,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 
@@ -48,7 +48,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * applying the slice. When a slice is applied without a sort, the same query
  * may return different results each time it is evaluated.
  * <p>
- * Note: When running on an {@link IBigdataFederation}, this operator must be
+ * Note: When running on an {@link IEmbergraphFederation}, this operator must be
  * imposed on the query controller so it can count the solutions as they flow
  * through - see {@link #getEvaluationContext()}.
  * <p>

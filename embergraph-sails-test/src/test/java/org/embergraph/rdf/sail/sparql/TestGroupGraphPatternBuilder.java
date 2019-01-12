@@ -24,6 +24,7 @@ package org.embergraph.rdf.sail.sparql;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
@@ -32,10 +33,9 @@ import org.embergraph.rdf.internal.ILexiconConfiguration;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.constraints.ComputedIN;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
@@ -63,7 +63,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
  *          thompsonbry $
  */
 public class TestGroupGraphPatternBuilder extends
-        AbstractBigdataExprBuilderTestCase {
+    AbstractEmbergraphExprBuilderTestCase {
 
     /**
      * 
@@ -174,7 +174,7 @@ public class TestGroupGraphPatternBuilder extends
        
         final String sparql = "select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}";
 
-        final IV<BigdataValue, ?> graphConst = makeIV(valueFactory
+        final IV<EmbergraphValue, ?> graphConst = makeIV(valueFactory
                 .createURI("http://www.embergraph.org"));
 
         final QueryRoot expected = new QueryRoot(QueryType.SELECT);
@@ -804,7 +804,7 @@ public class TestGroupGraphPatternBuilder extends
             final JoinGroupNode whereClause = new JoinGroupNode();
             expected.setWhereClause(whereClause);
 
-            ILexiconConfiguration<BigdataValue> lexiconConfiguration = tripleStore.getLexiconRelation().getLexiconConfiguration();
+            ILexiconConfiguration<EmbergraphValue> lexiconConfiguration = tripleStore.getLexiconRelation().getLexiconConfiguration();
             
             final ValueExpressionNode ve1 = new FunctionNode(
                     FunctionRegistry.GE, null/* scalarValues */,

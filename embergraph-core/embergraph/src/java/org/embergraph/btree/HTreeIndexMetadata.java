@@ -27,7 +27,7 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.LongPacker;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * HTree specific implementation.
@@ -209,7 +209,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
 	 * 
 	 * @param indexManager
 	 *            Optional. When given and when the {@link IIndexManager} is a
-	 *            scale-out {@link IBigdataFederation}, this object will be used
+	 *            scale-out {@link IEmbergraphFederation}, this object will be used
 	 *            to interpret the {@link Options#INITIAL_DATA_SERVICE}
 	 *            property.
 	 * @param properties

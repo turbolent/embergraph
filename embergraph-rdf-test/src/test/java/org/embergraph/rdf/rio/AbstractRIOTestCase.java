@@ -41,13 +41,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.AssertionFailedError;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.rdf.load.IStatementBufferFactory;
-import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Abstract base class for unit tests involving the RIO integration.
@@ -143,7 +143,7 @@ abstract public class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     protected void doLoad(final AbstractTripleStore store,
             final String resource,
             final boolean parallel,
-            final IStatementBufferFactory<BigdataStatement> factory)
+            final IStatementBufferFactory<EmbergraphStatement> factory)
             throws Exception {
 
         // tasks to load the resource or file(s)
@@ -187,7 +187,7 @@ abstract public class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
      * @return
      */
     protected List<Callable<Void>> getLoadTasks(final String resource,
-            final IStatementBufferFactory<BigdataStatement> factory) {
+            final IStatementBufferFactory<EmbergraphStatement> factory) {
         
         final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
         
@@ -235,7 +235,7 @@ abstract public class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
      */
     private void addFileLoadTask(final File file,
             final List<Callable<Void>> tasks,
-            final IStatementBufferFactory<BigdataStatement> factory) {
+            final IStatementBufferFactory<EmbergraphStatement> factory) {
 
         if (file.isHidden()) {
 
@@ -288,10 +288,10 @@ abstract public class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
 
         private final String resource;
 
-        private final IStatementBufferFactory<BigdataStatement> factory;
+        private final IStatementBufferFactory<EmbergraphStatement> factory;
 
         public LoadTask(final String resource,
-                final IStatementBufferFactory<BigdataStatement> factory) {
+                final IStatementBufferFactory<EmbergraphStatement> factory) {
 
             if (resource == null)
                 throw new IllegalArgumentException();
@@ -326,7 +326,7 @@ abstract public class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
          * @throws URISyntaxException 
          */
         protected void loadOne(final String resource,
-                IStatementBufferFactory<? extends BigdataStatement> factory)
+                IStatementBufferFactory<? extends EmbergraphStatement> factory)
                 throws IOException, URISyntaxException {
 
             if (log.isInfoEnabled())
@@ -732,7 +732,7 @@ abstract public class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
              * embedded federation. I've conditionally disabled it until it is
              * rewritten to be batch oriented.
              */
-            if (store.getIndexManager() instanceof IBigdataFederation<?>) {
+            if (store.getIndexManager() instanceof IEmbergraphFederation<?>) {
                 log.warn("Not checking indices in scale-out : code is not efficient.");
             } else {
                 assertLexiconIndicesConsistent(store);

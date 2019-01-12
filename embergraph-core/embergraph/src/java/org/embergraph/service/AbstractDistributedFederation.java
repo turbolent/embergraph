@@ -24,7 +24,7 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBuffer;
 
 /**
- * Abstract base class for {@link IBigdataFederation} implementations where the
+ * Abstract base class for {@link IEmbergraphFederation} implementations where the
  * services are distributed using RMI and are running, at least in principle,
  * across more than one host/JVM.
  * 
@@ -47,7 +47,7 @@ import org.embergraph.relation.accesspath.IBuffer;
  */
 abstract public class AbstractDistributedFederation<T> extends AbstractScaleOutFederation<T> {
 
-    public AbstractDistributedFederation(final IBigdataClient<T> client) {
+    public AbstractDistributedFederation(final IEmbergraphClient<T> client) {
 
         super(client);
 

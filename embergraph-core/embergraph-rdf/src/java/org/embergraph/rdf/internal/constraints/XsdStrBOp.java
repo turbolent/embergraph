@@ -29,14 +29,11 @@ import org.openrdf.model.Value;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
-import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -95,7 +92,7 @@ public class XsdStrBOp extends IVValueExpression<IV>
         }
         
         // use to create my simple literals
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
         if (val instanceof Literal) {
         	final Literal lit = (Literal) val;
@@ -105,12 +102,12 @@ public class XsdStrBOp extends IVValueExpression<IV>
         	}
         	else {
                 // else return new xsd:string literal using Literal.getLabel
-                final BigdataLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
+                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
                 return super.asIV(str, bs);
             }
         } else if (val instanceof URI) {
             // return new simple literal using URI label
-            final BigdataLiteral str = vf.createLiteral(val.stringValue(), XSD.STRING);
+            final EmbergraphLiteral str = vf.createLiteral(val.stringValue(), XSD.STRING);
             return super.asIV(str, bs);
         } else {
             throw new SparqlTypeErrorException();
@@ -119,7 +116,7 @@ public class XsdStrBOp extends IVValueExpression<IV>
 //        final IV iv = getAndCheckBound(0, bs);
 //
 //        // use to create my simple literals
-//        final BigdataValueFactory vf = getValueFactory();
+//        final EmbergraphValueFactory vf = getValueFactory();
 //
 //        if (iv.isInline() && !iv.isExtension()) {
 //            if(iv.isLiteral()){
@@ -134,17 +131,17 @@ public class XsdStrBOp extends IVValueExpression<IV>
 //        if (iv.isURI()) {
 //            // return new xsd:string literal using URI label
 //            final URI uri = (URI) iv.getValue();
-//            final BigdataLiteral str = vf.createLiteral(uri.toString(), XSD.STRING);
+//            final EmbergraphLiteral str = vf.createLiteral(uri.toString(), XSD.STRING);
 //            return super.asIV(str, bs);
 //        } else if (iv.isLiteral()) {
-//            final BigdataLiteral lit = (BigdataLiteral) iv.getValue();
+//            final EmbergraphLiteral lit = (EmbergraphLiteral) iv.getValue();
 //            if (lit.getDatatype() != null && lit.getDatatype().equals(XSD.STRING)) {
 //                // if xsd:string literal return it
 //                return iv;
 //        	}
 //        	else {
 //                // else return new xsd:string literal using Literal.getLabel
-//                final BigdataLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
+//                final EmbergraphLiteral str = vf.createLiteral(lit.getLabel(), XSD.STRING);
 //                return super.asIV(str, bs);
 //            }
 //        } else {

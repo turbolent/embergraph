@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.journal.ITx;
@@ -38,8 +39,7 @@ import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 import org.embergraph.rdf.properties.PropertiesParserFactory;
 import org.embergraph.rdf.properties.PropertiesParserRegistry;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.DataLoader;
 import org.embergraph.rdf.store.DataLoader.ClosureEnum;
@@ -53,7 +53,7 @@ import org.embergraph.rdf.store.DataLoader.MyLoadStats;
  * 
  * @author beebs@systap.com
  */
-public class DataLoaderServlet extends BigdataRDFServlet {
+public class DataLoaderServlet extends EmbergraphRDFServlet {
 
 	/**
      * 
@@ -240,7 +240,7 @@ public class DataLoaderServlet extends BigdataRDFServlet {
 
 		// The namespace of the KB instance. Defaults to "kb". -->
 		final String namespace = props.getProperty("namespace",
-				BigdataSail.Options.DEFAULT_NAMESPACE);
+				EmbergraphSail.Options.DEFAULT_NAMESPACE);
 		
 		/**
 		 * Zero or more files or directories containing the data to be
@@ -266,7 +266,7 @@ public class DataLoaderServlet extends BigdataRDFServlet {
 		}
 		
 
-        final AbstractTripleStore kb = (AbstractTripleStore) getBigdataRDFContext().getIndexManager()
+        final AbstractTripleStore kb = (AbstractTripleStore) getEmbergraphRDFContext().getIndexManager()
         		.getResourceLocator().locate(namespace, ITx.UNISOLATED);
 
         //Parse the passed properties files and create a new CreateKB API Task
@@ -288,7 +288,7 @@ public class DataLoaderServlet extends BigdataRDFServlet {
 				submitApiTask(new RestApiCreateKBTask(req, resp, namespace,
 						kbProps)).get();
 			} catch (Throwable t) {
-				BigdataRDFServlet.launderThrowable(t, resp,
+				EmbergraphRDFServlet.launderThrowable(t, resp,
 						"DATALOADER-SERVLET: Exception creating " + namespace
 								+ " with properties: " + propertyFile);
 
@@ -308,7 +308,7 @@ public class DataLoaderServlet extends BigdataRDFServlet {
 
 		} catch (Throwable t) {
 
-			BigdataRDFServlet.launderThrowable(
+			EmbergraphRDFServlet.launderThrowable(
 					t,
 					resp,
 					"DATALOADER-SERVLET: " + namespace );
@@ -429,7 +429,7 @@ public class DataLoaderServlet extends BigdataRDFServlet {
 
 			final long begin = System.currentTimeMillis();
             
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             boolean success = false;
 
             try {

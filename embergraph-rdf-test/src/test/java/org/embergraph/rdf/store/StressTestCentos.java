@@ -4,8 +4,8 @@ import java.util.Properties;
 
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.vocab.NoVocabulary;
@@ -64,21 +64,21 @@ public class StressTestCentos extends AbstractTripleStoreTestCase {
 
             for (int k = 0; k < N; k++) {
                 
-                StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(
+                StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(
                         store, 20000);
                 
-                BigdataURI g = store.getValueFactory().createURI(
+                EmbergraphURI g = store.getValueFactory().createURI(
                         "http://test/g" + k);
 
                 for (int l = 0; l < M; l++) {
 
-                    BigdataURI s = store.getValueFactory().createURI(
+                    EmbergraphURI s = store.getValueFactory().createURI(
                             "http://test/s" + (l % 99));
                     
-                    BigdataURI p = store.getValueFactory().createURI(
+                    EmbergraphURI p = store.getValueFactory().createURI(
                             "http://test/p" + (l % 37));
                     
-                    BigdataURI o = store.getValueFactory().createURI(
+                    EmbergraphURI o = store.getValueFactory().createURI(
                             "http://test/o" + (l % 399));
                     
                     sb.add(store.getValueFactory().createStatement(s, p, o, g,
@@ -103,7 +103,7 @@ public class StressTestCentos extends AbstractTripleStoreTestCase {
                  */
                 int size = 0;
                 
-                BigdataStatementIterator iter = readStore.getStatements(null,
+                EmbergraphStatementIterator iter = readStore.getStatements(null,
                         null, null, g);
                 
                 while (iter.hasNext()) {

@@ -92,7 +92,7 @@ public class TestAll_AST extends TestCase {
          * including DISTINCT/REDUCED, GROUP BY, HAVING, ORDER BY, and
          * LIMIT/OFFSET.
          */
-        suite.addTestSuite(TestBigdataExprBuilder.class);
+        suite.addTestSuite(TestEmbergraphExprBuilder.class);
 
         // Test suite for the VIRTUAL GRAPHS extension.
         suite.addTestSuite(TestVirtualGraphs.class);

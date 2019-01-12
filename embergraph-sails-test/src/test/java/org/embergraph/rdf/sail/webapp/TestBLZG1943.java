@@ -22,6 +22,7 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.openrdf.model.Statement;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.StatementImpl;
@@ -34,10 +35,9 @@ import org.openrdf.query.Update;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.ProxyEmbergraphSailTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -47,7 +47,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
-public class TestBLZG1943 extends ProxyBigdataSailTestCase {
+public class TestBLZG1943 extends ProxyEmbergraphSailTestCase {
 
     /**
      * 
@@ -65,14 +65,14 @@ public class TestBLZG1943 extends ProxyBigdataSailTestCase {
     public void testTicketBlzg1943() throws Exception {
 
         
-        final BigdataSail sail = getSail();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSail sail = getSail();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
         try {
 
             repo.initialize();
             
-            BigdataSailRepositoryConnection conn = repo.getConnection();
+            EmbergraphSailRepositoryConnection conn = repo.getConnection();
             
             // init repository
             conn.setAutoCommit(false);
@@ -133,7 +133,7 @@ public class TestBLZG1943 extends ProxyBigdataSailTestCase {
         properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
         // TM not available with quads.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,"false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
 
         // turn off axioms.
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,

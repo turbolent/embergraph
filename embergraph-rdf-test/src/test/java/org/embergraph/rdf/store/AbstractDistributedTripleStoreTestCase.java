@@ -35,7 +35,8 @@ import org.embergraph.journal.ITx;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractDistributedTripleStoreTestCase extends AbstractDistributedBigdataFederationTestCase {
+abstract public class AbstractDistributedTripleStoreTestCase extends
+    AbstractDistributedEmbergraphFederationTestCase {
 
     /**
      * 

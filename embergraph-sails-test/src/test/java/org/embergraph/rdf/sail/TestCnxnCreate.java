@@ -26,22 +26,22 @@ import java.util.Properties;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.sail.SailException;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
  * Test suite for BLZG-2056 BigdataSailConnections not always closed by
- * BigdataSail.shutdown()
+ * EmbergraphSail.shutdown()
  * 
  * @see https://jira.blazegraph.com/browse/BLZG-2056
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestCnxnCreate extends ProxyBigdataSailTestCase {
+public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
 
     /**
      * 
@@ -69,7 +69,7 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
         final Properties properties = getProperties();
 
         // truth maintenance is not compatible with full transactions.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
@@ -77,14 +77,14 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
         properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
                 NoVocabulary.class.getName());
 
-        properties.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
         properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
 
         properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
                 "false");
 
-        final BigdataSail sail = new BigdataSail(properties);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
         
         try {
 
@@ -92,11 +92,11 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
 
             log.info("Sail is initialized.");
                         
-            final BigdataSailConnection uicnxn = sail.getUnisolatedConnection();
+            final EmbergraphSailConnection uicnxn = sail.getUnisolatedConnection();
             
             assertTrue(uicnxn.isOpen());
             
-            final BigdataSailConnection rocnxn = sail.getReadOnlyConnection();
+            final EmbergraphSailConnection rocnxn = sail.getReadOnlyConnection();
             
             assertTrue(rocnxn.isOpen());
             
@@ -130,7 +130,7 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
         final Properties properties = getProperties();
 
         // truth maintenance is not compatible with full transactions.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
@@ -138,14 +138,14 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
         properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
                 NoVocabulary.class.getName());
 
-        properties.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
         properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
 
         properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
                 "false");
 
-        final BigdataSail sail = new BigdataSail(properties);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
         
         try {
 
@@ -153,7 +153,7 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
 
             log.info("Sail is initialized.");
             
-            final BigdataSailConnection cnxn = sail.getConnection();
+            final EmbergraphSailConnection cnxn = sail.getConnection();
             
             assertTrue(cnxn.isOpen());
                         
@@ -179,7 +179,7 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
         final Properties properties = getProperties();
 
         // truth maintenance is not compatible with full transactions.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
@@ -187,14 +187,14 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
         properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
                 NoVocabulary.class.getName());
 
-        properties.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
         properties.setProperty(AbstractTripleStore.Options.JUSTIFY, "false");
 
         properties.setProperty(AbstractTripleStore.Options.INLINE_DATE_TIMES,
                 "false");
 
-        final BigdataSail sail = new BigdataSail(properties);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
         
         try {
 
@@ -202,7 +202,7 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
 
             log.info("Sail is initialized.");
             
-            final AtomicReference<BigdataSailConnection> uicnxn = new AtomicReference<BigdataSailConnection>();
+            final AtomicReference<EmbergraphSailConnection> uicnxn = new AtomicReference<EmbergraphSailConnection>();
             final Semaphore c1 = new Semaphore(0);
             
             final Thread t = new Thread() {
@@ -223,11 +223,11 @@ public class TestCnxnCreate extends ProxyBigdataSailTestCase {
                         
             assertTrue(uicnxn.get().isOpen());
             
-            final BigdataSailConnection rocnxn = sail.getReadOnlyConnection();
+            final EmbergraphSailConnection rocnxn = sail.getReadOnlyConnection();
             
             assertTrue(rocnxn.isOpen());
             
-//            final BigdataSailConnection rwcnxn = sail.getReadWriteConnection();
+//            final EmbergraphSailConnection rwcnxn = sail.getReadWriteConnection();
 //            
 //            assertTrue(rwcnxn.isOpen());
 //            

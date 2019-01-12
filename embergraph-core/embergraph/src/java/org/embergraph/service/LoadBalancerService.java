@@ -100,7 +100,7 @@ import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCoun
  *       maintain QOS on individual machines, indices, and across the
  *       federation.
  * 
- * @todo All clients ({@link IBigdataClient}, {@link DataService}, etc) should
+ * @todo All clients ({@link IEmbergraphClient}, {@link DataService}, etc) should
  *       issue WARN and URGENT notices. The client-side rules for those alerts
  *       should be configurable / pluggable / declarative. It would be great if
  *       the WARN and URGENT notices were able to carry some information about
@@ -2095,7 +2095,7 @@ abstract public class LoadBalancerService extends AbstractService
          */
         String serviceName;
         if (IDataService.class == serviceIface) {
-            final IBigdataFederation<?> fed;
+            final IEmbergraphFederation<?> fed;
             try {
                 fed = getFederation();
             } catch (IllegalStateException t) {

@@ -23,7 +23,7 @@ package org.embergraph.service.geospatial;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
 /**
@@ -68,14 +68,14 @@ public class GeoSpatialDefaultLiteralSerializer implements IGeoSpatialLiteralSer
 
     @Override
     public IV<?,?> serializeLocation(
-        final BigdataValueFactory vf, final Object latitude, final Object longitude) {
+        final EmbergraphValueFactory vf, final Object latitude, final Object longitude) {
 
         return toSeparatedString(vf, latitude, longitude);
     }
 
     @Override
     public IV<?,?> serializeLocationAndTime(
-        final BigdataValueFactory vf, final Object latitude, 
+        final EmbergraphValueFactory vf, final Object latitude,
         final Object longitude, final Object time) {
 
         return toSeparatedString(vf, latitude, longitude, time);
@@ -83,13 +83,13 @@ public class GeoSpatialDefaultLiteralSerializer implements IGeoSpatialLiteralSer
 
     @Override
     @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeTime(final BigdataValueFactory vf, final Object time) {
+    public IV<?,?> serializeTime(final EmbergraphValueFactory vf, final Object time) {
         return new XSDNumericIV((Long)time);
     }
 
     @Override
     @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeLatitude(final BigdataValueFactory vf, final Object latitude) {
+    public IV<?,?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude) {
         
         if (latitude instanceof Double) {
             return new XSDNumericIV((Double)latitude);
@@ -102,7 +102,7 @@ public class GeoSpatialDefaultLiteralSerializer implements IGeoSpatialLiteralSer
 
     @Override
     @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeLongitude(final BigdataValueFactory vf, final Object longitude) {
+    public IV<?,?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude) {
         
         if (longitude instanceof Double) {
             return new XSDNumericIV((Double)longitude);
@@ -114,18 +114,18 @@ public class GeoSpatialDefaultLiteralSerializer implements IGeoSpatialLiteralSer
     }
 
     @Override
-    public IV<?,?> serializeCoordSystem(final BigdataValueFactory vf, final Object coordinateSystem) {
+    public IV<?,?> serializeCoordSystem(final EmbergraphValueFactory vf, final Object coordinateSystem) {
         return toSeparatedString(vf, coordinateSystem);
     }
 
     @Override
-    public IV<?,?> serializeCustomFields(final BigdataValueFactory vf, final Object... customFields) {
+    public IV<?,?> serializeCustomFields(final EmbergraphValueFactory vf, final Object... customFields) {
         return toSeparatedString(vf, customFields);
     }
     
     @Override
     @SuppressWarnings("rawtypes")
-    public IV<?,?> serializeDistance(final BigdataValueFactory vf, final Double distance, final UNITS unit) {
+    public IV<?,?> serializeDistance(final EmbergraphValueFactory vf, final Double distance, final UNITS unit) {
         
         return new XSDNumericIV(Math.round(distance*100)/100.0);
     }
@@ -134,7 +134,7 @@ public class GeoSpatialDefaultLiteralSerializer implements IGeoSpatialLiteralSer
      * Converts the input passed via args into string using its toString() method, 
      * separating the components via {GeoSpatial#CUSTOM_FIELDS_SEPARATOR}.
      */
-    protected IV<?,?> toSeparatedString(final BigdataValueFactory vf, final Object... args) {
+    protected IV<?,?> toSeparatedString(final EmbergraphValueFactory vf, final Object... args) {
       
         final StringBuffer buf = new StringBuffer();
         

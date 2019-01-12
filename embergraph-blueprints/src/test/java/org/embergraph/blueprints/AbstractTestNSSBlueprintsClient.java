@@ -27,10 +27,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.CreateKBTask;
 import org.embergraph.rdf.sail.DestroyKBTask;
 import org.embergraph.rdf.sail.webapp.ConfigParams;
@@ -49,7 +49,7 @@ import com.tinkerpop.blueprints.Vertex;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestBigdataGraphFactory {
+public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestEmbergraphGraphFactory {
 
     private static final transient Logger log = Logger.getLogger(AbstractTestNSSBlueprintsClient.class);
 
@@ -82,9 +82,9 @@ public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestBigdat
 	     {
 	         
 	         tripleStoreProperties.setProperty(
-	                 BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+	                 EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 	
-	         tripleStoreProperties.setProperty(BigdataSail.Options.TRIPLES_MODE,
+	         tripleStoreProperties.setProperty(EmbergraphSail.Options.TRIPLES_MODE,
 	                 "true");
 	
 	     }
@@ -146,7 +146,7 @@ public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestBigdat
 	        ).toExternalForm();
 	
 	        m_serviceURL = new URL("http", hostAddr, m_port,
-	                BigdataStatics.getContextPath()).toExternalForm();
+	                EmbergraphStatics.getContextPath()).toExternalForm();
 	
 	        if (log.isInfoEnabled())
 	            log.info("Setup done: \nname=" + getName() + "\nnamespace="
@@ -199,7 +199,7 @@ public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestBigdat
 	
 	    }
 
-	protected void testBigdataGraph(BigdataGraph testGraph) throws Exception {
+	protected void testEmbergraphGraph(EmbergraphGraph testGraph) throws Exception {
 	
 		loadTestGraph(testGraph, testData);
 	
@@ -214,10 +214,10 @@ public abstract class AbstractTestNSSBlueprintsClient extends AbstractTestBigdat
 	
 	}
 	
-	protected abstract BigdataGraph getNewGraph(String file) throws Exception;
+	protected abstract EmbergraphGraph getNewGraph(String file) throws Exception;
 
 	@Override
-	protected BigdataGraph loadGraph(String file) throws Exception {
+	protected EmbergraphGraph loadGraph(String file) throws Exception {
 		
 		return getNewGraph(file);
 	}

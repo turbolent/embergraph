@@ -23,7 +23,7 @@ import java.util.Properties;
 import junit.framework.Test;
 
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.client.IRemoteTx;
 import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
 
@@ -255,7 +255,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends
 
          final Properties p = new Properties(super.getProperties());
 
-         p.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "false");
+         p.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "false");
 
          return p;
 
@@ -294,7 +294,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends
 
          final Properties p = new Properties(super.getProperties());
 
-         p.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+         p.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 
          return p;
 

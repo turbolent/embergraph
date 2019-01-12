@@ -24,7 +24,7 @@ public class DefaultClientDelegate<T> implements IFederationDelegate<T> {
     
     private final UUID uuid = UUID.randomUUID();
 
-    private final IBigdataClient<?> client;
+    private final IEmbergraphClient<?> client;
 
     private final T clientOrService;
 
@@ -37,7 +37,7 @@ public class DefaultClientDelegate<T> implements IFederationDelegate<T> {
      *            <code>null</code> but then {@link #getService()} will also
      *            return <code>null</code>.
      */
-    public DefaultClientDelegate(final IBigdataClient<?> client,
+    public DefaultClientDelegate(final IEmbergraphClient<?> client,
             final T clientOrService) {
 
         if (client == null)

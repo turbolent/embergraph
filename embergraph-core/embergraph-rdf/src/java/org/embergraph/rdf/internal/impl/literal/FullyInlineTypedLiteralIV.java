@@ -18,6 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.impl.literal;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -28,9 +29,8 @@ import org.embergraph.rdf.internal.IVUnicode;
 import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataLiteralImpl;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteralImpl;
 
 /**
  * Implementation for inline {@link Literal}s. Literals may be plain (just a
@@ -43,9 +43,9 @@ import org.embergraph.rdf.model.BigdataValueFactory;
  * the {@link XSDStringExtension}.
  * 
  * TODO Validate methods on this class against {@link Literal} and
- * {@link BigdataLiteralImpl} (API compliance).
+ * {@link EmbergraphLiteralImpl} (API compliance).
  */
-public class FullyInlineTypedLiteralIV<V extends BigdataLiteral> extends
+public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral> extends
         AbstractLiteralIV<V, String> implements IInlineUnicode, Literal {
     
     /**
@@ -228,7 +228,7 @@ public class FullyInlineTypedLiteralIV<V extends BigdataLiteral> extends
     public V asValue(final LexiconRelation lex) {
 		V v = getValueCache();
 		if (v == null) {
-            final BigdataValueFactory f = lex.getValueFactory();
+            final EmbergraphValueFactory f = lex.getValueFactory();
             if (datatype != null) {
                 v = (V) f.createLiteral(label, datatype);
             } else if (language != null) {

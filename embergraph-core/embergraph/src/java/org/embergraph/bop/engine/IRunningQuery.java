@@ -31,7 +31,7 @@ import org.embergraph.bop.IQueryContext;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.concurrent.IHaltable;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -57,12 +57,12 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
 	UUID getQueryId();
 	
     /**
-     * The {@link IBigdataFederation} IFF the operator is being evaluated on an
-     * {@link IBigdataFederation}. When evaluating operations against an
-     * {@link IBigdataFederation}, this reference provides access to the
+     * The {@link IEmbergraphFederation} IFF the operator is being evaluated on an
+     * {@link IEmbergraphFederation}. When evaluating operations against an
+     * {@link IEmbergraphFederation}, this reference provides access to the
      * scale-out view of the indices and to other bigdata services.
      */
-    IBigdataFederation<?> getFederation();
+    IEmbergraphFederation<?> getFederation();
 
     /**
      * The <strong>local</strong> {@link IIndexManager}. Query evaluation occurs

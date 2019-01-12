@@ -7,7 +7,7 @@ import org.embergraph.bop.Constant;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * The dummy constant node is used to represent constants in the AST that do not
@@ -26,7 +26,7 @@ public class DummyConstantNode extends ConstantNode {
 	private static final long serialVersionUID = 1393730362383536411L;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static final IV toDummyIV(final BigdataValue val) {
+	public static final IV toDummyIV(final EmbergraphValue val) {
 		
 		final IV dummy = TermId.mockIV(VTE.valueOf(val));
 		
@@ -38,7 +38,7 @@ public class DummyConstantNode extends ConstantNode {
 		
 	}
 	
-	public DummyConstantNode(final BigdataValue val) {
+	public DummyConstantNode(final EmbergraphValue val) {
 		
 		super(new Constant<IV>(toDummyIV(val)));
 		

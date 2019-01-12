@@ -25,7 +25,7 @@ import org.embergraph.bop.Constant;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -57,7 +57,7 @@ public class TestReplaceBOp extends ProxyTestCase {
 //    @Override
 //    public Properties getProperties() {
 //    	final Properties props = super.getProperties();
-//    	props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES, "true");
+//    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
 //    	return props;
 //    }
     
@@ -68,7 +68,7 @@ public class TestReplaceBOp extends ProxyTestCase {
 
         try {
 
-            final BigdataValueFactory vf = db.getValueFactory();
+            final EmbergraphValueFactory vf = db.getValueFactory();
             
             final ListBindingSet emptyBindingSet = new ListBindingSet();
 

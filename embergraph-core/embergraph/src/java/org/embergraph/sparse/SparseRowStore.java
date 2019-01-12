@@ -27,7 +27,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
@@ -139,7 +139,7 @@ import cutthecrap.utils.striterators.Striterator;
  * row.
  * </p>
  * <p>
- * Note: Very large objects should be stored in the {@link BigdataFileSystem}
+ * Note: Very large objects should be stored in the {@link EmbergraphFileSystem}
  * (distributed, atomic, versioned, chunked file system) and the identifier for
  * that object can then be stored in the row store.
  * </p>

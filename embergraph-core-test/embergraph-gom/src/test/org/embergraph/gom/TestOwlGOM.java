@@ -168,10 +168,10 @@ public class TestOwlGOM extends ProxyGOMTest {
 //
 //		// create a backing file for the database
 //		File journal = File.createTempFile("bigdata", ".jnl");
-//		properties.setProperty(BigdataSail.Options.FILE, journal
+//		properties.setProperty(EmbergraphSail.Options.FILE, journal
 //				.getAbsolutePath());
 //		properties
-//				.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+//				.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 //
 //		properties.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW
 //				.toString());
@@ -204,8 +204,8 @@ public class TestOwlGOM extends ProxyGOMTest {
 //						"200");
 //
 //		// instantiate a sail and a Sesame repository
-//		BigdataSail sail = new BigdataSail(properties);
-//		m_repo = new BigdataSailRepository(sail);
+//		EmbergraphSail sail = new EmbergraphSail(properties);
+//		m_repo = new EmbergraphSailRepository(sail);
 //		m_repo.initialize();
 //
 //		m_om = new ObjectManager(m_repo);

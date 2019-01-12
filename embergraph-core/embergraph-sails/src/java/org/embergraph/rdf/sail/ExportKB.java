@@ -39,6 +39,7 @@ import java.util.Properties;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
@@ -51,7 +52,6 @@ import org.embergraph.Banner;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.rawstore.IRawStore;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.relation.locator.ILocatableResource;
@@ -76,7 +76,7 @@ public class ExportKB {
     /**
      * The connection that will be used to export the data.
      */
-    private final BigdataSailConnection conn;
+    private final EmbergraphSailConnection conn;
     
 //    /**
 //     * The KB to be exported.
@@ -119,7 +119,7 @@ public class ExportKB {
      *            exported. Otherwise just the explicitly given (aka told)
      *            triples/quads will be exported.
      */
-    public ExportKB(final BigdataSailConnection conn, final File kbdir,
+    public ExportKB(final EmbergraphSailConnection conn, final File kbdir,
             final RDFFormat format, final boolean includeInferred) {
 
         if (conn == null)
@@ -256,7 +256,7 @@ public class ExportKB {
     public void exportData() throws IOException, SailException,
             RDFHandlerException {
         prepare();
-//        final BigdataSail sail = new BigdataSail(kb);
+//        final EmbergraphSail sail = new EmbergraphSail(kb);
 //        try {
 //            sail.initialize();
 //            final SailConnection conn = sail.getReadOnlyConnection();
@@ -555,12 +555,12 @@ public class ExportKB {
 //                final AbstractTripleStore kb = (AbstractTripleStore) indexManager
 //                        .getResourceLocator().locate(namespace, commitTime);
 
-                final BigdataSail sail = new BigdataSail(namespace, indexManager);
+                final EmbergraphSail sail = new EmbergraphSail(namespace, indexManager);
                 try {
                     
                     sail.initialize();
 
-                    final BigdataSailConnection conn = sail.getReadOnlyConnection(commitTime);
+                    final EmbergraphSailConnection conn = sail.getReadOnlyConnection(commitTime);
 
                     try {
                 

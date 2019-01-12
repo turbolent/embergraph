@@ -10,8 +10,8 @@ import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
 import org.embergraph.rdf.internal.impl.extensions.DerivedNumericsExtension;
 import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
 import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 
 /**
@@ -29,22 +29,22 @@ import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
  */
 public class DefaultExtensionFactory implements IExtensionFactory {
 
-    private final List<IExtension<? extends BigdataValue>> extensions;
+    private final List<IExtension<? extends EmbergraphValue>> extensions;
     
     public DefaultExtensionFactory() {
         
-        extensions = new LinkedList<IExtension<? extends BigdataValue>>(); 
+        extensions = new LinkedList<IExtension<? extends EmbergraphValue>>();
             
     }
     
     @Override
     public void init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<BigdataValue> config) {
+            final ILexiconConfiguration<EmbergraphValue> config) {
 
     	/*
     	 * Always going to inline the derived numeric types.
     	 */
-    	extensions.add(new DerivedNumericsExtension<BigdataLiteral>(resolver));
+    	extensions.add(new DerivedNumericsExtension<EmbergraphLiteral>(resolver));
     	
     	/*
     	 * Set up the configuration of the geospatial module
@@ -56,14 +56,14 @@ public class DefaultExtensionFactory implements IExtensionFactory {
     	        config.getGeoSpatialConfig().getDatatypeConfigs();
     	    for (int i=0; i<datatypeConfigs.size(); i++) {
     	        extensions.add(
-    	            new GeoSpatialLiteralExtension<BigdataLiteral>(
+    	            new GeoSpatialLiteralExtension<EmbergraphLiteral>(
     	                resolver, datatypeConfigs.get(i)));    	
     	    }
     	}
     	
     	if (config.isInlineDateTimes()) {
     		
-    		extensions.add(new DateTimeExtension<BigdataLiteral>(
+    		extensions.add(new DateTimeExtension<EmbergraphLiteral>(
     				resolver, config.getInlineDateTimesTimeZone()));
     		
     	}
@@ -75,7 +75,7 @@ public class DefaultExtensionFactory implements IExtensionFactory {
 			 * we will not be able to inline either the local names or the full
 			 * text of URIs.
 			 */
-            extensions.add(new XSDStringExtension<BigdataLiteral>(resolver, config
+            extensions.add(new XSDStringExtension<EmbergraphLiteral>(resolver, config
                     .getMaxInlineStringLength()));
         }
         
@@ -99,15 +99,15 @@ public class DefaultExtensionFactory implements IExtensionFactory {
      * @see #init(IDatatypeURIResolver, ILexiconConfiguration)
      */
     protected void _init(final IDatatypeURIResolver resolver,
-            final ILexiconConfiguration<BigdataValue> config,
-            final Collection<IExtension<? extends BigdataValue>> extensions) {
+            final ILexiconConfiguration<EmbergraphValue> config,
+            final Collection<IExtension<? extends EmbergraphValue>> extensions) {
 
     	// noop
     	
     }
     
     @Override
-    public Iterator<IExtension<? extends BigdataValue>> getExtensions() {
+    public Iterator<IExtension<? extends EmbergraphValue>> getExtensions() {
         return Collections.unmodifiableList(extensions).iterator();
     }
     

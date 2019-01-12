@@ -21,11 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.inf;
 
-import java.util.Map;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.StatementWriter;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;

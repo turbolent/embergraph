@@ -69,7 +69,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.relation.rule.eval.ProgramTask;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreUtil;
 
 /**
@@ -624,7 +624,7 @@ abstract public class AbstractResource<E> implements IMutableResource<E> {
      *       exclusive), a resource hierarchy, and a delay queue to cancel
      *       leases that are not renewed. It would have to be wrapped up as a
      *       low-latency service and made available via the
-     *       {@link IBigdataFederation}. It also needs to use a weak reference
+     *       {@link IEmbergraphFederation}. It also needs to use a weak reference
      *       cache for the collection of resource queues so that they are GC'd
      *       rather than growing as new resources are locked and never
      *       shrinking.
@@ -721,7 +721,7 @@ abstract public class AbstractResource<E> implements IMutableResource<E> {
         {
 
             if (indexManager instanceof IJournal
-                    || indexManager instanceof IBigdataFederation) {
+                    || indexManager instanceof IEmbergraphFederation) {
 
                 /*
                  * Note: No cache associated with a TemporaryStore (since no

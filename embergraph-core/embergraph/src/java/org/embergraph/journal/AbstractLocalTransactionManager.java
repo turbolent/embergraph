@@ -8,14 +8,14 @@ import org.apache.log4j.Logger;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.resources.StoreManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ITxState;
 
 /**
  * Manages the client side of a transaction either for a standalone
  * {@link Journal} or for an {@link IDataService} in an
- * {@link IBigdataFederation}.
+ * {@link IEmbergraphFederation}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

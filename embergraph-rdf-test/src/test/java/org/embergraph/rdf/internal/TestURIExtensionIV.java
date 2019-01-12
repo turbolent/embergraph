@@ -8,6 +8,7 @@ import java.util.List;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
@@ -16,8 +17,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.vocab.BaseVocabulary;
 import org.embergraph.rdf.vocab.VocabularyDecl;
 
@@ -39,7 +39,7 @@ public class TestURIExtensionIV extends TestCase2 {
 
 	private String namespace;
 	private BaseVocabulary vocab;
-//	private BigdataValueFactory valueFactory;
+//	private EmbergraphValueFactory valueFactory;
     
     protected void setUp() throws Exception {
         
@@ -47,7 +47,7 @@ public class TestURIExtensionIV extends TestCase2 {
         
         namespace = getName();
         
-//        valueFactory  = BigdataValueFactoryImpl.getInstance(namespace);
+//        valueFactory  = EmbergraphValueFactoryImpl.getInstance(namespace);
         
         vocab = new MockVocabulary(namespace);
         
@@ -109,7 +109,7 @@ public class TestURIExtensionIV extends TestCase2 {
         
     }
 
-    private URIExtensionIV<BigdataURI> newFixture(final URI uri) {
+    private URIExtensionIV<EmbergraphURI> newFixture(final URI uri) {
 
         final String namespace = uri.getNamespace();
 
@@ -123,10 +123,10 @@ public class TestURIExtensionIV extends TestCase2 {
             
         }
         
-        final FullyInlineTypedLiteralIV<BigdataLiteral> localNameIV = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+        final FullyInlineTypedLiteralIV<EmbergraphLiteral> localNameIV = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                 uri.getLocalName());
 
-        final URIExtensionIV<BigdataURI> iv = new URIExtensionIV<BigdataURI>(
+        final URIExtensionIV<EmbergraphURI> iv = new URIExtensionIV<EmbergraphURI>(
                 localNameIV, namespaceIV);
         
         return iv;
@@ -148,7 +148,7 @@ public class TestURIExtensionIV extends TestCase2 {
 
 	private void doTest(final URI uri) {
 
-        final URIExtensionIV<BigdataURI> iv = newFixture(uri);
+        final URIExtensionIV<EmbergraphURI> iv = newFixture(uri);
         
 		assertEquals(VTE.URI, iv.getVTE());
 		

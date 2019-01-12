@@ -3,14 +3,14 @@ package org.embergraph.gom.web;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFServlet;
 import org.openrdf.repository.RepositoryException;
 
 import org.embergraph.gom.om.ObjectManager;
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext;
-import org.embergraph.rdf.sail.webapp.BigdataRDFServlet;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -80,7 +80,7 @@ public class GOMWebUtil {
         final ServletContext servletContext = request.getSession()
                 .getServletContext();
 
-        final BigdataRDFContext rdfContext = getBigdataRDFContext(servletContext);
+        final EmbergraphRDFContext rdfContext = getEmbergraphRDFContext(servletContext);
 
         // The SPARQL endpoint.
         final String endpoint = request.getRequestURL().toString();
@@ -98,9 +98,9 @@ public class GOMWebUtil {
         }
 
         // Wrap with SAIL.
-        final BigdataSail sail = new BigdataSail(tripleStore);
+        final EmbergraphSail sail = new EmbergraphSail(tripleStore);
 
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
         repo.initialize();
 
@@ -112,11 +112,11 @@ public class GOMWebUtil {
 
     }
 
-    static final protected BigdataRDFContext getBigdataRDFContext(
+    static final protected EmbergraphRDFContext getEmbergraphRDFContext(
             final ServletContext servletContext) {
 
         return getRequiredServletContextAttribute(servletContext,
-                BigdataRDFServlet.ATTRIBUTE_RDF_CONTEXT);
+                EmbergraphRDFServlet.ATTRIBUTE_RDF_CONTEXT);
 
     }
 

@@ -38,7 +38,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -49,7 +48,7 @@ import org.apache.log4j.Logger;
 
 import cern.colt.Arrays;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bfs.GlobalFileSystemHelper;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
@@ -95,7 +94,7 @@ import org.embergraph.rwstore.IRawTx;
 import org.embergraph.rwstore.RWStore;
 import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.DaemonThreadFactory;
@@ -3693,7 +3692,7 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
      *             always.
      */
     @Override
-    public IBigdataFederation<?> getFederation() {
+    public IEmbergraphFederation<?> getFederation() {
 
         throw new UnsupportedOperationException();
         
@@ -3804,7 +3803,7 @@ public class Journal extends AbstractJournal implements IConcurrencyManager,
      * as a reference. We are not relying on its CAS properties.
      */
     @Override
-    public BigdataFileSystem getGlobalFileSystem() {
+    public EmbergraphFileSystem getGlobalFileSystem() {
 
         GlobalFileSystemHelper t = globalFileSystemHelper.get();
         

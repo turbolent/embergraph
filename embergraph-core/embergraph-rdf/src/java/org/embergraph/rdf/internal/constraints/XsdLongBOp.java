@@ -25,6 +25,8 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
@@ -34,8 +36,6 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
@@ -95,7 +95,7 @@ public class XsdLongBOp extends IVValueExpression<IV>
         }
         
         // use to create my simple literals
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
         try {
             if (val instanceof Literal) {
@@ -105,7 +105,7 @@ public class XsdLongBOp extends IVValueExpression<IV>
                     return iv;
             	}
             	else {
-                    final BigdataLiteral str = 
+                    final EmbergraphLiteral str =
                         vf.createLiteral(Long.valueOf(lit.getLabel()));
                     return super.asIV(str, bs);
                 }

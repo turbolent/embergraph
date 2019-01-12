@@ -27,13 +27,13 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IBuffer;
@@ -63,7 +63,7 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
      * 
      * @param stmt
      *            The statement. If <i>stmt</i> implements
-     *            {@link BigdataStatement} then the {@link StatementEnum} will
+     *            {@link EmbergraphStatement} then the {@link StatementEnum} will
      *            be used (this makes it possible to load axioms into the
      *            database as axioms) but the term identifiers on the <i>stmt</i>'s
      *            values will be ignored.
@@ -143,6 +143,6 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
      * @throws IllegalStateException
      *             if the map has already been allocated.
      */
-    public void setBNodeMap(Map<String, BigdataBNode> bnodes);
+    public void setBNodeMap(Map<String, EmbergraphBNode> bnodes);
     
 }

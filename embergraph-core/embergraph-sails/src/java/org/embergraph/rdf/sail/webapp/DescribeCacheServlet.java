@@ -27,6 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -38,9 +41,6 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.cache.CacheConnectionFactory;
 import org.embergraph.rdf.sparql.ast.cache.ICacheConnection;
 import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
@@ -101,7 +101,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class DescribeCacheServlet extends BigdataRDFServlet {
+public class DescribeCacheServlet extends EmbergraphRDFServlet {
 
     static private final transient Logger log = Logger
             .getLogger(DescribeCacheServlet.class);
@@ -167,7 +167,7 @@ public class DescribeCacheServlet extends BigdataRDFServlet {
 
         }
 
-        final BigdataRDFContext context = getBigdataRDFContext();
+        final EmbergraphRDFContext context = getEmbergraphRDFContext();
 
         final QueryEngine queryEngine = QueryEngineFactory.getInstance()
                 .getQueryController(context.getIndexManager());
@@ -216,10 +216,10 @@ public class DescribeCacheServlet extends BigdataRDFServlet {
         /*
          * Ensure that URIs are BigdatURIs for this namespace.
          */
-        final Set<BigdataURI> internalURIs = new LinkedHashSet<BigdataURI>();
+        final Set<EmbergraphURI> internalURIs = new LinkedHashSet<EmbergraphURI>();
         {
 
-            final BigdataValueFactory valueFactory = tripleStore
+            final EmbergraphValueFactory valueFactory = tripleStore
                     .getValueFactory();
 
             for (URI uri : externalURIs) {
@@ -235,8 +235,8 @@ public class DescribeCacheServlet extends BigdataRDFServlet {
          */
         {
 
-            final BigdataValue[] values = internalURIs
-                    .toArray(new BigdataValue[nvalues]);
+            final EmbergraphValue[] values = internalURIs
+                    .toArray(new EmbergraphValue[nvalues]);
 
             final long numNotFound = tripleStore.getLexiconRelation().addTerms(
                     values, nvalues, true/* readOnly */);
@@ -259,7 +259,7 @@ public class DescribeCacheServlet extends BigdataRDFServlet {
         Graph g = null;
         {
 
-            for (BigdataURI uri : internalURIs) {
+            for (EmbergraphURI uri : internalURIs) {
 
                 final IV<?, ?> iv = uri.getIV();
 
@@ -368,7 +368,7 @@ public class DescribeCacheServlet extends BigdataRDFServlet {
 
         } catch (Throwable e) {
 
-            BigdataRDFServlet.launderThrowable(e, resp,
+            EmbergraphRDFServlet.launderThrowable(e, resp,
                     "DESCRIBE: uris=" + internalURIs);
             
         }

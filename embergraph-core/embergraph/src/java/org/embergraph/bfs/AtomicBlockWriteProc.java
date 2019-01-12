@@ -90,11 +90,11 @@ public class AtomicBlockWriteProc implements ISimpleIndexProcedure<Object>,
      * @param len
      *            The #of bytes to be written.
      */
-    public AtomicBlockWriteProc(BigdataFileSystem repo,String id, int version, long block, byte[] b, int off, int len) {
+    public AtomicBlockWriteProc(EmbergraphFileSystem repo,String id, int version, long block, byte[] b, int off, int len) {
 
         assert id != null && id.length() > 0;
         assert version >= 0;
-        assert block >= 0 && block <= BigdataFileSystem.MAX_BLOCK;
+        assert block >= 0 && block <= EmbergraphFileSystem.MAX_BLOCK;
         assert b != null;
         assert off >= 0 : "off="+off;
         assert len >= 0 && off + len <= b.length;

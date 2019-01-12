@@ -21,6 +21,8 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
@@ -38,10 +40,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
@@ -50,7 +50,7 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
  * A specialized IValueExpression that evaluates to an IV.  The inputs are
  * usually, but not strictly limited to, IVs as well.  This class also contains
  * many useful helper methods for evaluation, including providing access to
- * the BigdataValueFactory and LexiconConfiguration.
+ * the EmbergraphValueFactory and LexiconConfiguration.
  */
 public abstract class IVValueExpression<T extends IV> extends BOpBase 
 		implements IValueExpression<T> {
@@ -81,13 +81,13 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
      * Note: The double-checked locking pattern <em>requires</em> the keyword
      * <code>volatile</code>.
      */
-    private transient volatile BigdataValueFactory vf;
+    private transient volatile EmbergraphValueFactory vf;
 
     /**
      * Note: The double-checked locking pattern <em>requires</em> the keyword
      * <code>volatile</code>.
      */
-    private transient volatile ILexiconConfiguration<BigdataValue> lc;
+    private transient volatile ILexiconConfiguration<EmbergraphValue> lc;
 
     /**
      * Used by subclasses to create the annotations object from the global
@@ -216,11 +216,11 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     }
     
     /**
-     * Return the {@link BigdataValueFactory} for the {@link LexiconRelation}.
+     * Return the {@link EmbergraphValueFactory} for the {@link LexiconRelation}.
      * <p>
      * Note: This is lazily resolved and then cached.
      */
-    protected BigdataValueFactory getValueFactory() {
+    protected EmbergraphValueFactory getValueFactory() {
 
         if (vf == null) {
         
@@ -230,7 +230,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
                     
                     final String namespace = getNamespace();
                     
-                    vf = BigdataValueFactoryImpl.getInstance(namespace);
+                    vf = EmbergraphValueFactoryImpl.getInstance(namespace);
                     
                 }
 
@@ -265,7 +265,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
      * it will not be serialized when crossing a node boundary.
      * <p>
      * Note: It is more expensive to obtain the {@link ILexiconConfiguration}
-     * than the {@link BigdataValueFactory} because we have to resolve the
+     * than the {@link EmbergraphValueFactory} because we have to resolve the
      * {@link LexiconRelation} view. However, this happens once per function bop
      * in a query per node, so the cost is amortized.
      * 
@@ -287,7 +287,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
      *      use the last committed time for that view. This is NOT true of if we
      *      were going to read data from the {@link LexiconRelation}.
      */
-    protected ILexiconConfiguration<BigdataValue> getLexiconConfiguration(
+    protected ILexiconConfiguration<EmbergraphValue> getLexiconConfiguration(
             final IBindingSet bset) {
 
         if (lc == null) {
@@ -372,7 +372,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
         		
         } else if (iv.hasValue()) {
 
-            return (BigdataLiteral) iv.getValue();
+            return (EmbergraphLiteral) iv.getValue();
 
         } else {
 
@@ -408,7 +408,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
         		
         } else if (iv.hasValue()) {
 
-            return (BigdataValue) iv.getValue();
+            return (EmbergraphValue) iv.getValue();
 
         } else {
 
@@ -534,9 +534,9 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     final protected IV asIV(final Value value, final IBindingSet bs) {
 
         /*
-         * Convert to a BigdataValue if not already one.
+         * Convert to a EmbergraphValue if not already one.
          * 
-         * If it is a BigdataValue, then make sure that it is associated with
+         * If it is a EmbergraphValue, then make sure that it is associated with
          * the namespace for the lexicon relation.
          */
         
@@ -546,7 +546,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     		
     	}
     	
-        final BigdataValue v = getValueFactory().asValue(value);
+        final EmbergraphValue v = getValueFactory().asValue(value);
         
         return asIV(v, bs);
 
@@ -555,20 +555,20 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     /**
      * Return an {@link IV} for the {@link Value}.
      * <p>
-     * If the supplied BigdataValue has an IV, cache the BigdataValue on the
+     * If the supplied EmbergraphValue has an IV, cache the EmbergraphValue on the
      * IV and return it.  If there is no IV, first check the LexiconConfiguration
      * to see if an inline IV can be created.  As a last resort, create a
      * "dummy IV" (a TermIV with a "0" reference) for the value.
      * 
      * @param value
-     * 			The {@link BigdataValue}
+     * 			The {@link EmbergraphValue}
      * @param bs
      *            The bindings on the solution are ignored, but the reference is
      *            used to obtain the {@link ILexiconConfiguration}.
      *            
-     * @return An {@link IV} for that {@link BigdataValue}.
+     * @return An {@link IV} for that {@link EmbergraphValue}.
      */
-    protected IV asIV(final BigdataValue value, final IBindingSet bs) {
+    protected IV asIV(final EmbergraphValue value, final IBindingSet bs) {
     	
     	// first check to see if there is already an IV
     	IV iv = value.getIV();

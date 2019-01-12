@@ -37,7 +37,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
   </properties>
   <build>
     <extensions>
-      <!-- Add support for the "deb" packaging -->
+      <!-- ADD support for the "deb" packaging -->
       <extension>
         <groupId>org.vafer</groupId>
         <artifactId>jdeb</artifactId>

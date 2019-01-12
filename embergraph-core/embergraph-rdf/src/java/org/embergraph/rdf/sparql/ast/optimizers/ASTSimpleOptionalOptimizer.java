@@ -36,7 +36,7 @@ import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 import org.embergraph.rdf.internal.constraints.TrueBOp;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sparql.ast.ComputedMaterializationRequirement;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
@@ -186,7 +186,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
                 }
 
-                final BigdataURI serviceURI = ServiceCallUtility
+                final EmbergraphURI serviceURI = ServiceCallUtility
                         .getConstantServiceURI(serviceRef);
 
                 if (!BDS.SEARCH.equals(serviceURI)) {

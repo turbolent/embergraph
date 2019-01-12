@@ -24,7 +24,7 @@ package org.embergraph.rdf.rules;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -64,7 +64,7 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
 
         try {
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             final IV a = store.addTerm(f.createURI("http://www.embergraph.org/a"));
             final IV b = store.addTerm(f.createURI("http://www.embergraph.org/b"));
@@ -136,7 +136,7 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
 
         try {
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
             final IV a = store.addTerm(f.createURI("http://www.embergraph.org/a"));
             final IV b = store.addTerm(f.createURI("http://www.embergraph.org/b"));

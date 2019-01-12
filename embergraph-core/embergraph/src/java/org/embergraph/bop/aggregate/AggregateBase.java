@@ -13,7 +13,7 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Abstract base class for aggregate functions.
@@ -193,7 +193,7 @@ abstract public class AggregateBase<E> extends ImmutableBOp implements IAggregat
 	
 
     /** A ZERO. */
-    protected static final transient NumericIV ZERO = new XSDNumericIV<BigdataLiteral>(0);
+    protected static final transient NumericIV ZERO = new XSDNumericIV<EmbergraphLiteral>(0);
 
     /** An empty string. */
     protected static final transient Literal EMPTY_LITERAL = new LiteralImpl("");

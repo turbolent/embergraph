@@ -61,7 +61,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
     *      Allow configuration of embedded NSS jetty server using jetty-web.xml
     *      </a>
     * 
-    *      FIXME Configure ContextPath, but NOT with BigdataStatics since that
+    *      FIXME Configure ContextPath, but NOT with EmbergraphStatics since that
     *      will drag in code outside of this package. Instead, make this a
     *      System property or constructor property or parse it out of the
     *      request URL.

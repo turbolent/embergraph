@@ -32,11 +32,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.query.algebra.StatementPattern.Scope;
-import org.openrdf.repository.sail.helpers.SPARQLUpdateDataBlockParser;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.helpers.BasicParserSettings;
@@ -44,11 +46,8 @@ import org.openrdf.rio.helpers.StatementCollector;
 
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sail.sparql.ast.ASTAdd;
 import org.embergraph.rdf.sail.sparql.ast.ASTClear;
@@ -104,17 +103,17 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 
 /**
- * Extension of {@link BigdataExprBuilder} that builds Update Expressions.
+ * Extension of {@link EmbergraphExprBuilder} that builds Update Expressions.
  * 
  * @author Jeen Broekstra
  * @author Bryan Thompson
  * @openrdf
  */
-public class UpdateExprBuilder extends BigdataExprBuilder {
+public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
 //    private static final Logger log = Logger.getLogger(UpdateExprBuilder.class);
 
-    public UpdateExprBuilder(final BigdataASTContext context) {
+    public UpdateExprBuilder(final EmbergraphASTContext context) {
         
         super(context);
     }
@@ -442,7 +441,7 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
 
             op.setTargetSolutionSet(target.getValueExpression().getName());
             
-            final BigdataStatement[] params = doQuadsData(node, data, false/*allowVars*/, true/* allowBlankNodes */);
+            final EmbergraphStatement[] params = doQuadsData(node, data, false/*allowVars*/, true/* allowBlankNodes */);
 
             if (params != null && params.length > 0) {
 
@@ -722,7 +721,7 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
 
     }
 
-    private BigdataStatement[] doUnparsedQuadsDataBlock(final ASTUpdate node, 
+    private EmbergraphStatement[] doUnparsedQuadsDataBlock(final ASTUpdate node,
             final Object data,
             final boolean allowVars,
             final boolean allowBlankNodes) throws VisitorException {
@@ -786,15 +785,15 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
             }
          }
 
-        final BigdataStatement[] a = stmts.toArray(
-                new BigdataStatement[stmts.size()]);
+        final EmbergraphStatement[] a = stmts.toArray(
+                new EmbergraphStatement[stmts.size()]);
 
         return a;
         
     }
 
 	private boolean isInvalidBlankNode(Value v) {
-		if (v instanceof BigdataBNode && ((BigdataBNode)v).isStatementIdentifier()) {
+		if (v instanceof EmbergraphBNode && ((EmbergraphBNode)v).isStatementIdentifier()) {
 			return false;
 		} else {
 			return v instanceof BNode;
@@ -808,7 +807,7 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
      * Note: The QuadData is basically modeled by the bigdata AST as recursive
      * {@link StatementPatternNode} containers. This visits the parser AST nodes
      * and then flattens them into an {@link ISPO}[]. The {@link ISPO}s are
-     * {@link BigdataStatement}s at this point, but they can be converted to
+     * {@link EmbergraphStatement}s at this point, but they can be converted to
      * {@link SPO}s when the INSERT DATA or DELETE DATA operation runs.
      * 
      * @return A flat {@link ISPO}[] modeling the quad data.
@@ -819,7 +818,7 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
      *      NullPointerException when attempting to INSERT DATA containing a
      *      blank node </a>
      */
-    private BigdataStatement[] doQuadsData(final ASTUpdate node, final Object data,
+    private EmbergraphStatement[] doQuadsData(final ASTUpdate node, final Object data,
             final boolean allowVars,
             final boolean allowBlankNodes) throws VisitorException {
 
@@ -891,14 +890,14 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
                 assertNotAnonymousVariable(sp.o());
             }
 
-            final BigdataResource s = (BigdataResource) toValue(sp.s());
-            final BigdataValue o = toValue(sp.o());
+            final EmbergraphResource s = (EmbergraphResource) toValue(sp.s());
+            final EmbergraphValue o = toValue(sp.o());
             
-            final BigdataStatement spo = context.valueFactory.createStatement(
-                (BigdataResource) s,
-                (BigdataURI) sp.p().getValue(),
-                (BigdataValue) o,
-                (BigdataResource) (sp.c() != null ? sp.c().getValue(): null),
+            final EmbergraphStatement spo = context.valueFactory.createStatement(
+                (EmbergraphResource) s,
+                (EmbergraphURI) sp.p().getValue(),
+                (EmbergraphValue) o,
+                (EmbergraphResource) (sp.c() != null ? sp.c().getValue(): null),
                 StatementEnum.Explicit
                 );
 //            final ISPO spo = new SPO(
@@ -913,7 +912,7 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
 
         }
 
-        final BigdataStatement[] a = stmts.toArray(new BigdataStatement[stmts
+        final EmbergraphStatement[] a = stmts.toArray(new EmbergraphStatement[stmts
                 .size()]);
 
         return a;
@@ -977,7 +976,7 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
     }
     
     /**
-     * Convert the {@link TermNode} to a {@link BigdataValue}. IFF the
+     * Convert the {@link TermNode} to a {@link EmbergraphValue}. IFF the
      * {@link TermNode} is an anonymous variable, then it is converted into a
      * blank node whose ID is the name of that anonymous variable. This is used
      * to turn anonymous variables back into blank nodes for INSERT DATA (DELETE
@@ -986,15 +985,15 @@ public class UpdateExprBuilder extends BigdataExprBuilder {
      * @param t
      *            The {@link TermNode}.
      *            
-     * @return The {@link BigdataValue}.
+     * @return The {@link EmbergraphValue}.
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/573">
      *      NullPointerException when attempting to INSERT DATA containing a
      *      blank node </a>
      */
-    private BigdataValue toValue(final TermNode t) {
+    private EmbergraphValue toValue(final TermNode t) {
         if (t.isVariable() && ((VarNode) t).isAnonymous()) {
-            final BigdataBNode s = context.valueFactory.createBNode(t
+            final EmbergraphBNode s = context.valueFactory.createBNode(t
                     .getValueExpression().getName());
             return s;
         }

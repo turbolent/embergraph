@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
@@ -19,7 +20,6 @@ import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataValueFactory;
 
 public class MathUtility implements IMathOpHandler {
 
@@ -49,7 +49,7 @@ public class MathUtility implements IMathOpHandler {
     public NumericIV doMathOp(final Literal l1, final IV iv1,
             final Literal l2, final IV iv2,
             final MathOp op,
-            final BigdataValueFactory vf)
+            final EmbergraphValueFactory vf)
     {
         return literalMath(l1, l2, op);
     }
@@ -142,7 +142,7 @@ public class MathUtility implements IMathOpHandler {
 //            throw new IllegalArgumentException(
 //                    "right term is not numeric: left=" + l1 + ", right=" + iv2);
 //
-//        final AbstractLiteralIV<BigdataLiteral, ?> num2 = (AbstractLiteralIV<BigdataLiteral, ?>) iv2;
+//        final AbstractLiteralIV<EmbergraphLiteral, ?> num2 = (AbstractLiteralIV<EmbergraphLiteral, ?>) iv2;
 //
 //        // Determine most specific datatype that the arguments have in common,
 //        // choosing from xsd:integer, xsd:decimal, xsd:float and xsd:double as

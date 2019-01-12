@@ -35,9 +35,9 @@ import org.openrdf.query.impl.BindingImpl;
 
 import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
@@ -46,7 +46,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestSids extends ProxyBigdataSailTestCase {
+public class TestSids extends ProxyEmbergraphSailTestCase {
 
     private static final transient Logger log = Logger.getLogger(TestSids.class);
     
@@ -55,11 +55,11 @@ public class TestSids extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -80,14 +80,14 @@ public class TestSids extends ProxyBigdataSailTestCase {
 
     public void testSids() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            final BigdataSailRepositoryConnection cxn = 
-                (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            final EmbergraphSailRepositoryConnection cxn =
+                (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             try {
 
@@ -179,20 +179,20 @@ public class TestSids extends ProxyBigdataSailTestCase {
     
     public void testSids2() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         
         try {
     
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            final BigdataSailRepositoryConnection cxn = 
-                (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            final EmbergraphSailRepositoryConnection cxn =
+                (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             try {
 
             cxn.setAutoCommit(false);
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
         	
         	final URI host1 = vf.createURI("http://localhost/host1");
         	final URI host = vf.createURI("http://domainnamespace.com/host#Host");
@@ -225,17 +225,17 @@ public class TestSids extends ProxyBigdataSailTestCase {
 //        	cxn.add(swtch2, RDF.TYPE, swtch, sid5);
 //        	cxn.add(sid5, creator, src2);
         	
-        	final BigdataStatement s1 = vf.createStatement(host1, RDF.TYPE, host, vf.createBNode());
-        	final BigdataStatement s2 = vf.createStatement(host1, connectedTo, swtch1, vf.createBNode());
-        	final BigdataStatement s3 = vf.createStatement(host1, connectedTo, swtch2, vf.createBNode());
-        	final BigdataStatement s4 = vf.createStatement(swtch1, RDF.TYPE, swtch, vf.createBNode());
-        	final BigdataStatement s5 = vf.createStatement(swtch2, RDF.TYPE, swtch, vf.createBNode());
+        	final EmbergraphStatement s1 = vf.createStatement(host1, RDF.TYPE, host, vf.createBNode());
+        	final EmbergraphStatement s2 = vf.createStatement(host1, connectedTo, swtch1, vf.createBNode());
+        	final EmbergraphStatement s3 = vf.createStatement(host1, connectedTo, swtch2, vf.createBNode());
+        	final EmbergraphStatement s4 = vf.createStatement(swtch1, RDF.TYPE, swtch, vf.createBNode());
+        	final EmbergraphStatement s5 = vf.createStatement(swtch2, RDF.TYPE, swtch, vf.createBNode());
         	
-        	final BigdataBNode sid1 = vf.createBNode(s1);
-        	final BigdataBNode sid2 = vf.createBNode(s2);
-        	final BigdataBNode sid3 = vf.createBNode(s3);
-        	final BigdataBNode sid4 = vf.createBNode(s4);
-        	final BigdataBNode sid5 = vf.createBNode(s5);
+        	final EmbergraphBNode sid1 = vf.createBNode(s1);
+        	final EmbergraphBNode sid2 = vf.createBNode(s2);
+        	final EmbergraphBNode sid3 = vf.createBNode(s3);
+        	final EmbergraphBNode sid4 = vf.createBNode(s4);
+        	final EmbergraphBNode sid5 = vf.createBNode(s5);
         	
         	cxn.add(s1);
         	cxn.add(sid1, creator, src1);
@@ -333,10 +333,10 @@ public class TestSids extends ProxyBigdataSailTestCase {
     
 //    public void testSids3() throws Exception {
 //
-//        final BigdataSail sail = getSail();
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-//        final BigdataSailRepositoryConnection cxn = 
-//            (BigdataSailRepositoryConnection) repo.getUnisolatedConnection();
+//        final EmbergraphSail sail = getSail();
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+//        final EmbergraphSailRepositoryConnection cxn =
+//            (EmbergraphSailRepositoryConnection) repo.getUnisolatedConnection();
 //        cxn.setAutoCommit(false);
 //        
 //        try {
@@ -369,11 +369,11 @@ public class TestSids extends ProxyBigdataSailTestCase {
 //
 //    public void testTM() throws Exception {
 //
-//        final BigdataSail sail = getSail();
+//        final EmbergraphSail sail = getSail();
 //        sail.initialize();
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-//        final BigdataSailRepositoryConnection cxn = 
-//            (BigdataSailRepositoryConnection) repo.getUnisolatedConnection();
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+//        final EmbergraphSailRepositoryConnection cxn =
+//            (EmbergraphSailRepositoryConnection) repo.getUnisolatedConnection();
 //        cxn.setAutoCommit(false);
 //        
 //        if (!sail.getTruthMaintenance()) {
@@ -422,17 +422,17 @@ public class TestSids extends ProxyBigdataSailTestCase {
 //      
 //        {
 //        	final AbstractTripleStore db = sail.getDatabase();
-//        	final BigdataURI baz = db.getLexiconRelation().resolve(new URIImpl("baz"));
-//        	final BigdataStatementIterator it = db.getStatements(null, null, baz);
+//        	final EmbergraphURI baz = db.getLexiconRelation().resolve(new URIImpl("baz"));
+//        	final EmbergraphStatementIterator it = db.getStatements(null, null, baz);
 //        	while (it.hasNext()) {
-//        	    final BigdataStatement stmt = it.next();
+//        	    final EmbergraphStatement stmt = it.next();
 //        	    log.info(stmt);
 //        	}
 //        	it.close();
 //        	}
 //        	{
 //        	final AbstractTripleStore db = sail.getDatabase();
-//        	final BigdataURI baz = db.getLexiconRelation().resolve(new URIImpl("baz"));
+//        	final EmbergraphURI baz = db.getLexiconRelation().resolve(new URIImpl("baz"));
 //        	assert(baz.getIV() != null);
 //        	final IAccessPath<ISPO> ap = db.getAccessPath(null, null, baz.getIV());
 //        	final ICloseableIterator<ISPO> it = ap.iterator();

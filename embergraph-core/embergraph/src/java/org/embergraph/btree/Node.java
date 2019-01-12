@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import org.apache.log4j.Level;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTree.ChildMemoizer;
 import org.embergraph.btree.AbstractBTree.LoadChildRequest;
 import org.embergraph.btree.data.DefaultNodeCoder;
@@ -623,7 +623,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
         btree.getBtreeCounters().rootsSplit++;
 
-        if (BTree.INFO || BigdataStatics.debug) {
+        if (BTree.INFO || EmbergraphStatics.debug) {
 
             // Note: nnodes and nleaves might not reflect rightSibling yet.
 
@@ -635,7 +635,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
             if (BTree.INFO)
                 BTree.log.info(msg);
 
-            if (BigdataStatics.debug)
+            if (EmbergraphStatics.debug)
                 System.err.println(msg);
 
         }

@@ -37,12 +37,12 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
  * To run this test case, specify the following JVM property:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithoutSids</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids</code>
  *  
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestTicket610 extends ProxyBigdataSailTestCase {
+public class TestTicket610 extends ProxyEmbergraphSailTestCase {
 
     protected static final Logger log = Logger.getLogger(TestTicket610.class);
 
@@ -51,7 +51,7 @@ public class TestTicket610 extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
 
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, OwlAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, OwlAxioms.class.getName());
         
         return props;
         
@@ -77,13 +77,13 @@ public class TestTicket610 extends ProxyBigdataSailTestCase {
         /*
          * The bigdata store, backed by a temporary journal file.
          */
-	  	final BigdataSail sail = getSail();
+	  	final EmbergraphSail sail = getSail();
 	  	
 	  	try {
 	  	
 	  		sail.initialize();
 	  		
-  			final BigdataSailRepository bigdataRepo = new BigdataSailRepository(sail);
+  			final EmbergraphSailRepository bigdataRepo = new EmbergraphSailRepository(sail);
   			
 	  		{ // load the data into the bigdata store
 	  			
@@ -100,7 +100,7 @@ public class TestTicket610 extends ProxyBigdataSailTestCase {
 	  		
 	  		{ // check the closure
 	  			
-	  			final BigdataSailRepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+	  			final EmbergraphSailRepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
 	  			try {
 	  				
 	  				final AbstractTripleStore store = cxn.getTripleStore();

@@ -33,6 +33,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sail.Embergraph2Sesame2BindingSetIterator;
+import org.embergraph.rdf.store.EmbergraphBindingSetResolverator;
 import org.openrdf.model.Value;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
@@ -60,11 +65,7 @@ import org.embergraph.bop.rdf.join.ChunkedMaterializationIterator;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.sail.Bigdata2Sesame2BindingSetIterator;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.RunningQueryCloseableIterator;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.DatasetNode;
@@ -80,7 +81,6 @@ import org.embergraph.rdf.sparql.ast.cache.DescribeCacheUpdater;
 import org.embergraph.rdf.sparql.ast.cache.IDescribeCache;
 import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution.DeferredResolutionResult;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BigdataBindingSetResolverator;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.Dechunkerator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
@@ -459,7 +459,7 @@ public class ASTEvalHelper {
          * node IDs to BigdataBNodes scoped to the subgraph reported by the
          * top-level DESCRIBE query.
          */
-        final Map<String, BigdataBNode> bnodes = (isDescribe ? new LinkedHashMap<String, BigdataBNode>()
+        final Map<String, EmbergraphBNode> bnodes = (isDescribe ? new LinkedHashMap<String, EmbergraphBNode>()
                 : null);
 
         final IDescribeCache describeCache;
@@ -520,7 +520,7 @@ public class ASTEvalHelper {
         try {
         
         final CloseableIteration<BindingSet, QueryEvaluationException> solutions2;
-        final Set<BigdataValue> describedResources;
+        final Set<EmbergraphValue> describedResources;
         if (describeCache != null) {
 
             /**
@@ -548,7 +548,7 @@ public class ASTEvalHelper {
      
             // Concurrency safe set.
             describedResources = Collections
-                    .newSetFromMap(new ConcurrentHashMap<BigdataValue, Boolean>());
+                    .newSetFromMap(new ConcurrentHashMap<EmbergraphValue, Boolean>());
 
             // Collect the bindings on those variables.
             solutions2 = new DescribeBindingsCollector(
@@ -566,7 +566,7 @@ public class ASTEvalHelper {
         }
 
         // Constructed Statements.
-        final CloseableIteration<BigdataStatement, QueryEvaluationException> src =
+        final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src =
                 new ASTConstructIterator(context, store,
                         optimizedQuery.getConstruct(),
                         optimizedQuery.getWhereClause(),
@@ -574,7 +574,7 @@ public class ASTEvalHelper {
                         solutions2
                         );
 
-        final CloseableIteration<BigdataStatement, QueryEvaluationException> src2;
+        final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src2;
         if (isDescribe) {
         	switch (describeMode) {
         	case SymmetricOneStep: // No expansion step.
@@ -607,7 +607,7 @@ public class ASTEvalHelper {
         } else {
         	src2 = src;
         }
-        final CloseableIteration<BigdataStatement, QueryEvaluationException> src3;
+        final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src3;
 
         if (describeCache != null) {
 
@@ -794,7 +794,7 @@ public class ASTEvalHelper {
 
             final IVariable<IV> var = org.embergraph.bop.Var.var(binding.getName());
             
-            final IV iv = ((BigdataValue) binding.getValue()).getIV();
+            final IV iv = ((EmbergraphValue) binding.getValue()).getIV();
             
             final IConstant<IV> val = new Constant<IV>(iv);
             
@@ -836,7 +836,7 @@ public class ASTEvalHelper {
          * efficient.
          * 
          * The basic API alignment problem is that the IRunningQuery#iterator()
-         * visits IBindingSet[] chunks while the BigdataBindingSetResolverator
+         * visits IBindingSet[] chunks while the EmbergraphBindingSetResolverator
          * and Bigdata2SesameBindingSetIterator are IChunked(Ordered)Iterators.
          * That is, they implement #nextChunk(). A very simple class could be
          * used to align an IBindingSet[] returned by next() with nextChunk(). I
@@ -882,7 +882,7 @@ public class ASTEvalHelper {
              */
             
             // Convert IVs in IBindingSets to Sesame BindingSets with Values.
-            it3 = new Bigdata2Sesame2BindingSetIterator(it2);
+            it3 = new Embergraph2Sesame2BindingSetIterator(it2);
 
         } else {
         
@@ -907,7 +907,7 @@ public class ASTEvalHelper {
              * There are two basic code paths for RDF Value materialization: One
              * is the ChunkedMateralizationOp (it handles the "chunk" you feed
              * it as a "chunk" and is used for materialization for FILTERs). The
-             * other is the BigdataBindingSetResolverator. Both call through to
+             * other is the EmbergraphBindingSetResolverator. Both call through to
              * LexiconRelation#getTerms().
              * 
              * Regarding [termsChunkSize] and [blobsChunkSize], on a cluster,
@@ -917,7 +917,7 @@ public class ASTEvalHelper {
              * by setting [materializeProjectionInQuery:=true], but at the cost
              * of doing the materialization after a SLICE (if there is one in
              * the query). However, when running through the
-             * BigdataBindingSetResolverator, there will be exactly one thread
+             * EmbergraphBindingSetResolverator, there will be exactly one thread
              * materializing RDF values (because the iterator pattern is single
              * threaded) unless the chunkSize exceeds this threshold.
              */
@@ -944,9 +944,9 @@ public class ASTEvalHelper {
             final int blobsChunkSize = chunkCapacity;
             
             // Convert bigdata binding sets to Sesame binding sets.
-            it3 = new Bigdata2Sesame2BindingSetIterator(
+            it3 = new Embergraph2Sesame2BindingSetIterator(
                     // Materialize IVs as RDF Values.
-                    new BigdataBindingSetResolverator(db, it2,
+                    new EmbergraphBindingSetResolverator(db, it2,
                             runningQuery.getQueryId(), required, chunkCapacity,
                             chunkOfChunksCapacity, chunkTimeout,
                             termsChunkSize, blobsChunkSize).start(db
@@ -1006,7 +1006,7 @@ public class ASTEvalHelper {
      * TODO timeout for update?
      */
     static public long executeUpdate(
-            final BigdataSailRepositoryConnection conn,
+            final EmbergraphSailRepositoryConnection conn,
             final ASTContainer astContainer,
             final Dataset dataset,
             final boolean includeInferred,
@@ -1112,7 +1112,7 @@ public class ASTEvalHelper {
          * Batch resolve RDF Values to IVs and then set on the query model.
          */
 
-//        final Object[] tmp = new BigdataValueReplacer(tripleStore)
+//        final Object[] tmp = new EmbergraphValueReplacer(tripleStore)
 //                .replaceValues(dataset, null/* bindings */);
 
         /*

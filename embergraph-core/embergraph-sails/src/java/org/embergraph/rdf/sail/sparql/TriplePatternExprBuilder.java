@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
@@ -34,9 +37,6 @@ import org.openrdf.model.vocabulary.RDF;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sail.sparql.ast.ASTBind;
 import org.embergraph.rdf.sail.sparql.ast.ASTBlankNodePropertyList;
 import org.embergraph.rdf.sail.sparql.ast.ASTCollection;
@@ -80,7 +80,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
     /**
      * @param context
      */
-    public TriplePatternExprBuilder(final BigdataASTContext context) {
+    public TriplePatternExprBuilder(final EmbergraphASTContext context) {
         super(context);
     }
 
@@ -1083,7 +1083,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
         if(s instanceof ConstantNode) {
 
-            final BigdataValue v = ((ConstantNode)s).getValue();
+            final EmbergraphValue v = ((ConstantNode)s).getValue();
             
             if (v instanceof Literal) {
 
@@ -1114,7 +1114,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
         if (p instanceof ConstantNode) {
 
-            final BigdataValue v = ((ConstantNode) p).getValue();
+            final EmbergraphValue v = ((ConstantNode) p).getValue();
 
             if (!(v instanceof URI)) {
 
@@ -1130,7 +1130,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
         if (o instanceof ConstantNode) {
 
-            final BigdataValue v = ((ConstantNode) o).getValue();
+            final EmbergraphValue v = ((ConstantNode) o).getValue();
 
             // See https://jira.blazegraph.com/browse/BLZG-1229
             // To support SPARQL* syntax in CONSTRUCT clauses with nested TRef values,
@@ -1205,11 +1205,11 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
                         "Invalid TRef: (" + cs + "," + cp + "," + co + ")");
         	}
         	
-			BigdataStatement stmt = context.valueFactory.createStatement(cs, cp, co);
+			EmbergraphStatement stmt = context.valueFactory.createStatement(cs, cp, co);
 			
-			BigdataBNode val = context.valueFactory.createBNode(stmt);
+			EmbergraphBNode val = context.valueFactory.createBNode(stmt);
 			
-			SidIV<BigdataBNode> iv = new SidIV<BigdataBNode>(stmt);
+			SidIV<EmbergraphBNode> iv = new SidIV<EmbergraphBNode>(stmt);
 			
 			val.setIV(iv);
 			

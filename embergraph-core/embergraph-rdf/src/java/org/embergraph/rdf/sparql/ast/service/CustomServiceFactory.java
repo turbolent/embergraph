@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.service;
 
 import org.embergraph.rdf.changesets.IChangeLog;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -43,7 +43,7 @@ public interface CustomServiceFactory extends ServiceFactory {
      * obtained when the {@link ServiceFactory} is registered.
      * <p>
      * Note: This is not invoked unless you are using a
-     * {@link BigdataSailConnection}. Updates that are made directly using an
+     * {@link EmbergraphSailConnection}. Updates that are made directly using an
      * {@link AbstractTripleStore} are not visible to the service.
      * 
      * @return The {@link IChangeLog} listener -or- <code>null</code> if the
@@ -51,8 +51,8 @@ public interface CustomServiceFactory extends ServiceFactory {
      * 
      *         FIXME Re-think the notification mechanism. Services should see
      *         ALL updates, not just those made using the
-     *         {@link BigdataSailConnection}.
+     *         {@link EmbergraphSailConnection}.
      */
-    void startConnection(BigdataSailConnection conn);
+    void startConnection(EmbergraphSailConnection conn);
 
 }

@@ -53,7 +53,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bfs.GlobalFileSystemHelper;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
@@ -64,8 +64,8 @@ import org.embergraph.counters.ICounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.IServiceCounters;
 import org.embergraph.counters.OneShotInstrument;
-import org.embergraph.counters.ganglia.BigdataGangliaService;
-import org.embergraph.counters.ganglia.BigdataMetadataFactory;
+import org.embergraph.counters.ganglia.EmbergraphGangliaService;
+import org.embergraph.counters.ganglia.EmbergraphMetadataFactory;
 import org.embergraph.counters.ganglia.HostMetricsCollector;
 import org.embergraph.counters.ganglia.QueryEngineMetricsCollector;
 import org.embergraph.counters.query.QueryUtil;
@@ -79,7 +79,7 @@ import org.embergraph.journal.NoSuchIndexException;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.journal.TemporaryStoreFactory;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.service.IBigdataClient.Options;
+import org.embergraph.service.IEmbergraphClient.Options;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.ndx.ScaleOutIndexCounters;
 import org.embergraph.sparse.GlobalRowStoreHelper;
@@ -93,7 +93,7 @@ import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
 /**
- * Abstract base class for {@link IBigdataFederation} implementations.
+ * Abstract base class for {@link IEmbergraphFederation} implementations.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -105,9 +105,9 @@ import org.embergraph.util.httpd.AbstractHTTPD;
  *       that the IServiceShutdown.Options interface is flattened into
  *       IServiceShutdown and it shadows the Options that are being used.
  */
-abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
+abstract public class AbstractFederation<T> implements IEmbergraphFederation<T> {
 
-    protected static final Logger log = Logger.getLogger(IBigdataFederation.class);
+    protected static final Logger log = Logger.getLogger(IEmbergraphFederation.class);
 
     /**
      * The client (if connected).
@@ -153,7 +153,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
      * <p>
      * Note: concrete implementations MUST extend this method.
      * <p>
-     * Note: Clients use {@link IBigdataClient#disconnect(boolean)} to
+     * Note: Clients use {@link IEmbergraphClient#disconnect(boolean)} to
      * disconnect from a federation. The federation implements that disconnect
      * using either {@link #shutdown()} or {@link #shutdownNow()}.
      * <p>
@@ -288,7 +288,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
      * and then clear the {@link #fed} reference so that the client is no longer
      * "connected" to the federation.
      * <p>
-     * Note: Clients use {@link IBigdataClient#disconnect(boolean)} to disconnect
+     * Note: Clients use {@link IEmbergraphClient#disconnect(boolean)} to disconnect
      * from a federation.  The federation implements that disconnect using either
      * {@link #shutdown()} or {@link #shutdownNow()}.
      * <p>
@@ -426,7 +426,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
     
     /**
      * {@inheritDoc}
-     * @see IBigdataClient.Options#COLLECT_PLATFORM_STATISTICS
+     * @see IEmbergraphClient.Options#COLLECT_PLATFORM_STATISTICS
      */
     @Override
     public boolean getCollectPlatformStatistics() {
@@ -438,7 +438,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
     /**
      * {@inheritDoc}
      * 
-     * @see IBigdataClient.Options#COLLECT_QUEUE_STATISTICS
+     * @see IEmbergraphClient.Options#COLLECT_QUEUE_STATISTICS
      */
     @Override
     public boolean getCollectQueueStatistics() {
@@ -450,7 +450,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
     /**
      * {@inheritDoc}
      * 
-     * @see IBigdataClient.Options#HTTPD_PORT
+     * @see IEmbergraphClient.Options#HTTPD_PORT
      */
     @Override
     public int getHttpdPort() {
@@ -591,7 +591,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
     /**
      * The embedded ganglia peer.
      */
-    private final AtomicReference<BigdataGangliaService> gangliaService = new AtomicReference<BigdataGangliaService>();
+    private final AtomicReference<EmbergraphGangliaService> gangliaService = new AtomicReference<EmbergraphGangliaService>();
 
     @Override
     public ScheduledFuture<?> addScheduledTask(final Runnable task,
@@ -614,7 +614,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
      * The embedded ganglia peer. This can be used to obtain load balanced host
      * reports, etc.
      */
-    public final BigdataGangliaService getGangliaService() {
+    public final EmbergraphGangliaService getGangliaService() {
 
         return gangliaService.get();
         
@@ -789,7 +789,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
         
     }
 
-    protected AbstractFederation(final IBigdataClient<T> client) {
+    protected AbstractFederation(final IEmbergraphClient<T> client) {
 
         if (client == null)
             throw new IllegalArgumentException();
@@ -896,7 +896,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
     }
 
     /**
-    * The {@link IBigdataFederation} supports group commit (and always has). The
+    * The {@link IEmbergraphFederation} supports group commit (and always has). The
     * client side API submits tasks. Those tasks are scheduled on the
     * {@link IDataService} using the group commit mechanisms.
     */
@@ -1111,7 +1111,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
             this);
 
     @Override
-    public BigdataFileSystem getGlobalFileSystem() {
+    public EmbergraphFileSystem getGlobalFileSystem() {
 
         return globalFileSystemHelper.getGlobalFileSystem();
 
@@ -1434,12 +1434,12 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
                     final Properties properties = getClient().getProperties();
                     
                     final boolean listen = Boolean.valueOf(properties.getProperty(
-                            IBigdataClient.Options.GANGLIA_LISTEN,
-                            IBigdataClient.Options.DEFAULT_GANGLIA_LISTEN));
+                            IEmbergraphClient.Options.GANGLIA_LISTEN,
+                            IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN));
 
                     final boolean report = Boolean.valueOf(properties.getProperty(
-                            IBigdataClient.Options.GANGLIA_REPORT,
-                            IBigdataClient.Options.DEFAULT_GANGLIA_REPORT));
+                            IEmbergraphClient.Options.GANGLIA_REPORT,
+                            IEmbergraphClient.Options.DEFAULT_GANGLIA_REPORT));
                     
                     if (listen || report)
                         startGangliaService(statisticsCollector.get());
@@ -1588,27 +1588,27 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
 
                 final InetAddress listenGroup = InetAddress
                         .getByName(properties.getProperty(
-                                IBigdataClient.Options.GANGLIA_LISTEN_GROUP,
-                                IBigdataClient.Options.DEFAULT_GANGLIA_LISTEN_GROUP));
+                                IEmbergraphClient.Options.GANGLIA_LISTEN_GROUP,
+                                IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN_GROUP));
 
                 final int listenPort = Integer.valueOf(properties.getProperty(
-                        IBigdataClient.Options.GANGLIA_LISTEN_PORT,
-                        IBigdataClient.Options.DEFAULT_GANGLIA_LISTEN_PORT));
+                        IEmbergraphClient.Options.GANGLIA_LISTEN_PORT,
+                        IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN_PORT));
 
                 final boolean listen = Boolean.valueOf(properties.getProperty(
-                        IBigdataClient.Options.GANGLIA_LISTEN,
-                        IBigdataClient.Options.DEFAULT_GANGLIA_LISTEN));
+                        IEmbergraphClient.Options.GANGLIA_LISTEN,
+                        IEmbergraphClient.Options.DEFAULT_GANGLIA_LISTEN));
 
                 final boolean report = Boolean.valueOf(properties.getProperty(
-                        IBigdataClient.Options.GANGLIA_REPORT,
-                        IBigdataClient.Options.DEFAULT_GANGLIA_REPORT));
+                        IEmbergraphClient.Options.GANGLIA_REPORT,
+                        IEmbergraphClient.Options.DEFAULT_GANGLIA_REPORT));
 
                 // Note: defaults to the listenGroup and port if nothing given.
                 final InetSocketAddress[] metricsServers = GangliaUtil.parse(
                         // server(s)
                         properties.getProperty(
-                        IBigdataClient.Options.GANGLIA_SERVERS,
-                        IBigdataClient.Options.DEFAULT_GANGLIA_SERVERS),
+                        IEmbergraphClient.Options.GANGLIA_SERVERS,
+                        IEmbergraphClient.Options.DEFAULT_GANGLIA_SERVERS),
                         // default host (same as listenGroup)
                         listenGroup.getHostName(),
                         // default port (same as listenGroup)
@@ -1659,12 +1659,12 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
                  * by ganglia and; (b) provide nice declarations for various
                  * application counters of interest.
                  */
-                metadataFactory.add(new BigdataMetadataFactory(hostName,
+                metadataFactory.add(new EmbergraphMetadataFactory(hostName,
                         serviceName, defaultSlope, defaultTMax, defaultDMax,
                         heartbeatInterval));
 
                 // The embedded ganglia peer.
-                final BigdataGangliaService gangliaService = new BigdataGangliaService(
+                final EmbergraphGangliaService gangliaService = new EmbergraphGangliaService(
                         hostName,
                         serviceName,
                         metricsServers,
@@ -1965,7 +1965,7 @@ abstract public class AbstractFederation<T> implements IBigdataFederation<T> {
         
         final IDataService[] services = new IDataService[uuids.length];
 
-        final IBigdataFederation<?> fed = this;
+        final IEmbergraphFederation<?> fed = this;
         
         int i = 0;
         

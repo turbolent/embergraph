@@ -343,7 +343,7 @@ public class SolutionSetManager implements ISolutionSetManager {
                  * Note: This code path is used by the TemporaryStore and
                  * possibly ResourceManager (for a data service). The [store]
                  * reference here is always the local index manager. Thus it can
-                 * not be an IBigdataFederation.
+                 * not be an IEmbergraphFederation.
                  * 
                  * TODO Use the readsOnCommitTime. Test coverage for
                  * TemporaryStore and DataService (but there is an open question

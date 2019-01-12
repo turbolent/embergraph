@@ -64,8 +64,8 @@ import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.encoder.IBindingSetDecoder;
 import org.embergraph.rdf.internal.encoder.IVBindingSetEncoder;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.rwstore.sector.IMemoryManager;
@@ -95,8 +95,8 @@ import cutthecrap.utils.striterators.Visitor;
  * manner very similar to how we represent the keys of the statement indices.
  * <p>
  * Since this encoding does not persist the {@link IV#getValue() cache}, a
- * separate mapping must be maintained from {@link IV} to {@link BigdataValue}
- * for those {@link IV}s which have a materialized {@link BigdataValue}.
+ * separate mapping must be maintained from {@link IV} to {@link EmbergraphValue}
+ * for those {@link IV}s which have a materialized {@link EmbergraphValue}.
  * 
  * TODO Do a 64-bit hash version which could be used for hash indices having
  * more than 500M distinct join variable combinations. Note that at 500M
@@ -589,7 +589,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
         store = new MemStore(mmgr.createAllocationContext());
 
         // Setup the encoder.  The ivCache will be backed by the memory manager.
-        this.encoder = new IVBindingSetEncoder(BigdataValueFactoryImpl.getInstance(((String[]) op
+        this.encoder = new IVBindingSetEncoder(EmbergraphValueFactoryImpl.getInstance(((String[]) op
                 .getRequiredProperty(Predicate.Annotations.RELATION_NAME))[0]), filter);
 
         /*

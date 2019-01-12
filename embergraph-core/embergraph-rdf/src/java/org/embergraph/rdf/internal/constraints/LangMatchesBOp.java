@@ -30,7 +30,7 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.NotMaterializedException;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Implements the <a
@@ -108,7 +108,7 @@ public class LangMatchesBOp extends XSDBooleanIVValueExpression
 //        }
 
 
-        final BigdataValue tagVal = tag.getValue();
+        final EmbergraphValue tagVal = tag.getValue();
 
         // not yet materialized
         if (tagVal == null)
@@ -117,7 +117,7 @@ public class LangMatchesBOp extends XSDBooleanIVValueExpression
         if (!QueryEvaluationUtil.isSimpleLiteral(tagVal))
             throw new SparqlTypeErrorException();
 
-        final BigdataValue rangeVal = range.getValue();
+        final EmbergraphValue rangeVal = range.getValue();
 
         // not yet materialized
         if (rangeVal == null)

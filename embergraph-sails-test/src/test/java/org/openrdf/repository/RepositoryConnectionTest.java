@@ -1714,7 +1714,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
 
 	/*
 	 * Note: This test gets overridden in a GC aware manner to ensure that it
-	 * passes in CI. See BigdataConnectionTest.
+	 * passes in CI. See EmbergraphConnectionTest.
 	 */
 	@Test
 	public void testOrderByQueriesAreInterruptable()

@@ -27,7 +27,7 @@ import org.embergraph.bop.rdf.aggregate.COUNT;
 import org.embergraph.bop.rdf.aggregate.MAX;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -93,7 +93,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -252,7 +252,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer
 
 
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);

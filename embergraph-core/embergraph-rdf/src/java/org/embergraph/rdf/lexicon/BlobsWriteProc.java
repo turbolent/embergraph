@@ -271,7 +271,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result> imple
             } else {
 
 				/*
-				 * The serialized BigdataValue object.
+				 * The serialized EmbergraphValue object.
 				 * 
 				 * TODO Avoid materialization of this, preferring to operate on
 				 * streams in the source IRaba. We will need to compare it with

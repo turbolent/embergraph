@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
@@ -32,7 +33,6 @@ import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.DTEExtension;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 
 /**
  * Internal value representing a packed long in the range [0;72057594037927935L].
@@ -41,7 +41,7 @@ import org.embergraph.rdf.model.BigdataLiteral;
  * are not supported), the reason being that the compression technique
  * we're using is order preserving only for the valid range.
 */
-public class PackedLongIV<V extends BigdataLiteral> 
+public class PackedLongIV<V extends EmbergraphLiteral>
         extends AbstractLiteralIV<V, Long>
             implements Serializable, Literal {
 
@@ -76,7 +76,7 @@ public class PackedLongIV<V extends BigdataLiteral>
     private final long value;
 
     /**
-     * The cached materialized BigdataValue for this InetAddress.
+     * The cached materialized EmbergraphValue for this InetAddress.
      */
     private transient V literal;
     

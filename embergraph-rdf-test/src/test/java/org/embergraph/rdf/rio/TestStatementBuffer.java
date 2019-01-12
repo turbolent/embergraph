@@ -23,6 +23,10 @@ package org.embergraph.rdf.rio;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -35,11 +39,7 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.load.IStatementBufferFactory;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -240,7 +240,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
         		// store is empty.
         		assertEquals(0,store.getStatementCount());
 
-        		final BigdataValueFactory vf = store.getValueFactory();
+        		final EmbergraphValueFactory vf = store.getValueFactory();
         	
 			final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(
 					store, capacity);
@@ -335,16 +335,16 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 			// * _:s1 dc:source news:us-sybase .
 			// * _:s1 dc:created    "2011-04-05T12:00:00Z"^^xsd:dateTime .
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-			final BigdataURI SAP = vf.createURI("http://example.com/SAP");
-			final BigdataURI bought = vf.createURI("http://example.com/bought");
-			final BigdataURI sybase = vf.createURI("http://example.com/sybase");
-			final BigdataURI dcSource = vf.createURI("http://purl.org/dc/terms/source");
-			final BigdataURI dcCreated = vf.createURI("http://purl.org/dc/terms/created");
-			final BigdataURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
-			final BigdataLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
-			final BigdataBNode s1 = vf.createBNode("s1");
+			final EmbergraphURI SAP = vf.createURI("http://example.com/SAP");
+			final EmbergraphURI bought = vf.createURI("http://example.com/bought");
+			final EmbergraphURI sybase = vf.createURI("http://example.com/sybase");
+			final EmbergraphURI dcSource = vf.createURI("http://purl.org/dc/terms/source");
+			final EmbergraphURI dcCreated = vf.createURI("http://purl.org/dc/terms/created");
+			final EmbergraphURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
+			final EmbergraphLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
+			final EmbergraphBNode s1 = vf.createBNode("s1");
 
 			// store is empty.
 			assertEquals(0, store.getStatementCount());
@@ -504,16 +504,16 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 			// * _:s1 dc:source news:us-sybase .
 			// * _:s1 dc:created    "2011-04-05T12:00:00Z"^^xsd:dateTime .
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-			final BigdataURI SAP = vf.createURI("http://example.com/SAP");
-			final BigdataURI bought = vf.createURI("http://example.com/bought");
-			final BigdataURI sybase = vf.createURI("http://example.com/sybase");
-			final BigdataURI dcSource = vf.createURI("http://purl.org/dc/terms/source");
-			final BigdataURI dcCreated = vf.createURI("http://purl.org/dc/terms/created");
-			final BigdataURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
-			final BigdataLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
-			final BigdataBNode s1 = vf.createBNode("s1");
+			final EmbergraphURI SAP = vf.createURI("http://example.com/SAP");
+			final EmbergraphURI bought = vf.createURI("http://example.com/bought");
+			final EmbergraphURI sybase = vf.createURI("http://example.com/sybase");
+			final EmbergraphURI dcSource = vf.createURI("http://purl.org/dc/terms/source");
+			final EmbergraphURI dcCreated = vf.createURI("http://purl.org/dc/terms/created");
+			final EmbergraphURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
+			final EmbergraphLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
+			final EmbergraphBNode s1 = vf.createBNode("s1");
 
 			// store is empty.
 			assertEquals(0, store.getStatementCount());
@@ -540,10 +540,10 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 
 			// metadata statements.
 			
-			final BigdataStatement mds1 = vf.createStatement(s1, dcSource,
+			final EmbergraphStatement mds1 = vf.createStatement(s1, dcSource,
 					newsSybase, null, StatementEnum.Explicit);
 
-			final BigdataStatement mds2 = vf.createStatement(s1, dcCreated,
+			final EmbergraphStatement mds2 = vf.createStatement(s1, dcCreated,
 					createdDate, null, StatementEnum.Explicit);
 
 			buffer.add(mds1);
@@ -571,7 +571,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 			assertTrue(store.hasStatement(s1, dcCreated, createdDate));
 
 			/*
-			 * FIXME BigdataStatementImpl currently relies on c() to be the
+			 * FIXME EmbergraphStatementImpl currently relies on c() to be the
 			 * SidIV. This needs to be changed. The SidIV should now be formed
 			 * dynamically from the concatenation of the subject, predicate, and
 			 * object roles IVs. The context role [c] needs to remain available
@@ -639,12 +639,12 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
 
        try {
 
-          final BigdataValueFactory vf = store.getValueFactory();
+          final EmbergraphValueFactory vf = store.getValueFactory();
 
-          final BigdataURI s = vf.createURI("http://example.com/s");
-          final BigdataURI p = vf.createURI("http://example.com/p");
-          final BigdataURI o = vf.createURI("http://example.com/o");
-          final BigdataURI c = vf.createURI("http://example.com/c");
+          final EmbergraphURI s = vf.createURI("http://example.com/s");
+          final EmbergraphURI p = vf.createURI("http://example.com/p");
+          final EmbergraphURI o = vf.createURI("http://example.com/o");
+          final EmbergraphURI c = vf.createURI("http://example.com/c");
 
           final StatementBuffer<Statement> buffer = new StatementBuffer<Statement>(
                 store, capacity);

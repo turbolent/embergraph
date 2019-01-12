@@ -23,7 +23,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -36,7 +35,6 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 import org.embergraph.bop.BOp;
-import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
@@ -51,11 +49,10 @@ import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
-import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
@@ -91,24 +88,24 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
      * Note: This could extend the base class to allow for search service
      * configuration options.
      */
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public SearchInSearchServiceFactory() {
         
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         
 //        serviceOptions.setRunFirst(true);
         
     }
     
     @Override
-    public BigdataNativeServiceOptions getServiceOptions() {
+    public EmbergraphNativeServiceOptions getServiceOptions() {
 
         return serviceOptions;
         
     }
     
-    public BigdataServiceCall create(final ServiceCallCreateParams params) {
+    public EmbergraphServiceCall create(final ServiceCallCreateParams params) {
 
         if (params == null)
             throw new IllegalArgumentException();
@@ -345,7 +342,7 @@ public class SearchInSearchServiceFactory extends AbstractServiceFactoryBase {
      * is not a {@link Serializable} object. It MUST run on the query
      * controller.
      */
-    private static class SearchCall implements BigdataServiceCall {
+    private static class SearchCall implements EmbergraphServiceCall {
 
         private final AbstractTripleStore store;
         private final IIndex osp;

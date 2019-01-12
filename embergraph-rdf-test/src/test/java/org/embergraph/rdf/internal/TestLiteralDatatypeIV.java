@@ -11,7 +11,7 @@ import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegate
 import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.test.MockTermIdFactory;
 
 /**
@@ -59,24 +59,24 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 
 		final IV<?,?> datatypeIV = newTermId(VTE.URI);
 
-		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>(""), datatypeIV)
+		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+				new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""), datatypeIV)
 				);
 
-		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>("abc"), datatypeIV)
+		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+				new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"), datatypeIV)
 				);
 
-		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>(" "), datatypeIV)
+		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+				new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "), datatypeIV)
 				);
 
-		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>("1"), datatypeIV)
+		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+				new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"), datatypeIV)
 				);
 
-		doTest(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-				new FullyInlineTypedLiteralIV<BigdataLiteral>("12"), datatypeIV)
+		doTest(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+				new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"), datatypeIV)
 				);
 		
 		final IV<?,?>[] e;
@@ -84,28 +84,28 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 
             final List<IV<?, ?>> ivs = new LinkedList<IV<?, ?>>();
 
-            ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                    new FullyInlineTypedLiteralIV<BigdataLiteral>(""),
+            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>(""),
                     datatypeIV)
             );
 
-            ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                    new FullyInlineTypedLiteralIV<BigdataLiteral>("abc"),
+            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>("abc"),
                     datatypeIV)
             );
 
-            ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                    new FullyInlineTypedLiteralIV<BigdataLiteral>(" "),
+            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>(" "),
                     datatypeIV)
             );
 
-            ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                    new FullyInlineTypedLiteralIV<BigdataLiteral>("1"),
+            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>("1"),
                     datatypeIV)
             );
 
-            ivs.add(new PartlyInlineTypedLiteralIV<BigdataLiteral>(
-                    new FullyInlineTypedLiteralIV<BigdataLiteral>("12"),
+            ivs.add(new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(
+                    new FullyInlineTypedLiteralIV<EmbergraphLiteral>("12"),
                     datatypeIV)
             );
 
@@ -118,7 +118,7 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 		
 	}
 
-	private void doTest(final PartlyInlineTypedLiteralIV<BigdataLiteral> iv) {
+	private void doTest(final PartlyInlineTypedLiteralIV<EmbergraphLiteral> iv) {
 
 		assertEquals(VTE.LITERAL, iv.getVTE());
 		
@@ -134,8 +134,8 @@ public class TestLiteralDatatypeIV extends TestCase2 {
 		
 		final byte[] key = IVUtility.encode(keyBuilder, iv).getKey();
 		
-		final PartlyInlineTypedLiteralIV<BigdataLiteral> actual = 
-			(PartlyInlineTypedLiteralIV<BigdataLiteral>) IVUtility.decode(key);
+		final PartlyInlineTypedLiteralIV<EmbergraphLiteral> actual =
+			(PartlyInlineTypedLiteralIV<EmbergraphLiteral>) IVUtility.decode(key);
 
 		// Check the extension IVs for consistency.
 		{

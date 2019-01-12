@@ -23,14 +23,14 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -329,12 +329,12 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
        /*
         * Note: DO NOT share structures in this test!!!!
         */
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI testUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI testUri = f.createURI("http://www.test.com");
 
       final IV test = makeIV(testUri);
       
-      final BigdataValue[] values = new BigdataValue[] { testUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { testUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
@@ -1676,12 +1676,12 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
       /*
        * Note: DO NOT share structures in this test!!!!
        */
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI testUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI testUri = f.createURI("http://www.test.com");
 
       final IV test = makeIV(testUri);
       
-      final BigdataValue[] values = new BigdataValue[] { testUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { testUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       

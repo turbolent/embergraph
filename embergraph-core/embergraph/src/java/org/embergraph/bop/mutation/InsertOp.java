@@ -41,7 +41,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -267,14 +267,14 @@ public class InsertOp<E> extends PipelineOp implements
          *            The key order for that index.
          * @param partitionId
          *            The partition identifier and <code>-1</code> unless
-         *            running against an {@link IBigdataFederation}.
+         *            running against an {@link IEmbergraphFederation}.
          * 
          * @return The mutable view of the index.
          * 
          * @throws UnsupportedOperationException
          *             if there is an attempt to read on an index partition when
-         *             the database is not an {@link IBigdataFederation} or when
-         *             the database is an {@link IBigdataFederation} unless the
+         *             the database is not an {@link IEmbergraphFederation} or when
+         *             the database is an {@link IEmbergraphFederation} unless the
          *             index partition was specified.
          * 
          * @todo validate for standalone. probably needs to be wrapped as an
@@ -310,7 +310,7 @@ public class InsertOp<E> extends PipelineOp implements
                 throw new UnsupportedOperationException();
             }
             
-            final IBigdataFederation<?> fed = context.getFederation();
+            final IEmbergraphFederation<?> fed = context.getFederation();
             final IIndexManager indexManager = context.getIndexManager();
             final long writeTimestamp = predicate.getTimestamp();
             

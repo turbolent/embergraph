@@ -35,7 +35,7 @@ import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
  *
  */
 
-public class TestFuzzySSSP extends AbstractBigdataGraphTestCase {
+public class TestFuzzySSSP extends AbstractEmbergraphGraphTestCase {
 
 	public TestFuzzySSSP() {
 
@@ -51,7 +51,7 @@ public class TestFuzzySSSP extends AbstractBigdataGraphTestCase {
 
 		final Properties properties = new Properties();
 
-		final BigdataGraphFixture graphFixture = new BigdataGraphFixture(
+		final EmbergraphGraphFixture graphFixture = new EmbergraphGraphFixture(
 				properties);
 
 		final IGASEngine gasEngine = graphFixture.newGASEngine(nthreads);

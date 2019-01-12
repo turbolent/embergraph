@@ -40,6 +40,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
+import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -68,14 +72,11 @@ import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.PartitionLocator;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailQuery;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.EmbergraphSailQuery;
 import org.embergraph.rdf.sail.sparql.ast.SimpleNode;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.RunningQuery;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.UpdateTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.RunningQuery;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.UpdateTask;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sail.webapp.client.EncodeDecodeValue;
 import org.embergraph.rdf.sparql.ast.ASTBase.Annotations;
@@ -85,7 +86,6 @@ import org.embergraph.rdf.sparql.ast.explainhints.ExplainHints;
 import org.embergraph.rdf.sparql.ast.explainhints.IExplainHint;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.AccessPath;
-import org.embergraph.service.IBigdataFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.InnerCause;
@@ -96,7 +96,7 @@ import org.embergraph.util.InnerCause;
  * @author martyncutcher
  * @author thompsonbry
  */
-public class QueryServlet extends BigdataRDFServlet {
+public class QueryServlet extends EmbergraphRDFServlet {
 
     /**
      * 
@@ -190,7 +190,7 @@ public class QueryServlet extends BigdataRDFServlet {
     * <dt>transaction</dt>
     * <dd>The operation will be isolated by the transaction. The namespace MUST
     * support isolatable indices. See
-    * {@link BigdataSail.Options#ISOLATABLE_INDICES}.</dd>
+    * {@link EmbergraphSail.Options#ISOLATABLE_INDICES}.</dd>
     * </dl>
     * <p>
     * When not specified, the default for read-only operations is determined by
@@ -203,7 +203,7 @@ public class QueryServlet extends BigdataRDFServlet {
     * 
     * @see TxServlet
     * @see ITransactionService#newTx(long)
-    * @see BigdataRDFServlet#getTimestamp(HttpServletRequest)
+    * @see EmbergraphRDFServlet#getTimestamp(HttpServletRequest)
     * @see <a href="http://trac.bigdata.com/ticket/1156"> Support read/write
     *      transactions in the REST API</a>
     */
@@ -345,11 +345,11 @@ public class QueryServlet extends BigdataRDFServlet {
          * @see <a href="http://trac.blazegraph.com/ticket/867"> NSS concurrency
          *      problem with list namespaces and create namespace </a>
          */
-        final long tx = getBigdataRDFContext().newTx(getTimestamp(req));
+        final long tx = getEmbergraphRDFContext().newTx(getTimestamp(req));
         
         try {
             
-            final AbstractTripleStore tripleStore = getBigdataRDFContext()
+            final AbstractTripleStore tripleStore = getEmbergraphRDFContext()
                     .getTripleStore(getNamespace(req), tx);
 
             if (tripleStore == null) {
@@ -361,7 +361,7 @@ public class QueryServlet extends BigdataRDFServlet {
             }
 
             // The serviceURIs for this graph.
-            final String[] serviceURI = BigdataServlet.getServiceURIs(
+            final String[] serviceURI = EmbergraphServlet.getServiceURIs(
                     getServletContext(), req);
 
             /*
@@ -373,7 +373,7 @@ public class QueryServlet extends BigdataRDFServlet {
 
                 final SD sd = new SD(g, tripleStore, serviceURI);
 
-                final SparqlEndpointConfig config = getBigdataRDFContext()
+                final SparqlEndpointConfig config = getEmbergraphRDFContext()
                         .getConfig();
 
                 sd.describeService(true/* describeStatistics */,
@@ -389,7 +389,7 @@ public class QueryServlet extends BigdataRDFServlet {
 
         } finally {
 
-            getBigdataRDFContext().abortTx(tx);
+            getEmbergraphRDFContext().abortTx(tx);
 
         }
 
@@ -452,7 +452,7 @@ public class QueryServlet extends BigdataRDFServlet {
           */
          submitApiTask(
                new SparqlUpdateTask(req, resp, namespace, timestamp, updateStr, bindings,
-                     getBigdataRDFContext())).get();
+                     getEmbergraphRDFContext())).get();
 
       } catch (Throwable t) {
 
@@ -465,7 +465,7 @@ public class QueryServlet extends BigdataRDFServlet {
     static class SparqlUpdateTask extends AbstractRestApiTask<Void> {
 
         private final String updateStr;
-        private final BigdataRDFContext context;
+        private final EmbergraphRDFContext context;
         private final Map<String, Value> bindings;
 
         /**
@@ -482,7 +482,7 @@ public class QueryServlet extends BigdataRDFServlet {
                 final long timestamp,
                 final String updateStr,
                 final Map<String, Value> bindings,
-                final BigdataRDFContext context
+                final EmbergraphRDFContext context
                 ) {
             super(req, resp, namespace, timestamp);
             this.updateStr = updateStr;
@@ -522,13 +522,13 @@ public class QueryServlet extends BigdataRDFServlet {
 					 * parse the query exactly once in order to minimize the
 					 * resources associated with the query parser.
 					 */
-					final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+					final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
 							.parseUpdate2(updateStr, baseURI);
 
 					if (log.isDebugEnabled())
 						log.debug(astContainer.toString());
 
-			BigdataSailRepositoryConnection conn = null;
+			EmbergraphSailRepositoryConnection conn = null;
 			boolean success = false;
 			try {
 
@@ -647,7 +647,7 @@ public class QueryServlet extends BigdataRDFServlet {
 
          submitApiTask(
                new SparqlQueryTask(req, resp, namespace, timestamp, queryStr, includeInferred, bindings,
-                     getBigdataRDFContext())).get();
+                     getEmbergraphRDFContext())).get();
 
       } catch (Throwable t) {
 
@@ -665,7 +665,7 @@ public class QueryServlet extends BigdataRDFServlet {
     static class SparqlQueryTask extends AbstractRestApiTask<Void> {
 
 		private final String queryStr;
-		private final BigdataRDFContext context;
+		private final EmbergraphRDFContext context;
 		private final boolean includeInferred;
 		private final Map<String, Value> bindings;
 
@@ -673,7 +673,7 @@ public class QueryServlet extends BigdataRDFServlet {
             final HttpServletResponse resp, final String namespace,
             final long timestamp, final String queryStr,
             final boolean includeInferred, Map<String, Value> bindings,
-            final BigdataRDFContext context) {
+            final EmbergraphRDFContext context) {
 
          super(req, resp, namespace, timestamp);
 
@@ -705,12 +705,12 @@ public class QueryServlet extends BigdataRDFServlet {
              */
             
             // Setup the baseURI for this request. 
-            final String baseURI = BigdataRDFContext.getBaseURI(req, resp);
+            final String baseURI = EmbergraphRDFContext.getBaseURI(req, resp);
 
             // Parse the query.
-            final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+            final ASTContainer astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
-			BigdataSailRepositoryConnection conn = null;
+			EmbergraphSailRepositoryConnection conn = null;
 			try {
 
 				conn = getQueryConnection();
@@ -773,7 +773,7 @@ public class QueryServlet extends BigdataRDFServlet {
 						 * the query results.
 						 */
 
-						resp.setContentType(BigdataServlet.MIME_TEXT_HTML);
+						resp.setContentType(EmbergraphServlet.MIME_TEXT_HTML);
 						final Writer w = new OutputStreamWriter(os,
 								queryTask.charset);
 						try {
@@ -917,7 +917,7 @@ public class QueryServlet extends BigdataRDFServlet {
      * 
      *             TODO The complexity here is due to the lack of a tight
      *             coupling between the {@link RunningQuery}, the
-     *             {@link BigdataSailQuery}, and the {@link IRunningQuery}. It
+     *             {@link EmbergraphSailQuery}, and the {@link IRunningQuery}. It
      *             was not possible to obtain that tight coupling with the 1.0.x
      *             releases of bigdata due to the integration with the Sail.
      *             This led to the practice of setting the query {@link UUID} so
@@ -930,7 +930,7 @@ public class QueryServlet extends BigdataRDFServlet {
      *             <p>
      *             This issue could be revisited now. Probably the right way to
      *             do this is by defining our own evaluate() method on the
-     *             {@link BigdataSailQuery} which would provide either an object
+     *             {@link EmbergraphSailQuery} which would provide either an object
      *             to be monitored or an interface for a query listener. Either
      *             approach could be used to ensure that we always have the
      *             {@link IRunningQuery} for an {@link AbstractQueryTask} which
@@ -1012,7 +1012,7 @@ public class QueryServlet extends BigdataRDFServlet {
 
 			XMLBuilder.Node current = doc.root("html");
 
-            BigdataRDFContext.addHtmlHeader(current, charset);
+            EmbergraphRDFContext.addHtmlHeader(current, charset);
 
 			current.node("h1", "Query");
 
@@ -1067,7 +1067,7 @@ public class QueryServlet extends BigdataRDFServlet {
 			if (queryId2 != null) {
 				if(log.isDebugEnabled())
 					log.debug("Resolving IRunningQuery: queryId2=" + queryId2);
-				final IIndexManager indexManager = BigdataServlet
+				final IIndexManager indexManager = EmbergraphServlet
 						.getIndexManager(queryTask.req.getServletContext());
 				final QueryEngine queryEngine = QueryEngineFactory.getInstance()
 						.getQueryController(indexManager);
@@ -1467,7 +1467,7 @@ public class QueryServlet extends BigdataRDFServlet {
             
             final long begin = System.currentTimeMillis();
 
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             try {
 
                 conn = getQueryConnection();
@@ -1602,7 +1602,7 @@ public class QueryServlet extends BigdataRDFServlet {
 
          final long begin = System.currentTimeMillis();
 
-         BigdataSailRepositoryConnection conn = null;
+         EmbergraphSailRepositoryConnection conn = null;
          try {
 
             conn = getQueryConnection();
@@ -1724,7 +1724,7 @@ public class QueryServlet extends BigdataRDFServlet {
       @Override
       public Void call() throws Exception {
 
-        BigdataSailRepositoryConnection conn = null;
+        EmbergraphSailRepositoryConnection conn = null;
         
         try {
 
@@ -1829,7 +1829,7 @@ public class QueryServlet extends BigdataRDFServlet {
             return;
         }
 
-        if (!getBigdataRDFContext().isScaleOut()) {
+        if (!getEmbergraphRDFContext().isScaleOut()) {
             buildAndCommitResponse(resp, HTTP_BADREQUEST, MIME_TEXT_PLAIN,
                     "Not scale-out");
             return;
@@ -1908,7 +1908,7 @@ public class QueryServlet extends BigdataRDFServlet {
 
             final long begin = System.currentTimeMillis();
             
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             try {
 
                 conn = getQueryConnection();
@@ -1922,7 +1922,7 @@ public class QueryServlet extends BigdataRDFServlet {
                 
                 final String charset = "utf-8";// TODO from request.
 
-                resp.setContentType(BigdataServlet.MIME_TEXT_HTML);
+                resp.setContentType(EmbergraphServlet.MIME_TEXT_HTML);
                 resp.setCharacterEncoding(charset);
                 final Writer w = resp.getWriter();
                 try {
@@ -1931,9 +1931,9 @@ public class QueryServlet extends BigdataRDFServlet {
                     
                     XMLBuilder.Node current = doc.root("html");
                     
-                    BigdataRDFContext.addHtmlHeader(current, charset);
+                    EmbergraphRDFContext.addHtmlHeader(current, charset);
 
-                    final IBigdataFederation<?> fed = (IBigdataFederation<?>)// getBigdataRDFContext()
+                    final IEmbergraphFederation<?> fed = (IEmbergraphFederation<?>)// getEmbergraphRDFContext()
                             getIndexManager();
                     
                     final Iterator<PartitionLocator> itr = ndx.locatorScan(

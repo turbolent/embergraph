@@ -43,7 +43,7 @@ import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
@@ -171,12 +171,12 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
    
            final IConstant<String> s1 = new Constant<String>("s1");
            final IConstant<String> s2 = new Constant<String>("s2");
-           final IConstant<XSDNumericIV<BigdataLiteral>> num1 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(1));
-           final IConstant<XSDNumericIV<BigdataLiteral>> num2 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(2));
-           final IConstant<XSDNumericIV<BigdataLiteral>> num9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num1 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(1));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num2 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(2));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> num9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
            
            // COUNT(DISTINCT ?v) AS ?S
            final IValueExpression<IV> countDistinctVAsS = new Bind(S,
@@ -219,8 +219,8 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
             * </pre>
             */
                       // Note: The aggregates will have gone through type promotion.
-           final IConstant<XSDIntegerIV<BigdataLiteral>> _num1 = new Constant<XSDIntegerIV<BigdataLiteral>>(
-                   new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(1)));
+           final IConstant<XSDIntegerIV<EmbergraphLiteral>> _num1 = new Constant<XSDIntegerIV<EmbergraphLiteral>>(
+                   new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1)));
         
            final IBindingSet expected[] = new IBindingSet[]
            {

@@ -41,7 +41,7 @@ import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.DaemonThreadFactory;
 
 /**
@@ -230,7 +230,7 @@ public class ClientAsynchronousIterator<E> implements IAsynchronousIterator<E>,
      * Note: The whole reason for {@link #start(ExecutorService)} is that the
      * {@link ExecutorService} is NOT serializable. Typically this task will be
      * run on the {@link ExecutorService} associated with the local
-     * {@link IBigdataFederation} object for a {@link DataService}.
+     * {@link IEmbergraphFederation} object for a {@link DataService}.
      */
     private transient ExecutorService executorService;
     

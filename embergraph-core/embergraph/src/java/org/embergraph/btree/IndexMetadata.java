@@ -62,7 +62,7 @@ import org.embergraph.resources.OverflowManager;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ndx.pipeline.AbstractSubtask;
 import org.embergraph.sparse.SparseRowStore;
@@ -345,7 +345,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
          * desired name will be used if more than one instance is assigned the
          * same name). The default behavior is to select a data service using
          * the load balancer, which is done automatically by
-         * {@link IBigdataFederation#registerIndex(IndexMetadata, UUID)} if
+         * {@link IEmbergraphFederation#registerIndex(IndexMetadata, UUID)} if
          * {@link IndexMetadata#getInitialDataServiceUUID()} returns
          * <code>null</code>.
          */
@@ -1919,7 +1919,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
 	 * 
 	 * @param indexManager
 	 *            Optional. When given and when the {@link IIndexManager} is a
-	 *            scale-out {@link IBigdataFederation}, this object will be used
+	 *            scale-out {@link IEmbergraphFederation}, this object will be used
 	 *            to interpret the {@link Options#INITIAL_DATA_SERVICE}
 	 *            property.
 	 * @param properties
@@ -1987,9 +1987,9 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable,
                 }
                 
                 if (uuid == null && indexManager != null
-                        && indexManager instanceof IBigdataFederation<?>) {
+                        && indexManager instanceof IEmbergraphFederation<?>) {
 
-                    final IBigdataFederation<?> fed = (IBigdataFederation<?>) indexManager;
+                    final IEmbergraphFederation<?> fed = (IEmbergraphFederation<?>) indexManager;
 
                     final IDataService dataService = fed
                             .getDataServiceByName(val);

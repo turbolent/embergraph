@@ -120,7 +120,7 @@ public class RemoteRepositoryDecls {
     * 
     * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
     */
-   static protected final String HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS = "X-BIGDATA-MAX-QUERY-MILLIS";
+   static protected final String HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS = "X-EMBERGRAPH-MAX-QUERY-MILLIS";
 
 
    /**
@@ -137,7 +137,7 @@ public class RemoteRepositoryDecls {
 
    /**
     * The name of the parameter/attribute that contains high resolution maxQueryTime (milliseconds) for remote queries execution.
-    * Minimum value of maxQueryTimeMillis and {@link RemoteRepositoryDecls.HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS header} will be used as an effective timeout.
+    * Minimum value of maxQueryTimeMillis and {@link RemoteRepositoryDecls.HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS header} will be used as an effective timeout.
     * @see org.embergraph.rdf.sail.webapp.QueryServlet.TIMEOUT
     */
    public static final String MAX_QUERY_TIME_MILLIS = "maxQueryTimeMillis";

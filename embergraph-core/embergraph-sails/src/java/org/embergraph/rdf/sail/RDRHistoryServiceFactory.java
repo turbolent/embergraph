@@ -27,12 +27,12 @@ import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.CustomServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCall;
@@ -58,11 +58,11 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
     static private transient final Logger log = Logger
             .getLogger(RDRHistoryServiceFactory.class);
 
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public RDRHistoryServiceFactory() {
 
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         
         /*
          * TODO Review decision to make this a runFirst service. The rational is
@@ -130,7 +130,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
      * of the describe cache.
      */
     @Override
-    public void startConnection(final BigdataSailConnection conn) {
+    public void startConnection(final EmbergraphSailConnection conn) {
 
         final AbstractTripleStore database = conn.getTripleStore();
         if (database.isRDRHistory()) {
@@ -141,7 +141,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
 
     }
     
-    private static class RDRHistoryServiceCall implements BigdataServiceCall {
+    private static class RDRHistoryServiceCall implements EmbergraphServiceCall {
 
         private final AbstractTripleStore database;
         private final IServiceOptions options;

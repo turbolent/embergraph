@@ -32,6 +32,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -44,9 +46,7 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.InnerCause;
 
@@ -56,12 +56,12 @@ import org.embergraph.util.InnerCause;
  * in milliseconds since the epoch.  The milliseconds are encoded as an inline 
  * long.
  */
-public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> {
+public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<V> {
 
 	private static final transient Logger log = Logger.getLogger(DateTimeExtension.class);
 	
 	
-    private final Map<IV,BigdataURI> datatypes;
+    private final Map<IV, EmbergraphURI> datatypes;
     
     private final TimeZone defaultTZ;
     
@@ -69,7 +69,7 @@ public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> 
             final TimeZone defaultTZ) {
 
 //        this.dateTime = resolver.resolve(XSD.DATETIME);
-        this.datatypes = new LinkedHashMap<IV,BigdataURI>();
+        this.datatypes = new LinkedHashMap<IV, EmbergraphURI>();
         resolve(resolver, XSD.DATETIME);
         resolve(resolver, XSD.DATE);
         resolve(resolver, XSD.TIME);
@@ -89,15 +89,15 @@ public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> 
             log.debug("resolving: " + uri);
         }
     	
-        final BigdataURI val = resolver.resolve(uri);
+        final EmbergraphURI val = resolver.resolve(uri);
         datatypes.put(val.getIV(), val);
         
     }
 
     @Override
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
-        return new LinkedHashSet<BigdataURI>(datatypes.values());
+        return new LinkedHashSet<EmbergraphURI>(datatypes.values());
         
     }
     
@@ -176,8 +176,8 @@ public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> 
         if (dt == null)
             throw new IllegalArgumentException();
         
-        BigdataURI resolvedDT = null;
-        for (BigdataURI val : datatypes.values()) {
+        EmbergraphURI resolvedDT = null;
+        for (EmbergraphURI val : datatypes.values()) {
             // Note: URI.stringValue() is efficient....
             if (val.stringValue().equals(dt.stringValue())) {
                 resolvedDT = val;
@@ -199,7 +199,7 @@ public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> 
      * object (GMT timezone).  Use the XMLGregorianCalendar to create a datatype
      * literal value with the appropriate datatype.
      */
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
         
         if (!datatypes.containsKey(iv.getExtensionIV())) {
             throw new IllegalArgumentException("unrecognized datatype");
@@ -217,7 +217,7 @@ public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> 
         
         try {
             
-            final BigdataURI dt = datatypes.get(iv.getExtensionIV());
+            final EmbergraphURI dt = datatypes.get(iv.getExtensionIV());
             
             final DatatypeFactory f = datatypeFactorySingleton;
 

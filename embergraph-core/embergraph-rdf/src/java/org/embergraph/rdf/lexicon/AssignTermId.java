@@ -23,13 +23,13 @@ package org.embergraph.rdf.lexicon;
 
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
 import org.embergraph.service.ndx.pipeline.KVOC;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
 /**
- * Assigns the term identifier to duplicate {@link BigdataValue} for a single
+ * Assigns the term identifier to duplicate {@link EmbergraphValue} for a single
  * write operation when an {@link IDuplicateRemover} was applied.
  * 
  * @todo this should be more transparent. One way to do that is to get rid of
@@ -45,7 +45,7 @@ import org.embergraph.service.ndx.pipeline.KVOList;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class AssignTermId implements KVOList.Op<BigdataValue> {
+public class AssignTermId implements KVOList.Op<EmbergraphValue> {
 
     @SuppressWarnings("rawtypes")
     private final IV iv;
@@ -57,7 +57,7 @@ public class AssignTermId implements KVOList.Op<BigdataValue> {
 
     }
 
-    public void apply(final KVO<BigdataValue> t) {
+    public void apply(final KVO<EmbergraphValue> t) {
 
         t.obj.setIV(iv);
 

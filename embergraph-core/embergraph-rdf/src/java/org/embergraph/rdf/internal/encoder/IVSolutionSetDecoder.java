@@ -42,9 +42,9 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.util.BytesUtil;
 
 /**
@@ -77,10 +77,10 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
     /**
      * The observed {@link IVCache} associations.
      */
-    private final Map<IV<?, ?>, BigdataValue> cache;
+    private final Map<IV<?, ?>, EmbergraphValue> cache;
 
     /**
-     * Used to de-serialize the {@link BigdataValue}s.
+     * Used to de-serialize the {@link EmbergraphValue}s.
      */
     private final StringBuilder tmp;
     
@@ -108,11 +108,11 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
     private String namespace;
     
     /**
-     * Used to de-serialize the {@link BigdataValue}s for {@link IVCache}
+     * Used to de-serialize the {@link EmbergraphValue}s for {@link IVCache}
      * associations. This is initialized if and when we discover the
      * {@link #namespace}.
      */
-    private BigdataValueSerializer<BigdataValue> valueSer;
+    private EmbergraphValueSerializer<EmbergraphValue> valueSer;
 
     @Override
     public String toString() {
@@ -134,8 +134,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
         // The ordered set of variables for which bindings have been observed.
         this.schemaIndex = new ArrayList<IVariable<?>>();
 
-        // The IV -> BigdataValue cache
-        this.cache = new HashMap<IV<?, ?>, BigdataValue>();
+        // The IV -> EmbergraphValue cache
+        this.cache = new HashMap<IV<?, ?>, EmbergraphValue>();
 
         this.tmp = new StringBuilder();
         
@@ -252,7 +252,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
 
             if (newCached > 0 && numBindings == 0) {
                 /*
-                 * Illegal combination. New IV => BigdataValue cache
+                 * Illegal combination. New IV => EmbergraphValue cache
                  * associations can only appear with new bindings.
                  */
                 throw new RuntimeException();
@@ -261,10 +261,10 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
             if (newCached > 0 && namespace == null) {
                 /*
                  * This is where we discover the namespace for the serialized
-                 * BigdataValue objects.
+                 * EmbergraphValue objects.
                  */
                 namespace = in.readUTF2();
-                valueSer = BigdataValueFactoryImpl.getInstance(namespace)
+                valueSer = EmbergraphValueFactoryImpl.getInstance(namespace)
                         .getValueSerializer();
             }
             
@@ -367,7 +367,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
             }
 
             /*
-             * Decode any cached BigdataValue objects and associate them with
+             * Decode any cached EmbergraphValue objects and associate them with
              * the correct IVs in the IVCache mapping. The bit map has
              * [numBindings] bits. Each bit indicates whether or not there is a
              * cached Value inline for the corresponding binding (decoded
@@ -388,7 +388,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
                          */
                         chksum++;
                         final IV<?, ?> iv = ivs.get(i);
-                        final BigdataValue value = valueSer
+                        final EmbergraphValue value = valueSer
                                 .deserialize(in, tmp);
                         if (!iv.isNullIV()) {
                             cache.put(iv, value);
@@ -445,7 +445,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
 
             final IV iv = (IV) c.get();
 
-            final BigdataValue val = cache.get(iv);
+            final EmbergraphValue val = cache.get(iv);
 
             if (val != null) {
 

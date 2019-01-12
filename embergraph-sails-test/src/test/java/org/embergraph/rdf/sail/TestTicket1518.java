@@ -36,19 +36,19 @@ import com.ibm.icu.impl.Assert;
 /**
  * Test suite for ticket #1518: tests for quad-mode SPARQL features with triplestore not supporting quads
  */
-public class TestTicket1518 extends ProxyBigdataSailTestCase {
+public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
     public Properties getTriplesNoInference() {
         
         Properties props = super.getProperties();
         
-        props.setProperty(BigdataSail.Options.QUADS, "false");
-        props.setProperty(BigdataSail.Options.STATEMENT_IDENTIFIERS, "false");
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.QUADS, "false");
+        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -73,17 +73,17 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
     
     public void testQuadsInSPARQLInsertBlock() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
 
         try {
 
             sail.initialize();
             
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             cxn.begin();
             
@@ -123,17 +123,17 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
     
     public void testQuadsInSPARQLDeleteDataBlock() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
 
         try {
 
             sail.initialize();
             
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             cxn.begin();
          
@@ -173,17 +173,17 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
     
     public void testNamedGraphReferencedThroughWITHClause() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
 
         try {
 
             sail.initialize();
             
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             cxn.begin();
            
@@ -220,17 +220,17 @@ public class TestTicket1518 extends ProxyBigdataSailTestCase {
     
     public void testGRAPHConstructInQueryBody() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
 
         try {
 
             sail.initialize();
             
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             cxn.begin();
             

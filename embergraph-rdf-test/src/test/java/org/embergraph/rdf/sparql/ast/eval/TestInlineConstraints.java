@@ -44,7 +44,7 @@ import org.embergraph.rdf.internal.constraints.OrBOp;
 import org.embergraph.rdf.internal.constraints.SparqlTypeErrorBOp;
 import org.embergraph.rdf.internal.constraints.TrueBOp;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.rule.IRule;
@@ -75,7 +75,7 @@ public class TestInlineConstraints extends AbstractDataDrivenSPARQLTestCase {
     @Override
     public Properties getProperties() {
     	final Properties props = super.getProperties();
-    	props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES, "true");
+    	props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
     	return props;
     }
     

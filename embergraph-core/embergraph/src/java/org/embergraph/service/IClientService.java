@@ -27,7 +27,7 @@ import java.util.concurrent.Callable;
 
 /**
  * A service for distributing client {@link Callable}s across the resources of
- * an {@link IBigdataFederation}.
+ * an {@link IEmbergraphFederation}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

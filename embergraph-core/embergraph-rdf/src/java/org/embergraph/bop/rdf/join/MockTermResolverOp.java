@@ -45,7 +45,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.LexiconConfiguration;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
@@ -236,7 +236,7 @@ public class MockTermResolverOp extends PipelineOp {
    /**
     * Resolve a chunk of {@link IBindingSet}s into a chunk of
     * {@link IBindingSet}s in which {@link IV}s have been resolved to
-    * {@link BigdataValue}s.
+    * {@link EmbergraphValue}s.
     * 
     * @param required
     *           The variable(s) to be materialized or <code>null</code> to
@@ -263,10 +263,10 @@ public class MockTermResolverOp extends PipelineOp {
 
       /**
        * Collected affected IVs, storing them in a map pointing from the IV
-       * to the associated BigdataValue.
+       * to the associated EmbergraphValue.
        */
-      final Map<IV<?, ?>, BigdataValue> ivMap = 
-         new LinkedHashMap<IV<?, ?>, BigdataValue>(initialCapacity);
+      final Map<IV<?, ?>, EmbergraphValue> ivMap =
+         new LinkedHashMap<IV<?, ?>, EmbergraphValue>(initialCapacity);
       
       for (IBindingSet solution : chunk) {
 
@@ -297,7 +297,7 @@ public class MockTermResolverOp extends PipelineOp {
 
                /**
                 * We are interested only in ivs whose value resolves to a
-                * BigdataValue that is mocked. As a side effect, the internal
+                * EmbergraphValue that is mocked. As a side effect, the internal
                 * cache of the mocked value is cleared.
                 */
                
@@ -327,7 +327,7 @@ public class MockTermResolverOp extends PipelineOp {
 
                /**
                 * We are interested only in ivs whose value resolves to a
-                * BigdataValue that is mocked. As a side effect, the internal
+                * EmbergraphValue that is mocked. As a side effect, the internal
                 * cache of the mocked value is cleared.
                 */
                collectIVsToResolve(iv, ivMap, lex);
@@ -346,12 +346,12 @@ public class MockTermResolverOp extends PipelineOp {
        * In order to make lex.addTerms take effect, we need to clear the mocked
        * internal values of the mocked BigdataValues that we want to resolve.
        */
-      final Collection<BigdataValue> ivVals = ivMap.values();
+      final Collection<EmbergraphValue> ivVals = ivMap.values();
       
-      final BigdataValue[] ivValsArr = 
-         ivVals.toArray(new BigdataValue[ivVals.size()]);
+      final EmbergraphValue[] ivValsArr =
+         ivVals.toArray(new EmbergraphValue[ivVals.size()]);
 
-      for (BigdataValue ivVal : ivValsArr) {
+      for (EmbergraphValue ivVal : ivValsArr) {
           
          // case 1: null IVs need to be resolved
          if (ivVal.getIV()!=null && ivVal.getIV().isNullIV()) {
@@ -368,9 +368,9 @@ public class MockTermResolverOp extends PipelineOp {
        * Join with the dictionary and cache the resolved BigdataValues on IVs
        */
       lex.addTerms(ivValsArr, ivValsArr.length, true);
-      for (BigdataValue ivVal : ivValsArr) {
+      for (EmbergraphValue ivVal : ivValsArr) {
 
-         final IV<BigdataValue, ?> iv = ivVal.getIV();
+         final IV<EmbergraphValue, ?> iv = ivVal.getIV();
          if (iv != null) {
             iv.setValue(ivVal);
          }
@@ -399,20 +399,20 @@ public class MockTermResolverOp extends PipelineOp {
     *      that have been created (by default, the math engine creates inlined
     *      literals when adding up values) are resolved properly.
     * 
-    * The method fills the ivMap, mapping the original iv to its BigdataValue.
+    * The method fills the ivMap, mapping the original iv to its EmbergraphValue.
     * 
     * @param iv the iv to process
-    * @param ivMap mapping from IVs to be resolved to their {@link BigdataValue}
+    * @param ivMap mapping from IVs to be resolved to their {@link EmbergraphValue}
     * @param lex the {@link LexiconConfiguration}
     */
    private static void collectIVsToResolve(final IV<?, ?> iv,
-         final Map<IV<?, ?>, BigdataValue> ivMap, final LexiconRelation lex) {
+         final Map<IV<?, ?>, EmbergraphValue> ivMap, final LexiconRelation lex) {
       
       if (iv.isNullIV() && iv.hasValue() && !iv.isInline()) {
          
          final Object ivVal = iv.getValue();
-         if (ivVal instanceof BigdataValue) {
-            final BigdataValue bdVal = (BigdataValue)ivVal;
+         if (ivVal instanceof EmbergraphValue) {
+            final EmbergraphValue bdVal = (EmbergraphValue)ivVal;
             if (!bdVal.isRealIV()) {
                ivMap.put(iv, bdVal);
             }
@@ -437,12 +437,12 @@ public class MockTermResolverOp extends PipelineOp {
     *           corresponding constants with the resolved IVs included
     *           according to the <terms>ivMap<terms> ivs.
     * @param ivMap
-    *           A map from {@link IV}s to resolved {@link BigdataValue}s.
+    *           A map from {@link IV}s to resolved {@link EmbergraphValue}s.
     */
    static private void replaceInBindingSet(
 
          final IVariable<?>[] required, final IBindingSet bindingSet,
-         final Map<IV<?, ?>, BigdataValue> ivMap) {
+         final Map<IV<?, ?>, EmbergraphValue> ivMap) {
 
       if (bindingSet == null)
          throw new IllegalArgumentException();
@@ -475,7 +475,7 @@ public class MockTermResolverOp extends PipelineOp {
 
             }
 
-            final BigdataValue value = ivMap.get(iv);
+            final EmbergraphValue value = ivMap.get(iv);
 
             /**
              * Note: constants are immutable, so we can't execute a c.set(), but
@@ -484,7 +484,7 @@ public class MockTermResolverOp extends PipelineOp {
              */
             if (value!=null && value.getIV()!=null) {
                bindingSet.set(var, 
-                  new Constant<IV<BigdataValue, ?>>(value.getIV()));
+                  new Constant<IV<EmbergraphValue, ?>>(value.getIV()));
             } // otherwise: nothing to be done
          }
 
@@ -513,7 +513,7 @@ public class MockTermResolverOp extends PipelineOp {
 
             final IV<?, ?> iv = (IV<?, ?>) boundValue;
 
-            final BigdataValue value = ivMap.get(iv);
+            final EmbergraphValue value = ivMap.get(iv);
 
             /**
              * Note: constants are immutable, so we can't execute a c.set(), but
@@ -521,7 +521,7 @@ public class MockTermResolverOp extends PipelineOp {
              * value.
              */
             bindingSet.set(
-               entry.getKey(), new Constant<IV<BigdataValue, ?>>(value.getIV()));
+               entry.getKey(), new Constant<IV<EmbergraphValue, ?>>(value.getIV()));
          }
 
       }

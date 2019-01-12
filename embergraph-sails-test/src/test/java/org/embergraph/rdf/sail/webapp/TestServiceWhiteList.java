@@ -28,10 +28,10 @@ import org.eclipse.jetty.server.Server;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.CreateKBTask;
 import org.embergraph.rdf.sail.DestroyKBTask;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
@@ -90,7 +90,7 @@ public class TestServiceWhiteList extends TestCase2 {
 		 final Properties tripleStoreProperties = new Properties();
 	     {
 	         
-	         tripleStoreProperties.setProperty(BigdataSail.Options.TRIPLES_MODE,
+	         tripleStoreProperties.setProperty(EmbergraphSail.Options.TRIPLES_MODE,
 	                 "true");
 	         
 	         tripleStoreProperties.setProperty(Journal.Options.BUFFER_MODE,
@@ -154,7 +154,7 @@ public class TestServiceWhiteList extends TestCase2 {
 	        ).toExternalForm();
 	
 	        m_serviceURL = new URL("http", hostAddr, port,
-	                BigdataStatics.getContextPath()).toExternalForm();
+	                EmbergraphStatics.getContextPath()).toExternalForm();
 	
 	        if (log.isInfoEnabled())
 	            log.info("Setup done: \nname=" + getName() + "\nnamespace="

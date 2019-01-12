@@ -72,9 +72,9 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractClient;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.IBigdataClient;
-import org.embergraph.service.IBigdataClient.Options;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphClient;
+import org.embergraph.service.IEmbergraphClient.Options;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IMetadataService;
 import org.embergraph.service.Split;
@@ -154,7 +154,7 @@ abstract public class AbstractScaleOutClientIndexView implements IScaleOutClient
     }
     
     /**
-     * The thread pool exposed by {@link IBigdataFederation#getExecutorService()}
+     * The thread pool exposed by {@link IEmbergraphFederation#getExecutorService()}
      */
     protected ThreadPoolExecutor getThreadPool() {
 
@@ -246,7 +246,7 @@ abstract public class AbstractScaleOutClientIndexView implements IScaleOutClient
      *       different from the timestamp of the view (e.g., a read-consistent
      *       transaction).
      * 
-     * @see IBigdataFederation#getMetadataIndex(String, long)
+     * @see IEmbergraphFederation#getMetadataIndex(String, long)
      */
     final protected IMetadataIndex getMetadataIndex() {
         
@@ -255,7 +255,7 @@ abstract public class AbstractScaleOutClientIndexView implements IScaleOutClient
     }
     
     /**
-     * @see IBigdataClient#isReadConsistent()
+     * @see IEmbergraphClient#isReadConsistent()
      */
     final protected boolean readConsistent;
 

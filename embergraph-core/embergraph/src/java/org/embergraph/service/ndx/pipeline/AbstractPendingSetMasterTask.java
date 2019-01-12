@@ -35,8 +35,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.BigdataStatics;
-import org.embergraph.btree.BigdataMap;
+import org.embergraph.EmbergraphStatics;
+import org.embergraph.btree.EmbergraphMap;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.master.INotifyOutcome;
@@ -142,7 +142,7 @@ implements INotifyOutcome<E, L>
     /**
      * Add a work item to the pending set.
      * <p>
-     * Note: This method is written such that a {@link BigdataMap} could be used
+     * Note: This method is written such that a {@link EmbergraphMap} could be used
      * as the implementation object. (The tuple is always updated by an insert
      * when its value's state is changed.)
      * 
@@ -183,11 +183,11 @@ implements INotifyOutcome<E, L>
                 sink.getPendingSet().add(e);
                 modifiedMap = false;
             }
-            if (BigdataStatics.debug || log.isDebugEnabled()) {
+            if (EmbergraphStatics.debug || log.isDebugEnabled()) {
                 String msg = "Added pending: size=" + getPendingSetSize()
                         + ", resource=" + e + ", locator=" + locator
                         + ", sinkSize=" + sink.getPendingSetSize();
-                if (BigdataStatics.debug)
+                if (EmbergraphStatics.debug)
                     System.err.println(msg);
                 if (log.isDebugEnabled())
                     log.debug(msg);
@@ -201,7 +201,7 @@ implements INotifyOutcome<E, L>
     /**
      * Remove a work item from the pending set.
      * <p>
-     * Note: This method is written such that a {@link BigdataMap} could be used
+     * Note: This method is written such that a {@link EmbergraphMap} could be used
      * as the implementation object. (The tuple is always updated by an insert
      * when its value's state is changed.)
      * 
@@ -310,11 +310,11 @@ implements INotifyOutcome<E, L>
                     didFail(e, cause);
                 }
             }
-            if (BigdataStatics.debug || log.isDebugEnabled()) {
+            if (EmbergraphStatics.debug || log.isDebugEnabled()) {
                 final String msg = "resource=" + e + ", notify=" + notify
                         + ", pendingSetSize=" + sizeUnderLock + ", locator="
                         + locator + (cause == null ? "" : "cause=" + cause);
-                if (BigdataStatics.debug)
+                if (EmbergraphStatics.debug)
                     System.err.println(msg);
                 if (log.isDebugEnabled())
                     log.debug(msg);
@@ -325,7 +325,7 @@ implements INotifyOutcome<E, L>
     /**
      * Return a new pending map instance. The size of this collection places a
      * machine limit on the #of resources which may be processed concurrently. A
-     * {@link BigdataMap} may be used if sufficient RAM is not available.
+     * {@link EmbergraphMap} may be used if sufficient RAM is not available.
      */
     abstract protected Map<E, Collection<L>> newPendingMap();
 

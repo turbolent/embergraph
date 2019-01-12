@@ -18,40 +18,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-
 import junit.framework.Test;
 
-import org.openrdf.model.Graph;
-import org.openrdf.model.Literal;
-import org.openrdf.model.Resource;
-import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.LinkedHashModel;
-import org.openrdf.model.impl.StatementImpl;
-import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.model.vocabulary.RDFS;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
-import org.openrdf.query.resultio.TupleQueryResultFormat;
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFWriter;
-import org.openrdf.rio.RDFWriterFactory;
-import org.openrdf.rio.RDFWriterRegistry;
 
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
-import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
-import org.embergraph.rdf.sail.webapp.client.IPreparedTupleQuery;
-import org.embergraph.rdf.sail.webapp.client.IRemoteRepository.TupleQuery;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
-import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
-import org.embergraph.rdf.store.BD;
 
 /**
  * Proxied test suite.
@@ -1066,9 +1040,9 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //	
 //
     public void testServiceNodeBindings() throws Exception {
-        final BigdataSailRemoteRepository repo = m_repo.getBigdataSailRemoteRepository();
-        final BigdataSailRemoteRepositoryConnection cxn = 
-            (BigdataSailRemoteRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRemoteRepository repo = m_repo.getEmbergraphSailRemoteRepository();
+        final EmbergraphSailRemoteRepositoryConnection cxn =
+            (EmbergraphSailRemoteRepositoryConnection) repo.getConnection();
         
         try {
           String queryStr = "select * where {SERVICE <http://DBpedia.org/sparql> { <http://dbpedia.org/resource/Tonga_(Nyasa)_language> rdfs:label ?langLabel. }}";

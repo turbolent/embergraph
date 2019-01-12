@@ -18,10 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -61,6 +61,6 @@ public interface IDatatypeURIResolver {
      *             if the argument is not part of the pre-declared
      *             {@link Vocabulary}.
      */
-    BigdataURI resolve(final URI datatypeURI);
+    EmbergraphURI resolve(final URI datatypeURI);
     
 }

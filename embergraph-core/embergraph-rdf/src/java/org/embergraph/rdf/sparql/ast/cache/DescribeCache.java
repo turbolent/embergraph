@@ -11,7 +11,7 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -24,7 +24,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  *         addressed for the {@link CacheConnectionImpl} for named solution sets.
  * 
  *         TODO Support hash partitioned and remove DESCRIBE cache instances.
- *         These will need access to a service that resolves {@link BigdataURI}
+ *         These will need access to a service that resolves {@link EmbergraphURI}
  *         s to {@link IV}s efficiently. That service can be exposed using the
  *         NSS or using jini/River.
  */

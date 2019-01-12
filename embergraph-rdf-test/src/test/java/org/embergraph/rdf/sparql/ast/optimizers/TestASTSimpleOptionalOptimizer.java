@@ -25,15 +25,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.Constant;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -98,7 +98,7 @@ public class TestASTSimpleOptionalOptimizer extends
                 "  } \n" +
                 "}";
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer,store);
@@ -187,14 +187,14 @@ public class TestASTSimpleOptionalOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI p = f.createURI("http://example.org/ns#p");
-        final BigdataURI q = f.createURI("http://example.org/ns#q");
-        final BigdataValue[] values = new BigdataValue[] { p, q };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI p = f.createURI("http://example.org/ns#p");
+        final EmbergraphURI q = f.createURI("http://example.org/ns#q");
+        final EmbergraphValue[] values = new EmbergraphValue[] { p, q };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -274,14 +274,14 @@ public class TestASTSimpleOptionalOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI p = f.createURI("http://example.org/ns#p");
-        final BigdataURI q = f.createURI("http://example.org/ns#q");
-        final BigdataValue[] values = new BigdataValue[] { p, q };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI p = f.createURI("http://example.org/ns#p");
+        final EmbergraphURI q = f.createURI("http://example.org/ns#q");
+        final EmbergraphValue[] values = new EmbergraphValue[] { p, q };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -393,14 +393,14 @@ public class TestASTSimpleOptionalOptimizer extends
 //         * possible for us to explicitly construct the expected AST and
 //         * the verify it using equals().
 //         */
-//        final BigdataValueFactory f = store.getValueFactory();
-//        final BigdataURI p = f.createURI("http://example.org/ns#p");
-//        final BigdataURI q = f.createURI("http://example.org/ns#q");
-//        final BigdataValue[] values = new BigdataValue[] { p, q };
+//        final EmbergraphValueFactory f = store.getValueFactory();
+//        final EmbergraphURI p = f.createURI("http://example.org/ns#p");
+//        final EmbergraphURI q = f.createURI("http://example.org/ns#q");
+//        final EmbergraphValue[] values = new EmbergraphValue[] { p, q };
 //        store.getLexiconRelation()
 //                .addTerms(values, values.length, false/* readOnly */);
 //
-//        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+//        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
 //                .parseQuery2(queryStr, baseURI);
 //
 //        final AST2BOpContext context = new AST2BOpContext(astContainer, store);

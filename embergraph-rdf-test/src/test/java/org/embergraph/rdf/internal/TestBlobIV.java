@@ -27,7 +27,7 @@ import junit.framework.TestCase2;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.util.BytesUtil;
 
 /**
@@ -58,7 +58,7 @@ public class TestBlobIV extends TestCase2 {
 
     public void test_BlobIV_isExtensionIV() {
 
-        final BlobIV<BigdataURI> iv = new BlobIV<BigdataURI>(VTE.URI,
+        final BlobIV<EmbergraphURI> iv = new BlobIV<EmbergraphURI>(VTE.URI,
                 12/* hash */, (short) 50/* counter */);
 
         assertEquals(VTE.URI, iv.getVTE());
@@ -80,7 +80,7 @@ public class TestBlobIV extends TestCase2 {
 
 		final IKeyBuilder keyBuilder = helper.newKeyBuilder();
 
-		final BlobIV<?> iv = new BlobIV<BigdataURI>(vte, hashCode,
+		final BlobIV<?> iv = new BlobIV<EmbergraphURI>(vte, hashCode,
 				(short) counter);
 
 		assertEquals(BlobIV.toFlags(vte), iv.flags());

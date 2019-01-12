@@ -34,6 +34,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -44,9 +46,7 @@ import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.gom.gpo.GPO;
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphBNode;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 
@@ -69,7 +69,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
      */
     private final UUID m_uuid;
     
-    protected final BigdataValueFactory m_valueFactory;
+    protected final EmbergraphValueFactory m_valueFactory;
     
     /** Object Creation and ID Management patterns. */
     private final IIDGenerator m_idGenerator;
@@ -85,7 +85,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
      * This is only for the predicates and provides the guarantee that we can
      * reference test on predicates within the scope of a given object manager.
      */
-    private final ConcurrentHashMap<BigdataURI, BigdataURI> m_internedKeys = new ConcurrentHashMap<BigdataURI, BigdataURI>();
+    private final ConcurrentHashMap<EmbergraphURI, EmbergraphURI> m_internedKeys = new ConcurrentHashMap<EmbergraphURI, EmbergraphURI>();
 
     /**
      * We need to maintain a dirty list in order to pin object references that
@@ -131,7 +131,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
      */
     public ObjectMgrModel(
             final String endpoint, 
-            final BigdataValueFactory valueFactory) {
+            final EmbergraphValueFactory valueFactory) {
 
 		m_valueFactory = valueFactory;
 		
@@ -167,7 +167,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
 	}
 	
     @Override
-    final public BigdataValueFactory getValueFactory() {
+    final public EmbergraphValueFactory getValueFactory() {
 
         return m_valueFactory;
 
@@ -183,16 +183,16 @@ public abstract class ObjectMgrModel implements IObjectManager {
      * 
      * @return The interned version of the predicate.
      */
-    public BigdataURI internKey(final URI aKey) {
+    public EmbergraphURI internKey(final URI aKey) {
 
         // Ensure URI is for the namespace associated with this OM.
-        final BigdataURI key = m_valueFactory.asValue(aKey);
+        final EmbergraphURI key = m_valueFactory.asValue(aKey);
         
         // Internal the URI.
-        final BigdataURI old = m_internedKeys.putIfAbsent(key, key);
+        final EmbergraphURI old = m_internedKeys.putIfAbsent(key, key);
 
         // Resolve data race.
-        final BigdataURI uri = old != null ? old : key;
+        final EmbergraphURI uri = old != null ? old : key;
 
 		return uri;
 
@@ -381,7 +381,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
      */
 	public IGPO getGPO(final Statement stmt) {
 
-        final BigdataBNode id = m_valueFactory.createBNode(stmt.toString());
+        final EmbergraphBNode id = m_valueFactory.createBNode(stmt.toString());
 
         // Flag indicating that this GPO is a Statement.
         id.setStatementIdentifier(true);
@@ -669,7 +669,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
 		
 		final Resource uri = m_idGenerator.genId();
 		
-//		addNewTerm((BigdataValue) uri);
+//		addNewTerm((EmbergraphValue) uri);
 
 		final GPO ret = (GPO) getGPO(uri);
 		

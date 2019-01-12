@@ -43,7 +43,7 @@ import org.embergraph.btree.view.FusedView;
 import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * <p>
@@ -85,7 +85,7 @@ import org.embergraph.service.IBigdataFederation;
  * </p>
  * <p>
  * Note: The timestamp from which the post-commit state of the transaction may
- * be read IS NOT defined for an {@link IBigdataFederation}. It is not possible
+ * be read IS NOT defined for an {@link IEmbergraphFederation}. It is not possible
  * to define this timestamp without requiring concurrent commit processing to be
  * paused on all data services on which the transaction has written, which is
  * viewed as too high a cost. Instead, the commit timestamp is the state from

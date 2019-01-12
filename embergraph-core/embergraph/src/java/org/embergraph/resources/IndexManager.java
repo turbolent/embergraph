@@ -71,7 +71,7 @@ import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventType;
-import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.util.Bytes;
@@ -1117,8 +1117,8 @@ abstract public class IndexManager extends StoreManager {
      * requested from a {@link Journal} by the application and the application
      * can hold onto a read-committed view for an arbitrary length of time. This
      * has the pragmatic effect of allowing us to cache read-committed views in
-     * the application and in the {@link IBigdataClient}. For the
-     * {@link IBigdataClient}, the view acquires its read-committed semantics
+     * the application and in the {@link IEmbergraphClient}. For the
+     * {@link IEmbergraphClient}, the view acquires its read-committed semantics
      * because an {@link IClientIndex} generates {@link AbstractTask}(s) for
      * each {@link IIndex} operation and submits those task(s) to the
      * appropriate {@link IDataService}(s) for evaluation. The

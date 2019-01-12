@@ -30,10 +30,10 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.TermIVComparator;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
@@ -60,20 +60,20 @@ public class TestTermIVComparator extends TestCase2 {
 
     public void test_termIdComparator() {
 
-        final TermId<?> lmin = new TermId<BigdataURI>(VTE.URI, Long.MIN_VALUE);
-        final TermId<?> lm1 = new TermId<BigdataURI>(VTE.URI, -1L);
-        final TermId<?> l0 = new TermId<BigdataURI>(VTE.URI, 0L);
-        final TermId<?> lp1 = new TermId<BigdataURI>(VTE.URI, 1L);
-        final TermId<?> lmax = new TermId<BigdataURI>(VTE.URI, Long.MAX_VALUE);
+        final TermId<?> lmin = new TermId<EmbergraphURI>(VTE.URI, Long.MIN_VALUE);
+        final TermId<?> lm1 = new TermId<EmbergraphURI>(VTE.URI, -1L);
+        final TermId<?> l0 = new TermId<EmbergraphURI>(VTE.URI, 0L);
+        final TermId<?> lp1 = new TermId<EmbergraphURI>(VTE.URI, 1L);
+        final TermId<?> lmax = new TermId<EmbergraphURI>(VTE.URI, Long.MAX_VALUE);
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl
                 .getInstance(getName()/*namespace*/);
 
-        final BigdataValue vmin = f.createLiteral("a"); vmin.setIV( lmin);
-        final BigdataValue vm1  = f.createLiteral("b"); vm1 .setIV( lm1 );
-        final BigdataValue v0   = f.createLiteral("c"); v0  .setIV( l0 );
-        final BigdataValue vp1  = f.createLiteral("d"); vp1 .setIV( lp1 );
-        final BigdataValue vmax = f.createLiteral("e"); vmax.setIV( lmax);
+        final EmbergraphValue vmin = f.createLiteral("a"); vmin.setIV( lmin);
+        final EmbergraphValue vm1  = f.createLiteral("b"); vm1 .setIV( lm1 );
+        final EmbergraphValue v0   = f.createLiteral("c"); v0  .setIV( l0 );
+        final EmbergraphValue vp1  = f.createLiteral("d"); vp1 .setIV( lp1 );
+        final EmbergraphValue vmax = f.createLiteral("e"); vmax.setIV( lmax);
 
         // IVs out of order.
         final TermId<?>[] actualIds = new TermId[] { lm1, lmax, l0, lp1, lmin };
@@ -81,7 +81,7 @@ public class TestTermIVComparator extends TestCase2 {
         final TermId<?>[] expectedIds = new TermId[] { lmin, lm1, l0, lp1, lmax };
         
         // values out of order.
-        final BigdataValue[] terms = new BigdataValue[] { vmax, vm1, vmin, v0, vp1 };
+        final EmbergraphValue[] terms = new EmbergraphValue[] { vmax, vm1, vmin, v0, vp1 };
 
         /*
          * Test conversion of longs to unsigned byte[]s using the KeyBuilder and
@@ -123,7 +123,7 @@ public class TestTermIVComparator extends TestCase2 {
          * Test the term identifier comparator.
          */
 
-        final Comparator<BigdataValue> c = TermIVComparator.INSTANCE;
+        final Comparator<EmbergraphValue> c = TermIVComparator.INSTANCE;
 
         if (log.isInfoEnabled())
             log.info("unsorted terms: " + Arrays.toString(terms));

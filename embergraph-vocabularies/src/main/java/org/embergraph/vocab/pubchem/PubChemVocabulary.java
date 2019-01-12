@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.vocab.pubchem;
 
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
+import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151210;
 
 /**
  * 
@@ -42,7 +42,7 @@ import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210;
  * @version $Id$
  * 
  */
-public class PubChemVocabulary extends BigdataCoreVocabulary_v20151210 {
+public class PubChemVocabulary extends EmbergraphCoreVocabulary_v20151210 {
 
     /**
      * De-serialization ctor.

@@ -56,7 +56,7 @@ public class ConnegUtil {
 	// 714)
 
 	// if
-	// (BooleanQueryResultFormat.forMIMEType(BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON)!=null)
+	// (BooleanQueryResultFormat.forMIMEType(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON)!=null)
 	// {
 	// // This should fire once trac 714 is fixed, and we have upgraded, at this
 	// point the whole static block should be deleted.
@@ -64,7 +64,7 @@ public class ConnegUtil {
 	// new RuntimeException("location of issue"));
 	// } else {
 	// final BooleanQueryResultFormat askJsonFormat =
-	// BooleanQueryResultFormat.register("SPARQL/JSON",BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON,"srj");
+	// BooleanQueryResultFormat.register("SPARQL/JSON",EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON,"srj");
 	// BooleanQueryResultWriterRegistry.getInstance().add(new
 	// BooleanQueryResultWriterFactory(){
 
@@ -116,22 +116,22 @@ public class ConnegUtil {
 
 		if (outputFormat != null) {
 			switch (outputFormat.toLowerCase()) {
-			case BigdataRDFServlet.OUTPUT_FORMAT_JSON_SHORT:
-				acceptHeaderValue = BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON;
+			case EmbergraphRDFServlet.OUTPUT_FORMAT_JSON_SHORT:
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
 				break;
-			case BigdataRDFServlet.OUTPUT_FORMAT_XML_SHORT:
-				acceptHeaderValue = BigdataRDFServlet.MIME_SPARQL_RESULTS_XML;
+			case EmbergraphRDFServlet.OUTPUT_FORMAT_XML_SHORT:
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
 				break;
-			case BigdataRDFServlet.OUTPUT_FORMAT_JSON:
-				acceptHeaderValue = BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON;
+			case EmbergraphRDFServlet.OUTPUT_FORMAT_JSON:
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON;
 				break;
-			case BigdataRDFServlet.OUTPUT_FORMAT_XML:
-				acceptHeaderValue = BigdataRDFServlet.MIME_SPARQL_RESULTS_XML;
+			case EmbergraphRDFServlet.OUTPUT_FORMAT_XML:
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
 				break;
 			default:
-				acceptHeaderValue = BigdataRDFServlet.MIME_SPARQL_RESULTS_XML;
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
 				log.warn("Unknown value for QUERY PARAMETER: "
-						+ BigdataRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER
+						+ EmbergraphRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER
 						+ " passed " + outputFormat + ".  Defaulting to XML.");
 			}
 		} else {
@@ -175,16 +175,16 @@ public class ConnegUtil {
 
 		if (outputFormat != null) {
 			switch (outputFormat.toLowerCase()) {
-			case BigdataRDFServlet.OUTPUT_FORMAT_JSON_SHORT:
-				acceptHeaderValue = BigdataRDFServlet.MIME_JSON;
+			case EmbergraphRDFServlet.OUTPUT_FORMAT_JSON_SHORT:
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_JSON;
 				break;
-			case BigdataRDFServlet.OUTPUT_FORMAT_XML_SHORT:
-				acceptHeaderValue = BigdataRDFServlet.MIME_SPARQL_RESULTS_XML;
+			case EmbergraphRDFServlet.OUTPUT_FORMAT_XML_SHORT:
+				acceptHeaderValue = EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML;
 				break;
 			default: //Keep HTML as the default for now for legacy compatibility with workbench
 				acceptHeaderValue = IMimeTypes.MIME_TEXT_HTML;
 				log.warn("Unknown value for QUERY PARAMETER: "
-						+ BigdataRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER
+						+ EmbergraphRDFServlet.OUTPUT_FORMAT_QUERY_PARAMETER
 						+ " passed " + outputFormat + ".  Defaulting to XML.");
 			}
 		} else {

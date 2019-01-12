@@ -25,13 +25,13 @@ import org.apache.log4j.Logger;
 
 /**
  * Unit tests for named graphs. Specify
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code> to
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code> to
  * run this test suite.
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class QuadsTestCase extends ProxyBigdataSailTestCase {
+public class QuadsTestCase extends ProxyEmbergraphSailTestCase {
 
     protected static final Logger log = Logger.getLogger(QuadsTestCase.class);
     

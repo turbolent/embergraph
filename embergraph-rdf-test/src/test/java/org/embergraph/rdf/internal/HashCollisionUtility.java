@@ -36,6 +36,8 @@ import java.util.zip.Deflater;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
@@ -72,10 +74,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.internal.impl.literal.PartlyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.BaseVocabulary;
 import org.embergraph.rwstore.sector.IMemoryManager;
@@ -121,8 +121,8 @@ import org.embergraph.util.concurrent.Latch;
  * factor to 512 (was 32). [The current run is scanning after the initial
  * insert, which involves a little wasted effort. It was also without the
  * -server -Xmx2g, and write retention queue parameters. Finally, it was
- * serializing BigdataValue objects, including their IV, rather than RDF Value
- * objects. The code has since been modified to serialize just the BigdataValue
+ * serializing EmbergraphValue objects, including their IV, rather than RDF Value
+ * objects. The code has since been modified to serialize just the EmbergraphValue
  * Also, I've since raised the initial extent from 10M to 200M].
  * maxCollisions=3, Elapsed: 22579073ms Journal size: 35270950912 bytes
  * 
@@ -443,9 +443,9 @@ public class HashCollisionUtility {
 	 */
 	private final BTree termsIndex;
 
-	private final LexiconConfiguration<BigdataValue> conf;
+	private final LexiconConfiguration<EmbergraphValue> conf;
 	
-	private final BigdataValueFactory vf;
+	private final EmbergraphValueFactory vf;
 
 	/**
 	 * Counters for things that we track.
@@ -478,7 +478,7 @@ public class HashCollisionUtility {
 		private final AtomicLong nshortLiterals = new AtomicLong();
 
 		// private final ConcurrentWeakValueCacheWithBatchedUpdates<Value,
-		// BigdataValue> valueCache;
+		// EmbergraphValue> valueCache;
 
 		/**
 		 * The size of the hash collision set for the RDF Value with the most
@@ -924,7 +924,7 @@ public class HashCollisionUtility {
 		this.valueQueue = new LinkedBlockingQueue<ValueBuffer>(
 				valQueueCapacity);// lock);
 
-		vf = BigdataValueFactoryImpl.getInstance("test");
+		vf = EmbergraphValueFactoryImpl.getInstance("test");
 		
 		final BaseVocabulary vocab;
         try {
@@ -942,13 +942,13 @@ public class HashCollisionUtility {
 
             @Override
             public void init(final IDatatypeURIResolver resolver,
-                    final ILexiconConfiguration<BigdataValue> config) {
+                    final ILexiconConfiguration<EmbergraphValue> config) {
                 // NOP
 			}
 
 		    @Override
 			@SuppressWarnings("rawtypes")
-		    public Iterator<IExtension<? extends BigdataValue>> getExtensions() {
+		    public Iterator<IExtension<? extends EmbergraphValue>> getExtensions() {
 		        return Collections.emptyIterator();
 		    }
 		};
@@ -963,7 +963,7 @@ public class HashCollisionUtility {
 		 * @todo Do a special IExtension implementation to handle xsd:dateTime
 		 * since the DateTimeExtension uses the LexiconRelation to do its work.
 		 */
-		conf = new LexiconConfiguration<BigdataValue>(
+		conf = new LexiconConfiguration<EmbergraphValue>(
 		        256,  // blobsThreshold
 				true, // inlineXSDDatatypeLiterals
 				true, // inlineTextLiterals
@@ -981,7 +981,7 @@ public class HashCollisionUtility {
 				null // GeoSpatial config
 				);
 		
-//		valueCache = new ConcurrentWeakValueCacheWithBatchedUpdates<Value, BigdataValue>(
+//		valueCache = new ConcurrentWeakValueCacheWithBatchedUpdates<Value, EmbergraphValue>(
 //				50000 // hard reference queue capacity
 //				);
 		
@@ -1470,11 +1470,11 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 		private final File file;
 		private final RDFFormat fallback;
 		private final int fileBufSize;
-		private final BigdataValueFactory vf;
+		private final EmbergraphValueFactory vf;
 		private final StatementHandler stmtHandler;
 
 		public ParseFileTask(final File file, final RDFFormat fallback,
-				final int fileBufSize, final BigdataValueFactory vf,
+				final int fileBufSize, final EmbergraphValueFactory vf,
 				final StatementHandler stmtHandler) {
 
 			if (file == null)
@@ -1582,7 +1582,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
     	private final Counters c;
     	
     	/** The lexicon configuration. */
-    	private final LexiconConfiguration<BigdataValue> conf;
+    	private final LexiconConfiguration<EmbergraphValue> conf;
 
 		/**
 		 * Blocking queue to which we add {@link ValueBuffer} instances as they
@@ -1608,7 +1608,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
     	private final ByteArrayBuffer tbuf = new ByteArrayBuffer();
     	
 		/** Used to serialize RDF Values as byte[]s. */
-    	private final BigdataValueSerializer<BigdataValue> valSer;
+    	private final EmbergraphValueSerializer<EmbergraphValue> valSer;
 
     	/**
 		 * Used to (de-)compress the raw values.
@@ -1637,7 +1637,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 		 * 
 		 * TODO In addition to enforcing DISTINCT over the Values in the
 		 * ValueBuffer, an LRU/LIRS cache would be nice here so we can reuse the
-		 * frequently resolved (BigdataValue => IV) mappings across buffer
+		 * frequently resolved (EmbergraphValue => IV) mappings across buffer
 		 * instances.
 		 * 
 		 * FIXME We need to provide a canonicalizing mapping for blank nodes.
@@ -1653,8 +1653,8 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 		public StatementHandler(
     			final int valueBufSize,
 				final Counters c,
-				final LexiconConfiguration<BigdataValue> conf,
-				final BigdataValueFactory vf,
+				final LexiconConfiguration<EmbergraphValue> conf,
+				final EmbergraphValueFactory vf,
 				final IMemoryManager memoryManager,
 				final BlockingQueue<ValueBuffer> valueQueue,
 				final AtomicBoolean parsing) {
@@ -1702,15 +1702,15 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 
 			try {
 
-				bufferValue((BigdataValue) stmt.getSubject());
+				bufferValue((EmbergraphValue) stmt.getSubject());
 
-				bufferValue((BigdataValue) stmt.getPredicate());
+				bufferValue((EmbergraphValue) stmt.getPredicate());
 
-				bufferValue((BigdataValue) stmt.getObject());
+				bufferValue((EmbergraphValue) stmt.getObject());
 
 				if (stmt.getContext() != null) {
 
-					bufferValue((BigdataValue) stmt.getContext());
+					bufferValue((EmbergraphValue) stmt.getContext());
 
 				}
 
@@ -1735,8 +1735,8 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 		 * 
 		 * @return A {@link Value}. If the caller's {@link Value} could be
 		 *         represented as an inline {@link IV}, then the returned value
-		 *         will be a {@link BigdataValue} and the inline {@link IV} will
-		 *         be available from {@link BigdataValue#getIV()}. Otherwise the
+		 *         will be a {@link EmbergraphValue} and the inline {@link IV} will
+		 *         be available from {@link EmbergraphValue#getIV()}. Otherwise the
 		 *         caller's {@link Value} is returned and the {@link Value} must
 		 *         be resolved against the TERMS index in order to obtain its
 		 *         {@link IV}.
@@ -1758,7 +1758,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 		 *             would be references to large values stored in the file
 		 *             system, in S3, etc.
 		 */
-		private void bufferValue(final BigdataValue value)
+		private void bufferValue(final EmbergraphValue value)
 				throws InterruptedException {
 
 			// Not expecting the IV to already be cached.
@@ -1810,7 +1810,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 
 			/*
 			 * Generate a key (hash code) and value (serialized and compressed)
-			 * from the BigdataValue.
+			 * from the EmbergraphValue.
 			 */
 			final KV t = makeKV(value);
 
@@ -1936,7 +1936,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 			
 		}
 
-		private KV makeKV(final BigdataValue r) {
+		private KV makeKV(final EmbergraphValue r) {
 
 			byte[] val = valSer.serialize(r, out.reset(), tbuf); 
 
@@ -2055,7 +2055,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 //    	private final DataOutputBuffer out = new DataOutputBuffer();
 
 		/** Used to de-serialize RDF Values (debugging only). */
-    	private final BigdataValueSerializer<BigdataValue> valSer;
+    	private final EmbergraphValueSerializer<EmbergraphValue> valSer;
 
 		/**
 		 * Used to de-compress the raw values (debugging only).
@@ -2068,7 +2068,7 @@ sparse, but this suggests that we should try a different coder for the leaf keys
 
 		public IndexValueBufferTask(final MemoryManager mmgr,
 				final ValueBuffer vbuf, final BTree termsIndex,
-				final BigdataValueFactory vf, final Counters c) {
+				final EmbergraphValueFactory vf, final Counters c) {
 
 			if(mmgr == null)
 				throw new IllegalArgumentException();

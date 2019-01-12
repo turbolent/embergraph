@@ -30,8 +30,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.util.Properties;
 
-import org.embergraph.bfs.BigdataFileSystem;
-import org.embergraph.bfs.BigdataFileSystem.Options;
+import org.embergraph.bfs.EmbergraphFileSystem.Options;
 import org.embergraph.journal.ITx;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.service.AbstractEmbeddedFederationTestCase;
@@ -75,14 +74,14 @@ public class AbstractRepositoryTestCase extends
     
     protected int BLOCK_SIZE;     
 
-    protected BigdataFileSystem repo;
+    protected EmbergraphFileSystem repo;
     
     public void setUp() throws Exception {
 
         super.setUp();
 
         // setup the repository view.
-        repo = new BigdataFileSystem(fed, "test", ITx.UNISOLATED, fed
+        repo = new EmbergraphFileSystem(fed, "test", ITx.UNISOLATED, fed
                 .getClient().getProperties());
         
         // register the indices.

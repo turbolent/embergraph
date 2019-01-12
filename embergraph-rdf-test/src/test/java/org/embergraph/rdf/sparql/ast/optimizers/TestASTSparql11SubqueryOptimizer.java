@@ -24,11 +24,11 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import org.embergraph.EmbergraphStatics;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import org.embergraph.BigdataStatics;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.aggregate.AggregateBase;
 import org.embergraph.bop.aggregate.IAggregate;
@@ -837,7 +837,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
          * it can not predict the join variables correctly, it is actually
          * lifting everything when that code is enabled.
          */
-        if (!BigdataStatics.runKnownBadTests)
+        if (!EmbergraphStatics.runKnownBadTests)
             return;
 
         assertSameAST(expected, actual);

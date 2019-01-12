@@ -25,7 +25,7 @@ import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataBNode;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -40,7 +40,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  * 
  * @see AbstractTripleStore.Options
  */
-abstract public class AbstractBNodeIV<V extends BigdataBNode, T> extends
+abstract public class AbstractBNodeIV<V extends EmbergraphBNode, T> extends
         AbstractInlineIV<V, T> implements BNode {
 
     /**

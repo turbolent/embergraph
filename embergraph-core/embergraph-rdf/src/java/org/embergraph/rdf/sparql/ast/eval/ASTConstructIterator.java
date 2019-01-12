@@ -31,6 +31,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -48,11 +52,7 @@ import org.embergraph.bop.ap.filter.DistinctFilter;
 import org.embergraph.bop.rdf.filter.NativeDistinctFilter;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataQuadWrapper;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphQuadWrapper;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.ConstructNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
@@ -81,7 +81,7 @@ import cutthecrap.utils.striterators.IFilterTest;
  *          $
  */
 public class ASTConstructIterator implements
-        CloseableIteration<BigdataStatement, QueryEvaluationException> {
+        CloseableIteration<EmbergraphStatement, QueryEvaluationException> {
 
     private static final Logger log = Logger
             .getLogger(ASTConstructIterator.class);
@@ -96,7 +96,7 @@ public class ASTConstructIterator implements
      */
     private final boolean constructDistinctSPO;
 
-    private final BigdataValueFactory f;
+    private final EmbergraphValueFactory f;
 
     /**
      * The non-ground statement patterns.
@@ -104,7 +104,7 @@ public class ASTConstructIterator implements
     private final List<StatementPatternNode> templates;
     
     /**
-     * A mapping of blank node IDs to {@link BigdataBNode}s that will be imposed
+     * A mapping of blank node IDs to {@link EmbergraphBNode}s that will be imposed
      * across the {@link ASTConstructIterator}. This MUST be <code>null</code>
      * for a CONSTRUCT query since the semantics of CONSTRUCT require that blank
      * node assignments are scoped to the solution. It must be non-
@@ -121,7 +121,7 @@ public class ASTConstructIterator implements
      * invocation. This makes it possible to determine the scope of the blank
      * nodes simply by whether or not this map is supplied to the constructor.
      */
-    final Map<String, BigdataBNode> bnodes;
+    final Map<String, EmbergraphBNode> bnodes;
 
     /**
      * Return the blank node map. If this was specified to the constructor, then
@@ -130,11 +130,11 @@ public class ASTConstructIterator implements
      * 
      * @see #bnodes
      */
-    private final Map<String, BigdataBNode> getBNodeMap() {
+    private final Map<String, EmbergraphBNode> getBNodeMap() {
         
         if (bnodes == null) {
         
-            return new LinkedHashMap<String, BigdataBNode>();
+            return new LinkedHashMap<String, EmbergraphBNode>();
             
         }
 
@@ -146,7 +146,7 @@ public class ASTConstructIterator implements
     /**
      * Ground triples from the template.
      */
-    private final List<BigdataStatement> groundTriples;
+    private final List<EmbergraphStatement> groundTriples;
 
     private final CloseableIteration<BindingSet, QueryEvaluationException> src;
 
@@ -159,7 +159,7 @@ public class ASTConstructIterator implements
      * The buffer is pre-populated with any ground triples in the construct
      * template by the constructor.
      */
-    private final LinkedList<BigdataStatement> buffer = new LinkedList<BigdataStatement>();
+    private final LinkedList<EmbergraphStatement> buffer = new LinkedList<EmbergraphStatement>();
 
     /**
      * A filter which restricts the emitted statements to the distinct
@@ -211,7 +211,7 @@ public class ASTConstructIterator implements
      *            The WHERE clause (used to identify construct templates which
      *            obviously produce DISTINCT triples).
      * @param bnodes
-     *            A mapping from bnode IDs to {@link BigdataBNode}s that will be
+     *            A mapping from bnode IDs to {@link EmbergraphBNode}s that will be
      *            imposed (optional). This MUST be <code>null</code> when the
      *            top-level operation is a CONSTRUCT since the semantics of
      *            CONSTRUCT <strong>require</strong> that blank node ID
@@ -230,7 +230,7 @@ public class ASTConstructIterator implements
             final AbstractTripleStore tripleStore,
             final ConstructNode construct,
             final GraphPatternGroup<?> whereClause,
-            final Map<String, BigdataBNode> bnodesIn,
+            final Map<String, EmbergraphBNode> bnodesIn,
             final CloseableIteration<BindingSet, QueryEvaluationException> src) {
 
         this.constructDistinctSPO = context.constructDistinctSPO;
@@ -244,10 +244,10 @@ public class ASTConstructIterator implements
         
         templates = new LinkedList<StatementPatternNode>();
 
-        groundTriples = new LinkedList<BigdataStatement>();
+        groundTriples = new LinkedList<EmbergraphStatement>();
 
         // Blank nodes (scoped to the solution).
-        Map<String, BigdataBNode> bnodes = null;
+        Map<String, EmbergraphBNode> bnodes = null;
 
         for (StatementPatternNode pat : construct) {
 
@@ -259,10 +259,10 @@ public class ASTConstructIterator implements
                 }
                 
                 // Create statement from the template.
-                final BigdataStatement stmt = makeStatement(pat,
+                final EmbergraphStatement stmt = makeStatement(pat,
                         EmptyBindingSet.getInstance(), bnodes);
                 
-//                final BigdataStatement stmt = f.createStatement(
+//                final EmbergraphStatement stmt = f.createStatement(
 //                        (Resource) pat.s().getValue(),
 //                        (URI) pat.p().getValue(),
 //                        (Value) pat.o().getValue(),
@@ -375,7 +375,7 @@ public class ASTConstructIterator implements
         return new DistinctFilter.DistinctFilterImpl(construct){
         	@Override
         	public boolean isValid(Object o){
-        		return super.isValid(new BigdataQuadWrapper((BigdataStatement)o));
+        		return super.isValid(new EmbergraphQuadWrapper((EmbergraphStatement)o));
         	}
         };
 	}
@@ -645,7 +645,7 @@ public class ASTConstructIterator implements
     }
 
     @Override
-    public BigdataStatement next() throws QueryEvaluationException {
+    public EmbergraphStatement next() throws QueryEvaluationException {
 
         if (!hasNext())
             throw new NoSuchElementException();
@@ -714,7 +714,7 @@ public class ASTConstructIterator implements
 
             haveFirstSolution = true;
             
-            for(BigdataStatement stmt : groundTriples) {
+            for(EmbergraphStatement stmt : groundTriples) {
                 
                 addStatementToBuffer(stmt);
                 
@@ -726,7 +726,7 @@ public class ASTConstructIterator implements
          * Blank nodes. Either scoped to the solution (new bnodes map) or reuse
          * a global bnodes map.
          */
-        final Map<String, BigdataBNode> bnodes = getBNodeMap();
+        final Map<String, EmbergraphBNode> bnodes = getBNodeMap();
 
         // #of statements generated from the current solution.
         int ngenerated = 0;
@@ -739,7 +739,7 @@ public class ASTConstructIterator implements
              * solution.
              */
 
-            final BigdataStatement stmt = makeStatement(pat, solution, bnodes);
+            final EmbergraphStatement stmt = makeStatement(pat, solution, bnodes);
 
             if (stmt != null) {
 
@@ -772,7 +772,7 @@ public class ASTConstructIterator implements
      * @see <a href="https://jira.blazegraph.com/browse/BLZG-260"> native
      *      distinct in quad mode (insert/delete) </a>
      */
-    private void addStatementToBuffer(final BigdataStatement stmt) {
+    private void addStatementToBuffer(final EmbergraphStatement stmt) {
 
         if (DEBUG)
             log.debug(stmt.toString());
@@ -816,14 +816,14 @@ public class ASTConstructIterator implements
      * @return A statement if a valid statement could be constructed for that
      *         statement pattern and this solution.
      */
-    private BigdataStatement makeStatement(final StatementPatternNode pat,
-            final BindingSet solution, final Map<String, BigdataBNode> bnodes) {
+    private EmbergraphStatement makeStatement(final StatementPatternNode pat,
+            final BindingSet solution, final Map<String, EmbergraphBNode> bnodes) {
 
         // resolve values from template and/or solution.
-        final BigdataValue s = getValue(pat.s(), solution, bnodes);
-        final BigdataValue p = getValue(pat.p(), solution, bnodes);
-        final BigdataValue o = getValue(pat.o(), solution, bnodes);
-        final BigdataValue c = pat.c() == null ? null : getValue(pat.c(),
+        final EmbergraphValue s = getValue(pat.s(), solution, bnodes);
+        final EmbergraphValue p = getValue(pat.p(), solution, bnodes);
+        final EmbergraphValue o = getValue(pat.o(), solution, bnodes);
+        final EmbergraphValue c = pat.c() == null ? null : getValue(pat.c(),
                 solution, bnodes);
 
         // filter out unbound values.
@@ -858,10 +858,10 @@ public class ASTConstructIterator implements
      * 
      * @return The as-bound value.
      */
-    private BigdataValue getValue(
+    private EmbergraphValue getValue(
             final TermNode term,
             final BindingSet solution,
-            final Map<String, BigdataBNode> bnodes
+            final Map<String, EmbergraphBNode> bnodes
             ) {
 
         if (term instanceof ConstantNode) {
@@ -871,9 +871,9 @@ public class ASTConstructIterator implements
              * a constant.
              */
 
-            // Get the BigdataValue from the valueCache on the IV for the
+            // Get the EmbergraphValue from the valueCache on the IV for the
             // Constant.
-            final BigdataValue value = term.getValue();
+            final EmbergraphValue value = term.getValue();
 
             if (value == null) {
 
@@ -886,7 +886,7 @@ public class ASTConstructIterator implements
                  * This problem was first observed when developing CBD support.
                  * The CBD class is explicitly setting the IVs when it builds
                  * the DESCRIBE queries for the CBD expansions. However, it was
-                 * failing to resolve the BigdataValue for those IVs and set the
+                 * failing to resolve the EmbergraphValue for those IVs and set the
                  * valueCache on the IV. This assert was added to detect that
                  * problem and prevent regressions.
                  * 
@@ -895,12 +895,12 @@ public class ASTConstructIterator implements
                  *      Concise Bounded Description </a>
                  */
 
-                throw new AssertionError("BigdataValue not available: " + term
+                throw new AssertionError("EmbergraphValue not available: " + term
                         + ", term.iv=" + term.getValueExpression().get());
 
             }
 
-            if (value instanceof BigdataBNode) {
+            if (value instanceof EmbergraphBNode) {
 
                 /*
                  * Blank nodes require special handling.
@@ -941,9 +941,9 @@ public class ASTConstructIterator implements
                 	
                 }
                 
-                final String id = ((BigdataBNode) value).getID();
+                final String id = ((EmbergraphBNode) value).getID();
 
-                final BigdataBNode bnode = getBNode(id, bnodes);
+                final EmbergraphBNode bnode = getBNode(id, bnodes);
 
                 return bnode;
 
@@ -992,15 +992,15 @@ public class ASTConstructIterator implements
              */
 
             // Resolve the binding for the variable in the solution.
-            final BigdataValue val = (BigdataValue) solution.getValue(varname);
+            final EmbergraphValue val = (EmbergraphValue) solution.getValue(varname);
 
             /*
              * Note: Doing this will cause several of the DAWG CONSTRUCT tests
              * to fail...
              */
-            if (false && val instanceof BigdataBNode) {
+            if (false && val instanceof EmbergraphBNode) {
  
-                return getBNode(((BigdataBNode) val).getID(), bnodes);
+                return getBNode(((EmbergraphBNode) val).getID(), bnodes);
             
             }
             
@@ -1020,10 +1020,10 @@ public class ASTConstructIterator implements
      * mapped to the same bnode. The same ID in a new solution is mapped to a
      * new BNode.
      */
-    private BigdataBNode getBNode(final String id,
-            final Map<String, BigdataBNode> bnodes) {
+    private EmbergraphBNode getBNode(final String id,
+            final Map<String, EmbergraphBNode> bnodes) {
 
-        final BigdataBNode tmp = bnodes.get(id);
+        final EmbergraphBNode tmp = bnodes.get(id);
 
         if (tmp != null) {
 
@@ -1040,7 +1040,7 @@ public class ASTConstructIterator implements
 
         // new bnode, which will be scoped by the bnodes map (that is, to
         // the solution for CONSTRUCT and to the graph for DESCRIBE).
-        final BigdataBNode bnode = f.createBNode("b"
+        final EmbergraphBNode bnode = f.createBNode("b"
                 + Integer.valueOf(bnodeIdFactory++).toString());
 
         // put into the per-solution cache.

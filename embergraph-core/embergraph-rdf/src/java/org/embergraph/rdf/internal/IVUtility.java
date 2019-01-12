@@ -33,8 +33,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.impl.URIImpl;
-import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -71,9 +73,6 @@ import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
 import org.embergraph.rdf.lexicon.TermIdEncoder;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
@@ -361,10 +360,10 @@ public class IVUtility {
                     // TODO Should really be switch((int)extensionByte).
                     switch (AbstractIV.getInternalValueTypeEnum(flags)) {
                     case URI:
-                        return new PartlyInlineURIIV<BigdataURI>(delegate,
+                        return new PartlyInlineURIIV<EmbergraphURI>(delegate,
                                 extensionIV);
                     case LITERAL:
-                        return new PartlyInlineTypedLiteralIV<BigdataLiteral>(delegate,
+                        return new PartlyInlineTypedLiteralIV<EmbergraphLiteral>(delegate,
                                 extensionIV);
                     default:
                         throw new AssertionError();
@@ -475,11 +474,11 @@ public class IVUtility {
         switch (dte) {
         case XSDInt: {
             final int x = KeyBuilder.decodeInt(key, o);
-            return new NumericBNodeIV<BigdataBNode>(x);
+            return new NumericBNodeIV<EmbergraphBNode>(x);
         }
         case UUID: {
             final UUID x = KeyBuilder.decodeUUID(key, o);
-            return new UUIDBNodeIV<BigdataBNode>(x);
+            return new UUIDBNodeIV<EmbergraphBNode>(x);
         }
         case XSDString: {
             // decode buffer.
@@ -495,7 +494,7 @@ public class IVUtility {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            return new FullyInlineUnicodeBNodeIV<BigdataBNode>(str1,
+            return new FullyInlineUnicodeBNodeIV<EmbergraphBNode>(str1,
                     1/* flags */+ nbytes);
         }
         default:
@@ -524,11 +523,11 @@ public class IVUtility {
             
             o += namespaceIV.byteLength();
             
-            final AbstractLiteralIV<BigdataLiteral, ?> localNameIV = 
-                    (AbstractLiteralIV<BigdataLiteral, ?>) decodeFromOffset(
+            final AbstractLiteralIV<EmbergraphLiteral, ?> localNameIV =
+                    (AbstractLiteralIV<EmbergraphLiteral, ?>) decodeFromOffset(
                             key, o);
             
-            final IV iv = new URIExtensionIV<BigdataURI>(localNameIV,
+            final IV iv = new URIExtensionIV<EmbergraphURI>(localNameIV,
                     namespaceIV);
             
             return iv;
@@ -552,11 +551,11 @@ public class IVUtility {
 //        }
         case XSDByte: {
             final byte x = key[o];//KeyBuilder.decodeByte(key[o]);
-            return new VocabURIByteIV<BigdataURI>(x);
+            return new VocabURIByteIV<EmbergraphURI>(x);
         }
         case XSDShort: {
             final short x = KeyBuilder.decodeShort(key, o);
-            return new VocabURIShortIV<BigdataURI>(x);
+            return new VocabURIShortIV<EmbergraphURI>(x);
         }
         case XSDString: {
             // decode buffer.
@@ -572,7 +571,7 @@ public class IVUtility {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            return new FullyInlineURIIV<BigdataURI>(new URIImpl(str1),
+            return new FullyInlineURIIV<EmbergraphURI>(new URIImpl(str1),
                     1/* flags */+ nbytes);
         }
         default:
@@ -630,67 +629,67 @@ public class IVUtility {
         }
         case XSDByte: {
             final byte x = KeyBuilder.decodeByte(key[o]);
-            final AbstractLiteralIV iv = new XSDNumericIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDNumericIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDShort: {
             final short x = KeyBuilder.decodeShort(key, o);
-            final AbstractLiteralIV iv = new XSDNumericIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDNumericIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDInt: {
             final int x = KeyBuilder.decodeInt(key, o);
-            final AbstractLiteralIV iv = new XSDNumericIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDNumericIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv;
         }
         case XSDLong: {
             final long x = KeyBuilder.decodeLong(key, o);
-            final AbstractLiteralIV iv = new XSDNumericIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDNumericIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDFloat: {
             final float x = KeyBuilder.decodeFloat(key, o);
-            final AbstractLiteralIV iv = new XSDNumericIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDNumericIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDDouble: {
             final double x = KeyBuilder.decodeDouble(key, o);
-            final AbstractLiteralIV iv = new XSDNumericIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDNumericIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDInteger: {
             final BigInteger x = KeyBuilder.decodeBigInteger(o, key);
-            final AbstractLiteralIV iv = new XSDIntegerIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDIntegerIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDDecimal: {
             final BigDecimal x = KeyBuilder.decodeBigDecimal(o, key);
-            final AbstractLiteralIV iv = new XSDDecimalIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDDecimalIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case UUID: {
             final UUID x = KeyBuilder.decodeUUID(key, o);
-            final AbstractLiteralIV iv = new UUIDLiteralIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new UUIDLiteralIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv;
         }
         case XSDUnsignedByte: {
             final byte x = KeyBuilder.decodeByte(key[o]);
-            final AbstractLiteralIV iv = new XSDUnsignedByteIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDUnsignedByteIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDUnsignedShort: {
             final short x = KeyBuilder.decodeShort(key, o);
-            final AbstractLiteralIV iv = new XSDUnsignedShortIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDUnsignedShortIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDUnsignedInt: {
             final int x = KeyBuilder.decodeInt(key, o);
-            final AbstractLiteralIV iv = new XSDUnsignedIntIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDUnsignedIntIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv;
         }
         case XSDUnsignedLong: {
             final long x = KeyBuilder.decodeLong(key, o);
-            final AbstractLiteralIV iv = new XSDUnsignedLongIV<BigdataLiteral>(x);
+            final AbstractLiteralIV iv = new XSDUnsignedLongIV<EmbergraphLiteral>(x);
             return isExtension ? new LiteralExtensionIV(iv, datatype) : iv; 
         }
         case XSDString: {
@@ -713,10 +712,10 @@ public class IVUtility {
                 throw new RuntimeException(e);
             }
             // Note: The 'delegate' will be an InlineLiteralIV w/o a datatype.
-            final FullyInlineTypedLiteralIV<BigdataLiteral> iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+            final FullyInlineTypedLiteralIV<EmbergraphLiteral> iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                     str1, null/* languageCode */, null/* datatype */,
                     1/* flags */+ 1/* termCode */+ nread);
-            return isExtension ? new LiteralExtensionIV<BigdataLiteral>(iv, datatype)
+            return isExtension ? new LiteralExtensionIV<EmbergraphLiteral>(iv, datatype)
                     : iv;
             }
             return decodeInlineUnicodeLiteral(key,o);
@@ -814,7 +813,7 @@ public class IVUtility {
      *            
      * @return The decoded {@link IV}.
      */
-    static private FullyInlineTypedLiteralIV<BigdataLiteral> decodeInlineUnicodeLiteral(
+    static private FullyInlineTypedLiteralIV<EmbergraphLiteral> decodeInlineUnicodeLiteral(
             final byte[] key, final int offset) {
 
         int o = offset;
@@ -871,10 +870,10 @@ public class IVUtility {
             str2 = null;
         }
         final int byteLength = 1/* flags */+ 1/* termCode */+ nread;
-        final FullyInlineTypedLiteralIV<BigdataLiteral> iv;
+        final FullyInlineTypedLiteralIV<EmbergraphLiteral> iv;
         switch (termCode) {
         case ITermIndexCodes.TERM_CODE_LIT:
-            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+            iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                     str1,
                     null, // language
                     null, // datatype
@@ -882,7 +881,7 @@ public class IVUtility {
                     );
             break;
         case ITermIndexCodes.TERM_CODE_LCL:
-            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+            iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                     str2,
                     str1, // language
                     null, // datatype
@@ -890,7 +889,7 @@ public class IVUtility {
                     );
             break;
         case ITermIndexCodes.TERM_CODE_DTL:
-            iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(
+            iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(
                     str2,
                     null, // language
                     new URIImpl(str1), // datatype

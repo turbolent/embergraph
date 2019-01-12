@@ -10,7 +10,7 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Unsynchronized buffer maps the {@link IBindingSet}s across the index
@@ -35,7 +35,7 @@ class UnsyncDistributedOutputBuffer<E extends IBindingSet> extends
     /** The tailIndex of the next predicate to be evaluated. */
     final int nextTailIndex;
     
-    final IBigdataFederation<?> fed;
+    final IEmbergraphFederation<?> fed;
 
     /**
      * 

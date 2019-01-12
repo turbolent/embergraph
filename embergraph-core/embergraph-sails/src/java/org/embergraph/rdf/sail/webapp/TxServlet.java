@@ -30,9 +30,9 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.ValidationError;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ITxState;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.NV;
@@ -45,7 +45,7 @@ import org.embergraph.util.NV;
  * query), prepare the transaction, and finally commit or abort the transaction.
  * <p>
  * Transaction isolation requires that the namespace is provisioned with support
- * for isolatable indices. See {@link BigdataSail.Options#ISOLATABLE_INDICES}.
+ * for isolatable indices. See {@link EmbergraphSail.Options#ISOLATABLE_INDICES}.
  * When isolation is enabled for a namespace, the updates for the namespace will
  * be buffered by isolated indices. When a transaction prepares, the write set
  * will be validated by comparing the modified tuples against the unisolated
@@ -61,9 +61,9 @@ import org.embergraph.util.NV;
  * @see <a href="http://trac.bigdata.com/ticket/1156"> Support read/write
  *      transactions in the REST API</a>
  * 
- * @see BigdataSail.Options#ISOLATABLE_INDICES
+ * @see EmbergraphSail.Options#ISOLATABLE_INDICES
  */
-public class TxServlet extends BigdataRDFServlet {
+public class TxServlet extends EmbergraphRDFServlet {
 
    /**
      * 
@@ -197,7 +197,7 @@ public class TxServlet extends BigdataRDFServlet {
             return;
          }
 
-         if (getIndexManager() instanceof IBigdataFederation) {
+         if (getIndexManager() instanceof IEmbergraphFederation) {
 
             buildAndCommitResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                   MIME_TEXT_HTML,
@@ -233,7 +233,7 @@ public class TxServlet extends BigdataRDFServlet {
           * report it to the client.
           */
 
-         final long txId = getBigdataRDFContext().newTx(timestamp);
+         final long txId = getEmbergraphRDFContext().newTx(timestamp);
 
          // TODO This URL is correct IFF we only allow CREATE-TX at the correct
          // path.
@@ -281,9 +281,9 @@ public class TxServlet extends BigdataRDFServlet {
 
       try {
 
-         if (getIndexManager() instanceof IBigdataFederation) {
+         if (getIndexManager() instanceof IEmbergraphFederation) {
 
-            ((IBigdataFederation<?>) getIndexManager()).getTransactionService()
+            ((IEmbergraphFederation<?>) getIndexManager()).getTransactionService()
                   .abort(txId.get());
 
          } else {
@@ -375,9 +375,9 @@ public class TxServlet extends BigdataRDFServlet {
 
       try {
 
-         if (getIndexManager() instanceof IBigdataFederation) {
+         if (getIndexManager() instanceof IEmbergraphFederation) {
 
-            ((IBigdataFederation<?>) getIndexManager()).getTransactionService()
+            ((IEmbergraphFederation<?>) getIndexManager()).getTransactionService()
                   .commit(txId.get());
 
          } else {
@@ -512,7 +512,7 @@ public class TxServlet extends BigdataRDFServlet {
       final boolean ok;
       try {
 
-         if (getIndexManager() instanceof IBigdataFederation) {
+         if (getIndexManager() instanceof IEmbergraphFederation) {
 
             // Scale-out does not have read/write transactions. This is a NOP.
             ok = true;
@@ -611,7 +611,7 @@ public class TxServlet extends BigdataRDFServlet {
 
       try {
 
-         if (getIndexManager() instanceof IBigdataFederation) {
+         if (getIndexManager() instanceof IEmbergraphFederation) {
 
             /*
              * Scale-out does not let us resolve the transaction status.
@@ -700,7 +700,7 @@ public class TxServlet extends BigdataRDFServlet {
          final HttpServletResponse resp) throws IOException {
 
       final ITxState[] a;
-      if (getIndexManager() instanceof IBigdataFederation) {
+      if (getIndexManager() instanceof IEmbergraphFederation) {
 
          // NOP
          a = new ITxState[] {};
@@ -827,7 +827,7 @@ public class TxServlet extends BigdataRDFServlet {
     */
    private Long getReadsOnCommitTimeOrNull(final long txId) {
 
-      if (getIndexManager() instanceof IBigdataFederation) {
+      if (getIndexManager() instanceof IEmbergraphFederation) {
          return null;
       }
 

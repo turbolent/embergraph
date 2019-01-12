@@ -35,8 +35,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.SPO;
 
 /**
@@ -65,7 +65,7 @@ public class ZOrderIndexBigMinAdvancer extends Advancer<SPO> {
    private final int zOrderComponentPos;
    
    // the GeoSpatialLiteralExtension object
-   private final GeoSpatialLiteralExtension<BigdataValue> litExt;
+   private final GeoSpatialLiteralExtension<EmbergraphValue> litExt;
 
    private final ZOrderRangeScanUtil rangeScanUtil;
    
@@ -77,7 +77,7 @@ public class ZOrderIndexBigMinAdvancer extends Advancer<SPO> {
    public ZOrderIndexBigMinAdvancer(
       final byte[] searchMinZOrder, /* the minimum search key (top left) */
       final byte[] searchMaxZOrder, /* the maximum search key (bottom right) */
-      final GeoSpatialLiteralExtension<BigdataValue> litExt,
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
       final int zOrderComponentPos /* position of the zOrder in the index */,
       final GeoSpatialCounters geoSpatialCounters) {
 
@@ -130,8 +130,8 @@ public class ZOrderIndexBigMinAdvancer extends Advancer<SPO> {
    
          // this is the z-order literal
          @SuppressWarnings("unchecked")
-         final LiteralExtensionIV<BigdataLiteral> zOrderIv = 
-            (LiteralExtensionIV<BigdataLiteral>)ivs[ivs.length-1];
+         final LiteralExtensionIV<EmbergraphLiteral> zOrderIv =
+            (LiteralExtensionIV<EmbergraphLiteral>)ivs[ivs.length-1];
          
          // current record (aka dividing record) as unsigned
          final byte[] dividingRecord = 

@@ -80,9 +80,9 @@ import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractClient;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.IBigdataClient;
-import org.embergraph.service.IBigdataClient.Options;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphClient;
+import org.embergraph.service.IEmbergraphClient.Options;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IMetadataService;
 import org.embergraph.service.Split;
@@ -193,7 +193,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
     
     /**
-     * The thread pool exposed by {@link IBigdataFederation#getExecutorService()}
+     * The thread pool exposed by {@link IEmbergraphFederation#getExecutorService()}
      */
     protected ThreadPoolExecutor getThreadPool() {
 
@@ -291,7 +291,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
      * @todo should be protected, but some unit tests in a different package
      *       access this.
      * 
-     * @see IBigdataFederation#getMetadataIndex(String, long)
+     * @see IEmbergraphFederation#getMetadataIndex(String, long)
      */
     final public IMetadataIndex getMetadataIndex() {
         
@@ -320,7 +320,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
 
     /**
-     * @see IBigdataClient#isReadConsistent()
+     * @see IEmbergraphClient#isReadConsistent()
      */
     final private boolean readConsistent;
 

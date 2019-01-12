@@ -21,6 +21,8 @@ package org.embergraph.rdf.internal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -29,23 +31,21 @@ import org.openrdf.model.impl.URIImpl;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.store.BD;
 
 /**
  * Example of how to do a custom enum and map that enum over a byte using a 
  * native inline {@link XSDByteIV}. 
  */
-public class ColorsEnumExtension<V extends BigdataValue> implements IExtension<V> {
+public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtension<V> {
 
     /**
      * The datatype URI for the colors enum extension.
      */
     public transient static final URI COLOR = new URIImpl(BD.NAMESPACE + "Color");
     
-    private final BigdataURI color;
+    private final EmbergraphURI color;
     
     public ColorsEnumExtension(final IDatatypeURIResolver resolver) {
         
@@ -53,9 +53,9 @@ public class ColorsEnumExtension<V extends BigdataValue> implements IExtension<V
         
     }
         
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
-        final Set<BigdataURI> datatypes = new LinkedHashSet<BigdataURI>();
+        final Set<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
         datatypes.add(color);
         return datatypes;
         
@@ -101,7 +101,7 @@ public class ColorsEnumExtension<V extends BigdataValue> implements IExtension<V
      * a {@link Color}, and then use the string value of the {@link Color} to
      * create an RDF literal.
      */
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
         
         final byte b = iv.getDelegate().byteValue();
         

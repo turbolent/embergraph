@@ -25,8 +25,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.BigdataSailTupleQuery;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailTupleQuery;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
@@ -211,7 +211,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
 
             @Override
             protected TupleQueryResult doQuery(
-                    BigdataSailRepositoryConnection cxn,
+                    EmbergraphSailRepositoryConnection cxn,
                     ServiceCallCreateParams createParams,
                     ServiceParams serviceParams) throws Exception {
 
@@ -232,7 +232,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
 
                 final String baseURI = createParams.getServiceURI().stringValue();
 
-                final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+                final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
                         .prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
 
                 return query.evaluate();

@@ -31,20 +31,20 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
  * Unit test template for use in submission of bugs.
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -90,10 +90,10 @@ public class TestTicket1889_2 extends TestTicket1889 {
 	 * @param k Number of subjects to be loaded
 	 */
 	@Override
-	protected void executeQuery(final BigdataSailRepository repo, final int n, final int k)
+	protected void executeQuery(final EmbergraphSailRepository repo, final int n, final int k)
 			throws RepositoryException, MalformedQueryException,
 			QueryEvaluationException, RDFParseException, IOException, UpdateExecutionException {
-		final BigdataSailRepositoryConnection conn = repo.getConnection();
+		final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 		conn.setAutoCommit(false);
 		conn.clear();
 		try {

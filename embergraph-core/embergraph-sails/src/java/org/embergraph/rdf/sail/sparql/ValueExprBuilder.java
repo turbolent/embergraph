@@ -37,7 +37,7 @@ import org.openrdf.model.vocabulary.FN;
 import org.embergraph.bop.aggregate.AggregateBase;
 import org.embergraph.bop.rdf.aggregate.GROUP_CONCAT;
 import org.embergraph.rdf.internal.constraints.IriBOp;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sail.sparql.ast.ASTAbs;
 import org.embergraph.rdf.sail.sparql.ast.ASTAggregate;
 import org.embergraph.rdf.sail.sparql.ast.ASTAnd;
@@ -133,7 +133,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
  * @see FunctionRegistry
  * @openrdf
  */
-public class ValueExprBuilder extends BigdataASTVisitorBase {
+public class ValueExprBuilder extends EmbergraphASTVisitorBase {
 
 //    private static final Logger log = Logger.getLogger(ValueExprBuilder.class);
 
@@ -146,7 +146,7 @@ public class ValueExprBuilder extends BigdataASTVisitorBase {
      */
     protected GroupGraphPattern graphPattern;
 
-    public ValueExprBuilder(final BigdataASTContext context) {
+    public ValueExprBuilder(final EmbergraphASTContext context) {
 
         super(context);
         
@@ -461,7 +461,7 @@ public class ValueExprBuilder extends BigdataASTVisitorBase {
         final ConstantNode uriNode = (ConstantNode) node.jjtGetChild(0)
                 .jjtAccept(this, null);
 
-        final BigdataURI functionURI = (BigdataURI) uriNode.getValue();
+        final EmbergraphURI functionURI = (EmbergraphURI) uriNode.getValue();
 
         final int nargs = node.jjtGetNumChildren() - 1;
         

@@ -7,7 +7,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Used to represent a variable or constant in the AST (a term in a statement
@@ -69,7 +69,7 @@ public abstract class TermNode extends ValueExpressionNode {
         // NOP
     }
 
-    final public BigdataValue getValue() {
+    final public EmbergraphValue getValue() {
 	
     	final IVariableOrConstant<IV> val = getValueExpression();
     	

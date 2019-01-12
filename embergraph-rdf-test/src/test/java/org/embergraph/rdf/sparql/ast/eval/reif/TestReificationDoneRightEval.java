@@ -23,20 +23,20 @@ package org.embergraph.rdf.sparql.ast.eval.reif;
 
 import java.util.Properties;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.bop.ap.Predicate;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.bnode.SidIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
@@ -104,42 +104,42 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
 	 */
     public void test_reificationDoneRight_00() throws Exception {
 
-		final BigdataValueFactory vf = store.getValueFactory();
+		final EmbergraphValueFactory vf = store.getValueFactory();
 
-		final BigdataURI SAP = vf.createURI("http://example.com/SAP");
-		final BigdataURI bought = vf.createURI("http://example.com/bought");
-		final BigdataURI sybase = vf.createURI("http://example.com/sybase");
-		final BigdataURI dcSource = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"source");
-		final BigdataURI dcCreated = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"created");
-		final BigdataURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
-		final BigdataLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
-		final BigdataURI g1 = vf.createURI("http://example.com/g1");
+		final EmbergraphURI SAP = vf.createURI("http://example.com/SAP");
+		final EmbergraphURI bought = vf.createURI("http://example.com/bought");
+		final EmbergraphURI sybase = vf.createURI("http://example.com/sybase");
+		final EmbergraphURI dcSource = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"source");
+		final EmbergraphURI dcCreated = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"created");
+		final EmbergraphURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
+		final EmbergraphLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
+		final EmbergraphURI g1 = vf.createURI("http://example.com/g1");
 
 		// Add/resolve the terms against the lexicon.
-		final BigdataValue[] terms = new BigdataValue[] { SAP, bought, sybase,
+		final EmbergraphValue[] terms = new EmbergraphValue[] { SAP, bought, sybase,
 				dcSource, dcCreated, newsSybase, createdDate, g1 };
 
-		final BigdataURI context = store.isQuads() ? g1 : null;
+		final EmbergraphURI context = store.isQuads() ? g1 : null;
 		
 		store.addTerms(terms);
 		
 		// ground statement.
-		final BigdataStatement s0 = vf.createStatement(SAP, bought, sybase, 
+		final EmbergraphStatement s0 = vf.createStatement(SAP, bought, sybase,
 				context, StatementEnum.Explicit);
 		
 		// Setup blank node with SidIV for that Statement.
-		final BigdataBNode s1 = vf.createBNode("s1");
+		final EmbergraphBNode s1 = vf.createBNode("s1");
 		s1.setStatementIdentifier(true);
 		final ISPO spo = new SPO(s0);//SAP.getIV(), bought.getIV(), sybase.getIV(),
 //				null/* NO CONTEXT */, StatementEnum.Explicit);
-		s1.setIV(new SidIV<BigdataBNode>(spo));
+		s1.setIV(new SidIV<EmbergraphBNode>(spo));
 
 		// metadata statements.
 
-		final BigdataStatement mds1 = vf.createStatement(s1, dcSource,
+		final EmbergraphStatement mds1 = vf.createStatement(s1, dcSource,
 				newsSybase, context, StatementEnum.Explicit);
 
-		final BigdataStatement mds2 = vf.createStatement(s1, dcCreated,
+		final EmbergraphStatement mds2 = vf.createStatement(s1, dcCreated,
 				createdDate, context, StatementEnum.Explicit);
 
 		final ISPO[] stmts = new ISPO[] { new SPO(s0), new SPO(mds1), new SPO(mds2) };
@@ -183,42 +183,42 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
 	 */
     public void test_reificationDoneRight_00a() throws Exception {
 
-		final BigdataValueFactory vf = store.getValueFactory();
+		final EmbergraphValueFactory vf = store.getValueFactory();
 
-		final BigdataURI SAP = vf.createURI("http://example.com/SAP");
-		final BigdataURI bought = vf.createURI("http://example.com/bought");
-		final BigdataURI sybase = vf.createURI("http://example.com/sybase");
-		final BigdataURI dcSource = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"source");
-		final BigdataURI dcCreated = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"created");
-		final BigdataURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
-		final BigdataLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
-		final BigdataURI g1 = vf.createURI("http://example.com/g1");
+		final EmbergraphURI SAP = vf.createURI("http://example.com/SAP");
+		final EmbergraphURI bought = vf.createURI("http://example.com/bought");
+		final EmbergraphURI sybase = vf.createURI("http://example.com/sybase");
+		final EmbergraphURI dcSource = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"source");
+		final EmbergraphURI dcCreated = vf.createURI(DCTermsVocabularyDecl.NAMESPACE+"created");
+		final EmbergraphURI newsSybase = vf.createURI("http://example.com/news/us-sybase");
+		final EmbergraphLiteral createdDate = vf.createLiteral("2011-04-05T12:00:00Z",XSD.DATETIME);
+		final EmbergraphURI g1 = vf.createURI("http://example.com/g1");
 
 		// Add/resolve the terms against the lexicon.
-		final BigdataValue[] terms = new BigdataValue[] { SAP, bought, sybase,
+		final EmbergraphValue[] terms = new EmbergraphValue[] { SAP, bought, sybase,
 				dcSource, dcCreated, newsSybase, createdDate, g1 };
 
-		final BigdataURI context = store.isQuads() ? g1 : null;
+		final EmbergraphURI context = store.isQuads() ? g1 : null;
 		
 		store.addTerms(terms);
 		
 		// ground statement.
-		final BigdataStatement s0 = vf.createStatement(SAP, bought, sybase,
+		final EmbergraphStatement s0 = vf.createStatement(SAP, bought, sybase,
 				context, StatementEnum.Explicit);
 		
 		// Setup blank node with SidIV for that Statement.
-		final BigdataBNode s1 = vf.createBNode("s1");
+		final EmbergraphBNode s1 = vf.createBNode("s1");
 		s1.setStatementIdentifier(true);
 		final ISPO spo = new SPO(SAP.getIV(), bought.getIV(), sybase.getIV(),
 				null/* NO CONTEXT */, StatementEnum.Explicit);
-		s1.setIV(new SidIV<BigdataBNode>(spo));
+		s1.setIV(new SidIV<EmbergraphBNode>(spo));
 
 		// metadata statements.
 
-		final BigdataStatement mds1 = vf.createStatement(s1, dcSource,
+		final EmbergraphStatement mds1 = vf.createStatement(s1, dcSource,
 				newsSybase, context, StatementEnum.Explicit);
 
-		final BigdataStatement mds2 = vf.createStatement(s1, dcCreated,
+		final EmbergraphStatement mds2 = vf.createStatement(s1, dcCreated,
 				createdDate, context, StatementEnum.Explicit);
 
 		final ISPO[] stmts = new ISPO[] { new SPO(s0), new SPO(mds1), new SPO(mds2) };
@@ -526,7 +526,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
      */
     public void test_reificationDoneRight_05a() throws Exception {
 
-        if (!BigdataStatics.runKnownBadTests) // FIXME RDR TEST KNOWN TO FAIL.
+        if (!EmbergraphStatics.runKnownBadTests) // FIXME RDR TEST KNOWN TO FAIL.
             return;
 
         new TestHelper(TEST_RESOURCE_PREFIX + "rdr-05a", // testURI,
@@ -566,7 +566,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         properties.setProperty(AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "true");
 
         // TM not available with quads.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,"false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
 
 //        // override the default vocabulary.
 //        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,

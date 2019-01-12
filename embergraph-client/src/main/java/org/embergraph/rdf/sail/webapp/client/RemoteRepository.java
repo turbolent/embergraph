@@ -35,6 +35,7 @@ import org.apache.http.entity.mime.FormBodyPart;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepository;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -42,8 +43,6 @@ import org.openrdf.model.Value;
 import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.rio.RDFFormat;
-
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
 
 /**
  * Java API to the Nano Sparql Server.
@@ -144,9 +143,9 @@ public class RemoteRepository extends RemoteRepositoryBase {
     * Flyweight method returns a wrapper for the sparql end point associated
     * with this instance.
     */
-   public BigdataSailRemoteRepository getBigdataSailRemoteRepository() {
+   public EmbergraphSailRemoteRepository getEmbergraphSailRemoteRepository() {
 
-      return new BigdataSailRemoteRepository(this);
+      return new EmbergraphSailRemoteRepository(this);
 
    }
     
@@ -1141,7 +1140,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
         @Override
         public void setMaxQueryMillis(final long timeout) {
             
-            opts.setHeader(HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS,
+            opts.setHeader(HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS,
                     Long.toString(timeout));
             
         }
@@ -1156,7 +1155,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
         public long getMaxQueryMillis() {
 
             final String s = opts
-                    .getHeader(HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS);
+                    .getHeader(HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS);
 
             if (s == null) {
 

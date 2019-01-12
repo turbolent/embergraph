@@ -21,14 +21,14 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
@@ -90,9 +90,9 @@ public class LangBOp extends IVValueExpression<IV>
 
         }
 
-        final BigdataValueFactory vf = getValueFactory();
+        final EmbergraphValueFactory vf = getValueFactory();
 
-        final BigdataValue lang = vf.createLiteral(langTag);
+        final EmbergraphValue lang = vf.createLiteral(langTag);
 
         return super.asIV(lang, bs);
 

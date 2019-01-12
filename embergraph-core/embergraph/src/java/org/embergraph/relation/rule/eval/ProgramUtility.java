@@ -81,9 +81,9 @@ public class ProgramUtility {
 //     *            the relation objects that are being created other than to
 //     *            inquire after the names of their indices.
 //     * 
-//     * @return The {@link IBigdataFederation} -or- <code>null</code> if the
+//     * @return The {@link IEmbergraphFederation} -or- <code>null</code> if the
 //     *         indices are all hosted by <strong>local</strong> resources
-//     *         outside of {@link IBigdataFederation} control, such as a
+//     *         outside of {@link IEmbergraphFederation} control, such as a
 //     *         {@link Journal} or {@link TemporaryStore}.
 //     * 
 //     * @throws IllegalArgumentException
@@ -95,16 +95,16 @@ public class ProgramUtility {
 //     * 
 //     * @throws IllegalStateException
 //     *             if some of the indices are hosted on local resources and
-//     *             {@link IBigdataFederation#isDistributed()} is
+//     *             {@link IEmbergraphFederation#isDistributed()} is
 //     *             <code>true</code> (this implies that those resources MAY be
 //     *             unreachable from at least some of the {@link DataService}s
 //     *             in the federation).
 //     * 
 //     * @throws IllegalStateException
 //     *             if there are relations belonging to different
-//     *             {@link IBigdataFederation}s.
+//     *             {@link IEmbergraphFederation}s.
 //     */
-//    public IBigdataFederation getFederation(IIndexManager indexManager,
+//    public IEmbergraphFederation getFederation(IIndexManager indexManager,
 //            IStep step, long timestamp) {
 //
 //        if (step == null)
@@ -126,14 +126,14 @@ public class ProgramUtility {
 //            
 //        }
 //        
-//        // set of distinct index managers (IBigdataFederation, TemporaryStore, Journal, etc).
+//        // set of distinct index managers (IEmbergraphFederation, TemporaryStore, Journal, etc).
 //        final Set<IIndexManager> indexManagers = new HashSet<IIndexManager>();
 //
-//        IBigdataFederation fed = null;
+//        IEmbergraphFederation fed = null;
 //        
 //        final Set<IIndexManager> localResources = new HashSet<IIndexManager>();
 //        
-//        final Set<IBigdataFederation> feds = new HashSet<IBigdataFederation>();
+//        final Set<IEmbergraphFederation> feds = new HashSet<IEmbergraphFederation>();
 //        
 //        for(IRelation relation : relations.values()) {
 //            
@@ -141,13 +141,13 @@ public class ProgramUtility {
 //            
 //            indexManagers.add( tmp );
 //            
-//            if(tmp instanceof IBigdataFederation) {
+//            if(tmp instanceof IEmbergraphFederation) {
 //                
-//                feds.add( (IBigdataFederation)tmp );
+//                feds.add( (IEmbergraphFederation)tmp );
 //               
 //                if(fed == null) {
 //                
-//                    fed = (IBigdataFederation)tmp;
+//                    fed = (IEmbergraphFederation)tmp;
 //                    
 //                }
 //                

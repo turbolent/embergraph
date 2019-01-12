@@ -22,13 +22,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.rules;
 
 import java.util.Properties;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.inf.BackchainTypeResourceIterator;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
@@ -86,11 +86,11 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
 
             final Vocabulary vocab = store.getVocabulary();
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
 
             /*
              * add statements to the store.
@@ -173,11 +173,11 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
 
             final Vocabulary vocab = store.getVocabulary();
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
 
             /*
              * add statements to the store.
@@ -262,11 +262,11 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
 
             final Vocabulary vocab = store.getVocabulary();
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
 
             /*
              * add statements to the store.
@@ -374,11 +374,11 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
 
             final Vocabulary vocab = store.getVocabulary();
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
 
             /*
              * add statements to the store.
@@ -458,11 +458,11 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
 
             final Vocabulary vocab = store.getVocabulary();
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI S = f.createURI("http://www.embergraph.org/s");
-            final BigdataURI P = f.createURI("http://www.embergraph.org/p");
-            final BigdataURI O = f.createURI("http://www.embergraph.org/o");
+            final EmbergraphURI S = f.createURI("http://www.embergraph.org/s");
+            final EmbergraphURI P = f.createURI("http://www.embergraph.org/p");
+            final EmbergraphURI O = f.createURI("http://www.embergraph.org/o");
             
             final IV s = store.addTerm(S);
             final IV p = store.addTerm(P);

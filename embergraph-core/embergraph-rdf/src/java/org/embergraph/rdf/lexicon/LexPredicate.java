@@ -19,6 +19,7 @@ package org.embergraph.rdf.lexicon;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.BOp;
@@ -30,18 +31,17 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * A <code>
- * lex(BigdataValue,IV)
+ * lex(EmbergraphValue,IV)
  * </code> predicate used for querying the {@link LexiconRelation}'s TERMS
  * index.
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class LexPredicate extends Predicate<BigdataValue> {
+public class LexPredicate extends Predicate<EmbergraphValue> {
 
     /**
      * 
@@ -50,7 +50,7 @@ public class LexPredicate extends Predicate<BigdataValue> {
 
 	        /**
      * Simplified forward lookup ctor. Use this ctor to lookup an {@link IV}
-     * from a {@link BigdataValue}.
+     * from a {@link EmbergraphValue}.
      * 
      * @param relationName
      *            the namespace of the lexicon relation
@@ -70,7 +70,7 @@ public class LexPredicate extends Predicate<BigdataValue> {
     public static LexPredicate forwardInstance(
             final String relationName,
     		final long timestamp,
-    		final IVariableOrConstant<BigdataValue> term,
+    		final IVariableOrConstant<EmbergraphValue> term,
     		final IVariable<IV> var
     		) {
 
@@ -87,7 +87,7 @@ public class LexPredicate extends Predicate<BigdataValue> {
 
 	    /**
      * Simplified reverse lookup ctor. Use this ctor to lookup a
-     * {@link BigdataValue} from an {@link IV}.
+     * {@link EmbergraphValue} from an {@link IV}.
      * 
      * @param relationName
      *            the namespace of the lexicon relation
@@ -106,7 +106,7 @@ public class LexPredicate extends Predicate<BigdataValue> {
      */
     public static LexPredicate reverseInstance(final String relationName,
     		final long timestamp,
-    		final IVariable<BigdataValue> var,
+    		final IVariable<EmbergraphValue> var,
     		final IVariableOrConstant<IV> term) {
 
         return new LexPredicate(
@@ -150,13 +150,13 @@ public class LexPredicate extends Predicate<BigdataValue> {
     }
 
     /**
-     * Return the {@link BigdataValue} at index position
+     * Return the {@link EmbergraphValue} at index position
      * {@value LexiconKeyOrder#SLOT_TERM}.
      */
     @SuppressWarnings("unchecked")
-    final public IVariableOrConstant<BigdataValue> term() {
+    final public IVariableOrConstant<EmbergraphValue> term() {
         
-        return (IVariableOrConstant<BigdataValue>) get(LexiconKeyOrder.SLOT_TERM);
+        return (IVariableOrConstant<EmbergraphValue>) get(LexiconKeyOrder.SLOT_TERM);
         
     }
     

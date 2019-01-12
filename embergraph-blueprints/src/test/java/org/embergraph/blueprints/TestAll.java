@@ -80,15 +80,15 @@ public class TestAll extends TestCase {
 
         
         //Factory and client configuration test cases.
-        suite.addTestSuite(org.embergraph.blueprints.TestBigdataGraphClientNSS.class);
-        suite.addTestSuite(org.embergraph.blueprints.TestBigdataGraphFactoryNSS.class);
-        suite.addTestSuite(org.embergraph.blueprints.TestBigdataGraphFactoryFile.class);
-        suite.addTestSuite(org.embergraph.blueprints.TestBigdataGraphEmbeddedRepository.class);
+        suite.addTestSuite(TestEmbergraphGraphClientNSS.class);
+        suite.addTestSuite(TestEmbergraphGraphFactoryNSS.class);
+        suite.addTestSuite(TestEmbergraphGraphFactoryFile.class);
+        suite.addTestSuite(TestEmbergraphGraphEmbeddedRepository.class);
 
         //Blueprints related test cases
         //See BLZG-1415 
-        //suite.addTestSuite(org.embergraph.blueprints.TestBigdataGraphEmbeddedTransactional.class);
-        suite.addTestSuite(org.embergraph.blueprints.TestBigdataGraphClientInMemorySail.class);
+        //suite.addTestSuite(org.embergraph.blueprints.TestEmbergraphGraphEmbeddedTransactional.class);
+        suite.addTestSuite(TestEmbergraphGraphClientInMemorySail.class);
         //See BLZG-1415 
         suite.addTestSuite(org.embergraph.blueprints.TestPathConstraints.class);
         

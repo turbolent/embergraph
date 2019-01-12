@@ -30,7 +30,7 @@ import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.Session;
 import org.embergraph.striterator.IKeyOrder;
@@ -68,7 +68,7 @@ public class DistributedJoinTask extends JoinTask {
     final protected AbstractScaleOutFederation<?> fed;
 
     /**
-     * The {@link IJoinNexus} for the {@link IBigdataFederation}. This is
+     * The {@link IJoinNexus} for the {@link IEmbergraphFederation}. This is
      * mainly used to setup the {@link #solutionBuffer} since it needs to
      * write on the scale-out index while the {@link AccessPathTask} will
      * read on the local index partition view.
@@ -162,7 +162,7 @@ public class DistributedJoinTask extends JoinTask {
             throw new IllegalArgumentException();
 
         // Note: This MUST be the index manager for the local data service.
-        if(joinNexus instanceof IBigdataFederation<?>)
+        if(joinNexus instanceof IEmbergraphFederation<?>)
             throw new IllegalArgumentException();
         
         this.fed = fed;

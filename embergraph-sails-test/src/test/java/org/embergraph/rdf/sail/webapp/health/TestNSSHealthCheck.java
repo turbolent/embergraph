@@ -38,7 +38,7 @@ import junit.textui.ResultPrinter;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.server.Server;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
@@ -153,7 +153,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 		).toExternalForm();
 
 		m_serviceURL = new URL("http", hostAddr, port,
-				BigdataStatics.getContextPath()).toExternalForm();
+				EmbergraphStatics.getContextPath()).toExternalForm();
 
 		// m_cm = DefaultClientConnectionManagerFactory.getInstance()
 		// .newInstance();

@@ -61,7 +61,7 @@ import org.embergraph.relation.rule.eval.RuleLog;
 import org.embergraph.relation.rule.eval.RuleState;
 import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.ExecutionExceptions;
@@ -127,7 +127,7 @@ import org.embergraph.util.concurrent.ExecutionExceptions;
  * <p>
  * This is a hard requirement when computing the fix point closure of a rule
  * (set). Each round of closure MUST be evaluated against the commit time
- * reported by {@link IBigdataFederation#getLastCommitTime()} and is applied for
+ * reported by {@link IEmbergraphFederation#getLastCommitTime()} and is applied for
  * all rules in that round. This allows unisolated tasks to write on the
  * generated solutions onto the indices. This is a strong requirement since the
  * {@link JoinTask}s will otherwise wind up holding an exclusive lock on the
@@ -135,13 +135,13 @@ import org.embergraph.util.concurrent.ExecutionExceptions;
  * attempting to write the generated solutions onto the index partitions. At the
  * start of the next round of closure, simply update the read-historical
  * timestamp to the then current value of
- * {@link IBigdataFederation#getLastCommitTime()}.
+ * {@link IEmbergraphFederation#getLastCommitTime()}.
  * <p>
  * Queries that use {@link ITx#READ_COMMITTED} or {@link ITx#UNISOLATED} will
  * not generate deadlocks, but they are subject to abort from the
  * split/join/move of index partition(s) during query evaluation. This problem
  * WILL NOT arise if you read instead from the
- * {@link IBigdataFederation#getLastCommitTime()}.
+ * {@link IEmbergraphFederation#getLastCommitTime()}.
  * 
  * <h2>Key-range partitioned joins</h2>
  * 

@@ -23,6 +23,8 @@ package org.embergraph.rdf.lexicon;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.BNodeImpl;
 import org.openrdf.model.impl.LiteralImpl;
@@ -37,9 +39,7 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 
 /**
  * Test suite for the {@link BlobsWriteTask}.
@@ -150,14 +150,14 @@ public class TestBlobsWriteTask extends TestCase2 {
             if(v == null)
                 fail("Not expecting null inputs.");
 
-            if(v instanceof BigdataValue)
-                fail("Not expecting BigdataValue inputs.");
+            if(v instanceof EmbergraphValue)
+                fail("Not expecting EmbergraphValue inputs.");
             
         }
         
         final BlobsIndexHelper h = new BlobsIndexHelper();
 
-        final BigdataValueFactory vf = BigdataValueFactoryImpl
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                 .getInstance(getName());
 
         final IRawStore store = new SimpleMemoryRawStore();
@@ -192,7 +192,7 @@ public class TestBlobsWriteTask extends TestCase2 {
                  * Convert to BigdataValues so IVs will be assigned as a
                  * side-effect by the TermsWriteTask.
                  */
-                final BigdataValue[] values = new BigdataValue[valuesIn.length];
+                final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
 
                 for (int i = 0; i < valuesIn.length; i++) {
 
@@ -209,7 +209,7 @@ public class TestBlobsWriteTask extends TestCase2 {
 
                 for (int i = 0; i < valuesIn.length; i++) {
 
-                    final BigdataValue value = values[i];
+                    final EmbergraphValue value = values[i];
 
                     final IV iv = value.getIV();
 
@@ -228,7 +228,7 @@ public class TestBlobsWriteTask extends TestCase2 {
                  * Convert to BigdataValues so IVs will be assigned as a
                  * side-effect by the TermsWriteTask.
                  */
-                final BigdataValue[] values = new BigdataValue[valuesIn.length];
+                final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
 
                 for (int i = 0; i < valuesIn.length; i++) {
 
@@ -245,7 +245,7 @@ public class TestBlobsWriteTask extends TestCase2 {
 
                 for (int i = 0; i < valuesIn.length; i++) {
 
-                    final BigdataValue value = values[i];
+                    final EmbergraphValue value = values[i];
 
                     final IV iv = value.getIV();
 
@@ -270,7 +270,7 @@ public class TestBlobsWriteTask extends TestCase2 {
                  * Convert to BigdataValues so IVs will be assigned as a
                  * side-effect by the TermsWriteTask.
                  */
-                final BigdataValue[] values = new BigdataValue[valuesIn.length];
+                final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
 
                 for (int i = 0; i < valuesIn.length; i++) {
 
@@ -287,7 +287,7 @@ public class TestBlobsWriteTask extends TestCase2 {
 
                 for (int i = 0; i < valuesIn.length; i++) {
 
-                    final BigdataValue value = values[i];
+                    final EmbergraphValue value = values[i];
 
                     final IV expectedIV = expectedIVs[i];
 
@@ -342,11 +342,11 @@ public class TestBlobsWriteTask extends TestCase2 {
      * @return
      */
     private IV getTermIV(final Value value, final BlobsIndexHelper h,
-            final BigdataValueFactory vf, final IIndex ndx) {
+            final EmbergraphValueFactory vf, final IIndex ndx) {
 
         final IKeyBuilder keyBuilder = h.newKeyBuilder();
 
-        final BigdataValue asValue = vf.asValue(value);
+        final EmbergraphValue asValue = vf.asValue(value);
 
         final byte[] baseKey = h.makePrefixKey(keyBuilder.reset(), asValue);
 
@@ -364,7 +364,7 @@ public class TestBlobsWriteTask extends TestCase2 {
 
 //        final TermId<?> iv = (TermId<?>) IVUtility.decode(key);
 
-		final BlobIV<?> iv = new BlobIV<BigdataValue>(VTE.valueOf(asValue),
+		final BlobIV<?> iv = new BlobIV<EmbergraphValue>(VTE.valueOf(asValue),
 				asValue.hashCode(), (short) counter);
 
         return iv;
@@ -374,7 +374,7 @@ public class TestBlobsWriteTask extends TestCase2 {
     /**
      * Thin wrapper for the {@link BlobsWriteTask} as invoked by the
      * {@link LexiconRelation}. This can be used to unify the {@link IV}s for
-     * the caller's {@link BigdataValue} with those in the TERMS index and
+     * the caller's {@link EmbergraphValue} with those in the TERMS index and
      * (optionally) to assign new {@link IV}s (when read-only is
      * <code>false</code>).
      * 
@@ -385,9 +385,9 @@ public class TestBlobsWriteTask extends TestCase2 {
      * @param values
      * @return
      */
-    private WriteTaskStats addValues(final BigdataValueFactory vf,
+    private WriteTaskStats addValues(final EmbergraphValueFactory vf,
             final IIndex ndx, final boolean readOnly, final boolean toldBNodes,
-            final BigdataValue[] values) {
+            final EmbergraphValue[] values) {
 
         final WriteTaskStats stats = new WriteTaskStats();
 

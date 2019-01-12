@@ -31,9 +31,9 @@ package org.embergraph.service;
  * @version $Id$
  * 
  * @todo this exception should be used consistently when the caller uses one of
- *       the service discover methods on {@link IBigdataFederation} and gets
+ *       the service discover methods on {@link IEmbergraphFederation} and gets
  *       back a <code>null</code> instead of a service. For example,
- *       {@link IBigdataFederation#getMetadataService()}.
+ *       {@link IEmbergraphFederation#getMetadataService()}.
  */
 public class NoSuchService extends RuntimeException {
 

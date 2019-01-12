@@ -109,7 +109,7 @@ public class Test_Ticket_1207<S extends IIndexManager> extends
       }
 
       {
-          final TupleQuery tq = m_repo.getBigdataSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
+          final TupleQuery tq = m_repo.getEmbergraphSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
           tq.setBinding("s", s);
           tq.setIncludeInferred(true);
           final TupleQueryResult tqr = tq.evaluate();
@@ -125,7 +125,7 @@ public class Test_Ticket_1207<S extends IIndexManager> extends
           }
       }
       {
-          final TupleQuery tq = m_repo.getBigdataSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
+          final TupleQuery tq = m_repo.getEmbergraphSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, "SELECT * {?s ?p ?o} LIMIT 100", null);
           tq.setBinding("s", s);
           tq.setIncludeInferred(false);
           final TupleQueryResult tqr = tq.evaluate();

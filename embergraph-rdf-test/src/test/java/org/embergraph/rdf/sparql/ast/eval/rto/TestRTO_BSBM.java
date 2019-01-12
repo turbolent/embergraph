@@ -28,7 +28,7 @@ import java.util.Properties;
 import junit.framework.AssertionFailedError;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
 /**
@@ -103,9 +103,9 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
         // Note: clone to avoid modifying!!!
         final Properties properties = (Properties) super.getProperties().clone();
 
-        properties.setProperty(BigdataSail.Options.TRIPLES_MODE, "true");
+        properties.setProperty(EmbergraphSail.Options.TRIPLES_MODE, "true");
 
-        properties.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+        properties.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
                 NoAxioms.class.getName());
 
         return properties;

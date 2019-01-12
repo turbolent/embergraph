@@ -45,9 +45,9 @@ public class TestTicket1875 extends QuadsTestCase {
 	 */
 	public void testBug() throws Exception {
 
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
-			final BigdataSailRepository repo = new BigdataSailRepository(sail);
+			final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 			
 			try {
 				
@@ -65,7 +65,7 @@ public class TestTicket1875 extends QuadsTestCase {
 						"  <x:s>	rdf:type <http://x/o> .\r\n" + 
 						"  <<<x:s>	rdf:type <http://x/o>  >> <http://x/pr> <http://x/or>  \r\n" + 
 						"}";
-				executeUpdate(new BigdataSailRepository(sail), update2);
+				executeUpdate(new EmbergraphSailRepository(sail), update2);
 	
 				String update3 =
 						"prefix bbb: <http://x/> \r\n" + 
@@ -73,7 +73,7 @@ public class TestTicket1875 extends QuadsTestCase {
 						"  <x:a> rdf:type bbb:B .\r\n" + 
 						"  << <x:a> rdf:type bbb:B >><x:pr> <x:pr> .\r\n" + 
 						"}";
-				executeUpdate(new BigdataSailRepository(sail), update3);
+				executeUpdate(new EmbergraphSailRepository(sail), update3);
 
 			} finally {
 				repo.shutDown();
@@ -84,9 +84,9 @@ public class TestTicket1875 extends QuadsTestCase {
 		}
 	}
 
-	private void executeUpdate(final BigdataSailRepository repo, final String update)
+	private void executeUpdate(final EmbergraphSailRepository repo, final String update)
 			throws UpdateExecutionException, RepositoryException, MalformedQueryException {
-		final BigdataSailRepositoryConnection conn = repo.getConnection();
+		final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 		try {
 			Update preparedUpdate = conn.prepareUpdate(QueryLanguage.SPARQL, update);
 			preparedUpdate.execute();

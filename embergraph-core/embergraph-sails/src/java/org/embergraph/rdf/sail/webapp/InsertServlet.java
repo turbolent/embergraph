@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.impl.URIImpl;
@@ -43,8 +45,6 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUpdate;
 
@@ -53,7 +53,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpUpdate;
  * 
  * @author martyncutcher
  */
-public class InsertServlet extends BigdataRDFServlet {
+public class InsertServlet extends EmbergraphRDFServlet {
 	
     /**
      * 
@@ -110,7 +110,7 @@ public class InsertServlet extends BigdataRDFServlet {
             return;
         }
 
-        if (req.getParameter(BigdataRDFContext.URI) != null) {
+        if (req.getParameter(EmbergraphRDFContext.URI) != null) {
             doPostWithURIs(req, resp);
             return;
         } else {
@@ -182,7 +182,7 @@ public class InsertServlet extends BigdataRDFServlet {
          */
         final Resource[] defaultContext;
         {
-            final String[] s = req.getParameterValues(BigdataRDFContext.CONTEXT_URI);
+            final String[] s = req.getParameterValues(EmbergraphRDFContext.CONTEXT_URI);
             if (s != null && s.length > 0) {
                 try {
                 	defaultContext = toURIs(s);
@@ -205,9 +205,9 @@ public class InsertServlet extends BigdataRDFServlet {
             
         } catch (Throwable t) {
 
-         BigdataRDFServlet.launderThrowable(t, resp,
+         EmbergraphRDFServlet.launderThrowable(t, resp,
                "INSERT-WITH-BODY: baseURI=" + baseURI + ", Content-Type="
-                     + contentType + ", " + BigdataRDFContext.CONTEXT_URI + "="
+                     + contentType + ", " + EmbergraphRDFContext.CONTEXT_URI + "="
                      + Arrays.toString(defaultContext));
 
         }
@@ -266,7 +266,7 @@ public class InsertServlet extends BigdataRDFServlet {
 
             final AtomicLong nmodified = new AtomicLong(0L);
 
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             boolean success = false;
             try {
 
@@ -346,14 +346,14 @@ public class InsertServlet extends BigdataRDFServlet {
 	    
 		final String namespace = getNamespace(req);
 
-		final String[] uris = req.getParameterValues(BigdataRDFContext.URI);
+		final String[] uris = req.getParameterValues(EmbergraphRDFContext.URI);
 
       if (uris == null || uris.length == 0) {
 
          buildAndCommitResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                MIME_TEXT_PLAIN,
                "Parameter must be specified one or more times: '"
-                     + BigdataRDFContext.URI + "'");
+                     + EmbergraphRDFContext.URI + "'");
 
          return;
 
@@ -376,7 +376,7 @@ public class InsertServlet extends BigdataRDFServlet {
          */
         final Resource[] defaultContext;
         {
-            final String[] s = req.getParameterValues(BigdataRDFContext.CONTEXT_URI);
+            final String[] s = req.getParameterValues(EmbergraphRDFContext.CONTEXT_URI);
             if (s != null && s.length > 0) {
                 try {
                 	defaultContext = toURIs(s);
@@ -401,8 +401,8 @@ public class InsertServlet extends BigdataRDFServlet {
          launderThrowable(
                t,
                resp,
-               BigdataRDFContext.URI + "=" + urls + ", "
-                     + BigdataRDFContext.CONTEXT_URI + "="
+               EmbergraphRDFContext.URI + "=" + urls + ", "
+                     + EmbergraphRDFContext.CONTEXT_URI + "="
                      + Arrays.toString(defaultContext));
 
         }
@@ -448,7 +448,7 @@ public class InsertServlet extends BigdataRDFServlet {
 
             final long begin = System.currentTimeMillis();
             
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             boolean success = false;
             try {
 
@@ -616,7 +616,7 @@ public class InsertServlet extends BigdataRDFServlet {
      */
     static class AddStatementHandler extends RDFHandlerBase {
 
-        private final BigdataSailConnection conn;
+        private final EmbergraphSailConnection conn;
         private final AtomicLong nmodified;
         private final Resource[] defaultContext;
 
@@ -627,7 +627,7 @@ public class InsertServlet extends BigdataRDFServlet {
          * @param defaultContexts
          * 			Only used if the statements themselves do not have a context.
          */
-        public AddStatementHandler(final BigdataSailConnection conn,
+        public AddStatementHandler(final EmbergraphSailConnection conn,
                 final AtomicLong nmodified, final Resource... defaultContext) {
             this.conn = conn;
             this.nmodified = nmodified;

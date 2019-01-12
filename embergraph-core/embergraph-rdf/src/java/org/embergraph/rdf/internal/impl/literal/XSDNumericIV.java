@@ -21,12 +21,12 @@ package org.embergraph.rdf.internal.impl.literal;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.util.Bytes;
 
 /** 
@@ -34,7 +34,7 @@ import org.embergraph.util.Bytes;
  * <code>xsd:int</code>, <code>xsd:long</code>, <code>xsd:float</code>,
  * <code>xsd:decimal</code>. 
  */
-public class XSDNumericIV<V extends BigdataLiteral> extends
+public class XSDNumericIV<V extends EmbergraphLiteral> extends
         NumericIV<V, Number> implements Literal {
 
     /**

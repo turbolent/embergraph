@@ -41,12 +41,12 @@ import org.embergraph.bop.engine.IQueryClient;
 import org.embergraph.bop.engine.IQueryPeer;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Extends {@link ChunkedRunningQuery} to provide additional state and logic
  * required to support distributed query evaluation against an
- * {@link IBigdataFederation} .
+ * {@link IEmbergraphFederation} .
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

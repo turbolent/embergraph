@@ -29,6 +29,9 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 
@@ -53,9 +56,6 @@ import org.embergraph.bop.engine.MockRunningQuery;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
@@ -198,9 +198,9 @@ abstract public class AbstractDistinctSolutionsTestCase extends TestCase2 {
          */
         @SuppressWarnings({ "unchecked", "rawtypes" })
         private IV makeIV(final Value v) {
-            final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+            final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
-            final BigdataValue bv = valueFactory.asValue(v);
+            final EmbergraphValue bv = valueFactory.asValue(v);
             final IV iv = new TermId(VTE.valueOf(v), nextId++);
             iv.setValue(bv);
             return iv;

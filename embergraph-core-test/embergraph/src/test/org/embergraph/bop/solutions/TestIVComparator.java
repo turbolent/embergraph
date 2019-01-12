@@ -24,6 +24,11 @@ import javax.xml.datatype.DatatypeFactory;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.IDatatypeURIResolver;
@@ -36,12 +41,7 @@ import org.embergraph.rdf.internal.impl.bnode.SidIV;
 import org.embergraph.rdf.internal.impl.extensions.DateTimeExtension;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.spo.SPO;
 
 /**
@@ -68,46 +68,46 @@ public class TestIVComparator extends TestCase2 {
 
         private long termId = 1L;
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl
                 .getInstance(namespace);
         
         /*
          * Literals
          */
 
-        final IV<BigdataLiteral,Void> noninline_plain_lit1 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_plain_lit2 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_languageCode_en_lit1 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_languageCode_en_lit2 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_languageCode_de_lit1 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_languageCode_de_lit2 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_xsd_string_lit1 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
-        final IV<BigdataLiteral,Void> noninline_xsd_string_lit2 = new TermId<BigdataLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_plain_lit1 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_plain_lit2 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_languageCode_en_lit1 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_languageCode_en_lit2 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_languageCode_de_lit1 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_languageCode_de_lit2 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_xsd_string_lit1 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
+        final IV<EmbergraphLiteral,Void> noninline_xsd_string_lit2 = new TermId<EmbergraphLiteral>(VTE.LITERAL,termId++);
         
-        final IV<BigdataLiteral, Number> inline_xsd_byte1 = new XSDNumericIV<BigdataLiteral>((byte) 1);
-        final IV<BigdataLiteral, Number> inline_xsd_int1 = new XSDNumericIV<BigdataLiteral>(1);
+        final IV<EmbergraphLiteral, Number> inline_xsd_byte1 = new XSDNumericIV<EmbergraphLiteral>((byte) 1);
+        final IV<EmbergraphLiteral, Number> inline_xsd_int1 = new XSDNumericIV<EmbergraphLiteral>(1);
 
-        final IV<BigdataLiteral, Boolean> inline_xsd_boolean_true = new XSDBooleanIV<BigdataLiteral>(true);
-        final IV<BigdataLiteral, Boolean> inline_xsd_boolean_false = new XSDBooleanIV<BigdataLiteral>(false);
+        final IV<EmbergraphLiteral, Boolean> inline_xsd_boolean_true = new XSDBooleanIV<EmbergraphLiteral>(true);
+        final IV<EmbergraphLiteral, Boolean> inline_xsd_boolean_false = new XSDBooleanIV<EmbergraphLiteral>(false);
 
-        final IV<BigdataLiteral, Number> inline_xsd_dateTime1 = new XSDNumericIV<BigdataLiteral>(1);
+        final IV<EmbergraphLiteral, Number> inline_xsd_dateTime1 = new XSDNumericIV<EmbergraphLiteral>(1);
 
         /*
          * URIs
          */
-        final IV<BigdataURI, Void> noninline_uri1 = new TermId<BigdataURI>(VTE.URI, termId++);
-        final IV<BigdataURI, Void> noninline_uri2 = new TermId<BigdataURI>(VTE.URI, termId++);
+        final IV<EmbergraphURI, Void> noninline_uri1 = new TermId<EmbergraphURI>(VTE.URI, termId++);
+        final IV<EmbergraphURI, Void> noninline_uri2 = new TermId<EmbergraphURI>(VTE.URI, termId++);
         
         /*
          * Blank nodes.
          */
-        final IV<BigdataBNode,Integer> inline_bnode1 = new NumericBNodeIV<BigdataBNode>(1); 
-        final IV<BigdataBNode,Integer> inline_bnode2 = new NumericBNodeIV<BigdataBNode>(2); 
+        final IV<EmbergraphBNode,Integer> inline_bnode1 = new NumericBNodeIV<EmbergraphBNode>(1);
+        final IV<EmbergraphBNode,Integer> inline_bnode2 = new NumericBNodeIV<EmbergraphBNode>(2);
 
-        final SidIV<BigdataBNode> sid1 = new SidIV<BigdataBNode>(new SPO(
+        final SidIV<EmbergraphBNode> sid1 = new SidIV<EmbergraphBNode>(new SPO(
                 noninline_uri1, noninline_uri2, noninline_plain_lit1));
 
-        final SidIV<BigdataBNode> sid2 = new SidIV<BigdataBNode>(new SPO(
+        final SidIV<EmbergraphBNode> sid2 = new SidIV<EmbergraphBNode>(new SPO(
                 inline_bnode1, noninline_uri2, inline_xsd_dateTime1));
 
         public V() {
@@ -120,14 +120,14 @@ public class TestIVComparator extends TestCase2 {
             }
             
             final IDatatypeURIResolver resolver = new IDatatypeURIResolver() {
-                public BigdataURI resolve(final URI uri) {
-                    final BigdataURI buri = f.createURI(uri.stringValue());
-                    buri.setIV(new TermId<BigdataLiteral>(VTE.URI,termId++));
+                public EmbergraphURI resolve(final URI uri) {
+                    final EmbergraphURI buri = f.createURI(uri.stringValue());
+                    buri.setIV(new TermId<EmbergraphLiteral>(VTE.URI,termId++));
                     return buri;
                 }
             };
             
-            final DateTimeExtension<BigdataValue> dtExt = new DateTimeExtension<BigdataValue>(
+            final DateTimeExtension<EmbergraphValue> dtExt = new DateTimeExtension<EmbergraphValue>(
         			resolver, TimeZone.getTimeZone("GMT"));
 
             dtExt.createIV(f.createLiteral(df

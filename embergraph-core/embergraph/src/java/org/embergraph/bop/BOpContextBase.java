@@ -34,7 +34,7 @@ import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.relation.locator.IResourceLocator;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Base class for the bigdata operation evaluation context (NOT serializable).
@@ -46,7 +46,7 @@ public class BOpContextBase {
     /**
      * The federation iff running in scale-out.
      */
-    private final IBigdataFederation<?> fed;
+    private final IEmbergraphFederation<?> fed;
 
     /**
      * The <strong>local</strong> index manager.
@@ -71,13 +71,13 @@ public class BOpContextBase {
     }
 
     /**
-     * The {@link IBigdataFederation} IFF the operator is being evaluated on an
-     * {@link IBigdataFederation} and otherwise <code>null</code>. When
-     * evaluating operations against an {@link IBigdataFederation}, this
+     * The {@link IEmbergraphFederation} IFF the operator is being evaluated on an
+     * {@link IEmbergraphFederation} and otherwise <code>null</code>. When
+     * evaluating operations against an {@link IEmbergraphFederation}, this
      * reference provides access to the scale-out view of the indices and to
      * other bigdata services.
      */
-    final public IBigdataFederation<?> getFederation() {
+    final public IEmbergraphFederation<?> getFederation() {
 
         return fed;
         
@@ -109,7 +109,7 @@ public class BOpContextBase {
      * @param localIndexManager
      *            The <strong>local</strong> index manager.
      */
-    public BOpContextBase(final IBigdataFederation<?> fed,
+    public BOpContextBase(final IEmbergraphFederation<?> fed,
             final IIndexManager localIndexManager) {
 
         /*

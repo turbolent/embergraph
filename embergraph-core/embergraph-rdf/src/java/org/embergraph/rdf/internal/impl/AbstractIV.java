@@ -24,6 +24,8 @@ package org.embergraph.rdf.internal.impl;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
@@ -56,8 +58,6 @@ import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.lexicon.ITermIndexCodes;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Abstract base class for the inline representation of an RDF Value (the
@@ -77,7 +77,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * compression rather than a collation sort key. Therefore, when a high level
  * query is constrained such that a variable is known to be of a given data type
  * you can use {@link IV} aware operations. Otherwise, the {@link IV}s must be
- * materialized and operations performed on {@link BigdataValue}s instead.
+ * materialized and operations performed on {@link EmbergraphValue}s instead.
  * 
  * <h3>Binary record format</h3>
  * 
@@ -214,7 +214,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * @param <T>
  *            The generic type for the inline value.
  */
-public abstract class AbstractIV<V extends BigdataValue, T>
+public abstract class AbstractIV<V extends EmbergraphValue, T>
         implements IV<V, T> {
 
     /**
@@ -582,8 +582,8 @@ public abstract class AbstractIV<V extends BigdataValue, T>
 	 * Return a hash code based on the value of the point in the value space.
 	 * <p>
 	 * Note: The {@link IV} implementations typically DO NOT return hash codes
-	 * that are consistent with {@link BigdataValue#hashCode()}. Therefore you
-	 * MUST NOT mix {@link IV}s and {@link BigdataValue}s in the keys of a map
+	 * that are consistent with {@link EmbergraphValue#hashCode()}. Therefore you
+	 * MUST NOT mix {@link IV}s and {@link EmbergraphValue}s in the keys of a map
 	 * or the values of a set.
 	 */
     @Override
@@ -596,8 +596,8 @@ public abstract class AbstractIV<V extends BigdataValue, T>
 	 * corresponding primitive data type.
 	 * <p>
 	 * Note: The {@link IV} implementations typically DO NOT compare equals()
-	 * with {@link BigdataValue}s. Therefore you MUST NOT mix {@link IV}s and
-	 * {@link BigdataValue}s in the keys of a map or the values of a set.
+	 * with {@link EmbergraphValue}s. Therefore you MUST NOT mix {@link IV}s and
+	 * {@link EmbergraphValue}s in the keys of a map or the values of a set.
 	 */
     @Override
     abstract public boolean equals(Object o);
@@ -715,7 +715,7 @@ public abstract class AbstractIV<V extends BigdataValue, T>
             if(isExtension()) {
 
                 @SuppressWarnings("unchecked")
-                final URIExtensionIV<BigdataURI> extension = (URIExtensionIV<BigdataURI>) this;
+                final URIExtensionIV<EmbergraphURI> extension = (URIExtensionIV<EmbergraphURI>) this;
 
                 // The namespaceIV (a Vocabulary item).
                 IVUtility.encode(keyBuilder, extension.getExtensionIV());
@@ -998,7 +998,7 @@ public abstract class AbstractIV<V extends BigdataValue, T>
 	}
 
 	/**
-	 * Return the cached {@link BigdataValue} or -<code>null</code> if it is not
+	 * Return the cached {@link EmbergraphValue} or -<code>null</code> if it is not
 	 * cached.
 	 */
 	protected final V getValueCache() {
@@ -1025,7 +1025,7 @@ public abstract class AbstractIV<V extends BigdataValue, T>
 	 */
 	
     /**
-     * Override default serialization to send the cached {@link BigdataValue}.
+     * Override default serialization to send the cached {@link EmbergraphValue}.
      * 
      * @see https://sourceforge.net/apps/trac/bigdata/ticket/337
      */
@@ -1038,7 +1038,7 @@ public abstract class AbstractIV<V extends BigdataValue, T>
     }
 
     /**
-     * Override default serialization to recover the cached {@link BigdataValue}
+     * Override default serialization to recover the cached {@link EmbergraphValue}
      * .
      */
     @SuppressWarnings("unchecked")

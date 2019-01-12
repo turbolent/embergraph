@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Value;
@@ -15,8 +16,7 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.rio.RDFWriter;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.sparql.ast.ProjectionNode;
 import org.embergraph.rdf.sparql.ast.eval.ASTConstructIterator;
 import org.embergraph.rdf.store.TempTripleStore;
@@ -30,7 +30,7 @@ import org.embergraph.rdf.store.TempTripleStore;
  *         Thompson</a>
  */
 public class DescribeCacheUpdater implements
-        CloseableIteration<BigdataStatement, QueryEvaluationException> {
+        CloseableIteration<EmbergraphStatement, QueryEvaluationException> {
 
     static private transient final Logger log = Logger
             .getLogger(DescribeCacheUpdater.class);
@@ -41,7 +41,7 @@ public class DescribeCacheUpdater implements
     private final IDescribeCache cache;
 
     /**
-     * The {@link BigdataValue}s that become bound for the projection of the
+     * The {@link EmbergraphValue}s that become bound for the projection of the
      * original DESCRIBE query. We will collect all statements having a
      * described resource as either a subject or an object.
      * <p>
@@ -50,13 +50,13 @@ public class DescribeCacheUpdater implements
      * {@link Set} in order to ensure the visibility of the updates to this
      * class. It should also support high concurrency.
      */
-    private final Set<BigdataValue> describedResources;
+    private final Set<EmbergraphValue> describedResources;
     
     /**
      * The source iterator visiting the statements that are the description
      * of the projected resources.
      */
-    private final CloseableIteration<BigdataStatement, QueryEvaluationException> src;
+    private final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src;
     
     /**
      * The statements to be inserted into the cache as the description of
@@ -65,11 +65,11 @@ public class DescribeCacheUpdater implements
      * TODO This is not scalable to very large numbers of described
      * resources nor to resources with very large numbers of statements in
      * their descriptions. Try {@link TempTripleStore} with ONE (1) access
-     * path on SPO. However, we want to have the {@link BigdataStatement}
+     * path on SPO. However, we want to have the {@link EmbergraphStatement}
      * with its {@link IV}s and its {@link Value}s, so the
      * {@link TempTripleStore} will not work. Something more custom?
      */
-    final private HashMap<BigdataValue, Graph> graphs = new HashMap<BigdataValue, Graph>();
+    final private HashMap<EmbergraphValue, Graph> graphs = new HashMap<EmbergraphValue, Graph>();
 
     private boolean open = true;
     
@@ -78,7 +78,7 @@ public class DescribeCacheUpdater implements
      * @param cache
      *            The cache to be updated.
      * @param describedResources
-     *            The {@link BigdataValue}s that become bound for the projection
+     *            The {@link EmbergraphValue}s that become bound for the projection
      *            of the original DESCRIBE query. We will collect all statements
      *            having a described resource as either a subject or an object.
      *            This MUST be a thread-safe (and concurrency favorable) set in
@@ -90,8 +90,8 @@ public class DescribeCacheUpdater implements
      */
     public DescribeCacheUpdater(
             final IDescribeCache cache,
-            final Set<BigdataValue> describedResources,
-            final CloseableIteration<BigdataStatement, QueryEvaluationException> src) {
+            final Set<EmbergraphValue> describedResources,
+            final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src) {
 
         if (cache == null)
             throw new IllegalArgumentException();
@@ -149,7 +149,7 @@ public class DescribeCacheUpdater implements
      * resource description specified by CBD. The code in this method only
      * recognizes statements that directly have a described resource as a
      * subject or object. We probably need a reverse map that will allow us
-     * to navigate from a BigdataValue (or perhaps just a BigdataBNode) to
+     * to navigate from a EmbergraphValue (or perhaps just a EmbergraphBNode) to
      * all described resources for which that value was observed. That map
      * might only need to contain the blank nodes since the description can
      * never expand beyond a statement having a blank node in the subject
@@ -160,15 +160,15 @@ public class DescribeCacheUpdater implements
      *      Concise Bounded Description </a>
      */
     @Override
-    public BigdataStatement next() throws QueryEvaluationException {
+    public EmbergraphStatement next() throws QueryEvaluationException {
 
         // A statement produced by the CONSTRUCT iterator.
-        final BigdataStatement stmt = src.next();
+        final EmbergraphStatement stmt = src.next();
 
         // Check the Subject.
         {
             
-            final BigdataValue s = stmt.getSubject();
+            final EmbergraphValue s = stmt.getSubject();
 
             // Is the subject one of the described resources?
             if (describedResources.contains(s)) {
@@ -181,7 +181,7 @@ public class DescribeCacheUpdater implements
 
         // Check the Object.
         {
-            final BigdataValue o = stmt.getObject();
+            final EmbergraphValue o = stmt.getObject();
 
             // Is the object one of the described resources?
             if (describedResources.contains(o)) {
@@ -206,8 +206,8 @@ public class DescribeCacheUpdater implements
      *            A statement having that resource as either the subject or
      *            object.
      */
-    private void record(final BigdataValue describedResource,
-            final BigdataStatement stmt) {
+    private void record(final EmbergraphValue describedResource,
+            final EmbergraphStatement stmt) {
 
         Graph g = graphs.get(describedResource);
         
@@ -227,9 +227,9 @@ public class DescribeCacheUpdater implements
 
     private void updateCache() {
 
-        for (Map.Entry<BigdataValue, Graph> e : graphs.entrySet()) {
+        for (Map.Entry<EmbergraphValue, Graph> e : graphs.entrySet()) {
 
-            final BigdataValue describedResource = e.getKey();
+            final EmbergraphValue describedResource = e.getKey();
 
             final IV<?, ?> iv = describedResource.getIV();
 

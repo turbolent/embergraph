@@ -25,6 +25,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sail.EmbergraphValueReplacer;
 import org.openrdf.model.URI;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
@@ -41,9 +44,6 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.sail.BigdataValueReplacer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -74,7 +74,7 @@ public class ServiceCallUtility {
      *             if the service reference evaluates to an {@link IV} which is
      *             not materialized.
      */
-    static public BigdataURI getConstantServiceURI(
+    static public EmbergraphURI getConstantServiceURI(
             final IVariableOrConstant<?> serviceRef) {
 
         if (serviceRef.isVar()) {
@@ -92,7 +92,7 @@ public class ServiceCallUtility {
         if (!serviceRefIV.hasValue())
             throw new NotMaterializedException(ERR_NOT_MATERIALIZED);
 
-        final BigdataURI serviceURI = (BigdataURI) serviceRefIV.getValue();
+        final EmbergraphURI serviceURI = (EmbergraphURI) serviceRefIV.getValue();
 
         return serviceURI;
 
@@ -115,7 +115,7 @@ public class ServiceCallUtility {
      *             if the service reference evaluates to an {@link IV} which is
      *             not materialized.
      */
-    static public BigdataURI getServiceURI(
+    static public EmbergraphURI getServiceURI(
             final IVariableOrConstant<?> serviceRef, final IBindingSet bset) {
 
         // Evaluate the serviceRef expression.
@@ -131,7 +131,7 @@ public class ServiceCallUtility {
         if (!serviceRefIV.hasValue())
             throw new NotMaterializedException(ERR_NOT_MATERIALIZED);
 
-        final BigdataURI serviceURI = (BigdataURI) serviceRefIV.getValue();
+        final EmbergraphURI serviceURI = (EmbergraphURI) serviceRefIV.getValue();
 
         return serviceURI;
 
@@ -153,7 +153,7 @@ public class ServiceCallUtility {
      *             if a non-inline {@link IV} has not had its {@link IVCache}
      *             set.
      */
-    static public BindingSet bigdata2Openrdf(final LexiconRelation lex,
+    static public BindingSet embergraph2Openrdf(final LexiconRelation lex,
             final Set<IVariable<?>> vars, final IBindingSet in) {
 
         final MapBindingSet out = new MapBindingSet();
@@ -180,7 +180,7 @@ public class ServiceCallUtility {
             @SuppressWarnings("rawtypes")
             final IV iv = (IV) e.getValue().get();
 
-            final BigdataValue value;
+            final EmbergraphValue value;
 
             if (iv.isInline()) {
 
@@ -224,8 +224,8 @@ public class ServiceCallUtility {
     
     /**
      * Convert an openrdf {@link BindingSet} into a bigdata {@link IBindingSet}.
-     * The {@link BindingSet} MUST contain {@link BigdataValue}s and the
-     * {@link IV}s for those {@link BigdataValue}s MUST have been resolved
+     * The {@link BindingSet} MUST contain {@link EmbergraphValue}s and the
+     * {@link IV}s for those {@link EmbergraphValue}s MUST have been resolved
      * against the database and the {@link IVCache} association set.
      * 
      * @param vars
@@ -237,7 +237,7 @@ public class ServiceCallUtility {
      * @return The bigdata {@link IBindingSet}.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    static private IBindingSet openrdf2Bigdata(
+    static private IBindingSet openrdf2Embergraph(
             final Set<IVariable<?>> vars,
             final BindingSet in
             ) {
@@ -262,7 +262,7 @@ public class ServiceCallUtility {
             }
 
             // Note: MUST already be BigdataValues.
-            final BigdataValue value = (BigdataValue) e.getValue();
+            final EmbergraphValue value = (EmbergraphValue) e.getValue();
 
             // Note: IVs MUST already be resolved.
             final IV<?,?> iv = value.getIV();
@@ -302,7 +302,7 @@ public class ServiceCallUtility {
 
         for (int i = 0; i < in.length; i++) {
 
-            out[i] = ServiceCallUtility.bigdata2Openrdf(lex, projectedVars,
+            out[i] = ServiceCallUtility.embergraph2Openrdf(lex, projectedVars,
                     in[i]);
 
         }
@@ -324,7 +324,7 @@ public class ServiceCallUtility {
         final BindingSet[] resolvedServiceResults;
         {
 
-            final Object[] b = new BigdataValueReplacer(db).replaceValues(
+            final Object[] b = new EmbergraphValueReplacer(db).replaceValues(
                     null/* dataset */, serviceResults/* bindings */);
 
             resolvedServiceResults = (BindingSet[]) b[1];
@@ -341,7 +341,7 @@ public class ServiceCallUtility {
                 
                 final BindingSet bset = resolvedServiceResults[i];
             
-                final IBindingSet bset2 = openrdf2Bigdata(
+                final IBindingSet bset2 = openrdf2Embergraph(
                         null/* projectedVars */, bset);
 
                 bigdataSolutions[i] = bset2;

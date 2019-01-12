@@ -50,7 +50,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.relation.rule.BindingSetSortKeyBuilder;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPORelation;
@@ -148,18 +148,18 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
         
 //        /**
 //         * Factory will resolve term identifiers in {@link IPredicate}s in the
-//         * tail of the {@link IRule} to {@link BigdataValue}s unless the
-//         * {@link IIndexManager} is an {@link IBigdataFederation}.
+//         * tail of the {@link IRule} to {@link EmbergraphValue}s unless the
+//         * {@link IIndexManager} is an {@link IEmbergraphFederation}.
 //         * 
 //         * @todo translation of term identifiers is disabled. someone is
 //         *       interrupting the thread logging the {@link RuleStats}. until i
 //         *       can figure out who that is, you will see term identifiers
-//         *       rather than {@link BigdataValue}s.
+//         *       rather than {@link EmbergraphValue}s.
 //         */
 //        public RuleStats newInstancex(IRuleState ruleState) {
 //            
 //            return new RDFRuleStats(
-//                    (indexManager instanceof IBigdataFederation<?> ? null
+//                    (indexManager instanceof IEmbergraphFederation<?> ? null
 //                            : indexManager),
 //                        getReadTimestamp(),
 //                        ruleState
@@ -171,7 +171,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
     
     /**
      * Extends {@link RuleStats}s to translate the tail predicates back into
-     * RDF by resolving the term identifiers to {@link BigdataValue}s.
+     * RDF by resolving the term identifiers to {@link EmbergraphValue}s.
      */
     private static class RDFRuleStats extends RuleStats {
 
@@ -193,7 +193,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
          * @param indexManager
          *            When non-<code>null</code>, this is used to resolve
          *            the term identifiers in the {@link IPredicate}s in the
-         *            tail of the rule to {@link BigdataValue}s.
+         *            tail of the rule to {@link EmbergraphValue}s.
          * 
          * @param ruleState
          */

@@ -28,7 +28,7 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 
@@ -128,7 +128,7 @@ public class RemoteServiceCallImpl implements RemoteServiceCall {
         */
         final RemoteRepositoryManager repo = new RemoteRepositoryManager(
                 uriStr,
-                params.getServiceOptions().isBigdataLBS(),// useLBS
+                params.getServiceOptions().isEmbergraphLBS(),// useLBS
                 client,
                 params.getTripleStore().getExecutorService()
                 );
@@ -152,7 +152,7 @@ public class RemoteServiceCallImpl implements RemoteServiceCall {
             
         }
 
-        return new Sesame2BigdataIterator<BindingSet, QueryEvaluationException>(
+        return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
                         queryResult);
 
     }

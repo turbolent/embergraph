@@ -874,7 +874,7 @@ abstract public class MetadataService extends DataService implements
     static protected class RegisterScaleOutIndexTask extends AbstractTask {
 
         /** The federation. */
-        final private IBigdataFederation fed;
+        final private IEmbergraphFederation fed;
         /** The name of the scale-out index. */
         final private String scaleOutIndexName;
         /** The metadata template for the scale-out index. */
@@ -908,7 +908,7 @@ abstract public class MetadataService extends DataService implements
          *            services.
          */
         public RegisterScaleOutIndexTask(
-                final IBigdataFederation fed,
+                final IEmbergraphFederation fed,
                 final ConcurrencyManager concurrencyManager,
                 final IResourceManager resourceManager,
                 final String metadataIndexName,
@@ -1182,7 +1182,7 @@ abstract public class MetadataService extends DataService implements
      */
     static public class DropScaleOutIndexTask extends AbstractTask {
 
-        private final IBigdataFederation fed;
+        private final IEmbergraphFederation fed;
         
         /**
          * @parma fed
@@ -1190,7 +1190,7 @@ abstract public class MetadataService extends DataService implements
          * @param name
          *            The name of the metadata index for some scale-out index.
          */
-        protected DropScaleOutIndexTask(IBigdataFederation fed,
+        protected DropScaleOutIndexTask(IEmbergraphFederation fed,
                 ConcurrencyManager concurrencyManager, String name) {
             
             super(concurrencyManager, ITx.UNISOLATED, name);

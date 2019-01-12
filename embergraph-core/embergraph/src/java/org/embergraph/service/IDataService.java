@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bop.engine.IQueryPeer;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IRangeQuery;
@@ -474,7 +474,7 @@ public interface IDataService extends ITxCommitProtocol, IService, IRemoteExecut
      * 
      * @deprecated This was a first try at adding support for reading low-level records
      *       from a journal or index segment in support of the
-     *       {@link BigdataFileSystem}.
+     *       {@link EmbergraphFileSystem}.
      *       <p>
      *       The API should provide a means to obtain a socket from which record
      *       data may be streamed. The client sends the resource identifier

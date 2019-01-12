@@ -30,9 +30,9 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.util.Bytes;
 
 /**
@@ -77,7 +77,7 @@ public class TestTermIV extends TestCase2 {
 
     public void test_TermIV_isExtensionIV() {
 
-        final TermId<BigdataURI> iv = new TermId<BigdataURI>(VTE.URI,
+        final TermId<EmbergraphURI> iv = new TermId<EmbergraphURI>(VTE.URI,
                 12L);
 
         assertEquals(VTE.URI, iv.getVTE());
@@ -122,7 +122,7 @@ public class TestTermIV extends TestCase2 {
 
         assertEquals(iv, iv2);
 
-        final BigdataValue value = BigdataValueFactoryImpl.getInstance(
+        final EmbergraphValue value = EmbergraphValueFactoryImpl.getInstance(
                 getName()).createLiteral("foo");
         
         iv2.setValue(value);
@@ -199,7 +199,7 @@ public class TestTermIV extends TestCase2 {
             final long termId = IVUtility.PACK_TIDS ? Math.abs(r.nextLong())
                     : r.nextLong();
 
-            final TermId<?> v = new TermId<BigdataValue>(vte, termId);
+            final TermId<?> v = new TermId<EmbergraphValue>(vte, termId);
 
             assertFalse(v.isInline());
 

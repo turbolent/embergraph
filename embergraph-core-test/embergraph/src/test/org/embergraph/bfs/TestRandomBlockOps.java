@@ -30,8 +30,6 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.embergraph.bfs.BigdataFileSystem;
-
 import junit.framework.TestCase;
 
 /**
@@ -602,7 +600,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
             assert id != null;
             assert id.length() > 0;
             
-            assert block >= 0 && block <= BigdataFileSystem.MAX_BLOCK;
+            assert block >= 0 && block <= EmbergraphFileSystem.MAX_BLOCK;
             
             this.id = id;
             
@@ -674,7 +672,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
      */
     protected static class StressTest {
         
-        final BigdataFileSystem repo;
+        final EmbergraphFileSystem repo;
         
         final int limit;
         
@@ -705,7 +703,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
          */
         final AtomicLong blockCount = new AtomicLong(0L);
         
-        public StressTest(BigdataFileSystem repo,int limit,Op gen) {
+        public StressTest(EmbergraphFileSystem repo,int limit,Op gen) {
             
             this.repo = repo;
             

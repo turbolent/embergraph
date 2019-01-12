@@ -47,22 +47,22 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 /**
  * Test suite for ticket #1388: xsd:date function
  */
-public class TestTicket1388 extends ProxyBigdataSailTestCase {
+public class TestTicket1388 extends ProxyEmbergraphSailTestCase {
 
     public Properties getTriplesNoInference() {
         
         Properties props = super.getProperties();
         
         // triples with sids
-        props.setProperty(BigdataSail.Options.QUADS, "false");
-        props.setProperty(BigdataSail.Options.STATEMENT_IDENTIFIERS, "false");
+        props.setProperty(EmbergraphSail.Options.QUADS, "false");
+        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
         
         // no inference
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -87,17 +87,17 @@ public class TestTicket1388 extends ProxyBigdataSailTestCase {
      */
     public void testDateFunction() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
 
         try {
 
             sail.initialize();
             
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             
             cxn.begin();
            

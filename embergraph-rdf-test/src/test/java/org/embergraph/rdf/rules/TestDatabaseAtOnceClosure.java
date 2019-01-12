@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Statement;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.Repository;
@@ -28,8 +29,7 @@ import org.openrdf.sail.memory.MemoryStore;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.axioms.RdfsAxioms;
 import org.embergraph.rdf.inf.ClosureStats;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.DataLoader;
@@ -880,13 +880,13 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
         
         try {
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.embergraph.org/a");
-            final BigdataURI B = f.createURI("http://www.embergraph.org/b");
-            final BigdataURI C = f.createURI("http://www.embergraph.org/c");
-            final BigdataURI D = f.createURI("http://www.embergraph.org/d");
-            final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
+            final EmbergraphURI A = f.createURI("http://www.embergraph.org/a");
+            final EmbergraphURI B = f.createURI("http://www.embergraph.org/b");
+            final EmbergraphURI C = f.createURI("http://www.embergraph.org/c");
+            final EmbergraphURI D = f.createURI("http://www.embergraph.org/d");
+            final EmbergraphURI SCO = f.asValue(RDFS.SUBCLASSOF);
             
             final Vocabulary vocab = store.getVocabulary();
 

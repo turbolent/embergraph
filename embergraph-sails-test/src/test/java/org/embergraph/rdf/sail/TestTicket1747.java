@@ -20,6 +20,7 @@ package org.embergraph.rdf.sail;
 
 import java.io.IOException;
 import java.util.List;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -28,9 +29,8 @@ import org.openrdf.rio.RDFParseException;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sail.sparql.ast.*;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -60,22 +60,22 @@ public class TestTicket1747 extends QuadsTestCase {
 
 //		Setup a triple store using a vocabulary that declares xsd:dateTime (this should be in the default vocabulary).
 		
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
-			executeQuery(new BigdataSailRepository(sail));
+			executeQuery(new EmbergraphSailRepository(sail));
 		} finally {
 			sail.__tearDownUnitTest();
 		}
 	}
 
-	private void executeQuery(final BigdataSailRepository repo)
+	private void executeQuery(final EmbergraphSailRepository repo)
 			throws RepositoryException, MalformedQueryException,
 			QueryEvaluationException, RDFParseException, IOException, VisitorException {
 		try {
 			repo.initialize();
-			final BigdataSailRepositoryConnection conn = repo.getConnection();
+			final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 			try {
-				BigdataValueFactory vf = conn.getValueFactory();
+				EmbergraphValueFactory vf = conn.getValueFactory();
 			
 				//				Verify that you can resolve xsd:dateTime to a non-mock IV.
 				IV xsdDateTimeIV = conn.getTripleStore().getLexiconRelation().resolve(vf.createURI(XMLSchema.DATETIME.stringValue())).getIV();
@@ -102,7 +102,7 @@ public class TestTicket1747 extends QuadsTestCase {
 						"FILTER (day(?date) = day(now()))\r\n" + 
 						"}\r\n" + 
 						"LIMIT 10"; 
-		        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(query, null);
+		        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(query, null);
 
 //				Verify that re-resolution of xsd:dateTime does not return a MockIV.
 		        xsdDateTimeIV = conn.getTripleStore().getLexiconRelation().resolve(XMLSchema.DATETIME).getIV();
@@ -134,7 +134,7 @@ public class TestTicket1747 extends QuadsTestCase {
 
 	private void checkNode(BOp bop) {
 		if (bop instanceof ConstantNode) {
-			BigdataValue value = ((ConstantNode)bop).getValue();
+			EmbergraphValue value = ((ConstantNode)bop).getValue();
 			if (XMLSchema.DATETIME.equals(value)) {
 				IV xsdDateTimeIV = value.getIV();
 		        assertFalse(xsdDateTimeIV.isNullIV());

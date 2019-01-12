@@ -32,9 +32,9 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.spo.ISPO;
@@ -110,22 +110,22 @@ public class TestSlice extends AbstractRuleTestCase {
              * The slice will let us page through the result set.
              */
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI foo = f.createURI("http://www.embergraph.org/foo");
-            final BigdataURI bar = f.createURI("http://www.embergraph.org/bar");
+            final EmbergraphURI foo = f.createURI("http://www.embergraph.org/foo");
+            final EmbergraphURI bar = f.createURI("http://www.embergraph.org/bar");
 
-            final BigdataURI x0 = f.createURI("http://www.embergraph.org/x0");
-            final BigdataURI x1 = f.createURI("http://www.embergraph.org/x1");
-            final BigdataURI x2 = f.createURI("http://www.embergraph.org/x2");
+            final EmbergraphURI x0 = f.createURI("http://www.embergraph.org/x0");
+            final EmbergraphURI x1 = f.createURI("http://www.embergraph.org/x1");
+            final EmbergraphURI x2 = f.createURI("http://www.embergraph.org/x2");
 
-            final BigdataURI y0 = f.createURI("http://www.embergraph.org/y0");
-            final BigdataURI y1 = f.createURI("http://www.embergraph.org/y1");
-            final BigdataURI y2 = f.createURI("http://www.embergraph.org/y2");
+            final EmbergraphURI y0 = f.createURI("http://www.embergraph.org/y0");
+            final EmbergraphURI y1 = f.createURI("http://www.embergraph.org/y1");
+            final EmbergraphURI y2 = f.createURI("http://www.embergraph.org/y2");
             
-            final BigdataURI z0 = f.createURI("http://www.embergraph.org/z0");
-            final BigdataURI z1 = f.createURI("http://www.embergraph.org/z1");
-            final BigdataURI z2 = f.createURI("http://www.embergraph.org/z2");
+            final EmbergraphURI z0 = f.createURI("http://www.embergraph.org/z0");
+            final EmbergraphURI z1 = f.createURI("http://www.embergraph.org/z1");
+            final EmbergraphURI z2 = f.createURI("http://www.embergraph.org/z2");
             
             /*
              * Define the terms that we will be using.
@@ -135,7 +135,7 @@ public class TestSlice extends AbstractRuleTestCase {
              * 
              * Note: The SLICE tests below *DEPEND* on this order constraint!!!
              */
-            store.addTerms(new BigdataValue[] {
+            store.addTerms(new EmbergraphValue[] {
                     
                     foo, bar,
 
@@ -275,7 +275,7 @@ public class TestSlice extends AbstractRuleTestCase {
      * @return
      */
     protected IRule newRule(AbstractTripleStore store, ISlice slice,
-            BigdataValue foo, BigdataValue bar) {
+            EmbergraphValue foo, EmbergraphValue bar) {
         
         assert foo.getIV() != NULL;
         assert bar.getIV() != NULL;

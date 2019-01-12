@@ -20,6 +20,7 @@ package org.embergraph.rdf.internal;
 
 import java.util.TimeZone;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
@@ -29,9 +30,8 @@ import org.embergraph.rdf.internal.impl.extensions.XSDStringExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.service.geospatial.GeoSpatialConfig;
@@ -40,7 +40,7 @@ import org.embergraph.service.geospatial.GeoSpatialConfig;
  * Configuration determines which RDF Values are inlined into the statement
  * indices rather than being assigned term identifiers by the lexicon.
  */
-public interface ILexiconConfiguration<V extends BigdataValue> {
+public interface ILexiconConfiguration<V extends EmbergraphValue> {
 
     /**
      * Return the maximum length of a Unicode string which may be inlined into
@@ -105,9 +105,9 @@ public interface ILexiconConfiguration<V extends BigdataValue> {
      * Create an inline {@link IV} for the supplied RDF value if inlining is
      * supported for the supplied RDF value.
      * <p>
-     * Note: If the supplied RDF value is a {@link BigdataValue} then <em>the
+     * Note: If the supplied RDF value is a {@link EmbergraphValue} then <em>the
      * {@link IV} will be set as a side-effect</em> and will be available from
-     * {@link BigdataValue#getIV()}.
+     * {@link EmbergraphValue#getIV()}.
      *
      * @param value
      *            The RDF value
@@ -124,7 +124,7 @@ public interface ILexiconConfiguration<V extends BigdataValue> {
      * @return the inflated localName
      */
     String getInlineURILocalNameFromDelegate(final URI namespace,
-            final AbstractLiteralIV<BigdataLiteral, ?> delegate);
+            final AbstractLiteralIV<EmbergraphLiteral, ?> delegate);
 
     /**
      * Create an RDF value from an {@link AbstractInlineExtensionIV}. The
@@ -163,7 +163,7 @@ public interface ILexiconConfiguration<V extends BigdataValue> {
     /**
      * Return the value factory for the lexicon.
      */
-    BigdataValueFactory getValueFactory();
+    EmbergraphValueFactory getValueFactory();
     
     /**
      * Should the specified datatype be included in the text index (even though

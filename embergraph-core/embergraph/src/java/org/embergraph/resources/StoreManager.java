@@ -58,7 +58,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.IRangeQuery;
@@ -103,7 +103,7 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 import org.embergraph.service.EventType;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.MetadataService;
 import org.embergraph.sparse.SparseRowStore;
@@ -1448,7 +1448,7 @@ abstract public class StoreManager extends ResourceEvents implements
             }
 
 			try {
-				final IBigdataFederation<?> fed = getFederation();
+				final IEmbergraphFederation<?> fed = getFederation();
 				if (fed == null) {
 					/*
 					 * Some of the unit tests do not start the txs until after
@@ -2602,7 +2602,7 @@ abstract public class StoreManager extends ResourceEvents implements
         }
 
         @Override
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
             
             return getFederation().getGlobalFileSystem();
             
@@ -3297,7 +3297,7 @@ abstract public class StoreManager extends ResourceEvents implements
          */
         {
 
-            final IBigdataFederation fed;
+            final IEmbergraphFederation fed;
             try {
 
                 fed = getFederation();

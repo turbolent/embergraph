@@ -81,7 +81,7 @@
    <param-value>org.embergraph.blueprints.webapp.BlueprintsServlet</param-value>
   </context-param>
   <listener>
-   <listener-class>org.embergraph.rdf.sail.webapp.BigdataRDFServletContextListener</listener-class>
+   <listener-class>org.embergraph.rdf.sail.webapp.EmbergraphRDFServletContextListener</listener-class>
   </listener>
   <servlet>
    <servlet-name>REST API</servlet-name>

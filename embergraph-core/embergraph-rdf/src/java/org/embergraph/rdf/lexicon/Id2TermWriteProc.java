@@ -28,7 +28,7 @@ import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.service.ndx.NopAggregator;
 
@@ -139,7 +139,7 @@ public class Id2TermWriteProc extends AbstractKeyArrayIndexProcedure<Void> imple
     /**
      * Conditionally inserts each key-value pair into the index. The keys are
      * the term identifiers. The values are the terms as serialized by
-     * {@link BigdataValueSerializer}. Since a conditional insert is used, the
+     * {@link EmbergraphValueSerializer}. Since a conditional insert is used, the
      * operation does not cause terms that are already known to the ids index to
      * be re-inserted, thereby reducing writes of dirty index nodes.
      * 
@@ -229,11 +229,11 @@ public class Id2TermWriteProc extends AbstractKeyArrayIndexProcedure<Void> imple
 //                         * distinct literals are are mapped onto the same point
 //                         * in the data type space (the same key). However,
 //                         * comparison based on data type equality is not really
-//                         * provided for by BigdataLiteral, so we get into
+//                         * provided for by EmbergraphLiteral, so we get into
 //                         * trouble if we attempt to detect errors based on
 //                         * datatype literals.
 //                         */
-//                        final BigdataValueSerializer valSer = new BigdataValueSerializer(
+//                        final EmbergraphValueSerializer valSer = new EmbergraphValueSerializer(
 //                                new ValueFactoryImpl());
 //
 //                        final Value term = valSer.deserialize(val);

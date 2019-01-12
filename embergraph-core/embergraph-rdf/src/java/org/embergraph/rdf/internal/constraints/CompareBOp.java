@@ -21,6 +21,7 @@ package org.embergraph.rdf.internal.constraints;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.query.algebra.Compare.CompareOp;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
@@ -37,7 +38,6 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 
 /**
@@ -110,8 +110,8 @@ public class CompareBOp extends XSDBooleanIVValueExpression
     }
 
     public static boolean compare( 
-    		final IV<BigdataValue, ?> left,
-            final IV<BigdataValue, ?> right,
+    		final IV<EmbergraphValue, ?> left,
+            final IV<EmbergraphValue, ?> right,
             final CompareOp op) {
 
         if (log.isDebugEnabled()) {
@@ -119,8 +119,8 @@ public class CompareBOp extends XSDBooleanIVValueExpression
             log.debug(right);
         }
 
-//    	final BigdataValue val1 = left.getValue();
-//    	final BigdataValue val2 = right.getValue();
+//    	final EmbergraphValue val1 = left.getValue();
+//    	final EmbergraphValue val2 = right.getValue();
 //    	
 //    	try {
 //    	
@@ -169,8 +169,8 @@ public class CompareBOp extends XSDBooleanIVValueExpression
     }
     
     private static boolean compareLiterals(
-    		final IV<BigdataValue, ?> left,
-    		final IV<BigdataValue, ?> right,
+    		final IV<EmbergraphValue, ?> left,
+    		final IV<EmbergraphValue, ?> right,
     		final CompareOp op) {
     	
     	/*

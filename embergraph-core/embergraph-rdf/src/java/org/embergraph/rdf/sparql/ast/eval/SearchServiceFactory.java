@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sparql.ast.eval;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -30,6 +29,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -45,18 +45,16 @@ import org.embergraph.rdf.internal.constraints.RangeBOp;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.lexicon.ITextIndexer;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
-import org.embergraph.rdf.sparql.ast.service.BigdataServiceCall;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphServiceCall;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
-import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
@@ -93,24 +91,24 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
      * Note: This could extend the base class to allow for search service
      * configuration options.
      */
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public SearchServiceFactory() {
         
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         
         serviceOptions.setRunFirst(true);
         
     }
     
     @Override
-    public BigdataNativeServiceOptions getServiceOptions() {
+    public EmbergraphNativeServiceOptions getServiceOptions() {
 
         return serviceOptions;
         
     }
     
-    public BigdataServiceCall create(final ServiceCallCreateParams params) {
+    public EmbergraphServiceCall create(final ServiceCallCreateParams params) {
 
         if (params == null)
             throw new IllegalArgumentException();
@@ -353,7 +351,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
      * is not a {@link Serializable} object. It MUST run on the query
      * controller.
      */
-    private static class SearchCall implements BigdataServiceCall {
+    private static class SearchCall implements EmbergraphServiceCall {
 
         private final AbstractTripleStore store;
         private final IServiceOptions serviceOptions;
@@ -685,7 +683,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
                     new Constant(hit.getDocId()), // searchVar
                     new Constant(new XSDNumericIV(hit.getCosine())), // cosine
                     new Constant(new XSDNumericIV(hit.getRank())), // rank
-                    new Constant(((BigdataLiteral) query).getIV())
+                    new Constant(((EmbergraphLiteral) query).getIV())
                 };
         
             final IBindingSet bs = new ListBindingSet(vars, vals);
@@ -693,8 +691,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
             if (log.isTraceEnabled()) {
                 log.trace(bs);
                 log.trace(query.getClass());
-                log.trace(((BigdataLiteral) query).getIV());
-                log.trace(((BigdataLiteral) query).getIV().getClass());
+                log.trace(((EmbergraphLiteral) query).getIV());
+                log.trace(((EmbergraphLiteral) query).getIV().getClass());
             }
             
             return bs;

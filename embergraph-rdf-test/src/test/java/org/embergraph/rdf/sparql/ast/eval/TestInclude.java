@@ -48,13 +48,12 @@ import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IBTreeManager;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.NamedSubqueryRoot;
-import org.embergraph.rdf.sparql.ast.eval.TestTCK.TCKStressTests;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.sparql.ast.ssets.SolutionSetManager;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -144,7 +143,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
 
         final AbstractTripleStore tripleStore = testHelper.getTripleStore();
         
-        final BigdataValueFactory vf = tripleStore.getValueFactory();
+        final EmbergraphValueFactory vf = tripleStore.getValueFactory();
         
 		final QueryEngine queryEngine = QueryEngineFactory.getInstance()
 				.getQueryController(tripleStore.getIndexManager());
@@ -159,23 +158,23 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
         final IVariable<?> y = Var.var("y");
         final IVariable<?> z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(vf.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 //		two.setValue(vf.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 //		three.setValue(vf.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(vf.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 		five.setValue(vf.createLiteral(5));
 		
@@ -277,7 +276,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
 
         final AbstractTripleStore tripleStore = testHelper.getTripleStore();
         
-        final BigdataValueFactory vf = tripleStore.getValueFactory();
+        final EmbergraphValueFactory vf = tripleStore.getValueFactory();
         
         final QueryEngine queryEngine = QueryEngineFactory.getInstance()
                 .getQueryController(tripleStore.getIndexManager());
@@ -292,33 +291,33 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
         final IVariable<?> y = Var.var("y");
 
         // Resolve terms pre-loaded into the kb.
-        final BigdataURI Mike = vf.createURI("http://www.embergraph.org/Mike");
-        final BigdataURI Bryan = vf.createURI("http://www.embergraph.org/Bryan");
-        final BigdataURI DC = vf.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI Mike = vf.createURI("http://www.embergraph.org/Mike");
+        final EmbergraphURI Bryan = vf.createURI("http://www.embergraph.org/Bryan");
+        final EmbergraphURI DC = vf.createURI("http://www.embergraph.org/DC");
         {
-            tripleStore.addTerms(new BigdataValue[] { Mike, Bryan, DC });
+            tripleStore.addTerms(new EmbergraphValue[] { Mike, Bryan, DC });
             assertNotNull(Mike.getIV());
             assertNotNull(Bryan.getIV());
             assertNotNull(DC.getIV());
         }
 
-        final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+        final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
                 1);
         one.setValue(vf.createLiteral(1));
         
-        final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+        final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
                 2);
         two.setValue(vf.createLiteral(2));
         
-//      final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+//      final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 //              3);
 //      three.setValue(vf.createLiteral(3));
         
-        final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+        final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
                 4);
         four.setValue(vf.createLiteral(4));
         
-//      final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+//      final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 //              5);
 //      five.setValue(vf.createLiteral(5));
         
@@ -426,7 +425,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
 
         final AbstractTripleStore tripleStore = testHelper.getTripleStore();
         
-        final BigdataValueFactory vf = tripleStore.getValueFactory();
+        final EmbergraphValueFactory vf = tripleStore.getValueFactory();
         
 		final QueryEngine queryEngine = QueryEngineFactory.getInstance()
 				.getQueryController(tripleStore.getIndexManager());
@@ -441,33 +440,33 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
         final IVariable<?> y = Var.var("y");
 
         // Resolve terms pre-loaded into the kb.
-        final BigdataURI Mike = vf.createURI("http://www.embergraph.org/Mike");
-        final BigdataURI Bryan = vf.createURI("http://www.embergraph.org/Bryan");
-        final BigdataURI DC = vf.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI Mike = vf.createURI("http://www.embergraph.org/Mike");
+        final EmbergraphURI Bryan = vf.createURI("http://www.embergraph.org/Bryan");
+        final EmbergraphURI DC = vf.createURI("http://www.embergraph.org/DC");
 		{
-			tripleStore.addTerms(new BigdataValue[] { Mike, Bryan, DC });
+			tripleStore.addTerms(new EmbergraphValue[] { Mike, Bryan, DC });
 			assertNotNull(Mike.getIV());
 			assertNotNull(Bryan.getIV());
 			assertNotNull(DC.getIV());
 		}
 
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(vf.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(vf.createLiteral(2));
 		
-//		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+//		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 //				3);
 //		three.setValue(vf.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(vf.createLiteral(4));
 		
-//		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+//		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 //				5);
 //		five.setValue(vf.createLiteral(5));
 		
@@ -611,7 +610,7 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
 
             final AbstractTripleStore tripleStore = testHelper.getTripleStore();
 
-            final BigdataValueFactory vf = tripleStore.getValueFactory();
+            final EmbergraphValueFactory vf = tripleStore.getValueFactory();
 
             final QueryEngine queryEngine = QueryEngineFactory.getInstance()
                 .getQueryController(tripleStore.getIndexManager());
@@ -626,22 +625,22 @@ public class TestInclude extends AbstractDataDrivenSPARQLTestCase {
             final IVariable<?> y = Var.var("y");
             final IVariable<?> z = Var.var("z");
 
-            final XSDNumericIV<BigdataLiteral> one = 
-                new XSDNumericIV<BigdataLiteral>(1);
+            final XSDNumericIV<EmbergraphLiteral> one =
+                new XSDNumericIV<EmbergraphLiteral>(1);
             one.setValue(vf.createLiteral(1));
 
-            final XSDNumericIV<BigdataLiteral> two = 
-                new XSDNumericIV<BigdataLiteral>(2);
+            final XSDNumericIV<EmbergraphLiteral> two =
+                new XSDNumericIV<EmbergraphLiteral>(2);
 
-            final XSDNumericIV<BigdataLiteral> three = 
-                new XSDNumericIV<BigdataLiteral>(3);
+            final XSDNumericIV<EmbergraphLiteral> three =
+                new XSDNumericIV<EmbergraphLiteral>(3);
 
-            final XSDNumericIV<BigdataLiteral> four = 
-                new XSDNumericIV<BigdataLiteral>(4);
+            final XSDNumericIV<EmbergraphLiteral> four =
+                new XSDNumericIV<EmbergraphLiteral>(4);
             four.setValue(vf.createLiteral(4));
 
-           final XSDNumericIV<BigdataLiteral> five = 
-                new XSDNumericIV<BigdataLiteral>(5);
+           final XSDNumericIV<EmbergraphLiteral> five =
+                new XSDNumericIV<EmbergraphLiteral>(5);
            five.setValue(vf.createLiteral(5));
 
            final List<IBindingSet> bsets = new LinkedList<IBindingSet>();

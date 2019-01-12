@@ -58,7 +58,7 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.InnerCause;
 
 /**
@@ -818,7 +818,7 @@ public class TestSliceOp extends TestCase2 {
         
         private final IBlockingBuffer<IBindingSet[]> sink;
         
-        public MockRunningQuery(final IBigdataFederation<?> fed,
+        public MockRunningQuery(final IEmbergraphFederation<?> fed,
                 final IIndexManager indexManager,
                 final IBlockingBuffer<IBindingSet[]> sink) {
 

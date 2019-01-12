@@ -28,6 +28,11 @@ import java.util.Properties;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -48,11 +53,6 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.Id2TermWriteProc;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.lexicon.Term2IdWriteProc;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
@@ -308,9 +308,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         try {
         
-            final BigdataValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
             
-            final BigdataValue[] terms = new BigdataValue[] {
+            final EmbergraphValue[] terms = new EmbergraphValue[] {
     
                 valueFactory.createURI("http://www.embergraph.org"),
 
@@ -399,7 +399,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
 
     /**
-     * Unit test presents an array of {@link BigdataValue}s that contains
+     * Unit test presents an array of {@link EmbergraphValue}s that contains
      * duplicates and verifies that the assigned term identifiers are
      * consistent.
      */
@@ -409,15 +409,15 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         try {
         
-            final BigdataValueFactory valueFactory = store.getValueFactory();
-            final BigdataURI x = valueFactory.createURI("http://www.foo.org/x");
-            final BigdataURI y = valueFactory.createURI("http://www.foo.org/y");
-            final BigdataLiteral z = valueFactory.createLiteral("z");
-            final BigdataBNode b = valueFactory.createBNode();
-            final BigdataBNode c = valueFactory.createBNode("_c");
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphURI x = valueFactory.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = valueFactory.createURI("http://www.foo.org/y");
+            final EmbergraphLiteral z = valueFactory.createLiteral("z");
+            final EmbergraphBNode b = valueFactory.createBNode();
+            final EmbergraphBNode c = valueFactory.createBNode("_c");
             
             // add terms - lots of duplicates here.
-            store.addTerms(new BigdataValue[] { x, y, b, c, x, b, z, z, c, y, x, });
+            store.addTerms(new EmbergraphValue[] { x, y, b, c, x, b, z, z, c, y, x, });
             
             // none are NULL.
             assertNotSame(x.getIV(),NULL);
@@ -464,9 +464,9 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
     
     /**
-     * Unit test verifies that {@link BigdataValue}s whose term identifiers
+     * Unit test verifies that {@link EmbergraphValue}s whose term identifiers
      * have already been assigned are unchanged by
-     * {@link LexiconRelation#addTerms(BigdataValue[], int, boolean)}.
+     * {@link LexiconRelation#addTerms(EmbergraphValue[], int, boolean)}.
      * <p>
      * Note: {@link BNode}s are not tested for this property since they will be
      * assigned a new term identifier each time. Blank nodes are ONLY made
@@ -479,14 +479,14 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         try {
         
-            final BigdataValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
             
-            final BigdataURI x = valueFactory.createURI("http://www.foo.org/x");
-            final BigdataURI y = valueFactory.createURI("http://www.foo.org/y");
-            final BigdataLiteral z = valueFactory.createLiteral("z");
+            final EmbergraphURI x = valueFactory.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = valueFactory.createURI("http://www.foo.org/y");
+            final EmbergraphLiteral z = valueFactory.createLiteral("z");
             
             // add terms - lots of duplicates here.
-            store.addTerms(new BigdataValue[] { x, y, x, z, y, z});
+            store.addTerms(new EmbergraphValue[] { x, y, x, z, y, z});
             
             final IV _x = x.getIV();
             final IV _y = y.getIV();
@@ -519,7 +519,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
              */
             
             // add terms - lots of duplicates here.
-            store.addTerms(new BigdataValue[] { x, y, x, z, y, z});
+            store.addTerms(new EmbergraphValue[] { x, y, x, z, y, z});
 
             assertEquals(_x, x.getIV());
             assertEquals(_y, y.getIV());
@@ -531,12 +531,12 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
              */
             {
 
-                final BigdataURI x1 = valueFactory.createURI("http://www.foo.org/x");
-                final BigdataURI y1 = valueFactory.createURI("http://www.foo.org/y");
-                final BigdataLiteral z1 = valueFactory.createLiteral("z");
+                final EmbergraphURI x1 = valueFactory.createURI("http://www.foo.org/x");
+                final EmbergraphURI y1 = valueFactory.createURI("http://www.foo.org/y");
+                final EmbergraphLiteral z1 = valueFactory.createLiteral("z");
                 
                 // add terms - lots of duplicates here.
-                store.addTerms(new BigdataValue[] { x1, y1, x1, z1, y1, z1});
+                store.addTerms(new EmbergraphValue[] { x1, y1, x1, z1, y1, z1});
 
                 // same term identifiers were assigned.
                 assertEquals(_x, x1.getIV());
@@ -711,7 +711,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
              * Create a variant array of BigdataValues whose IVs are set as a
              * side-effect.
              */
-            final BigdataValue[] terms = new BigdataValue[values.length];
+            final EmbergraphValue[] terms = new EmbergraphValue[values.length];
 
             for (int i = 0; i < values.length; i++) {
             
@@ -979,13 +979,13 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             assertSameIterator(new SPO[]{},
                     store.getAccessPath(NULL,NULL,NULL).iterator());
             
-            final BigdataValueFactory valueFactory = store.getValueFactory();
-            final BigdataURI A = valueFactory.createURI("http://www.embergraph.org/A");
-            final BigdataURI B = valueFactory.createURI("http://www.embergraph.org/B");
-            final BigdataURI C = valueFactory.createURI("http://www.embergraph.org/C");
-            final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphURI A = valueFactory.createURI("http://www.embergraph.org/A");
+            final EmbergraphURI B = valueFactory.createURI("http://www.embergraph.org/B");
+            final EmbergraphURI C = valueFactory.createURI("http://www.embergraph.org/C");
+            final EmbergraphURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
 
-            store.addTerms(new BigdataValue[] { A, B, C, rdfType });
+            store.addTerms(new EmbergraphValue[] { A, B, C, rdfType });
             
             store.addTerm(A);
             store.addTerm(B);
@@ -1189,15 +1189,15 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             assertSameIterator(new SPO[]{},
                     store.getAccessPath(NULL,NULL,NULL).iterator());
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI A = f.createURI("http://www.embergraph.org/A");
-            final BigdataURI B = f.createURI("http://www.embergraph.org/B");
-            final BigdataURI C = f.createURI("http://www.embergraph.org/C");
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI A = f.createURI("http://www.embergraph.org/A");
+            final EmbergraphURI B = f.createURI("http://www.embergraph.org/B");
+            final EmbergraphURI C = f.createURI("http://www.embergraph.org/C");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
             
             // assign term identifiers for reuse below.
-            store.addTerms(new BigdataValue[] { A, B, C, rdfType });
+            store.addTerms(new EmbergraphValue[] { A, B, C, rdfType });
             
             {
 
@@ -1266,14 +1266,14 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         try {
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI v1 = f.createURI("http://www.embergraph.org/1");
-            final BigdataURI v2 = f.createURI("http://www.embergraph.org/2");
-            final BigdataURI v3 = f.createURI("http://www.embergraph.org/3");
+            final EmbergraphURI v1 = f.createURI("http://www.embergraph.org/1");
+            final EmbergraphURI v2 = f.createURI("http://www.embergraph.org/2");
+            final EmbergraphURI v3 = f.createURI("http://www.embergraph.org/3");
             
             // assign term identifiers.
-            store.addTerms(new BigdataValue[]{v1,v2,v3});
+            store.addTerms(new EmbergraphValue[]{v1,v2,v3});
             
             final SPO[] a = new SPO[] {
             
@@ -1324,12 +1324,12 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             assertSameIterator(new Statement[] {}, store.getAccessPath(NULL,
                     NULL, NULL).iterator());
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI A = f.createURI("http://www.embergraph.org/A");
-            final BigdataURI B = f.createURI("http://www.embergraph.org/B");
-            final BigdataURI C = f.createURI("http://www.embergraph.org/C");
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI A = f.createURI("http://www.embergraph.org/A");
+            final EmbergraphURI B = f.createURI("http://www.embergraph.org/B");
+            final EmbergraphURI C = f.createURI("http://www.embergraph.org/C");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
             {
 
@@ -1397,13 +1397,13 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
              * statement identifier).
              */
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI x = f.createURI("http://www.foo.org/x1");
-            final BigdataURI y = f.createURI("http://www.foo.org/y2");
-            final BigdataURI z = f.createURI("http://www.foo.org/z3");
+            final EmbergraphURI x = f.createURI("http://www.foo.org/x1");
+            final EmbergraphURI y = f.createURI("http://www.foo.org/y2");
+            final EmbergraphURI z = f.createURI("http://www.foo.org/z3");
     
-            store.addTerms(new BigdataValue[] { x, y, z });
+            store.addTerms(new EmbergraphValue[] { x, y, z });
             
             final IV x1 = x.getIV();
             final IV y2 = y.getIV();
@@ -1474,14 +1474,14 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             assertSameIterator(new Statement[] {}, store.getAccessPath(NULL,
                     NULL, NULL).iterator());
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI A = f.createURI("http://www.embergraph.org/A");
-            final BigdataURI B = f.createURI("http://www.embergraph.org/B");
-            final BigdataURI C = f.createURI("http://www.embergraph.org/C");
-            final BigdataURI Person = f.asValue(FOAF.PERSON);
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI foafKnows = f.asValue(FOAF.KNOWS);
+            final EmbergraphURI A = f.createURI("http://www.embergraph.org/A");
+            final EmbergraphURI B = f.createURI("http://www.embergraph.org/B");
+            final EmbergraphURI C = f.createURI("http://www.embergraph.org/C");
+            final EmbergraphURI Person = f.asValue(FOAF.PERSON);
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI foafKnows = f.asValue(FOAF.KNOWS);
 
             {
 
@@ -1503,31 +1503,31 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
             // Empty input.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {};
+                final EmbergraphTriplePattern[] triplePatterns = new EmbergraphTriplePattern[] {};
                 assertSameStatements(
                         new Statement[] {
                         },
-                        store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
+                        store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(
                                 triplePatterns)));
             }
 
             // Single pattern matching one statement.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
-                    new BigdataTriplePattern(A, rdfType, null),
+                final EmbergraphTriplePattern[] triplePatterns = new EmbergraphTriplePattern[] {
+                    new EmbergraphTriplePattern(A, rdfType, null),
                 };
                 assertSameStatements(
                         new Statement[] {
                         new StatementImpl(A, rdfType, Person),
                         },
-                        store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
+                        store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(
                                 triplePatterns)));
             }
 
             // Single pattern matching three statements.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
-                    new BigdataTriplePattern(null, rdfType, Person),
+                final EmbergraphTriplePattern[] triplePatterns = new EmbergraphTriplePattern[] {
+                    new EmbergraphTriplePattern(null, rdfType, Person),
                 };
                 assertSameStatements(
                         new Statement[] {
@@ -1535,15 +1535,15 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
                                 new StatementImpl(B, rdfType, Person),
                                 new StatementImpl(C, rdfType, Person),
                         },
-                        store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
+                        store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(
                                 triplePatterns)));
             }
 
             // Two patterns matching various statements.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
-                        new BigdataTriplePattern(A, foafKnows, null),
-                        new BigdataTriplePattern(null, rdfType, Person),
+                final EmbergraphTriplePattern[] triplePatterns = new EmbergraphTriplePattern[] {
+                        new EmbergraphTriplePattern(A, foafKnows, null),
+                        new EmbergraphTriplePattern(null, rdfType, Person),
                 };
                 assertSameIteratorAnyOrder(
                         new Statement[] {
@@ -1552,16 +1552,16 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
                                 new StatementImpl(B, rdfType, Person),
                                 new StatementImpl(C, rdfType, Person),
                         },
-                        store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
+                        store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(
                                 triplePatterns)));
             }
 
             // Three patterns, two of which match various statements.
             {
-                final BigdataTriplePattern[] triplePatterns = new BigdataTriplePattern[] {
-                        new BigdataTriplePattern(A, foafKnows, null),
-                        new BigdataTriplePattern(null, rdfType, Person),
-                        new BigdataTriplePattern(rdfType, foafKnows, null),// no match
+                final EmbergraphTriplePattern[] triplePatterns = new EmbergraphTriplePattern[] {
+                        new EmbergraphTriplePattern(A, foafKnows, null),
+                        new EmbergraphTriplePattern(null, rdfType, Person),
+                        new EmbergraphTriplePattern(rdfType, foafKnows, null),// no match
                 };
                 assertSameIteratorAnyOrder(
                         new Statement[] {
@@ -1570,7 +1570,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
                                 new StatementImpl(B, rdfType, Person),
                                 new StatementImpl(C, rdfType, Person),
                         },
-                        store.getStatements(new ChunkedArrayIterator<BigdataTriplePattern>(
+                        store.getStatements(new ChunkedArrayIterator<EmbergraphTriplePattern>(
                                 triplePatterns)));
             }
 

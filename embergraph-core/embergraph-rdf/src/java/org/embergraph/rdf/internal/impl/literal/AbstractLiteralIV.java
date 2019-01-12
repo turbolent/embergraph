@@ -32,7 +32,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.InlineLiteralIV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Abstract base class for RDF datatype literals adds primitive data type
@@ -48,7 +48,7 @@ import org.embergraph.rdf.model.BigdataLiteral;
  * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z
  *          thompsonbry $
  */
-abstract public class AbstractLiteralIV<V extends BigdataLiteral, T>
+abstract public class AbstractLiteralIV<V extends EmbergraphLiteral, T>
         extends AbstractInlineIV<V, T> implements Literal, InlineLiteralIV<V, T> {
 
     /**

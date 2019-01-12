@@ -49,13 +49,13 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -89,19 +89,19 @@ public class TestTicket276 extends QuadsTestCase {
 		 * For example, here is a set of five properties that turns off
 		 * inference, truth maintenance, and the free text index.
 		 */
-		props.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+		props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
 				NoAxioms.class.getName());
-		props.setProperty(BigdataSail.Options.VOCABULARY_CLASS,
+		props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
 				NoVocabulary.class.getName());
-		props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-		props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-		props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES, "true");
-		props.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
-		props.setProperty(BigdataSail.Options.EXACT_SIZE, "true");
-//		props.setProperty(BigdataSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
+		props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+		props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+		props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+		props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
+//		props.setProperty(EmbergraphSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
 //				"false");
 		props.setProperty(
-				BigdataSail.Options.STATEMENT_IDENTIFIERS,
+				EmbergraphSail.Options.STATEMENT_IDENTIFIERS,
 				"false");
 
 		return props;
@@ -113,10 +113,10 @@ public class TestTicket276 extends QuadsTestCase {
 	    // try with Sesame MemoryStore:
 		executeQuery(new SailRepository(new MemoryStore()));
 
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
 	        // fails with UnsupportedOperationException
-			executeQuery(new BigdataSailRepository(sail));
+			executeQuery(new EmbergraphSailRepository(sail));
 		} finally {
 			sail.__tearDownUnitTest();
 		}

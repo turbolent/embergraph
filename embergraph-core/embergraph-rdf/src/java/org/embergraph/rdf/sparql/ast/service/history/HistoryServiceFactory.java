@@ -2,7 +2,6 @@ package org.embergraph.rdf.sparql.ast.service.history;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
@@ -16,10 +15,10 @@ import org.embergraph.rdf.changesets.ChangeAction;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.ServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
@@ -43,11 +42,11 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
     static private transient final Logger log = Logger
             .getLogger(HistoryServiceFactory.class);
 
-    private final BigdataNativeServiceOptions serviceOptions;
+    private final EmbergraphNativeServiceOptions serviceOptions;
 
     public HistoryServiceFactory() {
 
-        serviceOptions = new BigdataNativeServiceOptions();
+        serviceOptions = new EmbergraphNativeServiceOptions();
         
         /*
          * TODO Review decision to make this a runFirst service. The rational is
@@ -110,14 +109,14 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
      * of the describe cache.
      */
     @Override
-    public void startConnection(final BigdataSailConnection conn) {
+    public void startConnection(final EmbergraphSailConnection conn) {
 
 //        final Properties properties = conn.getProperties();
         final AbstractTripleStore tripleStore = conn.getTripleStore();
 
         if (Boolean.valueOf(tripleStore.getProperty(
-                BigdataSail.Options.HISTORY_SERVICE,
-                BigdataSail.Options.DEFAULT_HISTORY_SERVICE))) {
+                EmbergraphSail.Options.HISTORY_SERVICE,
+                EmbergraphSail.Options.DEFAULT_HISTORY_SERVICE))) {
 
             conn.addChangeLog(new HistoryChangeLogListener(conn));
 
@@ -136,7 +135,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
         /** The vector size for updates. */
         private static final int threshold = 10000;
         /** The connection. */
-        private final BigdataSailConnection conn;
+        private final EmbergraphSailConnection conn;
         /** The KB instance. */
         private final AbstractTripleStore tripleStore;
         /**
@@ -158,7 +157,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
         /** The history index. */
         private IIndex ndx = null;
 
-        HistoryChangeLogListener(final BigdataSailConnection conn) {
+        HistoryChangeLogListener(final EmbergraphSailConnection conn) {
 
             this.conn = conn;
 
@@ -169,8 +168,8 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
             this.minReleaseAge = Long
                     .valueOf(tripleStore
                             .getProperty(
-                                    BigdataSail.Options.HISTORY_SERVICE_MIN_RELEASE_AGE,
-                                    BigdataSail.Options.DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE));
+                                    EmbergraphSail.Options.HISTORY_SERVICE_MIN_RELEASE_AGE,
+                                    EmbergraphSail.Options.DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE));
 
             /*
              * TODO We should be able to reach the timestamp service from the
@@ -209,11 +208,11 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
 ////                        ((IJournal) indexManager)
 ////                        .getLocalTransactionManager().nextTimestamp();
 //                
-//            } else if (indexManager instanceof IBigdataFederation) {
+//            } else if (indexManager instanceof IEmbergraphFederation) {
 //                
 //                try {
 //                
-//                    revisionTimestamp = ((IBigdataFederation<?>) indexManager)
+//                    revisionTimestamp = ((IEmbergraphFederation<?>) indexManager)
 //                            .getTransactionService().nextTimestamp();
 //                    
 //                } catch (IOException e) {

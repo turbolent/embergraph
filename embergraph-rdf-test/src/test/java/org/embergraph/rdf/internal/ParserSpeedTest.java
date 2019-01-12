@@ -61,7 +61,7 @@ public class ParserSpeedTest {
 		this.parserService = Executors.newCachedThreadPool();
 
 		// TODO compare w/ openrdf default value factory....
-//		this.vf = BigdataValueFactoryImpl.getInstance("test");
+//		this.vf = EmbergraphValueFactoryImpl.getInstance("test");
 		this.vf = new ValueFactoryImpl();
 		
 	}

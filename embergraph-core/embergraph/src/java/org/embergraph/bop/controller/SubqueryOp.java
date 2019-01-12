@@ -45,7 +45,7 @@ import org.embergraph.bop.join.JoinAnnotations;
 import org.embergraph.bop.join.JoinTypeEnum;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -447,7 +447,7 @@ public class SubqueryOp extends PipelineOp {
                              * in whether or not at least one solution exists.
                              */
                             
-                            final IV<BigdataLiteral, Boolean> success = XSDBooleanIV.valueOf(subquerySolutionItr.hasNext());
+                            final IV<EmbergraphLiteral, Boolean> success = XSDBooleanIV.valueOf(subquerySolutionItr.hasNext());
                             
 //                            System.err
 //                                    .println("in="
@@ -458,7 +458,7 @@ public class SubqueryOp extends PipelineOp {
 //                                            + ", askVar=" + success);
 //                            
                             parentSolutionIn.set(askVar,
-                                    new Constant<IV<BigdataLiteral, Boolean>>(
+                                    new Constant<IV<EmbergraphLiteral, Boolean>>(
                                             success));
                             
                             parentContext.getSink().add(

@@ -24,14 +24,14 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.service.IBigdataClient;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphClient;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
@@ -114,10 +114,10 @@ public class DumpLexicon {
 				} finally {
 					is.close();
 				}
-				if (System.getProperty(BigdataSail.Options.FILE) != null) {
+				if (System.getProperty(EmbergraphSail.Options.FILE) != null) {
 					// Override/set from the environment.
-					properties.setProperty(BigdataSail.Options.FILE,
-							System.getProperty(BigdataSail.Options.FILE));
+					properties.setProperty(EmbergraphSail.Options.FILE,
+							System.getProperty(EmbergraphSail.Options.FILE));
 				}
 			}
 
@@ -244,11 +244,11 @@ public class DumpLexicon {
 
 				} else {
 
-					IBigdataClient<?> client = null;
+					IEmbergraphClient<?> client = null;
 
 					try {
 					
-						client = ((IBigdataFederation<?>) indexManager)
+						client = ((IEmbergraphFederation<?>) indexManager)
 								.getClient();
 						
 					} catch (IllegalStateException ex) {
@@ -363,13 +363,13 @@ public class DumpLexicon {
                 final IIndex ndx = store.getLexiconRelation().getId2TermIndex();
 
                 @SuppressWarnings("unchecked")
-                final ITupleIterator<BigdataValue> itr = ndx.rangeIterator();
+                final ITupleIterator<EmbergraphValue> itr = ndx.rangeIterator();
 
                 while (itr.hasNext()) {
 
-                    final ITuple<BigdataValue> tuple = itr.next();
+                    final ITuple<EmbergraphValue> tuple = itr.next();
 
-                    final BigdataValue term = tuple.getObject();
+                    final EmbergraphValue term = tuple.getObject();
 
                     w.write(term.getIV() + ":" + term + " (iv=" + term.getIV()
                             + ")\n");
@@ -505,10 +505,10 @@ public class DumpLexicon {
              */
     		final long[] bins = new long[NBINS];
     
-    		final BigdataValueFactory vf = BigdataValueFactoryImpl
+    		final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
     				.getInstance(namespace);
     
-    		final BigdataValueSerializer<BigdataValue> valSer = vf
+    		final EmbergraphValueSerializer<EmbergraphValue> valSer = vf
     				.getValueSerializer();
     
     		// Used to decode the Values.
@@ -541,7 +541,7 @@ public class DumpLexicon {
     						.decodeFromOffset(tuple.getKeyBuffer().array(), 0/* offset */);
     				// new TermId(tuple.getKey());
     
-    				final BigdataValue value = valSer.deserialize(tuple
+    				final EmbergraphValue value = valSer.deserialize(tuple
     						.getValueStream(), tmp);
     
     				if (showEntries) {

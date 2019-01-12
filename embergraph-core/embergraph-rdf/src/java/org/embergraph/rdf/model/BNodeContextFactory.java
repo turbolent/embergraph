@@ -22,7 +22,7 @@ import org.openrdf.model.Value;
  * sources are understood as distinct blank nodes by the database (this is
  * required).
  * <p>
- * Note: All {@link BigdataValue} instances are in fact created by the delegate
+ * Note: All {@link EmbergraphValue} instances are in fact created by the delegate
  * instances created by this class and by the delegate will appear to have been
  * created by the same factory. This is intentional - it makes the instances
  * reusable by the base factory.
@@ -35,7 +35,7 @@ import org.openrdf.model.Value;
  * @version $Id: BNodeContextFactory.java 2547 2010-03-24 20:44:07Z thompsonbry
  *          $
  */
-public class BNodeContextFactory implements BigdataValueFactory {
+public class BNodeContextFactory implements EmbergraphValueFactory {
 	
     public String getNamespace() {
         return valueFactory.getNamespace();
@@ -54,9 +54,9 @@ public class BNodeContextFactory implements BigdataValueFactory {
     /**
      * The delegate factory.
      */
-    private final BigdataValueFactory valueFactory;
+    private final EmbergraphValueFactory valueFactory;
 
-	public BNodeContextFactory(final BigdataValueFactory valueFactory) {
+	public BNodeContextFactory(final EmbergraphValueFactory valueFactory) {
 
         this.valueFactory = valueFactory;
 
@@ -74,7 +74,7 @@ public class BNodeContextFactory implements BigdataValueFactory {
 
     private int nextID;
 
-	public BigdataBNode createBNode() {
+	public EmbergraphBNode createBNode() {
         return valueFactory.createBNode(nextID());
     }
 
@@ -83,140 +83,140 @@ public class BNodeContextFactory implements BigdataValueFactory {
      */
 
 	@Override
-    public BigdataValue asValue(Value v) {
+    public EmbergraphValue asValue(Value v) {
         return valueFactory.asValue(v);
     }
 
     @Override
-	public BigdataBNode createBNode(String id) {
+	public EmbergraphBNode createBNode(String id) {
         return valueFactory.createBNode(id);
     }
 
     @Override
-	public BigdataBNode createBNode(BigdataStatement stmt) {
+	public EmbergraphBNode createBNode(EmbergraphStatement stmt) {
         return valueFactory.createBNode(stmt);
     }
 
     @Override
-	public BigdataLiteral createLiteral(boolean arg0) {
+	public EmbergraphLiteral createLiteral(boolean arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(byte arg0) {
+	public EmbergraphLiteral createLiteral(byte arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(double arg0) {
+	public EmbergraphLiteral createLiteral(double arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(float arg0) {
+	public EmbergraphLiteral createLiteral(float arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(int arg0, boolean unsigned) {
+	public EmbergraphLiteral createLiteral(int arg0, boolean unsigned) {
         return valueFactory.createLiteral(arg0, unsigned);
     }
 
     @Override
-	public BigdataLiteral createLiteral(long arg0, boolean unsigned) {
+	public EmbergraphLiteral createLiteral(long arg0, boolean unsigned) {
         return valueFactory.createLiteral(arg0, unsigned);
     }
 
     @Override
-	public BigdataLiteral createLiteral(short arg0, boolean unsigned) {
+	public EmbergraphLiteral createLiteral(short arg0, boolean unsigned) {
         return valueFactory.createLiteral(arg0, unsigned);
     }
 
     @Override
-	public BigdataLiteral createLiteral(byte arg0, boolean unsigned) {
+	public EmbergraphLiteral createLiteral(byte arg0, boolean unsigned) {
         return valueFactory.createLiteral(arg0, unsigned);
     }
 
     @Override
-	public BigdataLiteral createLiteral(int arg0) {
+	public EmbergraphLiteral createLiteral(int arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(long arg0) {
+	public EmbergraphLiteral createLiteral(long arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(short arg0) {
+	public EmbergraphLiteral createLiteral(short arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataLiteral createLiteral(String label, String language) {
+	public EmbergraphLiteral createLiteral(String label, String language) {
         return valueFactory.createLiteral(label, language);
     }
 
     @Override
-	public BigdataLiteral createLiteral(String label, URI datatype) {
+	public EmbergraphLiteral createLiteral(String label, URI datatype) {
         return valueFactory.createLiteral(label, datatype);
     }
 	
     @Override
-	public BigdataLiteral createLiteral(String label, URI datatype, String language) {
+	public EmbergraphLiteral createLiteral(String label, URI datatype, String language) {
 	    return valueFactory.createLiteral(label, datatype, language);
 	}
 
     @Override
-	public BigdataLiteral createLiteral(String label) {
+	public EmbergraphLiteral createLiteral(String label) {
         return valueFactory.createLiteral(label);
     }
 
     @Override
-	public BigdataLiteral createLiteral(XMLGregorianCalendar arg0) {
+	public EmbergraphLiteral createLiteral(XMLGregorianCalendar arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-    public BigdataLiteral createLiteral(Date arg0) {
+    public EmbergraphLiteral createLiteral(Date arg0) {
         return valueFactory.createLiteral(arg0);
     }
 
     @Override
-	public BigdataStatement createStatement(Resource s, URI p, Value o) {
+	public EmbergraphStatement createStatement(Resource s, URI p, Value o) {
         return valueFactory.createStatement(s, p, o);
     }
 
     @Override
-	public BigdataStatement createStatement(Resource s, URI p, Value o,
+	public EmbergraphStatement createStatement(Resource s, URI p, Value o,
             Resource c) {
         return valueFactory.createStatement(s, p, o, c);
     }
 
     @Override
-	public BigdataStatement createStatement(Resource s, URI p, Value o,
+	public EmbergraphStatement createStatement(Resource s, URI p, Value o,
             Resource c, StatementEnum type) {
         return valueFactory.createStatement(s, p, o, c, type, false);
     }
 	
     @Override
-	public BigdataStatement createStatement(Resource s, URI p, Value o,
+	public EmbergraphStatement createStatement(Resource s, URI p, Value o,
             Resource c, StatementEnum type, boolean userFlag) {
         return valueFactory.createStatement(s, p, o, c, type, userFlag);
     }
 	
     @Override
-	public BigdataURI createURI(String namespace, String localName) {
+	public EmbergraphURI createURI(String namespace, String localName) {
         return valueFactory.createURI(namespace, localName);
     }
 
     @Override
-	public BigdataURI createURI(String uriString) {
+	public EmbergraphURI createURI(String uriString) {
         return valueFactory.createURI(uriString);
     }
 
     @Override
-	public BigdataValueSerializer<BigdataValue> getValueSerializer() {
+	public EmbergraphValueSerializer<EmbergraphValue> getValueSerializer() {
         return valueFactory.getValueSerializer();
     }
 
@@ -224,32 +224,32 @@ public class BNodeContextFactory implements BigdataValueFactory {
 	 * Recursive contexts are not available (should not be necessary, right?)
      */
     @Override
-    public BigdataValueFactory newBNodeContext() {
+    public EmbergraphValueFactory newBNodeContext() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public BigdataResource asValue(Resource v) {
+    public EmbergraphResource asValue(Resource v) {
         return valueFactory.asValue(v);
     }
 
     @Override
-    public BigdataURI asValue(URI v) {
+    public EmbergraphURI asValue(URI v) {
         return valueFactory.asValue(v);
     }
 
     @Override
-    public BigdataLiteral asValue(Literal v) {
+    public EmbergraphLiteral asValue(Literal v) {
         return valueFactory.asValue(v);
     }
 
     @Override
-    public BigdataBNode asValue(BNode v) {
+    public EmbergraphBNode asValue(BNode v) {
         return valueFactory.asValue(v);
     }
 
     @Override
-    public BigdataLiteral createXSDDateTime(long timestamp) {
+    public EmbergraphLiteral createXSDDateTime(long timestamp) {
         return valueFactory.createXSDDateTime(timestamp);
     }
 

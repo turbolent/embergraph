@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.junit.After;
 import org.junit.Before;
 import org.openrdf.model.Literal;
@@ -52,9 +53,8 @@ import org.slf4j.LoggerFactory;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.Options;
-import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.store.BD;
 
 import junit.framework.TestCase;
@@ -162,11 +162,11 @@ public class SPARQLUpdateTestv2 extends TestCase {
 
         final Properties props = getProperties();
         
-        final BigdataSail sail = new BigdataSail(props);
+        final EmbergraphSail sail = new EmbergraphSail(props);
         
         backend = sail.getIndexManager();
 
-        return new BigdataSailRepository(sail);
+        return new EmbergraphSailRepository(sail);
 
 //        if (true) {
 //            final Properties props = getProperties();
@@ -183,8 +183,8 @@ public class SPARQLUpdateTestv2 extends TestCase {
 //                props.setProperty(Options.STRENGTH, StrengthEnum.Identical.toString());
 //            }
 //            
-//            final BigdataSail sail = new BigdataSail(props);
-//            return new DatasetRepository(new BigdataSailRepository(sail));
+//            final EmbergraphSail sail = new EmbergraphSail(props);
+//            return new DatasetRepository(new EmbergraphSailRepository(sail));
 //        } else {
 //            return new DatasetRepository(new SailRepository(new MemoryStore()));
 //        }
@@ -239,9 +239,9 @@ public class SPARQLUpdateTestv2 extends TestCase {
 
         final Properties props = new Properties();
         
-//        final File journal = BigdataStoreTest.createTempFile();
+//        final File journal = EmbergraphStoreTest.createTempFile();
 //        
-//        props.setProperty(BigdataSail.Options.FILE, journal.getAbsolutePath());
+//        props.setProperty(EmbergraphSail.Options.FILE, journal.getAbsolutePath());
 
         props.setProperty(Options.BUFFER_MODE, BufferMode.Transient.toString());
         

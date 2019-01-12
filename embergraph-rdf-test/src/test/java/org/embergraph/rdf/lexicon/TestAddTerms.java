@@ -28,15 +28,15 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
@@ -87,10 +87,10 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
         
         try {
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             terms.add(f.asValue(RDF.TYPE));
             terms.add(f.asValue(RDF.PROPERTY));
@@ -126,7 +126,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
 			}
 
-			final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+			final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
 			if (store.isStable()) {
 
@@ -136,12 +136,12 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
 				// verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(), ids2.size());
 
-                for (Map.Entry<IV<?,?>, BigdataValue> e : ids2.entrySet()) {
+                for (Map.Entry<IV<?,?>, EmbergraphValue> e : ids2.entrySet()) {
 
                     final IV<?,?> id = e.getKey();
                     
@@ -198,15 +198,15 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
                 
             }
 
-            final Collection<BigdataValue> terms = new HashSet<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new HashSet<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             terms.add(f.createBNode());
             terms.add(f.createBNode("a"));
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             if (store.isStable()) {
                 
@@ -216,12 +216,12 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(),ids2.size());
                 
-                for (Map.Entry<IV<?, ?>, BigdataValue> e : ids.entrySet()) {
+                for (Map.Entry<IV<?, ?>, EmbergraphValue> e : ids.entrySet()) {
 
                     final IV<?, ?> id = e.getKey();
 
@@ -241,7 +241,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
     }
     
     /**
-     * Unit test for addTerms() when the {@link BigdataValue}[] contains
+     * Unit test for addTerms() when the {@link EmbergraphValue}[] contains
      * multiple instances of a given reference.
      */
     public void test_duplicates_same_reference() {
@@ -266,27 +266,27 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
         try {
 
             // Note: List allows duplicates!
-            final Collection<BigdataValue> terms = new LinkedList<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new LinkedList<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             // Add two instances of the same reference.
-            final BigdataURI type = f.asValue(RDF.TYPE);
+            final EmbergraphURI type = f.asValue(RDF.TYPE);
             terms.add(type);
             terms.add(type);
             assertEquals(2,terms.size());
             
             // Add two instances of the same reference.
-            final BigdataURI largeURI = f.createURI(getVeryLargeURI());
+            final EmbergraphURI largeURI = f.createURI(getVeryLargeURI());
             terms.add(largeURI);
             terms.add(largeURI);
             assertEquals(4,terms.size());
 
             // Add two instances of the same reference.
-            final BigdataLiteral lit1 = f.createLiteral("test");
-            final BigdataLiteral lit2 = f.createLiteral("test","en");
-            final BigdataLiteral lit3 = f.createLiteral(getVeryLargeLiteral());
+            final EmbergraphLiteral lit1 = f.createLiteral("test");
+            final EmbergraphLiteral lit2 = f.createLiteral("test","en");
+            final EmbergraphLiteral lit3 = f.createLiteral(getVeryLargeLiteral());
             terms.add(lit1);
             terms.add(lit1);
             terms.add(lit2);
@@ -301,9 +301,9 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
                  * Note: Blank nodes will not round trip through the lexicon unless
                  * the "told bnodes" is enabled.
                  */
-                final BigdataBNode bnode1 = f.createBNode(); 
-                final BigdataBNode bnode2 = f.createBNode("a"); 
-                final BigdataBNode bnode3 = f.createBNode(getVeryLargeLiteral()); 
+                final EmbergraphBNode bnode1 = f.createBNode();
+                final EmbergraphBNode bnode2 = f.createBNode("a");
+                final EmbergraphBNode bnode3 = f.createBNode(getVeryLargeLiteral());
                 terms.add(bnode1);
                 terms.add(bnode1);
                 terms.add(bnode2);
@@ -314,7 +314,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
             }
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             if (store.isStable()) {
 
@@ -324,12 +324,12 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(), ids2.size());
 
-                for (Map.Entry<IV<?,?>, BigdataValue> e : ids2.entrySet()) {
+                for (Map.Entry<IV<?,?>, EmbergraphValue> e : ids2.entrySet()) {
 
                     final IV<?,?> id = e.getKey();
                     
@@ -349,8 +349,8 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
     }
 
     /**
-     * Unit test for addTerms() when the {@link BigdataValue}[] contains
-     * distinct instances of {@link BigdataValue}s which are equals().
+     * Unit test for addTerms() when the {@link EmbergraphValue}[] contains
+     * distinct instances of {@link EmbergraphValue}s which are equals().
      */
     public void test_duplicates_distinct_references() {
 
@@ -374,10 +374,10 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
         try {
 
             // Note: List allows duplicates!
-            final Collection<BigdataValue> terms = new LinkedList<BigdataValue>();
+            final Collection<EmbergraphValue> terms = new LinkedList<EmbergraphValue>();
 
             // lookup/add some values.
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             // Add two distinct instances of the same Value.
             terms.add(f.asValue(RDF.TYPE));
@@ -416,7 +416,7 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
             }
 
-            final Map<IV<?,?>, BigdataValue> ids = doAddTermsTest(store, terms);
+            final Map<IV<?,?>, EmbergraphValue> ids = doAddTermsTest(store, terms);
 
             if (store.isStable()) {
 
@@ -426,12 +426,12 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
 
                 // verify same reverse mappings.
 
-                final Map<IV<?,?>, BigdataValue> ids2 = store.getLexiconRelation()
+                final Map<IV<?,?>, EmbergraphValue> ids2 = store.getLexiconRelation()
                         .getTerms(ids.keySet());
 
                 assertEquals(ids.size(), ids2.size());
 
-                for (Map.Entry<IV<?,?>, BigdataValue> e : ids2.entrySet()) {
+                for (Map.Entry<IV<?,?>, EmbergraphValue> e : ids2.entrySet()) {
 
                     final IV<?,?> id = e.getKey();
                     
@@ -455,13 +455,13 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
      * @param terms
      * @return
      */
-    private Map<IV<?,?>, BigdataValue> doAddTermsTest(
+    private Map<IV<?,?>, EmbergraphValue> doAddTermsTest(
             final AbstractTripleStore store,
-            final Collection<BigdataValue> terms) {
+            final Collection<EmbergraphValue> terms) {
 
         final int size = terms.size();
 
-        final BigdataValue[] a = terms.toArray(new BigdataValue[size]);
+        final EmbergraphValue[] a = terms.toArray(new EmbergraphValue[size]);
         
         // Resolve/add IVs.
         store.getLexiconRelation().addTerms(a, size, false/* readOnly */);
@@ -469,11 +469,11 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
         // Collect the assigned IVs.
         final Collection<IV<?,?>> ids = new ArrayList<IV<?,?>>();
 
-        for(BigdataValue t : a)
+        for(EmbergraphValue t : a)
             ids.add(t.getIV());
         
         // Resolve assigned IVs against the lexicon.
-        final Map<IV<?,?>, BigdataValue> tmp = store.getLexiconRelation()
+        final Map<IV<?,?>, EmbergraphValue> tmp = store.getLexiconRelation()
                 .getTerms(ids);
   
         // Note: This is not true if there are duplicates.
@@ -484,11 +484,11 @@ public class TestAddTerms extends AbstractTripleStoreTestCase {
          * identifiers (they will be "equals()" to the values that we added to
          * the lexicon).
          */
-        for(BigdataValue expected : a) {
+        for(EmbergraphValue expected : a) {
 
             assertNotNull("Did not assign IV? : " + expected, expected.getIV());
 
-            final BigdataValue actual = tmp.get(expected.getIV());
+            final EmbergraphValue actual = tmp.get(expected.getIV());
 
             if (actual == null) {
 

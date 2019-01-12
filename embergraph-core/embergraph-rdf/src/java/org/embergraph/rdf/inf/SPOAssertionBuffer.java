@@ -23,15 +23,12 @@ package org.embergraph.rdf.inf;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.embergraph.rdf.changesets.IChangeLog;
-import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.ISPOAssertionBuffer;
 import org.embergraph.rdf.spo.JustificationWriter;

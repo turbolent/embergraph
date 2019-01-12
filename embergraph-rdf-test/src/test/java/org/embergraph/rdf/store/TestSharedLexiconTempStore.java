@@ -25,8 +25,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Test suite for {@link TempTripleStore}s sharing the same
@@ -64,11 +64,11 @@ public class TestSharedLexiconTempStore extends AbstractTripleStoreTestCase {
         
         try {
 
-            final BigdataValueFactory vf = store.getValueFactory();
+            final EmbergraphValueFactory vf = store.getValueFactory();
 
-            final BigdataURI uri1 = vf.createURI(uriString1);
-//            final BigdataURI uri2 = vf.createURI(uriString2);
-            final BigdataURI uri3 = vf.createURI(uriString3);
+            final EmbergraphURI uri1 = vf.createURI(uriString1);
+//            final EmbergraphURI uri2 = vf.createURI(uriString2);
+            final EmbergraphURI uri3 = vf.createURI(uriString3);
             
             // add term to lexicon.
             store.addTerm(uri1);

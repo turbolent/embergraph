@@ -19,8 +19,6 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
-import org.embergraph.rdf.sail.BigdataSail;
-
 /**
  * Concrete instance of {@link TestRollbacks} which overrides the properties to
  * enable full transaction support in the SAIL.
@@ -44,7 +42,7 @@ public class TestRollbacksTx extends TestRollbacks {
     	final Properties props = super.getProperties();
 
         // transactions are ON in this version of this class.
-        props.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+        props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
         
         return props;
 

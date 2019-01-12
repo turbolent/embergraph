@@ -18,16 +18,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval.service;
 
+import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20160317;
 import org.openrdf.model.impl.URIImpl;
 
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.BaseVocabularyDecl;
-import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20160317;
 
 /**
  * Test class for GeoSpatial data type extensions.
  */
-public class GeoSpatialTestVocabulary extends BigdataCoreVocabulary_v20160317 {
+public class GeoSpatialTestVocabulary extends EmbergraphCoreVocabulary_v20160317 {
 
     /**
      * De-serialization ctor.

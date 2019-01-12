@@ -333,7 +333,7 @@ public class StressTestConcurrent extends
      *       operations so that they can be made likely to force a join or split
      *       of an index partition.
      */
-    public Result doConcurrentClientTest(final IBigdataClient<?> client,
+    public Result doConcurrentClientTest(final IEmbergraphClient<?> client,
             final int nclients, final long timeout, final int ntrials,
             final int keyLen, final int nops, final double insertRate, final int nindices,
             boolean testCorrectness) throws InterruptedException, IOException {
@@ -342,7 +342,7 @@ public class StressTestConcurrent extends
         final String basename = "testIndex";
 
         // connect to the federation.
-        final IBigdataFederation<?> federation = client.connect();
+        final IEmbergraphFederation<?> federation = client.connect();
         
         /*
          * Register the scale-out index(s).

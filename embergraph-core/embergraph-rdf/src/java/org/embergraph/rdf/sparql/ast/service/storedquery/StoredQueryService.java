@@ -21,14 +21,14 @@ import java.util.Arrays;
 import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.BigdataSailTupleQuery;
-import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sail.EmbergraphSailTupleQuery;
+import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
 import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
 import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 import org.embergraph.rdf.sparql.ast.eval.ServiceParams;
@@ -188,7 +188,7 @@ abstract public class StoredQueryService extends AbstractServiceFactoryBase {
      * @throws Exception
      */
     abstract protected TupleQueryResult doQuery(
-            final BigdataSailRepositoryConnection cxn,
+            final EmbergraphSailRepositoryConnection cxn,
             final ServiceCallCreateParams createParams,
             final ServiceParams serviceParams) throws Exception;
     
@@ -241,7 +241,7 @@ abstract public class StoredQueryService extends AbstractServiceFactoryBase {
 
                 final TupleQueryResult tupleQueryResult = ft.get();
 
-                return new Sesame2BigdataIterator<BindingSet, QueryEvaluationException>(
+                return new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
                         tupleQueryResult);
 
             } finally {
@@ -266,7 +266,7 @@ abstract public class StoredQueryService extends AbstractServiceFactoryBase {
              * less equivalent to bottom-up evaluation. It would be more
              * efficient if we could flow in the exogenous bindings but this is
              * not supported before openrdf 2.7 (we hack this in
-             * {@link BigdataSailTupleQuery}).
+             * {@link EmbergraphSailTupleQuery}).
              */
             private final BindingSet[] bindingSets;
 
@@ -288,7 +288,7 @@ abstract public class StoredQueryService extends AbstractServiceFactoryBase {
             
             @Override
             public TupleQueryResult call() throws Exception {
-                BigdataSailRepositoryConnection cxn = null;
+                EmbergraphSailRepositoryConnection cxn = null;
                 boolean success = false;
                 try {
                     // Note: Will be UPDATE connection if UPDATE request!!!

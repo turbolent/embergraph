@@ -30,7 +30,7 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 
 import org.embergraph.bop.IVariable;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Collects and reports the distinct bindings observed on some set of variables.
@@ -44,7 +44,7 @@ public class DescribeBindingsCollector implements
             .getLogger(DescribeBindingsCollector.class);
     
     private final IVariable<?>[] originalVars;
-    private final Set<BigdataValue> describedResources;
+    private final Set<EmbergraphValue> describedResources;
     private final CloseableIteration<BindingSet, QueryEvaluationException> src;
     private boolean open = true;
 
@@ -60,7 +60,7 @@ public class DescribeBindingsCollector implements
      *            The source iterator.
      */
     public DescribeBindingsCollector(final Set<IVariable<?>> originalVars,
-            final Set<BigdataValue> describedResources,
+            final Set<EmbergraphValue> describedResources,
             final CloseableIteration<BindingSet, QueryEvaluationException> src) {
 
         if (originalVars == null)
@@ -121,7 +121,7 @@ public class DescribeBindingsCollector implements
             if (binding == null)
                 continue;
 
-            final BigdataValue boundValue = (BigdataValue) binding.getValue();
+            final EmbergraphValue boundValue = (EmbergraphValue) binding.getValue();
 
             if (boundValue != null) {
 

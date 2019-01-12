@@ -77,7 +77,7 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
      * Always returns <code>false</code> since the service is remote.
      */
     @Override
-    final public boolean isBigdataNativeService() {
+    final public boolean isEmbergraphNativeService() {
         return false;
     }
 

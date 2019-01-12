@@ -23,6 +23,7 @@ import java.util.Properties;
 
 import junit.framework.Test;
 
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.model.Resource;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
@@ -31,7 +32,6 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.BigdataSail;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.RemoveOp;
 
 /**
@@ -265,7 +265,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends
 	      
 	      final Properties p = new Properties(super.getProperties());
 
-	      p.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
+	      p.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
 	      
 	      return p;
 	      

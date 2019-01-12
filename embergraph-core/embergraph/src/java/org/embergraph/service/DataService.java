@@ -127,7 +127,7 @@ abstract public class DataService extends AbstractService
             org.embergraph.journal.ConcurrencyManager.Options,
             org.embergraph.resources.ResourceManager.Options,
             org.embergraph.counters.AbstractStatisticsCollector.Options,
-            org.embergraph.service.IBigdataClient.Options
+            IEmbergraphClient.Options
             // @todo local tx manager options?
             {
 
@@ -187,7 +187,7 @@ abstract public class DataService extends AbstractService
     
     /**
      * The object used to support distributed query against an
-     * {@link IBigdataFederation}.
+     * {@link IEmbergraphFederation}.
      */
     public IQueryPeer getQueryEngine() {
         
@@ -227,7 +227,7 @@ abstract public class DataService extends AbstractService
         return new ResourceManager(properties) {
 
             @Override
-            public IBigdataFederation<?> getFederation() {
+            public IEmbergraphFederation<?> getFederation() {
                 
                 return DataService.this.getFederation();
                                 

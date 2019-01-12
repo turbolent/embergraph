@@ -23,24 +23,24 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.ProxyEmbergraphSailTestCase;
 
 /**
  * Unit test template for use in submission of bugs.
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -49,7 +49,7 @@ import org.embergraph.rdf.sail.ProxyBigdataSailTestCase;
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
-public class TestOOMBug extends ProxyBigdataSailTestCase {
+public class TestOOMBug extends ProxyEmbergraphSailTestCase {
 
 	private static final transient Logger log = Logger.getLogger(TestOOMBug.class);
 	
@@ -101,16 +101,16 @@ public class TestOOMBug extends ProxyBigdataSailTestCase {
 	}
 
 	public void testOOM() throws Exception {
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		
 		try {
 			
 			sail.initialize();
-			final BigdataSailRepository repo = new BigdataSailRepository(sail);
-			final BigdataSailRepositoryConnection cxn = repo.getConnection();
+			final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+			final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 			cxn.setAutoCommit(false);
 			
-			final BigdataValueFactory vf = cxn.getValueFactory();
+			final EmbergraphValueFactory vf = cxn.getValueFactory();
 			
 			try {
 			

@@ -42,7 +42,7 @@ abstract public class DataServiceCallable<T> extends FederationCallable<T>
     }
 
     /**
-     * Sets the {@link DataService} reference and the {@link IBigdataFederation}
+     * Sets the {@link DataService} reference and the {@link IEmbergraphFederation}
      * reference (if not already set).
      */
     synchronized public void setDataService(final DataService dataService) {

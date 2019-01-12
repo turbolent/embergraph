@@ -27,6 +27,9 @@ import java.util.LinkedHashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
@@ -38,10 +41,7 @@ import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
 import org.embergraph.service.geospatial.IGeoSpatialLiteralSerializer;
@@ -68,13 +68,13 @@ import org.embergraph.service.geospatial.IGeoSpatialLiteralSerializer;
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
-public class GeoSpatialLiteralExtension<V extends BigdataValue> implements IExtension<V> {
+public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IExtension<V> {
 
    private static final int BASE_SIZE = Double.SIZE / 8;
 
    private final IGeoSpatialLiteralSerializer litSerializer;
    
-   private final BigdataURI datatype;
+   private final EmbergraphURI datatype;
    
    private final GeoSpatialDatatypeConfiguration datatypeConfig;
    
@@ -100,9 +100,9 @@ public class GeoSpatialLiteralExtension<V extends BigdataValue> implements IExte
    }
    
    @Override
-   public Set<BigdataURI> getDatatypes() {
+   public Set<EmbergraphURI> getDatatypes() {
 
-      final HashSet<BigdataURI> datatypes = new LinkedHashSet<BigdataURI>();
+      final HashSet<EmbergraphURI> datatypes = new LinkedHashSet<EmbergraphURI>();
       datatypes.add(datatype);
       return datatypes;
 
@@ -385,7 +385,7 @@ public class GeoSpatialLiteralExtension<V extends BigdataValue> implements IExte
     */
    @SuppressWarnings({ "unchecked", "rawtypes" })
    @Override
-   public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+   public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
       
       // get the components represented by the IV (which must be of type
       // xsd:integer (G->C)
@@ -474,7 +474,7 @@ public class GeoSpatialLiteralExtension<V extends BigdataValue> implements IExte
     * Converts an IV to a zOrderByte array (without leading zero).
     * Entry point for query service, somewhat outside the pipeline described above.
     */
-   public byte[] toZOrderByteArray(AbstractLiteralIV<BigdataLiteral, ?> literalIV) {
+   public byte[] toZOrderByteArray(AbstractLiteralIV<EmbergraphLiteral, ?> literalIV) {
 
       if (!(literalIV instanceof XSDIntegerIV)) {
          throw new RuntimeException("zOrder value IV must be XSDInteger");

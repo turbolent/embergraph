@@ -21,10 +21,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.IBindingSet;
-import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.DatasetNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
@@ -230,7 +230,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
                  */
 
                 assertGraphInNamedDataset(
-                        (BigdataURI) ((TermNode) innerGraphContext).getValue(),
+                        (EmbergraphURI) ((TermNode) innerGraphContext).getValue(),
                         dataSet);
 
             }
@@ -457,7 +457,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
      * @param dataSet
      *            The dataset.
      */
-    private void assertGraphInNamedDataset(final BigdataURI uri,
+    private void assertGraphInNamedDataset(final EmbergraphURI uri,
             final DatasetNode dataSet) {
 
         if (dataSet == null) {

@@ -27,7 +27,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDFS;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.rule.Rule;
 
@@ -70,7 +70,7 @@ public class TestRuleRdfs11 extends AbstractRuleTestCase {
         
         try {
         
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             final URI A = f.createURI("http://www.foo.org/A");
             final URI B = f.createURI("http://www.foo.org/B");

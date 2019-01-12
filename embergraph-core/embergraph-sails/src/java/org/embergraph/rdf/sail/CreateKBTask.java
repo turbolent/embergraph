@@ -35,7 +35,7 @@ import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ITx;
 import org.embergraph.quorum.AsynchronousQuorumCloseException;
 import org.embergraph.quorum.Quorum;
-import org.embergraph.rdf.sail.BigdataSail.UnisolatedCallable;
+import org.embergraph.rdf.sail.EmbergraphSail.UnisolatedCallable;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
@@ -81,7 +81,7 @@ public class CreateKBTask extends AbstractApiTask<Void> {
       this.properties = new Properties(properties);
 
       // override the namespace.
-      this.properties.setProperty(BigdataSail.Options.NAMESPACE, namespace);
+      this.properties.setProperty(EmbergraphSail.Options.NAMESPACE, namespace);
 
    }
 
@@ -141,7 +141,7 @@ public class CreateKBTask extends AbstractApiTask<Void> {
              * Create a local triple store.
              * 
              * Note: This hands over the logic to some custom code located
-             * on the BigdataSail.
+             * on the EmbergraphSail.
              */
 
             final IJournal jnl = (IJournal) indexManager;
@@ -223,13 +223,13 @@ public class CreateKBTask extends AbstractApiTask<Void> {
                 /*
                  * Note: createLTS() writes on the GRS. This is an atomic row
                  * store. The change is automatically committed. The unisolated
-                 * view of the BigdataSailConnection is being used solely to
+                 * view of the EmbergraphSailConnection is being used solely to
                  * have the correct locks.
                  * 
                  * @see BLZG-2023, BLZG-2041
                  */
                 // Wrap with SAIL.
-                final BigdataSail sail = new BigdataSail(namespace, getIndexManager());
+                final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());
                 try {
                     sail.initialize();
                     final UnisolatedCallable<Void> task = new UnisolatedCallable<Void>() {
@@ -302,17 +302,17 @@ public class CreateKBTask extends AbstractApiTask<Void> {
     private void createLTS(final IJournal indexManager, final Properties properties) throws IOException {
        
       final String namespace = properties.getProperty(
-            BigdataSail.Options.NAMESPACE,
-            BigdataSail.Options.DEFAULT_NAMESPACE);
+            EmbergraphSail.Options.NAMESPACE,
+            EmbergraphSail.Options.DEFAULT_NAMESPACE);
 
       // throws an exception if there are inconsistent properties
-      BigdataSail.checkProperties(properties);
+      EmbergraphSail.checkProperties(properties);
       
 //      /**
 //       * Note: Unless group commit is enabled, we need to make this operation
 //       * mutually exclusive with KB level writers in order to avoid the
 //       * possibility of a triggering a commit during the middle of a
-//       * BigdataSailConnection level operation (or visa versa).
+//       * EmbergraphSailConnection level operation (or visa versa).
 //       * 
 //       * Note: When group commit is not enabled, the indexManager will be a
 //       * Journal class. When it is enabled, it will merely implement the
@@ -354,8 +354,8 @@ public class CreateKBTask extends AbstractApiTask<Void> {
          {
 
             if (Boolean.parseBoolean(properties.getProperty(
-                  BigdataSail.Options.ISOLATABLE_INDICES,
-                  BigdataSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
+                  EmbergraphSail.Options.ISOLATABLE_INDICES,
+                  EmbergraphSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
 
                /*
                 * Isolatable indices: requires the use of a tx to create the KB

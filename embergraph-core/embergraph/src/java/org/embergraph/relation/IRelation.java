@@ -43,7 +43,7 @@ import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.locator.ILocatableResource;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /**
@@ -266,7 +266,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>>{
      * </ul>
      * When a remote access path is required, the <i>localIndexManager</i> is
      * ignored and {@link IRelation#getIndexManager()} is used to obtain the
-     * {@link IBigdataFederation} from which the {@link IRelation} definition
+     * {@link IEmbergraphFederation} from which the {@link IRelation} definition
      * was materialized.
      * 
      * @param localIndexManager

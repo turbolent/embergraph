@@ -27,6 +27,9 @@ import java.io.ObjectOutput;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.openrdf.model.Value;
 
 import org.embergraph.btree.DefaultTupleSerializer;
@@ -40,10 +43,7 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 
@@ -53,7 +53,7 @@ import org.embergraph.util.Bytes;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataValue> {
+public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphValue> {
 
     /**
      * 
@@ -66,10 +66,10 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
     private String namespace;
     
     /**
-     * A (de-)serialized backed by a {@link BigdataValueFactoryImpl} for the
+     * A (de-)serialized backed by a {@link EmbergraphValueFactoryImpl} for the
      * {@link #namespace} of the owning {@link LexiconRelation}.
      */
-    transient private BigdataValueSerializer<BigdataValue> valueSer;
+    transient private EmbergraphValueSerializer<EmbergraphValue> valueSer;
 
     private static transient final int INITIAL_CAPACITY = 128;
     
@@ -89,7 +89,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
      */
     final transient private ByteArrayBuffer tbuf = new ByteArrayBuffer(INITIAL_CAPACITY);
 
-    transient private BigdataValueFactory valueFactory;
+    transient private EmbergraphValueFactory valueFactory;
 
     /**
      * De-serialization ctor.
@@ -107,7 +107,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
      *            initialCapacity of {@value Bytes#SIZEOF_LONG}.
      */
     public Id2TermTupleSerializer(final String namespace,
-            final BigdataValueFactory valueFactory) {
+            final EmbergraphValueFactory valueFactory) {
         
         this(namespace,valueFactory,
                 // Note: TermId is now 9 bytes (flags + tid)
@@ -120,7 +120,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
     }
 
     public Id2TermTupleSerializer(final String namespace,
-            final BigdataValueFactory valueFactory,
+            final EmbergraphValueFactory valueFactory,
             final IKeyBuilderFactory keyBuilderFactory,
             final IRabaCoder leafKeysCoder, final IRabaCoder leafValsCoder) {
 
@@ -190,22 +190,22 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
      * @param obj
      *            An RDF {@link Value}.
      */
-    public byte[] serializeVal(final BigdataValue obj) {
+    public byte[] serializeVal(final EmbergraphValue obj) {
         
         return valueSer.serialize(obj, buf.reset(), tbuf);
 
     }
 
     /**
-     * De-serializes the {@link ITuple} as a {@link BigdataValue}, including
+     * De-serializes the {@link ITuple} as a {@link EmbergraphValue}, including
      * the term identifier extracted from the unsigned byte[] key, and sets
-     * the appropriate {@link BigdataValueFactoryImpl} reference on that object.
+     * the appropriate {@link EmbergraphValueFactoryImpl} reference on that object.
      */
-    public BigdataValue deserialize(final ITuple tuple) {
+    public EmbergraphValue deserialize(final ITuple tuple) {
 
         final IV<?,?> iv = deserializeKey(tuple);
 
-        final BigdataValue tmp = valueSer.deserialize(tuple.getValueStream(),
+        final EmbergraphValue tmp = valueSer.deserialize(tuple.getValueStream(),
                 new StringBuilder());
 
         tmp.setIV(iv);
@@ -242,14 +242,14 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, BigdataVa
         // resolve the valueSerializer from the value factory class.
         try {
             final Class<?> vfc = Class.forName(valueFactoryClass);
-            if (!BigdataValueFactory.class.isAssignableFrom(vfc)) {
+            if (!EmbergraphValueFactory.class.isAssignableFrom(vfc)) {
                 throw new RuntimeException(
                         AbstractTripleStore.Options.VALUE_FACTORY_CLASS
                                 + ": Must extend: "
-                                + BigdataValueFactory.class.getName());
+                                + EmbergraphValueFactory.class.getName());
             }
             final Method gi = vfc.getMethod("getInstance", String.class);
-            this.valueFactory = (BigdataValueFactory) gi
+            this.valueFactory = (EmbergraphValueFactory) gi
                     .invoke(null, namespace);
         } catch (NoSuchMethodException e) {
             throw new IOException(e);

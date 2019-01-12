@@ -130,7 +130,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 		 * right now.
 		 * 
 		 * @see #1021 (Add critical section protection to
-		 * AbstractJournal.abort() and BigdataSailConnection.rollback())
+		 * AbstractJournal.abort() and EmbergraphSailConnection.rollback())
 		 */
 		suite.addTestSuite(TestJournalAbort.class);
 		

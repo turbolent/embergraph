@@ -6,15 +6,13 @@ import java.math.BigInteger;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 import org.embergraph.rdf.internal.INonInlineExtensionCodes;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractNonInlineExtensionIVWithDelegateIV;
-import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * A {@link Literal} modeled as a datatype {@link IV} plus an inline Unicode
@@ -24,7 +22,7 @@ import org.embergraph.rdf.model.BigdataLiteral;
  * @version $Id$
  * @param <V>
  */
-public class PartlyInlineTypedLiteralIV<V extends BigdataLiteral> 
+public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
 		extends AbstractNonInlineExtensionIVWithDelegateIV<V, Literal>
 		implements Literal {
 
@@ -49,7 +47,7 @@ public class PartlyInlineTypedLiteralIV<V extends BigdataLiteral>
     }
 
 	public PartlyInlineTypedLiteralIV(
-			final AbstractLiteralIV<BigdataLiteral, ?> delegate, 
+			final AbstractLiteralIV<EmbergraphLiteral, ?> delegate,
 			final IV<?,?> datatype) {
 
         super(VTE.LITERAL, delegate, datatype);

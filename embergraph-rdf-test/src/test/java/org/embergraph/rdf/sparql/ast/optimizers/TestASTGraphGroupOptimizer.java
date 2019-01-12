@@ -21,15 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.Constant;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -104,15 +104,15 @@ public class TestASTGraphGroupOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI p = f.createURI("http://example.org/p");
-        final BigdataURI p2= f.createURI("http://example.org/p2");
-        final BigdataURI o = f.createURI("http://example.org/o");
-        final BigdataValue[] values = new BigdataValue[] { p, p2, o };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI p = f.createURI("http://example.org/p");
+        final EmbergraphURI p2= f.createURI("http://example.org/p2");
+        final EmbergraphURI o = f.createURI("http://example.org/o");
+        final EmbergraphValue[] values = new EmbergraphValue[] { p, p2, o };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -203,15 +203,15 @@ public class TestASTGraphGroupOptimizer extends
         * possible for us to explicitly construct the expected AST and
         * the verify it using equals().
         */
-       final BigdataValueFactory f = store.getValueFactory();
-       final BigdataURI p = f.createURI("http://example.org/p");
-       final BigdataURI p2= f.createURI("http://example.org/p2");
-       final BigdataURI o = f.createURI("http://example.org/o");
-       final BigdataValue[] values = new BigdataValue[] { p, p2, o };
+       final EmbergraphValueFactory f = store.getValueFactory();
+       final EmbergraphURI p = f.createURI("http://example.org/p");
+       final EmbergraphURI p2= f.createURI("http://example.org/p2");
+       final EmbergraphURI o = f.createURI("http://example.org/o");
+       final EmbergraphValue[] values = new EmbergraphValue[] { p, p2, o };
        store.getLexiconRelation()
                .addTerms(values, values.length, false/* readOnly */);
 
-       final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+       final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                .parseQuery2(queryStr, baseURI);
 
        ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -305,7 +305,7 @@ public class TestASTGraphGroupOptimizer extends
                 + "  }\n"
                 + "}";
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -335,7 +335,7 @@ public class TestASTGraphGroupOptimizer extends
                 + "}";
 
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);

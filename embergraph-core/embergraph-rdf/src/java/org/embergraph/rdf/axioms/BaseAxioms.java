@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.Value;
 
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -38,9 +39,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.io.LongPacker;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.spo.ISPO;
@@ -87,7 +87,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
     
     /**
      * The namespace of the associated kb instance. This is used to materialize
-     * the appropriate {@link BigdataValueFactory}.
+     * the appropriate {@link EmbergraphValueFactory}.
      */
     private String namespace;
 
@@ -104,9 +104,9 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
      * @throws IllegalStateException
      *             unless the ctor variant was used that specifies the database.
      */
-    final protected BigdataValueFactory getValueFactory() {
+    final protected EmbergraphValueFactory getValueFactory() {
         
-        return BigdataValueFactoryImpl.getInstance(namespace);
+        return EmbergraphValueFactoryImpl.getInstance(namespace);
 //        return db.getValueFactory();
         
     }
@@ -150,7 +150,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
     final public void init(final AbstractTripleStore db) {
 
         // setup [axioms] collection.
-        final Set<BigdataStatement> axioms = new LinkedHashSet<BigdataStatement>(
+        final Set<EmbergraphStatement> axioms = new LinkedHashSet<EmbergraphStatement>(
                 200);
 
         // obtain collection of axioms to be used.
@@ -172,7 +172,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
      * @throws IllegalArgumentException
      *             if the parameter is <code>null</code>.
      */
-    protected void addAxioms(final Collection<BigdataStatement> axioms) {
+    protected void addAxioms(final Collection<EmbergraphStatement> axioms) {
 
         if (axioms == null)
             throw new IllegalArgumentException();
@@ -182,13 +182,13 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
     }
 
     /**
-     * Writes the axioms on the database, resolving {@link BigdataStatement}s to
+     * Writes the axioms on the database, resolving {@link EmbergraphStatement}s to
      * {@link SPO}s.
      * 
      * @return The axioms expressed as {@link SPO}s.
      */
     private Set<SPO> writeAxioms(final AbstractTripleStore db,
-            final Collection<BigdataStatement> axioms) {
+            final Collection<EmbergraphStatement> axioms) {
 
         if (db == null)
             throw new IllegalArgumentException();
@@ -245,11 +245,11 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
 //
 //			buffer.setChangeLog(changeLog);
 
-            final Iterator<BigdataStatement> itr = axioms.iterator();
+            final Iterator<EmbergraphStatement> itr = axioms.iterator();
 
             while (itr.hasNext()) {
 
-                final BigdataStatement triple = itr.next();
+                final EmbergraphStatement triple = itr.next();
 
                 assert triple.getStatementType() == StatementEnum.Axiom;
 
@@ -324,7 +324,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
 //     * 
 //     * @param axioms
 //     */
-//    private void buildBTree(final Collection<BigdataStatement> axioms) {
+//    private void buildBTree(final Collection<EmbergraphStatement> axioms) {
 //
 //        /*
 //         * Fill the btree with the axioms in SPO order.
@@ -343,7 +343,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
 //        
 //        createBTree(naxioms/* naxioms */);
 //
-//        for (BigdataStatement spo : axioms) {
+//        for (EmbergraphStatement spo : axioms) {
 //
 //            btree.insert(tupleSer.serializeKey(spo), spo.getStatementType()
 //                    .serialize());
@@ -374,7 +374,7 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
      * out as <code>long</code> integers. That version is no longer supported.
      * <p>
      * This version also includes the <em>namespace</em> so we can obtain the
-     * appropriate {@link BigdataValueFactory} instance without requiring a
+     * appropriate {@link EmbergraphValueFactory} instance without requiring a
      * reference to the {@link AbstractTripleStore}.
      */ 
     private static final transient byte VERSION1 = 1;
@@ -416,11 +416,11 @@ public abstract class BaseAxioms implements Axioms, Externalizable {
 //
 //        for (int i = 0; i < naxioms; i++) {
 //
-//            final IV s = new TermId<BigdataURI>(VTE.URI, in.readLong());
+//            final IV s = new TermId<EmbergraphURI>(VTE.URI, in.readLong());
 //
-//            final IV p = new TermId<BigdataURI>(VTE.URI, in.readLong());
+//            final IV p = new TermId<EmbergraphURI>(VTE.URI, in.readLong());
 //
-//            final IV o = new TermId<BigdataURI>(VTE.URI, in.readLong());
+//            final IV o = new TermId<EmbergraphURI>(VTE.URI, in.readLong());
 //
 //            final SPO spo = new SPO(s, p, o, StatementEnum.Axiom);
 //

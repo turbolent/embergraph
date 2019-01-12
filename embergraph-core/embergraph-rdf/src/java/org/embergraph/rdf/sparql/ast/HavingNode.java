@@ -27,7 +27,7 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IConstraint;
 import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * AST node for a HAVING clause.
@@ -82,7 +82,7 @@ public class HavingNode extends
 
         for (IValueExpressionNode node : this) {
 
-            exprs[i++] = new SPARQLConstraint<XSDBooleanIV<BigdataLiteral>>(
+            exprs[i++] = new SPARQLConstraint<XSDBooleanIV<EmbergraphLiteral>>(
                     node.getRequiredValueExpression());
 
         }

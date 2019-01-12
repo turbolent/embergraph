@@ -40,7 +40,7 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.query.resultio.sparqlxml.SPARQLResultsXMLWriter;
 
 /**
- * Unit tests the UNION aspects of the {@link BigdataSail} implementation.
+ * Unit tests the UNION aspects of the {@link EmbergraphSail} implementation.
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -99,11 +99,11 @@ public class TestUnions extends QuadsTestCase {
      */
     public void testUnions() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {
@@ -154,7 +154,7 @@ public class TestUnions extends QuadsTestCase {
             
 /**/            
             if (log.isInfoEnabled()) {
-                log.info(((BigdataSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+                log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
             }
 
             {
@@ -204,11 +204,11 @@ public class TestUnions extends QuadsTestCase {
      */
     public void testSesameFilters() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {

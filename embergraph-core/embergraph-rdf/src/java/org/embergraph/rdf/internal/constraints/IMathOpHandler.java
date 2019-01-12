@@ -4,7 +4,7 @@ import org.openrdf.model.Literal;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Interface for handling math operations on specific data type.
@@ -31,5 +31,5 @@ public interface IMathOpHandler {
      */
     public IV doMathOp(final Literal l1, final IV iv1,
             final Literal l2, final IV iv2,
-            final MathOp op, final BigdataValueFactory vf);
+            final MathOp op, final EmbergraphValueFactory vf);
 }

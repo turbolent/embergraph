@@ -24,7 +24,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * 
@@ -72,7 +72,7 @@ public class InlineHexUUIDURIHandler extends InlineURIHandler {
     @SuppressWarnings("rawtypes")
 	@Override
 	public String getLocalNameFromDelegate(
-			AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+			AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
     	final UUID uuid = ((UUIDLiteralIV) delegate).getInlineValue();
 

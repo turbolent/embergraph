@@ -47,11 +47,11 @@ abstract public class ServiceOptionsBase implements IServiceOptions {
     }
 
     @Override
-    public boolean isBigdataLBS() {
+    public boolean isEmbergraphLBS() {
         return useLBS;
     }
 
-    public void setBigdataLBS(final boolean newValue) {
+    public void setEmbergraphLBS(final boolean newValue) {
         this.useLBS = newValue;
     }
 }

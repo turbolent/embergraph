@@ -62,7 +62,7 @@ public class Test_Ticket_1717<S extends IIndexManager> extends
         // Clear DB per task description (Executing the query over the empty database)
         m_repo.remove(new RemoveOp(null, null, null));
         String query = "SELECT ?z ?s1 {  ?s ?p ?o .   BIND(?o+1 AS ?z)  BIND(?z+1 AS ?z2) }";
-        final TupleQuery tq = m_repo.getBigdataSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, query, null);
+        final TupleQuery tq = m_repo.getEmbergraphSailRemoteRepository().getConnection().prepareTupleQuery(QueryLanguage.SPARQL, query, null);
           final TupleQueryResult tqr = tq.evaluate();
           try {
               int count = 0;

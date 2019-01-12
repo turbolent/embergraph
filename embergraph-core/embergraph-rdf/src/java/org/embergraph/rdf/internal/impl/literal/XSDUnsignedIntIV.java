@@ -24,12 +24,12 @@ import java.math.BigInteger;
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.util.Bytes;
 
 /** Implementation for inline <code>xsd:unsignedInt</code>. */
-public class XSDUnsignedIntIV<V extends BigdataLiteral> extends
+public class XSDUnsignedIntIV<V extends EmbergraphLiteral> extends
         AbstractLiteralIV<V, Long> {
 
     /**
@@ -100,7 +100,7 @@ public class XSDUnsignedIntIV<V extends BigdataLiteral> extends
 	public V asValue(final LexiconRelation lex) {
 		V v = getValueCache();
 		if (v == null) {
-			final BigdataValueFactory f = lex.getValueFactory();
+			final EmbergraphValueFactory f = lex.getValueFactory();
 			v = (V) f.createLiteral(value, true);
 			v.setIV(this);
 			setValue(v);

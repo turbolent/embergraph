@@ -36,7 +36,7 @@ import org.embergraph.rdf.sail.webapp.client.MiniMime;
  * 
  * @author Martyn Cutcher
  */
-public class RESTServlet extends BigdataRDFServlet {
+public class RESTServlet extends EmbergraphRDFServlet {
 
     private static final transient Logger log = Logger
             .getLogger(RESTServlet.class);
@@ -256,8 +256,8 @@ public class RESTServlet extends BigdataRDFServlet {
                 || req.getParameter(QueryServlet.ATTR_GETSTMTS) != null
                 || req.getParameter(QueryServlet.ATTR_CONTEXTS) != null
                 // the two cases below were added to fix bug trac 711
-                || hasMimeType(req, BigdataRDFServlet.MIME_SPARQL_UPDATE)
-                || hasMimeType(req, BigdataRDFServlet.MIME_SPARQL_QUERY)
+                || hasMimeType(req, EmbergraphRDFServlet.MIME_SPARQL_UPDATE)
+                || hasMimeType(req, EmbergraphRDFServlet.MIME_SPARQL_QUERY)
                 ) {
 
             // SPARQL QUERY -or- SPARQL UPDATE via POST
@@ -276,7 +276,7 @@ public class RESTServlet extends BigdataRDFServlet {
         } else if (req.getParameter(StatusServlet.CANCEL_QUERY) != null) {
 
             StatusServlet.doCancelQuery(req, resp, getIndexManager(),
-                    getBigdataRDFContext());
+                    getEmbergraphRDFContext());
 
             buildAndCommitResponse(resp, HTTP_OK, MIME_TEXT_PLAIN, "");
 

@@ -19,6 +19,7 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -28,7 +29,6 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataBNode;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -81,7 +81,7 @@ public class BNodeBOp extends IVValueExpression<IV> implements INeedsMaterializa
         if (dt != null && !dt.stringValue().equals(XSD.STRING.stringValue()))
             throw new SparqlTypeErrorException();
 
-        final BigdataBNode bnode = getValueFactory().createBNode(
+        final EmbergraphBNode bnode = getValueFactory().createBNode(
                 "-bnode-func-" + lit.getLabel());
 
         return super.asIV(bnode, bs);

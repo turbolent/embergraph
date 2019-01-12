@@ -29,7 +29,7 @@
 	
    <target name="run-gas-engine"
           description="Run a Bigdata GAS Engine performance test.">
-      <java classname="org.embergraph.rdf.graph.impl.bd.BigdataGASRunner"
+      <java classname="org.embergraph.rdf.graph.impl.bd.EmbergraphGASRunner"
             fork="true" failonerror="true"
             >
          <arg line="-bufferMode ${bufferMode} -namespace ${namespace} -seed ${seed} -nsamples ${nsamples} -nthreads ${nthreads} ${scheduler} ${load} org.embergraph.rdf.graph.analytics.${analytic} ${journalPropertyFile}" />

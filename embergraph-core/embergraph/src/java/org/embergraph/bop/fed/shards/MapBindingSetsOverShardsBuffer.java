@@ -19,7 +19,7 @@ import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.service.AbstractScaleOutFederation;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /**
@@ -144,7 +144,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
 //    * @param keyOrder
 //    *            Identifies the access path for the target predicate.
     public MapBindingSetsOverShardsBuffer(
-            final IBigdataFederation<?> fed,
+            final IEmbergraphFederation<?> fed,
             final IPredicate<F> pred,
 //            final IKeyOrder<F> keyOrder,
             final long timestamp,

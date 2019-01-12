@@ -38,8 +38,6 @@ import org.openrdf.sail.memory.MemoryStore;
 
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
@@ -47,13 +45,13 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * <p>
  * This test case will delegate to an underlying backing store.  You can
  * specify this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -81,13 +79,13 @@ public class TestMillisecondPrecisionForInlineDateTimes extends QuadsTestCase {
          * For example, here is a set of five properties that turns off
          * inference, truth maintenance, and the free text index.
          */
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
-		props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES, "true");
-		props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES_TIMEZONE, "GMT");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
+		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES_TIMEZONE, "GMT");
 
 		// No disk file.
         props.setProperty(org.embergraph.journal.Options.BUFFER_MODE,
@@ -115,13 +113,13 @@ public class TestMillisecondPrecisionForInlineDateTimes extends QuadsTestCase {
         /*
          * The bigdata store, backed by a temporary journal file.
          */
-	  	BigdataSail bigdataSail = null;
+	  	EmbergraphSail embergraphSail = null;
 	  	
 	  	try {
 	  	
 	  	    sesameSail = new MemoryStore();
 	  	    
-	  	    bigdataSail = getSail();
+	  	    embergraphSail = getSail();
 	  	    
 	        /*
 	         * Data file containing the data demonstrating your bug.
@@ -144,10 +142,10 @@ public class TestMillisecondPrecisionForInlineDateTimes extends QuadsTestCase {
 	                + "} ORDER BY DESC(?datePub)";
 	        
 	  		sesameSail.initialize();
-	  		bigdataSail.initialize();
+	  		embergraphSail.initialize();
 	  		
   			final Repository sesameRepo = new SailRepository(sesameSail);
-  			final BigdataSailRepository bigdataRepo = new BigdataSailRepository(bigdataSail);
+  			final EmbergraphSailRepository bigdataRepo = new EmbergraphSailRepository(embergraphSail);
   			
 	  		{ // load the data into the Sesame store
 	  			
@@ -253,8 +251,8 @@ public class TestMillisecondPrecisionForInlineDateTimes extends QuadsTestCase {
             if (sesameSail != null)
                 sesameSail.shutDown();
             
-            if (bigdataSail != null)
-                bigdataSail.__tearDownUnitTest();
+            if (embergraphSail != null)
+                embergraphSail.__tearDownUnitTest();
             
         }
 

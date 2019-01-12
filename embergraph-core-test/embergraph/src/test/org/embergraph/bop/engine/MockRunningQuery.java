@@ -36,7 +36,7 @@ import org.embergraph.bop.IQueryContext;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.rwstore.sector.IMemoryManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Mock object.
@@ -48,7 +48,7 @@ public class MockRunningQuery implements IRunningQuery {
 
     private static final Logger log = Logger.getLogger(MockRunningQuery.class);
     
-    private final IBigdataFederation<?> fed;
+    private final IEmbergraphFederation<?> fed;
 
     private final IIndexManager indexManager;
 
@@ -63,12 +63,12 @@ public class MockRunningQuery implements IRunningQuery {
      * @param readTimestamp
      * @param writeTimestamp
      */
-    public MockRunningQuery(final IBigdataFederation<?> fed,
+    public MockRunningQuery(final IEmbergraphFederation<?> fed,
             final IIndexManager indexManager) {
         this(fed, indexManager, null/* queryContext */);
     }
 
-    public MockRunningQuery(final IBigdataFederation<?> fed,
+    public MockRunningQuery(final IEmbergraphFederation<?> fed,
             final IIndexManager indexManager, final IQueryContext queryContext) {
 
         this.fed = fed;
@@ -78,7 +78,7 @@ public class MockRunningQuery implements IRunningQuery {
     }
 
     @Override
-    public IBigdataFederation<?> getFederation() {
+    public IEmbergraphFederation<?> getFederation() {
         return fed;
     }
 

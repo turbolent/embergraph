@@ -29,6 +29,7 @@ import java.util.concurrent.FutureTask;
 
 import junit.framework.TestCase;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
@@ -53,9 +54,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.vocab.decls.FOAFVocabularyDecl;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.striterator.Chunkerator;
@@ -125,9 +125,9 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings({ "unchecked", "rawtypes" })
         private IV makeIV(final Value v) {
-            final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+            final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
-            final BigdataValue bv = valueFactory.asValue(v);
+            final EmbergraphValue bv = valueFactory.asValue(v);
             final IV iv = new TermId(VTE.valueOf(v), nextId++);
             iv.setValue(bv);
             return iv;
@@ -275,9 +275,9 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings({ "unchecked", "rawtypes" })
         private IV makeIV(final Value v) {
-            final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+            final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
-            final BigdataValue bv = valueFactory.asValue(v);
+            final EmbergraphValue bv = valueFactory.asValue(v);
             final IV iv = new TermId(VTE.valueOf(v), nextId++);
             iv.setValue(bv);
             return iv;
@@ -391,9 +391,9 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings({ "unchecked", "rawtypes" })
         private IV makeIV(final Value v) {
-            final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+            final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
-            final BigdataValue bv = valueFactory.asValue(v);
+            final EmbergraphValue bv = valueFactory.asValue(v);
             final IV iv = new TermId(VTE.valueOf(v), nextId++);
             iv.setValue(bv);
             return iv;
@@ -2099,9 +2099,9 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings({ "unchecked", "rawtypes" })
         private IV makeIV(final Value v) {
-            final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+            final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
-            final BigdataValue bv = valueFactory.asValue(v);
+            final EmbergraphValue bv = valueFactory.asValue(v);
             final IV iv = new TermId(VTE.valueOf(v), nextId++);
             iv.setValue(bv);
             return iv;
@@ -2410,9 +2410,9 @@ abstract public class AbstractHashJoinUtilityTestCase extends TestCase {
          */
         @SuppressWarnings({ "unchecked", "rawtypes" })
         private IV makeIV(final Value v) {
-            final BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+            final EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
                     .getInstance(namespace);
-            final BigdataValue bv = valueFactory.asValue(v);
+            final EmbergraphValue bv = valueFactory.asValue(v);
             final IV iv = new TermId(VTE.valueOf(v), nextId++);
             iv.setValue(bv);
             return iv;

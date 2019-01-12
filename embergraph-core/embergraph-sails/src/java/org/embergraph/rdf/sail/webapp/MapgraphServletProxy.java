@@ -32,7 +32,7 @@ import org.apache.log4j.Logger;
 
 import org.embergraph.util.ClassPathUtil;
 
-public class MapgraphServletProxy extends BigdataRDFServlet {
+public class MapgraphServletProxy extends EmbergraphRDFServlet {
 	
 	private static final String DEFAULT_PROVIDER = "org.embergraph.gpu.webapp.MapgraphServlet";
 	

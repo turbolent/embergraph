@@ -24,6 +24,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.client.HttpClient;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailException;
@@ -32,12 +37,7 @@ import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.eval.CustomServiceFactoryBase;
@@ -60,7 +60,7 @@ import org.embergraph.rdf.vocab.NoVocabulary;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
+public class TestServiceRegistry extends AbstractEmbergraphExprBuilderTestCase {
 
     private static final Logger log = Logger
             .getLogger(TestServiceRegistry.class);
@@ -264,17 +264,17 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
              * Declare terms that we will need.
              */
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI serviceURI1 = f
+            final EmbergraphURI serviceURI1 = f
                     .createURI("http://www.embergraph.org/myService/" + getName()
                             + "/" + UUID.randomUUID());
 
-            final BigdataURI serviceURI2 = f
+            final EmbergraphURI serviceURI2 = f
                     .createURI("http://www.embergraph.org/myService2/" + getName()
                             + "/" + UUID.randomUUID());
 
-            final BigdataValue[] values = new BigdataValue[] {
+            final EmbergraphValue[] values = new EmbergraphValue[] {
                     serviceURI1,
                     serviceURI2,
             };
@@ -352,7 +352,7 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
 
     /**
      * Unit test a {@link CustomServiceFactory} which hooks the connection start
-     * for the {@link BigdataSail}.
+     * for the {@link EmbergraphSail}.
      * 
      * @throws SailException
      */
@@ -412,13 +412,13 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
                 final AbstractTripleStore store = getStore(getProperties());
                 try {
 
-                    final BigdataSail sail = new BigdataSail(store.getNamespace(),store.getIndexManager());
+                    final EmbergraphSail sail = new EmbergraphSail(store.getNamespace(),store.getIndexManager());
                     try {
                         sail.initialize();
                         // Nothing started yet.
                         assertEquals("nstarted", 0,
                                 serviceFactory.nstarted.get());
-                        final BigdataSailConnection conn = sail.getConnection();
+                        final EmbergraphSailConnection conn = sail.getConnection();
                         try {
                             // Verify the service was notified.
                             assertEquals("nstarted", 1,
@@ -478,7 +478,7 @@ public class TestServiceRegistry extends AbstractBigdataExprBuilderTestCase {
         }
 
         @Override
-        public void startConnection(BigdataSailConnection conn) {
+        public void startConnection(EmbergraphSailConnection conn) {
 
             nstarted.incrementAndGet();
 

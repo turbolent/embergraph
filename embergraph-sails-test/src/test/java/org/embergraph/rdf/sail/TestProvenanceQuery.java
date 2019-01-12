@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -45,9 +46,8 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.sail.SailConnection;
 
 import org.embergraph.rdf.ServiceProviderHook;
-import org.embergraph.rdf.model.BigdataStatementImpl;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.store.BigdataStatementIterator;
+import org.embergraph.rdf.model.EmbergraphStatementImpl;
+import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.embergraph.rdf.store.DataLoader;
 
 /**
@@ -57,7 +57,7 @@ import org.embergraph.rdf.store.DataLoader;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
+public class TestProvenanceQuery extends ProxyEmbergraphSailTestCase {
 
 	private final transient static Logger log = Logger.getLogger(TestProvenanceQuery.class);
 	
@@ -73,7 +73,7 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
 
     public void test_query() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         
         try {
         
@@ -86,7 +86,7 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
 
                 boolean ok = false;
 
-                final BigdataSailConnection conn = sail.getUnisolatedConnection();
+                final EmbergraphSailConnection conn = sail.getUnisolatedConnection();
                 
                 try {
 
@@ -124,11 +124,11 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
              */
     		if (log.isInfoEnabled()) {
 
-                    final BigdataSailConnection conn = sail.getReadOnlyConnection();
+                    final EmbergraphSailConnection conn = sail.getReadOnlyConnection();
                     
                     try {
 
-                        final BigdataStatementIterator itr = conn.getTripleStore().getStatements(null, null, null);
+                        final EmbergraphStatementIterator itr = conn.getTripleStore().getStatements(null, null, null);
                         final String rdfXml;
                         try {
             
@@ -146,7 +146,7 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
             
                             while (itr.hasNext()) {
             
-                                final BigdataStatementImpl stmt = (BigdataStatementImpl) itr
+                                final EmbergraphStatementImpl stmt = (EmbergraphStatementImpl) itr
                                         .next();
             
                                 // only write the explicit statements.
@@ -231,7 +231,7 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
     //            final CloseableIteration<? extends BindingSet, QueryEvaluationException> itr = conn
     //                    .evaluate(tupleExpr, dataSet, bindingSet, true/* includeInferred */);
     
-                final TupleQuery tq = new BigdataSailRepository(sail).getReadOnlyConnection().prepareTupleQuery(QueryLanguage.SPARQL, q);
+                final TupleQuery tq = new EmbergraphSailRepository(sail).getReadOnlyConnection().prepareTupleQuery(QueryLanguage.SPARQL, q);
                 
                 final TupleQueryResult itr = tq.evaluate();
                 

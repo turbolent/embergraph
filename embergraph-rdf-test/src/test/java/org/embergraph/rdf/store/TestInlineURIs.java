@@ -26,6 +26,9 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
@@ -47,14 +50,11 @@ import org.embergraph.rdf.internal.impl.literal.LiteralArrayIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sail.BigdataSail;
 import org.embergraph.rdf.vocab.BaseVocabularyDecl;
-import org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151106;
+import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151106;
 
 /**
  * Integration test suite for {@link InlineURIFactory} (the inline IVs are also
@@ -78,10 +78,10 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
         /*
          * Turn off inference.
          */
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -103,13 +103,13 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 	  	
 		try {
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-			final BigdataURI uri1 = vf.createURI("urn:uuid:" + UUID.randomUUID().toString());
-			final BigdataURI uri2 = vf.createURI("urn:uuid:" + UUID.randomUUID().toString());
-			final BigdataURI uri3 = vf.createURI("urn:uuid:foo");
+			final EmbergraphURI uri1 = vf.createURI("urn:uuid:" + UUID.randomUUID().toString());
+			final EmbergraphURI uri2 = vf.createURI("urn:uuid:" + UUID.randomUUID().toString());
+			final EmbergraphURI uri3 = vf.createURI("urn:uuid:foo");
 
-			final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(store, 10/* capacity */);
+			final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(store, 10/* capacity */);
 
 			sb.add(uri1, RDF.TYPE, XSD.UUID);
 			sb.add(uri2, RDF.TYPE, XSD.UUID);
@@ -139,16 +139,16 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 	  	
 		try {     
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-            final BigdataURI uri1 = vf.createURI("urn:ipv4:10.128.1.2");
-            final BigdataURI uri2 = vf.createURI("urn:ipv4:10.128.1.2/24");
-            final BigdataURI uri3 = vf.createURI("urn:ipv4:500.425.1.2");
-            final BigdataURI uri4 = vf.createURI("urn:ipv4");
+            final EmbergraphURI uri1 = vf.createURI("urn:ipv4:10.128.1.2");
+            final EmbergraphURI uri2 = vf.createURI("urn:ipv4:10.128.1.2/24");
+            final EmbergraphURI uri3 = vf.createURI("urn:ipv4:500.425.1.2");
+            final EmbergraphURI uri4 = vf.createURI("urn:ipv4");
 
-            final BigdataLiteral l = vf.createLiteral("10.128.1.2", XSD.IPV4);
+            final EmbergraphLiteral l = vf.createLiteral("10.128.1.2", XSD.IPV4);
             
-			final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(store, 10/* capacity */);
+			final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(store, 10/* capacity */);
             
             sb.add(uri1, RDF.TYPE, XSD.IPV4);
             sb.add(uri2, RDF.TYPE, XSD.IPV4);
@@ -187,13 +187,13 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 	  	
 		try {
         
-                final BigdataValueFactory vf = store.getValueFactory();
+                final EmbergraphValueFactory vf = store.getValueFactory();
 
-                final BigdataURI uri1 = vf.createURI(CUSTOM_NAMESPACE + UUID.randomUUID().toString());
-                final BigdataURI uri2 = vf.createURI(CUSTOM_NAMESPACE + UUID.randomUUID().toString());
-                final BigdataURI uri3 = vf.createURI(CUSTOM_NAMESPACE + "foo");
+                final EmbergraphURI uri1 = vf.createURI(CUSTOM_NAMESPACE + UUID.randomUUID().toString());
+                final EmbergraphURI uri2 = vf.createURI(CUSTOM_NAMESPACE + UUID.randomUUID().toString());
+                final EmbergraphURI uri3 = vf.createURI(CUSTOM_NAMESPACE + "foo");
     
-    			final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(store, 10/* capacity */);
+    			final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(store, 10/* capacity */);
 
     			sb.add(uri1, RDF.TYPE, XSD.UUID);
                 sb.add(uri2, RDF.TYPE, XSD.UUID);
@@ -275,13 +275,13 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 	  	
 		try {
         
-			final BigdataValueFactory vf = store.getValueFactory();
-			final ArrayList<BigdataURI> uris = new ArrayList<>();
+			final EmbergraphValueFactory vf = store.getValueFactory();
+			final ArrayList<EmbergraphURI> uris = new ArrayList<>();
 			{
-				final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(store,
+				final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(store,
 						10/* capacity */);
 				for (int i = 0; i < options.length; i += 2) {
-					final BigdataURI uri = vf.createURI((String) options[i]);
+					final EmbergraphURI uri = vf.createURI((String) options[i]);
 					uris.add(uri);
 					sb.add(uri, RDF.TYPE, vf.createLiteral("doesn't matter"));
 				}
@@ -298,7 +298,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 				
 				final boolean isInline = (Boolean) options[i + 1];
 
-				final BigdataURI uri = uris.get(j);
+				final EmbergraphURI uri = uris.get(j);
 
 				assertEquals("String representation different for:  " + givenOption, givenOption, uri.stringValue());
 
@@ -327,18 +327,18 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 
 		try {
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-			final BigdataURI uri1 = vf.createURI(CUSTOM_NAMESPACE + UUID.randomUUID().toString());
-			final BigdataURI uri2 = vf.createURI(CUSTOM_NAMESPACE + "1");
-			final BigdataURI uri3 = vf.createURI(CUSTOM_NAMESPACE + Short.MAX_VALUE);
-			final BigdataURI uri4 = vf.createURI(CUSTOM_NAMESPACE + Integer.MAX_VALUE);
-			final BigdataURI uri5 = vf.createURI(CUSTOM_NAMESPACE + Long.MAX_VALUE);
-			final BigdataURI uri6 = vf.createURI(CUSTOM_NAMESPACE + "2.3");
-			final BigdataURI uri7 = vf.createURI(CUSTOM_NAMESPACE + "foo");
+			final EmbergraphURI uri1 = vf.createURI(CUSTOM_NAMESPACE + UUID.randomUUID().toString());
+			final EmbergraphURI uri2 = vf.createURI(CUSTOM_NAMESPACE + "1");
+			final EmbergraphURI uri3 = vf.createURI(CUSTOM_NAMESPACE + Short.MAX_VALUE);
+			final EmbergraphURI uri4 = vf.createURI(CUSTOM_NAMESPACE + Integer.MAX_VALUE);
+			final EmbergraphURI uri5 = vf.createURI(CUSTOM_NAMESPACE + Long.MAX_VALUE);
+			final EmbergraphURI uri6 = vf.createURI(CUSTOM_NAMESPACE + "2.3");
+			final EmbergraphURI uri7 = vf.createURI(CUSTOM_NAMESPACE + "foo");
 
 			{
-				final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(store,
+				final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(store,
 						10/* capacity */);
 				sb.add(uri1, RDF.TYPE, RDFS.RESOURCE);
 				sb.add(uri2, RDF.TYPE, RDFS.RESOURCE);
@@ -354,7 +354,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 					log.debug(store.dumpStore());
 			}
 
-			for (BigdataURI uri : new BigdataURI[] { uri1, uri2, uri3, uri4, uri5, uri6, uri7 }) {
+			for (EmbergraphURI uri : new EmbergraphURI[] { uri1, uri2, uri3, uri4, uri5, uri6, uri7 }) {
 
 				assertTrue(uri.getIV().isInline());
 				
@@ -390,7 +390,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 
         try {
 
-            final BigdataValueFactory vf = store.getValueFactory();
+            final EmbergraphValueFactory vf = store.getValueFactory();
 
             final Object[] array = new Object[] {
                     UUID.randomUUID(),
@@ -410,10 +410,10 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
             }
             sb.setLength(sb.length()-1);
             
-            final BigdataURI uri1 = vf.createURI(sb.toString());
+            final EmbergraphURI uri1 = vf.createURI(sb.toString());
 
             {
-                final StatementBuffer<BigdataStatement> buf = new StatementBuffer<BigdataStatement>(store,
+                final StatementBuffer<EmbergraphStatement> buf = new StatementBuffer<EmbergraphStatement>(store,
                         10/* capacity */);
                 buf.add(uri1, RDF.TYPE, RDFS.RESOURCE);
                 buf.flush();
@@ -423,7 +423,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
                     log.debug(store.dumpStore());
             }
 
-            for (BigdataURI uri : new BigdataURI[] { uri1 }) {
+            for (EmbergraphURI uri : new EmbergraphURI[] { uri1 }) {
 
                 assertTrue(uri.getIV().isInline());
                 
@@ -462,7 +462,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     /**
      * Note: Must be public for access patterns.
      */
-    public static class CustomVocab extends BigdataCoreVocabulary_v20151106 {
+    public static class CustomVocab extends EmbergraphCoreVocabulary_v20151106 {
         
         public CustomVocab() {
             super();
@@ -562,7 +562,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
             }
 
             // just use a UTF encoded string, this is expensive
-            return new FullyInlineTypedLiteralIV<BigdataLiteral>(localName);
+            return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
             
         }
         
@@ -606,7 +606,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
         
         @Override
         public String getLocalNameFromDelegate(
-                final AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+                final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
             
             final StringBuilder sb = new StringBuilder();
             

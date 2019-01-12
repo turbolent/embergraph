@@ -49,7 +49,7 @@ import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.resources.ResourceManager.Options;
 import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.Bytes;
 
 /**
@@ -785,7 +785,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
             
         }
 
-        public IBigdataFederation getFederation() {
+        public IEmbergraphFederation getFederation() {
 
             throw new UnsupportedOperationException();
 

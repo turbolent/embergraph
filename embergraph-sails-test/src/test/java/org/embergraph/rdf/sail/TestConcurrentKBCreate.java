@@ -29,10 +29,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.embergraph.EmbergraphStatics;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-import org.embergraph.BigdataStatics;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
@@ -90,9 +90,9 @@ import org.embergraph.util.InnerCause;
  * INFO : 41212 2012-11-06 08:38:41,875 :    ... 23 more
  * INFO : 41212 2012-11-06 08:38:41,875 : Caused by: java.lang.RuntimeException: No axioms defined? : LocalTripleStore{timestamp=-1, namespace=kb, container=null, indexManager=org.embergraph.journal.jini.ha.HAJournal@4d092447}
  * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.store.AbstractTripleStore.getAxioms(AbstractTripleStore.java:1787)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.BigdataSail.<init>(BigdataSail.java:934)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.BigdataSail.<init>(BigdataSail.java:891)
- * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.webapp.BigdataRDFContext.getQueryConnection(BigdataRDFContext.java:1858)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.EmbergraphSail.<init>(EmbergraphSail.java:934)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.EmbergraphSail.<init>(EmbergraphSail.java:891)
+ * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.getQueryConnection(EmbergraphRDFContext.java:1858)
  * INFO : 41212 2012-11-06 08:38:41,875 :    at org.embergraph.rdf.sail.webapp.QueryServlet.doEstCard(QueryServlet.java:1074)
  * INFO : 41212 2012-11-06 08:38:41,875 :    ... 23 more
  * </pre>
@@ -101,7 +101,7 @@ import org.embergraph.util.InnerCause;
  *      Concurrent KB create fails with "No axioms defined?" </a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
+abstract public class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase {
 
     public TestConcurrentKBCreate() {
     }
@@ -238,7 +238,7 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
    private void assertKBExists(final Journal jnl, final String namespace)
          throws RepositoryException, SailException {
       // Attempt to discover the KB instance.
-      BigdataSailRepositoryConnection conn = null;
+      EmbergraphSailRepositoryConnection conn = null;
       try {
          // Request query connection.
          conn = getQueryConnection(jnl, namespace, ITx.READ_COMMITTED);
@@ -259,7 +259,7 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
    private void assertKBNotFound(final Journal jnl, final String namespace)
          throws RepositoryException, SailException {
       // Attempt to discover the KB instance.
-      BigdataSailRepositoryConnection conn = null;
+      EmbergraphSailRepositoryConnection conn = null;
       try {
          // Request query connection.
          conn = getQueryConnection(jnl, namespace, ITx.READ_COMMITTED);
@@ -375,7 +375,7 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
     */
    public void test_CreateDestroy_ticket_948_01() throws Exception {
     
-      if(!BigdataStatics.runKnownBadTests) {
+      if(!EmbergraphStatics.runKnownBadTests) {
          return;
       }
       
@@ -438,7 +438,7 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
     */
    public void test_CreateDestroy_ticket_948_02() throws Exception {
     
-      if(!BigdataStatics.runKnownBadTests) {
+      if(!EmbergraphStatics.runKnownBadTests) {
          return;
       }
       
@@ -697,7 +697,7 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
         @Override
         public Void call() throws Exception {
 
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
 
             try {
                 
@@ -749,17 +749,17 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
      *         instance was not found.
      * @throws SailException 
      */
-    private BigdataSailRepositoryConnection getQueryConnection(
+    private EmbergraphSailRepositoryConnection getQueryConnection(
             final IIndexManager indexManager, final String namespace,
             final long timestamp) throws RepositoryException, SailException {
 
 //        boolean ok = false;
-//        final BigdataSail sail = new BigdataSail(namespace, indexManager);
+//        final EmbergraphSail sail = new EmbergraphSail(namespace, indexManager);
 //        try {
-//            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //            repo.initialize();
 //            try {
-//                final BigdataSailRepositoryConnection con;
+//                final EmbergraphSailRepositoryConnection con;
 //                if (TimestampUtility.isReadOnly(timestamp)) {
 //                    con = repo.getReadOnlyConnection(timestamp);
 //                } else {
@@ -797,21 +797,21 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
       try {
 
          // Wrap with SAIL.
-         final BigdataSail sail = new BigdataSail(tripleStore);
+         final EmbergraphSail sail = new EmbergraphSail(tripleStore);
 
-         final BigdataSailRepository repo = new BigdataSailRepository(sail);
+         final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
          repo.initialize();
 
          if (TimestampUtility.isReadOnly(timestamp)) {
 
-            return (BigdataSailRepositoryConnection) repo
+            return (EmbergraphSailRepositoryConnection) repo
                   .getReadOnlyConnection(timestamp);
 
          }
 
          // Read-write connection.
-         final BigdataSailRepositoryConnection conn = repo.getConnection();
+         final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 
          conn.setAutoCommit(false);
 
@@ -863,7 +863,7 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
 //     * 
 //     * @throws RepositoryException
 //     */
-//    private BigdataSailRepositoryConnection getUnisolatedConnection(
+//    private EmbergraphSailRepositoryConnection getUnisolatedConnection(
 //            final IIndexManager indexManager, final String namespace)
 //            throws SailException, RepositoryException {
 //
@@ -878,13 +878,13 @@ abstract public class TestConcurrentKBCreate extends ProxyBigdataSailTestCase {
 //        }
 //
 //        // Wrap with SAIL.
-//        final BigdataSail sail = new BigdataSail(tripleStore);
+//        final EmbergraphSail sail = new EmbergraphSail(tripleStore);
 //
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //
 //        repo.initialize();
 //
-//        final BigdataSailRepositoryConnection conn = (BigdataSailRepositoryConnection) repo
+//        final EmbergraphSailRepositoryConnection conn = (EmbergraphSailRepositoryConnection) repo
 //                .getUnisolatedConnection();
 //
 //        conn.setAutoCommit(false);

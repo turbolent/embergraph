@@ -34,6 +34,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Value;
 import org.openrdf.query.MalformedQueryException;
@@ -44,10 +47,7 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask;
 import org.embergraph.rdf.sail.webapp.DeleteServlet.BufferStatementHandler;
 import org.embergraph.rdf.sail.webapp.DeleteServlet.RemoveStatementHandler;
 import org.embergraph.rdf.sail.webapp.InsertServlet.AddStatementHandler;
@@ -60,7 +60,7 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
  * 
  * @author martyncutcher
  */
-public class UpdateServlet extends BigdataRDFServlet {
+public class UpdateServlet extends EmbergraphRDFServlet {
 
     /**
      * 
@@ -348,13 +348,13 @@ public class UpdateServlet extends BigdataRDFServlet {
              */
             
             // Setup the baseURI for this request. 
-            final String baseURI = BigdataRDFContext.getBaseURI(req, resp);
+            final String baseURI = EmbergraphRDFContext.getBaseURI(req, resp);
 
             // Parse the query.
-            final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+            final ASTContainer astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
-            BigdataSailRepositoryConnection repoConn = null;
-            BigdataSailConnection conn = null;
+            EmbergraphSailRepositoryConnection repoConn = null;
+            EmbergraphSailConnection conn = null;
             boolean success = false;
             try {
             	
@@ -375,8 +375,8 @@ public class UpdateServlet extends BigdataRDFServlet {
 					if (log.isInfoEnabled())
 						log.info("update with query: " + queryStr);
 
-					final BigdataRDFContext context = BigdataServlet
-							.getBigdataRDFContext(req.getServletContext());
+					final EmbergraphRDFContext context = EmbergraphServlet
+							.getEmbergraphRDFContext(req.getServletContext());
 
 					/*
 					 * Note: pipe is drained by this thread to consume the query
@@ -385,7 +385,7 @@ public class UpdateServlet extends BigdataRDFServlet {
 					final PipedOutputStream os = new PipedOutputStream();
 
 					// The read-only connection for the query.
-					BigdataSailRepositoryConnection roconn = null;
+					EmbergraphSailRepositoryConnection roconn = null;
 					try {
 						
 						final long readOnlyTimestamp = ITx.READ_COMMITTED;
@@ -613,13 +613,13 @@ public class UpdateServlet extends BigdataRDFServlet {
           */
          
          // Setup the baseURI for this request. 
-         final String baseURI = BigdataRDFContext.getBaseURI(req, resp);
+         final String baseURI = EmbergraphRDFContext.getBaseURI(req, resp);
 
          // Parse the query.
-         final ASTContainer astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+         final ASTContainer astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
-         BigdataSailRepositoryConnection repoConn = null;
-         BigdataSailConnection conn = null;
+         EmbergraphSailRepositoryConnection repoConn = null;
+         EmbergraphSailConnection conn = null;
          boolean success = false;
          try {
         	 
@@ -635,7 +635,7 @@ public class UpdateServlet extends BigdataRDFServlet {
             	
             }
              
-            BigdataSailRepositoryConnection roconn = null;
+            EmbergraphSailRepositoryConnection roconn = null;
             try {
             	
             	final long readOnlyTimestamp = ITx.READ_COMMITTED;
@@ -648,8 +648,8 @@ public class UpdateServlet extends BigdataRDFServlet {
 	               if (log.isInfoEnabled())
 	                  log.info("update with query: " + queryStr);
 	
-	               final BigdataRDFContext context = BigdataServlet
-	                     .getBigdataRDFContext(req.getServletContext());
+	               final EmbergraphRDFContext context = EmbergraphServlet
+	                     .getEmbergraphRDFContext(req.getServletContext());
 	
 	               /*
 	                * Note: pipe is drained by this thread to consume the query
@@ -998,8 +998,8 @@ public class UpdateServlet extends BigdataRDFServlet {
             
             final AtomicLong nmodified = new AtomicLong(0L);
 
-            BigdataSailRepositoryConnection repoConn = null;
-            BigdataSailConnection conn = null;
+            EmbergraphSailRepositoryConnection repoConn = null;
+            EmbergraphSailConnection conn = null;
             boolean success = false;
             try {
         
@@ -1080,7 +1080,7 @@ public class UpdateServlet extends BigdataRDFServlet {
 
         }
         
-        private void processData(final BigdataSailConnection conn, 
+        private void processData(final EmbergraphSailConnection conn,
                 final String contentType, 
                 final InputStream is, 
                 final RDFHandler handler,

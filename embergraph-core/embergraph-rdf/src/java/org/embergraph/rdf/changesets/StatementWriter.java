@@ -44,12 +44,12 @@ public class StatementWriter {
         
         if (itr.hasNext()) {
             
-//            final BigdataStatementIteratorImpl itr2 = 
-//                new BigdataStatementIteratorImpl(database, bnodes, itr)
+//            final EmbergraphStatementIteratorImpl itr2 =
+//                new EmbergraphStatementIteratorImpl(database, bnodes, itr)
 //                    .start(database.getExecutorService()); 
 //            
-//            final BigdataStatement[] stmts = 
-//                new BigdataStatement[database.getChunkCapacity()];
+//            final EmbergraphStatement[] stmts =
+//                new EmbergraphStatement[database.getChunkCapacity()];
             final SPO[] stmts = new SPO[database.getChunkCapacity()];
             
             int i = 0;
@@ -119,12 +119,12 @@ public class StatementWriter {
         
         if (itr.hasNext()) {
             
-//            final BigdataStatementIteratorImpl itr2 = 
-//                new BigdataStatementIteratorImpl(database, bnodes, itr)
+//            final EmbergraphStatementIteratorImpl itr2 =
+//                new EmbergraphStatementIteratorImpl(database, bnodes, itr)
 //                    .start(database.getExecutorService()); 
 //            
-//            final BigdataStatement[] stmts = 
-//                new BigdataStatement[database.getChunkCapacity()];
+//            final EmbergraphStatement[] stmts =
+//                new EmbergraphStatement[database.getChunkCapacity()];
             final ISPO[] stmts = new ISPO[database.getChunkCapacity()];
             
             int i = 0;
@@ -191,14 +191,14 @@ public class StatementWriter {
         
     }
     
-//    private static SPO[] allocateSPOs(final BigdataStatement[] stmts, 
+//    private static SPO[] allocateSPOs(final EmbergraphStatement[] stmts,
 //            final int numStmts) {
 //        
 //        final SPO[] tmp = new SPO[numStmts];
 //
 //        for (int i = 0; i < tmp.length; i++) {
 //
-//            final BigdataStatement stmt = stmts[i];
+//            final EmbergraphStatement stmt = stmts[i];
 //            
 //            final SPO spo = new SPO(stmt);
 //

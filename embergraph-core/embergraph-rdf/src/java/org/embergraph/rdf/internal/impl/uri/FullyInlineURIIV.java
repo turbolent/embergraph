@@ -28,15 +28,15 @@ import org.embergraph.rdf.internal.IVUnicode;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.AbstractInlineIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Implementation for inline {@link URI}s. All information is inlined. This
  * class is mainly targeted at inlining at fully inlining URIs in scale-out
  * (which can be an attractive option).
  */
-public class FullyInlineURIIV<V extends BigdataURI> extends AbstractInlineIV<V, URI>
+public class FullyInlineURIIV<V extends EmbergraphURI> extends AbstractInlineIV<V, URI>
         implements IInlineUnicode, URI {
 
     /**
@@ -101,7 +101,7 @@ public class FullyInlineURIIV<V extends BigdataURI> extends AbstractInlineIV<V, 
     public V asValue(final LexiconRelation lex) {
 		V v = getValueCache();
 		if (v == null) {
-            final BigdataValueFactory f = lex.getValueFactory();
+            final EmbergraphValueFactory f = lex.getValueFactory();
             v = (V) f.createURI(uri.stringValue());
             v.setIV(this);
 			setValue(v);

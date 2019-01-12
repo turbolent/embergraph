@@ -25,7 +25,7 @@ import java.util.Properties;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialLiteralError;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
@@ -1068,7 +1068,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
         properties.setProperty(AbstractTripleStore.Options.QUADS, "false");
 
         // TM not available with quads.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,"false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
 
         // turn off axioms.
         properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,

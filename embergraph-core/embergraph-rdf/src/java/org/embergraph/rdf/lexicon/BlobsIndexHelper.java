@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
@@ -47,9 +49,7 @@ import org.embergraph.rdf.internal.INonInlineExtensionCodes;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
@@ -124,13 +124,13 @@ public class BlobsIndexHelper {
 	public static final transient int NOT_FOUND = Integer.MIN_VALUE;
 	
 	/**
-	 * Generate the sort keys for {@link BigdataValue}s to be represented as
+	 * Generate the sort keys for {@link EmbergraphValue}s to be represented as
 	 * {@link BlobIV}s. The sort key is formed from the {@link VTE} of the
-	 * {@link BigdataValue} followed by the hashCode of the {@link BigdataValue}
+	 * {@link EmbergraphValue} followed by the hashCode of the {@link EmbergraphValue}
 	 * . Note that the sort key formed in this manner is only a prefix key for
 	 * the TERMS index. The fully formed key also includes a counter to breaks
 	 * ties when the sort key formed from {@link VTE} and hashCode results in a
-	 * collision (different {@link BigdataValue}s having the same prefix key).
+	 * collision (different {@link EmbergraphValue}s having the same prefix key).
 	 * 
 	 * @param valSer
 	 *            The object used to generate the values to be written onto the
@@ -143,9 +143,9 @@ public class BlobsIndexHelper {
 	 * @return An array of correlated key-value-object tuples.
 	 */
 	@SuppressWarnings("unchecked")
-	public KVO<BigdataValue>[] generateKVOs(
-			final BigdataValueSerializer<BigdataValue> valSer,
-			final BigdataValue[] terms, final int numTerms) {
+	public KVO<EmbergraphValue>[] generateKVOs(
+			final EmbergraphValueSerializer<EmbergraphValue> valSer,
+			final EmbergraphValue[] terms, final int numTerms) {
 
 		if (valSer == null)
 			throw new IllegalArgumentException();
@@ -154,7 +154,7 @@ public class BlobsIndexHelper {
 		if (numTerms <= 0 || numTerms > terms.length)
 			throw new IllegalArgumentException();
 
-		final KVO<BigdataValue>[] a = new KVO[numTerms];
+		final KVO<EmbergraphValue>[] a = new KVO[numTerms];
 
         final IKeyBuilder keyBuilder = newKeyBuilder();
 
@@ -166,7 +166,7 @@ public class BlobsIndexHelper {
 
             for (int i = 0; i < numTerms; i++) {
 
-                final BigdataValue term = terms[i];
+                final EmbergraphValue term = terms[i];
 
                 final VTE vte = VTE.valueOf(term);
 
@@ -177,7 +177,7 @@ public class BlobsIndexHelper {
 
                 final byte[] val = valSer.serialize(term, out.reset(), tmp);
 
-                a[i] = new KVO<BigdataValue>(key, val, term);
+                a[i] = new KVO<EmbergraphValue>(key, val, term);
 
             }
 
@@ -510,8 +510,8 @@ public class BlobsIndexHelper {
 	 * Return the value associated with the {@link BlobIV} in the TERMS index.
 	 * <p>
 	 * Note: The returned <code>byte[]</code> may be decoded using the
-	 * {@link BigdataValueSerializer} associated with the
-	 * {@link BigdataValueFactory} for the namespace of the owning
+	 * {@link EmbergraphValueSerializer} associated with the
+	 * {@link EmbergraphValueFactory} for the namespace of the owning
 	 * {@link AbstractTripleStore}.
 	 * 
 	 * @param ndx
@@ -562,7 +562,7 @@ public class BlobsIndexHelper {
 	
 	/**
 	 * Create a fully formed key for the TERMS index from the {@link VTE}, the
-	 * hashCode of the {@link BigdataValue}, and the hash collision counter.
+	 * hashCode of the {@link EmbergraphValue}, and the hash collision counter.
 	 * 
 	 * @param keyBuilder
 	 *            The caller is responsible for resetting the buffer as
@@ -570,7 +570,7 @@ public class BlobsIndexHelper {
 	 * @param vte
 	 *            The {@link VTE}.
 	 * @param hashCode
-	 *            The hash code of the {@link BigdataValue}.
+	 *            The hash code of the {@link EmbergraphValue}.
 	 * @param counter
 	 *            The hash collision counter.
 	 *            
@@ -602,7 +602,7 @@ public class BlobsIndexHelper {
 
 	/**
 	 * Create a prefix key for the TERMS index from the {@link VTE} and hashCode
-	 * of the {@link BigdataValue}.
+	 * of the {@link EmbergraphValue}.
 	 * 
 	 * @param keyBuilder
 	 *            The caller is responsible for resetting the buffer as
@@ -610,7 +610,7 @@ public class BlobsIndexHelper {
 	 * @param vte
 	 *            The {@link VTE}.
 	 * @param hashCode
-	 *            The hash code of the {@link BigdataValue}.
+	 *            The hash code of the {@link EmbergraphValue}.
 	 * 
 	 * @return The prefix key.
 	 */
@@ -639,18 +639,18 @@ public class BlobsIndexHelper {
 	}
 
     /**
-     * Create a prefix key for the TERMS index from the {@link BigdataValue}.
+     * Create a prefix key for the TERMS index from the {@link EmbergraphValue}.
      * 
      * @param keyBuilder
      *            The caller is responsible for resetting the buffer as
      *            required.
      * @param value
-     *            The {@link BigdataValue}
+     *            The {@link EmbergraphValue}
      * 
      * @return The prefix key.
      */
     public byte[] makePrefixKey(final IKeyBuilder keyBuilder,
-            final BigdataValue value) {
+            final EmbergraphValue value) {
 
         final VTE vte = VTE.valueOf(value);
 
@@ -715,7 +715,7 @@ public class BlobsIndexHelper {
 
 	/**
      * Exception thrown if the maximum size of the collision bucket would be
-     * exceeded for some {@link BigdataValue}.
+     * exceeded for some {@link EmbergraphValue}.
      * 
      * @author thompsonbry
      */

@@ -23,6 +23,8 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.Collections;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
@@ -33,9 +35,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -99,17 +99,17 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
 		 * not known.
 		 */
 
-    		final BigdataValueFactory f = store.getValueFactory();
+    		final EmbergraphValueFactory f = store.getValueFactory();
 
     		// A version where a mock IV is associated with the term. 
-    		final BigdataURI unknown1 = f.createURI("http://example/out");
+    		final EmbergraphURI unknown1 = f.createURI("http://example/out");
     		unknown1.setIV(TermId.mockIV(VTE.URI));
     		assertFalse(unknown1.isRealIV());
     		unknown1.getIV().setValue(unknown1);
     		
     		// A version where a real IV is associated with the term. 
-    		final BigdataURI known1 = f.createURI("http://example/out");
-    		store.addTerms(new BigdataValue[]{known1});
+    		final EmbergraphURI known1 = f.createURI("http://example/out");
+    		store.addTerms(new EmbergraphValue[]{known1});
     		assertTrue(known1.isRealIV());
     		
         final IBindingSet[] bsets = new IBindingSet[] {
@@ -212,17 +212,17 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
 		 * not known.
 		 */
 
-    		final BigdataValueFactory f = store.getValueFactory();
+    		final EmbergraphValueFactory f = store.getValueFactory();
 
     		// A version where a mock IV is associated with the term. 
-    		final BigdataURI unknown1 = f.createURI("http://example/out");
+    		final EmbergraphURI unknown1 = f.createURI("http://example/out");
     		unknown1.setIV(TermId.mockIV(VTE.URI));
     		assertFalse(unknown1.isRealIV());
     		unknown1.getIV().setValue(unknown1);
     		
     		// A version where a real IV is associated with the term. 
-    		final BigdataURI known1 = f.createURI("http://example/out");
-    		store.addTerms(new BigdataValue[]{known1});
+    		final EmbergraphURI known1 = f.createURI("http://example/out");
+    		store.addTerms(new EmbergraphValue[]{known1});
     		assertTrue(known1.isRealIV());
     		
         final IBindingSet[] bsets = new IBindingSet[] {

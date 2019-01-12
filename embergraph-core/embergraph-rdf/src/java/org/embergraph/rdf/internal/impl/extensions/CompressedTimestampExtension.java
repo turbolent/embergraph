@@ -22,6 +22,7 @@ package org.embergraph.rdf.internal.impl.extensions;
 import java.util.Collections;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -32,9 +33,8 @@ import org.embergraph.rdf.internal.IExtension;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Effective, packed representation of timestamps typed as
@@ -50,9 +50,9 @@ import org.embergraph.rdf.model.BigdataValueFactory;
  * 04 May 2198 23:50:03 GMT, so you couldn't represent dates beyond that time.
  */
 @SuppressWarnings("rawtypes")
-public class CompressedTimestampExtension<V extends BigdataValue> implements IExtension<V> {
+public class CompressedTimestampExtension<V extends EmbergraphValue> implements IExtension<V> {
 
-    private final BigdataURI datatype;
+    private final EmbergraphURI datatype;
     
     public static final URI COMPRESSED_TIMESTAMP = 
         new URIImpl("http://www.embergraph.org/rdf/datatype#compressedTimestamp");
@@ -62,7 +62,7 @@ public class CompressedTimestampExtension<V extends BigdataValue> implements IEx
         datatype = resolver.resolve(COMPRESSED_TIMESTAMP);
     }
     
-    public Set<BigdataURI> getDatatypes() {
+    public Set<EmbergraphURI> getDatatypes() {
         
         return Collections.singleton(datatype);
         
@@ -86,7 +86,7 @@ public class CompressedTimestampExtension<V extends BigdataValue> implements IEx
     
     
     @SuppressWarnings("unchecked")
-    public V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf) {
+    public V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf) {
         
         AbstractLiteralIV delegate = iv.getDelegate();
         if (delegate==null || !(delegate instanceof PackedLongIV)) {

@@ -21,6 +21,7 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -29,7 +30,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -141,7 +141,7 @@ public class SubstrBOp extends IVValueExpression<IV> implements INeedsMaterializ
              * Language code literal.
              */
 
-            final BigdataLiteral str = getValueFactory().createLiteral(label,
+            final EmbergraphLiteral str = getValueFactory().createLiteral(label,
                     lang);
 
             return super.asIV(str, bs);
@@ -152,7 +152,7 @@ public class SubstrBOp extends IVValueExpression<IV> implements INeedsMaterializ
              * Datatype literal.
              */
 
-            final BigdataLiteral str = getValueFactory().createLiteral(label,
+            final EmbergraphLiteral str = getValueFactory().createLiteral(label,
                     dt);
 
             return super.asIV(str, bs);
@@ -163,7 +163,7 @@ public class SubstrBOp extends IVValueExpression<IV> implements INeedsMaterializ
              * Return new simple literal using Literal.getLabel()
              */
 
-            final BigdataLiteral str = getValueFactory().createLiteral(label);
+            final EmbergraphLiteral str = getValueFactory().createLiteral(label);
 
             return super.asIV(str, bs);
 

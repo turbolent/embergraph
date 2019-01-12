@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 
 import org.embergraph.bop.BOp;
-import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
  * The DELETE DATA operation removes some triples, given inline in the request,
@@ -65,7 +65,7 @@ public class DeleteData extends AbstractGraphDataUpdate {
     }
 
     @Override
-    public void setData(final BigdataStatement[] data) {
+    public void setData(final EmbergraphStatement[] data) {
 
       setProperty(Annotations.DATA, data);
 

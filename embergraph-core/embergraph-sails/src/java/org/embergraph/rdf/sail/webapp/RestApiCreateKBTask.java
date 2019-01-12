@@ -57,7 +57,7 @@ class RestApiCreateKBTask extends AbstractDelegateRestApiTask<Void> {
              * Note: The response code is defined as 409 (Conflict) since 1.3.2.
              */
             throw new HttpOperationException(HttpServletResponse.SC_CONFLICT,
-                  BigdataServlet.MIME_TEXT_PLAIN, "EXISTS: " + namespace);
+                  EmbergraphServlet.MIME_TEXT_PLAIN, "EXISTS: " + namespace);
          }
 
       }

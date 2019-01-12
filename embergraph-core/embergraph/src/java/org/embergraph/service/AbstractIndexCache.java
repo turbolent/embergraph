@@ -53,8 +53,8 @@ abstract public class AbstractIndexCache<T extends IRangeQuery> {
      * @param timeout
      *            The timeout in milliseconds for stale entries in the cache.
      * 
-     * @see IBigdataClient.Options#CLIENT_INDEX_CACHE_CAPACITY
-     * @see IBigdataClient.Options#CLIENT_INDEX_CACHE_TIMEOUT
+     * @see IEmbergraphClient.Options#CLIENT_INDEX_CACHE_CAPACITY
+     * @see IEmbergraphClient.Options#CLIENT_INDEX_CACHE_TIMEOUT
      */
     protected AbstractIndexCache(final int capacity, final long timeout) {
 

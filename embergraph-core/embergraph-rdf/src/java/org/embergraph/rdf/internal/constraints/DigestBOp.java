@@ -29,7 +29,7 @@ import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -170,7 +170,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
                 byte[] bytes = label.getBytes("UTF-8");
                 md.update(bytes);
                 byte[] digest = md.digest();
-                final BigdataLiteral str = getValueFactory().createLiteral(toHexString(digest));
+                final EmbergraphLiteral str = getValueFactory().createLiteral(toHexString(digest));
                 return super.asIV(str, bs);
             } catch (Exception e) {
                 throw new SparqlTypeErrorException();

@@ -15,7 +15,7 @@ import org.embergraph.journal.AbstractJournal;
  * <p>
  * Note that {@link MetadataService} extends {@link DataService} so this
  * task can also be used to enumerate the scale-out indices in an
- * {@link IBigdataFederation}. However, when enumerating metadata index
+ * {@link IEmbergraphFederation}. However, when enumerating metadata index
  * names, note that they all use a prefix to place them into their own
  * namespace.
  * 

@@ -37,7 +37,7 @@ import org.embergraph.counters.query.URLQueryModel;
 import org.embergraph.counters.render.IRenderer;
 import org.embergraph.counters.render.RendererFactory;
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IEventReceivingService;
 import org.embergraph.service.IService;
 
@@ -56,7 +56,7 @@ import org.embergraph.service.IService;
  *          The event reporting needs to be hooked via
  *          {@link IEventReceivingService}, at least for scale-out.
  */
-public class CountersServlet extends BigdataServlet {
+public class CountersServlet extends EmbergraphServlet {
 
     /**
      * 
@@ -88,9 +88,9 @@ public class CountersServlet extends BigdataServlet {
         
         final IIndexManager indexManager = getIndexManager();
 
-        if (indexManager instanceof IBigdataFederation) {
+        if (indexManager instanceof IEmbergraphFederation) {
 
-            ((IBigdataFederation<?>) indexManager).reattachDynamicCounters();
+            ((IEmbergraphFederation<?>) indexManager).reattachDynamicCounters();
 
         }
 
@@ -184,7 +184,7 @@ public class CountersServlet extends BigdataServlet {
         
         } catch (Throwable t) {
             
-            BigdataRDFServlet.launderThrowable(t, resp, "");
+            EmbergraphRDFServlet.launderThrowable(t, resp, "");
             
         }
 

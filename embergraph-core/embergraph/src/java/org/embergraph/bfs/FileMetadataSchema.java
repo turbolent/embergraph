@@ -6,7 +6,7 @@ import org.embergraph.sparse.SparseRowStore;
 
 /**
  * The schema for metadata about file versions stored in the
- * {@link BigdataFileSystem}. Some well known properties are always defined,
+ * {@link EmbergraphFileSystem}. Some well known properties are always defined,
  * but any property may be stored - ideally within their own namespace!
  * <p>
  * Note: File version creation time and update times are available using the

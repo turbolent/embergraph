@@ -5,10 +5,10 @@ import java.util.Properties;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.query.QueryLanguage;
 
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
-import org.embergraph.rdf.sail.BigdataSailTupleQuery;
+import org.embergraph.rdf.sail.EmbergraphSailTupleQuery;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.store.BDS;
 import com.tinkerpop.blueprints.Edge;
@@ -24,10 +24,10 @@ public class TestPathConstraints extends TestCase {
     public void testPathLength() throws Exception {
     
         final Properties props = new Properties();
-        props.setProperty(BigdataGraph.Options.LAX_EDGES, "true");
+        props.setProperty(EmbergraphGraph.Options.LAX_EDGES, "true");
         
-        final BigdataGraphEmbedded graph = (BigdataGraphEmbedded)
-                BigdataGraphFactory.create(
+        final EmbergraphGraphEmbedded graph = (EmbergraphGraphEmbedded)
+                EmbergraphGraphFactory.create(
                         SimpleBlueprintsValueFactory.INSTANCE, props);
         
         try {
@@ -66,10 +66,10 @@ public class TestPathConstraints extends TestCase {
                         "  } " +
                         "}";
                 
-//                final BigdataSailRepositoryConnection cxn = graph
+//                final EmbergraphSailRepositoryConnection cxn = graph
 //                        .getReadConnection();
 //                try {
-//                    final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+//                    final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
 //                            .prepareQuery(QueryLanguage.SPARQL, queryStr);
 //                    final QueryRoot optimized = query.optimize();
 //                    if (log.isDebugEnabled()) {
@@ -80,12 +80,12 @@ public class TestPathConstraints extends TestCase {
 //                }
     
                 for (int i = 1; i < 5; i++) {
-                    final ICloseableIterator<BigdataBindingSet> selection = 
+                    final ICloseableIterator<EmbergraphBindingSet> selection =
                             graph.select(queryStr.replace("?upper", ""+i));
                     try {
                         int n = 0;
                         while (selection.hasNext()) {
-                            final BigdataBindingSet bbs = selection.next();
+                            final EmbergraphBindingSet bbs = selection.next();
                             if (log.isDebugEnabled()) {
                                 log.debug(bbs);
                             }
@@ -113,10 +113,10 @@ public class TestPathConstraints extends TestCase {
                         "  } " +
                         "}";
                 
-//                final BigdataSailRepositoryConnection cxn = graph
+//                final EmbergraphSailRepositoryConnection cxn = graph
 //                        .getReadConnection();
 //                try {
-//                    final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+//                    final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
 //                            .prepareQuery(QueryLanguage.SPARQL, queryStr);
 //                    final QueryRoot optimized = query.optimize();
 //                    if (log.isDebugEnabled()) {
@@ -126,11 +126,11 @@ public class TestPathConstraints extends TestCase {
 //                    cxn.close();
 //                }
     
-                final ICloseableIterator<BigdataBindingSet> selection = graph.select(queryStr);
+                final ICloseableIterator<EmbergraphBindingSet> selection = graph.select(queryStr);
                 try {
                     int n = 0;
                     while (selection.hasNext()) {
-                        final BigdataBindingSet bbs = selection.next();
+                        final EmbergraphBindingSet bbs = selection.next();
                         if (log.isDebugEnabled()) {
                             log.debug(bbs);
                         }
@@ -153,10 +153,10 @@ public class TestPathConstraints extends TestCase {
     public void testPathFilters() throws Exception {
         
         final Properties props = new Properties();
-        props.setProperty(BigdataGraph.Options.LAX_EDGES, "true");
+        props.setProperty(EmbergraphGraph.Options.LAX_EDGES, "true");
         
-        final BigdataGraphEmbedded graph = (BigdataGraphEmbedded)
-                BigdataGraphFactory.create(
+        final EmbergraphGraphEmbedded graph = (EmbergraphGraphEmbedded)
+                EmbergraphGraphFactory.create(
                         SimpleBlueprintsValueFactory.INSTANCE, props);
         
         try {
@@ -198,11 +198,11 @@ public class TestPathConstraints extends TestCase {
 
 //                showOptimizedAST(graph, queryStr);
                 
-                final ICloseableIterator<BigdataBindingSet> selection = graph.select(queryStr);
+                final ICloseableIterator<EmbergraphBindingSet> selection = graph.select(queryStr);
                 try {
                     int n = 0;
                     while (selection.hasNext()) {
-                        final BigdataBindingSet bbs = selection.next();
+                        final EmbergraphBindingSet bbs = selection.next();
                         if (log.isDebugEnabled()) {
                             log.debug(bbs);
                         }
@@ -240,11 +240,11 @@ public class TestPathConstraints extends TestCase {
                 
                 showOptimizedAST(graph, queryStr);
                 
-                final ICloseableIterator<BigdataBindingSet> selection = graph.select(queryStr);
+                final ICloseableIterator<EmbergraphBindingSet> selection = graph.select(queryStr);
                 try {
                     int n = 0;
                     while (selection.hasNext()) {
-                        final BigdataBindingSet bbs = selection.next();
+                        final EmbergraphBindingSet bbs = selection.next();
                         if (log.isDebugEnabled()) {
                             log.debug(bbs);
                         }
@@ -266,10 +266,10 @@ public class TestPathConstraints extends TestCase {
     public void testPred() throws Exception {
     
         final Properties props = new Properties();
-        props.setProperty(BigdataGraph.Options.LAX_EDGES, "true");
+        props.setProperty(EmbergraphGraph.Options.LAX_EDGES, "true");
         
-        final BigdataGraphEmbedded graph = (BigdataGraphEmbedded)
-                BigdataGraphFactory.create(
+        final EmbergraphGraphEmbedded graph = (EmbergraphGraphEmbedded)
+                EmbergraphGraphFactory.create(
                         SimpleBlueprintsValueFactory.INSTANCE, props);
         
         try {
@@ -321,10 +321,10 @@ public class TestPathConstraints extends TestCase {
 //                        "  filter(?to = <id:v4>) . " +
                         "}";
                 
-//                final BigdataSailRepositoryConnection cxn = graph
+//                final EmbergraphSailRepositoryConnection cxn = graph
 //                        .getReadConnection();
 //                try {
-//                    final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+//                    final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
 //                            .prepareQuery(QueryLanguage.SPARQL, queryStr);
 //                    final QueryRoot optimized = query.optimize();
 //                    if (log.isDebugEnabled()) {
@@ -334,12 +334,12 @@ public class TestPathConstraints extends TestCase {
 //                    cxn.close();
 //                }
     
-                final ICloseableIterator<BigdataBindingSet> selection = 
+                final ICloseableIterator<EmbergraphBindingSet> selection =
                         graph.select(queryStr);
                 try {
                     int n = 0;
                     while (selection.hasNext()) {
-                        final BigdataBindingSet bbs = selection.next();
+                        final EmbergraphBindingSet bbs = selection.next();
                         if (log.isDebugEnabled()) {
                             log.debug(bbs);
                         }
@@ -368,10 +368,10 @@ public class TestPathConstraints extends TestCase {
 //                        "  optional { ?from ?edge ?to . } " +
                         "}";
                 
-//                final BigdataSailRepositoryConnection cxn = graph
+//                final EmbergraphSailRepositoryConnection cxn = graph
 //                        .getReadConnection();
 //                try {
-//                    final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+//                    final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
 //                            .prepareQuery(QueryLanguage.SPARQL, queryStr);
 //                    final QueryRoot optimized = query.optimize();
 //                    if (log.isDebugEnabled()) {
@@ -383,12 +383,12 @@ public class TestPathConstraints extends TestCase {
 
                 { // v0 has an edge
                     
-                    final ICloseableIterator<BigdataBindingSet> selection = 
+                    final ICloseableIterator<EmbergraphBindingSet> selection =
                             graph.select(queryStr.replace("?id", "<id:v0>"));
                     try {
                         int n = 0;
                         while (selection.hasNext()) {
-                            final BigdataBindingSet bbs = selection.next();
+                            final EmbergraphBindingSet bbs = selection.next();
                             if (log.isDebugEnabled()) {
                                 log.debug(bbs);
                             }
@@ -403,11 +403,11 @@ public class TestPathConstraints extends TestCase {
                 
                 { // v4 has no edge
                     
-                    final ICloseableIterator<BigdataBindingSet> selection = 
+                    final ICloseableIterator<EmbergraphBindingSet> selection =
                             graph.select(queryStr.replace("?id", "<id:v4>"));
                     try {
                         assertTrue(selection.hasNext());
-                        final BigdataBindingSet bbs = selection.next();
+                        final EmbergraphBindingSet bbs = selection.next();
                         if (log.isDebugEnabled()) {
                             log.debug(bbs);
                         }
@@ -430,10 +430,10 @@ public class TestPathConstraints extends TestCase {
     public void testJoinOrder() throws Exception {
         
         final Properties props = new Properties();
-        props.setProperty(BigdataGraph.Options.LAX_EDGES, "true");
+        props.setProperty(EmbergraphGraph.Options.LAX_EDGES, "true");
         
-        final BigdataGraphEmbedded graph = (BigdataGraphEmbedded)
-                BigdataGraphFactory.create(
+        final EmbergraphGraphEmbedded graph = (EmbergraphGraphEmbedded)
+                EmbergraphGraphFactory.create(
                         SimpleBlueprintsValueFactory.INSTANCE, props);
         
         try {
@@ -472,9 +472,9 @@ public class TestPathConstraints extends TestCase {
                         "  ?from <embergraph:type> <embergraph:Vertex> . " +
                         "}";
                 
-                final BigdataSailRepositoryConnection cxn = graph.cxn();
+                final EmbergraphSailRepositoryConnection cxn = graph.cxn();
                 try {
-                    final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+                    final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
                             .prepareQuery(QueryLanguage.SPARQL, queryStr);
                     final QueryRoot optimized = query.optimize();
                     if (log.isDebugEnabled()) {
@@ -484,12 +484,12 @@ public class TestPathConstraints extends TestCase {
                     cxn.close();
                 }
     
-//                final ICloseableIterator<BigdataBindingSet> selection = 
+//                final ICloseableIterator<EmbergraphBindingSet> selection =
 //                        graph.select(queryStr);
 //                try {
 //                    int n = 0;
 //                    while (selection.hasNext()) {
-//                        final BigdataBindingSet bbs = selection.next();
+//                        final EmbergraphBindingSet bbs = selection.next();
 //                        if (log.isDebugEnabled()) {
 //                            log.debug(bbs);
 //                        }
@@ -508,12 +508,12 @@ public class TestPathConstraints extends TestCase {
         
     }
     
-    private void showOptimizedAST(final BigdataGraph graph, 
+    private void showOptimizedAST(final EmbergraphGraph graph,
             final String queryStr) throws Exception {
         
-        final BigdataSailRepositoryConnection cxn = (BigdataSailRepositoryConnection) graph.cxn();
+        final EmbergraphSailRepositoryConnection cxn = (EmbergraphSailRepositoryConnection) graph.cxn();
         try {
-            final BigdataSailTupleQuery query = (BigdataSailTupleQuery) cxn
+            final EmbergraphSailTupleQuery query = (EmbergraphSailTupleQuery) cxn
                     .prepareQuery(QueryLanguage.SPARQL, queryStr);
             final QueryRoot optimized = query.optimize();
             if (log.isDebugEnabled()) {

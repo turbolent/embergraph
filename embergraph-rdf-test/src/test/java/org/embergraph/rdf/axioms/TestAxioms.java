@@ -24,14 +24,14 @@ package org.embergraph.rdf.axioms;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.io.SerializerUtil;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
@@ -41,7 +41,7 @@ import org.embergraph.rdf.store.AbstractTripleStore.Options;
  * Test suite for the {@link Axioms}.
  * <p>
  * Note: {@link BaseAxioms} required an {@link AbstractTripleStore} to convert
- * the {@link BigdataStatement} objects into {@link SPO}s. This makes it
+ * the {@link EmbergraphStatement} objects into {@link SPO}s. This makes it
  * impossible to unit test the axioms classes independent of the
  * {@link AbstractTripleStore}.
  * 
@@ -101,17 +101,17 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
 //            // store is empty.
 //            assertEquals(0, store.getStatementCount());
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
             // Must be using the same namespace.
             assertEquals(store.getAxioms().getNamespace(), f.getNamespace());
 
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfProperty = f.asValue(RDF.PROPERTY);
+            final EmbergraphURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
-            store.addTerms(new BigdataValue[] { rdfType, rdfProperty, unknownURI });
+            store.addTerms(new EmbergraphValue[] { rdfType, rdfProperty, unknownURI });
             
 //            final NoAxioms axioms = new NoAxioms(store);
 //            
@@ -190,14 +190,14 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
 //            // store is empty.
 //            assertEquals(0, store.getStatementCount());
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfProperty = f.asValue(RDF.PROPERTY);
+            final EmbergraphURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
-            store.addTerms(new BigdataValue[] { rdfType, rdfProperty, unknownURI });
+            store.addTerms(new EmbergraphValue[] { rdfType, rdfProperty, unknownURI });
             
             final RdfsAxioms axioms = (RdfsAxioms)store.getAxioms();
 
@@ -269,15 +269,15 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
 //            // store is empty.
 //            assertEquals(0, store.getStatementCount());
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfProperty = f.asValue(RDF.PROPERTY);
-            final BigdataURI owlEquivalentClass = f.asValue(OWL.EQUIVALENTCLASS);
-            final BigdataURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfProperty = f.asValue(RDF.PROPERTY);
+            final EmbergraphURI owlEquivalentClass = f.asValue(OWL.EQUIVALENTCLASS);
+            final EmbergraphURI unknownURI = f.createURI("http://www.embergraph.org/unknown");
             
             // resolve term ids.
-            store.addTerms(new BigdataValue[] { rdfType, rdfProperty,
+            store.addTerms(new EmbergraphValue[] { rdfType, rdfProperty,
                     owlEquivalentClass, unknownURI });
 
             final OwlAxioms axioms = (OwlAxioms)store.getAxioms();

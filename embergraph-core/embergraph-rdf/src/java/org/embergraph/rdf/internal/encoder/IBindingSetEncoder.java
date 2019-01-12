@@ -25,7 +25,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Interface for encoding {@link IBindingSet}s comprised of {@link IV}s. The
@@ -37,7 +37,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * the statement indices.
  * <p>
  * The {@link IVCache} interface may be used to associate a materialized
- * {@link BigdataValue} with an {@link IV}. In order to have efficient encode /
+ * {@link EmbergraphValue} with an {@link IV}. In order to have efficient encode /
  * decode of {@link IV}s which preserves the {@link IVCache} information, the
  * encoding scheme also needs to store this association somewhere.
  * <p>
@@ -60,7 +60,7 @@ public interface IBindingSetEncoder {
     
     /**
      * Encode the solution as an {@link IV}[], collecting updates for the
-     * internal {@link IV} to {@link BigdataValue} cache.
+     * internal {@link IV} to {@link EmbergraphValue} cache.
      * 
      * @param bset
      *            The solution to be encoded.
@@ -79,7 +79,7 @@ public interface IBindingSetEncoder {
      *            The solution to be encoded.
      * @param updateCache
      *            When <code>true</code>, updates are accumulated for the
-     *            {@link IV} to {@link BigdataValue} cache. You must still use
+     *            {@link IV} to {@link EmbergraphValue} cache. You must still use
      *            {@link #flush()} to vector the accumulated updates.
      *            <p>
      *            If you are only generating the encoding in order to resolve a

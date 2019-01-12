@@ -24,17 +24,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.repository.sail.helpers.SPARQLUpdateDataBlockParser;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.helpers.StatementCollector;
-
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValueFactory;
 
 /**
  * An extension of {@link SPARQLUpdateDataBlockParser} that processes data in the format
@@ -172,8 +170,8 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
         if (stmts.size() != 1) {
         	throw new RDFParseException("Error parsing SPARQL* value, invalid number of statements");
         }
-        if (valueFactory instanceof BigdataValueFactory && stmts.get(0) instanceof BigdataStatement) {
-        	return ((BigdataValueFactory)valueFactory).createBNode((BigdataStatement)stmts.get(0));
+        if (valueFactory instanceof EmbergraphValueFactory && stmts.get(0) instanceof EmbergraphStatement) {
+        	return ((EmbergraphValueFactory)valueFactory).createBNode((EmbergraphStatement)stmts.get(0));
         } else {
         	throw new RDFParseException("Error parsing SPARQL* value, incompatible valueFactory");
         }

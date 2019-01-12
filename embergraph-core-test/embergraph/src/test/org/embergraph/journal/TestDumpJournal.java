@@ -32,7 +32,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.bop.solutions.SolutionSetStream;
 import org.embergraph.btree.AbstractBTreeTestCase;
 import org.embergraph.btree.BTree;
@@ -490,7 +490,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
      *      DumpJournal does not protect against concurrent updates (NSS) </a>
      */
     public void test_dumpJournal_concurrent_updates() throws Exception {
-        if(!BigdataStatics.runKnownBadTests) {
+        if(!EmbergraphStatics.runKnownBadTests) {
            /* FIXME Disabled per #762 pending resolution. Note that DumpJournal
             * concurrent with updates appears to work at the NSS layer as of the
             * 1.5.2 development branch.

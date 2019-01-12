@@ -29,6 +29,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.IBindingSet;
@@ -44,20 +48,16 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
 import org.embergraph.util.BytesUtil;
 
 /**
  * This class provides fast, efficient serialization for solution sets. Each
  * solution must be an {@link IBindingSet}s whose bound values are {@link IV}s
- * and their cached {@link BigdataValue}s. The {@link IV}s and the cached
- * {@link BigdataValue}s are efficiently and compactly represented in format
+ * and their cached {@link EmbergraphValue}s. The {@link IV}s and the cached
+ * {@link EmbergraphValue}s are efficiently and compactly represented in format
  * suitable for chunked messages or streaming. Decode is a fast online process.
  * Both encode and decode require the maintenance of a map from the {@link IV}
- * having cached {@link BigdataValue}s to those cached values.
+ * having cached {@link EmbergraphValue}s to those cached values.
  * 
  * <h2>Record Format</h2>
  * 
@@ -85,9 +85,9 @@ import org.embergraph.util.BytesUtil;
  * solutions.
  * <p>
  * where <code>ncached</code> is the #of bindings in the binding set for which
- * there is a cached {@link BigdataValue} which has not already been written
+ * there is a cached {@link EmbergraphValue} which has not already been written
  * into a previous record. Even if the {@link IV} has a cached
- * {@link BigdataValue}, if the {@link IV} has been previously written into a
+ * {@link EmbergraphValue}, if the {@link IV} has been previously written into a
  * record then the {@link IV} is NOT record in this record with a cached Value.
  * Further, if the {@link IV} appears more than once in a given record, the
  * cached value is only marked in the bitmap for the first such occurrence and
@@ -95,7 +95,7 @@ import org.embergraph.util.BytesUtil;
  * <p>
  * where <code>namespace</code> is the namespace of the lexicon relation. This
  * is written out for the first solution having an {@link IVCache} association.
- * It is assumed that all {@link Value}s are {@link BigdataValue} for the same
+ * It is assumed that all {@link Value}s are {@link EmbergraphValue} for the same
  * lexicon relation. If no solutions have an {@link IVCache} association, then
  * the namespace will never be written into the encoded output.
  * <p>
@@ -119,14 +119,14 @@ import org.embergraph.util.BytesUtil;
  * <p>
  * where <code>IV[n]</code> is an {@link IV} as encoded by {@link IVUtility}.
  * <p>
- * where {@link BigdataValue} is an RDF Value serialized using the
- * {@link BigdataValueSerializer} for the namespace of the lexicon.
+ * where {@link EmbergraphValue} is an RDF Value serialized using the
+ * {@link EmbergraphValueSerializer} for the namespace of the lexicon.
  * 
  * <h2>Decode</h2>
  * 
  * The namespace of the lexicon is required in to obtain the
- * {@link BigdataValueFactory} and {@link BigdataValueSerializer} used to decode
- * and materialize the cached {@link BigdataValue}s. This information can be
+ * {@link EmbergraphValueFactory} and {@link EmbergraphValueSerializer} used to decode
+ * and materialize the cached {@link EmbergraphValue}s. This information can be
  * sent before the records if it is not known to the caller.
  * <p>
  * The decoder materializes the cached values into a map (either a HashMap or
@@ -141,7 +141,7 @@ import org.embergraph.util.BytesUtil;
  * resolve each {@link IV} against the {@link IV} cache, setting its RDF Value
  * as a side effect before returning the IBindingSet to the caller. If we do a
  * custom {@link IBindingSet} implementation, then the cached
- * {@link BigdataValue} could be lazily materialized by hooking
+ * {@link EmbergraphValue} could be lazily materialized by hooking
  * {@link IVCache#getValue()}. Either way, the life cycle of the materialized
  * objects will be very short unless they are propagated into new solutions.
  * Short life cycle objects entail very little heap burden.
@@ -182,10 +182,10 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
 
     /**
      * Used to store the {@link IVCache} associations. This allows us to elide
-     * {@link BigdataValue}s which have already been written by this encoder
+     * {@link EmbergraphValue}s which have already been written by this encoder
      * instance.
      */
-    private final Map<IV<?, ?>, BigdataValue> cache;
+    private final Map<IV<?, ?>, EmbergraphValue> cache;
 
     /**
      * Used to encode the {@link IV}s.
@@ -198,7 +198,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
     private final DataOutputBuffer out;
 
     /**
-     * Temporary buffer used by {@link BigdataValueSerializer}.
+     * Temporary buffer used by {@link EmbergraphValueSerializer}.
      */
     private final ByteArrayBuffer tmp;
     
@@ -229,10 +229,10 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
     private String namespace;
 
     /**
-     * Used to de-serialize the {@link BigdataValue}s for {@link IVCache}
+     * Used to de-serialize the {@link EmbergraphValue}s for {@link IVCache}
      * associations.
      */
-    private BigdataValueSerializer<BigdataValue> valueSer;
+    private EmbergraphValueSerializer<EmbergraphValue> valueSer;
 
     @Override
     public String toString() {
@@ -251,8 +251,8 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
         // The ordered set of variables for which bindings have been observed.
         this.schema = new LinkedHashSet<IVariable<?>>();
 
-        // The IV -> BigdataValue cache
-        this.cache = new HashMap<IV<?, ?>, BigdataValue>();
+        // The IV -> EmbergraphValue cache
+        this.cache = new HashMap<IV<?, ?>, EmbergraphValue>();
 
         // Used to encode the IVs.
         this.keyBuilder = new ASCIIKeyBuilderFactory(128).getKeyBuilder();
@@ -260,7 +260,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
         // Used to format the encoded records (reset each time).
         this.out = new DataOutputBuffer();
         
-        // Temp buffer used by the BigdataValueSerializer
+        // Temp buffer used by the EmbergraphValueSerializer
         this.tmp = new ByteArrayBuffer();
         
     }
@@ -352,7 +352,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
          */
         // Ordered set of new IV -> Value associations. List entry is [null] if
         // no association for IV at that ordinal position in the solution.
-        final List<BigdataValue> values = new LinkedList<BigdataValue>();
+        final List<EmbergraphValue> values = new LinkedList<EmbergraphValue>();
         // #of bindings with non-null IVs.
         int numBindings = 0;
         // #of new IVCache associations.
@@ -374,11 +374,11 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
                 IVUtility.encode(keyBuilder, iv);
                 if (iv.hasValue() && (iv.isNullIV() || !cache.containsKey(iv))) {
                     // New IV => Value association (all NullIVs are "new").
-                    final BigdataValue value = iv.getValue();
+                    final EmbergraphValue value = iv.getValue();
                     if (namespace == null) {
                         // Note: The namespace is discovered here!!!
                         namespace = value.getValueFactory().getNamespace();
-                        valueSer = BigdataValueFactoryImpl.getInstance(
+                        valueSer = EmbergraphValueFactoryImpl.getInstance(
                                 namespace).getValueSerializer();
                         discoveredNamespace = true;
                     }
@@ -478,7 +478,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
             if (trace)
                 log.trace("cachebitmap: beginBitOffset=" + bitIndex
                         + ", nbytes=" + nbytes);
-            for (BigdataValue value : values) {
+            for (EmbergraphValue value : values) {
                 if (value != null) {
                     BytesUtil.setBit(out.array(), bitIndex, true);
                 }
@@ -499,7 +499,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
             if(trace)
                 log.trace("cache[]: off=" + out.pos() + ", newCached="
                         + newCached);
-            for (BigdataValue value : values) {
+            for (EmbergraphValue value : values) {
 
                 if (value != null) {
 

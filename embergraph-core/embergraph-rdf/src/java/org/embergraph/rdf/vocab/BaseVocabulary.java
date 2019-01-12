@@ -33,6 +33,9 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
@@ -42,10 +45,7 @@ import org.embergraph.io.LongPacker;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -65,10 +65,10 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
     private static final long serialVersionUID = 1560142397515291331L;
 
     /**
-     * The {@link BigdataValueFactory} for the namespace associated with the KB
+     * The {@link EmbergraphValueFactory} for the namespace associated with the KB
      * instance.
      */
-    private transient BigdataValueFactory valueFactory;
+    private transient EmbergraphValueFactory valueFactory;
 
     /**
      * An ordered set of the declared vocabulary classes in the order in which
@@ -79,19 +79,19 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
     /**
      * The {@link Value}s together with their assigned {@link IV}s.
      * <p>
-     * Note: The {@link IV} is permanently attached to each {@link BigdataValue}.
+     * Note: The {@link IV} is permanently attached to each {@link EmbergraphValue}.
      * <p>
-     * Note: A {@link Map} is used for O(1) lookup of a {@link BigdataValue}
+     * Note: A {@link Map} is used for O(1) lookup of a {@link EmbergraphValue}
      * from a {@link Value}, but the keys and values for a given entry are
      * always the same reference.
      */
-    private transient LinkedHashMap<Value, BigdataValue> val2iv;
+    private transient LinkedHashMap<Value, EmbergraphValue> val2iv;
 
     /**
      * Reverse lookup from {@link IV} to {@link Value}.
      */
     @SuppressWarnings("rawtypes")
-    private transient Map<IV, BigdataValue> iv2val;
+    private transient Map<IV, EmbergraphValue> iv2val;
     
     /**
      * De-serialization ctor. 
@@ -115,7 +115,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
         if (namespace == null)
             throw new IllegalArgumentException();
 
-        this.valueFactory = BigdataValueFactoryImpl
+        this.valueFactory = EmbergraphValueFactoryImpl
                 .getInstance(namespace);
         
     }
@@ -161,13 +161,13 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
         this.decls = new LinkedHashSet<VocabularyDecl>(declsInitialCapacity);
 
         // Setup forward map.
-        val2iv = new LinkedHashMap<Value, BigdataValue>(valuesInitialCapacity);
+        val2iv = new LinkedHashMap<Value, EmbergraphValue>(valuesInitialCapacity);
 
         // Hook for subclass to provide its vocabulary decls.
         addValues();
 
         // Setup reverse map now that we know the exact size.
-        iv2val = new LinkedHashMap<IV, BigdataValue>(val2iv.size());
+        iv2val = new LinkedHashMap<IV, EmbergraphValue>(val2iv.size());
 
         addAllDecls();
         
@@ -231,7 +231,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
             while (itr.hasNext()) {
 
                 // Convert to BigdataValues when adding to the collection.
-                final BigdataValue value = valueFactory.asValue(itr.next());
+                final EmbergraphValue value = valueFactory.asValue(itr.next());
 
                 // Add to the collection.
                 if (val2iv.put(value, value) != null) {
@@ -260,12 +260,12 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
     /**
      * Make a stable assignment of {@link IV}s to declared {@link Value}s.
      * <p>
-     * Note: The {@link Value}s are converted to {@link BigdataValue}s by
+     * Note: The {@link Value}s are converted to {@link EmbergraphValue}s by
      * {@link #add(Value)} so that we can invoke
-     * {@link AbstractTripleStore#addTerms(BigdataValue[])} directly and get
+     * {@link AbstractTripleStore#addTerms(EmbergraphValue[])} directly and get
      * back the assigned {@link IV}s. We rely on the <code>namespace</code> of
-     * the {@link AbstractTripleStore} to deserialize {@link BigdataValue}s
-     * using the appropriate {@link BigdataValueFactory}.
+     * the {@link AbstractTripleStore} to deserialize {@link EmbergraphValue}s
+     * using the appropriate {@link EmbergraphValueFactory}.
      */
     private void generateIVs() {
         
@@ -283,9 +283,9 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
         int i = 0;
 
         // The Values in the order in which they were declared.
-        for (Map.Entry<Value, BigdataValue> e : val2iv.entrySet()) {
+        for (Map.Entry<Value, EmbergraphValue> e : val2iv.entrySet()) {
 
-            final BigdataValue value = e.getValue();
+            final EmbergraphValue value = e.getValue();
 
             @SuppressWarnings("rawtypes")
             final IV iv;
@@ -293,12 +293,12 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
             if (i <= 255) {
             
                 // Use a byte for the 1st 256 declared vocabulary items.
-                iv = new VocabURIByteIV<BigdataURI>((byte) i);
+                iv = new VocabURIByteIV<EmbergraphURI>((byte) i);
                 
             } else {
                 
                 // Use a short for the next 64k declared vocabulary items.
-                iv = new VocabURIShortIV<BigdataURI>((short) i);
+                iv = new VocabURIShortIV<EmbergraphURI>((short) i);
                 
             }
             
@@ -339,14 +339,14 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
         
     }
 
-    final public Iterator<BigdataValue> values() {
+    final public Iterator<EmbergraphValue> values() {
         
         return Collections.unmodifiableMap(val2iv).values().iterator();
         
     }
 
     @SuppressWarnings("rawtypes")
-    final public BigdataValue asValue(final IV iv) {
+    final public EmbergraphValue asValue(final IV iv) {
         
         if (val2iv == null)
             throw new IllegalStateException();
@@ -367,7 +367,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
         if (value == null)
             throw new IllegalArgumentException();
 
-        final BigdataValue tmp = val2iv.get(value);
+        final EmbergraphValue tmp = val2iv.get(value);
 
         if (tmp == null)
             return null;
@@ -408,7 +408,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
      * KB instance and a list of the {@link VocabularyDecl} classes to be
      * instantiated. The names of those classes are given in the order in which
      * they were declared. When the vocabulary is deserialized, the
-     * {@link BigdataValue}s and {@link IV}s are simply reconstructed from those
+     * {@link EmbergraphValue}s and {@link IV}s are simply reconstructed from those
      * classes.
      * <p>
      * Note: VERSION ZERO (0) was the initial version. That version is no longer
@@ -426,9 +426,9 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 
     /**
      * Note: The de-serialized state contains {@link Value}s but not
-     * {@link BigdataValue}s since the {@link AbstractTripleStore} reference is
+     * {@link EmbergraphValue}s since the {@link AbstractTripleStore} reference is
      * not available and we can not obtain the appropriate
-     * {@link BigdataValueFactory} instance without it. This should not matter
+     * {@link EmbergraphValueFactory} instance without it. This should not matter
      * since the only access to the {@link Value}s is via {@link #get(Value)}
      * and {@link #getConstant(Value)}.
      */
@@ -470,11 +470,11 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //
 //        /*
 //         * Note: VERSION0 was not able to provide the correct
-//         * BigdataValueFactory since it did not have access to the KB namespace.
+//         * EmbergraphValueFactory since it did not have access to the KB namespace.
 //         */
 //        final ValueFactory valueFactory = new ValueFactoryImpl();
 //        
-//        final BigdataValueSerializer<Value> valueSer = new BigdataValueSerializer<Value>(
+//        final EmbergraphValueSerializer<Value> valueSer = new EmbergraphValueSerializer<Value>(
 //                valueFactory);
 //
 //        // read in the #of values.
@@ -484,8 +484,8 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //            throw new IOException();
 //        
 //        // allocate the map with sufficient capacity.
-//        val2iv = new LinkedHashMap<BigdataValue, IV>(nvalues);
-//        iv2val = new LinkedHashMap<IV, BigdataValue>(nvalues);
+//        val2iv = new LinkedHashMap<EmbergraphValue, IV>(nvalues);
+//        iv2val = new LinkedHashMap<IV, EmbergraphValue>(nvalues);
 //
 //        for (int i = 0; i < nvalues; i++) {
 //            
@@ -530,15 +530,15 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //        final String namespace = in.readUTF();
 //        
 //        // Note: The value factory uses the namespace of the KB instance! 
-//        valueFactory = BigdataValueFactoryImpl.getInstance(namespace);
+//        valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
 //
 //        // ValueSerializer using the namespace of the KB instance!
-//        final BigdataValueSerializer<BigdataValue> valueSer = new BigdataValueSerializer<BigdataValue>(
+//        final EmbergraphValueSerializer<EmbergraphValue> valueSer = new EmbergraphValueSerializer<EmbergraphValue>(
 //                valueFactory);
 //
 //        // allocate the map with sufficient capacity.
-//        val2iv = new LinkedHashMap<Value, BigdataValue>(nvalues);
-//        iv2val = new LinkedHashMap<IV, BigdataValue>(nvalues);
+//        val2iv = new LinkedHashMap<Value, EmbergraphValue>(nvalues);
+//        iv2val = new LinkedHashMap<IV, EmbergraphValue>(nvalues);
 //
 //        // buffer reused for each Value/IV.
 //        final ByteArrayBuffer buf = new ByteArrayBuffer();
@@ -558,7 +558,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //            in.readFully(buf.array(), 0/* off */, nbytes/* len */);
 //
 //            // de-serialize the value.
-//            final BigdataValue value = valueSer
+//            final EmbergraphValue value = valueSer
 //                    .deserialize(
 //                            new DataInputBuffer(buf.array(), 0/* off */, nbytes/* len */),
 //                            tmp
@@ -601,7 +601,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
         final String namespace = in.readUTF();
 
         // Note: The value factory uses the namespace of the KB instance!
-        valueFactory = BigdataValueFactoryImpl.getInstance(namespace);
+        valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
         
         // Initialize the vocabulary.
         init(ndecls, nvalues);
@@ -609,8 +609,8 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //        decls = new LinkedHashSet<VocabularyDecl>(ndecls);
 //
 //        // allocate the map with sufficient capacity.
-//        val2iv = new LinkedHashMap<Value, BigdataValue>(nvalues);
-//        iv2val = new LinkedHashMap<IV, BigdataValue>(nvalues);
+//        val2iv = new LinkedHashMap<Value, EmbergraphValue>(nvalues);
+//        iv2val = new LinkedHashMap<IV, EmbergraphValue>(nvalues);
 //
 //        for (int i = 0; i < ndecls; i++) {
 //
@@ -722,19 +722,19 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //        final DataOutputBuffer buf = new DataOutputBuffer();
 //        final ByteArrayBuffer tbuf = new ByteArrayBuffer();
 //
-//        final BigdataValueSerializer<Value> valueSer = new BigdataValueSerializer<Value>(
+//        final EmbergraphValueSerializer<Value> valueSer = new EmbergraphValueSerializer<Value>(
 //                new ValueFactoryImpl());
 //
 //        final IKeyBuilder keyBuilder = KeyBuilder.newInstance();
 //
-//        final Iterator<Map.Entry<BigdataValue, IV>> itr = val2iv.entrySet()
+//        final Iterator<Map.Entry<EmbergraphValue, IV>> itr = val2iv.entrySet()
 //                .iterator();
 //
 //        while (itr.hasNext()) {
 //
-//            final Map.Entry<BigdataValue, IV> entry = itr.next();
+//            final Map.Entry<EmbergraphValue, IV> entry = itr.next();
 //
-//            final BigdataValue value = entry.getKey();
+//            final EmbergraphValue value = entry.getKey();
 //
 //            final IV iv = entry.getValue();
 //
@@ -783,17 +783,17 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //        final ByteArrayBuffer tbuf = new ByteArrayBuffer();
 //        final IKeyBuilder keyBuilder = KeyBuilder.newInstance();
 //
-//        final BigdataValueSerializer<Value> valueSer = new BigdataValueSerializer<Value>(
+//        final EmbergraphValueSerializer<Value> valueSer = new EmbergraphValueSerializer<Value>(
 //                valueFactory);
 //
-//        final Iterator<Map.Entry<Value, BigdataValue>> itr = val2iv.entrySet()
+//        final Iterator<Map.Entry<Value, EmbergraphValue>> itr = val2iv.entrySet()
 //                .iterator();
 //
 //        while (itr.hasNext()) {
 //
-//            final Map.Entry<Value, BigdataValue> entry = itr.next();
+//            final Map.Entry<Value, EmbergraphValue> entry = itr.next();
 //
-//            final BigdataValue value = entry.getValue();
+//            final EmbergraphValue value = entry.getValue();
 //
 //            final IV iv = value.getIV();
 //

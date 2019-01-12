@@ -95,7 +95,7 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
 import org.embergraph.relation.rule.eval.ISolution;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.EmptyChunkedIterator;
 import org.embergraph.striterator.IChunkedIterator;
@@ -746,8 +746,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
         metadata.setTupleSerializer(new SPOTupleSerializer(
         		keyOrder, statementIdentifiers, leafKeySer, leafValSer));
 
-        if ((getIndexManager() instanceof IBigdataFederation<?>)
-                && ((IBigdataFederation<?>) getIndexManager()).isScaleOut()
+        if ((getIndexManager() instanceof IEmbergraphFederation<?>)
+                && ((IEmbergraphFederation<?>) getIndexManager()).isScaleOut()
                 && keyOrder.getKeyArity() == 4
                 && getContainer().isConstrainXXXCShards()
                 && keyOrder.getIndexName().endsWith("C")) {
@@ -1401,7 +1401,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 ////        if (indexManager == null)
 ////            throw new IllegalArgumentException();
 //
-////        if (indexManager instanceof IBigdataFederation<?>) {
+////        if (indexManager instanceof IEmbergraphFederation<?>) {
 //
 ////            /*
 ////             * This will happen if you fail to re-create the JoinNexus within

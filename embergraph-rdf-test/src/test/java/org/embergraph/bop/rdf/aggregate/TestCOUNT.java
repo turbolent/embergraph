@@ -39,10 +39,10 @@ import org.embergraph.rdf.internal.constraints.MathBOp;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.InnerCause;
@@ -89,12 +89,12 @@ public class TestCOUNT extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(5));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(5));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         /**
          * The test data:
@@ -150,12 +150,12 @@ public class TestCOUNT extends TestCase2 {
            final IConstant<String> book2 = new Constant<String>("book2");
            final IConstant<String> book3 = new Constant<String>("book3");
            final IConstant<String> book4 = new Constant<String>("book4");
-           final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(5));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(7));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(5));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(7));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
    
            /**
             * The test data:
@@ -208,10 +208,10 @@ public class TestCOUNT extends TestCase2 {
         final IConstant<String> book2 = new Constant<String>("book2");
         final IConstant<String> book3 = new Constant<String>("book3");
         final IConstant<String> book4 = new Constant<String>("book4");
-        final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(7));
-        final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                new XSDNumericIV<BigdataLiteral>(9));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(7));
+        final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                new XSDNumericIV<EmbergraphLiteral>(9));
 
         /**
          * The test data:
@@ -253,7 +253,7 @@ public class TestCOUNT extends TestCase2 {
 
            GlobalAnnotations globals = new GlobalAnnotations(lexiconNamespace, ITx.READ_COMMITTED);
 
-           final BigdataValueFactory f = BigdataValueFactoryImpl.getInstance(getName());
+           final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
    
            final IVariable<IV> org = Var.var("org");
            final IVariable<IV> auth = Var.var("auth");
@@ -263,7 +263,7 @@ public class TestCOUNT extends TestCase2 {
            final IConstant<String> org1 = new Constant<String>("org1");
            final IConstant<String> org2 = new Constant<String>("org2");
            final IConstant<String> auth1 = new Constant<String>("auth1");
-           final TermId tid1 = new TermId<BigdataValue>(VTE.LITERAL, 1);
+           final TermId tid1 = new TermId<EmbergraphValue>(VTE.LITERAL, 1);
            tid1.setValue(f.createLiteral("auth2"));
            final IConstant<IV> auth2 = new Constant<IV>(tid1);
            final IConstant<String> auth3 = new Constant<String>("auth3");
@@ -271,12 +271,12 @@ public class TestCOUNT extends TestCase2 {
            final IConstant<String> book2 = new Constant<String>("book2");
            final IConstant<String> book3 = new Constant<String>("book3");
            final IConstant<String> book4 = new Constant<String>("book4");
-           final IConstant<XSDNumericIV<BigdataLiteral>> price5 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(5));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price7 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(7));
-           final IConstant<XSDNumericIV<BigdataLiteral>> price9 = new Constant<XSDNumericIV<BigdataLiteral>>(
-                   new XSDNumericIV<BigdataLiteral>(9));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price5 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(5));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price7 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(7));
+           final IConstant<XSDNumericIV<EmbergraphLiteral>> price9 = new Constant<XSDNumericIV<EmbergraphLiteral>>(
+                   new XSDNumericIV<EmbergraphLiteral>(9));
    
            /**
             * The test data:

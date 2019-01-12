@@ -46,7 +46,7 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.resources.StoreManager;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 
 /**
@@ -234,7 +234,7 @@ public class Tx implements ITx {
      * Create a transaction reading from the most recent committed state not
      * later than the specified startTime.
      * <p>
-     * Note: For an {@link IBigdataFederation}, a transaction does not start
+     * Note: For an {@link IEmbergraphFederation}, a transaction does not start
      * execution on all {@link IDataService}s at the same moment. Instead, the
      * transaction startTime is assigned by the {@link ITransactionService} and
      * then provided each time an {@link ITx} must be created for isolatation of

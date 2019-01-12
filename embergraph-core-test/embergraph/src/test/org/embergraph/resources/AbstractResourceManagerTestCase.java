@@ -39,7 +39,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.bop.engine.IQueryPeer;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.ResultSet;
@@ -65,8 +65,8 @@ import org.embergraph.relation.locator.IResourceLocator;
 import org.embergraph.resources.ResourceManager.Options;
 import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataClient;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphClient;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.ILoadBalancerService;
 import org.embergraph.service.IMetadataService;
@@ -128,7 +128,7 @@ public class AbstractResourceManagerTestCase extends
     private AbstractTransactionService txService;
     protected AbstractLocalTransactionManager localTransactionManager;
     private ExecutorService executorService; 
-    private IBigdataFederation fed;
+    private IEmbergraphFederation fed;
 
     /**
      * Setup test fixtures.
@@ -147,7 +147,7 @@ public class AbstractResourceManagerTestCase extends
             final private UUID dataServiceUUID = UUID.randomUUID();
             
 //            @Override
-            public IBigdataFederation getFederation() {
+            public IEmbergraphFederation getFederation() {
                 
                 return fed;
                 
@@ -419,7 +419,7 @@ public class AbstractResourceManagerTestCase extends
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      * @version $Id$
      */
-    protected class MockFederation implements IBigdataFederation<MockMetadataService> {
+    protected class MockFederation implements IEmbergraphFederation<MockMetadataService> {
 
         private final MockMetadataService metadataService = new MockMetadataService();
         
@@ -444,7 +444,7 @@ public class AbstractResourceManagerTestCase extends
             return null;
         }
 
-        public IBigdataClient getClient() {
+        public IEmbergraphClient getClient() {
 
             return null;
         }
@@ -567,7 +567,7 @@ public class AbstractResourceManagerTestCase extends
             return null;
         }
 
-        public BigdataFileSystem getGlobalFileSystem() {
+        public EmbergraphFileSystem getGlobalFileSystem() {
 
             return null;
         }

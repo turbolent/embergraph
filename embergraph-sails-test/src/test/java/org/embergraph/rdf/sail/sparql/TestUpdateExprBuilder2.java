@@ -20,20 +20,20 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sail.sparql;
 
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.ClearGraph;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.CreateGraph;
@@ -57,7 +57,7 @@ import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestUpdateExprBuilder2 extends AbstractBigdataExprBuilderTestCase {
+public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCase {
 
     public TestUpdateExprBuilder2() {
     }
@@ -375,23 +375,23 @@ public class TestUpdateExprBuilder2 extends AbstractBigdataExprBuilderTestCase {
 //                    new ConstantNode(hintQuery), new ConstantNode(hintExpireAge),
 //                    new ConstantNode(millis)));
 
-          final BigdataURI hintQuery = valueFactory.createURI(QueryHints.NAMESPACE+QueryHintScope.Query);
-          final BigdataURI hintEngine = valueFactory.createURI(QueryHints.NAMESPACE+"engine");
-          final BigdataURI hintExpireAge = valueFactory.createURI(QueryHints.NAMESPACE+"expireAge");
-          final BigdataLiteral cache = valueFactory.createLiteral("cache");
-          final BigdataLiteral millis = valueFactory.createLiteral("100000",XSD.LONG);
+          final EmbergraphURI hintQuery = valueFactory.createURI(QueryHints.NAMESPACE+QueryHintScope.Query);
+          final EmbergraphURI hintEngine = valueFactory.createURI(QueryHints.NAMESPACE+"engine");
+          final EmbergraphURI hintExpireAge = valueFactory.createURI(QueryHints.NAMESPACE+"expireAge");
+          final EmbergraphLiteral cache = valueFactory.createLiteral("cache");
+          final EmbergraphLiteral millis = valueFactory.createLiteral("100000",XSD.LONG);
 
-            final BigdataStatement[] params = new BigdataStatement[] {
+            final EmbergraphStatement[] params = new EmbergraphStatement[] {
                     valueFactory.createStatement(
-                            (BigdataResource)hintQuery,
-                            (BigdataURI)hintEngine,
-                            (BigdataValue)cache,
+                            (EmbergraphResource)hintQuery,
+                            (EmbergraphURI)hintEngine,
+                            (EmbergraphValue)cache,
                             null, // c
                             StatementEnum.Explicit),
                     valueFactory.createStatement(
-                            (BigdataResource)hintQuery,
-                            (BigdataURI)hintExpireAge,
-                            (BigdataValue)millis,
+                            (EmbergraphResource)hintQuery,
+                            (EmbergraphURI)hintExpireAge,
+                            (EmbergraphValue)millis,
                             null,// c 
                             StatementEnum.Explicit),
             };

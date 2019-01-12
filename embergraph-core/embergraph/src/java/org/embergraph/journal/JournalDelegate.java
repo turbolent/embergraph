@@ -29,7 +29,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.ICheckpointProtocol;
 import org.embergraph.btree.IIndex;
@@ -256,7 +256,7 @@ public class JournalDelegate implements IJournal {
 	}
 
    @Override
-	public BigdataFileSystem getGlobalFileSystem() {
+	public EmbergraphFileSystem getGlobalFileSystem() {
 		return delegate.getGlobalFileSystem();
 	}
 

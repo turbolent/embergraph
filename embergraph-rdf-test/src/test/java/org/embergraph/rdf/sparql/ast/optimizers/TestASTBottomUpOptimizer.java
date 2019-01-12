@@ -29,6 +29,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
@@ -42,11 +46,7 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -138,17 +138,17 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x1 = f.createURI("http://example/x1");
-        final BigdataURI x2 = f.createURI("http://example/x2");
-        final BigdataURI x3 = f.createURI("http://example/x3");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataURI q = f.createURI("http://example/q");
-        final BigdataValue[] values = new BigdataValue[] { x1, x2, x3, p, q };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x1 = f.createURI("http://example/x1");
+        final EmbergraphURI x2 = f.createURI("http://example/x2");
+        final EmbergraphURI x3 = f.createURI("http://example/x3");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphURI q = f.createURI("http://example/q");
+        final EmbergraphValue[] values = new EmbergraphValue[] { x1, x2, x3, p, q };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -288,19 +288,19 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x1 = f.createURI("http://example/x1");
-        final BigdataURI x2 = f.createURI("http://example/x2");
-        final BigdataURI x3 = f.createURI("http://example/x3");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataURI q = f.createURI("http://example/q");
-        final BigdataURI c1 = f.createURI("http://example/c1");
-        final BigdataURI c2 = f.createURI("http://example/c2");
-        final BigdataValue[] values = new BigdataValue[] { x1, x2, x3, p, q, c1, c2 };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x1 = f.createURI("http://example/x1");
+        final EmbergraphURI x2 = f.createURI("http://example/x2");
+        final EmbergraphURI x3 = f.createURI("http://example/x3");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphURI q = f.createURI("http://example/q");
+        final EmbergraphURI c1 = f.createURI("http://example/c1");
+        final EmbergraphURI c2 = f.createURI("http://example/c2");
+        final EmbergraphValue[] values = new EmbergraphValue[] { x1, x2, x3, p, q, c1, c2 };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -420,16 +420,16 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and the
          * verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x = f.createURI("http://example/x");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataURI q = f.createURI("http://example/q");
-        final BigdataLiteral ONE = f.createLiteral("1", XSD.INTEGER);
-        final BigdataValue[] values = new BigdataValue[] { x, p, q, ONE };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x = f.createURI("http://example/x");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphURI q = f.createURI("http://example/q");
+        final EmbergraphLiteral ONE = f.createLiteral("1", XSD.INTEGER);
+        final EmbergraphValue[] values = new EmbergraphValue[] { x, p, q, ONE };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -612,17 +612,17 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI name = f.createURI("http://example/name");
-        final BigdataURI email = f.createURI("http://example/email");
-        final BigdataLiteral paul = f.createLiteral("paul");
-        final BigdataLiteral george = f.createLiteral("george");
-        final BigdataValue[] values = new BigdataValue[] { name, email, paul,
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI name = f.createURI("http://example/name");
+        final EmbergraphURI email = f.createURI("http://example/email");
+        final EmbergraphLiteral paul = f.createLiteral("paul");
+        final EmbergraphLiteral george = f.createLiteral("george");
+        final EmbergraphValue[] values = new EmbergraphValue[] { name, email, paul,
                 george };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -749,17 +749,17 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI name = f.createURI("http://example/name");
-        final BigdataURI email = f.createURI("http://example/email");
-        final BigdataLiteral paul = f.createLiteral("paul");
-        final BigdataLiteral george = f.createLiteral("george");
-        final BigdataValue[] values = new BigdataValue[] { name, email, paul,
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI name = f.createURI("http://example/name");
+        final EmbergraphURI email = f.createURI("http://example/email");
+        final EmbergraphLiteral paul = f.createLiteral("paul");
+        final EmbergraphLiteral george = f.createLiteral("george");
+        final EmbergraphValue[] values = new EmbergraphValue[] { name, email, paul,
                 george };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -803,17 +803,17 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI name = f.createURI("http://example/name");
-        final BigdataURI email = f.createURI("http://example/email");
-        final BigdataLiteral paul = f.createLiteral("paul");
-        final BigdataLiteral george = f.createLiteral("george");
-        final BigdataValue[] values = new BigdataValue[] { name, email, paul,
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI name = f.createURI("http://example/name");
+        final EmbergraphURI email = f.createURI("http://example/email");
+        final EmbergraphLiteral paul = f.createLiteral("paul");
+        final EmbergraphLiteral george = f.createLiteral("george");
+        final EmbergraphValue[] values = new EmbergraphValue[] { name, email, paul,
                 george };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -857,17 +857,17 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI name = f.createURI("http://example/name");
-        final BigdataURI email = f.createURI("http://example/email");
-        final BigdataLiteral paul = f.createLiteral("paul");
-        final BigdataLiteral george = f.createLiteral("george");
-        final BigdataValue[] values = new BigdataValue[] { name, email, paul,
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI name = f.createURI("http://example/name");
+        final EmbergraphURI email = f.createURI("http://example/email");
+        final EmbergraphLiteral paul = f.createLiteral("paul");
+        final EmbergraphLiteral george = f.createLiteral("george");
+        final EmbergraphValue[] values = new EmbergraphValue[] { name, email, paul,
                 george };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -923,16 +923,16 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI p1 = f.createURI("http://example/p1");
-        final BigdataURI p2 = f.createURI("http://example/p2");
-        final BigdataURI p3 = f.createURI("http://example/p3");
-        final BigdataValue[] values = new BigdataValue[] { p1, p2, p3 };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI p1 = f.createURI("http://example/p1");
+        final EmbergraphURI p2 = f.createURI("http://example/p2");
+        final EmbergraphURI p3 = f.createURI("http://example/p3");
+        final EmbergraphValue[] values = new EmbergraphValue[] { p1, p2, p3 };
         store.getLexiconRelation().
             addTerms(values, values.length, false/* readOnly */);
 
         final ASTContainer astContainer = 
-            new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+            new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
 
@@ -980,17 +980,17 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x = f.createURI("http://example/x");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataLiteral ONE = f.createLiteral("1", XSD.INTEGER);
-        final BigdataValue[] values = new BigdataValue[] { x, p, ONE };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x = f.createURI("http://example/x");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphLiteral ONE = f.createLiteral("1", XSD.INTEGER);
+        final EmbergraphValue[] values = new EmbergraphValue[] { x, p, ONE };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 //        x.getIV().setValue(x);
 //        p.getIV().setValue(p);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -1076,14 +1076,14 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x = f.createURI("http://example/x");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataValue[] values = new BigdataValue[] { x, p };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x = f.createURI("http://example/x");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphValue[] values = new EmbergraphValue[] { x, p };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -1141,15 +1141,15 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x = f.createURI("http://example/x");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataLiteral ONE = f.createLiteral("1", XSD.INTEGER);
-        final BigdataValue[] values = new BigdataValue[] { x, p, ONE };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x = f.createURI("http://example/x");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphLiteral ONE = f.createLiteral("1", XSD.INTEGER);
+        final EmbergraphValue[] values = new EmbergraphValue[] { x, p, ONE };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         ASTDeferredIVResolution.resolveQuery(store, astContainer);
@@ -1258,16 +1258,16 @@ public class TestASTBottomUpOptimizer extends
          * possible for us to explicitly construct the expected AST and
          * the verify it using equals().
          */
-        final BigdataValueFactory f = store.getValueFactory();
-        final BigdataURI x = f.createURI("http://example/x");
-        final BigdataURI y = f.createURI("http://example/y");
-        final BigdataURI p = f.createURI("http://example/p");
-        final BigdataURI q = f.createURI("http://example/q");
-        final BigdataValue[] values = new BigdataValue[] { x, y, p, q };
+        final EmbergraphValueFactory f = store.getValueFactory();
+        final EmbergraphURI x = f.createURI("http://example/x");
+        final EmbergraphURI y = f.createURI("http://example/y");
+        final EmbergraphURI p = f.createURI("http://example/p");
+        final EmbergraphURI q = f.createURI("http://example/q");
+        final EmbergraphValue[] values = new EmbergraphValue[] { x, y, p, q };
         store.getLexiconRelation()
                 .addTerms(values, values.length, false/* readOnly */);
 
-        final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+        final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                 .parseQuery2(queryStr, baseURI);
 
         final AST2BOpContext context = new AST2BOpContext(astContainer, store);
@@ -1511,11 +1511,11 @@ public class TestASTBottomUpOptimizer extends
 //         * possible for us to explicitly construct the expected AST and
 //         * the verify it using equals().
 //         */
-//        final BigdataValueFactory f = store.getValueFactory();
-//        final BigdataURI rdfType = f.asValue(RDF.TYPE);
-//        final BigdataURI owlClass = f.asValue(OWL.CLASS);
-//        final BigdataURI endpoint1 = f.createURI("http://localhost:18080/openrdf/repositories/endpoint1");
-//        final BigdataValue[] values = new BigdataValue[] { rdfType, owlClass, endpoint1 };
+//        final EmbergraphValueFactory f = store.getValueFactory();
+//        final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+//        final EmbergraphURI owlClass = f.asValue(OWL.CLASS);
+//        final EmbergraphURI endpoint1 = f.createURI("http://localhost:18080/openrdf/repositories/endpoint1");
+//        final EmbergraphValue[] values = new EmbergraphValue[] { rdfType, owlClass, endpoint1 };
 //        store.getLexiconRelation()
 //                .addTerms(values, values.length, false/* readOnly */);
 //        

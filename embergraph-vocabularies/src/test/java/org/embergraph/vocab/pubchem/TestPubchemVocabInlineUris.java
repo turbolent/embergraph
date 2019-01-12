@@ -8,11 +8,11 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.rio.StatementBuffer;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
@@ -31,11 +31,11 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 		/*
 		 * Turn off inference.
 		 */
-		props.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+		props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
 				NoAxioms.class.getName());
-		props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-		props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-		props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+		props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+		props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+		props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
 
 		return props;
 
@@ -63,17 +63,17 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 
 		try {
 
-			final BigdataValueFactory vf = store.getValueFactory();
+			final EmbergraphValueFactory vf = store.getValueFactory();
 
-			final LinkedList<BigdataURI> uriList = new LinkedList<BigdataURI>();
+			final LinkedList<EmbergraphURI> uriList = new LinkedList<EmbergraphURI>();
 			
 			Random rand = new Random();
 
-			final StatementBuffer<BigdataStatement> sb = new StatementBuffer<BigdataStatement>(
+			final StatementBuffer<EmbergraphStatement> sb = new StatementBuffer<EmbergraphStatement>(
 					store, PubChemInlineURIFactory.uris.length/* capacity */);
 			
-			BigdataURI pred = vf.createURI("http://semanticscience.org/resource/CHEMINF_000461");
-			BigdataURI obj = vf.createURI("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID1726184");
+			EmbergraphURI pred = vf.createURI("http://semanticscience.org/resource/CHEMINF_000461");
+			EmbergraphURI obj = vf.createURI("http://rdf.ncbi.nlm.nih.gov/pubchem/compound/CID1726184");
 			
 			for (int i = 0; i < PubChemInlineURIFactory.uris.length; i++) {
 
@@ -82,7 +82,7 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 
 				final int test = rand.nextInt(999999);
 
-				final BigdataURI uri = vf.createURI(uriStr+prefix+test);
+				final EmbergraphURI uri = vf.createURI(uriStr+prefix+test);
 
 				uriList.push(uri);
 				sb.add(uri, pred, obj);
@@ -96,7 +96,7 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 
 				final int test = rand.nextInt(999999);
 
-				final BigdataURI uri = vf.createURI(uriStr+prefix+test+suffix);
+				final EmbergraphURI uri = vf.createURI(uriStr+prefix+test+suffix);
 
 				uriList.push(uri);
 				sb.add(uri, pred, obj);
@@ -105,7 +105,7 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 			{  //Add the fixed width ones
 				
 				 // http://www.bioassayontology.org/bao#BAO_0002877 fixed width 7
-				BigdataURI uri = null;
+				EmbergraphURI uri = null;
 				uri = vf.createURI("http://www.bioassayontology.org/bao#BAO_002877");
 				uriList.push(uri);
 				sb.add(uri, pred, obj);
@@ -138,7 +138,7 @@ public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 			if (log.isDebugEnabled())
 				log.debug(store.dumpStore());
 			
-			for (final BigdataURI uri: uriList ) {
+			for (final EmbergraphURI uri: uriList ) {
 
 				if(log.isDebugEnabled()) {
 					log.debug("Checking " + uri.getNamespace() + " "+ uri.getLocalName() + " inline: " + uri.getIV().isInline());

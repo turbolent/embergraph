@@ -24,7 +24,7 @@ package org.embergraph.journal;
 import java.io.IOException;
 
 import org.embergraph.btree.isolation.IConflictResolver;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 
 /**
@@ -221,7 +221,7 @@ public interface ITransactionService extends ITimestampService {
      * <p>
      * Note: This is used to inform the {@link ITransactionService} of commits
      * that DO NOT involve transaction commits. That is, local unisolated writes
-     * on individual {@link IDataService}s in an {@link IBigdataFederation}.
+     * on individual {@link IDataService}s in an {@link IEmbergraphFederation}.
      * 
      * @param commitTime
      *            The commit time.

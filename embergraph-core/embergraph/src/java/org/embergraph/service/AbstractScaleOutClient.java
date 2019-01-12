@@ -53,7 +53,7 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      * @version $Id$
      */
-    public interface Options extends IBigdataClient.Options {
+    public interface Options extends IEmbergraphClient.Options {
         
         /**
          * Option selects the policy that will be used to cache
@@ -62,7 +62,7 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
          * 
          * <strong>Warning: This feature is expected to evolve.</strong>
          */
-        String METADATA_INDEX_CACHE_POLICY = IBigdataClient.class.getName()
+        String METADATA_INDEX_CACHE_POLICY = IEmbergraphClient.class.getName()
                 + ".metadataIndex.cachePolicy";
 
         String DEFAULT_METADATA_INDEX_CACHE_POLICY = MetadataIndexCachePolicy.CacheAll

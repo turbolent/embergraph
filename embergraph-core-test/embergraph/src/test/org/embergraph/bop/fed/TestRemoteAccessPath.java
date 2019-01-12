@@ -122,7 +122,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         assertNotNull(dataService0);
         assertNull(dataService1);
         
-//        final IBigdataFederation<?> fed = client.connect();
+//        final IEmbergraphFederation<?> fed = client.connect();
 
         // create index manager for the query controller.
         {

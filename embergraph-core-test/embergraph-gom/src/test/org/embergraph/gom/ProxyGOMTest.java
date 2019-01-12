@@ -1,22 +1,13 @@
 package org.embergraph.gom;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URL;
 import java.util.Iterator;
 
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDFS;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParseException;
 
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.om.IObjectManager;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
 
 import junit.extensions.proxy.IProxyTest;
 import junit.framework.Test;

@@ -25,14 +25,11 @@ package org.embergraph.bfs;
 
 import java.io.IOException;
 
-import org.embergraph.bfs.BigdataFileSystem;
-import org.embergraph.bfs.FileVersionOutputStream;
-
 
 /**
  * Tests some specifics of the {@link FileVersionOutputStream}. These behaviors
  * are only observable to callers that cast
- * {@link BigdataFileSystem#outputStream(String, int)} to a
+ * {@link EmbergraphFileSystem#outputStream(String, int)} to a
  * {@link FileVersionOutputStream}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

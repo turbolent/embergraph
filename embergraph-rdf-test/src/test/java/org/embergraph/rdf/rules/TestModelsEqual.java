@@ -22,11 +22,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.rules;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.vocabulary.RDFS;
 
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.TripleStoreUtility;
@@ -70,13 +70,13 @@ public class TestModelsEqual extends AbstractRuleTestCase {
 
             // write statements on one store.
             {
-                final BigdataValueFactory f = store1.getValueFactory();
+                final EmbergraphValueFactory f = store1.getValueFactory();
                 
-                final BigdataURI A = f.createURI("http://www.embergraph.org/a");
-                final BigdataURI B = f.createURI("http://www.embergraph.org/b");
-                final BigdataURI C = f.createURI("http://www.embergraph.org/c");
-                final BigdataURI D = f.createURI("http://www.embergraph.org/d");
-                final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
+                final EmbergraphURI A = f.createURI("http://www.embergraph.org/a");
+                final EmbergraphURI B = f.createURI("http://www.embergraph.org/b");
+                final EmbergraphURI C = f.createURI("http://www.embergraph.org/c");
+                final EmbergraphURI D = f.createURI("http://www.embergraph.org/d");
+                final EmbergraphURI SCO = f.asValue(RDFS.SUBCLASSOF);
 
                 StatementBuffer buf = new StatementBuffer(store1, 10);
 
@@ -89,13 +89,13 @@ public class TestModelsEqual extends AbstractRuleTestCase {
 
             // write the same statements on the other store.
             {
-                final BigdataValueFactory f = store1.getValueFactory();
+                final EmbergraphValueFactory f = store1.getValueFactory();
                 
-                final BigdataURI A = f.createURI("http://www.embergraph.org/a");
-                final BigdataURI B = f.createURI("http://www.embergraph.org/b");
-                final BigdataURI C = f.createURI("http://www.embergraph.org/c");
-                final BigdataURI D = f.createURI("http://www.embergraph.org/d");
-                final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
+                final EmbergraphURI A = f.createURI("http://www.embergraph.org/a");
+                final EmbergraphURI B = f.createURI("http://www.embergraph.org/b");
+                final EmbergraphURI C = f.createURI("http://www.embergraph.org/c");
+                final EmbergraphURI D = f.createURI("http://www.embergraph.org/d");
+                final EmbergraphURI SCO = f.asValue(RDFS.SUBCLASSOF);
 
                 StatementBuffer buf = new StatementBuffer(store2, 10);
 
@@ -109,7 +109,7 @@ public class TestModelsEqual extends AbstractRuleTestCase {
 
             // verify all in store1 also found in store2.
             {
-                final ICloseableIterator<BigdataStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(store1,
+                final ICloseableIterator<EmbergraphStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(store1,
                         store2);
                 try {
                     assertFalse(notFoundItr.hasNext());
@@ -120,7 +120,7 @@ public class TestModelsEqual extends AbstractRuleTestCase {
 
             // verify all in store2 also found in store1.
             {
-                final ICloseableIterator<BigdataStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(store2,
+                final ICloseableIterator<EmbergraphStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(store2,
                         store1);
                 try {
                     assertFalse(notFoundItr.hasNext());
@@ -135,11 +135,11 @@ public class TestModelsEqual extends AbstractRuleTestCase {
             // now remove one statement from store2.
             {
                 
-                final BigdataValueFactory f = store1.getValueFactory();
+                final EmbergraphValueFactory f = store1.getValueFactory();
                 
-                final BigdataURI A = f.createURI("http://www.embergraph.org/a");
-                final BigdataURI B = f.createURI("http://www.embergraph.org/b");
-                final BigdataURI SCO = f.asValue(RDFS.SUBCLASSOF);
+                final EmbergraphURI A = f.createURI("http://www.embergraph.org/a");
+                final EmbergraphURI B = f.createURI("http://www.embergraph.org/b");
+                final EmbergraphURI SCO = f.asValue(RDFS.SUBCLASSOF);
                 
                 assertEquals(1L, store2.removeStatements(A, SCO, B));
                 
@@ -151,7 +151,7 @@ public class TestModelsEqual extends AbstractRuleTestCase {
 
             // verify one in store1 NOT FOUND in store2.
             {
-                final ICloseableIterator<BigdataStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(
+                final ICloseableIterator<EmbergraphStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(
                         store1, store2);
                 int nnotFound = 0;
                 try {
@@ -167,7 +167,7 @@ public class TestModelsEqual extends AbstractRuleTestCase {
 
             // verify all in store2 found in store1.
             {
-                final ICloseableIterator<BigdataStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(
+                final ICloseableIterator<EmbergraphStatement> notFoundItr = TripleStoreUtility.notFoundInTarget(
                         store2, store1);
                 try {
                     assertFalse(notFoundItr.hasNext());

@@ -23,7 +23,7 @@ package org.embergraph.rdf.internal;
 
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.util.BytesUtil;
 
@@ -57,12 +57,12 @@ public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
     public void test_encodeDecode_URIByteIV() {
 
         final IV<?, ?>[] e = {
-//                new VocabURIByteIV<BigdataURI>((byte) Byte.MIN_VALUE),
-//                new VocabURIByteIV<BigdataURI>((byte) -1),
-                new VocabURIByteIV<BigdataURI>((byte) 0),
-                new VocabURIByteIV<BigdataURI>((byte) KeyBuilder.encodeByte(14)),
-                new VocabURIByteIV<BigdataURI>((byte) 14),
-//                new VocabURIByteIV<BigdataURI>((byte) Byte.MAX_VALUE),
+//                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
+//                new VocabURIByteIV<EmbergraphURI>((byte) -1),
+                new VocabURIByteIV<EmbergraphURI>((byte) 0),
+                new VocabURIByteIV<EmbergraphURI>((byte) KeyBuilder.encodeByte(14)),
+                new VocabURIByteIV<EmbergraphURI>((byte) 14),
+//                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
         };
 
         final KeyBuilder keyBuilder = new KeyBuilder();

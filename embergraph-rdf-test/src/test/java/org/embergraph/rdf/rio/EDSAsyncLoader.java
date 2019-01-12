@@ -27,13 +27,13 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
 import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.EmbeddedFederation;
@@ -150,7 +150,7 @@ public class EDSAsyncLoader {
 
             }
 
-            final AsynchronousStatementBufferFactory<BigdataStatement, File> statementBufferFactory = new AsynchronousStatementBufferFactory<BigdataStatement, File>(
+            final AsynchronousStatementBufferFactory<EmbergraphStatement, File> statementBufferFactory = new AsynchronousStatementBufferFactory<EmbergraphStatement, File>(
                     (ScaleOutTripleStore) tripleStore,
                     producerChunkSize,
                     valuesInitialCapacity,

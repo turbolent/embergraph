@@ -42,7 +42,7 @@ public interface IServiceOptions {
      * When <code>false</code>, the service is expected to exchange
      * {@link BindingSet}s containing materialized RDF {@link Value}s.
      */
-    boolean isBigdataNativeService();
+    boolean isEmbergraphNativeService();
 
     /**
      * Return <code>true</code> iff the service is "remote". A remote service is
@@ -76,7 +76,7 @@ public interface IServiceOptions {
      * <code>false</code>). The default may be overridden iff the end point is
      * known to expose the bigdata LBS pattern.
      */
-    boolean isBigdataLBS();
+    boolean isEmbergraphLBS();
     
     
     /**

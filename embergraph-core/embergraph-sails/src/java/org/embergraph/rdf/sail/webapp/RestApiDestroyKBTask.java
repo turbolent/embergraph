@@ -49,7 +49,7 @@ class RestApiDestroyKBTask extends AbstractDelegateRestApiTask<Void> {
       super.call();
 
       buildResponse(HttpServletResponse.SC_OK,
-            BigdataServlet.MIME_TEXT_PLAIN, "DELETED: " + namespace);
+            EmbergraphServlet.MIME_TEXT_PLAIN, "DELETED: " + namespace);
 
       return null;
 

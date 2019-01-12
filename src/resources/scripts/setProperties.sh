@@ -18,5 +18,5 @@ namespace=$1
 
 java ${JAVA_OPTS} -Xmx400m \
 	 -cp ${CLASSPATH} \
-	 org.embergraph.rdf.sail.BigdataSailHelper \
+	 org.embergraph.rdf.sail.EmbergraphSailHelper \
 	 ${BIGDATA_CONFIG} JDS $namespace

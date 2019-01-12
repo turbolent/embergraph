@@ -32,6 +32,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
@@ -47,10 +49,8 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.sparql.ast.GroupNodeBase;
@@ -60,7 +60,7 @@ import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.ASTFulltextSearchOptimizer;
 import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
-import org.embergraph.rdf.sparql.ast.service.BigdataNativeServiceOptions;
+import org.embergraph.rdf.sparql.ast.service.EmbergraphNativeServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.IServiceOptions;
 import org.embergraph.rdf.sparql.ast.service.MockIVReturningServiceCall;
 import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
@@ -90,18 +90,18 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     * Note: This could extend the base class to allow for search service
     * configuration options.
     */
-   private final BigdataNativeServiceOptions serviceOptions;   
+   private final EmbergraphNativeServiceOptions serviceOptions;
 
    public FulltextSearchServiceFactory() {
 
-      serviceOptions = new BigdataNativeServiceOptions();
+      serviceOptions = new EmbergraphNativeServiceOptions();
 
       serviceOptions.setRunFirst(true);
 
    }
 
    @Override
-   public BigdataNativeServiceOptions getServiceOptions() {
+   public EmbergraphNativeServiceOptions getServiceOptions() {
 
       return serviceOptions;
 
@@ -538,13 +538,13 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
           */
          private IBindingSet newBindingSet(final IFulltextSearchHit<?> hit) {
 
-            final BigdataValueFactory vf = BigdataValueFactoryImpl
+            final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                   .getInstance(store.getLexiconRelation().getNamespace());
 
             /**
              * The searchResultTyppe determines the type to which we cast results
              */
-            final BigdataValue val;
+            final EmbergraphValue val;
             switch (hit.getSearchResultType()) {
             case LITERAL:
                val = vf.createLiteral(hit.getRes());
@@ -572,12 +572,12 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
             
             if (hit.getSnippet()!=null) {
                
-               final BigdataLiteral litSnippet = 
+               final EmbergraphLiteral litSnippet =
                   vf.createLiteral(hit.getSnippet());
                bs.set(vars[2], 
                   new Constant(new Constant(
                      DummyConstantNode.toDummyIV(
-                        (BigdataValue) litSnippet))));
+                        (EmbergraphValue) litSnippet))));
             }
             
             final IBindingSet baseBs = hit.getIncomingBindings();
@@ -602,8 +602,8 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
             if (log.isTraceEnabled()) {
                log.trace(bs);
                log.trace(query.getClass());
-               log.trace(((BigdataLiteral) query).getIV());
-               log.trace(((BigdataLiteral) query).getIV().getClass());
+               log.trace(((EmbergraphLiteral) query).getIV());
+               log.trace(((EmbergraphLiteral) query).getIV().getClass());
             }
 
             return bs;

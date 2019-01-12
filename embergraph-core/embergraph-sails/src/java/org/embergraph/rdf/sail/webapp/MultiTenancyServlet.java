@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Graph;
 import org.openrdf.model.impl.LinkedHashModel;
@@ -50,21 +51,20 @@ import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 import org.embergraph.rdf.properties.PropertiesParserFactory;
 import org.embergraph.rdf.properties.PropertiesParserRegistry;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.service.AbstractTransactionService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.PropertyUtil;
 
 /**
  * Mult-tenancy Administration Servlet (management for bigdata namespaces). A
  * bigdata namespace corresponds to a partition in the naming of durable
- * resources. A {@link Journal} or {@link IBigdataFederation} may have multiple
+ * resources. A {@link Journal} or {@link IEmbergraphFederation} may have multiple
  * KB instances, each in their own namespace. This servlet allows you to manage
  * those KB instances using CRUD operations.
  * 
@@ -76,7 +76,7 @@ import org.embergraph.util.PropertyUtil;
  *         FIXME GROUP COMMIT: The other operations in this class also should
  *         use the new REST API pattern, but are not intrinsically sensitive.
  */
-public class MultiTenancyServlet extends BigdataRDFServlet {
+public class MultiTenancyServlet extends EmbergraphRDFServlet {
 
     /**
      * 
@@ -292,7 +292,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
             return;
         }
 
-        final BigdataRDFContext context = getBigdataRDFContext();
+        final EmbergraphRDFContext context = getEmbergraphRDFContext();
 
         final IIndexManager indexManager = context.getIndexManager();
         
@@ -300,7 +300,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
         /*
          * 1. Read the request entity, which must be some kind of Properties
-         * object. The BigdataSail.Options.NAMESPACE property defaults to "kb".
+         * object. The EmbergraphSail.Options.NAMESPACE property defaults to "kb".
          * A non-default value SHOULD be specified by the client.
          * 
          * 2. Wrap and flatten the base properties for the Journal or
@@ -356,12 +356,12 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
             given = parser.parse(req.getInputStream());
             
             //check properties
-            BigdataSail.checkProperties(given);
+            EmbergraphSail.checkProperties(given);
             
             // The effective namespace for the new KB.
             final String namespace = given.getProperty(
-                    BigdataSail.Options.NAMESPACE,
-                    BigdataSail.Options.DEFAULT_NAMESPACE);
+                    EmbergraphSail.Options.NAMESPACE,
+                    EmbergraphSail.Options.DEFAULT_NAMESPACE);
             
             try {
         	  
@@ -511,7 +511,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
         /*
          * 1. Read the request entity, which must be some kind of Properties
-         * object. The BigdataSail.Options.NAMESPACE property defaults to "kb".
+         * object. The EmbergraphSail.Options.NAMESPACE property defaults to "kb".
          * A non-default value SHOULD be specified by the client.
          * 
          * 2. Wrap and flatten the base properties for the Journal or
@@ -570,8 +570,8 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
         // The effective namespace for the new KB.
         final String namespace = props.getProperty(
-                BigdataSail.Options.NAMESPACE,
-                BigdataSail.Options.DEFAULT_NAMESPACE);
+                EmbergraphSail.Options.NAMESPACE,
+                EmbergraphSail.Options.DEFAULT_NAMESPACE);
 
       try {
     	  
@@ -639,7 +639,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 //		// TODO This might no longer be necessary with BLZG-2041 since the code 
 //		// now uses correct locking patterns when locating a resource.
 //		
-//		final long tx = getBigdataRDFContext().newTx(timestamp);
+//		final long tx = getEmbergraphRDFContext().newTx(timestamp);
 		
 		try {
 		   
@@ -656,7 +656,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
                      try {
                           
-                     final BigdataSailRepositoryConnection conn = getQueryConnection();
+                     final EmbergraphSailRepositoryConnection conn = getQueryConnection();
                      try {
 
                          final Properties properties = PropertyUtil
@@ -677,7 +677,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
                          */
                         throw new HttpOperationException(
                               HttpServletResponse.SC_NOT_FOUND,
-                              BigdataServlet.MIME_TEXT_PLAIN,
+                              EmbergraphServlet.MIME_TEXT_PLAIN,
                               "Not found: namespace=" + namespace);
                      }
                          throw new RuntimeException(t);
@@ -693,7 +693,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 			
 //		} finally {
 //
-//		    getBigdataRDFContext().abortTx(tx);
+//		    getEmbergraphRDFContext().abortTx(tx);
 		    
 		}
 
@@ -713,7 +713,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
         
             describeEachNamedGraph = s != null ?
                 Boolean.valueOf(s) : 
-                    getBigdataRDFContext().getConfig().describeEachNamedGraph;
+                    getEmbergraphRDFContext().getConfig().describeEachNamedGraph;
         }
 
         final boolean describeDefaultNamespace;
@@ -730,7 +730,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
          * @see <a href="http://trac.blazegraph.com/ticket/867"> NSS concurrency
          *      problem with list namespaces and create namespace </a>
          */
-        final long tx = getBigdataRDFContext().newTx(timestamp);
+        final long tx = getEmbergraphRDFContext().newTx(timestamp);
 
         try {
             
@@ -738,7 +738,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
             if (describeDefaultNamespace) {
 
-                final String namespace = getBigdataRDFContext().getConfig().namespace;
+                final String namespace = getEmbergraphRDFContext().getConfig().namespace;
 
                 describeNamespaceTx(req, g, namespace, describeEachNamedGraph,
                         tx);
@@ -748,7 +748,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
                 /*
                  * The set of registered namespaces for KBs.
                  */
-                final List<String> namespaces = getBigdataRDFContext()
+                final List<String> namespaces = getEmbergraphRDFContext()
                         .getNamespacesTx(tx);
 
                 for (String namespace : namespaces) {
@@ -770,7 +770,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
         } finally {
 
-            getBigdataRDFContext().abortTx(tx);
+            getEmbergraphRDFContext().abortTx(tx);
             
         }
 
@@ -785,7 +785,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
                     throws IOException {
         
         // Get a view onto that KB instance for that timestamp.
-        final AbstractTripleStore tripleStore = getBigdataRDFContext()
+        final AbstractTripleStore tripleStore = getEmbergraphRDFContext()
                 .getTripleStore(namespace, tx);
 
         if (tripleStore == null) {
@@ -819,7 +819,7 @@ public class MultiTenancyServlet extends BigdataRDFServlet {
 
 		try {
 
-			AbstractTripleStore store = getBigdataRDFContext().getTripleStore(namespace, Tx.UNISOLATED);
+			AbstractTripleStore store = getEmbergraphRDFContext().getTripleStore(namespace, Tx.UNISOLATED);
 			
 			store.getLexiconRelation().rebuildTextIndex(forceIndexCreate);
 			

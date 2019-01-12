@@ -25,7 +25,7 @@ package org.embergraph.relation.locator;
 
 import org.embergraph.relation.IDatabase;
 import org.embergraph.relation.IRelation;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * An object that knows how to resolve a resource identifier (aka namespace) to
@@ -39,7 +39,7 @@ import org.embergraph.service.IBigdataFederation;
  * Note: a locator does not proxy for a resource. Either the resource is locally
  * accessible, including the case of a resource distributed across a federation,
  * or it is not since the resource is accessible using the
- * {@link IBigdataFederation}'s API. However, you CAN NOT "locate" a
+ * {@link IEmbergraphFederation}'s API. However, you CAN NOT "locate" a
  * <em>local</em> resource on another JVM or machine using this interface.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

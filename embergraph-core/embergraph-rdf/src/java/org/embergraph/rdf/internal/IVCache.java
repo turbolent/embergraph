@@ -21,34 +21,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
- * Interface for managing the {@link BigdataValue} cached on an {@link IV}.
+ * Interface for managing the {@link EmbergraphValue} cached on an {@link IV}.
  * <p>
  * This interface is designed to support the query plan generator. The
- * {@link BigdataValue} is cached when a query plan decides that the
+ * {@link EmbergraphValue} is cached when a query plan decides that the
  * materialized value is required for a downstream operator.
  * <p>
- * Both {@link IV} and {@link BigdataValue} can cache one another. The pattern
+ * Both {@link IV} and {@link EmbergraphValue} can cache one another. The pattern
  * for caching is that you <em>always</em> cache the {@link IV} on the
- * {@link BigdataValue} using {@link BigdataValue#setIV(IV)}. However, the
- * {@link BigdataValue} is normally NOT cached on the {@link IV}. The exception
- * is when the {@link BigdataValue} has been materialized from the {@link IV} by
+ * {@link EmbergraphValue} using {@link EmbergraphValue#setIV(IV)}. However, the
+ * {@link EmbergraphValue} is normally NOT cached on the {@link IV}. The exception
+ * is when the {@link EmbergraphValue} has been materialized from the {@link IV} by
  * joining against the lexicon.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface IVCache<V extends BigdataValue,T> {
+public interface IVCache<V extends EmbergraphValue,T> {
     
     /**
      * If the value is not already cached, then inflate an inline RDF value to a
-     * {@link BigdataValue} and cache it on a private field.
+     * {@link EmbergraphValue} and cache it on a private field.
      * <p>
      * Note: Query plans are responsible for ensuring that {@link IV}s have been
      * materialized before operators are evaluated which invoke this method.
@@ -58,15 +58,15 @@ public interface IVCache<V extends BigdataValue,T> {
      * simple method signature which does not require access to the lexicon.
      * Query plans are also responsible for dropping variables once they are no
      * longer needed or, in the case of large values and BLOBs, dropping the
-     * cached {@link BigdataValue} when possible in order to avoid excess
+     * cached {@link EmbergraphValue} when possible in order to avoid excess
      * network and heap overhead.
      * 
      * @param lex
      *            The lexicon relation (this is required in order to access the
-     *            {@link BigdataValueFactory} for the namespace associated with
+     *            {@link EmbergraphValueFactory} for the namespace associated with
      *            lexicon when we materialize an inline {@link IV}).
      * 
-     * @return The corresponding {@link BigdataValue}.
+     * @return The corresponding {@link EmbergraphValue}.
      * 
      * @throws UnsupportedOperationException
      *             if the {@link IV} does not represent something which can be
@@ -76,25 +76,25 @@ public interface IVCache<V extends BigdataValue,T> {
         throws UnsupportedOperationException;
 
     /**
-	 * Set the {@link BigdataValue} on the cache.
+	 * Set the {@link EmbergraphValue} on the cache.
 	 * <p>
 	 * Note: This is normally invoked by {@link #asValue(LexiconRelation)}
 	 * during a lexicon join cache a newly materialized {@link Value} on the
 	 * {@link IV}.
 	 * 
 	 * @param val
-	 *            The {@link BigdataValue}.
+	 *            The {@link EmbergraphValue}.
 	 *            
 	 * @return The argument.
 	 */
     V setValue(final V val);
     
     /**
-     * Return a pre-materialized RDF {@link BigdataValue} which has been cached
+     * Return a pre-materialized RDF {@link EmbergraphValue} which has been cached
      * on this {@link IV} by a previous invocation of
      * {@link #asValue(LexiconRelation)}.
      * 
-     * @return The {@link BigdataValue}.
+     * @return The {@link EmbergraphValue}.
      * 
      * @throws NotMaterializedException
      *             if the value is not cached.
@@ -102,7 +102,7 @@ public interface IVCache<V extends BigdataValue,T> {
     V getValue() throws NotMaterializedException;
 
 //	/**
-//	 * Drop the cached {@link BigdataValue}. This is a NOP if the cache is
+//	 * Drop the cached {@link EmbergraphValue}. This is a NOP if the cache is
 //	 * empty.
 //	 * 
 //	 * @deprecated There is a concurrency problem with this method for any IV for
@@ -121,13 +121,13 @@ public interface IVCache<V extends BigdataValue,T> {
      * Return a copy of this {@link IV}.
      * <p>
      * Note: This method exists to defeat the hard reference from the {@link IV}
-     * to the cached {@link BigdataValue} in order to avoid a memory leak when
+     * to the cached {@link EmbergraphValue} in order to avoid a memory leak when
      * the {@link IV} is used as the key in a weak value cache whose value is
-     * the {@link BigdataValue}. Therefore, certain {@link IV} implementations
+     * the {@link EmbergraphValue}. Therefore, certain {@link IV} implementations
      * MAY return <i>this</i> when they are used for limited collections. The
      * vocabulary IVs are the primary example. For the same reason, we do not
      * need to recursively break the link from the {@link IV} to the
-     * {@link BigdataValue} for {@link IV}s which embed other {@link IV}s.
+     * {@link EmbergraphValue} for {@link IV}s which embed other {@link IV}s.
      * 
      * @param clearCache
      *            When <code>true</code> the cached reference (if any) will NOT
@@ -142,7 +142,7 @@ public interface IVCache<V extends BigdataValue,T> {
     IV<V, T> clone(boolean clearCache);
 
     /**
-     * Returns true if the RDF {@link BigdataValue} has been pre-materialized
+     * Returns true if the RDF {@link EmbergraphValue} has been pre-materialized
      * and cached on this {@link IV}.
      */
     boolean hasValue();

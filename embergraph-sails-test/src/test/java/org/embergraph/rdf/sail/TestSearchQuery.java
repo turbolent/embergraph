@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
@@ -58,8 +59,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.ITextIndexer;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 import org.embergraph.rdf.lexicon.IValueCentricTextIndexer;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.search.Hiterator;
 import org.embergraph.search.IHit;
@@ -71,7 +71,7 @@ import org.embergraph.search.TestSearch;
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
-public class TestSearchQuery extends ProxyBigdataSailTestCase {
+public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 
     private static final Logger log = Logger.getLogger(TestSearchQuery.class);
 	
@@ -124,7 +124,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //
 //        properties.setProperty(Options.FILE, file.toString());
 //
-//        BigdataSail sail = getSail(properties);
+//        EmbergraphSail sail = getSail(properties);
 //
 //        try {
 //
@@ -170,9 +170,9 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //                                + sail.database.getStatementCount(null/* c */,
 //                                        true/* exact */));
 //
-//            doSearchTest(((BigdataSail) sail).getConnection());
+//            doSearchTest(((EmbergraphSail) sail).getConnection());
 //
-//            doSearchTest(((BigdataSail) sail).getReadOnlyConnection());
+//            doSearchTest(((EmbergraphSail) sail).getReadOnlyConnection());
 //
 //            if (log.isInfoEnabled())
 //                log
@@ -191,9 +191,9 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //                                + sail.database.getStatementCount(null/* c */,
 //                                        true/* exact */));
 //
-//            doSearchTest(((BigdataSail) sail).getConnection());
+//            doSearchTest(((EmbergraphSail) sail).getConnection());
 //
-//            doSearchTest(((BigdataSail) sail).getReadOnlyConnection());
+//            doSearchTest(((EmbergraphSail) sail).getReadOnlyConnection());
 //            
 //        } finally {
 //
@@ -380,7 +380,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 
         properties.setProperty(Options.FILE, file.toString());
 
-        BigdataSail sail = getSail(properties);
+        EmbergraphSail sail = getSail(properties);
 
         try {
 
@@ -390,7 +390,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 
             {
 
-                final BigdataSailRepository repo = new BigdataSailRepository(
+                final EmbergraphSailRepository repo = new EmbergraphSailRepository(
                         sail);
 
                 // note: initializes the SAIL.
@@ -464,7 +464,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 
             // setup the repo again.
             {
-                final BigdataSailRepository repo = new BigdataSailRepository(
+                final EmbergraphSailRepository repo = new EmbergraphSailRepository(
                         sail);
 
                 repo.initialize();
@@ -510,7 +510,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //    
 //    public void testWithNamedGraphs() throws Exception {
 //        
-//        final BigdataSail sail = getSail();
+//        final EmbergraphSail sail = getSail();
 //        try {
 //            
 //        if (sail.getDatabase().isQuads() == false) {
@@ -518,9 +518,9 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //        }
 //        
 //        sail.initialize();
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-//        final BigdataSailRepositoryConnection cxn = 
-//            (BigdataSailRepositoryConnection) repo.getConnection();
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+//        final EmbergraphSailRepositoryConnection cxn =
+//            (EmbergraphSailRepositoryConnection) repo.getConnection();
 //        try {
 //
 //            cxn.setAutoCommit(false);
@@ -682,13 +682,13 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
      */
     public void testWithMetadata() throws Exception {
         
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
             
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         
         try {
             
@@ -730,24 +730,24 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
             cxn.commit();
             
             final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
-            literals.put(((BigdataValue)l1).getIV(), l1);
-            literals.put(((BigdataValue)l2).getIV(), l2);
-            literals.put(((BigdataValue)l3).getIV(), l3);
-            literals.put(((BigdataValue)l4).getIV(), l4);
-            literals.put(((BigdataValue)l5).getIV(), l5);
-            literals.put(((BigdataValue)l6).getIV(), l6);
-            literals.put(((BigdataValue)l7).getIV(), l7);
-            literals.put(((BigdataValue)l8).getIV(), l8);
+            literals.put(((EmbergraphValue)l1).getIV(), l1);
+            literals.put(((EmbergraphValue)l2).getIV(), l2);
+            literals.put(((EmbergraphValue)l3).getIV(), l3);
+            literals.put(((EmbergraphValue)l4).getIV(), l4);
+            literals.put(((EmbergraphValue)l5).getIV(), l5);
+            literals.put(((EmbergraphValue)l6).getIV(), l6);
+            literals.put(((EmbergraphValue)l7).getIV(), l7);
+            literals.put(((EmbergraphValue)l8).getIV(), l8);
             
             final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
-            uris.put(((BigdataValue)l1).getIV(), s1);
-            uris.put(((BigdataValue)l2).getIV(), s2);
-            uris.put(((BigdataValue)l3).getIV(), s3);
-            uris.put(((BigdataValue)l4).getIV(), s4);
-            uris.put(((BigdataValue)l5).getIV(), s5);
-            uris.put(((BigdataValue)l6).getIV(), s6);
-            uris.put(((BigdataValue)l7).getIV(), s7);
-            uris.put(((BigdataValue)l8).getIV(), s8);
+            uris.put(((EmbergraphValue)l1).getIV(), s1);
+            uris.put(((EmbergraphValue)l2).getIV(), s2);
+            uris.put(((EmbergraphValue)l3).getIV(), s3);
+            uris.put(((EmbergraphValue)l4).getIV(), s4);
+            uris.put(((EmbergraphValue)l5).getIV(), s5);
+            uris.put(((EmbergraphValue)l6).getIV(), s6);
+            uris.put(((EmbergraphValue)l7).getIV(), s7);
+            uris.put(((EmbergraphValue)l8).getIV(), s8);
             
 /**/            
             if (log.isInfoEnabled()) {
@@ -1392,13 +1392,13 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
     
 //    public void testSubjectSearch() throws Exception {
 //        
-//        final BigdataSail sail = getSail();
+//        final EmbergraphSail sail = getSail();
 //        try {
 //            
 //        sail.initialize();
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-//        final BigdataSailRepositoryConnection cxn = 
-//            (BigdataSailRepositoryConnection) repo.getConnection();
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+//        final EmbergraphSailRepositoryConnection cxn =
+//            (EmbergraphSailRepositoryConnection) repo.getConnection();
 //        
 //        try {
 //            
@@ -1442,24 +1442,24 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //            sail.getDatabase().getLexiconRelation().buildSubjectCentricTextIndex();
 //            
 //            final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
-//            literals.put(((BigdataURI)s1).getIV(), l1);
-//            literals.put(((BigdataURI)s2).getIV(), l2);
-//            literals.put(((BigdataURI)s3).getIV(), l3);
-//            literals.put(((BigdataURI)s4).getIV(), l4);
-//            literals.put(((BigdataURI)s5).getIV(), l5);
-//            literals.put(((BigdataURI)s6).getIV(), l6);
-//            literals.put(((BigdataURI)s7).getIV(), l7);
-//            literals.put(((BigdataURI)s8).getIV(), l8);
+//            literals.put(((EmbergraphURI)s1).getIV(), l1);
+//            literals.put(((EmbergraphURI)s2).getIV(), l2);
+//            literals.put(((EmbergraphURI)s3).getIV(), l3);
+//            literals.put(((EmbergraphURI)s4).getIV(), l4);
+//            literals.put(((EmbergraphURI)s5).getIV(), l5);
+//            literals.put(((EmbergraphURI)s6).getIV(), l6);
+//            literals.put(((EmbergraphURI)s7).getIV(), l7);
+//            literals.put(((EmbergraphURI)s8).getIV(), l8);
 //            
 //            final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
-//            uris.put(((BigdataURI)s1).getIV(), s1);
-//            uris.put(((BigdataURI)s2).getIV(), s2);
-//            uris.put(((BigdataURI)s3).getIV(), s3);
-//            uris.put(((BigdataURI)s4).getIV(), s4);
-//            uris.put(((BigdataURI)s5).getIV(), s5);
-//            uris.put(((BigdataURI)s6).getIV(), s6);
-//            uris.put(((BigdataURI)s7).getIV(), s7);
-//            uris.put(((BigdataURI)s8).getIV(), s8);
+//            uris.put(((EmbergraphURI)s1).getIV(), s1);
+//            uris.put(((EmbergraphURI)s2).getIV(), s2);
+//            uris.put(((EmbergraphURI)s3).getIV(), s3);
+//            uris.put(((EmbergraphURI)s4).getIV(), s4);
+//            uris.put(((EmbergraphURI)s5).getIV(), s5);
+//            uris.put(((EmbergraphURI)s6).getIV(), s6);
+//            uris.put(((EmbergraphURI)s7).getIV(), s7);
+//            uris.put(((EmbergraphURI)s8).getIV(), s8);
 //            
 ///**/            
 //            if (log.isInfoEnabled()) {
@@ -2102,13 +2102,13 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
      */
     public void testValidationWithIncomingBindings() throws Exception {
         
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
             
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         
         try {
             
@@ -2150,24 +2150,24 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
             cxn.commit();
             
             final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
-            literals.put(((BigdataValue)l1).getIV(), l1);
-            literals.put(((BigdataValue)l2).getIV(), l2);
-            literals.put(((BigdataValue)l3).getIV(), l3);
-            literals.put(((BigdataValue)l4).getIV(), l4);
-            literals.put(((BigdataValue)l5).getIV(), l5);
-            literals.put(((BigdataValue)l6).getIV(), l6);
-            literals.put(((BigdataValue)l7).getIV(), l7);
-            literals.put(((BigdataValue)l8).getIV(), l8);
+            literals.put(((EmbergraphValue)l1).getIV(), l1);
+            literals.put(((EmbergraphValue)l2).getIV(), l2);
+            literals.put(((EmbergraphValue)l3).getIV(), l3);
+            literals.put(((EmbergraphValue)l4).getIV(), l4);
+            literals.put(((EmbergraphValue)l5).getIV(), l5);
+            literals.put(((EmbergraphValue)l6).getIV(), l6);
+            literals.put(((EmbergraphValue)l7).getIV(), l7);
+            literals.put(((EmbergraphValue)l8).getIV(), l8);
             
             final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
-            uris.put(((BigdataValue)l1).getIV(), s1);
-            uris.put(((BigdataValue)l2).getIV(), s2);
-            uris.put(((BigdataValue)l3).getIV(), s3);
-            uris.put(((BigdataValue)l4).getIV(), s4);
-            uris.put(((BigdataValue)l5).getIV(), s5);
-            uris.put(((BigdataValue)l6).getIV(), s6);
-            uris.put(((BigdataValue)l7).getIV(), s7);
-            uris.put(((BigdataValue)l8).getIV(), s8);
+            uris.put(((EmbergraphValue)l1).getIV(), s1);
+            uris.put(((EmbergraphValue)l2).getIV(), s2);
+            uris.put(((EmbergraphValue)l3).getIV(), s3);
+            uris.put(((EmbergraphValue)l4).getIV(), s4);
+            uris.put(((EmbergraphValue)l5).getIV(), s5);
+            uris.put(((EmbergraphValue)l6).getIV(), s6);
+            uris.put(((EmbergraphValue)l7).getIV(), s7);
+            uris.put(((EmbergraphValue)l8).getIV(), s8);
             
 /**/            
             if (log.isInfoEnabled()) {
@@ -2260,14 +2260,14 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
     
 //    private final void doQuery() throws Exception {
 //        
-//        final BigdataSail sail = getSail();
+//        final EmbergraphSail sail = getSail();
 //        
 //        try {
 //            
 //        sail.initialize();
-//        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-//        final BigdataSailRepositoryConnection cxn = 
-//            (BigdataSailRepositoryConnection) repo.getConnection();
+//        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+//        final EmbergraphSailRepositoryConnection cxn =
+//            (EmbergraphSailRepositoryConnection) repo.getConnection();
 //        
 //        try {
 //            
@@ -2406,7 +2406,7 @@ public class TestSearchQuery extends ProxyBigdataSailTestCase {
 //                
 //                final BindingSet bs = chunk.next();
 //                
-//                final BigdataValue val = (BigdataValue) 
+//                final EmbergraphValue val = (EmbergraphValue)
 //                    bs.getBinding("target").getValue();
 //                
 //                final IV iv = val.getIV();
@@ -2492,13 +2492,13 @@ LIMIT 10 OFFSET 0
      */
     public void testExactMatch() throws Exception {
         
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
             
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         
         try {
             
@@ -2540,24 +2540,24 @@ LIMIT 10 OFFSET 0
             cxn.commit();
             
             final Map<IV, Literal> literals = new LinkedHashMap<IV, Literal>();
-            literals.put(((BigdataValue)l1).getIV(), l1);
-            literals.put(((BigdataValue)l2).getIV(), l2);
-            literals.put(((BigdataValue)l3).getIV(), l3);
-            literals.put(((BigdataValue)l4).getIV(), l4);
-            literals.put(((BigdataValue)l5).getIV(), l5);
-            literals.put(((BigdataValue)l6).getIV(), l6);
-            literals.put(((BigdataValue)l7).getIV(), l7);
-            literals.put(((BigdataValue)l8).getIV(), l8);
+            literals.put(((EmbergraphValue)l1).getIV(), l1);
+            literals.put(((EmbergraphValue)l2).getIV(), l2);
+            literals.put(((EmbergraphValue)l3).getIV(), l3);
+            literals.put(((EmbergraphValue)l4).getIV(), l4);
+            literals.put(((EmbergraphValue)l5).getIV(), l5);
+            literals.put(((EmbergraphValue)l6).getIV(), l6);
+            literals.put(((EmbergraphValue)l7).getIV(), l7);
+            literals.put(((EmbergraphValue)l8).getIV(), l8);
             
             final Map<IV, URI> uris = new LinkedHashMap<IV, URI>();
-            uris.put(((BigdataValue)l1).getIV(), s1);
-            uris.put(((BigdataValue)l2).getIV(), s2);
-            uris.put(((BigdataValue)l3).getIV(), s3);
-            uris.put(((BigdataValue)l4).getIV(), s4);
-            uris.put(((BigdataValue)l5).getIV(), s5);
-            uris.put(((BigdataValue)l6).getIV(), s6);
-            uris.put(((BigdataValue)l7).getIV(), s7);
-            uris.put(((BigdataValue)l8).getIV(), s8);
+            uris.put(((EmbergraphValue)l1).getIV(), s1);
+            uris.put(((EmbergraphValue)l2).getIV(), s2);
+            uris.put(((EmbergraphValue)l3).getIV(), s3);
+            uris.put(((EmbergraphValue)l4).getIV(), s4);
+            uris.put(((EmbergraphValue)l5).getIV(), s5);
+            uris.put(((EmbergraphValue)l6).getIV(), s6);
+            uris.put(((EmbergraphValue)l7).getIV(), s7);
+            uris.put(((EmbergraphValue)l8).getIV(), s8);
             
 /**/            
             if (log.isInfoEnabled()) {

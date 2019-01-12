@@ -21,15 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
+import org.embergraph.EmbergraphStatics;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-import org.embergraph.BigdataStatics;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
@@ -110,7 +110,7 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
         /*
          * Resolve terms against the lexicon.
          */
-        final BigdataValueFactory valueFactory = store.getLexiconRelation()
+        final EmbergraphValueFactory valueFactory = store.getLexiconRelation()
                 .getValueFactory();
 
         final String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
@@ -119,26 +119,26 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
 
         final String productInstance = "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer1/Product22";
         
-        final BigdataURI rdfsLabel = valueFactory.createURI(rdfs + "label");
+        final EmbergraphURI rdfsLabel = valueFactory.createURI(rdfs + "label");
 
-        final BigdataURI productFeature = valueFactory.createURI(bsbm
+        final EmbergraphURI productFeature = valueFactory.createURI(bsbm
                 + "productFeature");
 
-        final BigdataURI productPropertyNumeric1 = valueFactory.createURI(bsbm
+        final EmbergraphURI productPropertyNumeric1 = valueFactory.createURI(bsbm
                 + "productPropertyNumeric1");
 
-        final BigdataURI productPropertyNumeric2 = valueFactory.createURI(bsbm
+        final EmbergraphURI productPropertyNumeric2 = valueFactory.createURI(bsbm
                 + "productPropertyNumeric2");
 
-        final BigdataURI product53999 = valueFactory.createURI(productInstance);
+        final EmbergraphURI product53999 = valueFactory.createURI(productInstance);
         
-        final BigdataLiteral _120 = valueFactory.createLiteral("120",
+        final EmbergraphLiteral _120 = valueFactory.createLiteral("120",
                 XSD.INTEGER);
         
-        final BigdataLiteral _170 = valueFactory.createLiteral("170",
+        final EmbergraphLiteral _170 = valueFactory.createLiteral("170",
                 XSD.INTEGER);
 
-        final BigdataValue[] terms = new BigdataValue[] { rdfsLabel,
+        final EmbergraphValue[] terms = new EmbergraphValue[] { rdfsLabel,
                 productFeature, productPropertyNumeric1,
                 productPropertyNumeric2, product53999, _120, _170};
 
@@ -146,7 +146,7 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
         store.getLexiconRelation()
                 .addTerms(terms, terms.length, false/* readOnly */);
 
-        for(BigdataValue bv : terms) {
+        for(EmbergraphValue bv : terms) {
             // Cache the Value on the IV.
             bv.getIV().setValue(bv);
         }
@@ -504,7 +504,7 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
         /*
          * FIXME This is failing because the optimizer is not finished yet.
          */
-        if (!BigdataStatics.runKnownBadTests)
+        if (!EmbergraphStatics.runKnownBadTests)
             return;
 
         assertSameAST(expected, actual);

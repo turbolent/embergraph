@@ -320,10 +320,10 @@ public class ASTRangeConstraintOptimizer implements IASTOptimizer {
 ////  sail.initialize();
 ////  final Repository repo = new SailRepository(sail);
 //
-//  final BigdataSail sail = getSail();
+//  final EmbergraphSail sail = getSail();
 //  try {
 //  sail.initialize();
-//  final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//  final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //  
 //  final RepositoryConnection cxn = repo.getConnection();
 //  

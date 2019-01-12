@@ -24,7 +24,7 @@ import org.embergraph.rdf.internal.impl.literal.FullyInlineTypedLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
 import org.embergraph.rdf.internal.impl.literal.UUIDLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Inline URI handler for IDs of multiple types.
@@ -104,7 +104,7 @@ public class MultipurposeIDHandler extends InlineURIHandler {
         
         if (localName.length() < maxTextLen) {
             // just use a UTF encoded string, this is expensive
-            return new FullyInlineTypedLiteralIV<BigdataLiteral>(localName);
+            return new FullyInlineTypedLiteralIV<EmbergraphLiteral>(localName);
         }
         
         return null;

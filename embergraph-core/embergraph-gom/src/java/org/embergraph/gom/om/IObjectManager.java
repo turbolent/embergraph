@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -33,7 +34,6 @@ import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
 import org.embergraph.gom.gpo.IGPO;
-import org.embergraph.rdf.model.BigdataValueFactory;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 
@@ -127,7 +127,7 @@ public interface IObjectManager extends INativeTransaction {
      * The value factory for the KB instance associated with this object manager
      * view.
      */
-    BigdataValueFactory getValueFactory();
+    EmbergraphValueFactory getValueFactory();
     
     /**
      * 

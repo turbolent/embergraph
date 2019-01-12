@@ -2652,7 +2652,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
     * ClassCast Exception when Loading LUBM: org.embergraph.rdf.internal.impl.literal.XSDBooleanIV
     * cannot be cast to org.embergraph.rdf.internal.impl.literal.NumericIV
     */
-   public void testTicketBigdataGPU368() throws Exception {
+   public void testTicketEmbergraphGPU368() throws Exception {
        
        new TestHelper( 
            "workbench1",      // test name

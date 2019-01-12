@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.lexicon;
 
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Reduced interface for the {@link LexiconRelation}'s term cache. This
@@ -33,7 +33,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public interface ITermCache<K extends IV<?, ?>, V extends BigdataValue> {
+public interface ITermCache<K extends IV<?, ?>, V extends EmbergraphValue> {
 
     int size();
     

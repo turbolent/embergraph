@@ -48,8 +48,8 @@ import org.embergraph.counters.CAT;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.service.AbstractTransactionService;
@@ -62,7 +62,7 @@ import org.embergraph.util.InnerCause;
  * 
  * @author Martyn Cutcher
  */
-abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
+abstract public class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
 
 //    private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
@@ -116,13 +116,13 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
             log.info("=================================================================================");
         }
 
-        final BigdataSail sail = getSail(getProperties(retentionMillis,
+        final EmbergraphSail sail = getSail(getProperties(retentionMillis,
                 isolatableIndices));
         
         domultiple_csem_transaction2(sail, nreaderThreads, nwriters, nreaders, true);
     }
     
-    static void domultiple_csem_transaction2( final BigdataSail sail,
+    static void domultiple_csem_transaction2( final EmbergraphSail sail,
             final int nreaderThreads, final int nwriters, final int nreaders, final boolean teardown) throws Exception {   
 
         /**
@@ -160,7 +160,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
             sail.initialize();
             // TODO Force an initial commit?
 
-//            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //            final AbstractTripleStore origStore = repo.getDatabase();
 
             final URI[] subs = new URI[nuris];
@@ -278,7 +278,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 
         final Random r;
         final int nwrites;
-        final BigdataSail sail;
+        final EmbergraphSail sail;
         final CAT commits;
         final CAT aborts;
 //        final int maxAborts;
@@ -289,7 +289,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
         final URI[] preds;
 
         Writer(final Random r, final int nwrites,
-                final BigdataSail sail, final CAT commits,
+                final EmbergraphSail sail, final CAT commits,
                 final CAT aborts, //final int maxAborts,
                 final AtomicReference<Throwable> failex, final URI[] subs,
                 final URI[] preds) {
@@ -311,7 +311,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
         @Override
         public Long call() throws Exception {
             // Thread.sleep(r.nextInt(2000) + 500);
-            BigdataSailConnection con = null;
+            EmbergraphSailConnection con = null;
             boolean ok = false;
             try {
                 con = sail.getConnection();
@@ -366,7 +366,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
         final Random r;
         final int nreads;
         final int nwriters;
-        final BigdataSail sail;
+        final EmbergraphSail sail;
         final AtomicReference<Throwable> failex;
         final CAT commits;
         final CAT nreadersDone;
@@ -374,7 +374,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
         final URI[] subs;
 
         Reader(final Random r, final int nreads, final int nwriters,
-                final BigdataSail sail,
+                final EmbergraphSail sail,
                 final AtomicReference<Throwable> failex, final CAT commits,
                 final CAT nreadersDone, final URI[] subs) {
             this.r = r;
@@ -390,7 +390,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 
         @Override
         public Long call() throws Exception {
-            BigdataSailConnection con = null;
+            EmbergraphSailConnection con = null;
             try {
                 con = sail.getReadOnlyConnection();
                 /*
@@ -453,11 +453,11 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 //        // running tasks.
 //        // final AtomicBoolean success = new AtomicBoolean(false);
 //        final boolean isolatableIndices = false;
-//        final BigdataSail sail = getSail(getProperties(retention,isolatableIndices));
+//        final EmbergraphSail sail = getSail(getProperties(retention,isolatableIndices));
 //        try {
 //
 //            sail.initialize();
-//            final BigdataSailRepository repo = new BigdataSailRepository(sail);
+//            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 //            final AbstractTripleStore origStore = repo.getDatabase();
 //
 //            final URI[] subs = new URI[nuris];
@@ -482,7 +482,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 //                            .getIndexManager().getResourceLocator()
 //                            .locate(origStore.getNamespace(), txId);
 //                    for (int i = 0; i < nreads; i++) {
-//                        final BigdataStatementIterator stats = readstore
+//                        final EmbergraphStatementIterator stats = readstore
 //                        // .getStatements(subs[nuris/2 + loop], null,
 //                        // null);
 //                                .getStatements(subs[r.nextInt(nuris)], null,
@@ -546,11 +546,11 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 
         final Properties props = super.getProperties();
 
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         // props.setProperty(Options.WRITE_CACHE_BUFFER_COUNT, "3");
 
         // ensure using RWStore
@@ -574,11 +574,11 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 
         final Properties props = getProperties();
         
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         // props.setProperty(Options.WRITE_CACHE_BUFFER_COUNT, "3");
 
         // ensure using RWStore
@@ -600,7 +600,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 
    static void setProperties(final Properties props, final int retention,
            final boolean isolatableIndices) {
-        props.setProperty(BigdataSail.Options.ISOLATABLE_INDICES,
+        props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES,
                 Boolean.toString(isolatableIndices));
 
         props.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE,
@@ -725,7 +725,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 		
 		props.load(new FileInputStream(propertyFile));
 		
-		final AtomicReference<BigdataSail> sail = new AtomicReference<BigdataSail>(new BigdataSail(props));
+		final AtomicReference<EmbergraphSail> sail = new AtomicReference<EmbergraphSail>(new EmbergraphSail(props));
 
 		final int nreaderThreads = (int) getLongArg(args, "-nreaderthreads", 20); // 20
 
@@ -768,7 +768,7 @@ abstract public class TestMROWTransactions extends ProxyBigdataSailTestCase {
 				log.warn("OOPS", e); // There will be a number of expected causes, eg IllegalStateException - service not available
 			}
 			
-			sail.set(new BigdataSail(props));
+			sail.set(new EmbergraphSail(props));
 
 			System.out.println("Completed run: " + i);
 		}

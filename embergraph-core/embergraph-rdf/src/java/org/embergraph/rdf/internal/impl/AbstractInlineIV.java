@@ -19,7 +19,7 @@ package org.embergraph.rdf.internal.impl;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Abstract base class for inline RDF values (literals, blank nodes, and
@@ -32,7 +32,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * @version $Id: TestEncodeDecodeKeys.java 2753 2010-05-01 16:36:59Z
  *          thompsonbry $
  */
-abstract public class AbstractInlineIV<V extends BigdataValue, T>
+abstract public class AbstractInlineIV<V extends EmbergraphValue, T>
         extends AbstractIV<V, T> {
 
     /**

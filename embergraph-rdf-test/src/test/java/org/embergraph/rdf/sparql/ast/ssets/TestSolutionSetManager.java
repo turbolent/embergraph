@@ -48,10 +48,10 @@ import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.cache.CacheConnectionImpl;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.striterator.CloseableIteratorWrapper;
@@ -85,7 +85,7 @@ public class TestSolutionSetManager extends TestCase2 {
     protected IEvaluationContext ctx = null;
 
     /**
-     * The namespace for the {@link BigdataValueFactory}.
+     * The namespace for the {@link EmbergraphValueFactory}.
      * 
      */
     protected String namespace = getName();
@@ -93,35 +93,35 @@ public class TestSolutionSetManager extends TestCase2 {
     /**
      * The value factory for that namespace.
      */
-    protected BigdataValueFactory valueFactory = BigdataValueFactoryImpl
+    protected EmbergraphValueFactory valueFactory = EmbergraphValueFactoryImpl
             .getInstance(namespace);
 
     /**
      * A {@link TermId} whose {@link IVCache} is set.
      */
-    protected TermId<BigdataLiteral> termId;
+    protected TermId<EmbergraphLiteral> termId;
 
     /**
      * A {@link TermId} whose {@link IVCache} is set.
      */
-    protected TermId<BigdataLiteral> termId2;
+    protected TermId<EmbergraphLiteral> termId2;
 
     /**
      * A {@link BlobIV} whose {@link IVCache} is set.
      */
-    protected BlobIV<BigdataLiteral> blobIV;
+    protected BlobIV<EmbergraphLiteral> blobIV;
 
     /** A "mockIV". */
-    protected TermId<BigdataValue> mockIV1;
+    protected TermId<EmbergraphValue> mockIV1;
 
     /** A "mockIV". */
-    protected TermId<BigdataValue> mockIV2;
+    protected TermId<EmbergraphValue> mockIV2;
 
     /** A "mockIV". */
-    protected TermId<BigdataValue> mockIV3;
+    protected TermId<EmbergraphValue> mockIV3;
     
     /** An inline IV whose {@link IVCache} is set. */
-    protected XSDIntegerIV<BigdataLiteral> inlineIV;
+    protected XSDIntegerIV<EmbergraphLiteral> inlineIV;
 
     /** An inline IV whose {@link IVCache} is NOT set. */
     protected IV<?,?> inlineIV2;
@@ -155,27 +155,27 @@ public class TestSolutionSetManager extends TestCase2 {
         /*
          * Declare some IVs.
          */
-        termId = new TermId<BigdataLiteral>(VTE.LITERAL, 12/* termId */);
+        termId = new TermId<EmbergraphLiteral>(VTE.LITERAL, 12/* termId */);
         termId.setValue(valueFactory.createLiteral("abc"));
 
-        termId2 = new TermId<BigdataLiteral>(VTE.LITERAL, 36/* termId */);
+        termId2 = new TermId<EmbergraphLiteral>(VTE.LITERAL, 36/* termId */);
         termId2.setValue(valueFactory.createLiteral("xyz"));
 
-        blobIV = new BlobIV<BigdataLiteral>(VTE.LITERAL, 912/* hash */,
+        blobIV = new BlobIV<EmbergraphLiteral>(VTE.LITERAL, 912/* hash */,
                 (short) 0/* collisionCounter */);
         blobIV.setValue(valueFactory.createLiteral("bigfoo"));
         
         mockIV1 = (TermId) TermId.mockIV(VTE.LITERAL);
-        mockIV1.setValue((BigdataValue) valueFactory.createLiteral("red"));
+        mockIV1.setValue((EmbergraphValue) valueFactory.createLiteral("red"));
 
         mockIV2 = (TermId) TermId.mockIV(VTE.LITERAL);
-        mockIV2.setValue((BigdataValue) valueFactory.createLiteral("blue"));
+        mockIV2.setValue((EmbergraphValue) valueFactory.createLiteral("blue"));
 
         mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
-        mockIV3.setValue((BigdataValue) valueFactory.createLiteral("green"));
+        mockIV3.setValue((EmbergraphValue) valueFactory.createLiteral("green"));
 
-        inlineIV = new XSDIntegerIV<BigdataLiteral>(BigInteger.valueOf(100));
-        inlineIV.setValue((BigdataLiteral) valueFactory.createLiteral("100",
+        inlineIV = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
+        inlineIV.setValue((EmbergraphLiteral) valueFactory.createLiteral("100",
                 XSD.INTEGER));
         
         inlineIV2 = XSDBooleanIV.valueOf(true);

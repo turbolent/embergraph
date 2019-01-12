@@ -50,11 +50,11 @@ package org.embergraph.rdf.lexicon;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.impl.LiteralImpl;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
@@ -93,9 +93,9 @@ public class TestCompletionScan extends AbstractTripleStoreTestCase {
              */
             {
                 
-                final BigdataValueFactory f = store.getValueFactory();
+                final EmbergraphValueFactory f = store.getValueFactory();
                 
-                final BigdataValue[] terms = new BigdataValue[] {
+                final EmbergraphValue[] terms = new EmbergraphValue[] {
                         
                         f.createLiteral("mingus"),
                         f.createLiteral("minor"),

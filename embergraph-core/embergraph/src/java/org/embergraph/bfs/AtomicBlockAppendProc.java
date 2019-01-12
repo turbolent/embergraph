@@ -36,7 +36,6 @@ import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
-import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.btree.view.FusedView;
 import org.embergraph.io.DataOutputBuffer;
@@ -96,7 +95,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>,
      * @param len
      *            The #of bytes to be written.
      */
-    public AtomicBlockAppendProc(BigdataFileSystem repo, String id,
+    public AtomicBlockAppendProc(EmbergraphFileSystem repo, String id,
             int version, byte[] b, int off, int len) {
 
         assert id != null && id.length() > 0;
@@ -482,7 +481,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>,
                     final long block = KeyBuilder.decodeLong(key,
                             key.length - Bytes.SIZEOF_LONG) + 1;
 
-                    if (block > BigdataFileSystem.MAX_BLOCK) {
+                    if (block > EmbergraphFileSystem.MAX_BLOCK) {
 
                         throw new RuntimeException(
                                 "File version has maximum #of blocks: id="

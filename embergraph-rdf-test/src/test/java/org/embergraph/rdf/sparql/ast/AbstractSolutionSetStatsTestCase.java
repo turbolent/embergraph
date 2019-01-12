@@ -39,9 +39,9 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 //import org.semanticweb.yars.nx.namespace.XSD;
 
 /**
@@ -136,7 +136,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
 	}
 
     protected String namespace;
-    protected BigdataValueFactory f;
+    protected EmbergraphValueFactory f;
     
     protected void setUp() throws Exception {
     	
@@ -144,7 +144,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
 
     		namespace = getName();
     		
-    		f = BigdataValueFactoryImpl.getInstance(namespace);
+    		f = EmbergraphValueFactoryImpl.getInstance(namespace);
     	
     }
     
@@ -194,7 +194,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         
         final IVariable x = Var.var("x");
 
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 //		one.setValue(f.createLiteral(1));
         
@@ -230,7 +230,7 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         
         final IVariable x = Var.var("x");
 
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
         
@@ -266,11 +266,11 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable x = Var.var("x");
         final IVariable y = Var.var("y");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 //		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		two.setValue(f.createLiteral(2));
 
@@ -308,19 +308,19 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable x = Var.var("x");
         final IVariable y = Var.var("y");
 
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
@@ -364,19 +364,19 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable x = Var.var("x");
         final IVariable y = Var.var("y");
 
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 //		four.setValue(f.createLiteral(4));
 		
@@ -422,23 +422,23 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable y = Var.var("y");
         final IVariable z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 		five.setValue(f.createLiteral(5));
 		
@@ -485,23 +485,23 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable y = Var.var("y");
         final IVariable z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 //		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 //		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 		five.setValue(f.createLiteral(5));
 		
@@ -549,23 +549,23 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable y = Var.var("y");
         final IVariable z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 		five.setValue(f.createLiteral(5));
 
@@ -614,23 +614,23 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable y = Var.var("y");
         final IVariable z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 //		five.setValue(f.createLiteral(5));
 
@@ -675,23 +675,23 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable y = Var.var("y");
         final IVariable z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 		five.setValue(f.createLiteral(5));
         
@@ -741,31 +741,31 @@ abstract public class AbstractSolutionSetStatsTestCase extends TestCase2 {
         final IVariable y = Var.var("y");
         final IVariable z = Var.var("z");
         
-		final XSDNumericIV<BigdataLiteral> one = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> one = new XSDNumericIV<EmbergraphLiteral>(
 				1);
 		one.setValue(f.createLiteral(1));
 		
-		final XSDNumericIV<BigdataLiteral> two = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> two = new XSDNumericIV<EmbergraphLiteral>(
 				2);
 		two.setValue(f.createLiteral(2));
 		
-		final XSDNumericIV<BigdataLiteral> three = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> three = new XSDNumericIV<EmbergraphLiteral>(
 				3);
 		three.setValue(f.createLiteral(3));
 		
-		final XSDNumericIV<BigdataLiteral> four = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> four = new XSDNumericIV<EmbergraphLiteral>(
 				4);
 		four.setValue(f.createLiteral(4));
 		
-		final XSDNumericIV<BigdataLiteral> five = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> five = new XSDNumericIV<EmbergraphLiteral>(
 				5);
 		five.setValue(f.createLiteral(5));
 
-		final XSDNumericIV<BigdataLiteral> six = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> six = new XSDNumericIV<EmbergraphLiteral>(
 				6);
 		six.setValue(f.createLiteral(6));
 
-		final XSDNumericIV<BigdataLiteral> seven = new XSDNumericIV<BigdataLiteral>(
+		final XSDNumericIV<EmbergraphLiteral> seven = new XSDNumericIV<EmbergraphLiteral>(
 				7);
 		seven.setValue(f.createLiteral(7));
 

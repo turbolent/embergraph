@@ -38,6 +38,9 @@ import java.util.UUID;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
@@ -64,11 +67,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDUnsignedByteIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedIntIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedLongIV;
 import org.embergraph.rdf.internal.impl.literal.XSDUnsignedShortIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.sail.BigdataValueReplacer;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
+import org.embergraph.rdf.sail.EmbergraphValueReplacer;
 import org.embergraph.rdf.sail.sparql.ast.ASTBlankNode;
 import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
 import org.embergraph.rdf.sail.sparql.ast.ASTFalse;
@@ -85,7 +85,7 @@ import org.embergraph.rdf.store.BD;
 
 /**
  * Visits the AST model and builds a map from each RDF {@link Value} to
- * {@link BigdataValue} objects that have mock IVs assigned to them.
+ * {@link EmbergraphValue} objects that have mock IVs assigned to them.
  * <p>
  * Note: The {@link PrefixDeclProcessor} will rewrite {@link ASTQName} nodes as
  * {@link ASTIRI} nodes. It MUST run before this processor.
@@ -96,7 +96,7 @@ import org.embergraph.rdf.store.BD;
  * or {@link ASTQName}.
  * <p>
  * Note: This is a part of deferred IV batch resolution, which is intended to
- * replace the functionality of the {@link BigdataValueReplacer}.
+ * replace the functionality of the {@link EmbergraphValueReplacer}.
  * <p>
  * Note: {@link IValueExpression} nodes used in {@link SPARQLConstraint}s are
  * allowed to use values not actually in the database. MP
@@ -118,18 +118,18 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
 
     private final static List<URI> RDF_VOCAB = Arrays.asList(RDF.FIRST, RDF.REST, RDF.NIL, BD.VIRTUAL_GRAPH);
 
-    private final Map<Value, BigdataValue> vocab;
+    private final Map<Value, EmbergraphValue> vocab;
 
-    private final BigdataValueFactory valueFactory;
+    private final EmbergraphValueFactory valueFactory;
 
-    private final LinkedHashMap<ASTRDFValue, BigdataValue> nodes;
+    private final LinkedHashMap<ASTRDFValue, EmbergraphValue> nodes;
     
     /**
 	 * Return a map from openrdf {@link Value} objects to the corresponding
-	 * {@link BigdataValue} objects for all {@link Value}s that appear in the
+	 * {@link EmbergraphValue} objects for all {@link Value}s that appear in the
 	 * parse tree.
 	 */
-    public Map<Value, BigdataValue> getValues() {
+    public Map<Value, EmbergraphValue> getValues() {
 
     	return vocab;
     	
@@ -137,11 +137,11 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
 
     public ASTDeferredIVResolutionInitializer() {
 
-        // Unnamed BigdataValueFactory is used to provide instances
-        // of BigdataValue, which are required by existing test suite.
+        // Unnamed EmbergraphValueFactory is used to provide instances
+        // of EmbergraphValue, which are required by existing test suite.
         // See also task https://jira.blazegraph.com/browse/BLZG-1519
-//        this.valueFactory = BigdataValueFactoryImpl.getInstance("parser"+UUID.randomUUID().toString().replaceAll("-", ""));
-        this.valueFactory = new BigdataValueFactoryImpl();
+//        this.valueFactory = EmbergraphValueFactoryImpl.getInstance("parser"+UUID.randomUUID().toString().replaceAll("-", ""));
+        this.valueFactory = new EmbergraphValueFactoryImpl();
         
         this.nodes = new LinkedHashMap<>();
         
@@ -153,11 +153,11 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
      * Visit the parse tree, locating and collecting references to all
      * {@link ASTRDFValue} nodes (including blank nodes iff we are in a told
      * bnodes mode). The {@link ASTRDFValue}s are collected in a {@link Map}
-     * which associates each one with a {@link BigdataValue} object which is set
+     * which associates each one with a {@link EmbergraphValue} object which is set
      * using {@link ASTRDFValue#setRDFValue(org.openrdf.model.Value)}. The
-     * {@link BigdataValue}s will be resolved later (in ASTDeferredIVResolution)
+     * {@link EmbergraphValue}s will be resolved later (in ASTDeferredIVResolution)
      * in a batch against the database, obtaining their {@link IVs}.
-     * Until then {@link BigdataValue}s in the parse tree have unresolved
+     * Until then {@link EmbergraphValue}s in the parse tree have unresolved
      * {@link IV}s (TermID(0)).  
      * 
      * @param qc
@@ -172,7 +172,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
 
             /*
              * Collect all ASTRDFValue nodes into a map, paired with
-             * BigdataValue objects.
+             * EmbergraphValue objects.
              */
             qc.jjtAccept(new RDFValueResolver(), null);
             
@@ -188,27 +188,27 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
             /*
              * RDF Values actually appearing in the parse tree.
              */
-            final Iterator<Entry<ASTRDFValue, BigdataValue>> itr = nodes.entrySet().iterator();
+            final Iterator<Entry<ASTRDFValue, EmbergraphValue>> itr = nodes.entrySet().iterator();
 
             while (itr.hasNext()) {
             
-                final Entry<ASTRDFValue, BigdataValue> entry = itr.next();
+                final Entry<ASTRDFValue, EmbergraphValue> entry = itr.next();
 
                 final ASTRDFValue value = entry.getKey();
                 
                 IV iv = null;
-                BigdataValue bigdataValue = null;
-                if (value.getRDFValue()!=null && ((BigdataValue)value.getRDFValue()).getIV() != null) {
-                    bigdataValue = (BigdataValue) value.getRDFValue();
-                    iv = bigdataValue.getIV();
+                EmbergraphValue embergraphValue = null;
+                if (value.getRDFValue()!=null && ((EmbergraphValue)value.getRDFValue()).getIV() != null) {
+                    embergraphValue = (EmbergraphValue) value.getRDFValue();
+                    iv = embergraphValue.getIV();
                 } else if (value instanceof ASTIRI) {
-                    iv = new TermId<BigdataValue>(VTE.URI,0);
-                    bigdataValue = valueFactory.createURI(((ASTIRI)value).getValue());
-                    if (!bigdataValue.isRealIV()) {
-                    	bigdataValue.clearInternalValue();
-                    	bigdataValue.setIV(iv);
+                    iv = new TermId<EmbergraphValue>(VTE.URI,0);
+                    embergraphValue = valueFactory.createURI(((ASTIRI)value).getValue());
+                    if (!embergraphValue.isRealIV()) {
+                    	embergraphValue.clearInternalValue();
+                    	embergraphValue.setIV(iv);
                     }
-                    iv.setValue(bigdataValue);
+                    iv.setValue(embergraphValue);
                 } else if (value instanceof ASTRDFLiteral) {
                     final ASTRDFLiteral rdfNode = (ASTRDFLiteral) value;
                     final String lang = rdfNode.getLang();
@@ -220,64 +220,64 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
                         dte = DTE.valueOf(dataTypeUri);
                     }
                     if (dte!=null) {
-                        bigdataValue = getBigdataValue(rdfNode.getLabel().getValue(), dte);
-                        if (!bigdataValue.stringValue().equals(rdfNode.getLabel().getValue())) {
+                        embergraphValue = getEmbergraphValue(rdfNode.getLabel().getValue(), dte);
+                        if (!embergraphValue.stringValue().equals(rdfNode.getLabel().getValue())) {
                             // Data loss could occur if inline IV will be used, as string representation of original value differ from decoded value
-                            bigdataValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), dataTypeUri);
-                            iv = TermId.mockIV(VTE.valueOf(bigdataValue));
-                            bigdataValue.setIV(iv);
-                            iv.setValue(bigdataValue);
+                            embergraphValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), dataTypeUri);
+                            iv = TermId.mockIV(VTE.valueOf(embergraphValue));
+                            embergraphValue.setIV(iv);
+                            iv.setValue(embergraphValue);
                         }
                     } else { 
-                        iv = new TermId<BigdataValue>(VTE.LITERAL,0);
+                        iv = new TermId<EmbergraphValue>(VTE.LITERAL,0);
                         if (lang!=null) {
-                            bigdataValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), lang);
+                            embergraphValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), lang);
                         } else {
-                            bigdataValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), dataTypeUri);
+                            embergraphValue = valueFactory.createLiteral(rdfNode.getLabel().getValue(), dataTypeUri);
                         }
-                        iv.setValue(bigdataValue);
-                        bigdataValue.setIV(iv);
+                        iv.setValue(embergraphValue);
+                        embergraphValue.setIV(iv);
                     }
                 } else if (value instanceof ASTNumericLiteral) {
                     final ASTNumericLiteral rdfNode = (ASTNumericLiteral) value;
                     final URI dataTypeUri = rdfNode.getDatatype();
                     final DTE dte = DTE.valueOf(dataTypeUri);
-                    bigdataValue = getBigdataValue(rdfNode.getValue(), dte);
-                    if (!bigdataValue.stringValue().equals(rdfNode.getValue())) {
+                    embergraphValue = getEmbergraphValue(rdfNode.getValue(), dte);
+                    if (!embergraphValue.stringValue().equals(rdfNode.getValue())) {
                         // Data loss could occur if inline IV will be used, as string representation of original value differ from decoded value
-//                        iv = bigdataValue.getIV();
-                        bigdataValue = valueFactory.createLiteral(rdfNode.getValue(), dataTypeUri);
-//                        bigdataValue.setIV(iv);
+//                        iv = embergraphValue.getIV();
+                        embergraphValue = valueFactory.createLiteral(rdfNode.getValue(), dataTypeUri);
+//                        embergraphValue.setIV(iv);
                     }
                 } else if (value instanceof ASTTrue) {
-                    bigdataValue = valueFactory.createLiteral(true);
-                    if (bigdataValue.isRealIV()) {
-                        iv = bigdataValue.getIV();
+                    embergraphValue = valueFactory.createLiteral(true);
+                    if (embergraphValue.isRealIV()) {
+                        iv = embergraphValue.getIV();
                     } else {
-                        iv = TermId.mockIV(VTE.valueOf(bigdataValue));
-                        iv.setValue(bigdataValue);
-                        bigdataValue.setIV(iv);
+                        iv = TermId.mockIV(VTE.valueOf(embergraphValue));
+                        iv.setValue(embergraphValue);
+                        embergraphValue.setIV(iv);
                     }
                 } else if (value instanceof ASTFalse) {
-                    bigdataValue = valueFactory.createLiteral(false);
-                    if (bigdataValue.isRealIV()) {
-                        iv = bigdataValue.getIV();
+                    embergraphValue = valueFactory.createLiteral(false);
+                    if (embergraphValue.isRealIV()) {
+                        iv = embergraphValue.getIV();
                     } else {
-                        iv = TermId.mockIV(VTE.valueOf(bigdataValue));
-                        iv.setValue(bigdataValue);
-                        bigdataValue.setIV(iv);
+                        iv = TermId.mockIV(VTE.valueOf(embergraphValue));
+                        iv.setValue(embergraphValue);
+                        embergraphValue.setIV(iv);
                     }
                 } else {
-                    iv = new FullyInlineTypedLiteralIV<BigdataLiteral>(value.toString(), true);
-                    bigdataValue = iv.getValue();
+                    iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>(value.toString(), true);
+                    embergraphValue = iv.getValue();
                 }
 
-                if (bigdataValue!=null) {
-                    value.setRDFValue(bigdataValue);
-                    // filling in a dummy IV for BigdataExprBuilder
+                if (embergraphValue !=null) {
+                    value.setRDFValue(embergraphValue);
+                    // filling in a dummy IV for EmbergraphExprBuilder
                     // @see https://jira.blazegraph.com/browse/BLZG-1717 (IV not resolved)
-                    fillInDummyIV(bigdataValue);
-                    vocab.put(bigdataValue, bigdataValue);
+                    fillInDummyIV(embergraphValue);
+                    vocab.put(embergraphValue, embergraphValue);
                 }
                 
             }
@@ -291,20 +291,20 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
         
         // RDF Collection syntactic sugar vocabulary items.
         for (Value value: RDF_VOCAB) {
-            BigdataValue bigdataValue = valueFactory.asValue(value);
-            fillInDummyIV(bigdataValue);
-            vocab.put(value, bigdataValue);
+            EmbergraphValue embergraphValue = valueFactory.asValue(value);
+            fillInDummyIV(embergraphValue);
+            vocab.put(value, embergraphValue);
         }
 
     }
 
     /*
-     * Note: Batch resolution the BigdataValue objects against the database
+     * Note: Batch resolution the EmbergraphValue objects against the database
      * DOES NOT happen here. It will be done in ASTDeferredIVResolution.
      * Mock IVs used until then.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    private void fillInDummyIV(BigdataValue value) {
+    private void fillInDummyIV(EmbergraphValue value) {
         final IV iv = value.getIV();
 
         if (iv == null) {
@@ -335,7 +335,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     }
 
     /**
-     * Reconstructs BigdataValue out of IV, creating literals if needed
+     * Reconstructs EmbergraphValue out of IV, creating literals if needed
      * <p>
      * {@link IVUtility#decode(String, String)} is used by
      * {@link ASTDeferredIVResolutionInitializer} to convert parsed AST
@@ -354,72 +354,72 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
      *            data type of IV
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    private BigdataValue getBigdataValue(final String value, final DTE dte) {
+    private EmbergraphValue getEmbergraphValue(final String value, final DTE dte) {
     	// Check if lexical form is empty, and provide bigdata value
     	// with FullyInlineTypedLiteralIV holding corresponding data type
     	// @see https://jira.blazegraph.com/browse/BLZG-1716 (SPARQL Update parser fails on invalid numeric literals)
     	if (value.isEmpty()) {
-    		BigdataLiteral bigdataValue = valueFactory.createLiteral(value, dte.getDatatypeURI());
-    		IV iv = new FullyInlineTypedLiteralIV<BigdataLiteral>("", null, dte.getDatatypeURI(), true);
+    		EmbergraphLiteral bigdataValue = valueFactory.createLiteral(value, dte.getDatatypeURI());
+    		IV iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, dte.getDatatypeURI(), true);
 			bigdataValue.setIV(iv);
 			iv.setValue(bigdataValue);
 			return bigdataValue;
     	}
         final IV iv = decode(value, dte.name());
-        BigdataValue bigdataValue;
+        EmbergraphValue embergraphValue;
         if (!iv.hasValue() && iv instanceof AbstractLiteralIV) {
             switch(dte) {
             case XSDByte:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).byteValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).byteValue());
                 break;
             case XSDShort:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).shortValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).shortValue());
                 break;
             case XSDInt:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).intValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).intValue());
                 break;
             case XSDLong:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).longValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).longValue());
                 break;
             case XSDFloat:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).floatValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).floatValue());
                 break;
             case XSDDouble:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).doubleValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).doubleValue());
                 break;
             case XSDBoolean:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).booleanValue());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).booleanValue());
                 break;
             case XSDString:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).stringValue(), dte.getDatatypeURI());
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).stringValue(), dte.getDatatypeURI());
                 break;
             case XSDInteger:
-                bigdataValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).stringValue(), XMLSchema.INTEGER);
+                embergraphValue = valueFactory.createLiteral(((AbstractLiteralIV)iv).stringValue(), XMLSchema.INTEGER);
                 break;
             case XSDDecimal:
-                bigdataValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDDecimal.getDatatypeURI());
+                embergraphValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDDecimal.getDatatypeURI());
                 break;
             case XSDUnsignedShort:
-                bigdataValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedShort.getDatatypeURI());
+                embergraphValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedShort.getDatatypeURI());
                 break;
             case XSDUnsignedInt:
-                bigdataValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedInt.getDatatypeURI());
+                embergraphValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedInt.getDatatypeURI());
                 break;
             case XSDUnsignedByte:
-                bigdataValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedByte.getDatatypeURI());
+                embergraphValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedByte.getDatatypeURI());
                 break;
             case XSDUnsignedLong:
-                bigdataValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedLong.getDatatypeURI());
+                embergraphValue = valueFactory.createLiteral(iv.stringValue(), DTE.XSDUnsignedLong.getDatatypeURI());
                 break;
             default:
                 throw new RuntimeException("unknown DTE " + dte);
             }
-            bigdataValue.setIV(iv);
-            iv.setValue(bigdataValue);
+            embergraphValue.setIV(iv);
+            iv.setValue(embergraphValue);
         } else {
-            bigdataValue = iv.getValue();
+            embergraphValue = iv.getValue();
         }
-        return bigdataValue;
+        return embergraphValue;
     }
 
     /**
@@ -481,7 +481,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
 
             final ASTIRI datatypeNode = node.getDatatype();
 
-            final BigdataLiteral literal;
+            final EmbergraphLiteral literal;
 
             if (datatypeNode != null) {
 
@@ -590,39 +590,39 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
         }
         case XSDByte: {
             final byte x = Byte.valueOf(val);
-            return new XSDNumericIV<BigdataLiteral>(x);
+            return new XSDNumericIV<EmbergraphLiteral>(x);
         }
         case XSDShort: {
             final short x = Short.valueOf(val);
-            return new XSDNumericIV<BigdataLiteral>(x);
+            return new XSDNumericIV<EmbergraphLiteral>(x);
         }
         case XSDInt: {
             final int x = Integer.valueOf(val);
-            return new XSDNumericIV<BigdataLiteral>(x);
+            return new XSDNumericIV<EmbergraphLiteral>(x);
         }
         case XSDLong: {
             final long x = Long.valueOf(val);
-            return new XSDNumericIV<BigdataLiteral>(x);
+            return new XSDNumericIV<EmbergraphLiteral>(x);
         }
         case XSDFloat: {
             final float x = Float.valueOf(val);
-            return new XSDNumericIV<BigdataLiteral>(x);
+            return new XSDNumericIV<EmbergraphLiteral>(x);
         }
         case XSDDouble: {
             final double x = Double.valueOf(val);
-            return new XSDNumericIV<BigdataLiteral>(x);
+            return new XSDNumericIV<EmbergraphLiteral>(x);
         }
         case UUID: {
             final UUID x = UUID.fromString(val);
-            return new UUIDLiteralIV<BigdataLiteral>(x);
+            return new UUIDLiteralIV<EmbergraphLiteral>(x);
         }
         case XSDInteger: {
             final BigInteger x = new BigInteger(val);
-            return new XSDIntegerIV<BigdataLiteral>(x);
+            return new XSDIntegerIV<EmbergraphLiteral>(x);
         }
         case XSDDecimal: {
             final BigDecimal x = new BigDecimal(val);
-            return new XSDDecimalIV<BigdataLiteral>(x);
+            return new XSDDecimalIV<EmbergraphLiteral>(x);
         }
         case XSDString: {
             return new FullyInlineTypedLiteralIV(val, null, XMLSchema.STRING, true);

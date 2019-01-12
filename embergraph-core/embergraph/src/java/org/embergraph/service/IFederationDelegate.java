@@ -65,7 +65,7 @@ public interface IFederationDelegate<T> {
     public Class getServiceIface();
 
     /**
-     * The {@link UUID} assigned to the {@link IBigdataClient} or
+     * The {@link UUID} assigned to the {@link IEmbergraphClient} or
      * {@link AbstractService}.
      * 
      * @see AbstractService#setServiceUUID(UUID)
@@ -107,7 +107,7 @@ public interface IFederationDelegate<T> {
     /**
      * Notice that the service has been discovered. This notice will be
      * generated the first time the service is discovered by a given
-     * {@link IBigdataClient}.
+     * {@link IEmbergraphClient}.
      * 
      * @param service
      *            The service.
@@ -118,7 +118,7 @@ public interface IFederationDelegate<T> {
     
     /**
      * Notice that the service is no longer available. This notice will be
-     * generated once for a given {@link IBigdataClient} when the service is no
+     * generated once for a given {@link IEmbergraphClient} when the service is no
      * longer available from any of its service registrars.
      * 
      * @param serviceUUID

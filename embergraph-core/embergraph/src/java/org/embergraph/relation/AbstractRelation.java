@@ -51,7 +51,7 @@ import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.relation.rule.IAccessPathExpander;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
 /**
@@ -206,7 +206,7 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     /**
      * Return the named index using the timestamp for this view of the relation.
      * <p>
-     * While both the {@link IBigdataFederation} imposes the
+     * While both the {@link IEmbergraphFederation} imposes the
      * {@link ConcurrencyManager} on all access to a named index, neither the
      * {@link Journal} nor the {@link TemporaryRawStore} does this. Therefore
      * this method encapsulates the unisolated index for the latter classes in
@@ -398,7 +398,7 @@ abstract public class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 ////        if (indexManager == null)
 ////            throw new IllegalArgumentException();
 //
-////        if (indexManager instanceof IBigdataFederation<?>) {
+////        if (indexManager instanceof IEmbergraphFederation<?>) {
 //
 ////            /*
 ////             * This will happen if you fail to re-create the JoinNexus within

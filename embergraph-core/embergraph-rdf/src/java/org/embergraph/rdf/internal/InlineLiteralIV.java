@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal;
 
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Common root interface for AbstractLiteralIV and LiteralExtensionIV, the two 
@@ -25,5 +25,5 @@ import org.embergraph.rdf.model.BigdataLiteral;
  * 
  * @author mikepersonick
  */
-public interface InlineLiteralIV<V extends BigdataLiteral, T> extends IV<V, T> {
+public interface InlineLiteralIV<V extends EmbergraphLiteral, T> extends IV<V, T> {
 }

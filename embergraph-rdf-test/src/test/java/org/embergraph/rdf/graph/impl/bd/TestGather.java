@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
@@ -34,7 +35,6 @@ import org.embergraph.rdf.graph.IGASState;
 import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.impl.BaseGASProgram;
 import org.embergraph.rdf.graph.impl.GASStats;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
 
@@ -44,7 +44,7 @@ import org.embergraph.rdf.spo.SPO;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 @SuppressWarnings("rawtypes")
-public class TestGather extends AbstractBigdataGraphTestCase {
+public class TestGather extends AbstractEmbergraphGraphTestCase {
 
     public TestGather() {
         
@@ -211,7 +211,7 @@ public class TestGather extends AbstractBigdataGraphTestCase {
         
         }
 
-        final BigdataValueFactory vf = (BigdataValueFactory) getGraphFixture()
+        final EmbergraphValueFactory vf = (EmbergraphValueFactory) getGraphFixture()
                 .getSail().getValueFactory();
         // gather in-edges for :mike
         {

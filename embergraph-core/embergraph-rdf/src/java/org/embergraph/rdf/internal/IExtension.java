@@ -20,14 +20,14 @@ package org.embergraph.rdf.internal;
 
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -41,15 +41,15 @@ import org.embergraph.rdf.vocab.Vocabulary;
  * relies on the declaration of that {@link URI} as part of the
  * {@link Vocabulary}.
  */
-public interface IExtension<V extends BigdataValue> {
+public interface IExtension<V extends EmbergraphValue> {
 
     /**
      * Return the fully resolved datatype(s) handled by this interface in the
-     * form of a {@link BigdataURI} with the {@link TermId} already set.
+     * form of a {@link EmbergraphURI} with the {@link TermId} already set.
      * 
      * @return the datatype
      */
-    Set<BigdataURI> getDatatypes();
+    Set<EmbergraphURI> getDatatypes();
     
     /**
      * Create an {@link LiteralExtensionIV} from an RDF value.
@@ -72,6 +72,6 @@ public interface IExtension<V extends BigdataValue> {
      * @return
      *          The RDF {@link Value}
      */
-    V asValue(final LiteralExtensionIV iv, final BigdataValueFactory vf);
+    V asValue(final LiteralExtensionIV iv, final EmbergraphValueFactory vf);
     
 }

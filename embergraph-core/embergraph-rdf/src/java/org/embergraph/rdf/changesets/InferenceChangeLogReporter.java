@@ -4,6 +4,8 @@ import java.beans.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.store.EmbergraphStatementIterator;
+import org.embergraph.rdf.store.EmbergraphStatementIteratorImpl;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.rdf.filter.NativeDistinctFilter;
@@ -11,8 +13,6 @@ import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.rdf.store.BigdataStatementIterator;
-import org.embergraph.rdf.store.BigdataStatementIteratorImpl;
 import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
@@ -120,14 +120,14 @@ public class InferenceChangeLogReporter implements IChangeLog {
     /**
      * Return iterator visiting the inferences that were added to the KB.
      */
-    public BigdataStatementIterator addedIterator() {
+    public EmbergraphStatementIterator addedIterator() {
 
         // Wrap as chunked iterator.
         final IChunkedOrderedIterator<ISPO> src = new ChunkedWrappedIterator<ISPO>(
                 added.iterator());
 
         // Asynchronous conversion of ISPOs to Statements.
-        return new BigdataStatementIteratorImpl(kb, src).start(kb
+        return new EmbergraphStatementIteratorImpl(kb, src).start(kb
                 .getExecutorService());
 
     }
@@ -135,14 +135,14 @@ public class InferenceChangeLogReporter implements IChangeLog {
     /**
      * Return iterator visiting the inferences that were removed from the KB.
      */
-    public BigdataStatementIterator removedIterator() {
+    public EmbergraphStatementIterator removedIterator() {
 
         // Wrap as chunked iterator.
         final IChunkedOrderedIterator<ISPO> src = new ChunkedWrappedIterator<ISPO>(
                 removed.iterator());
 
         // Asynchronous conversion of ISPOs to Statements.
-        return new BigdataStatementIteratorImpl(kb, src).start(kb
+        return new EmbergraphStatementIteratorImpl(kb, src).start(kb
                 .getExecutorService());
 
     }

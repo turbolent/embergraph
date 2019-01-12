@@ -5,6 +5,10 @@ import java.io.StringReader;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.rio.ntriples.EmbergraphNTriplesParser;
+import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
@@ -12,12 +16,8 @@ import org.openrdf.rio.RDFParserRegistry;
 
 import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.rio.ntriples.BigdataNTriplesParser;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
-import org.embergraph.rdf.store.BigdataStatementIterator;
 import org.embergraph.rdf.store.DataLoader;
 
 /**
@@ -97,7 +97,7 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 			// Verify that the correct parser will be used.
 			assertEquals("NTriplesParserClass",
-					BigdataNTriplesParser.class.getName(), RDFParserRegistry
+					EmbergraphNTriplesParser.class.getName(), RDFParserRegistry
 							.getInstance().get(ServiceProviderHook.NTRIPLES_RDR).getParser()
 							.getClass().getName());
 
@@ -111,17 +111,17 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 			assertEquals("toldTriples", 3L, store.getStatementCount());//loadStats.toldTriples.get());
 			
-			final BigdataStatementIterator it = store.getStatements(null, null, null);
+			final EmbergraphStatementIterator it = store.getStatements(null, null, null);
 			while (it.hasNext())
 				System.err.println(it.next());
 
-			final BigdataURI dcSource = store.getValueFactory().createURI(
+			final EmbergraphURI dcSource = store.getValueFactory().createURI(
 					"http://purl.org/dc/terms/source");
 
-			final BigdataURI dcCreated = store.getValueFactory().createURI(
+			final EmbergraphURI dcCreated = store.getValueFactory().createURI(
 					"http://purl.org/dc/terms/created");
 			
-			final BigdataURI bobSource = store.getValueFactory().createURI(
+			final EmbergraphURI bobSource = store.getValueFactory().createURI(
 					"http://hr.example.com/employees#bob");
 			
 			assertEquals(1,
@@ -137,14 +137,14 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 				int n = 0;
 
-				final BigdataStatementIterator itr = store.getStatements(
+				final EmbergraphStatementIterator itr = store.getStatements(
 						null/* s */, dcSource, bobSource);
 
 				try {
 
 					while (itr.hasNext()) {
 
-						final BigdataStatement st = itr.next();
+						final EmbergraphStatement st = itr.next();
 						
 						assertTrue(st.getSubject().getIV().isStatement());
 					
@@ -168,14 +168,14 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 				int n = 0;
 				
-				final BigdataStatementIterator itr = store.getStatements(
+				final EmbergraphStatementIterator itr = store.getStatements(
 						null/* s */, dcCreated, null/* o */);
 
 				try {
 
 					while (itr.hasNext()) {
 
-						final BigdataStatement st = itr.next();
+						final EmbergraphStatement st = itr.next();
 						
 						assertTrue(st.getSubject().getIV().isStatement());
 						
@@ -248,7 +248,7 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 			// Verify that the correct parser will be used.
 			assertEquals("NTriplesParserClass",
-					BigdataNTriplesParser.class.getName(), RDFParserRegistry
+					EmbergraphNTriplesParser.class.getName(), RDFParserRegistry
 							.getInstance().get(ServiceProviderHook.NTRIPLES_RDR).getParser()
 							.getClass().getName());
 
@@ -262,13 +262,13 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 			assertEquals("toldTriples", 3L, store.getStatementCount());//loadStats.toldTriples.get());
 			
-			final BigdataURI dcSource = store.getValueFactory().createURI(
+			final EmbergraphURI dcSource = store.getValueFactory().createURI(
 					"http://purl.org/dc/terms/source");
 
-			final BigdataURI dcCreated = store.getValueFactory().createURI(
+			final EmbergraphURI dcCreated = store.getValueFactory().createURI(
 					"http://purl.org/dc/terms/created");
 			
-			final BigdataURI bobSource = store.getValueFactory().createURI(
+			final EmbergraphURI bobSource = store.getValueFactory().createURI(
 					"http://hr.example.com/employees#bob");
 			
 			assertEquals(1,
@@ -284,14 +284,14 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 				int n = 0;
 
-				final BigdataStatementIterator itr = store.getStatements(
+				final EmbergraphStatementIterator itr = store.getStatements(
 						null/* s */, dcSource, bobSource);
 
 				try {
 
 					while (itr.hasNext()) {
 
-						final BigdataStatement st = itr.next();
+						final EmbergraphStatement st = itr.next();
 						
 						assertTrue(st.getSubject().getIV().isStatement());
 					
@@ -315,14 +315,14 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
 
 				int n = 0;
 				
-				final BigdataStatementIterator itr = store.getStatements(
+				final EmbergraphStatementIterator itr = store.getStatements(
 						null/* s */, dcCreated, null/* o */);
 
 				try {
 
 					while (itr.hasNext()) {
 
-						final BigdataStatement st = itr.next();
+						final EmbergraphStatement st = itr.next();
 						
 						assertTrue(st.getSubject().getIV().isStatement());
 						

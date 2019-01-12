@@ -53,9 +53,9 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.constraints.MathBOp;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.LocalTripleStore;
@@ -90,9 +90,9 @@ public class TestMemorySortOp extends TestCase2 {
 
     private long termId = 1;
     
-    private IV<BigdataLiteral, ?> makeIV(final BigdataLiteral lit) {
+    private IV<EmbergraphLiteral, ?> makeIV(final EmbergraphLiteral lit) {
 
-        final IV<BigdataLiteral, ?> iv = new TermId<BigdataLiteral>(
+        final IV<EmbergraphLiteral, ?> iv = new TermId<EmbergraphLiteral>(
                 VTE.LITERAL, termId++);
 
         iv.setValue(lit);
@@ -108,7 +108,7 @@ public class TestMemorySortOp extends TestCase2 {
     public void testMaterializedIVs() 
     {
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl.getInstance(getName());
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
         
     	final IVariable<IV> x = Var.var ( "x" ) ;
     	final IVariable<IV> y = Var.var ( "y" ) ;
@@ -221,7 +221,7 @@ public class TestMemorySortOp extends TestCase2 {
     public void testInlineIVs() 
     {
 
-        final BigdataValueFactory f = BigdataValueFactoryImpl.getInstance(getName());
+        final EmbergraphValueFactory f = EmbergraphValueFactoryImpl.getInstance(getName());
         
         final IVariable<IV> x = Var.var ( "x" ) ;
         final IVariable<IV> y = Var.var ( "y" ) ;

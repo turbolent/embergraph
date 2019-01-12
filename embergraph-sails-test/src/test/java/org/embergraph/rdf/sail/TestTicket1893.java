@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.repository.RepositoryException;
@@ -35,11 +37,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 import org.embergraph.journal.IJournal;
-import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 import org.embergraph.rdf.lexicon.IValueCentricTextIndexer;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore.Options;
 import org.embergraph.rdf.store.LocalTripleStore;
 
@@ -51,7 +50,7 @@ import org.embergraph.rdf.store.LocalTripleStore;
  * 
  */
 public class TestTicket1893 extends
-	ProxyBigdataSailTestCase {
+    ProxyEmbergraphSailTestCase {
     
      private final static String DATA = "<http://s> <http://p> 1 .\n" + 
      		"<http://s> <http://p> \"2\"^^xsd:int .\n" + 
@@ -91,7 +90,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
             true /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -123,7 +122,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
                 true /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -154,7 +153,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -186,7 +185,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -217,7 +216,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -248,7 +247,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -279,7 +278,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
             true /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -310,7 +309,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
                 true /*inlineXSDDatatypeLiterals*/ , true /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -341,7 +340,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
             true /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -372,7 +371,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
                 true /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -403,7 +402,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         {
@@ -437,7 +436,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -468,7 +467,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -499,7 +498,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -530,7 +529,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
             true /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         loadData(cxn);
@@ -561,7 +560,7 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
                 true /*inlineXSDDatatypeLiterals*/ , false /*textIndexDatatypeLiterals*/);
         
         insertSparql(cxn);
@@ -593,13 +592,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
             true /*inlineXSDDatatypeLiterals*/);
         
         loadData(cxn);
         
-        final BigdataValueFactory vf = cxn.getValueFactory();
-        final BigdataValue[] values = new BigdataValue[]{
+        final EmbergraphValueFactory vf = cxn.getValueFactory();
+        final EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -639,13 +638,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
                 true /*inlineXSDDatatypeLiterals*/);
         
         insertSparql(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -685,13 +684,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/);
         
         loadData(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -731,13 +730,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/);
         
         insertSparql(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -779,13 +778,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/);
         
         loadData(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -830,13 +829,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, true /*inlineTextLiterals*/ ,
         		false /*inlineXSDDatatypeLiterals*/);
         
         insertSparql(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -881,13 +880,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
             true /*inlineXSDDatatypeLiterals*/ );
         
         loadData(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -927,13 +926,13 @@ public class TestTicket1893 extends
         
         final String namespace = "test" + UUID.randomUUID();
         
-        final BigdataSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ , 
+        final EmbergraphSailRepositoryConnection cxn = prepareTest(namespace, false /*inlineTextLiterals*/ ,
                 true /*inlineXSDDatatypeLiterals*/ );
         
         insertSparql(cxn);
         
-        BigdataValueFactory vf = cxn.getValueFactory();
-		BigdataValue[] values = new BigdataValue[]{
+        EmbergraphValueFactory vf = cxn.getValueFactory();
+		EmbergraphValue[] values = new EmbergraphValue[]{
 				vf.createURI("http://s"),
 				vf.createLiteral("1", XMLSchema.INTEGER),
 				vf.createLiteral(2),
@@ -967,21 +966,21 @@ public class TestTicket1893 extends
     
 
     
-    private BigdataSailRepositoryConnection prepareTest(final String namespace, final boolean inlineTextLiterals, 
+    private EmbergraphSailRepositoryConnection prepareTest(final String namespace, final boolean inlineTextLiterals,
             final boolean inlineXSDDatatypeLiterals) throws Exception {
         return prepareTest(namespace, inlineTextLiterals, 
                 inlineXSDDatatypeLiterals, false /* textIndexDatatypeLiterals */);
     }
     
 
-    private BigdataSailRepositoryConnection prepareTest(final String namespace, final boolean inlineTextLiterals, 
+    private EmbergraphSailRepositoryConnection prepareTest(final String namespace, final boolean inlineTextLiterals,
             final boolean inlineXSDDatatypeLiterals, final boolean textIndexDatatypeLiterals) throws Exception {
 
         final Properties properties = getProperties();
         
         {
             
-            properties.setProperty(org.embergraph.rdf.sail.BigdataSail.Options.NAMESPACE, namespace);
+            properties.setProperty(EmbergraphSail.Options.NAMESPACE, namespace);
             
             properties.setProperty("org.embergraph.namespace."+namespace+".lex."+Options.INLINE_TEXT_LITERALS, Boolean.toString(inlineTextLiterals));
 
@@ -997,17 +996,17 @@ public class TestTicket1893 extends
 
         }
 
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
 
         sail.initialize();
         
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         
-        return (BigdataSailRepositoryConnection) repo.getConnection();
+        return (EmbergraphSailRepositoryConnection) repo.getConnection();
         
     }
     
-    private void endTest(BigdataSailRepositoryConnection cxn) throws Exception {
+    private void endTest(EmbergraphSailRepositoryConnection cxn) throws Exception {
         
     	cxn.close();
     	
@@ -1021,7 +1020,7 @@ public class TestTicket1893 extends
         
     }
     
-    private void loadData(final BigdataSailRepositoryConnection cxn) throws RepositoryException, RDFParseException, IOException {
+    private void loadData(final EmbergraphSailRepositoryConnection cxn) throws RepositoryException, RDFParseException, IOException {
         
     	cxn.clear();
     	
@@ -1031,7 +1030,7 @@ public class TestTicket1893 extends
         
     }
     
-    private void insertSparql(final BigdataSailRepositoryConnection cxn) throws Exception {
+    private void insertSparql(final EmbergraphSailRepositoryConnection cxn) throws Exception {
 
         cxn.prepareUpdate(QueryLanguage.SPARQL, INSERT_SPARQL).execute();
         

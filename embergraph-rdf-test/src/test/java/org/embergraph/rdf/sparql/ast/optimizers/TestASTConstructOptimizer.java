@@ -23,17 +23,17 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 
 import java.util.Arrays;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphStatementImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.BOp;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataStatementImpl;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
@@ -92,16 +92,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
      */
     public void test_construct_rewrite() {
 
-        final BigdataValueFactory f = store.getValueFactory();
+        final EmbergraphValueFactory f = store.getValueFactory();
 
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.embergraph.org");
+            final EmbergraphURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person.toString()),
@@ -110,7 +110,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -120,7 +120,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),
@@ -129,7 +129,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),
@@ -138,7 +138,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),
@@ -149,10 +149,10 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             };
 
-            final StatementBuffer<BigdataStatement> buf = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> buf = new StatementBuffer<EmbergraphStatement>(
                     store, 10/* capacity */);
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
 
                 buf.add(stmt);
 
@@ -163,26 +163,26 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
         }
 
-        final BigdataURI rdfType = f.createURI(RDF.TYPE.toString());
+        final EmbergraphURI rdfType = f.createURI(RDF.TYPE.toString());
 
-        final BigdataURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
+        final EmbergraphURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
 
-        final BigdataURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
+        final EmbergraphURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
                 .toString());
 
-        final BigdataURI mikeURI = f
+        final EmbergraphURI mikeURI = f
                 .createURI("http://www.embergraph.org/Mike");
 
-        final BigdataURI bryanURI = f
+        final EmbergraphURI bryanURI = f
                 .createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataLiteral mikeLabel = f.createLiteral("Mike");
+        final EmbergraphLiteral mikeLabel = f.createLiteral("Mike");
 
-        final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
+        final EmbergraphLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { rdfType,
+        final EmbergraphValue[] values = new EmbergraphValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
                 bryanLabel, dcURI };
 
@@ -400,16 +400,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
      */
     public void test_construct_withSolutionModifiers_none() {
 
-        final BigdataValueFactory f = store.getValueFactory();
+        final EmbergraphValueFactory f = store.getValueFactory();
 
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.embergraph.org");
+            final EmbergraphURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -419,7 +419,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -429,7 +429,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),
@@ -438,7 +438,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),
@@ -447,7 +447,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),
@@ -458,10 +458,10 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             };
 
-            final StatementBuffer<BigdataStatement> buf = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> buf = new StatementBuffer<EmbergraphStatement>(
                     store, 10/* capacity */);
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
 
                 buf.add(stmt);
 
@@ -472,26 +472,26 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
         }
 
-        final BigdataURI rdfType = f.createURI(RDF.TYPE.toString());
+        final EmbergraphURI rdfType = f.createURI(RDF.TYPE.toString());
 
-        final BigdataURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
+        final EmbergraphURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
 
-        final BigdataURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
+        final EmbergraphURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
                 .toString());
 
-        final BigdataURI mikeURI = f
+        final EmbergraphURI mikeURI = f
                 .createURI("http://www.embergraph.org/Mike");
 
-        final BigdataURI bryanURI = f
+        final EmbergraphURI bryanURI = f
                 .createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataLiteral mikeLabel = f.createLiteral("Mike");
+        final EmbergraphLiteral mikeLabel = f.createLiteral("Mike");
 
-        final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
+        final EmbergraphLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { rdfType,
+        final EmbergraphValue[] values = new EmbergraphValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
                 bryanLabel, dcURI };
 
@@ -640,16 +640,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
      */
     public void test_construct_withSolutionModifiers_offsetLimit() {
 
-        final BigdataValueFactory f = store.getValueFactory();
+        final EmbergraphValueFactory f = store.getValueFactory();
 
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.embergraph.org");
+            final EmbergraphURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -659,7 +659,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -669,7 +669,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),
@@ -678,7 +678,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),
@@ -687,7 +687,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),
@@ -698,10 +698,10 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             };
 
-            final StatementBuffer<BigdataStatement> buf = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> buf = new StatementBuffer<EmbergraphStatement>(
                     store, 10/* capacity */);
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
 
                 buf.add(stmt);
 
@@ -712,26 +712,26 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
         }
 
-        final BigdataURI rdfType = f.createURI(RDF.TYPE.toString());
+        final EmbergraphURI rdfType = f.createURI(RDF.TYPE.toString());
 
-        final BigdataURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
+        final EmbergraphURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
 
-        final BigdataURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
+        final EmbergraphURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
                 .toString());
 
-        final BigdataURI mikeURI = f
+        final EmbergraphURI mikeURI = f
                 .createURI("http://www.embergraph.org/Mike");
 
-        final BigdataURI bryanURI = f
+        final EmbergraphURI bryanURI = f
                 .createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataLiteral mikeLabel = f.createLiteral("Mike");
+        final EmbergraphLiteral mikeLabel = f.createLiteral("Mike");
 
-        final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
+        final EmbergraphLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { rdfType,
+        final EmbergraphValue[] values = new EmbergraphValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
                 bryanLabel, dcURI };
 
@@ -921,16 +921,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
      */
     public void test_construct_withSolutionModifiers_offsetLimit_orderBy() {
 
-        final BigdataValueFactory f = store.getValueFactory();
+        final EmbergraphValueFactory f = store.getValueFactory();
 
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.embergraph.org");
+            final EmbergraphURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -940,7 +940,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -950,7 +950,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),
@@ -959,7 +959,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),
@@ -968,7 +968,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),
@@ -979,10 +979,10 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             };
 
-            final StatementBuffer<BigdataStatement> buf = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> buf = new StatementBuffer<EmbergraphStatement>(
                     store, 10/* capacity */);
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
 
                 buf.add(stmt);
 
@@ -993,26 +993,26 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
         }
 
-        final BigdataURI rdfType = f.createURI(RDF.TYPE.toString());
+        final EmbergraphURI rdfType = f.createURI(RDF.TYPE.toString());
 
-        final BigdataURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
+        final EmbergraphURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
 
-        final BigdataURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
+        final EmbergraphURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
                 .toString());
 
-        final BigdataURI mikeURI = f
+        final EmbergraphURI mikeURI = f
                 .createURI("http://www.embergraph.org/Mike");
 
-        final BigdataURI bryanURI = f
+        final EmbergraphURI bryanURI = f
                 .createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataLiteral mikeLabel = f.createLiteral("Mike");
+        final EmbergraphLiteral mikeLabel = f.createLiteral("Mike");
 
-        final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
+        final EmbergraphLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { rdfType,
+        final EmbergraphValue[] values = new EmbergraphValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
                 bryanLabel, dcURI };
 
@@ -1210,16 +1210,16 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
      */
     public void test_construct_withSolutionModifiers_orderBy() {
 
-        final BigdataValueFactory f = store.getValueFactory();
+        final EmbergraphValueFactory f = store.getValueFactory();
 
         // Add some data.
         {
 
-            final BigdataURI g = f.createURI("http://www.embergraph.org");
+            final EmbergraphURI g = f.createURI("http://www.embergraph.org");
 
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -1229,7 +1229,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDF.TYPE.toString()),
                             f.createURI(FOAFVocabularyDecl.Person
@@ -1239,7 +1239,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Mike"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Mike"),
@@ -1248,7 +1248,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/Bryan"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("Bryan"),
@@ -1257,7 +1257,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                             false// userFlag
                     ),
 
-                    new BigdataStatementImpl(
+                    new EmbergraphStatementImpl(
                             f.createURI("http://www.embergraph.org/DC"),
                             f.createURI(RDFS.LABEL.toString()),
                             f.createLiteral("DC"),
@@ -1268,10 +1268,10 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
             };
 
-            final StatementBuffer<BigdataStatement> buf = new StatementBuffer<BigdataStatement>(
+            final StatementBuffer<EmbergraphStatement> buf = new StatementBuffer<EmbergraphStatement>(
                     store, 10/* capacity */);
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
 
                 buf.add(stmt);
 
@@ -1282,26 +1282,26 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
 
         }
 
-        final BigdataURI rdfType = f.createURI(RDF.TYPE.toString());
+        final EmbergraphURI rdfType = f.createURI(RDF.TYPE.toString());
 
-        final BigdataURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
+        final EmbergraphURI rdfsLabel = f.createURI(RDFS.LABEL.toString());
 
-        final BigdataURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
+        final EmbergraphURI foafPerson = f.createURI(FOAFVocabularyDecl.Person
                 .toString());
 
-        final BigdataURI mikeURI = f
+        final EmbergraphURI mikeURI = f
                 .createURI("http://www.embergraph.org/Mike");
 
-        final BigdataURI bryanURI = f
+        final EmbergraphURI bryanURI = f
                 .createURI("http://www.embergraph.org/Bryan");
 
-        final BigdataLiteral mikeLabel = f.createLiteral("Mike");
+        final EmbergraphLiteral mikeLabel = f.createLiteral("Mike");
 
-        final BigdataLiteral bryanLabel = f.createLiteral("Bryan");
+        final EmbergraphLiteral bryanLabel = f.createLiteral("Bryan");
 
-        final BigdataURI dcURI = f.createURI("http://www.embergraph.org/DC");
+        final EmbergraphURI dcURI = f.createURI("http://www.embergraph.org/DC");
 
-        final BigdataValue[] values = new BigdataValue[] { rdfType,
+        final EmbergraphValue[] values = new EmbergraphValue[] { rdfType,
                 rdfsLabel, foafPerson, mikeURI, bryanURI, mikeLabel,
                 bryanLabel, dcURI };
 

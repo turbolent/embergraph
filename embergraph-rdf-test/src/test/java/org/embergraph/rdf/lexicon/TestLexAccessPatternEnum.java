@@ -28,9 +28,9 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.test.MockTermIdFactory;
 
 /**
@@ -74,10 +74,10 @@ public class TestLexAccessPatternEnum extends TestCase2 {
 
     public void test_ValueBound_pattern() {
 
-        final BigdataValueFactory vf = BigdataValueFactoryImpl
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                 .getInstance(getName());
 
-        final IConstant<?> value = new Constant<BigdataURI>(vf
+        final IConstant<?> value = new Constant<EmbergraphURI>(vf
                 .createURI("http://www.embergraph.org"));
 
         final IVariableOrConstant<?>[] args = new IVariableOrConstant[] {
@@ -98,10 +98,10 @@ public class TestLexAccessPatternEnum extends TestCase2 {
         
         final IConstant<?> iv = new Constant<IV>(f.newTermId());
 
-        final BigdataValueFactory vf = BigdataValueFactoryImpl
+        final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl
                 .getInstance(getName());
 
-        final IConstant<?> value = new Constant<BigdataURI>(vf
+        final IConstant<?> value = new Constant<EmbergraphURI>(vf
                 .createURI("http://www.embergraph.org"));
 
         final IVariableOrConstant<?>[] args = new IVariableOrConstant[] {

@@ -48,7 +48,7 @@ import org.embergraph.journal.IBTreeManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.DescribeModeEnum;
 import org.embergraph.rdf.sparql.ast.EmptySolutionSetStats;
@@ -70,7 +70,7 @@ import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.sparql.ast.ssets.SolutionSetManager;
 import org.embergraph.rdf.store.AbstractTripleStore;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.ClassPathUtil;
 
 /**
@@ -661,7 +661,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     @Override
     public boolean isCluster() {
 
-        return db.getIndexManager() instanceof IBigdataFederation<?>;
+        return db.getIndexManager() instanceof IEmbergraphFederation<?>;
 
     }
 
@@ -792,7 +792,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
          * Consult the KB for a configured default behavior. 
          */
         final String describeDefaultStr = db.getProperties().getProperty(
-                BigdataSail.Options.DESCRIBE_MODE);
+                EmbergraphSail.Options.DESCRIBE_MODE);
 
         if (describeDefaultStr != null) {
 
@@ -837,7 +837,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
          * Consult the KB for a configured default behavior. 
          */
         final String limitStr = db.getProperties().getProperty(
-                BigdataSail.Options.DESCRIBE_ITERATION_LIMIT);
+                EmbergraphSail.Options.DESCRIBE_ITERATION_LIMIT);
 
         if (limitStr != null) {
 
@@ -882,7 +882,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
          * Consult the KB for a configured default behavior. 
          */
         final String limitStr = db.getProperties().getProperty(
-                BigdataSail.Options.DESCRIBE_STATEMENT_LIMIT);
+                EmbergraphSail.Options.DESCRIBE_STATEMENT_LIMIT);
 
         if (limitStr != null) {
 

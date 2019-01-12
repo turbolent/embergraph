@@ -27,11 +27,11 @@ import org.embergraph.btree.ICounter;
 import org.embergraph.btree.IIndex;
 import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.ITx;
-import org.embergraph.service.IBigdataClient;
+import org.embergraph.service.IEmbergraphClient;
 import org.embergraph.service.IDataService;
 
 /**
- * {@link IBigdataClient}-side {@link IIndex} interface.
+ * {@link IEmbergraphClient}-side {@link IIndex} interface.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

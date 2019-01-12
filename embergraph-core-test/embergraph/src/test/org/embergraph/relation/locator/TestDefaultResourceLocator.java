@@ -44,7 +44,7 @@ import org.embergraph.journal.Journal.Options;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.relation.AbstractRelation;
 import org.embergraph.relation.AbstractResource;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.NT;
@@ -56,7 +56,7 @@ import org.embergraph.util.NT;
  * @version $Id$
  * 
  * @todo make this a proxy test case and run for {@link Journal} and
- *       {@link IBigdataFederation}
+ *       {@link IEmbergraphFederation}
  */
 public class TestDefaultResourceLocator extends TestCase2 {
 

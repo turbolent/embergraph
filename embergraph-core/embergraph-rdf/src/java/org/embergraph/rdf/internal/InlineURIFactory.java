@@ -24,7 +24,7 @@ import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.vocab.Vocabulary;
 
 /**
@@ -154,7 +154,7 @@ public class InlineURIFactory implements IInlineURIFactory {
 
     @Override
     public String getLocalNameFromDelegate(final URI namespace,
-            final AbstractLiteralIV<BigdataLiteral, ?> delegate) {
+            final AbstractLiteralIV<EmbergraphLiteral, ?> delegate) {
 
 		final InlineURIHandler handler = getHandlersByNamespace().get(namespace.stringValue());
 		

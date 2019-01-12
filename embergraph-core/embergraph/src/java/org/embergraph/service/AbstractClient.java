@@ -31,14 +31,14 @@ import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 
 /**
- * Abstract base class for {@link IBigdataClient} implementations.
+ * Abstract base class for {@link IEmbergraphClient} implementations.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractClient<T> implements IBigdataClient<T> {
+abstract public class AbstractClient<T> implements IEmbergraphClient<T> {
     
-    protected static final Logger log = Logger.getLogger(IBigdataClient.class);
+    protected static final Logger log = Logger.getLogger(IEmbergraphClient.class);
 
     /**
      * The properties specified to the ctor.
@@ -65,7 +65,7 @@ abstract public class AbstractClient<T> implements IBigdataClient<T> {
 //    private final long tempStoreMaxExtent;
     
     /*
-     * IBigdataClient API.
+     * IEmbergraphClient API.
      */
 
     public int getThreadPoolSize() {
@@ -143,7 +143,7 @@ abstract public class AbstractClient<T> implements IBigdataClient<T> {
     /**
      * 
      * @param properties
-     *            See {@link IBigdataClient.Options}
+     *            See {@link IEmbergraphClient.Options}
      */
     protected AbstractClient(final Properties properties) {
         
@@ -398,7 +398,7 @@ abstract public class AbstractClient<T> implements IBigdataClient<T> {
     }
 
     /**
-     * Extended to {@link IBigdataClient#disconnect(boolean)} if the client is
+     * Extended to {@link IEmbergraphClient#disconnect(boolean)} if the client is
      * still connected when it is finalized.
      */
     protected void finalize() throws Throwable {

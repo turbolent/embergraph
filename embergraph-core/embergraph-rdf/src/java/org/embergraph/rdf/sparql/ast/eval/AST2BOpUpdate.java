@@ -38,6 +38,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -83,15 +86,12 @@ import org.embergraph.rdf.error.SparqlDynamicErrorException.SolutionSetExistsExc
 import org.embergraph.rdf.error.SparqlDynamicErrorException.UnknownContentTypeException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.rio.IRDFParserOptions;
 import org.embergraph.rdf.rio.RDFParserOptions;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.SPARQLUpdateEvent;
 import org.embergraph.rdf.sail.SPARQLUpdateEvent.DeleteInsertWhereStats;
-import org.embergraph.rdf.sail.Sesame2BigdataIterator;
+import org.embergraph.rdf.sail.Sesame2EmbergraphIterator;
 import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractGraphDataUpdate;
@@ -122,7 +122,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
-import org.embergraph.rdf.store.BigdataOpenRDFBindingSetsResolverator;
+import org.embergraph.rdf.store.EmbergraphOpenRDFBindingSetsResolverator;
 import org.embergraph.striterator.Chunkerator;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -143,7 +143,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     /**
      * When <code>true</code>, convert the SPARQL UPDATE into a physical
      * operator plan and execute it on the query engine. When <code>false</code>
-     * , the UPDATE is executed using the {@link BigdataSail} API.
+     * , the UPDATE is executed using the {@link EmbergraphSail} API.
      * 
      * TODO By coming in through the SAIL, we automatically pick up truth
      * maintenance and related logics. All of that needs to be integrated into
@@ -249,9 +249,9 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 				/*
 				 * Note: We need to flush the assertion / retraction buffers if
 				 * the Sail is local since some of the code paths supporting
-				 * UPDATEs do not go through the BigdataSail and would otherwise
+				 * UPDATEs do not go through the EmbergraphSail and would otherwise
 				 * not have their updates flushed until the commit (which does
-				 * go through the BigdataSail).
+				 * go through the EmbergraphSail).
 				 * 
 				 * @see https://sourceforge.net/apps/trac/bigdata/ticket/558
 				 */
@@ -346,7 +346,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
             final AST2BOpUpdateContext context) throws Exception {
 
     	/*
-    	 * Note: Since we are using the BigdataSail interface, we DO have to
+    	 * Note: Since we are using the EmbergraphSail interface, we DO have to
     	 * do a commit on the cluster.  It is only if we are running on the
     	 * query engine that things could be different (but that requires a
     	 * wholly different plan).
@@ -729,7 +729,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 							// Write solutions to be deleted onto temp set.
 							context.solutionSetManager.putSolutions(
 									tempSolutionSet,
-									asBigdataIterator(lexicon, chunkSize,
+									asEmbergraphIterator(lexicon, chunkSize,
 											result));
 
 							try {
@@ -834,7 +834,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
 							while (itr.hasNext()) {
 
-								final BigdataStatement stmt = itr.next();
+								final EmbergraphStatement stmt = itr.next();
 
 								addOrRemoveStatement(
 										context.conn.getSailConnection(), stmt,
@@ -875,7 +875,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 							// Set the projection node.
 							queryRoot.setProjection(insertClause.getProjection());
 
-							final ICloseableIterator<IBindingSet[]> titr = asBigdataIterator(
+							final ICloseableIterator<IBindingSet[]> titr = asEmbergraphIterator(
 									lexicon, chunkSize, result);
 
 							try {
@@ -914,7 +914,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
 							while (itr.hasNext()) {
 
-								final BigdataStatement stmt = itr.next();
+								final EmbergraphStatement stmt = itr.next();
 
 								addOrRemoveStatement(
 										context.conn.getSailConnection(), stmt,
@@ -1046,7 +1046,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
                         while (result.hasNext()) {
 
-                            final BigdataStatement stmt = (BigdataStatement) result
+                            final EmbergraphStatement stmt = (EmbergraphStatement) result
                                     .next();
 
                             addOrRemoveStatement(
@@ -1089,7 +1089,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 	 *         TODO We should not have to do this. We should stay within native
 	 *         bigdata IBindingSet[]s and the native bigdata iterators
 	 */
-	private static ICloseableIterator<IBindingSet[]> asBigdataIterator(
+	private static ICloseableIterator<IBindingSet[]> asEmbergraphIterator(
 			final LexiconRelation r,
 			final int chunkSize,
 			final CloseableIteration<BindingSet, QueryEvaluationException> result) {
@@ -1099,26 +1099,19 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 				// Chunk up the openrdf solutions.
 				new Chunkerator<BindingSet>(
 						// Convert the Sesame iteration into a Bigdata iterator.
-						new Sesame2BigdataIterator<BindingSet, QueryEvaluationException>(
+						new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
 								result), chunkSize));
 
 		// Add filter to batch resolve BindingSet[] => IBindingSet[].
 		sitr.addFilter(new Resolver() {
-			
+
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected Object resolve(Object obj) {
 
-				// Visiting openrdf BindingSet[] chunks.
 				final BindingSet[] in = (BindingSet[]) obj;
-				
-				// Batch resolve to IBindingSet[].
-				final IBindingSet[] out = BigdataOpenRDFBindingSetsResolverator
-						.resolveChunk(r, in);
-				
-				// Return Bigdata IBindingSet[].
-				return out;
+        return EmbergraphOpenRDFBindingSetsResolverator.resolveChunk(r, in);
 			}
 		});
 		
@@ -1191,10 +1184,10 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         if (runOnQueryEngine)
             throw new UnsupportedOperationException();
 
-        final BigdataURI sourceGraph = (BigdataURI) (op.getSourceGraph() == null ? null
+        final EmbergraphURI sourceGraph = (EmbergraphURI) (op.getSourceGraph() == null ? null
                 : op.getSourceGraph().getValue());
         
-        final BigdataURI targetGraph = (BigdataURI) (op.getTargetGraph() == null ? null
+        final EmbergraphURI targetGraph = (EmbergraphURI) (op.getTargetGraph() == null ? null
                 : op.getTargetGraph().getValue());
         
         copyStatements(
@@ -1217,8 +1210,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * if we just ignored the SILENT keyword.
      */
     private static void copyStatements(final AST2BOpUpdateContext context,
-            final boolean silent, final BigdataURI sourceGraph,
-            final BigdataURI targetGraph) throws RepositoryException {
+            final boolean silent, final EmbergraphURI sourceGraph,
+            final EmbergraphURI targetGraph) throws RepositoryException {
 
         if (log.isDebugEnabled())
             log.debug("sourceGraph=" + sourceGraph + ", targetGraph="
@@ -1232,11 +1225,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         
         final RepositoryResult<Statement> result = context.conn.getStatements(
                 null/* s */, null/* p */, null/* o */,
-                context.isIncludeInferred(), new Resource[] { sourceGraph });
+                context.isIncludeInferred(), sourceGraph);
         
         try {
 
-            context.conn.add(result, new Resource[] { targetGraph });
+            context.conn.add(result, targetGraph);
 
         } finally {
 
@@ -1263,10 +1256,10 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         if (runOnQueryEngine)
             throw new UnsupportedOperationException();
 
-        final BigdataURI sourceGraph = (BigdataURI) (op.getSourceGraph() == null ? context.f
+        final EmbergraphURI sourceGraph = (EmbergraphURI) (op.getSourceGraph() == null ? context.f
                 .asValue(BD.NULL_GRAPH) : op.getSourceGraph().getValue());
 
-        final BigdataURI targetGraph = (BigdataURI) (op.getTargetGraph() == null ? context.f
+        final EmbergraphURI targetGraph = (EmbergraphURI) (op.getTargetGraph() == null ? context.f
                 .asValue(BD.NULL_GRAPH) : op.getTargetGraph().getValue());
 
         if (log.isDebugEnabled())
@@ -1304,10 +1297,10 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         if (runOnQueryEngine)
             throw new UnsupportedOperationException();
 
-        final BigdataURI sourceGraph = (BigdataURI) (op.getSourceGraph() == null ? context.f
+        final EmbergraphURI sourceGraph = (EmbergraphURI) (op.getSourceGraph() == null ? context.f
                 .asValue(BD.NULL_GRAPH) : op.getSourceGraph().getValue());
 
-        final BigdataURI targetGraph = (BigdataURI) (op.getTargetGraph() == null ? context.f
+        final EmbergraphURI targetGraph = (EmbergraphURI) (op.getTargetGraph() == null ? context.f
                 .asValue(BD.NULL_GRAPH) : op.getTargetGraph().getValue());
 
         if (log.isDebugEnabled())
@@ -1350,7 +1343,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
                 final URL sourceURL = new URL(urlStr);
 
-                final BigdataURI defaultContext = (BigdataURI) (op
+                final EmbergraphURI defaultContext = (EmbergraphURI) (op
                         .getTargetGraph() == null ? null : op.getTargetGraph()
                         .getValue());
 
@@ -1519,7 +1512,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      *             integrated into all of the truth maintenance mechanisms in
      *             the Sail and is therefore easier to place into service.
      */
-    private static void doLoad(final BigdataSailConnection conn,
+    private static void doLoad(final EmbergraphSailConnection conn,
             final URL sourceURL, final URI defaultContext,
             final IRDFParserOptions parserOptions, final AtomicLong nmodified,
             final LoadGraph op) throws IOException,
@@ -1672,11 +1665,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         private final LoadGraph op;
         private final long beginNanos;
-        private final BigdataSailConnection conn;
+        private final EmbergraphSailConnection conn;
         private final AtomicLong nmodified;
         private final Resource[] defaultContexts;
 
-        public AddStatementHandler(final BigdataSailConnection conn,
+        public AddStatementHandler(final EmbergraphSailConnection conn,
                 final AtomicLong nmodified, final Resource defaultContext,
                 final LoadGraph op) {
             this.conn = conn;
@@ -1768,8 +1761,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         final TermNode targetGraphNode = op.getTargetGraph();
 
-        final BigdataURI targetGraph = targetGraphNode == null ? null
-                : (BigdataURI) targetGraphNode.getValue();
+        final EmbergraphURI targetGraph = targetGraphNode == null ? null
+                : (EmbergraphURI) targetGraphNode.getValue();
 
         clearGraph(op.isSilent(), op.getTargetSolutionSet(), targetGraph,
                 op.getScope(), op.isAllGraphs(), op.isAllSolutionSets(),
@@ -1846,7 +1839,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         /*
          * Note: removeStatements() is not exposed by the RepositoryConnection.
          */
-        final BigdataSailConnection sailConn = context.conn.getSailConnection();
+        final EmbergraphSailConnection sailConn = context.conn.getSailConnection();
         
         if (solutionSet != null) {
 
@@ -1922,7 +1915,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
              * drop the proof chains. If we are not doing truth maintenance and
              * this is the unisolated connection, then delete all statements and
              * also clear the lexicon. (We should really catch this optimization
-             * in the BigdataSailConnection.)
+             * in the EmbergraphSailConnection.)
              */
 
             sailConn.removeStatements(null/* s */, null/* p */, null/* o */);
@@ -2071,7 +2064,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
             
         } else {
 
-            final BigdataURI c = (BigdataURI) ((CreateGraph) op)
+            final EmbergraphURI c = (EmbergraphURI) ((CreateGraph) op)
                     .getTargetGraph().getValue();
 
             if (log.isDebugEnabled())
@@ -2118,15 +2111,15 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         if (!runOnQueryEngine) {
 
-            final BigdataStatement[] stmts = op.getData();
+            final EmbergraphStatement[] stmts = op.getData();
 
             if (log.isDebugEnabled())
                 log.debug((insert ? "INSERT" : "DELETE") + " DATA: #stmts="
                         + stmts.length);
 
-            final BigdataSailConnection conn = context.conn.getSailConnection();
+            final EmbergraphSailConnection conn = context.conn.getSailConnection();
             
-            for (BigdataStatement s : stmts) {
+            for (EmbergraphStatement s : stmts) {
  
                 addOrRemoveStatementData(conn, s, insert);
                 
@@ -2195,8 +2188,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      *            <code>false</code> iff the statement is to be removed.
      * @throws SailException
      */
-    private static void addOrRemoveStatement(final BigdataSailConnection conn,
-            final BigdataStatement spo, final boolean insert) throws SailException {
+    private static void addOrRemoveStatement(final EmbergraphSailConnection conn,
+            final EmbergraphStatement spo, final boolean insert) throws SailException {
 
         final Resource s = (Resource) spo.getSubject();
 
@@ -2264,8 +2257,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      *            <code>false</code> iff the statement is to be removed.
      * @throws SailException
      */
-    private static void addOrRemoveStatementData(final BigdataSailConnection conn,
-            final BigdataStatement stmt, final boolean insert) throws SailException {
+    private static void addOrRemoveStatementData(final EmbergraphSailConnection conn,
+            final EmbergraphStatement stmt, final boolean insert) throws SailException {
 
 //        final Resource s = (Resource) spo.s().getValue();
 //
@@ -2494,7 +2487,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      *             if the graph does not exist and/or is empty.
      */
     static private void assertGraphNotEmpty(final AST2BOpUpdateContext context,
-            final BigdataURI sourceGraph) {
+            final EmbergraphURI sourceGraph) {
 
         if (sourceGraph == null || sourceGraph.equals(BD.NULL_GRAPH)) {
 
@@ -2543,7 +2536,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      *      exception)
      */
     static private void assertGraphExists(final AST2BOpUpdateContext context,
-            final BigdataURI c) {
+            final EmbergraphURI c) {
 
         if (c.getIV() != null
                 && context.conn

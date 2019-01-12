@@ -19,20 +19,20 @@ package org.embergraph.rdf.internal.impl.literal;
 
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.ValueFactory;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.util.Bytes;
 
 /**
  * Implementation for inline {@link UUID}s (there is no corresponding XML
  * Schema Datatype).
  */
-public class UUIDLiteralIV<V extends BigdataLiteral> extends
+public class UUIDLiteralIV<V extends EmbergraphLiteral> extends
         AbstractLiteralIV<V, UUID> implements Literal {
     
     /**

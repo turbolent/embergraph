@@ -232,8 +232,8 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
                       journal, namespace, ITx.UNISOLATED, properties);
               
 //              if (Boolean.parseBoolean(properties.getProperty(
-//                      BigdataSail.Options.ISOLATABLE_INDICES,
-//                      BigdataSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
+//                      EmbergraphSail.Options.ISOLATABLE_INDICES,
+//                      EmbergraphSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
 //              
 //                  final long txCreate = txService.newTx(ITx.UNISOLATED);
 //      

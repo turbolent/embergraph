@@ -29,7 +29,7 @@ import org.embergraph.rdf.changesets.IChangeRecord;
 
 /**
  */
-public class TestSparqlUpdateCommit extends ProxyBigdataSailTestCase {
+public class TestSparqlUpdateCommit extends ProxyEmbergraphSailTestCase {
 
     private static final Logger log = Logger.getLogger(TestSparqlUpdateCommit.class);
     
@@ -52,15 +52,15 @@ public class TestSparqlUpdateCommit extends ProxyBigdataSailTestCase {
      */
     public void testCountCommits() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
 
-        final BigdataSail sail = getSail(getProperties());
+        final EmbergraphSail sail = getSail(getProperties());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
             final CommitCounter counter = new CommitCounter();
             cxn.addChangeLog(counter);

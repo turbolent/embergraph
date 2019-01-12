@@ -27,8 +27,8 @@ public interface IDataServiceCallable extends IFederationCallable {
     /**
      * Invoked before the task is executed to provide a reference to the
      * {@link IDataService} on which it is executing. This method is also
-     * responsible for setting the {@link IBigdataFederation} reference using
-     * {@link IFederationCallable#setFederation(IBigdataFederation)}.
+     * responsible for setting the {@link IEmbergraphFederation} reference using
+     * {@link IFederationCallable#setFederation(IEmbergraphFederation)}.
      * 
      * @param dataService
      *            The data service.

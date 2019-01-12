@@ -24,13 +24,13 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.embergraph.rdf.sparql.AbstractEmbergraphExprBuilderTestCase;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
 import org.embergraph.bop.aggregate.AggregateBase;
 import org.embergraph.rdf.sail.sparql.ast.ParseException;
 import org.embergraph.rdf.sail.sparql.ast.TokenMgrError;
-import org.embergraph.rdf.sparql.AbstractBigdataExprBuilderTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FunctionNode;
@@ -47,10 +47,10 @@ import org.embergraph.rdf.sparql.ast.VarNode;
  * Test suite for {@link ValueExprBuilder}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: TestBigdataExprBuilder.java 5063 2011-08-21 16:13:03Z
+ * @version $Id: TestEmbergraphExprBuilder.java 5063 2011-08-21 16:13:03Z
  *          thompsonbry $
  */
-public class TestValueExprBuilder extends AbstractBigdataExprBuilderTestCase {
+public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase {
 
 //    private static final Logger log = Logger
 //            .getLogger(TestValueExprBuilder.class);

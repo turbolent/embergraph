@@ -34,7 +34,7 @@ import java.util.concurrent.Callable;
 abstract public class FederationCallable<T> implements IFederationCallable,
         Callable<T> {
 
-    private transient IBigdataFederation<?> fed;
+    private transient IEmbergraphFederation<?> fed;
 
     /**
      * Deserialization ctor.
@@ -42,7 +42,7 @@ abstract public class FederationCallable<T> implements IFederationCallable,
     public FederationCallable() {
     }
 
-    synchronized public void setFederation(final IBigdataFederation<?> fed) {
+    synchronized public void setFederation(final IEmbergraphFederation<?> fed) {
 
         if (fed == null)
             throw new IllegalArgumentException();
@@ -54,7 +54,7 @@ abstract public class FederationCallable<T> implements IFederationCallable,
 
     }
 
-    public IBigdataFederation<?> getFederation() {
+    public IEmbergraphFederation<?> getFederation() {
 
         if (fed == null)
             throw new IllegalStateException();

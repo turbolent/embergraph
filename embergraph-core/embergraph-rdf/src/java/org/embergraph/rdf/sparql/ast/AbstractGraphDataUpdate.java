@@ -25,8 +25,8 @@ import java.util.Map;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.ISPO;
 
 /**
@@ -45,13 +45,13 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
     interface Annotations extends GraphUpdate.Annotations {
 
         /**
-         * The {@link BigdataStatement}[] data.
+         * The {@link EmbergraphStatement}[] data.
          * 
-         * TODO The strong typing as a {@link BigdataStatement}[] was introduced
+         * TODO The strong typing as a {@link EmbergraphStatement}[] was introduced
          * to support of the ticket below (573). This forces us to work with
          * materialized RDF Values. That makes it more difficult to optimize
          * SPARQL UPDATE by not materializing {@link IV}s as
-         * {@link BigdataValue}s (ticket 522).
+         * {@link EmbergraphValue}s (ticket 522).
          * 
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/573">
          *      NullPointerException when attempting to INSERT DATA containing a
@@ -89,13 +89,13 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
         
     }
 
-    public BigdataStatement[] getData() {
+    public EmbergraphStatement[] getData() {
 
-        return (BigdataStatement[]) getProperty(Annotations.DATA);
+        return (EmbergraphStatement[]) getProperty(Annotations.DATA);
 
     }
 
-    public void setData(final BigdataStatement[] data) {
+    public void setData(final EmbergraphStatement[] data) {
 
         setProperty(Annotations.DATA, data);
 
@@ -110,7 +110,7 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
         
         sb.append(getUpdateType());
 
-        final BigdataStatement[] data = getData();
+        final EmbergraphStatement[] data = getData();
 
         if (data != null) {
             

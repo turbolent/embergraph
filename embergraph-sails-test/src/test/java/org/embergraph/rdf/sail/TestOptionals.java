@@ -36,7 +36,7 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
 /**
- * Unit tests the optionals aspects of the {@link BigdataSail} implementation.
+ * Unit tests the optionals aspects of the {@link EmbergraphSail} implementation.
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -109,11 +109,11 @@ public class TestOptionals extends QuadsTestCase {
      */
     public void testLeftJoins() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {
@@ -203,11 +203,11 @@ public class TestOptionals extends QuadsTestCase {
         properties.put("org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass", "org.embergraph.rdf.vocab.NoVocabulary");
         properties.put("org.embergraph.rdf.store.AbstractTripleStore.justify", "false");
         
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {

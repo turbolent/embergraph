@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
 import org.embergraph.btree.IOverflowHandler;
@@ -55,7 +55,7 @@ import org.embergraph.util.concurrent.ShutdownHelper;
  * Note: If any indices use references to raw records then they MUST define an
  * {@link IOverflowHandler} in order for the raw records to be copied to the new
  * store and those references updated in the index to point to the records in
- * the new store. For example, the {@link BigdataFileSystem} uses such
+ * the new store. For example, the {@link EmbergraphFileSystem} uses such
  * references and defines an {@link IOverflowHandler} so that the raw file
  * blocks will not be lost on overflow.
  * 

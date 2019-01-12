@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal.impl.literal;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.btree.keys.KeyBuilder;
@@ -27,7 +28,6 @@ import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.DTEExtension;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.util.BytesUtil;
 
 /**
@@ -43,7 +43,7 @@ import org.embergraph.util.BytesUtil;
  * 
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
-public class MockedValueIV extends AbstractLiteralIV<BigdataLiteral, IV<?,?>> {
+public class MockedValueIV extends AbstractLiteralIV<EmbergraphLiteral, IV<?,?>> {
 
     private static final long serialVersionUID = 9136542087440805253L;
 
@@ -158,7 +158,7 @@ public class MockedValueIV extends AbstractLiteralIV<BigdataLiteral, IV<?,?>> {
      * This IV cannot be materialized on its own. 
      */
     @Override
-    public BigdataLiteral asValue(LexiconRelation lex) throws UnsupportedOperationException {
+    public EmbergraphLiteral asValue(LexiconRelation lex) throws UnsupportedOperationException {
         throw new UnsupportedOperationException(); // not required
     }
 

@@ -67,6 +67,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.openrdf.model.Statement;
 import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.QueryEvaluationException;
@@ -86,10 +87,8 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
 import org.embergraph.bop.engine.AbstractQueryEngineTestCase;
-import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.journal.IBTreeManager;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -260,7 +259,7 @@ abstract public class AbstractDataDrivenSPARQLTestCase extends
              * the triple/sids/quads mode distinction and even other
              * configuration properties for the KB instance.
              */
-			astContainer = new Bigdata2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
+			astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
 			// Force the QueryEngine to exist for this db.
             QueryEngineFactory.getInstance().getQueryController((IBTreeManager) store.getIndexManager());
@@ -641,7 +640,7 @@ abstract public class AbstractDataDrivenSPARQLTestCase extends
             final String baseURI = "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/dataset/manifest#"
                     + queryFileURL;
 
-            Bigdata2ASTSPARQLParser parser = new Bigdata2ASTSPARQLParser();
+            Embergraph2ASTSPARQLParser parser = new Embergraph2ASTSPARQLParser();
             astContainer = parser.parseUpdate2(queryStr, baseURI);
             ASTDeferredIVResolution.resolveUpdate(store, astContainer);
 

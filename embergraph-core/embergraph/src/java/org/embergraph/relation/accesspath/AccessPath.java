@@ -68,7 +68,7 @@ import org.embergraph.relation.AbstractResource;
 import org.embergraph.relation.IRelation;
 import org.embergraph.service.AbstractClient;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.ndx.IScaleOutClientIndex;
 import org.embergraph.striterator.ChunkedArrayIterator;
@@ -340,7 +340,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
          * REMOTE use the relation's index manager. Otherwise, the
          * localIndexManager MUST NOT be null and we will use it.
          */
-        if (!(relation.getIndexManager() instanceof IBigdataFederation<?>)) {
+        if (!(relation.getIndexManager() instanceof IEmbergraphFederation<?>)) {
             this.indexManager = relation.getIndexManager();
         } else if (remoteAccessPath) {
             this.indexManager = relation.getIndexManager();

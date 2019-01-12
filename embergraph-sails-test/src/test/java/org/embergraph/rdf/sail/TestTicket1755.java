@@ -19,52 +19,41 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.rdf.sail;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 
-import junit.framework.Assert;
-
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
-import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
-import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
-import org.openrdf.sail.memory.MemoryStore;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.Constant;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
-import org.embergraph.rdf.sparql.ast.ASTContainer;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.ConstantNode;
 import org.embergraph.rdf.sparql.ast.FilterNode;
-import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
-import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 
 /**
  * Unit test template for use in submission of bugs.
  * <p>
  * This test case will delegate to an underlying backing store. You can specify
  * this store via a JVM property as follows:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  * <p>
  * There are three possible configurations for the testClass:
  * <ul>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithQuads (quads mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithoutSids (triples mode)</li>
- * <li>org.embergraph.rdf.sail.TestBigdataSailWithSids (SIDs mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithQuads (quads mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids (triples mode)</li>
+ * <li>org.embergraph.rdf.sail.TestEmbergraphSailWithSids (SIDs mode)</li>
  * </ul>
  * <p>
  * The default for triples and SIDs mode is for inference with truth maintenance
@@ -88,20 +77,20 @@ public class TestTicket1755 extends QuadsTestCase {
 
 	public void testBug() throws Exception {
 
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
-			executeQuery(new BigdataSailRepository(sail));
+			executeQuery(new EmbergraphSailRepository(sail));
 		} finally {
 			sail.__tearDownUnitTest();
 		}
 	}
 
-	private void executeQuery(final BigdataSailRepository repo)
+	private void executeQuery(final EmbergraphSailRepository repo)
 			throws RepositoryException, MalformedQueryException,
 			QueryEvaluationException, RDFParseException, IOException {
 		try {
 			repo.initialize();
-			final BigdataSailRepositoryConnection conn = repo.getConnection();
+			final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 			conn.setAutoCommit(false);
 			try {
 				conn.add(getClass().getResourceAsStream("TestTicket1755.n3"), "",
@@ -117,7 +106,7 @@ public class TestTicket1755 extends QuadsTestCase {
 					/*
 					 * There are 3 IVs in the parsed tree:
 					 * LiteralExtensionIV in Constant as an argument of ConstantNode in FunctionNode
-					 * LiteralExtensionIV in BigdataValue in ConstantNode as an argument of FunctionNode
+					 * LiteralExtensionIV in EmbergraphValue in ConstantNode as an argument of FunctionNode
 					 * LiteralExtensionIV in Constant as an argument of valueExpression annotation of FunctionNode
 					 */
 					int expectedIVs = 3;
@@ -134,7 +123,7 @@ public class TestTicket1755 extends QuadsTestCase {
 					 * LiteralExtensionIV in Constant as an argument of CompareBOp in valueExpression annotation of FunctionNode
 					 * XSDBooleanIV in Constant as an  argument of EBVBOp in valueExpression annotation of FunctionNode
 					 * LiteralExtensionIV in Constant as an argument of valueExpression annotation of FunctionNode
-					 * LiteralExtensionIV in BigdataValue in ConstantNode as an argument of FunctionNode
+					 * LiteralExtensionIV in EmbergraphValue in ConstantNode as an argument of FunctionNode
 					 * LiteralExtensionIV in Constant as an argument of ConstantNode
 					 * XSDBoolean in Constant as an argument  of  ConstantNode
 					 */
@@ -151,7 +140,7 @@ public class TestTicket1755 extends QuadsTestCase {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void testQuery(final BigdataSailRepositoryConnection conn,
+	private void testQuery(final EmbergraphSailRepositoryConnection conn,
 			final String query, final int expectedIVs) throws MalformedQueryException, RepositoryException, QueryEvaluationException {
 		TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
 		TupleQueryResult tqr = tq.evaluate();
@@ -162,7 +151,7 @@ public class TestTicket1755 extends QuadsTestCase {
 				cnt++;
 			}
 //			assertEquals("Expected 1 row in resultset", 1, cnt);
-			QueryRoot queryRoot = ((BigdataSailTupleQuery)tq).getASTContainer().getOriginalAST();
+			QueryRoot queryRoot = ((EmbergraphSailTupleQuery)tq).getASTContainer().getOriginalAST();
 			cnt = 0;
 			for (Object filterNode: queryRoot.getWhereClause().getChildren(FilterNode.class)) {
 				cnt += checkNode((BOp)filterNode);
@@ -185,9 +174,9 @@ public class TestTicket1755 extends QuadsTestCase {
 		}
 		if (bop instanceof ConstantNode) {
 			// constant node in AST
-			BigdataValue value = ((ConstantNode)bop).getValue();
-			if (value instanceof BigdataLiteral && XMLSchema.DATE.equals(((BigdataLiteral)value).getDatatype())) {
-		        assertFalse(((BigdataLiteral)value).getIV().isNullIV());
+			EmbergraphValue value = ((ConstantNode)bop).getValue();
+			if (value instanceof EmbergraphLiteral && XMLSchema.DATE.equals(((EmbergraphLiteral)value).getDatatype())) {
+		        assertFalse(((EmbergraphLiteral)value).getIV().isNullIV());
 				assertTrue(value.getIV() instanceof LiteralExtensionIV);
 				cnt++;
 			}

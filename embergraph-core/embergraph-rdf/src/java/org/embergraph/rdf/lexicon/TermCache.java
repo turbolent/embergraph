@@ -23,13 +23,13 @@ package org.embergraph.rdf.lexicon;
 
 import org.embergraph.cache.ConcurrentWeakValueCacheWithBatchedUpdates;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class TermCache<K extends IV<?, ?>, V extends BigdataValue> implements
+public class TermCache<K extends IV<?, ?>, V extends EmbergraphValue> implements
         ITermCache<K, V> {
 
     private final ConcurrentWeakValueCacheWithBatchedUpdates<IV<?, ?>, V> delegate;
@@ -80,7 +80,7 @@ public class TermCache<K extends IV<?, ?>, V extends BigdataValue> implements
 
         /*
          * Clone the IV in order to ensure that the hard reference from the IV
-         * to the BigdataValue cached on the IV has been cleared before we enter
+         * to the EmbergraphValue cached on the IV has been cleared before we enter
          * the IV into the map.
          * 
          * Note: If the key has a hard reference to the value then the value can

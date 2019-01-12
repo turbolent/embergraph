@@ -27,6 +27,9 @@ import java.io.ObjectOutput;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.Value;
 
 import org.embergraph.btree.DefaultTupleSerializer;
@@ -38,23 +41,20 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.BlobIV;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
-import org.embergraph.rdf.model.BigdataValueSerializer;
+import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 
 /**
  * Encapsulates key and value formation for the TERMS index.  The keys are
- * {@link BlobIV}s.  The values are {@link BigdataValue}s serialized using the
- * {@link BigdataValueSerializer}.  Large values are converted to raw records
+ * {@link BlobIV}s.  The values are {@link EmbergraphValue}s serialized using the
+ * {@link EmbergraphValueSerializer}.  Large values are converted to raw records
  * and must be materialized before they can be deserialized.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValue> {
+public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphValue> {
 
     /**
      * 
@@ -67,10 +67,10 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
     private String namespace;
     
     /**
-     * A (de-)serialized backed by a {@link BigdataValueFactoryImpl} for the
+     * A (de-)serialized backed by a {@link EmbergraphValueFactoryImpl} for the
      * {@link #namespace} of the owning {@link LexiconRelation}.
      */
-    transient private BigdataValueSerializer<BigdataValue> valueSer;
+    transient private EmbergraphValueSerializer<EmbergraphValue> valueSer;
 
     private static transient final int INITIAL_CAPACITY = 512;
     
@@ -90,7 +90,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
      */
     final transient private ByteArrayBuffer tbuf = new ByteArrayBuffer(INITIAL_CAPACITY);
 
-    transient private BigdataValueFactory valueFactory;
+    transient private EmbergraphValueFactory valueFactory;
 
     /**
      * De-serialization ctor.
@@ -108,7 +108,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
      *            initialCapacity of {@value Bytes#SIZEOF_LONG}.
      */
     public BlobsTupleSerializer(final String namespace,
-            final BigdataValueFactory valueFactory) {
+            final EmbergraphValueFactory valueFactory) {
         
         super(
                 new ASCIIKeyBuilderFactory(
@@ -160,25 +160,25 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
 
     /**
      * Return the byte[] value, which is the serialization of an RDF
-     * {@link Value} using the {@link BigdataValueSerializer}.
+     * {@link Value} using the {@link EmbergraphValueSerializer}.
      * 
      * @param obj
      *            An RDF {@link Value}.
      */
     @Override
-    public byte[] serializeVal(final BigdataValue obj) {
+    public byte[] serializeVal(final EmbergraphValue obj) {
         
         return valueSer.serialize(obj, buf.reset(), tbuf);
 
     }
 
     /**
-     * De-serializes the {@link ITuple} as a {@link BigdataValue}, including
+     * De-serializes the {@link ITuple} as a {@link EmbergraphValue}, including
      * the term identifier extracted from the unsigned byte[] key, and sets
-     * the appropriate {@link BigdataValueFactoryImpl} reference on that object.
+     * the appropriate {@link EmbergraphValueFactoryImpl} reference on that object.
      */
     @Override
-    public BigdataValue deserialize(final ITuple tuple) {
+    public EmbergraphValue deserialize(final ITuple tuple) {
 
 //        if(tuple.isNull()) {
 //            /*
@@ -189,7 +189,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
         
         final IV<?,?> iv = deserializeKey(tuple);
         
-        final BigdataValue tmp = valueSer.deserialize(tuple.getValueStream(),
+        final EmbergraphValue tmp = valueSer.deserialize(tuple.getValueStream(),
                 new StringBuilder());
 
         tmp.setIV(iv);
@@ -227,14 +227,14 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, BigdataValu
         // resolve the valueSerializer from the value factory class.
         try {
             final Class<?> vfc = Class.forName(valueFactoryClass);
-            if (!BigdataValueFactory.class.isAssignableFrom(vfc)) {
+            if (!EmbergraphValueFactory.class.isAssignableFrom(vfc)) {
                 throw new RuntimeException(
                         AbstractTripleStore.Options.VALUE_FACTORY_CLASS
                                 + ": Must extend: "
-                                + BigdataValueFactory.class.getName());
+                                + EmbergraphValueFactory.class.getName());
             }
             final Method gi = vfc.getMethod("getInstance", String.class);
-            this.valueFactory = (BigdataValueFactory) gi
+            this.valueFactory = (EmbergraphValueFactory) gi
                     .invoke(null, namespace);
         } catch (NoSuchMethodException e) {
             throw new IOException(e);

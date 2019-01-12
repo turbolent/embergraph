@@ -39,7 +39,7 @@ public class OpenrdfNativeServiceOptions extends ServiceOptionsBase implements
      * Always returns <code>false</code>.
      */
     @Override
-    final public boolean isBigdataNativeService() {
+    final public boolean isEmbergraphNativeService() {
         return false;
     }
 

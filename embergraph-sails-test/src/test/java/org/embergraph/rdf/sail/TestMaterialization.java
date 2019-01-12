@@ -33,7 +33,7 @@ import org.openrdf.repository.sail.SailTupleQuery;
 
 import org.embergraph.rdf.store.BD;
 
-public class TestMaterialization extends ProxyBigdataSailTestCase {
+public class TestMaterialization extends ProxyEmbergraphSailTestCase {
 
     protected static final Logger log = Logger.getLogger(TestMaterialization.class);
 
@@ -57,7 +57,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
         
         Properties props = super.getProperties();
 
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "true");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "true");
         
         return props;
         
@@ -65,10 +65,10 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
     
     public void testRegex() throws Exception {
         
-      final BigdataSail sail = getSail();
+      final EmbergraphSail sail = getSail();
       try {
       sail.initialize();
-      final BigdataSailRepository repo = new BigdataSailRepository(sail);
+      final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       
       final RepositoryConnection cxn = repo.getConnection();
       
@@ -97,7 +97,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
           cxn.commit();
           
           if (log.isInfoEnabled()) {
-              log.info(((BigdataSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+              log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
           }
           
           {
@@ -139,18 +139,18 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
             cxn.close();
         }
         } finally {
-            if (sail instanceof BigdataSail)
-                ((BigdataSail)sail).__tearDownUnitTest();//shutDown();
+            if (sail instanceof EmbergraphSail)
+                ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
         }
 
     }
     
     public void testStr() throws Exception {
         
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         
         final RepositoryConnection cxn = repo.getConnection();
         
@@ -179,7 +179,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
             cxn.commit();
             
             if (log.isInfoEnabled()) {
-                log.info(((BigdataSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+                log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
             }
             
             {
@@ -224,18 +224,18 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
               cxn.close();
           }
           } finally {
-              if (sail instanceof BigdataSail)
-                  ((BigdataSail)sail).__tearDownUnitTest();//shutDown();
+              if (sail instanceof EmbergraphSail)
+                  ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
           }
 
       }
       
     public void testXsdStr() throws Exception {
         
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         
         final RepositoryConnection cxn = repo.getConnection();
         
@@ -264,7 +264,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
             cxn.commit();
             
             if (log.isInfoEnabled()) {
-                log.info(((BigdataSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+                log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
             }
             
             {
@@ -309,8 +309,8 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
               cxn.close();
           }
           } finally {
-              if (sail instanceof BigdataSail)
-                  ((BigdataSail)sail).__tearDownUnitTest();//shutDown();
+              if (sail instanceof EmbergraphSail)
+                  ((EmbergraphSail)sail).__tearDownUnitTest();//shutDown();
           }
 
       }

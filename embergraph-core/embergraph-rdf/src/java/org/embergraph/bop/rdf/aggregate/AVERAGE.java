@@ -19,9 +19,8 @@ package org.embergraph.bop.rdf.aggregate;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
-import org.openrdf.model.URI;
-import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
@@ -29,8 +28,6 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.aggregate.AggregateBase;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.internal.IVUtility;
-import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.IVValueExpression;
 import org.embergraph.rdf.internal.constraints.MathBOp;
@@ -38,8 +35,6 @@ import org.embergraph.rdf.internal.constraints.MathUtility;
 import org.embergraph.rdf.internal.constraints.MathBOp.MathOp;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
 
 /**
  * Operator computes the running sum over the presented binding sets for the
@@ -112,7 +107,7 @@ public class AVERAGE extends AggregateBase<IV> implements  INeedsMaterialization
             return ZERO;
         
         return MathUtility.literalMath(aggregated,
-                new XSDNumericIV<BigdataLiteral>(n), MathBOp.MathOp.DIVIDE);
+                new XSDNumericIV<EmbergraphLiteral>(n), MathBOp.MathOp.DIVIDE);
         
     }
 
@@ -172,7 +167,7 @@ public class AVERAGE extends AggregateBase<IV> implements  INeedsMaterialization
 //            } else {
 //
 //                // One IV and one Literal.
-//                final BigdataValue val1 = iv.getValue();
+//                final EmbergraphValue val1 = iv.getValue();
 //
 //                if (val1 == null)
 //                    throw new NotMaterializedException();

@@ -23,11 +23,11 @@ package org.embergraph.rdf.rio;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.model.EmbergraphStatement;
 import org.openrdf.model.Statement;
 
 import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.rdf.load.IStatementBufferFactory;
-import org.embergraph.rdf.model.BigdataStatement;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -241,7 +241,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
             final boolean parallel)
             throws Exception {
         
-        doLoad(store, resource, parallel, new StatementBufferFactory<BigdataStatement>(store));
+        doLoad(store, resource, parallel, new StatementBufferFactory<EmbergraphStatement>(store));
         
     }
     

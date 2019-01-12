@@ -33,7 +33,7 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.GraphPatternGroup;
 import org.embergraph.rdf.sparql.ast.GroupMemberNodeBase;
@@ -427,7 +427,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
           
           if (val instanceof TermId<?>) {
              final TermId<?> valTerm = (TermId<?>)val;
-             final BigdataValue bdVal = valTerm.getValue();
+             final EmbergraphValue bdVal = valTerm.getValue();
              if (bdVal!=null && bdVal instanceof URI) {
                 serviceUri = (URI)bdVal;
              }

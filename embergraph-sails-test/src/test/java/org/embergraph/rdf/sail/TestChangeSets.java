@@ -27,6 +27,9 @@ import java.util.LinkedList;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
@@ -39,9 +42,6 @@ import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.changesets.InMemChangeLog;
 import org.embergraph.rdf.changesets.InferenceChangeLogReporter;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.spo.ModifiedEnum;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
@@ -54,7 +54,7 @@ import org.embergraph.rdf.vocab.RDFSVocabulary;
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
-public class TestChangeSets extends ProxyBigdataSailTestCase {
+public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
     private static final Logger log = Logger.getLogger(TestChangeSets.class);
     
@@ -63,15 +63,15 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
         Properties props = super.getProperties();
         
         // triples with sids
-        props.setProperty(BigdataSail.Options.QUADS, "false");
-        props.setProperty(BigdataSail.Options.STATEMENT_IDENTIFIERS, "false");
+        props.setProperty(EmbergraphSail.Options.QUADS, "false");
+        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
         
         // no inference
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, NoVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -82,15 +82,15 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
         Properties props = super.getProperties();
         
         // triples with sids
-        props.setProperty(BigdataSail.Options.QUADS, "false");
-        props.setProperty(BigdataSail.Options.STATEMENT_IDENTIFIERS, "false");
+        props.setProperty(EmbergraphSail.Options.QUADS, "false");
+        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
         
         // no inference
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "true");
-        props.setProperty(BigdataSail.Options.AXIOMS_CLASS, OwlAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.VOCABULARY_CLASS, RDFSVocabulary.class.getName());
-        props.setProperty(BigdataSail.Options.JUSTIFY, "true");
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, "false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "true");
+        props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, OwlAxioms.class.getName());
+        props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS, RDFSVocabulary.class.getName());
+        props.setProperty(EmbergraphSail.Options.JUSTIFY, "true");
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX, "false");
         
         return props;
         
@@ -111,22 +111,22 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
     public void testSimpleAdd() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
         
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
 
         try {
             
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
             final InMemChangeLog changeLog = new InMemChangeLog();
             cxn.addChangeLog(changeLog);
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail
                     .getValueFactory();
 
             final String ns = BD.NAMESPACE;
@@ -135,12 +135,12 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final URI b = vf.createURI(ns+"B");
             final URI c = vf.createURI(ns+"C");
             
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, b),
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
 
-            final BigdataStatement[] stmts2 = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts2 = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, c),
             };
 
@@ -149,7 +149,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
             // add the stmts[]
             
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 cxn.add(stmt);
             }
 
@@ -159,7 +159,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : stmts) {
+                for (EmbergraphStatement stmt : stmts) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
@@ -169,7 +169,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             // add the stmts[] again
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 cxn.add(stmt);
             }
 
@@ -183,7 +183,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             // add the stmts2[]
             
-            for (BigdataStatement stmt : stmts2) {
+            for (EmbergraphStatement stmt : stmts2) {
                 cxn.add(stmt);
             }
 
@@ -193,7 +193,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : stmts2) {
+                for (EmbergraphStatement stmt : stmts2) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
@@ -220,26 +220,26 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
      */
     public void testSimpleTxAdd() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
+        EmbergraphSailRepositoryConnection cxn = null;
         
         final Properties properties = getTriplesNoInference();
         
-        properties.setProperty(BigdataSail.Options.ISOLATABLE_INDICES,"true");
+        properties.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES,"true");
         
-        final BigdataSail sail = getSail(properties);
+        final EmbergraphSail sail = getSail(properties);
 
         try {
             
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
             final InMemChangeLog changeLog = new InMemChangeLog();
             cxn.addChangeLog(changeLog);
 
-            final BigdataValueFactory vf = (BigdataValueFactory) sail
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail
                     .getValueFactory();
 
             final String ns = BD.NAMESPACE;
@@ -248,12 +248,12 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final URI b = vf.createURI(ns+"B");
             final URI c = vf.createURI(ns+"C");
             
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, b),
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
 
-            final BigdataStatement[] stmts2 = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts2 = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, c),
             };
 
@@ -262,7 +262,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
             // add the stmts[]
             
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 cxn.add(stmt);
             }
 
@@ -272,7 +272,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : stmts) {
+                for (EmbergraphStatement stmt : stmts) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
@@ -282,7 +282,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             // add the stmts[] again
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 cxn.add(stmt);
             }
 
@@ -296,7 +296,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             // add the stmts2[]
             
-            for (BigdataStatement stmt : stmts2) {
+            for (EmbergraphStatement stmt : stmts2) {
                 cxn.add(stmt);
             }
 
@@ -306,7 +306,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : stmts2) {
+                for (EmbergraphStatement stmt : stmts2) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
@@ -328,19 +328,19 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
     
     public void testSimpleRemove() throws Exception {
 
-        BigdataSailRepositoryConnection cxn = null;
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        EmbergraphSailRepositoryConnection cxn = null;
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
         try {
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
             final InMemChangeLog changeLog = new InMemChangeLog();
             cxn.addChangeLog(changeLog);
     
-            final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
             
             final String ns = BD.NAMESPACE;
             
@@ -348,7 +348,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final URI b = vf.createURI(ns+"B");
             final URI c = vf.createURI(ns+"C");
             
-            final BigdataStatement[] stmts = new BigdataStatement[] {
+            final EmbergraphStatement[] stmts = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, b),
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
@@ -358,7 +358,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
             // add the stmts[]
             
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 cxn.add(stmt);
             }
 
@@ -366,7 +366,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             // remove the stmts[]
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 stmt.setModified(ModifiedEnum.NONE);
                 cxn.remove(stmt);
             }
@@ -381,7 +381,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : stmts) {
+                for (EmbergraphStatement stmt : stmts) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
                 }
                 
@@ -391,7 +391,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             // remove the stmts[] again
 
-            for (BigdataStatement stmt : stmts) {
+            for (EmbergraphStatement stmt : stmts) {
                 cxn.remove(stmt);
             }
 
@@ -415,25 +415,25 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
         if (!Boolean.valueOf(
                 getProperties().getProperty(
-                        BigdataSail.Options.STATEMENT_IDENTIFIERS,
-                        BigdataSail.Options.DEFAULT_STATEMENT_IDENTIFIERS))
+                        EmbergraphSail.Options.STATEMENT_IDENTIFIERS,
+                        EmbergraphSail.Options.DEFAULT_STATEMENT_IDENTIFIERS))
                 .booleanValue()) {
             log.warn("cannot run this test without sids enabled");
             return;
         }
 
-        BigdataSailRepositoryConnection cxn = null;
-        final BigdataSail sail = getSail(getTriplesNoInference());
+        EmbergraphSailRepositoryConnection cxn = null;
+        final EmbergraphSail sail = getSail(getTriplesNoInference());
         try {
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
 
             final InMemChangeLog changeLog = new InMemChangeLog();
             cxn.addChangeLog(changeLog);
         
-            final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
             
             final String ns = BD.NAMESPACE;
             
@@ -447,20 +447,20 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 //            final BNode sid1 = vf.createBNode();
 //            final BNode sid2 = vf.createBNode();
             
-            final BigdataStatement axb = vf.createStatement(a, x, b);
-            final BigdataBNode sid1 = vf.createBNode(axb);
+            final EmbergraphStatement axb = vf.createStatement(a, x, b);
+            final EmbergraphBNode sid1 = vf.createBNode(axb);
             
-            final BigdataStatement[] add = new BigdataStatement[] {
+            final EmbergraphStatement[] add = new EmbergraphStatement[] {
                 axb,
                 vf.createStatement(sid1, y, c),
                 vf.createStatement(d, z, sid1),
             };
 
-            final BigdataStatement[] explicitRemove = new BigdataStatement[] {
+            final EmbergraphStatement[] explicitRemove = new EmbergraphStatement[] {
                 axb,
             };
 
-            final BigdataStatement[] inferredRemove = new BigdataStatement[] {
+            final EmbergraphStatement[] inferredRemove = new EmbergraphStatement[] {
                 vf.createStatement(sid1, y, c),
                 vf.createStatement(d, z, sid1),
             };
@@ -468,7 +468,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 /**/
             cxn.setNamespace("ns", ns);
 
-            for (BigdataStatement stmt : add) {
+            for (EmbergraphStatement stmt : add) {
                 cxn.add(stmt);
             }
 
@@ -491,7 +491,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : add) {
+                for (EmbergraphStatement stmt : add) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
@@ -499,7 +499,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             
             }
         
-            for (BigdataStatement stmt : explicitRemove) {
+            for (EmbergraphStatement stmt : explicitRemove) {
                 cxn.remove(stmt);
             }
 
@@ -509,10 +509,10 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : explicitRemove) {
+                for (EmbergraphStatement stmt : explicitRemove) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
                 }
-                for (BigdataStatement stmt : inferredRemove) {
+                for (EmbergraphStatement stmt : inferredRemove) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
                 }
                 
@@ -536,20 +536,20 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
         if (!Boolean.valueOf(
                 getProperties().getProperty(
-                        BigdataSail.Options.TRUTH_MAINTENANCE,
-                        BigdataSail.Options.DEFAULT_TRUTH_MAINTENANCE))
+                        EmbergraphSail.Options.TRUTH_MAINTENANCE,
+                        EmbergraphSail.Options.DEFAULT_TRUTH_MAINTENANCE))
                 .booleanValue()) {
             log.warn("cannot run this test without TM enabled");
             return;
         }
 
-        BigdataSailRepositoryConnection cxn = null;
-        final BigdataSail sail = getSail(getTriplesWithInference());
+        EmbergraphSailRepositoryConnection cxn = null;
+        final EmbergraphSail sail = getSail(getTriplesWithInference());
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -559,7 +559,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final InferenceChangeLogReporter changeLog2 = new InferenceChangeLogReporter(tripleStore);
             cxn.addChangeLog(changeLog2);
         
-            final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+            final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
             
             final String ns = BD.NAMESPACE;
             
@@ -567,12 +567,12 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final URI b = vf.createURI(ns+"B");
             final URI c = vf.createURI(ns+"C");
             
-            final BigdataStatement[] explicit = new BigdataStatement[] {
+            final EmbergraphStatement[] explicit = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, b),
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
 
-            final BigdataStatement[] inferred = new BigdataStatement[] {
+            final EmbergraphStatement[] inferred = new EmbergraphStatement[] {
                 vf.createStatement(a, RDF.TYPE, RDFS.CLASS),
                 vf.createStatement(a, RDFS.SUBCLASSOF, RDFS.RESOURCE),
                 vf.createStatement(a, RDFS.SUBCLASSOF, a),
@@ -585,14 +585,14 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 vf.createStatement(c, RDFS.SUBCLASSOF, c),
             };
  
-            final BigdataStatement[] upgrades = new BigdataStatement[] {
+            final EmbergraphStatement[] upgrades = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, c),
             };
 
 /**/
             cxn.setNamespace("ns", ns);
 
-            for (BigdataStatement stmt : explicit) {
+            for (EmbergraphStatement stmt : explicit) {
                 cxn.add(stmt);
             }
 
@@ -605,19 +605,19 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             { 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : explicit) {
+                for (EmbergraphStatement stmt : explicit) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
-                for (BigdataStatement stmt : inferred) {
+                for (EmbergraphStatement stmt : inferred) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
                 compare(expected, changeLog.getLastCommit(tripleStore));
                 assertSameIteratorAnyOrder(inferred, changeLog2.addedIterator());
-                assertSameIteratorAnyOrder(new BigdataStatement[]{}, changeLog2.removedIterator());
+                assertSameIteratorAnyOrder(new EmbergraphStatement[]{}, changeLog2.removedIterator());
             }
             
-            for (BigdataStatement stmt : upgrades) {
+            for (EmbergraphStatement stmt : upgrades) {
                 cxn.add(stmt);
             }
 
@@ -630,7 +630,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             { 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : upgrades) {
+                for (EmbergraphStatement stmt : upgrades) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.UPDATED));
                 }
                 
@@ -649,19 +649,19 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
         if (!Boolean.valueOf(
                 getProperties().getProperty(
-                        BigdataSail.Options.TRUTH_MAINTENANCE,
-                        BigdataSail.Options.DEFAULT_TRUTH_MAINTENANCE))
+                        EmbergraphSail.Options.TRUTH_MAINTENANCE,
+                        EmbergraphSail.Options.DEFAULT_TRUTH_MAINTENANCE))
                 .booleanValue()) {
             log.warn("cannot run this test without TM enabled");
             return;
         }
         
-        BigdataSailRepositoryConnection cxn = null;
-        final BigdataSail sail = getSail(getTriplesWithInference());
+        EmbergraphSailRepositoryConnection cxn = null;
+        final EmbergraphSail sail = getSail(getTriplesWithInference());
         try {
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -671,7 +671,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final InferenceChangeLogReporter changeLog2 = new InferenceChangeLogReporter(tripleStore);
             cxn.addChangeLog(changeLog2);
 
-        	final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+        	final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
             
             final String ns = BD.NAMESPACE;
             
@@ -679,12 +679,12 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final URI b = vf.createURI(ns+"B");
             final URI c = vf.createURI(ns+"C");
             
-            final BigdataStatement[] explicitAdd = new BigdataStatement[] {
+            final EmbergraphStatement[] explicitAdd = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, b),
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
 
-            final BigdataStatement[] inferredAdd = new BigdataStatement[] {
+            final EmbergraphStatement[] inferredAdd = new EmbergraphStatement[] {
                 vf.createStatement(a, RDF.TYPE, RDFS.CLASS),
                 vf.createStatement(a, RDFS.SUBCLASSOF, RDFS.RESOURCE),
                 vf.createStatement(a, RDFS.SUBCLASSOF, a),
@@ -697,11 +697,11 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 vf.createStatement(c, RDFS.SUBCLASSOF, c),
             };
  
-            final BigdataStatement[] explicitRemove = new BigdataStatement[] {
+            final EmbergraphStatement[] explicitRemove = new EmbergraphStatement[] {
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
 
-            final BigdataStatement[] inferredRemove = new BigdataStatement[] {
+            final EmbergraphStatement[] inferredRemove = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, c),
                 vf.createStatement(c, RDF.TYPE, RDFS.CLASS),
                 vf.createStatement(c, RDFS.SUBCLASSOF, RDFS.RESOURCE),
@@ -711,7 +711,7 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 /**/
             cxn.setNamespace("ns", ns);
 
-            for (BigdataStatement stmt : explicitAdd) {
+            for (EmbergraphStatement stmt : explicitAdd) {
                 cxn.add(stmt);
             }
 
@@ -721,23 +721,23 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : explicitAdd) {
+                for (EmbergraphStatement stmt : explicitAdd) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
-                for (BigdataStatement stmt : inferredAdd) {
+                for (EmbergraphStatement stmt : inferredAdd) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.INSERTED));
                 }
                 
                 compare(expected, changeLog.getLastCommit(tripleStore));
                 assertSameIteratorAnyOrder(inferredAdd, changeLog2.addedIterator());
-                assertSameIteratorAnyOrder(new BigdataStatement[]{}, changeLog2.removedIterator());
+                assertSameIteratorAnyOrder(new EmbergraphStatement[]{}, changeLog2.removedIterator());
             
             }
         
             // reset
             changeLog2.clear();
             
-            for (BigdataStatement stmt : explicitRemove) {
+            for (EmbergraphStatement stmt : explicitRemove) {
                 cxn.remove(stmt);
             }
 
@@ -747,15 +747,15 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
                 
                 final Collection<IChangeRecord> expected = 
                     new LinkedList<IChangeRecord>();
-                for (BigdataStatement stmt : explicitRemove) {
+                for (EmbergraphStatement stmt : explicitRemove) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
                 }
-                for (BigdataStatement stmt : inferredRemove) {
+                for (EmbergraphStatement stmt : inferredRemove) {
                     expected.add(new ChangeRecord(stmt, ChangeAction.REMOVED));
                 }
                 
                 compare(expected, changeLog.getLastCommit(tripleStore));
-                assertSameIteratorAnyOrder(new BigdataStatement[]{}, changeLog2.addedIterator());
+                assertSameIteratorAnyOrder(new EmbergraphStatement[]{}, changeLog2.addedIterator());
                 assertSameIteratorAnyOrder(inferredRemove, changeLog2.removedIterator());
 
             }
@@ -776,28 +776,28 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 
         if (!Boolean.valueOf(
                 getProperties().getProperty(
-                        BigdataSail.Options.TRUTH_MAINTENANCE,
-                        BigdataSail.Options.DEFAULT_TRUTH_MAINTENANCE))
+                        EmbergraphSail.Options.TRUTH_MAINTENANCE,
+                        EmbergraphSail.Options.DEFAULT_TRUTH_MAINTENANCE))
                 .booleanValue()) {
             log.warn("cannot run this test without TM enabled");
             return;
         }
         
-        BigdataSailRepositoryConnection cxn = null;
-        final BigdataSail sail = getSail(getTriplesWithInference());
+        EmbergraphSailRepositoryConnection cxn = null;
+        final EmbergraphSail sail = getSail(getTriplesWithInference());
 
         try {
 
             sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-            cxn = (BigdataSailRepositoryConnection) repo.getConnection();
+            final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+            cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
             cxn.setAutoCommit(false);
             final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
             final InMemChangeLog changeLog = new InMemChangeLog();
             cxn.addChangeLog(changeLog);
 
-        	final BigdataValueFactory vf = (BigdataValueFactory) sail.getValueFactory();
+        	final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
             
             final String ns = BD.NAMESPACE;
             
@@ -805,12 +805,12 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
             final URI b = vf.createURI(ns+"B");
             final URI c = vf.createURI(ns+"C");
             
-            final BigdataStatement[] explicit = new BigdataStatement[] {
+            final EmbergraphStatement[] explicit = new EmbergraphStatement[] {
                 vf.createStatement(a, RDFS.SUBCLASSOF, b),
                 vf.createStatement(b, RDFS.SUBCLASSOF, c),
             };
 
-//            final BigdataStatement[] inferred = new BigdataStatement[] {
+//            final EmbergraphStatement[] inferred = new EmbergraphStatement[] {
 //                vf.createStatement(a, RDF.TYPE, RDFS.CLASS),
 //                vf.createStatement(a, RDFS.SUBCLASSOF, RDFS.RESOURCE),
 //                vf.createStatement(a, RDFS.SUBCLASSOF, a),
@@ -823,15 +823,15 @@ public class TestChangeSets extends ProxyBigdataSailTestCase {
 //                vf.createStatement(c, RDFS.SUBCLASSOF, c),
 //            };
  
-//            final BigdataStatement[] updates = new BigdataStatement[] {
-            BigdataStatement update =
+//            final EmbergraphStatement[] updates = new EmbergraphStatement[] {
+            EmbergraphStatement update =
                 vf.createStatement(a, RDFS.SUBCLASSOF, c);
 //            };
 
 /**/
             cxn.setNamespace("ns", ns);
 
-            for (BigdataStatement stmt : explicit) {
+            for (EmbergraphStatement stmt : explicit) {
                 cxn.add(stmt);
             }
 

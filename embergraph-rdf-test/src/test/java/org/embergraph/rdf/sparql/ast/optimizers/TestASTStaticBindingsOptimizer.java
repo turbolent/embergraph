@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
@@ -36,10 +40,6 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AbstractASTEvaluationTestCase;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
@@ -192,12 +192,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
         * Note: DO NOT SHARE STRUCTURES IN THIS TEST.
         */
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataLiteral c12Lit = f.createLiteral(12);
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphLiteral c12Lit = f.createLiteral(12);
 
       final IV c12 = makeIV(c12Lit);
       
-      final BigdataValue[] values = new BigdataValue[] { c12Lit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { c12Lit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
@@ -279,12 +279,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromBind() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
 
       final IV cTest = makeIV(cTestUri);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -371,12 +371,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromBindNested1() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
 
       final IV cTest = makeIV(cTestUri);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -469,12 +469,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromBindNested2() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
 
       final IV cTest = makeIV(cTestUri);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -566,12 +566,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromTopLevelValues() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
 
       final IV cTest = makeIV(cTestUri);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -669,12 +669,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromValues() {
 
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
 
       final IV cTest = makeIV(cTestUri);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -771,13 +771,13 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testMergeWithSimpleExogeneousMapping() {
       
-      final BigdataLiteral cTrueLit = store.getValueFactory().createLiteral(true);
-      final BigdataLiteral cFalseLit = store.getValueFactory().createLiteral(false);
+      final EmbergraphLiteral cTrueLit = store.getValueFactory().createLiteral(true);
+      final EmbergraphLiteral cFalseLit = store.getValueFactory().createLiteral(false);
       
       final IV cTrue = makeIV(cTrueLit);
       final IV cFalse = makeIV(cFalseLit);
 
-      final BigdataValue[] values = new BigdataValue[] { 
+      final EmbergraphValue[] values = new EmbergraphValue[] {
             cTrueLit, cFalseLit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
@@ -875,16 +875,16 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInliningForComplexExogeneousMapping() {
       
-      final BigdataLiteral a1LitBD = store.getValueFactory().createLiteral("a1");
-      final BigdataLiteral a2LitBD = store.getValueFactory().createLiteral("a2");
-      final BigdataLiteral a3LitBD = store.getValueFactory().createLiteral("a3");
-      final BigdataLiteral bLitBD =  store.getValueFactory().createLiteral("b");
-      final BigdataLiteral c1LitBD = store.getValueFactory().createLiteral("c1");
-      final BigdataLiteral c2LitBD = store.getValueFactory().createLiteral("c2");
-      final BigdataLiteral c3LitBD = store.getValueFactory().createLiteral("c3");
-      final BigdataLiteral d1LitBD = store.getValueFactory().createLiteral("d1");
-      final BigdataLiteral d2LitBD = store.getValueFactory().createLiteral("d2");
-      final BigdataLiteral eLitBD = store.getValueFactory().createLiteral("e");
+      final EmbergraphLiteral a1LitBD = store.getValueFactory().createLiteral("a1");
+      final EmbergraphLiteral a2LitBD = store.getValueFactory().createLiteral("a2");
+      final EmbergraphLiteral a3LitBD = store.getValueFactory().createLiteral("a3");
+      final EmbergraphLiteral bLitBD =  store.getValueFactory().createLiteral("b");
+      final EmbergraphLiteral c1LitBD = store.getValueFactory().createLiteral("c1");
+      final EmbergraphLiteral c2LitBD = store.getValueFactory().createLiteral("c2");
+      final EmbergraphLiteral c3LitBD = store.getValueFactory().createLiteral("c3");
+      final EmbergraphLiteral d1LitBD = store.getValueFactory().createLiteral("d1");
+      final EmbergraphLiteral d2LitBD = store.getValueFactory().createLiteral("d2");
+      final EmbergraphLiteral eLitBD = store.getValueFactory().createLiteral("e");
       
       final IV a1Lit = makeIV(a1LitBD);
       final IV a2Lit = makeIV(a2LitBD);
@@ -898,7 +898,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       final IV eLit = makeIV(eLitBD);
       
       
-      final BigdataValue[] values = new BigdataValue[] { 
+      final EmbergraphValue[] values = new EmbergraphValue[] {
             a1LitBD, a2LitBD, a3LitBD, bLitBD, c1LitBD, c2LitBD, c3LitBD, d1LitBD, d2LitBD, eLitBD };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
@@ -1054,12 +1054,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
        * Note: DO NOT SHARE STRUCTURES IN THIS TEST.
        */
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataLiteral c12Lit = f.createLiteral(12);
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphLiteral c12Lit = f.createLiteral(12);
 
       final IV c12 = makeIV(c12Lit);
       
-      final BigdataValue[] values = new BigdataValue[] { c12Lit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { c12Lit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -1150,12 +1150,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineSimpleFilterEqURI() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI fooLit = f.createURI(":foo");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI fooLit = f.createURI(":foo");
 
       final IV foo = makeIV(fooLit);
       
-      final BigdataValue[] values = new BigdataValue[] { fooLit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { fooLit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
@@ -1243,12 +1243,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineSimpleFilterINURI() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI fooLit = f.createURI(":foo");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI fooLit = f.createURI(":foo");
 
       final IV foo = makeIV(fooLit);
       
-      final BigdataValue[] values = new BigdataValue[] { fooLit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { fooLit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
@@ -1320,12 +1320,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineSimpleFilterEqURIRev() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI fooLit = f.createURI(":foo");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI fooLit = f.createURI(":foo");
 
       final IV foo = makeIV(fooLit);
       
-      final BigdataValue[] values = new BigdataValue[] { fooLit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { fooLit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
@@ -1408,12 +1408,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
         * Note: DO NOT SHARE STRUCTURES IN THIS TEST.
         */
        
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataLiteral fooLit = f.createLiteral("foo");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphLiteral fooLit = f.createLiteral("foo");
 
       final IV foo = makeIV(fooLit);
       
-      final BigdataValue[] values = new BigdataValue[] { fooLit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { fooLit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
 
@@ -1482,12 +1482,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
        * Note: DO NOT SHARE STRUCTURES IN THIS TEST.
        */
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataLiteral fooLit = f.createLiteral("foo");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphLiteral fooLit = f.createLiteral("foo");
 
       final IV foo = makeIV(fooLit);
       
-      final BigdataValue[] values = new BigdataValue[] { fooLit };
+      final EmbergraphValue[] values = new EmbergraphValue[] { fooLit };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -1601,16 +1601,16 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testValuesComplexExogeneousMappingInSubquery() {
       
-      final BigdataLiteral a1LitBD = store.getValueFactory().createLiteral("a1");
-      final BigdataLiteral a2LitBD = store.getValueFactory().createLiteral("a2");
-      final BigdataLiteral a3LitBD = store.getValueFactory().createLiteral("a3");
-      final BigdataLiteral bLitBD =  store.getValueFactory().createLiteral("b");
-      final BigdataLiteral c1LitBD = store.getValueFactory().createLiteral("c1");
-      final BigdataLiteral c2LitBD = store.getValueFactory().createLiteral("c2");
-      final BigdataLiteral c3LitBD = store.getValueFactory().createLiteral("c3");
-      final BigdataLiteral d1LitBD = store.getValueFactory().createLiteral("d1");
-      final BigdataLiteral d2LitBD = store.getValueFactory().createLiteral("d2");
-      final BigdataLiteral eLitBD = store.getValueFactory().createLiteral("e");
+      final EmbergraphLiteral a1LitBD = store.getValueFactory().createLiteral("a1");
+      final EmbergraphLiteral a2LitBD = store.getValueFactory().createLiteral("a2");
+      final EmbergraphLiteral a3LitBD = store.getValueFactory().createLiteral("a3");
+      final EmbergraphLiteral bLitBD =  store.getValueFactory().createLiteral("b");
+      final EmbergraphLiteral c1LitBD = store.getValueFactory().createLiteral("c1");
+      final EmbergraphLiteral c2LitBD = store.getValueFactory().createLiteral("c2");
+      final EmbergraphLiteral c3LitBD = store.getValueFactory().createLiteral("c3");
+      final EmbergraphLiteral d1LitBD = store.getValueFactory().createLiteral("d1");
+      final EmbergraphLiteral d2LitBD = store.getValueFactory().createLiteral("d2");
+      final EmbergraphLiteral eLitBD = store.getValueFactory().createLiteral("e");
       
       final IV a1Lit = makeIV(a1LitBD);
       final IV a2Lit = makeIV(a2LitBD);
@@ -1624,7 +1624,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       final IV eLit = makeIV(eLitBD);
       
       
-      final BigdataValue[] values = new BigdataValue[] { 
+      final EmbergraphValue[] values = new EmbergraphValue[] {
             a1LitBD, a2LitBD, a3LitBD, bLitBD, c1LitBD, c2LitBD, c3LitBD, d1LitBD, d2LitBD, eLitBD };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
@@ -1778,12 +1778,12 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromBindInFilter() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
 
       final IV cTest = makeIV(cTestUri);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -1871,14 +1871,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineFromBindInComplexFilter() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
-      final BigdataURI cTestUri2 = f.createURI("http://www.test2.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphURI cTestUri2 = f.createURI("http://www.test2.com");
 
       final IV cTest = makeIV(cTestUri);
       final IV cTest2 = makeIV(cTestUri2);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri, cTestUri2 };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri, cTestUri2 };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -1985,14 +1985,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testInlineWithSubquery() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
-      final BigdataURI cTestUri2 = f.createURI("http://www.test2.com");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphURI cTestUri2 = f.createURI("http://www.test2.com");
 
       final IV cTest = makeIV(cTestUri);
       final IV cTest2 = makeIV(cTestUri2);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri, cTestUri2 };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri, cTestUri2 };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -2133,16 +2133,16 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testSubqueryWithValues() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI c1BD = f.createURI("http://www.test.com");
-      final BigdataLiteral c2BD = f.createLiteral("X");
-      final BigdataLiteral c3BD = f.createLiteral("Y");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI c1BD = f.createURI("http://www.test.com");
+      final EmbergraphLiteral c2BD = f.createLiteral("X");
+      final EmbergraphLiteral c3BD = f.createLiteral("Y");
 
       final IV c1 = makeIV(c1BD);
       final IV c2 = makeIV(c2BD);
       final IV c3 = makeIV(c3BD);
       
-      final BigdataValue[] values = new BigdataValue[] { c1BD, c2BD, c3BD };
+      final EmbergraphValue[] values = new EmbergraphValue[] { c1BD, c2BD, c3BD };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       
@@ -2302,17 +2302,17 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testTicket653() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.yso.fi/onto/ysa/Y141994");
-      final BigdataURI rdfTypeUri = f.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
-      final BigdataURI rdfsLabelUri = f.createURI("http://www.w3.org/2000/01/rdf-schema#label");
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.yso.fi/onto/ysa/Y141994");
+      final EmbergraphURI rdfTypeUri = f.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+      final EmbergraphURI rdfsLabelUri = f.createURI("http://www.w3.org/2000/01/rdf-schema#label");
       
       final IV cTest = makeIV(cTestUri);
       final IV rdfType = makeIV(cTestUri);
       final IV rdfsLabel = makeIV(rdfsLabelUri);
       
-      final BigdataValue[] values = 
-         new BigdataValue[] { cTestUri, rdfTypeUri, rdfsLabelUri };
+      final EmbergraphValue[] values =
+         new EmbergraphValue[] { cTestUri, rdfTypeUri, rdfsLabelUri };
       
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
@@ -2421,16 +2421,16 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     */
    public void testTicketBLZG2042() {
       
-      final BigdataValueFactory f = store.getValueFactory();
-      final BigdataURI cTestUri = f.createURI("http://www.test.com");
-      final BigdataValue bv1 = store.getValueFactory().asValue(new URIImpl("http://p1"));
-      final BigdataValue bv2 = store.getValueFactory().asValue(new URIImpl("http://p2"));
+      final EmbergraphValueFactory f = store.getValueFactory();
+      final EmbergraphURI cTestUri = f.createURI("http://www.test.com");
+      final EmbergraphValue bv1 = store.getValueFactory().asValue(new URIImpl("http://p1"));
+      final EmbergraphValue bv2 = store.getValueFactory().asValue(new URIImpl("http://p2"));
 
       final IV cTest = makeIV(cTestUri);
       final IV iv1 = makeIV(bv1);
       final IV iv2 = makeIV(bv2);
       
-      final BigdataValue[] values = new BigdataValue[] { cTestUri };
+      final EmbergraphValue[] values = new EmbergraphValue[] { cTestUri };
       store.getLexiconRelation()
               .addTerms(values, values.length, false/* readOnly */);
       

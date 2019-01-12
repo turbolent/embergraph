@@ -19,11 +19,11 @@ package org.embergraph.rdf.internal.impl.bnode;
 
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.openrdf.model.BNode;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 
@@ -40,7 +40,7 @@ import org.embergraph.util.Bytes;
  * 
  * @see AbstractTripleStore.Options
  */
-public class UUIDBNodeIV<V extends BigdataBNode> extends
+public class UUIDBNodeIV<V extends EmbergraphBNode> extends
         AbstractBNodeIV<V, UUID> {
 
     /**

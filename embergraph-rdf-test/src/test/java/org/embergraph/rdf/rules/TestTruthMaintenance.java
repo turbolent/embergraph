@@ -30,6 +30,8 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.log4j.MDC;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
@@ -39,10 +41,8 @@ import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.rdf.inf.TruthMaintenance;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.spo.ExplicitSPOFilter;
@@ -104,13 +104,13 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
              * Setup some terms.
              */
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI x = f.createURI("http://www.foo.org/x1");
-            final BigdataURI y = f.createURI("http://www.foo.org/y2");
-            final BigdataURI z = f.createURI("http://www.foo.org/z3");
+            final EmbergraphURI x = f.createURI("http://www.foo.org/x1");
+            final EmbergraphURI y = f.createURI("http://www.foo.org/y2");
+            final EmbergraphURI z = f.createURI("http://www.foo.org/z3");
             
-            store.addTerms(new BigdataValue[] { x, y, z });
+            store.addTerms(new EmbergraphValue[] { x, y, z });
             
             final IV x1 = x.getIV();
             final IV y2 = y.getIV();
@@ -236,13 +236,13 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
             
             final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI U = f.createURI("http://www.embergraph.org/U");
-            final BigdataURI V = f.createURI("http://www.embergraph.org/V");
-            final BigdataURI X = f.createURI("http://www.embergraph.org/X");
+            final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
+            final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
+            final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
 
-            final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
             tempStore = tm.newTempTripleStore();
 
@@ -312,13 +312,13 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         
         try {
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
             
-            final BigdataURI U = f.createURI("http://www.embergraph.org/U");
-            final BigdataURI V = f.createURI("http://www.embergraph.org/V");
-            final BigdataURI X = f.createURI("http://www.embergraph.org/X");
+            final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
+            final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
+            final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
 
-            final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
             final InferenceEngine inf = store.getInferenceEngine();
 
@@ -455,13 +455,13 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
             
             final TruthMaintenance tm = new TruthMaintenance(store.getInferenceEngine());
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI U = f.createURI("http://www.embergraph.org/U");
-            final BigdataURI V = f.createURI("http://www.embergraph.org/V");
-            final BigdataURI X = f.createURI("http://www.embergraph.org/X");
+            final EmbergraphURI U = f.createURI("http://www.embergraph.org/U");
+            final EmbergraphURI V = f.createURI("http://www.embergraph.org/V");
+            final EmbergraphURI X = f.createURI("http://www.embergraph.org/X");
 
-            final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
 
             {
 
@@ -648,7 +648,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
                 // verify that stmt c is marked as explicit in the kb.
 
-                final BigdataStatement stmtC = (BigdataStatement) store
+                final EmbergraphStatement stmtC = (EmbergraphStatement) store
                         .getStatement(foo, rdftype, graph);
                 
                 assertNotNull(stmtC);
@@ -687,7 +687,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
                 // verify that stmt c is marked as explicit in the kb.
 
-                final BigdataStatement stmtC = (BigdataStatement) store
+                final EmbergraphStatement stmtC = (EmbergraphStatement) store
                         .getStatement(foo, rdftype, graph);
                 
                 assertNotNull(stmtC);

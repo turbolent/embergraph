@@ -33,6 +33,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.openrdf.model.Value;
 
 import org.embergraph.bop.BOp;
@@ -52,9 +54,7 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.LocalTripleStore;
@@ -80,7 +80,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
     protected AbstractTripleStore store = null;
 
-    protected BigdataValueFactory valueFactory = null;
+    protected EmbergraphValueFactory valueFactory = null;
 
     protected String baseURI = null;
 
@@ -159,7 +159,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
         properties.setProperty(AbstractTripleStore.Options.QUADS, "true");
 
         // TM not available with quads.
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,"false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
 
 //        // override the default vocabulary.
 //        properties.setProperty(AbstractTripleStore.Options.VOCABULARY_CLASS,
@@ -267,13 +267,13 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 //     * Return a mock IV for the value.
 //     */
 //    @SuppressWarnings("unchecked")
-//    protected IV<BigdataValue, ?> mockIV(final BigdataValue value) {
+//    protected IV<EmbergraphValue, ?> mockIV(final EmbergraphValue value) {
 //
 //        IV iv = store.getLexiconRelation().getInlineIV(value);
 //
 //        if (iv == null) {
 //
-//            iv = (IV<BigdataValue, ?>) TermId.mockIV(VTE.valueOf(value));
+//            iv = (IV<EmbergraphValue, ?>) TermId.mockIV(VTE.valueOf(value));
 //            
 //            iv.setValue(value);
 //
@@ -293,7 +293,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     protected IV makeIV(final Value v) {
-        final BigdataValue bv = store.getValueFactory().asValue(v);
+        final EmbergraphValue bv = store.getValueFactory().asValue(v);
         final IV iv = TermId.mockIV(VTE.valueOf(v));
         iv.setValue(bv);
         return iv;

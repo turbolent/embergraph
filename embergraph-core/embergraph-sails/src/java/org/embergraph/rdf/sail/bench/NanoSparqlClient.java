@@ -59,8 +59,7 @@ import org.openrdf.rio.helpers.StatementCollector;
 import org.embergraph.counters.CAT;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.jsr166.LinkedBlockingQueue;
-import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.store.AbstractTripleStore;
@@ -239,7 +238,7 @@ public class NanoSparqlClient {
 //			final QueryParser engine = new SPARQLParserFactory().getParser();
 //			
 //			final ParsedQuery q = engine.parseQuery(opts.queryStr, opts.baseURI);
-            final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+            final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                     .parseQuery2(opts.queryStr, opts.baseURI);
 
             final QueryType queryType = opts.queryType = astContainer
@@ -299,7 +298,7 @@ public class NanoSparqlClient {
 //                 * at all, but I have not yet looked at modifying the parser to
 //                 * accept a null KB reference for this use case.
                  */
-//                final ASTContainer astContainer = new Bigdata2ASTSPARQLParser(
+//                final ASTContainer astContainer = new Embergraph2ASTSPARQLParser(
 //                        opts.tmpKb).parseQuery2(opts.queryStr, opts.baseURI);
 //
 //                final QueryType queryType = opts.queryType = astContainer

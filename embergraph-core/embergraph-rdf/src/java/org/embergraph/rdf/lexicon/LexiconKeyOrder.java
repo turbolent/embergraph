@@ -3,6 +3,7 @@ package org.embergraph.rdf.lexicon;
 import java.io.ObjectStreamException;
 import java.util.Comparator;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
 import org.embergraph.btree.keys.IKeyBuilder;
@@ -11,7 +12,6 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.striterator.AbstractKeyOrder;
 
 /**
@@ -20,7 +20,7 @@ import org.embergraph.striterator.AbstractKeyOrder;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-public class LexiconKeyOrder extends AbstractKeyOrder<BigdataValue> {
+public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
 
     /*
      * Note: these constants make it possible to use switch(index())
@@ -60,7 +60,7 @@ public class LexiconKeyOrder extends AbstractKeyOrder<BigdataValue> {
             _BLOBS);
 
     /**
-     * The positional index corresponding to the {@link BigdataValue} in a
+     * The positional index corresponding to the {@link EmbergraphValue} in a
      * {@link LexPredicate}.
      */
     public final static transient int SLOT_TERM = 0;
@@ -182,15 +182,15 @@ public class LexiconKeyOrder extends AbstractKeyOrder<BigdataValue> {
      * <p>
      * Note: The TERMS index key order is defined by the {@link BlobIV} keys.
      * They are formed from the {@link VTE}, the hashCode (of the
-     * {@link BigdataValue}), and a collision counter. The collision counter is
+     * {@link EmbergraphValue}), and a collision counter. The collision counter is
      * not known unless you actually scan the collision bucket in the TERMS
      * index. So there is no way to provide a comparator for the TERMS index
-     * unless all of the {@link BigdataValue}s have been resolved to their
+     * unless all of the {@link EmbergraphValue}s have been resolved to their
      * {@link BlobIV}s.
      * 
      * @throws UnsupportedOperationException
      */
-    final public Comparator<BigdataValue> getComparator() {
+    final public Comparator<EmbergraphValue> getComparator() {
 
         throw new UnsupportedOperationException();
 

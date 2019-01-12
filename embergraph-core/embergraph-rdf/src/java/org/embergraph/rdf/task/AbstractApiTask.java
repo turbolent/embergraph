@@ -29,6 +29,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
@@ -41,13 +44,10 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.changesets.IChangeRecord;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
 import org.embergraph.resources.IndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreHelper;
 
 /**
@@ -210,7 +210,7 @@ abstract public class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
      * @throws RepositoryException
      * @throws DatasetNotFoundException
      */
-    protected BigdataSailRepositoryConnection getQueryConnection()
+    protected EmbergraphSailRepositoryConnection getQueryConnection()
             throws RepositoryException {
 
         /*
@@ -232,25 +232,25 @@ abstract public class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
      * @throws RepositoryException
      * @throws DatasetNotFoundException
      */
-	protected BigdataSailRepositoryConnection getQueryConnection(
+	protected EmbergraphSailRepositoryConnection getQueryConnection(
 			final String namespace, final long timestamp)
 			throws RepositoryException {
 
         // Wrap with SAIL.
-        final BigdataSail sail = new BigdataSail(namespace, getIndexManager());
+        final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());
 
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
         repo.initialize();
 
         if (TimestampUtility.isReadOnly(timestamp)) {
 
-            return (BigdataSailRepositoryConnection) repo.getReadOnlyConnection(timestamp);
+            return (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection(timestamp);
 
         }
 
         // Read-write connection.
-        final BigdataSailRepositoryConnection conn = repo.getConnection();
+        final EmbergraphSailRepositoryConnection conn = repo.getConnection();
 
         conn.setAutoCommit(false);
 
@@ -258,14 +258,14 @@ abstract public class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
 
     }
 
-    protected BigdataSailConnection getUnisolatedSailConnection() throws SailException, InterruptedException {
+    protected EmbergraphSailConnection getUnisolatedSailConnection() throws SailException, InterruptedException {
         
         // Wrap with SAIL.
-        final BigdataSail sail = new BigdataSail(namespace, getIndexManager());
+        final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());
 
         sail.initialize();
 
-        final BigdataSailConnection conn = sail.getUnisolatedConnection();
+        final EmbergraphSailConnection conn = sail.getUnisolatedConnection();
         
         // Setup a change listener. It will notice the #of mutations.
         conn.addChangeLog(new SailChangeLog());
@@ -287,17 +287,17 @@ abstract public class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     * @throws DatasetNotFoundException
     *            if the specified namespace does not exist.
     */
-    protected BigdataSailRepositoryConnection getConnection()
+    protected EmbergraphSailRepositoryConnection getConnection()
             throws SailException, RepositoryException {
     
         // Wrap with SAIL.
-        final BigdataSail sail = new BigdataSail(namespace, getIndexManager());
+        final EmbergraphSail sail = new EmbergraphSail(namespace, getIndexManager());
 
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
         repo.initialize();
 
-        final BigdataSailRepositoryConnection conn = repo.getConnection();
+        final EmbergraphSailRepositoryConnection conn = repo.getConnection();
         
         conn.setAutoCommit(false);
         
@@ -366,7 +366,7 @@ abstract public class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
       final long timestamp = task.getTimestamp();
 
       if (!indexManager.isGroupCommit()
-            || indexManager instanceof IBigdataFederation
+            || indexManager instanceof IEmbergraphFederation
             || TimestampUtility.isReadOnly(timestamp)) {
 
          /*

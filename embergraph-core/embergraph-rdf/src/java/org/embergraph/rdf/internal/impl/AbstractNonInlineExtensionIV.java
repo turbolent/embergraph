@@ -26,7 +26,7 @@ import org.embergraph.rdf.internal.IExtensionIV;
 import org.embergraph.rdf.internal.INonInlineExtensionCodes;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Abstract base class for non-inline {@link IV}s which use the extension bit
@@ -36,7 +36,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
-abstract public class AbstractNonInlineExtensionIV<V extends BigdataValue, T>
+abstract public class AbstractNonInlineExtensionIV<V extends EmbergraphValue, T>
         extends AbstractNonInlineIV<V, T> implements IExtensionIV {
 
     private static final long serialVersionUID = 1L;

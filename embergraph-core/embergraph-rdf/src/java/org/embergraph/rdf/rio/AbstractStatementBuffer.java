@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphResource;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
@@ -17,12 +23,6 @@ import org.openrdf.model.impl.ContextStatementImpl;
 import org.openrdf.model.impl.StatementImpl;
 
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataResource;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPORelation;
@@ -32,9 +32,9 @@ import org.embergraph.rdf.store.TripleStoreUtility;
 
 /**
  * Class for efficiently converting {@link Statement}s into
- * {@link BigdataStatement}s, including resolving term identifiers (or adding
+ * {@link EmbergraphStatement}s, including resolving term identifiers (or adding
  * entries to the lexicon for unknown terms) as required. The class does not
- * write the converted {@link BigdataStatement}s onto the database, but that can
+ * write the converted {@link EmbergraphStatement}s onto the database, but that can
  * be easily done using a resolving iterator pattern.
  * 
  * @todo In fact, RIO also keeps a blank node map so that it can reuse the same
@@ -51,7 +51,7 @@ import org.embergraph.rdf.store.TripleStoreUtility;
  *       goes into a canonicalizing Set (add iff not found and return, otherwise
  *       return the existing Value). The canonicalized value is used by the
  *       statement. An incremental write will cause all terms in the Value[] to
- *       be assigned term identifiers, so they should be BigdataValue objects.
+ *       be assigned term identifiers, so they should be EmbergraphValue objects.
  *       The statements now have term identifiers and they are written onto the
  *       DB. When the end of the document is reached, there will be deferred
  *       statements iff there were blank nodes. Those are then processed per the
@@ -59,7 +59,7 @@ import org.embergraph.rdf.store.TripleStoreUtility;
  *       with statment identifiers otherwise just assign term identifiers to
  *       blank nodes.) Note that the Value[] should be empty after each
  *       incremental write. If there are deferred statements, then they already
- *       have BigdataValue objects binding their term identifiers. When we
+ *       have EmbergraphValue objects binding their term identifiers. When we
  *       process the deferred statements we should only be assigning term
  *       identifiers for blank nodes -- everything else should already have its
  *       term identifier assigned for the deferred statements.
@@ -75,10 +75,10 @@ import org.embergraph.rdf.store.TripleStoreUtility;
  *            The generic type of the source {@link Statement} added to the
  *            buffer by the callers.
  * @param <G>
- *            The generic type of the {@link BigdataStatement}s stored in the
+ *            The generic type of the {@link EmbergraphStatement}s stored in the
  *            buffer.
  */
-abstract public class AbstractStatementBuffer<F extends Statement, G extends BigdataStatement>
+abstract public class AbstractStatementBuffer<F extends Statement, G extends EmbergraphStatement>
         implements IStatementBuffer<F> {
 
     protected static final Logger log = Logger.getLogger(AbstractStatementBuffer.class);
@@ -105,16 +105,16 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     protected final boolean readOnly;
 
     /**
-     * The maximum #of {@link BigdataStatement}s that can be buffered
+     * The maximum #of {@link EmbergraphStatement}s that can be buffered
      * before the buffer {@link #overflow()}s (from the ctor).
      */
     private final int capacity;
     
     /**
-     * Buffer for canonical {@link BigdataValue}s. This buffer is cleared
+     * Buffer for canonical {@link EmbergraphValue}s. This buffer is cleared
      * each time it overflows.
      */
-    private final BigdataValue[] valueBuffer;
+    private final EmbergraphValue[] valueBuffer;
 
     /**
      * The #of elements in {@link #valueBuffer}.
@@ -122,7 +122,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     private int nvalues = 0;
     
     /**
-     * Buffer for accepted {@link BigdataStatement}s. This buffer is
+     * Buffer for accepted {@link EmbergraphStatement}s. This buffer is
      * cleared each time it would overflow.
      */
     protected final G[] statementBuffer;
@@ -152,7 +152,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
      * Map used to filter out duplicate terms.  The use of this map provides
      * a ~40% performance gain.
      */
-    final private Map<Value, BigdataValue> distinctValues;
+    final private Map<Value, EmbergraphValue> distinctValues;
 
     /**
      * A canonicalizing map for blank nodes. This map MUST be cleared before you
@@ -165,7 +165,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
      * Note: This is allocated lazily so that we can implement
      * {@link IStatementBuffer#setBNodeMap(Map)}
      */
-    private Map<String, BigdataBNode> bnodes = null;
+    private Map<String, EmbergraphBNode> bnodes = null;
 
     /**
      * The database from the ctor.
@@ -191,13 +191,13 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
      * The {@link ValueFactory} for {@link Statement}s and {@link Value}s
      * created by this class.
      */
-    public BigdataValueFactory getValueFactory() {
+    public EmbergraphValueFactory getValueFactory() {
 
         return valueFactory;
         
     }
     
-    final private BigdataValueFactory valueFactory;
+    final private EmbergraphValueFactory valueFactory;
     
     /**
      * @param db
@@ -232,13 +232,13 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
         
         this.readOnly = readOnly;
 
-        this.valueBuffer = new BigdataValue[capacity * 3];
+        this.valueBuffer = new EmbergraphValue[capacity * 3];
 
-        this.statementBuffer = (G[])new BigdataStatement[capacity];
+        this.statementBuffer = (G[])new EmbergraphStatement[capacity];
         
-//        this.distinctValues = new HashMap<Value, BigdataValue>(capacity
+//        this.distinctValues = new HashMap<Value, EmbergraphValue>(capacity
 //                * IRawTripleStore.N);
-        this.distinctValues = new HashMap<Value, BigdataValue>(capacity
+        this.distinctValues = new HashMap<Value, EmbergraphValue>(capacity
                 * db.getSPOKeyArity());
 
         this.deferredStatementBuffer = db.getStatementIdentifiers() ? new LinkedList<G>()
@@ -248,7 +248,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 
     }
 
-    public void setBNodeMap(final Map<String, BigdataBNode> bnodes) {
+    public void setBNodeMap(final Map<String, EmbergraphBNode> bnodes) {
     
         if (bnodes == null)
             throw new IllegalArgumentException();
@@ -261,13 +261,13 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     }
         
     /**
-     * Return a canonical {@link BigdataValue} instance representing the given
+     * Return a canonical {@link EmbergraphValue} instance representing the given
      * <i>value</i>. The scope of the canonical instance is until the next
      * internal buffer overflow ({@link URI}s and {@link Literal}s) or until
      * {@link #flush()} ({@link BNode}s, since blank nodes are global for a
      * given source). The purpose of the canonicalizing mapping is to reduce the
-     * buffered {@link BigdataValue}s to the minimum variety required to
-     * represent the buffered {@link BigdataStatement}s, which improves
+     * buffered {@link EmbergraphValue}s to the minimum variety required to
+     * represent the buffered {@link EmbergraphStatement}s, which improves
      * throughput significantly (40%) when resolving terms to the corresponding
      * term identifiers using the {@link LexiconRelation}.
      * <p>
@@ -281,12 +281,12 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
      * @param value
      *            A value.
      * 
-     * @return The corresponding canonical {@link BigdataValue} for the target
-     *         {@link BigdataValueFactory}. This will be <code>null</code>
+     * @return The corresponding canonical {@link EmbergraphValue} for the target
+     *         {@link EmbergraphValueFactory}. This will be <code>null</code>
      *         iff the <i>value</i> is <code>null</code> (allows for the
      *         context to be undefined).
      */
-    protected BigdataValue convertValue(final Value value) {
+    protected EmbergraphValue convertValue(final Value value) {
 
         if (value == null)
             return null;
@@ -306,11 +306,11 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
             if (bnodes == null) {
 
                 // allocate map lazily.
-                bnodes = new HashMap<String, BigdataBNode>(capacity);
+                bnodes = new HashMap<String, EmbergraphBNode>(capacity);
 
             }
             
-            BigdataBNode b = bnodes.get(id);
+            EmbergraphBNode b = bnodes.get(id);
 
             if (b == null) {
 
@@ -331,7 +331,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
              * Handle URIs and Literals.
              */
             
-            BigdataValue b = distinctValues.get(value);
+            EmbergraphValue b = distinctValues.get(value);
 
             if (b == null) {
 
@@ -396,9 +396,9 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 
     /**
      * Imposes a canonical mapping on the subject, predicate, and objects of the
-     * given {@link Statement}s and stores a new {@link BigdataStatement}
+     * given {@link Statement}s and stores a new {@link EmbergraphStatement}
      * instance in the internal buffer. If the given statement is a
-     * {@link BigdataStatement} then its {@link StatementEnum} will be used.
+     * {@link EmbergraphStatement} then its {@link StatementEnum} will be used.
      * Otherwise the new statement will be {@link StatementEnum#Explicit}.
      * <p>
      * Note: Unlike the {@link Value}s, a canonicalizing mapping is NOT imposed
@@ -416,11 +416,11 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
         }
         
         final G stmt = (G) getValueFactory().createStatement(
-                (BigdataResource) convertValue(e.getSubject()),
-                (BigdataURI)      convertValue(e.getPredicate()),
+                (EmbergraphResource) convertValue(e.getSubject()),
+                (EmbergraphURI)      convertValue(e.getPredicate()),
                     convertValue(e.getObject()),
-                (BigdataResource) convertValue(e.getContext()),
-                (e instanceof BigdataStatement ? ((BigdataStatement) e)
+                (EmbergraphResource) convertValue(e.getContext()),
+                (e instanceof EmbergraphStatement ? ((EmbergraphStatement) e)
                         .getStatementType() : StatementEnum.Explicit));
 
         if (deferredStatementBuffer != null
@@ -475,10 +475,10 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     public void add(Resource s, URI p, Value o, Resource c, StatementEnum type) {
         
         final G stmt = (G)  getValueFactory().createStatement(
-                (BigdataResource) convertValue(s),
-                (BigdataURI)      convertValue(p),
+                (EmbergraphResource) convertValue(s),
+                (EmbergraphURI)      convertValue(p),
                                   convertValue(o),
-                (BigdataResource) convertValue(c),
+                (EmbergraphResource) convertValue(c),
                 type);
         
         add((F)stmt); 
@@ -487,7 +487,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 
     /**
      * Efficiently resolves/adds term identifiers for the buffered
-     * {@link BigdataValue}s.
+     * {@link EmbergraphValue}s.
      * <p>
      * If {@link #readOnly}), then the term identifier for unknown values
      * will remain {@link IRawTripleStore#NULL}.
@@ -502,7 +502,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     }
 
     /**
-     * Processes any {@link BigdataStatement}s in the
+     * Processes any {@link EmbergraphStatement}s in the
      * {@link #deferredStatementBuffer}, adding them to the
      * {@link #statementBuffer}, which may cause the latter to
      * {@link #overflow()}.
@@ -529,8 +529,8 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     /**
      * Invoked each time the {@link #statementBuffer} buffer would overflow.
      * This method is responsible for bulk resolving / adding the buffered
-     * {@link BigdataValue}s against the {@link #db} and adding the fully
-     * resolved {@link BigdataStatement}s to the queue on which the
+     * {@link EmbergraphValue}s against the {@link #db} and adding the fully
+     * resolved {@link EmbergraphStatement}s to the queue on which the
      * iterator is reading.
      */
     @SuppressWarnings("unchecked")
@@ -552,7 +552,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
          */
         
         // an array with exactly the right #of elements.
-        final G[] a = (G[]) new BigdataStatement[nstmts];
+        final G[] a = (G[]) new EmbergraphStatement[nstmts];
         
         // copy references.
         for (int i = 0; i < nstmts; i++) {
@@ -573,7 +573,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
      * Invoked by {@link #overflow()}.
      * 
      * @param a
-     *            An array of processed {@link BigdataStatement}s.
+     *            An array of processed {@link EmbergraphStatement}s.
      * 
      * @return The delta that will be added to the {@link #counter} reported by
      *         {@link #flush()}.
@@ -631,7 +631,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
     }
     
     /**
-     * Clears the state associated with the {@link BigdataStatement}s in
+     * Clears the state associated with the {@link EmbergraphStatement}s in
      * the internal buffer but does not discard the blank nodes or deferred
      * statements.
      */
@@ -660,10 +660,10 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 //     *            The generic type of the source {@link Statement} added to the
 //     *            buffer by the callers.
 //     * @param <G>
-//     *            The generic type of the {@link BigdataStatement}s stored in
+//     *            The generic type of the {@link EmbergraphStatement}s stored in
 //     *            the buffer.
 //     */
-//    public static class StatementResolvingBuffer<F extends Statement, G extends BigdataStatement>
+//    public static class StatementResolvingBuffer<F extends Statement, G extends EmbergraphStatement>
 //            extends AbstractStatementBuffer<F, G> {
 //
 //        /**
@@ -706,10 +706,10 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 //        
 //        /**
 //         * An asynchronous iterator singleton that reads from the converted
-//         * statements. {@link BigdataStatement}s are made available to the
+//         * statements. {@link EmbergraphStatement}s are made available to the
 //         * iterator in chunks each time the buffer {@link #overflow()}s and
 //         * when it is {@link #flush()}ed. The iterator will block until more
-//         * {@link BigdataStatement}s are available or until it is
+//         * {@link EmbergraphStatement}s are available or until it is
 //         * {@link ICloseableIterator#close()}d. The iterator is safe for
 //         * reading by a single thread. The iterator does NOT support removal.
 //         */
@@ -732,7 +732,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 //        }
 //        
 //        /**
-//         * Iterator for converted {@link BigdataStatement}s.
+//         * Iterator for converted {@link EmbergraphStatement}s.
 //         * 
 //         * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
 //         * @version $Id$
@@ -750,7 +750,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 //
 //            /**
 //             * Blocking queue containing chunks of converted
-//             * {@link BigdataStatement}s.
+//             * {@link EmbergraphStatement}s.
 //             * <p>
 //             * Note: The queue has an unbounded capacity. In practice, a bounded
 //             * and small (~5-10) capacity would be just fine since we normally
@@ -762,7 +762,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 //            private final BlockingQueue<G[]> queue = new LinkedBlockingQueue<G[]>();
 //            
 //            /**
-//             * The current chunk of converted {@link BigdataStatement}s from
+//             * The current chunk of converted {@link EmbergraphStatement}s from
 //             * the {@link #queue}.
 //             */
 //            private G[] chunk = null;
@@ -783,7 +783,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
 //             * {@link #queue}.
 //             * 
 //             * @param chunk
-//             *            A chunk of converted {@link BigdataStatement}s.
+//             *            A chunk of converted {@link EmbergraphStatement}s.
 //             */
 //            protected void add(G[] chunk) {
 //
@@ -867,10 +867,10 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
      *            The generic type of the source {@link Statement} added to the
      *            buffer by the callers.
      * @param <G>
-     *            The generic type of the {@link BigdataStatement}s stored in
+     *            The generic type of the {@link EmbergraphStatement}s stored in
      *            the buffer.
      */
-    public static class StatementBuffer2<F extends Statement, G extends BigdataStatement>
+    public static class StatementBuffer2<F extends Statement, G extends EmbergraphStatement>
             extends AbstractStatementBuffer<F, G> {
 
         final private AbstractTripleStore statementStore;
@@ -959,7 +959,7 @@ abstract public class AbstractStatementBuffer<F extends Statement, G extends Big
             }
 
             /*
-             * Align BigdataStatement[] to SPO[].
+             * Align EmbergraphStatement[] to SPO[].
              * 
              * @todo if [SPO#override] is added to ISPO then we do not need to
              * allocate the intermediate SPO array.

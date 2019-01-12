@@ -36,9 +36,9 @@ import org.openrdf.repository.sail.SailTupleQuery;
 import org.openrdf.rio.RDFFormat;
 
 /**
- * Unit tests the quads aspects of the {@link BigdataSail} implementation.
+ * Unit tests the quads aspects of the {@link EmbergraphSail} implementation.
  * Specify
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code> to run
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code> to run
  * this test suite.
  * 
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
@@ -102,11 +102,11 @@ public class TestJoinScope extends QuadsTestCase {
     
     public void testJoinScope() throws Exception {
 
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         sail.initialize();
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection cxn = 
-            (BigdataSailRepositoryConnection) repo.getConnection();
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection cxn =
+            (EmbergraphSailRepositoryConnection) repo.getConnection();
         cxn.setAutoCommit(false);
         
         try {

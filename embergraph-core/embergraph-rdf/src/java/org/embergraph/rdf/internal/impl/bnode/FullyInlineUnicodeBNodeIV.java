@@ -17,13 +17,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.impl.bnode;
 
+import org.embergraph.rdf.model.EmbergraphBNode;
 import org.openrdf.model.BNode;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IInlineUnicode;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUnicode;
-import org.embergraph.rdf.model.BigdataBNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -37,7 +37,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  * 
  * @see AbstractTripleStore.Options
  */
-public class FullyInlineUnicodeBNodeIV<V extends BigdataBNode> extends
+public class FullyInlineUnicodeBNodeIV<V extends EmbergraphBNode> extends
         AbstractBNodeIV<V, String> implements IInlineUnicode {
 
     private static final long serialVersionUID = 1L;

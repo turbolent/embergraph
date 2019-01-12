@@ -22,10 +22,10 @@ import java.net.UnknownHostException;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.junit.Test;
 
 import org.embergraph.rdf.internal.impl.literal.IPv4AddrIV;
-import org.embergraph.rdf.model.BigdataLiteral;
 
 public class IPv4AddrIVTest extends TestCase {
 
@@ -37,10 +37,10 @@ public class IPv4AddrIVTest extends TestCase {
 		String testCase = "192.168.1.100";
 
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -55,10 +55,10 @@ public class IPv4AddrIVTest extends TestCase {
 	public void testIPAddress1() {
 		String testCase = "66.249.211.254";
 
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -73,10 +73,10 @@ public class IPv4AddrIVTest extends TestCase {
 	public void testIPAddress2() {
 		String testCase = "66.249.71.255";
 
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -91,10 +91,10 @@ public class IPv4AddrIVTest extends TestCase {
 	public void testIPAddress3() {
 		String testCase = "66.249.71.253/32";
 
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -112,10 +112,10 @@ public class IPv4AddrIVTest extends TestCase {
 		boolean test = true;
 		
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -135,10 +135,10 @@ public class IPv4AddrIVTest extends TestCase {
 		boolean test = true;
 		
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -157,10 +157,10 @@ public class IPv4AddrIVTest extends TestCase {
 		boolean test = false;
 		
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -178,10 +178,10 @@ public class IPv4AddrIVTest extends TestCase {
 		boolean test = false;
 		
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -198,10 +198,10 @@ public class IPv4AddrIVTest extends TestCase {
 		boolean test = false;
 		
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);
@@ -218,10 +218,10 @@ public class IPv4AddrIVTest extends TestCase {
 		boolean test = false;
 		
 		@SuppressWarnings("unused")
-		IPv4AddrIV<BigdataLiteral> addr = null;
+		IPv4AddrIV<EmbergraphLiteral> addr = null;
 		
 		try {
-			addr = new IPv4AddrIV<BigdataLiteral>(testCase);
+			addr = new IPv4AddrIV<EmbergraphLiteral>(testCase);
 		} catch (UnknownHostException uh)
 		{
 			log.info(uh);

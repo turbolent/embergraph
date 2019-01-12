@@ -23,7 +23,7 @@ package org.embergraph.rdf.sail;
 import org.apache.log4j.Logger;
 
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.sail.webapp.DatasetNotFoundException;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.task.AbstractApiTask;
@@ -65,7 +65,7 @@ public class DestroyKBTask extends AbstractApiTask<Void> {
 
        boolean ok = false;
        
-       final BigdataSailConnection con = getUnisolatedSailConnection();
+       final EmbergraphSailConnection con = getUnisolatedSailConnection();
 
             try {
 
@@ -108,7 +108,7 @@ public class DestroyKBTask extends AbstractApiTask<Void> {
 //       * Note: Unless group commit is enabled, we need to make this operation
 //       * mutually exclusive with KB level writers in order to avoid the
 //       * possibility of a triggering a commit during the middle of a
-//       * BigdataSailConnection level operation (or visa versa).
+//       * EmbergraphSailConnection level operation (or visa versa).
 //       * 
 //       * Note: When group commit is not enabled, the indexManager will be a
 //       * Journal class. When it is enabled, it will merely implement the

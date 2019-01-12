@@ -45,7 +45,7 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.lexicon.Id2TermWriteProc;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.AbstractTransactionService;
 
@@ -85,7 +85,7 @@ public class TestTicket473 extends TestCase {
     private Properties getProperties() {
         
         final Properties props = new Properties();
-        props.setProperty(BigdataSail.Options.NAMESPACE,"foo.bar.snapdragon.kb");
+        props.setProperty(EmbergraphSail.Options.NAMESPACE,"foo.bar.snapdragon.kb");
         props.setProperty(org.embergraph.journal.Options.BUFFER_MODE,BufferMode.DiskRW.name());
         props.setProperty(IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY,"4000");
         props.setProperty(IndexMetadata.Options.BTREE_BRANCHING_FACTOR,"128");
@@ -94,12 +94,12 @@ public class TestTicket473 extends TestCase {
         props.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE,"1");
         props.setProperty(AbstractTripleStore.Options.TEXT_INDEX,"false");
         props.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,NoAxioms.class.getName());
-        props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,"false");
+        props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,"false");
         props.setProperty(AbstractTripleStore.Options.JUSTIFY,"false");
         props.setProperty(org.embergraph.rdf.store.AbstractTripleStore.Options.STATEMENT_IDENTIFIERS,"false");
         props.setProperty(org.embergraph.rdf.store.AbstractTripleStore.Options.QUADS_MODE,"false");
         props.setProperty(org.embergraph.journal.Options.MAXIMUM_EXTENT,"209715200");
-        props.setProperty(BigdataSail.Options.BUFFER_CAPACITY,"100000");
+        props.setProperty(EmbergraphSail.Options.BUFFER_CAPACITY,"100000");
         props.setProperty(AbstractTripleStore.Options.BLOOM_FILTER,"false");
         props.setProperty(org.embergraph.journal.Options.FILE,"ticket473.jnl");
 
@@ -107,8 +107,8 @@ public class TestTicket473 extends TestCase {
         
     }
     
-    private BigdataSail getSail(final Properties properties) {
-        return new BigdataSail(properties);
+    private EmbergraphSail getSail(final Properties properties) {
+        return new EmbergraphSail(properties);
     }
     
     /**
@@ -117,7 +117,7 @@ public class TestTicket473 extends TestCase {
      * This test does not require reading current state.
      */
     public void test_stressTicket473() throws Exception {
-        BigdataSail sail = null;
+        EmbergraphSail sail = null;
         try {
             for (int i = 0; i < 20; i++) {
                 log.info("Opening sail");
@@ -137,10 +137,10 @@ public class TestTicket473 extends TestCase {
         }
     }
 
-    private void doTicket473Commit(final BigdataSail sail) throws Exception {
+    private void doTicket473Commit(final EmbergraphSail sail) throws Exception {
 
-        final BigdataSailRepository repo = new BigdataSailRepository(sail);
-        final BigdataSailRepositoryConnection conn = (BigdataSailRepositoryConnection) repo
+        final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+        final EmbergraphSailRepositoryConnection conn = (EmbergraphSailRepositoryConnection) repo
 //                .getReadWriteConnection();
                 .getUnisolatedConnection();
         conn.setAutoCommit(false);
@@ -178,7 +178,7 @@ public class TestTicket473 extends TestCase {
 
     }
 
-    private void loadOntology(final BigdataSail sail, final String fileName)
+    private void loadOntology(final EmbergraphSail sail, final String fileName)
             throws SailException, InterruptedException {
 
         final File file = new File(fileName);
@@ -189,7 +189,7 @@ public class TestTicket473 extends TestCase {
         
         final Resource defaultContext = null;
         
-        final BigdataSailConnection conn = sail.getUnisolatedConnection();
+        final EmbergraphSailConnection conn = sail.getUnisolatedConnection();
 
         try {
 
@@ -251,11 +251,11 @@ public class TestTicket473 extends TestCase {
      */
     private static class AddStatementHandler extends RDFHandlerBase {
 
-        private final BigdataSailConnection conn;
+        private final EmbergraphSailConnection conn;
         private final AtomicLong nmodified;
         private final Resource[] defaultContexts;
 
-        public AddStatementHandler(final BigdataSailConnection conn,
+        public AddStatementHandler(final EmbergraphSailConnection conn,
                 final AtomicLong nmodified, final Resource defaultContext) {
             this.conn = conn;
             this.nmodified = nmodified;

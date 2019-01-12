@@ -21,7 +21,7 @@ import org.embergraph.util.InnerCause;
  * journal as requiring abort().
  * 
  * @see #1021 (Add critical section protection to AbstractJournal.abort() and
- *      BigdataSailConnection.rollback())
+ *      EmbergraphSailConnection.rollback())
  * 
  * @author martyncutcher
  * 

@@ -4,11 +4,10 @@ import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.util.Bytes;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
@@ -199,7 +198,7 @@ public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
              * the B+Tree.
              */
 
-            if (BigdataStatics.debug)
+            if (EmbergraphStatics.debug)
                 System.err.println("Distinct SPO iterator overflow");
 
             // allocate buffer.

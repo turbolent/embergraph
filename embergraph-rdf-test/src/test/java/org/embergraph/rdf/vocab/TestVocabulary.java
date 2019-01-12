@@ -34,7 +34,7 @@ import org.openrdf.model.vocabulary.RDF;
 
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -83,11 +83,11 @@ public class TestVocabulary extends TestCase2 {
 
             int nfound = 0;
             
-            final Iterator<BigdataValue> itr = vocab.values();
+            final Iterator<EmbergraphValue> itr = vocab.values();
             
             while(itr.hasNext()) {
 
-                final BigdataValue v = itr.next();
+                final EmbergraphValue v = itr.next();
             
                 // The IV is cached on the Value.
                 assertNotNull(v.getIV());
@@ -179,11 +179,11 @@ public class TestVocabulary extends TestCase2 {
 
             int nfound = 0;
             
-            final Iterator<BigdataValue> itr = vocab.values();
+            final Iterator<EmbergraphValue> itr = vocab.values();
             
             while(itr.hasNext()) {
 
-                final BigdataValue v = itr.next();
+                final EmbergraphValue v = itr.next();
             
                 // The IV is cached on the Value.
                 assertNotNull(v.getIV());

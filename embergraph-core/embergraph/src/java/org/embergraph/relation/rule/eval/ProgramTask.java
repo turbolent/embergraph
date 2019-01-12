@@ -49,7 +49,7 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 import org.embergraph.service.DataServiceCallable;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
@@ -68,7 +68,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  *       service (any) in the federation and dropped in a finally {} clause.
  *       <p>
  *       When the sets are large then they may need a backing store, e.g.,
- *       BigdataSet<Long> (specialized so that it does not store anything under
+ *       EmbergraphSet<Long> (specialized so that it does not store anything under
  *       the key since we can decode the Long from the key - do utility versions
  *       BigdataLongSet(), but the same code can serve float, double, and int as
  *       well. Avoid override for duplicate keys to reduce IO.
@@ -444,7 +444,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 			 * read.
 			 */
 
-			if (indexManager instanceof IBigdataFederation<?>) {
+			if (indexManager instanceof IEmbergraphFederation<?>) {
 
 				/*
 				 * Advance the read-consistent timestamp so that any writes from
@@ -469,7 +469,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 					 * could use ITx.READ_COMMITTED rather that explicitly
 					 * looking up the lastCommitTime.
 					 */
-					tx = ((IBigdataFederation<?>) indexManager)
+					tx = ((IEmbergraphFederation<?>) indexManager)
 							.getTransactionService().newTx(lastCommitTime);
 				} catch (IOException ex) {
 					throw new RuntimeException(ex);
@@ -539,9 +539,9 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 				/*
 				 * Terminate the read-only tx (releases the read-lock).
 				 */
-				if (indexManager instanceof IBigdataFederation<?>) {
+				if (indexManager instanceof IEmbergraphFederation<?>) {
 					try {
-						((IBigdataFederation<?>) indexManager)
+						((IEmbergraphFederation<?>) indexManager)
 								.getTransactionService().abort(tx);
 					} catch (IOException ex) {
 						throw new RuntimeException(ex);

@@ -21,17 +21,16 @@ package org.embergraph.rdf.internal.constraints;
 
 import java.util.Map;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IValueExpression;
-import org.embergraph.bop.NV;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 
 /**
@@ -121,7 +120,7 @@ public class StrAfterBOp extends IVValueExpression<IV> implements INeedsMaterial
     	
         if (label == null) {
             
-            final BigdataLiteral str = getValueFactory().createLiteral("");
+            final EmbergraphLiteral str = getValueFactory().createLiteral("");
             
             return super.asIV(str, bs);
             
@@ -131,7 +130,7 @@ public class StrAfterBOp extends IVValueExpression<IV> implements INeedsMaterial
     	
     	if (lang != null) {
     		
-            final BigdataLiteral str = getValueFactory().createLiteral(label, lang);
+            final EmbergraphLiteral str = getValueFactory().createLiteral(label, lang);
 
             return super.asIV(str, bs);
     		
@@ -141,13 +140,13 @@ public class StrAfterBOp extends IVValueExpression<IV> implements INeedsMaterial
     	
     	if (dt != null) {
     		
-            final BigdataLiteral str = getValueFactory().createLiteral(label, dt);
+            final EmbergraphLiteral str = getValueFactory().createLiteral(label, dt);
 
             return super.asIV(str, bs);
     		
     	}
     	
-        final BigdataLiteral str = getValueFactory().createLiteral(label);
+        final EmbergraphLiteral str = getValueFactory().createLiteral(label);
 
         return super.asIV(str, bs);
     	

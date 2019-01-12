@@ -29,7 +29,7 @@ import java.util.Random;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Unit tests for {@link XSDDecimalIV}.
@@ -65,10 +65,10 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal m2 = new BigDecimal("-1.51");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(p1),
-                new XSDDecimalIV<BigdataLiteral>(p2),
-                new XSDDecimalIV<BigdataLiteral>(m1),
-                new XSDDecimalIV<BigdataLiteral>(m2),
+                new XSDDecimalIV<EmbergraphLiteral>(p1),
+                new XSDDecimalIV<EmbergraphLiteral>(p2),
+                new XSDDecimalIV<EmbergraphLiteral>(m1),
+                new XSDDecimalIV<EmbergraphLiteral>(m2),
                 };
 
         doEncodeDecodeTest(e);
@@ -89,8 +89,8 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal p2 = new BigDecimal("1.500");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(p1),
-                new XSDDecimalIV<BigdataLiteral>(p2),
+                new XSDDecimalIV<EmbergraphLiteral>(p1),
+                new XSDDecimalIV<EmbergraphLiteral>(p2),
                 };
 
 //        for(IV t : e) {
@@ -128,9 +128,9 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal z1 = new BigDecimal("0.0");
         final BigDecimal z2 = new BigDecimal("0.00");
         
-        final IV<?,?> v0 = new XSDDecimalIV<BigdataLiteral>(z0);
-        final IV<?,?> v1 = new XSDDecimalIV<BigdataLiteral>(z1);
-        final IV<?,?> v2 = new XSDDecimalIV<BigdataLiteral>(z2);
+        final IV<?,?> v0 = new XSDDecimalIV<EmbergraphLiteral>(z0);
+        final IV<?,?> v1 = new XSDDecimalIV<EmbergraphLiteral>(z1);
+        final IV<?,?> v2 = new XSDDecimalIV<EmbergraphLiteral>(z2);
 
         // Encode each of those BigDecimal values.
         final byte[] b0 = IVUtility.encode(keyBuilder.reset(), v0).getKey();
@@ -150,7 +150,7 @@ public class TestEncodeDecodeXSDDecimalIVs extends
 //        final BigDecimal v = new BigDecimal("500"); // NB: Decodes as 5E+2!
         final BigDecimal v = new BigDecimal("5E+2");
         
-        final IV<?,?> iv = new XSDDecimalIV<BigdataLiteral>(v);
+        final IV<?,?> iv = new XSDDecimalIV<EmbergraphLiteral>(v);
 
         final byte[] b0 = IVUtility.encode(keyBuilder.reset(), iv).getKey();
 
@@ -190,20 +190,20 @@ public class TestEncodeDecodeXSDDecimalIVs extends
         final BigDecimal v2 = new BigDecimal("383.00000000000002");
 
         final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(z1),
-//                new XSDDecimalIV<BigdataLiteral>(negz1),
-//                new XSDDecimalIV<BigdataLiteral>(z2),
-                new XSDDecimalIV<BigdataLiteral>(p1),
-                new XSDDecimalIV<BigdataLiteral>(negp1),
-//                new XSDDecimalIV<BigdataLiteral>(z3),
-                new XSDDecimalIV<BigdataLiteral>(m1),
-                new XSDDecimalIV<BigdataLiteral>(m2),
-                new XSDDecimalIV<BigdataLiteral>(m5),
-//                new XSDDecimalIV<BigdataLiteral>(m53),
-                new XSDDecimalIV<BigdataLiteral>(m500),
-//                new XSDDecimalIV<BigdataLiteral>(m5003),
-                new XSDDecimalIV<BigdataLiteral>(v1),
-                new XSDDecimalIV<BigdataLiteral>(v2),
+                new XSDDecimalIV<EmbergraphLiteral>(z1),
+//                new XSDDecimalIV<EmbergraphLiteral>(negz1),
+//                new XSDDecimalIV<EmbergraphLiteral>(z2),
+                new XSDDecimalIV<EmbergraphLiteral>(p1),
+                new XSDDecimalIV<EmbergraphLiteral>(negp1),
+//                new XSDDecimalIV<EmbergraphLiteral>(z3),
+                new XSDDecimalIV<EmbergraphLiteral>(m1),
+                new XSDDecimalIV<EmbergraphLiteral>(m2),
+                new XSDDecimalIV<EmbergraphLiteral>(m5),
+//                new XSDDecimalIV<EmbergraphLiteral>(m53),
+                new XSDDecimalIV<EmbergraphLiteral>(m500),
+//                new XSDDecimalIV<EmbergraphLiteral>(m5003),
+                new XSDDecimalIV<EmbergraphLiteral>(v1),
+                new XSDDecimalIV<EmbergraphLiteral>(v2),
                 };
 
         doEncodeDecodeTest(e);
@@ -219,30 +219,30 @@ public class TestEncodeDecodeXSDDecimalIVs extends
 //
 //        final IV<?,?>[] e = new IV[] {
 //            
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0)),
 //            
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-123450)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-99)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-9)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-123450)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-99)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-9)),
 //            
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(8.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(255.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(256.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(512.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1028.001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(8.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(255.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(256.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(512.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1028.001)),
 //
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-8.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-255.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-256.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-512.0001)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1028.001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-8.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-255.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-256.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-512.0001)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1028.001)),
 //
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MIN_VALUE)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MAX_VALUE)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MIN_VALUE - 1)),
-//            new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(Double.MAX_VALUE + 1)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MIN_VALUE)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MAX_VALUE)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MIN_VALUE - 1)),
+//            new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(Double.MAX_VALUE + 1)),
 //            };
 //
 //        doEncodeDecodeTest(e);
@@ -257,22 +257,22 @@ public class TestEncodeDecodeXSDDecimalIVs extends
     public void test_encodeDecode_XSDDecimal_3() {
 
       final IV<?,?>[] e = new IV[] {
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(2.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(1.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(0.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-2.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(-1.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(10.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(11.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(258.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(3.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(259.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.01)),
-                new XSDDecimalIV<BigdataLiteral>(BigDecimal.valueOf(383.02)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(2.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(1.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(0.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-2.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(-1.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(10.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(11.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(258.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(3.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(259.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.01)),
+                new XSDDecimalIV<EmbergraphLiteral>(BigDecimal.valueOf(383.02)),
       };
 
         doEncodeDecodeTest(e);
@@ -308,15 +308,15 @@ public class TestEncodeDecodeXSDDecimalIVs extends
             final BigDecimal t6 = t1.add(BigDecimal.valueOf(5));
             final BigDecimal t7 = t1.add(BigDecimal.valueOf(9));
 
-            a.add(new XSDDecimalIV<BigdataLiteral>(t1));
-            a.add(new XSDDecimalIV<BigdataLiteral>(v2));
-            a.add(new XSDDecimalIV<BigdataLiteral>(v4));
-            a.add(new XSDDecimalIV<BigdataLiteral>(t2));
-            a.add(new XSDDecimalIV<BigdataLiteral>(t4));
-            a.add(new XSDDecimalIV<BigdataLiteral>(t5));
-            a.add(new XSDDecimalIV<BigdataLiteral>(t3));
-            a.add(new XSDDecimalIV<BigdataLiteral>(t6));
-            a.add(new XSDDecimalIV<BigdataLiteral>(t7));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t1));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(v2));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(v4));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t2));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t4));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t5));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t3));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t6));
+            a.add(new XSDDecimalIV<EmbergraphLiteral>(t7));
             
         }
         

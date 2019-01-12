@@ -171,7 +171,7 @@ public class TestUnicodeCompressor extends TestCase2 {
              * the data before it can be copied into an IKeyBuilder. This is not
              * a problem as long as it is the only thing in the buffer, but that
              * is not true for many use cases, including serialization of a
-             * BigdataValue.
+             * EmbergraphValue.
              */
             final String actual;
             final int ndecoded;

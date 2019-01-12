@@ -284,7 +284,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
 
        resp.setStatus(HttpServletResponse.SC_OK);
 
-       resp.setContentType(BigdataServlet.MIME_APPLICATION_XML);
+       resp.setContentType(EmbergraphServlet.MIME_APPLICATION_XML);
 
 //       buildResponse(resp, HTTP_OK, MIME_APPLICATION_XML, w.toString());
 

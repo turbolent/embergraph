@@ -9,7 +9,7 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 import org.embergraph.relation.rule.eval.IJoinNexus;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * An object used by a {@link JoinTask} to write on another {@link JoinTask}
@@ -109,7 +109,7 @@ public class JoinTaskSink {
      * @param sourceJoinTask
      *            The current join dimension.
      */
-    public JoinTaskSink(final IBigdataFederation fed,
+    public JoinTaskSink(final IEmbergraphFederation fed,
             final PartitionLocator locator, final JoinTask sourceJoinTask) {
 
         if (fed == null)

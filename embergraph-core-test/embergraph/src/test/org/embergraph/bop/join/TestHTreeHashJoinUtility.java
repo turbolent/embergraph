@@ -23,14 +23,14 @@ package org.embergraph.bop.join;
 
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.io.DirectBufferPool;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rwstore.sector.MemoryManager;
 
 /**
  * Test suite for the {@link HTreeHashJoinUtility}.
  * 
  * TODO Write a unit test which verifies that the ivCache is used and that the
- * cached {@link BigdataValue}s are correctly restored when the rightSolutions
+ * cached {@link EmbergraphValue}s are correctly restored when the rightSolutions
  * had cached values and the leftSolutions did not have a value cached for the
  * same IVs. For example, this could be done with a cached value on an IV which
  * is not a join variable and which is only present in the rightSolutions.

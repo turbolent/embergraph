@@ -24,13 +24,13 @@ package org.embergraph.rdf.rules;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
 import org.embergraph.bop.IConstant;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValueFactory;
 import org.embergraph.rdf.rio.IStatementBuffer;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rules.AbstractRuleFastClosure_3_5_6_7_9.FastClosureRuleTask;
@@ -91,7 +91,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
         
         try {
 
-            final BigdataValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
             
             final URI A = valueFactory.createURI("http://www.foo.org/A");
             final URI B = valueFactory.createURI("http://www.foo.org/B");

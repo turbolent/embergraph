@@ -39,7 +39,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParserFactory;
 import org.embergraph.rdf.properties.PropertiesParserRegistry;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.client.HttpException;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 
@@ -114,8 +114,8 @@ public class TestDataLoaderServlet<S extends IIndexManager> extends
 			log.warn("Found properties for namespace " + randomNS);
 		}
 
-		final BigdataSailRemoteRepositoryConnection cxn = (BigdataSailRemoteRepositoryConnection) repo
-				.getBigdataSailRemoteRepository().getConnection();
+		final EmbergraphSailRemoteRepositoryConnection cxn = (EmbergraphSailRemoteRepositoryConnection) repo
+				.getEmbergraphSailRemoteRepository().getConnection();
 
 		try {
 			String queryStr = "select * where { ?s ?p ?o }";

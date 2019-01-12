@@ -25,18 +25,17 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
 import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
-import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
 import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialLiteralError;
 import org.embergraph.rdf.internal.impl.literal.LiteralExtensionIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
-import org.embergraph.rdf.model.BigdataValueFactoryImpl;
 import org.embergraph.service.geospatial.GeoSpatial;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration;
@@ -84,9 +83,9 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void test_encodeDecodeLatLonTimeGeoSpatialLiterals() throws Exception {
 
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
       
-      final GeoSpatialLiteralExtension<BigdataValue> ext = 
+      final GeoSpatialLiteralExtension<EmbergraphValue> ext =
          getLatLonTimeGSLiteralExtension(vf);
       
       encodeDecodeGeoSpatialLiterals(
@@ -100,9 +99,9 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void test_encodeDecodeLatLonGeoSpatialLiterals() throws Exception {
 
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
       
-      final GeoSpatialLiteralExtension<BigdataValue> ext = 
+      final GeoSpatialLiteralExtension<EmbergraphValue> ext =
          getLatLonGSLiteralExtension(vf);
       
       encodeDecodeGeoSpatialLiterals(
@@ -115,7 +114,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void test_encodeDecodeGeoSpatialLiteralsWrongFormat() throws Exception {
 
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
       
       
       // direction one: processing lat+lon literals with lat+lon+time datatype
@@ -124,7 +123,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
          
          // the following does not work: we encode lat + lon literals, but
          // our schema description expects lat + lon + time
-         final GeoSpatialLiteralExtension<BigdataValue> extLatLonTime = 
+         final GeoSpatialLiteralExtension<EmbergraphValue> extLatLonTime =
                getLatLonTimeGSLiteralExtension(vf);
          
          encodeDecodeGeoSpatialLiterals(
@@ -148,7 +147,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
          // the following does not work: we encode lat + lon +time literals, but
          // our schema description expects lat + lon
 
-         final GeoSpatialLiteralExtension<BigdataValue> extLatLon = 
+         final GeoSpatialLiteralExtension<EmbergraphValue> extLatLon =
                getLatLonGSLiteralExtension(vf);
 
          encodeDecodeGeoSpatialLiterals(
@@ -173,9 +172,9 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void testZIndexOrderingPositive() {
       
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
       
-      final GeoSpatialLiteralExtension<BigdataValue> litExt = 
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
             getSimpleLatLonGSLiteralExtension(vf); 
       
       
@@ -190,10 +189,10 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void testZIndexOrderingPositiveWithRangeAdjustment() {
       
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
       // the range in the test we delegate to is 0 .. 7
-      final GeoSpatialLiteralExtension<BigdataValue> litExt = 
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
          getSimpleLatLonGSLiteralExtensionWithRange(vf, Long.valueOf(0)); 
       
       zIndexOrderingPositiveBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG_MIN);
@@ -206,10 +205,10 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void testZIndexOrderingMixed() {
       
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
       // the range in the test we delegate to is -2 .. 1
-      final GeoSpatialLiteralExtension<BigdataValue> litExt = 
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
          getSimpleLatLonGSLiteralExtension(vf); 
       
       zIndexOrderingMixedBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG);
@@ -222,10 +221,10 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     */
    public void testZIndexOrderingMixedWithRangeAdjustment() {
       
-      final BigdataValueFactory vf = BigdataValueFactoryImpl.getInstance("test");
+      final EmbergraphValueFactory vf = EmbergraphValueFactoryImpl.getInstance("test");
 
       // the range in the test we delegate to is -2 .. 1
-      final GeoSpatialLiteralExtension<BigdataValue> litExt = 
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt =
          getSimpleLatLonGSLiteralExtensionWithRange(vf, Long.valueOf(-2)); 
       
       zIndexOrderingMixedBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG_MIN);
@@ -241,9 +240,9 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * (see example test cases for sample code).
     */
    protected void encodeDecodeGeoSpatialLiterals(
-      final BigdataValueFactory vf,
-      final BigdataLiteral[] dt,
-      final GeoSpatialLiteralExtension<BigdataValue> ext) throws Exception {
+      final EmbergraphValueFactory vf,
+      final EmbergraphLiteral[] dt,
+      final GeoSpatialLiteralExtension<EmbergraphValue> ext) throws Exception {
    
       // create associated IVs
       final IV<?, ?>[] e = new IV[dt.length];
@@ -255,7 +254,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
       // (i.e., syntax/formatting might differ, but the numeric value conincides)
       for (int i = 0; i < e.length; i++) {
          @SuppressWarnings("rawtypes")
-         final BigdataValue val = ext.asValue((LiteralExtensionIV) e[i], vf);
+         final EmbergraphValue val = ext.asValue((LiteralExtensionIV) e[i], vf);
          assertSemanticallyIdentical(val, dt[i]);
       }
    
@@ -277,8 +276,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
    }
 
    protected void zIndexOrderingPositiveBase(
-      final BigdataValueFactory vf,
-      final GeoSpatialLiteralExtension<BigdataValue> litExt,
+      final EmbergraphValueFactory vf,
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
       final URI datatype) {
       
       /**
@@ -372,7 +371,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
        */
       
       // Generate in syntactical order (as above): 0#0, ..., 0#7, 1#0, ... 7#7:
-      final BigdataLiteral[] asWritten  =
+      final EmbergraphLiteral[] asWritten  =
          getGeospatialLiteralsLatLonInRange(vf,0,7,datatype);
       
       // convert into LiteralExtensionIVs (backed by BigInteger, in this case)
@@ -479,12 +478,12 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
    }
 
    protected void zIndexOrderingMixedBase(
-      final BigdataValueFactory vf,
-      final GeoSpatialLiteralExtension<BigdataValue> litExt,
+      final EmbergraphValueFactory vf,
+      final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
       final URI datatype) {
       
       // Generate values
-      final BigdataLiteral[] asWritten  =
+      final EmbergraphLiteral[] asWritten  =
          getGeospatialLiteralsLatLonInRange(vf, -2, 1, datatype);
       
       // convert into LiteralExtensionIVs (backed by BigInteger, in this case)
@@ -551,8 +550,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     *           the value factory used to generate the literals
     * @return the list of generated literals
     */
-   protected final BigdataLiteral[] getDummyGeospatialLiteralsLatLon(
-         final BigdataValueFactory vf, final URI datatype) {
+   protected final EmbergraphLiteral[] getDummyGeospatialLiteralsLatLon(
+         final EmbergraphValueFactory vf, final URI datatype) {
 
       /**
        * The basic schema is a three-component datatype string made up from the
@@ -598,8 +597,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
 
 
       // we'll create a permutation over all values above
-      final BigdataLiteral[] dt = 
-         new BigdataLiteral[
+      final EmbergraphLiteral[] dt =
+         new EmbergraphLiteral[
             baseLatLong.length * baseLatLong.length];
 
       // compute permutations from the base arrays provided above
@@ -630,8 +629,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     *           the value factory used to generate the literals
     * @return the list of generated literals
     */
-   protected final BigdataLiteral[] getDummyGeospatialLiteralsLatLonTime(
-         final BigdataValueFactory vf, final URI datatype) {
+   protected final EmbergraphLiteral[] getDummyGeospatialLiteralsLatLonTime(
+         final EmbergraphValueFactory vf, final URI datatype) {
 
       /**
        * Using the built-in datatype schema.
@@ -695,8 +694,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
       };
 
       // we'll create a permutation over all values above
-      final BigdataLiteral[] dt = 
-         new BigdataLiteral[
+      final EmbergraphLiteral[] dt =
+         new EmbergraphLiteral[
             baseLatLong.length * baseLatLong.length * baseTime.length];
 
       // compute permutations from the base arrays provided above
@@ -723,15 +722,15 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     *           the value factory used to generate the literals
     * @return the list of generated literals
     */
-   protected final BigdataLiteral[] getGeospatialLiteralsLatLonInRange(
-      final BigdataValueFactory vf, final int from, final int to,
+   protected final EmbergraphLiteral[] getGeospatialLiteralsLatLonInRange(
+      final EmbergraphValueFactory vf, final int from, final int to,
       final URI datatype) {
       
       final int numComponents = to-from+1;
       
       // we'll create a permutation over all values above
-      final BigdataLiteral[] dt = 
-         new BigdataLiteral[numComponents*numComponents];
+      final EmbergraphLiteral[] dt =
+         new EmbergraphLiteral[numComponents*numComponents];
 
       // compute permutations from the base arrays provided above:
       // 0#0, 0#1, ..., 0#n, 1#0, 1#1, 1#n, ..., n#n
@@ -749,8 +748,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * Get a {@link GeoSpatialLiteralExtension} object processing lat+lon+time
     * schema literals.
     */
-   protected GeoSpatialLiteralExtension<BigdataValue> 
-      getLatLonTimeGSLiteralExtension(final BigdataValueFactory vf) {
+   protected GeoSpatialLiteralExtension<EmbergraphValue>
+      getLatLonTimeGSLiteralExtension(final EmbergraphValueFactory vf) {
       
        final GeoSpatialDatatypeFieldConfiguration field1Config =
            new GeoSpatialDatatypeFieldConfiguration(
@@ -781,8 +780,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * Get a {@link GeoSpatialLiteralExtension} object processing lat+lon
     * schema literals.
     */
-   protected GeoSpatialLiteralExtension<BigdataValue> 
-      getLatLonGSLiteralExtension(final BigdataValueFactory vf) {
+   protected GeoSpatialLiteralExtension<EmbergraphValue>
+      getLatLonGSLiteralExtension(final EmbergraphValueFactory vf) {
       
        final GeoSpatialDatatypeFieldConfiguration field1Config =
            new GeoSpatialDatatypeFieldConfiguration(
@@ -809,8 +808,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * Get simple lat lon schema description, where lat and lon correspong to
     * long values (rather than 5 precise doubles).
     */
-   protected GeoSpatialLiteralExtension<BigdataValue> 
-      getSimpleLatLonGSLiteralExtension(final BigdataValueFactory vf) {
+   protected GeoSpatialLiteralExtension<EmbergraphValue>
+      getSimpleLatLonGSLiteralExtension(final EmbergraphValueFactory vf) {
        
        final GeoSpatialDatatypeFieldConfiguration field1Config =
            new GeoSpatialDatatypeFieldConfiguration(
@@ -837,9 +836,9 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * Get simple lat lon schema description, where lat and lon correspong to
     * long values (rather than 5 precise doubles).
     */
-   protected GeoSpatialLiteralExtension<BigdataValue> 
+   protected GeoSpatialLiteralExtension<EmbergraphValue>
       getSimpleLatLonGSLiteralExtensionWithRange(
-         final BigdataValueFactory vf, final Long min) {
+         final EmbergraphValueFactory vf, final Long min) {
       
        final GeoSpatialDatatypeFieldConfiguration field1Config =
            new GeoSpatialDatatypeFieldConfiguration(
@@ -866,14 +865,14 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * Get a {@link GeoSpatialLiteralExtension} object processing literals of
     * the schema specified in the {@link SchemaDescription} object.
     */
-   protected GeoSpatialLiteralExtension<BigdataValue> getGSLiteralExtension(
-      final BigdataValueFactory vf, final GeoSpatialDatatypeConfiguration datatypeConfig) {
+   protected GeoSpatialLiteralExtension<EmbergraphValue> getGSLiteralExtension(
+      final EmbergraphValueFactory vf, final GeoSpatialDatatypeConfiguration datatypeConfig) {
       
       return 
-         new GeoSpatialLiteralExtension<BigdataValue>(
+         new GeoSpatialLiteralExtension<EmbergraphValue>(
             new IDatatypeURIResolver() {
-               public BigdataURI resolve(URI uri) {
-                  final BigdataURI buri = vf.createURI(uri.stringValue());
+               public EmbergraphURI resolve(URI uri) {
+                  final EmbergraphURI buri = vf.createURI(uri.stringValue());
                   buri.setIV(newTermId(VTE.URI));
                   return buri;
                }
@@ -882,8 +881,8 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
    }
 
    /**
-    * Asserts that the two {@link BigdataValue}s that are passed in are
-    * {@link BigdataLiteral} of the same type and that the actual values
+    * Asserts that the two {@link EmbergraphValue}s that are passed in are
+    * {@link EmbergraphLiteral} of the same type and that the actual values
     * value, interpreted as numerical value, are identical.
     * 
     * @param val
@@ -891,13 +890,13 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * 
     * @throw {@link AssertionError} in case they are not
     */
-   protected void assertSemanticallyIdentical(final BigdataValue x1,
-         final BigdataLiteral x2) {
+   protected void assertSemanticallyIdentical(final EmbergraphValue x1,
+         final EmbergraphLiteral x2) {
    
-      assertTrue(x1 instanceof BigdataLiteral);
+      assertTrue(x1 instanceof EmbergraphLiteral);
    
       // assert they're both of the same datatype
-      final BigdataLiteral x1AsLiteral = (BigdataLiteral) x1;
+      final EmbergraphLiteral x1AsLiteral = (EmbergraphLiteral) x1;
       assertEquals(x1AsLiteral.getDatatype(), x2.getDatatype());
    
       // compare the component values

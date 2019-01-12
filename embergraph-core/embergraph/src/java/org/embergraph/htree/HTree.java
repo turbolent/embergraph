@@ -29,9 +29,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 
-import org.apache.log4j.Logger;
-
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.AbstractNode;
 import org.embergraph.btree.BTree;
@@ -1037,12 +1035,12 @@ public class HTree extends AbstractHTree
         // write it on the store.
         checkpoint.write(store);
         
-        if (BigdataStatics.debug||INFO) {
+        if (EmbergraphStatics.debug||INFO) {
             final String msg = "name=" + metadata.getName()
                     + ", writeQueue{size=" + writeRetentionQueue.size()
                     + ",distinct=" + ndistinctOnWriteRetentionQueue + "} : "
                     + checkpoint;
-            if (BigdataStatics.debug)
+            if (EmbergraphStatics.debug)
                 System.err.println(msg);
             if (INFO)
                 log.info(msg);
@@ -1153,7 +1151,7 @@ public class HTree extends AbstractHTree
     }
 
 	// TODO contains with an Object clear needs to test for the Object, not just
-	// the key.  Maybe do this as a wrapper similar to BigdataMap?
+	// the key.  Maybe do this as a wrapper similar to EmbergraphMap?
     public boolean contains(final Object obj) {
         //contains(obj.hashCode());
     	throw new UnsupportedOperationException();

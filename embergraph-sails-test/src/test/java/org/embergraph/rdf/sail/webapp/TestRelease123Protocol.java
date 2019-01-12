@@ -21,8 +21,6 @@ import java.io.IOException;
 
 import org.apache.http.Header;
 import org.apache.http.message.BasicHeader;
-import org.eclipse.jetty.http.MimeTypes;
-import org.openrdf.rio.RDFFormat;
 
 import junit.framework.Test;
 
@@ -45,31 +43,31 @@ public class TestRelease123Protocol extends AbstractProtocolTest{
 	
 	public void testSelectGetXML() throws IOException {
 		assertTrue(serviceRequest("query",SELECT).contains("</sparql>"));
-		assertEquals(BigdataRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
+		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
 	}
 
 	public void testSelectGetJSON() throws IOException {
-		this.setAccept(BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON);
+		this.setAccept(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON);
 		assertTrue(serviceRequest("query",SELECT).contains("results"));
-		assertEquals(BigdataRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
+		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
 		
 	}
 	public void testAskGetXML() throws IOException {
 		assertTrue(serviceRequest("query",ASK).contains("</sparql>"));
-		assertEquals(BigdataRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
+		assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_XML, getResponseContentType());
 	}
 	
 	public void testEchoBackHeader() throws IOException {
 		resetDefaultOptions();
-		setMethodisPost(BigdataRDFServlet.MIME_SPARQL_UPDATE, update);
+		setMethodisPost(EmbergraphRDFServlet.MIME_SPARQL_UPDATE, update);
 		String response = serviceRequest();
 		assertFalse(response.contains("INSERT"));
-		Header echoBack = new BasicHeader(BigdataRDFContext.HTTP_HEADER_ECHO_BACK_QUERY, "true");
+		Header echoBack = new BasicHeader(EmbergraphRDFContext.HTTP_HEADER_ECHO_BACK_QUERY, "true");
 		Header[] headers = {
 				echoBack
 				};
 		setHeaders(headers);
-		setMethodisPost(BigdataRDFServlet.MIME_SPARQL_UPDATE, update);
+		setMethodisPost(EmbergraphRDFServlet.MIME_SPARQL_UPDATE, update);
 		response = serviceRequest();
 		assertTrue(response.contains("INSERT"));
 		

@@ -52,16 +52,16 @@ import java.util.Properties;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphBNode;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataBNode;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValue;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.rio.UnificationException;
@@ -120,29 +120,29 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
                 
             }
             
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI x = f.createURI("http://www.foo.org/x");
-            final BigdataURI y = f.createURI("http://www.foo.org/y");
-            final BigdataURI z = f.createURI("http://www.foo.org/z");
+            final EmbergraphURI x = f.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = f.createURI("http://www.foo.org/y");
+            final EmbergraphURI z = f.createURI("http://www.foo.org/z");
     
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
     
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI rdfsLabel = f.asValue(RDFS.LABEL);
-            final BigdataURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfsLabel = f.asValue(RDFS.LABEL);
+            final EmbergraphURI rdfsSubClassOf = f.asValue(RDFS.SUBCLASSOF);
     
-            final BigdataLiteral lit1 = f.createLiteral("abc");
-            final BigdataLiteral lit2 = f.createLiteral("abc", A);
-            final BigdataLiteral lit3 = f.createLiteral("abc", "en");
+            final EmbergraphLiteral lit1 = f.createLiteral("abc");
+            final EmbergraphLiteral lit2 = f.createLiteral("abc", A);
+            final EmbergraphLiteral lit3 = f.createLiteral("abc", "en");
     
-            final BigdataBNode bn1 = f.createBNode(UUID.randomUUID().toString());
-            final BigdataBNode bn2 = f.createBNode("a12");
+            final EmbergraphBNode bn1 = f.createBNode(UUID.randomUUID().toString());
+            final EmbergraphBNode bn2 = f.createBNode("a12");
             
             {
-                final BigdataValue[] terms = new BigdataValue[] {
+                final EmbergraphValue[] terms = new EmbergraphValue[] {
 
                         x, y, z,
                         A, B, C,
@@ -288,7 +288,7 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
                 
             }
 
-//            final BigdataStatementIterator itr = store.getStatements(null, null, null);
+//            final EmbergraphStatementIterator itr = store.getStatements(null, null, null);
 //            
 //            try {
 //
@@ -432,28 +432,28 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
                 
             }
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI x = f.createURI("http://www.foo.org/x");
-            final BigdataURI y = f.createURI("http://www.foo.org/y");
-            final BigdataURI z = f.createURI("http://www.foo.org/z");
+            final EmbergraphURI x = f.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = f.createURI("http://www.foo.org/y");
+            final EmbergraphURI z = f.createURI("http://www.foo.org/z");
     
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
     
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-//            final BigdataURI rdfsLabel = f.createURI(RDFS.LABEL);
-            final BigdataURI dcCreator = f.createURI("http://purl.org/dc/terms/creator");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+//            final EmbergraphURI rdfsLabel = f.createURI(RDFS.LABEL);
+            final EmbergraphURI dcCreator = f.createURI("http://purl.org/dc/terms/creator");
     
-            BigdataLiteral lit1 = f.createLiteral("bryan");
-            BigdataLiteral lit2 = f.createLiteral("mike");
+            EmbergraphLiteral lit1 = f.createLiteral("bryan");
+            EmbergraphLiteral lit2 = f.createLiteral("mike");
     
-//            final BigdataBNode bn1 = f.createBNode(UUID.randomUUID().toString());
-//            final BigdataBNode bn2 = f.createBNode("a12");
+//            final EmbergraphBNode bn1 = f.createBNode(UUID.randomUUID().toString());
+//            final EmbergraphBNode bn2 = f.createBNode("a12");
 
             {
-                final BigdataValue[] terms = new BigdataValue[] {
+                final EmbergraphValue[] terms = new EmbergraphValue[] {
 
                 x, y, z,
                         A, B, C,
@@ -549,25 +549,25 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
                 
             }
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI x = f.createURI("http://www.foo.org/x");
-            final BigdataURI y = f.createURI("http://www.foo.org/y");
-            final BigdataURI z = f.createURI("http://www.foo.org/z");
+            final EmbergraphURI x = f.createURI("http://www.foo.org/x");
+            final EmbergraphURI y = f.createURI("http://www.foo.org/y");
+            final EmbergraphURI z = f.createURI("http://www.foo.org/z");
     
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
     
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataURI dcCreator = f.createURI("http://purl.org/dc/terms/creator");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI dcCreator = f.createURI("http://purl.org/dc/terms/creator");
     
-            final BigdataLiteral lit1 = f.createLiteral("bryan");
-            final BigdataLiteral lit2 = f.createLiteral("mike");
+            final EmbergraphLiteral lit1 = f.createLiteral("bryan");
+            final EmbergraphLiteral lit2 = f.createLiteral("mike");
 
             {
 
-                final BigdataValue[] terms = new BigdataValue[] {
+                final EmbergraphValue[] terms = new EmbergraphValue[] {
 
                         x, y, z,
                         A, B, C,
@@ -742,10 +742,10 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
 
             }
 
-            final BigdataValueFactory valueFactory = store.getValueFactory();
-            final BigdataURI A = valueFactory.createURI("http://www.foo.org/A");
-            final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
-            final BigdataBNode sid1 = valueFactory.createBNode("_S1");
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphURI A = valueFactory.createURI("http://www.foo.org/A");
+            final EmbergraphURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
+            final EmbergraphBNode sid1 = valueFactory.createBNode("_S1");
 
             /*
              * Note: Do NOT add the SIDs in advance to the lexicon. The will be
@@ -753,7 +753,7 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
              * identifiers (SIDs). These differ in their bit pattern on the
              * lower two bits.
              */
-//            store.addTerms(new BigdataValue[] { A, rdfType, sid1 });
+//            store.addTerms(new EmbergraphValue[] { A, rdfType, sid1 });
             
             {
                 StatementBuffer buf = new StatementBuffer(store, 100/* capacity */);
@@ -807,11 +807,11 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
 
             }
 
-            final BigdataValueFactory valueFactory = store.getValueFactory();
-            final BigdataURI B = valueFactory.createURI("http://www.foo.org/B");
-            final BigdataURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
-            final BigdataBNode sid1 = valueFactory.createBNode("_S1");
-            final BigdataBNode sid2 = valueFactory.createBNode("_S2");
+            final EmbergraphValueFactory valueFactory = store.getValueFactory();
+            final EmbergraphURI B = valueFactory.createURI("http://www.foo.org/B");
+            final EmbergraphURI rdfType = valueFactory.createURI(RDF.TYPE.stringValue());
+            final EmbergraphBNode sid1 = valueFactory.createBNode("_S1");
+            final EmbergraphBNode sid2 = valueFactory.createBNode("_S2");
 
             /*
              * Note: Do NOT add the SIDs in advance to the lexicon. The will be
@@ -819,7 +819,7 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
              * identifiers (SIDs). These differ in their bit pattern on the
              * lower two bits.
              */
-//            store.addTerms(new BigdataValue[] { B, rdfType, sid1, sid2 });
+//            store.addTerms(new EmbergraphValue[] { B, rdfType, sid1, sid2 });
             
             {
                 StatementBuffer buf = new StatementBuffer(store, 100/* capacity */);
@@ -879,13 +879,13 @@ public class TestStatementIdentifiers extends AbstractTripleStoreTestCase {
 
             }
 
-            final BigdataValueFactory f = store.getValueFactory();
+            final EmbergraphValueFactory f = store.getValueFactory();
 
-            final BigdataURI A = f.createURI("http://www.foo.org/A");
-            final BigdataURI B = f.createURI("http://www.foo.org/B");
-            final BigdataURI C = f.createURI("http://www.foo.org/C");
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
-            final BigdataBNode sid1 = f.createBNode("_S1");
+            final EmbergraphURI A = f.createURI("http://www.foo.org/A");
+            final EmbergraphURI B = f.createURI("http://www.foo.org/B");
+            final EmbergraphURI C = f.createURI("http://www.foo.org/C");
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphBNode sid1 = f.createBNode("_S1");
 
             StatementBuffer buf = new StatementBuffer(store, 100/* capacity */);
             

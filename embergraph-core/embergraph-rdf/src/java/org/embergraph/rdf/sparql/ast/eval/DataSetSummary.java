@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 import org.openrdf.query.Dataset;
 
@@ -17,7 +18,6 @@ import org.embergraph.bop.cost.SubqueryCostReport;
 import org.embergraph.bop.fed.FederatedQueryEngine;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataURI;
 import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.AccessPath;
@@ -49,9 +49,9 @@ public class DataSetSummary {
 			
 			IV iv = null;
 			
-			if (uri != null && uri instanceof BigdataURI) {
+			if (uri != null && uri instanceof EmbergraphURI) {
 				
-				final BigdataURI bURI = (BigdataURI) uri;
+				final EmbergraphURI bURI = (EmbergraphURI) uri;
 				
 				iv = bURI.getIV();
 				
@@ -107,7 +107,7 @@ public class DataSetSummary {
      * @param graphs
      *            The set of named graphs in the SPARQL DATASET (optional). A
      *            runtime exception will be thrown during evaluation of the if
-     *            the {@link URI}s are not {@link BigdataURI}s. If
+     *            the {@link URI}s are not {@link EmbergraphURI}s. If
      *            <code>graphs := null</code>, then the set of named graphs is
      *            understood to be ALL graphs in the quad store.
      * @param update
@@ -258,7 +258,7 @@ public class DataSetSummary {
             if (nsamples == limit)
                 break;
 
-//            final IV graph = ((BigdataURI) uri).getIV();
+//            final IV graph = ((EmbergraphURI) uri).getIV();
 //
 //            if (graph == null)
 //                continue;

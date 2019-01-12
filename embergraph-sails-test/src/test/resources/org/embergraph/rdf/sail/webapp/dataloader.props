@@ -3,7 +3,7 @@ org.embergraph.relation.container=kb
 org.embergraph.journal.AbstractJournal.bufferMode=DiskRW
 org.embergraph.journal.AbstractJournal.file=bigdata.jnl
 org.embergraph.journal.AbstractJournal.initialExtent=209715200
-org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.rdf.vocab.core.BigdataCoreVocabulary_v20151210
+org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151210
 org.embergraph.rdf.store.AbstractTripleStore.textIndex false
 org.embergraph.btree.BTree.branchingFactor=128
 org.embergraph.namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor=400

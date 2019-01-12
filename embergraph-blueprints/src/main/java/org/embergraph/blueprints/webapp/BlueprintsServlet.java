@@ -26,11 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.blueprints.BigdataGraphBulkLoad;
+import org.embergraph.blueprints.EmbergraphGraphBulkLoad;
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.AbstractRestApiTask;
-import org.embergraph.rdf.sail.webapp.BigdataRDFServlet;
+import org.embergraph.rdf.sail.webapp.EmbergraphRDFServlet;
 import org.embergraph.rdf.sail.webapp.BlueprintsServletProxy;
 import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
@@ -86,7 +86,7 @@ public class BlueprintsServlet extends BlueprintsServletProxy {
 
         } catch (Throwable t) {
 
-            BigdataRDFServlet.launderThrowable(t, resp, "");
+            EmbergraphRDFServlet.launderThrowable(t, resp, "");
             
         }
         
@@ -111,13 +111,13 @@ public class BlueprintsServlet extends BlueprintsServletProxy {
 
             final long begin = System.currentTimeMillis();
             
-            BigdataSailRepositoryConnection conn = null;
+            EmbergraphSailRepositoryConnection conn = null;
             boolean success = false;
             try {
 
                 conn = getConnection();
                 
-                final BigdataGraphBulkLoad graph = new BigdataGraphBulkLoad(conn);
+                final EmbergraphGraphBulkLoad graph = new EmbergraphGraphBulkLoad(conn);
 
                 GraphMLReader.inputGraph(graph, req.getInputStream());
                 

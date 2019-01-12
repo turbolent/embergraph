@@ -31,7 +31,7 @@ import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
-import org.embergraph.bfs.BigdataFileSystem;
+import org.embergraph.bfs.EmbergraphFileSystem;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
@@ -46,7 +46,7 @@ import org.embergraph.util.CSVReader;
  * Test suite for {@link SparseRowStore}.
  * <p>
  * Note: A lot of the pragmatic tests are being done by the
- * {@link BigdataFileSystem} which uses the {@link SparseRowStore} for its file
+ * {@link EmbergraphFileSystem} which uses the {@link SparseRowStore} for its file
  * metadata index.
  * 
  * @todo test write, delete, and row scan with bad arguments.

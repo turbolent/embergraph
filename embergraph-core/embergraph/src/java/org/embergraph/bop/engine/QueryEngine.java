@@ -54,7 +54,6 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IQueryAttributes;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.bindingSet.ListBindingSet;
-import org.embergraph.bop.fed.FederatedQueryEngine;
 import org.embergraph.bop.fed.QueryEngineFactory;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexSegment;
@@ -69,7 +68,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
 import org.embergraph.resources.IndexManager;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.service.geospatial.GeoSpatialCounters;
@@ -451,13 +450,13 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
 
     /**
-     * The {@link IBigdataFederation} iff running in scale-out.
+     * The {@link IEmbergraphFederation} iff running in scale-out.
      * <p>
-     * Note: The {@link IBigdataFederation} is required in scale-out in order to
+     * Note: The {@link IEmbergraphFederation} is required in scale-out in order to
      * perform shard locator scans when mapping binding sets across the next
      * join in a query plan.
      */
-    public IBigdataFederation<?> getFederation() {
+    public IEmbergraphFederation<?> getFederation() {
         
         return null;
         
@@ -545,7 +544,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     
     /**
      * Return <code>true</code> iff running against an
-     * {@link IBigdataFederation}.
+     * {@link IEmbergraphFederation}.
      */
     public boolean isScaleOut() {
 

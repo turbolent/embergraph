@@ -125,7 +125,7 @@ public class BlobOverflowHandler implements IOverflowHandler {
 
         } catch (IOException ex) {
 
-            BigdataFileSystem.log.warn("Problem copying block: addr=" + addr
+            EmbergraphFileSystem.log.warn("Problem copying block: addr=" + addr
                     + ", len=" + len, ex);
 
             throw new RuntimeException(ex);
@@ -141,7 +141,7 @@ public class BlobOverflowHandler implements IOverflowHandler {
             try {
                 bin.close();
             } catch (IOException ex) {
-                BigdataFileSystem.log.warn(ex);
+                EmbergraphFileSystem.log.warn(ex);
             }
 
         }

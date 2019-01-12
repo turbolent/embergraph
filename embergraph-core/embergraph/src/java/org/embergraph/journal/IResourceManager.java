@@ -48,7 +48,7 @@ import org.embergraph.resources.ResourceManager;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.resources.StaleLocatorReason;
 import org.embergraph.service.DataService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IServiceShutdown;
 
@@ -284,7 +284,7 @@ public interface IResourceManager extends IServiceShutdown {
      * 
      * @throws UnsupportedOperationException
      *             if the {@link IResourceManager} is not part of an
-     *             {@link IBigdataFederation}.
+     *             {@link IEmbergraphFederation}.
      */
     public DataService getDataService();
     
@@ -293,9 +293,9 @@ public interface IResourceManager extends IServiceShutdown {
      * 
      * @throws UnsupportedOperationException
      *             if the {@link IResourceManager} is not part of an
-     *             {@link IBigdataFederation}.
+     *             {@link IEmbergraphFederation}.
      */
-    public IBigdataFederation<?> getFederation();
+    public IEmbergraphFederation<?> getFederation();
     
     /**
      * Return the {@link BTreeCounters} for the named index. If none exist, then

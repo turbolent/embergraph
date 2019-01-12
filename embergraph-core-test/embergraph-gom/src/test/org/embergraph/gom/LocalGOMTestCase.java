@@ -30,27 +30,27 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
+import org.embergraph.EmbergraphStatics;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.BigdataStatics;
 import org.embergraph.gom.om.IObjectManager;
 import org.embergraph.gom.om.ObjectManager;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.Journal.Options;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 public class LocalGOMTestCase extends TestCase implements IGOMProxy {
 
     private static final Logger log = Logger.getLogger(LocalGOMTestCase.class);
 
-    protected BigdataSailRepository m_repo;
-    protected BigdataSail m_sail;
+    protected EmbergraphSailRepository m_repo;
+    protected EmbergraphSail m_sail;
     protected ValueFactory m_vf;
     protected IObjectManager om;
     
@@ -90,7 +90,7 @@ public class LocalGOMTestCase extends TestCase implements IGOMProxy {
         // create a backing file for the database
         final File journal = File.createTempFile("embergraph", ".jnl");
         properties.setProperty(
-                BigdataSail.Options.FILE,
+                EmbergraphSail.Options.FILE,
                 journal.getAbsolutePath()
                 );
         properties.setProperty(Options.BUFFER_MODE, BufferMode.DiskRW.toString());
@@ -102,7 +102,7 @@ public class LocalGOMTestCase extends TestCase implements IGOMProxy {
 //        properties.setProperty("org.embergraph.namespace.kb.spo.BLOBS.org.embergraph.btree.BTree.branchingFactor", "200");
 //        properties.setProperty("org.embergraph.namespace.kb.lex.TERM2ID.org.embergraph.btree.BTree.branchingFactor", "200");
 //        properties.setProperty("org.embergraph.namespace.kb.lex.ID2TERM.org.embergraph.btree.BTree.branchingFactor", "200");
-        properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
+        properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
 
         return properties;
         
@@ -111,13 +111,13 @@ public class LocalGOMTestCase extends TestCase implements IGOMProxy {
     protected void setUp() throws Exception {
 
         // instantiate a sail and a Sesame repository
-        m_sail = new BigdataSail(getProperties());
-        m_repo = new BigdataSailRepository(m_sail);
+        m_sail = new EmbergraphSail(getProperties());
+        m_repo = new EmbergraphSailRepository(m_sail);
         m_repo.initialize();
         m_vf = m_sail.getValueFactory();
         // Note: This uses a mock endpoint URL.
         om = new ObjectManager("http://localhost"
-                + BigdataStatics.getContextPath() + "/sparql", m_repo);
+                + EmbergraphStatics.getContextPath() + "/sparql", m_repo);
 
     }
     
@@ -171,7 +171,7 @@ public class LocalGOMTestCase extends TestCase implements IGOMProxy {
             final Reader reader = new InputStreamReader(in);
             try {
 
-                final BigdataSailRepositoryConnection cxn = m_repo
+                final EmbergraphSailRepositoryConnection cxn = m_repo
                         .getConnection();
                 try {
                     cxn.setAutoCommit(false);

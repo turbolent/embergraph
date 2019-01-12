@@ -63,7 +63,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import org.apache.log4j.Logger;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
 import org.embergraph.btree.Checkpoint;
@@ -173,7 +173,7 @@ import org.embergraph.rwstore.sector.MemStrategy;
 import org.embergraph.rwstore.sector.MemoryManager;
 import org.embergraph.service.AbstractHATransactionService;
 import org.embergraph.service.AbstractTransactionService;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.ClocksNotSynchronizedException;
 import org.embergraph.util.NT;
@@ -555,7 +555,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 	 * <p>
 	 * It is checked in the commit() method ensure updates are protected.
 	 * 
-	 * @see #1021 (Add critical section protection to AbstractJournal.abort() and BigdataSailConnection.rollback())
+	 * @see #1021 (Add critical section protection to AbstractJournal.abort() and EmbergraphSailConnection.rollback())
 	 */
 	private final AtomicBoolean abortRequired = new AtomicBoolean(false);
 
@@ -2507,7 +2507,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
              * 
              * @see http://jira.blazegraph.com/browse/BLZG-181 (Add critical
              *      section protection to AbstractJournal.abort() and
-             *      BigdataSailConnection.rollback())
+             *      EmbergraphSailConnection.rollback())
              * @see http://jira.blazegraph.com/browse/BLZG-1236 (Recycler error
              *      in 1.5.1)
              */
@@ -2788,7 +2788,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 	 */// TODO Could merge with doLocalAbort().
 	private void _abort() {
 
-		// @see #1021 (Add critical section protection to AbstractJournal.abort() and BigdataSailConnection.rollback())
+		// @see #1021 (Add critical section protection to AbstractJournal.abort() and EmbergraphSailConnection.rollback())
 		boolean success = false;
 		
 		final WriteLock lock = _fieldReadWriteLock.writeLock();
@@ -2958,7 +2958,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 			
 			throw new RuntimeException("ABORT FAILED", e);
 		} finally {
-			// @see #1021 (Add critical section protection to AbstractJournal.abort() and BigdataSailConnection.rollback())
+			// @see #1021 (Add critical section protection to AbstractJournal.abort() and EmbergraphSailConnection.rollback())
 			abortRequired.set(!success);
 
 			lock.unlock();
@@ -4076,7 +4076,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
             if (log.isInfoEnabled())
                 log.info("commitTime=" + commitTime);
 
-        	// Critical Section Check. @see #1021 (Add critical section protection to AbstractJournal.abort() and BigdataSailConnection.rollback())
+        	// Critical Section Check. @see #1021 (Add critical section protection to AbstractJournal.abort() and EmbergraphSailConnection.rollback())
         	if (abortRequired.get()) 
         		throw new AbortRequiredException();
 
@@ -4159,7 +4159,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 
 			final long elapsedNanos = System.nanoTime() - cs.beginNanos;
 
-			if (BigdataStatics.debug || log.isInfoEnabled()) {
+			if (EmbergraphStatics.debug || log.isInfoEnabled()) {
                 final String msg = "commit: commitTime=" + cs.commitTime
                         + ", commitCounter=" + cs.newCommitCounter
                         + ", latency="
@@ -4168,11 +4168,11 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 //                        + cs.newRootBlock.getNextOffset()
 //                        + ", byteCount="
 //                        + (cs.newRootBlock.getNextOffset() - cs.byteCountBefore);
-                if (BigdataStatics.debug)
+                if (EmbergraphStatics.debug)
 					System.err.println(msg);
 				else if (log.isInfoEnabled())
 					log.info(msg);
-//				if (BigdataStatics.debug && LRUNexus.INSTANCE != null) {
+//				if (EmbergraphStatics.debug && LRUNexus.INSTANCE != null) {
 //					System.err.println(LRUNexus.INSTANCE.toString());
 //				}
 			}
@@ -5186,7 +5186,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
      *      FIXME GIST Reconcile API tension with {@link IIndex} and
      *      {@link ICheckpointProtocol}, however this method is overridden by
      *      {@link Journal} and is also implemented by
-     *      {@link IBigdataFederation}. The central remaining tensions are
+     *      {@link IEmbergraphFederation}. The central remaining tensions are
      *      {@link FusedView} and the local/remote aspect. {@link FusedView}
      *      could probably be "fixed" by extending {@link AbstractBTree} rather
      *      than having an inner delegate for the mutable view. The local/remote

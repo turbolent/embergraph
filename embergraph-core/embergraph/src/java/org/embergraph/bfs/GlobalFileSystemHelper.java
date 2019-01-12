@@ -58,7 +58,7 @@ public class GlobalFileSystemHelper {
     /**
      * The {@link ITx#UNISOLATED} view.
      */
-    synchronized public BigdataFileSystem getGlobalFileSystem() {
+    synchronized public EmbergraphFileSystem getGlobalFileSystem() {
 
         if (INFO)
             log.info("");
@@ -66,7 +66,7 @@ public class GlobalFileSystemHelper {
         if (globalRowStore == null) {
 
             // setup the repository view.
-            globalRowStore = new BigdataFileSystem(indexManager,
+            globalRowStore = new EmbergraphFileSystem(indexManager,
                     GLOBAL_FILE_SYSTEM_NAMESPACE, ITx.UNISOLATED,
                     new Properties());
             
@@ -78,17 +78,17 @@ public class GlobalFileSystemHelper {
         return globalRowStore;
 
     }
-    private transient BigdataFileSystem globalRowStore;
+    private transient EmbergraphFileSystem globalRowStore;
 
     /**
      * {@link ITx#READ_COMMITTED} view.
      */
-    public BigdataFileSystem getReadCommitted() {
+    public EmbergraphFileSystem getReadCommitted() {
 
         if (INFO)
             log.info("");
 
-        return (BigdataFileSystem) indexManager.getResourceLocator().locate(
+        return (EmbergraphFileSystem) indexManager.getResourceLocator().locate(
                 GLOBAL_FILE_SYSTEM_NAMESPACE, ITx.READ_COMMITTED);
 
     }

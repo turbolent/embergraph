@@ -36,10 +36,10 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.rdf.inf.TruthMaintenance;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.PropertyUtil;
 
 /**
@@ -61,7 +61,7 @@ import org.embergraph.util.PropertyUtil;
  * all MUST be assigned the {@link TemporaryStore#getUUID()} as their prefix in
  * order to avoid possible conflicts within a global namespace. This is
  * especially important when the relations in the {@link TemporaryStore} are
- * resolvable by an {@link IBigdataFederation} or {@link Journal}.
+ * resolvable by an {@link IEmbergraphFederation} or {@link Journal}.
  * <p>
  * Note: This class is often used to support inference. When so used, the
  * statement indices are populated with the term identifiers from the main
@@ -354,7 +354,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
             final String val = in.getProperty(key);
 
             // FIXME BLZG-2023, BLZG-2041
-            if (BigdataSail.Options.NAMESPACE.equals(key)) {
+            if (EmbergraphSail.Options.NAMESPACE.equals(key)) {
 
                 // Ensure that the TempTripleStore has a unique namespace.
                 out.setProperty(key, val + "_temporaryStore=" + tempStore.getUUID());

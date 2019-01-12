@@ -34,7 +34,7 @@ import org.embergraph.journal.ITx;
 
 /**
  * Unit tests of local (all writes are on a single data service) and distributed
- * abort and commit protocols for an {@link IBigdataFederation} using the
+ * abort and commit protocols for an {@link IEmbergraphFederation} using the
  * {@link DistributedTransactionService}.
  * 
  * @todo the easiest way to set this up is to place different indices onto

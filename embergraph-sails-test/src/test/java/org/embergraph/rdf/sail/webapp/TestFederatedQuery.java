@@ -72,6 +72,7 @@ import javax.servlet.http.HttpServletResponse;
 import junit.framework.Test;
 import junit.util.PropertyUtil;
 
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -104,8 +105,7 @@ import org.openrdf.rio.helpers.StatementCollector;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
-import org.embergraph.rdf.sail.sparql.Bigdata2ASTSPARQLParser;
+import org.embergraph.rdf.sail.sparql.Embergraph2ASTSPARQLParser;
 import org.embergraph.rdf.sail.webapp.client.HttpException;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
@@ -371,7 +371,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends
         qb.append("     ?X a <" + FOAF.PERSON + "> . \n");
         qb.append(" } \n");
 
-        final BigdataSailRemoteRepositoryConnection conn = m_repo.getBigdataSailRemoteRepository().getConnection();
+        final EmbergraphSailRemoteRepositoryConnection conn = m_repo.getEmbergraphSailRemoteRepository().getConnection();
         
         try {
 
@@ -418,8 +418,8 @@ public class TestFederatedQuery<S extends IIndexManager> extends
 //  @Test
     public void test2() throws Exception {
 //        if(false) {
-//        final BigdataValueFactory f = (BigdataValueFactory) localSail.getValueFactory();
-//        final BigdataValue[] values = new BigdataValue[] {
+//        final EmbergraphValueFactory f = (EmbergraphValueFactory) localSail.getValueFactory();
+//        final EmbergraphValue[] values = new EmbergraphValue[] {
 //                f.createURI("http://example.org/a"),
 //                f.createURI("http://example.org/b"),
 //        };
@@ -636,8 +636,8 @@ public class TestFederatedQuery<S extends IIndexManager> extends
             final String expectedResultFile, final boolean checkOrder)
             throws Exception {
         
-        final BigdataSailRemoteRepositoryConnection conn = m_repo
-               .getBigdataSailRemoteRepository().getConnection();
+        final EmbergraphSailRemoteRepositoryConnection conn = m_repo
+               .getEmbergraphSailRemoteRepository().getConnection();
        
         try {
            
@@ -661,7 +661,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends
             final AbstractTripleStore tripleStore = (AbstractTripleStore) getIndexManager()
                   .getResourceLocator().locate(namespace, ITx.READ_COMMITTED);
 
-            final ASTContainer astContainer = new Bigdata2ASTSPARQLParser()
+            final ASTContainer astContainer = new Embergraph2ASTSPARQLParser()
                   .parseQuery2(queryString, baseURI);
 
             queryType = astContainer.getOriginalAST().getQueryType();

@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 
 import org.embergraph.bop.BOp;
-import org.embergraph.rdf.model.BigdataStatement;
+import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
  * This operation creates a graph in the Graph Store (this operation is a NOP
@@ -49,7 +49,7 @@ public class CreateGraph extends AbstractOneGraphManagement {
     public interface Annotations extends AbstractOneGraphManagement.Annotations {
         
         /**
-         * The {@link BigdataStatement}[] which provides the provisioning
+         * The {@link EmbergraphStatement}[] which provides the provisioning
          * information for the named solution set (optional, even when creating
          * a named solution set).
          */
@@ -85,13 +85,13 @@ public class CreateGraph extends AbstractOneGraphManagement {
     /**
      * Return the parameters used to provision a named solution set.
      */
-    public BigdataStatement[] getParams() {
+    public EmbergraphStatement[] getParams() {
 
-        return (BigdataStatement[]) getProperty(Annotations.PARAMS);
+        return (EmbergraphStatement[]) getProperty(Annotations.PARAMS);
 
     }
 
-    public void setParams(final BigdataStatement[] params) {
+    public void setParams(final EmbergraphStatement[] params) {
 
         setProperty(Annotations.PARAMS, params);
 

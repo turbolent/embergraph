@@ -25,7 +25,7 @@ import org.embergraph.bop.HTreeAnnotations;
 import org.embergraph.bop.ap.Predicate;
 import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.IV;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Annotations in common for {@link HTree} based hash joins.
@@ -41,7 +41,7 @@ public interface HTreeHashJoinAnnotations extends HTreeAnnotations,
      * <p>
      * Note: This is necessary for the ivCache index used to optimize the
      * serialized representation of the solution {@link IV}s. We need to know
-     * how to serialize and deserialize {@link BigdataValue}s from the ivCache.
+     * how to serialize and deserialize {@link EmbergraphValue}s from the ivCache.
      * 
      * @see Predicate.Annotations#RELATION_NAME
      */

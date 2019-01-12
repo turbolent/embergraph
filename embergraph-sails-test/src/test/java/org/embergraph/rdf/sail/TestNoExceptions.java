@@ -72,7 +72,7 @@ public class TestNoExceptions extends
         super(name);
     }
 
-    public AbstractBigdataSailTestCase getOurDelegate() {
+    public AbstractEmbergraphSailTestCase getOurDelegate() {
 
         if (getDelegate() == null) {
 
@@ -81,9 +81,9 @@ public class TestNoExceptions extends
             	return super.getOurDelegate();
 
             }
-            setDelegate(new org.embergraph.rdf.sail.TestBigdataSailWithQuads());
+            setDelegate(new TestEmbergraphSailWithQuads());
         }
-        return (AbstractBigdataSailTestCase) super.getDelegate();
+        return (AbstractEmbergraphSailTestCase) super.getDelegate();
     }
 
 	/**
@@ -99,18 +99,18 @@ public class TestNoExceptions extends
 		 * For example, here is a set of five properties that turns off
 		 * inference, truth maintenance, and the free text index.
 		 */
-		props.setProperty(BigdataSail.Options.AXIOMS_CLASS,
+		props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS,
 				NoAxioms.class.getName());
-		props.setProperty(BigdataSail.Options.VOCABULARY_CLASS,
+		props.setProperty(EmbergraphSail.Options.VOCABULARY_CLASS,
 				NoVocabulary.class.getName());
-		props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-		props.setProperty(BigdataSail.Options.JUSTIFY, "false");
-//		props.setProperty(BigdataSail.Options.INLINE_DATE_TIMES, "true");
-//		props.setProperty(BigdataSail.Options.ISOLATABLE_INDICES, "true");
-//		props.setProperty(BigdataSail.Options.EXACT_SIZE, "true");
-//		props.setProperty(BigdataSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
+		props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+		props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
+//		props.setProperty(EmbergraphSail.Options.INLINE_DATE_TIMES, "true");
+//		props.setProperty(EmbergraphSail.Options.ISOLATABLE_INDICES, "true");
+//		props.setProperty(EmbergraphSail.Options.EXACT_SIZE, "true");
+//		props.setProperty(EmbergraphSail.Options.ALLOW_SESAME_QUERY_EVALUATION,
 //				"false");
-		props.setProperty(BigdataSail.Options.STATEMENT_IDENTIFIERS, "false");
+		props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS, "false");
 
 		return props;
 
@@ -193,9 +193,9 @@ WHERE {
 	void optimizeQuery(final String queryfile) throws Exception {
 		final String sparql = IOUtils.toString(getClass().getResourceAsStream(queryfile+".rq"));
 		// try with Bigdata:
-		final BigdataSail sail = getSail();
+		final EmbergraphSail sail = getSail();
 		try {
-			executeQuery(new BigdataSailRepository(sail),sparql);
+			executeQuery(new EmbergraphSailRepository(sail),sparql);
 		} finally {
 			sail.__tearDownUnitTest();
 		}

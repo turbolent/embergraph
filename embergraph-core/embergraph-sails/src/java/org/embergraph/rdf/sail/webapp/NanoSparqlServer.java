@@ -211,7 +211,7 @@ public class NanoSparqlServer {
          * the command line.
          */
         
-        String BIGDATA_PROPERTY_FILE = "embergraph.propertyFile";
+        String EMBERGRAPH_PROPERTY_FILE = "embergraph.propertyFile";
         
         /**
          * The jetty.home property.
@@ -286,7 +286,7 @@ public class NanoSparqlServer {
      *            read-only transaction.</dt>
      *            <dt>-servletContextListenerClass</dt>
      *            <dd>The name of a class that extends
-     *            {@link BigdataRDFServletContextListener}. This allows you to
+     *            {@link EmbergraphRDFServletContextListener}. This allows you to
      *            hook the {@link ServletContextListener} events.</dd>
      *            </dl>
      *            </p>
@@ -702,7 +702,7 @@ public class NanoSparqlServer {
      * When the {@link IIndexManager} is NOT specified, the life cycle of the
      * {@link IIndexManager} will be managed by the server and the
      * {@link IndexManager} instance will be opened (and eventually closed) by
-     * the {@link BigdataRDFServletContextListener} based on the configured
+     * the {@link EmbergraphRDFServletContextListener} based on the configured
      * value of the <code>propertyFile</code> init parameter in
      * <code>web.xml</code>. This form is used by {@link #main(String[])} and
      * can be used with either the {@link Journal} or the scale-out
@@ -1045,8 +1045,8 @@ public class NanoSparqlServer {
      * <p>
      * Note: These overrides are achieved by setting the {@link WebAppContext}
      * attribute named
-     * {@link BigdataRDFServletContextListener#INIT_PARAM_OVERRIDES}. The
-     * {@link BigdataRDFServletContextListener} then consults the attribute when
+     * {@link EmbergraphRDFServletContextListener#INIT_PARAM_OVERRIDES}. The
+     * {@link EmbergraphRDFServletContextListener} then consults the attribute when
      * reporting the effective value of the init-params. This convoluted
      * mechanism is required because you can not otherwise override the
      * init-params without editing <code>web.xml</code>.
@@ -1093,7 +1093,7 @@ public class NanoSparqlServer {
         if (initParams != null) {
 
             wac.setAttribute(
-                    BigdataRDFServletContextListener.INIT_PARAM_OVERRIDES,
+                    EmbergraphRDFServletContextListener.INIT_PARAM_OVERRIDES,
                     initParams);
 
         }

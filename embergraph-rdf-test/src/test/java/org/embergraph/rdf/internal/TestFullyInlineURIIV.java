@@ -5,12 +5,12 @@ import java.util.List;
 
 import junit.framework.TestCase2;
 
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.impl.URIImpl;
 
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.rdf.internal.impl.uri.FullyInlineURIIV;
 import org.embergraph.rdf.lexicon.BlobsIndexHelper;
-import org.embergraph.rdf.model.BigdataURI;
 
 /**
  * Test suite for {@link FullyInlineURIIV}.
@@ -26,14 +26,14 @@ public class TestFullyInlineURIIV extends TestCase2 {
 
 	public void test_InlineURIIV() {
 
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")));
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/")));
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/foo")));
-        doTest(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org:80/foo")));
+        doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
+        doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/")));
+        doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/foo")));
+        doTest(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org:80/foo")));
 
 	}
 
-	private void doTest(final FullyInlineURIIV<BigdataURI> iv) {
+	private void doTest(final FullyInlineURIIV<EmbergraphURI> iv) {
 
 		assertEquals(VTE.URI, iv.getVTE());
 		
@@ -64,10 +64,10 @@ public class TestFullyInlineURIIV extends TestCase2 {
         final List<IV<?,?>> ivs = new LinkedList<IV<?,?>>();
         {
 
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org")));
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/")));
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org/foo")));
-            ivs.add(new FullyInlineURIIV<BigdataURI>(new URIImpl("http://www.embergraph.org:80/foo")));
+            ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org")));
+            ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/")));
+            ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org/foo")));
+            ivs.add(new FullyInlineURIIV<EmbergraphURI>(new URIImpl("http://www.embergraph.org:80/foo")));
 
         }
         

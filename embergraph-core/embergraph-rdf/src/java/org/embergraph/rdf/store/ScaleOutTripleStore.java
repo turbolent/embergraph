@@ -25,11 +25,11 @@ import java.util.Properties;
 
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.locator.DefaultResourceLocator;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 
 /**
  * Implementation of an {@link ITripleStore} as a client of an
- * {@link IBigdataFederation}.
+ * {@link IEmbergraphFederation}.
  * 
  * <h2>Deployment choices</h2>
  * 
@@ -84,7 +84,7 @@ public class ScaleOutTripleStore extends AbstractTripleStore {
          * instantiated from within an AbstractTask.
          */
         
-//        this.fed = (IBigdataFederation) indexManager;
+//        this.fed = (IEmbergraphFederation) indexManager;
      
         /*
          * Note: KB is NOT created automatically.

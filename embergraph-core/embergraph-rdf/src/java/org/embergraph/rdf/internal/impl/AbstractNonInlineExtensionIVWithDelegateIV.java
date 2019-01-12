@@ -4,8 +4,8 @@ import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 
 /**
  * Class <strong>always</strong> has the <em>extension</em> bit set but is NOT
@@ -18,7 +18,7 @@ import org.embergraph.rdf.model.BigdataValue;
  * @param <V>
  * @param <T>
  */
-abstract public class AbstractNonInlineExtensionIVWithDelegateIV<V extends BigdataValue, T>
+abstract public class AbstractNonInlineExtensionIVWithDelegateIV<V extends EmbergraphValue, T>
         extends AbstractNonInlineExtensionIV<V, T> {
 
 	/**
@@ -29,7 +29,7 @@ abstract public class AbstractNonInlineExtensionIVWithDelegateIV<V extends Bigda
     /**
 	 * The inline literal delegate.
 	 */
-    private final AbstractLiteralIV<BigdataLiteral, ?> delegate;
+    private final AbstractLiteralIV<EmbergraphLiteral, ?> delegate;
 
     /**
      * The non-inline extension IV.
@@ -37,7 +37,7 @@ abstract public class AbstractNonInlineExtensionIVWithDelegateIV<V extends Bigda
     private final IV<?, ?> extensionIV;
     
     protected AbstractNonInlineExtensionIVWithDelegateIV(final VTE vte,
-            final AbstractLiteralIV<BigdataLiteral, ?> delegate, 
+            final AbstractLiteralIV<EmbergraphLiteral, ?> delegate,
             final IV<?, ?> extensionIv) {
 
         super(vte, delegate.getDTE());
@@ -51,7 +51,7 @@ abstract public class AbstractNonInlineExtensionIVWithDelegateIV<V extends Bigda
         
     }
     
-    public AbstractLiteralIV<BigdataLiteral, ?> getDelegate() {
+    public AbstractLiteralIV<EmbergraphLiteral, ?> getDelegate() {
 
         return delegate;
         

@@ -25,12 +25,12 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.UUID;
 
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
 import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.util.Bytes;
 
 /**
@@ -47,7 +47,7 @@ import org.embergraph.util.Bytes;
  * indirection from the TERMS index. For example, very large objects may be
  * stored in the file system, in S3, etc. In those cases, you must still resolve
  * the {@link IV} against the TERMS index. Now the resulting object may be a
- * {@link BigdataValue}. However, the object materialized from the TERMS index
+ * {@link EmbergraphValue}. However, the object materialized from the TERMS index
  * may also provide indirection into the file system, S3, etc.
  * <p>
  * The {@link VTE} has 4 distinctions (URI, Literal, BlankNode, and SID) and is

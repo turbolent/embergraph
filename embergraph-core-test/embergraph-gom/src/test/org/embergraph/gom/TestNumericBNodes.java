@@ -2,11 +2,7 @@ package org.embergraph.gom;
 
 import java.util.Properties;
 
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParserRegistry;
-
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.rio.turtle.BigdataTurtleParser;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
@@ -73,7 +69,7 @@ public class TestNumericBNodes extends RemoteGOMTestCase {
 //
 //			// Verify that the correct parser will be used.
 //			assertEquals("TurtleParserClass",
-//					BigdataTurtleParser.class.getName(), RDFParserRegistry
+//					EmbergraphTurtleParser.class.getName(), RDFParserRegistry
 //							.getInstance().get(RDFFormat.TURTLE).getParser()
 //							.getClass().getName());
 //

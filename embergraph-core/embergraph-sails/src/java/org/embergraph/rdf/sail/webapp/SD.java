@@ -23,6 +23,8 @@ package org.embergraph.rdf.sail.webapp;
 
 import java.util.Properties;
 
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Graph;
 import org.openrdf.model.URI;
@@ -39,11 +41,9 @@ import org.embergraph.rdf.axioms.Axioms;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.axioms.OwlAxioms;
 import org.embergraph.rdf.axioms.RdfsAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
-import org.embergraph.service.IBigdataFederation;
 import org.embergraph.util.ClassPathUtil;
 
 /**
@@ -182,7 +182,7 @@ public class SD {
             + "replicationFactor");
     
     /**
-     * An {@link IBigdataFederation}.
+     * An {@link IEmbergraphFederation}.
      */
     static public final URI ScaleOut = new URIImpl(BDFNS
             + "ScaleOut");
@@ -202,7 +202,7 @@ public class SD {
 
     /**
      * The <code>namespace</code> for this KB instance as configured by the
-     * {@link BigdataSail.Options#NAMESPACE} property.
+     * {@link EmbergraphSail.Options#NAMESPACE} property.
      */
     static public final URI KB_NAMESPACE = new URIImpl(BDFNS
             + "KB/Namespace");
@@ -669,16 +669,16 @@ public class SD {
         final Properties properties = tripleStore.getProperties();
 
         if (Boolean.valueOf(properties.getProperty(
-                BigdataSail.Options.TRUTH_MAINTENANCE,
-                BigdataSail.Options.DEFAULT_TRUTH_MAINTENANCE))) {
+                EmbergraphSail.Options.TRUTH_MAINTENANCE,
+                EmbergraphSail.Options.DEFAULT_TRUTH_MAINTENANCE))) {
 
             g.add(aService, SD.feature, TruthMaintenance);
 
         }
         
         if (Boolean.valueOf(properties.getProperty(
-                BigdataSail.Options.ISOLATABLE_INDICES,
-                BigdataSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
+                EmbergraphSail.Options.ISOLATABLE_INDICES,
+                EmbergraphSail.Options.DEFAULT_ISOLATABLE_INDICES))) {
 
             g.add(aService, SD.feature, IsolatableIndices);
 
@@ -718,7 +718,7 @@ public class SD {
 
                 }
 
-            } else if (indexManager instanceof IBigdataFederation) {
+            } else if (indexManager instanceof IEmbergraphFederation) {
 
                 g.add(aService, SD.feature, ScaleOut);
 

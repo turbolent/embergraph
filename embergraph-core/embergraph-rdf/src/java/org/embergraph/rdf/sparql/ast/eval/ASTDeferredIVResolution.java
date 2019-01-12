@@ -13,6 +13,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
@@ -39,10 +42,7 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.constraints.IVValueExpression;
 import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.TermId;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
 import org.embergraph.rdf.sail.sparql.ast.ASTIRI;
 import org.embergraph.rdf.sail.sparql.ast.ASTQueryContainer;
@@ -122,15 +122,15 @@ public class ASTDeferredIVResolution {
     /**
      * The value factory for that target triple store.
      */
-    private final BigdataValueFactory vf;
+    private final EmbergraphValueFactory vf;
     
     /**
-     * Deferred handlers, linked to particular BigdataValue resolution
+     * Deferred handlers, linked to particular EmbergraphValue resolution
      */
-    private final Map<BigdataValue, List<Handler>> deferred = new LinkedHashMap<>();
+    private final Map<EmbergraphValue, List<Handler>> deferred = new LinkedHashMap<>();
     
     /**
-	 * Deferred handlers, NOT linked to particular BigdataValue resolution, used
+	 * Deferred handlers, NOT linked to particular EmbergraphValue resolution, used
 	 * to provide sets of resolved default and named graphs into DataSetSummary
 	 * constructor
 	 */
@@ -401,20 +401,20 @@ public class ASTDeferredIVResolution {
 
     /**
      * Schedule resolution if IV in provided value, provided handler will be
-     * used to process resolved IV. If provided BigdataValue was created using
-     * BigdataValueFactory bound to triple store, and has real IV already
+     * used to process resolved IV. If provided EmbergraphValue was created using
+     * EmbergraphValueFactory bound to triple store, and has real IV already
      * resolved (for example dataset definition), handler will be fired
      * immediately and no value will be queued for resolution.
      * 
      * @param value
      * @param handler
      */
-    private void defer(final BigdataValue value, final Handler handler) {
+    private void defer(final EmbergraphValue value, final Handler handler) {
         if (value == null)
             return;
         if (value.getValueFactory() == vf && value.isRealIV()) {
             /*
-             * We have a BigdataValue that belongs to the correct namespace and
+             * We have a EmbergraphValue that belongs to the correct namespace and
              * which has already been resolved to a real IV.
              */
             if (value.getIV().needsMaterialization()) {
@@ -509,12 +509,12 @@ public class ASTDeferredIVResolution {
                     final ASTIRI astIri = dc.jjtGetChild(ASTIRI.class);
     
                     // Setup the callback handler : TODO Pull handler into a private class? Questions about scope for defaultGraphs and namedGraphs.
-					defer((BigdataURI) astIri.getRDFValue(), new Handler() {
+					defer((EmbergraphURI) astIri.getRDFValue(), new Handler() {
 
 						@Override
                         public void handle(final IV newIV) {
                         
-							final BigdataValue uri = newIV.getValue();
+							final EmbergraphValue uri = newIV.getValue();
                             
 							if (dc.isVirtual()) {
 
@@ -547,7 +547,7 @@ public class ASTDeferredIVResolution {
                                 while(itr.hasNext()) {
 
                                     final IV memberGraph = itr.next().o();
-                                    final BigdataValue value = store.getLexiconRelation().getTerm(memberGraph);
+                                    final EmbergraphValue value = store.getLexiconRelation().getTerm(memberGraph);
                                     memberGraph.setValue(value);
 
                                     if (dc.isNamed()) {
@@ -738,8 +738,8 @@ public class ASTDeferredIVResolution {
         while (itr.hasNext()) {
             final Entry<IVariable, IConstant> entry = itr.next();
             final Object value = entry.getValue().get();
-            if (value instanceof BigdataValue) {
-                defer((BigdataValue)value, new Handler(){
+            if (value instanceof EmbergraphValue) {
+                defer((EmbergraphValue)value, new Handler(){
                     @Override
                     public void handle(final IV newIV) {
                         entry.setValue(new Constant(newIV));
@@ -767,18 +767,18 @@ public class ASTDeferredIVResolution {
             
             for (Binding entry: bs) {
                 Value value = entry.getValue();
-                if (!(value instanceof BigdataValue)) {
+                if (!(value instanceof EmbergraphValue)) {
                     if (bs instanceof QueryBindingSet) {
-                        BigdataValue bValue = store.getValueFactory().asValue(value);
+                        EmbergraphValue bValue = store.getValueFactory().asValue(value);
 //                        bValue.setIV(TermId.mockIV(VTE.valueOf(bValue)));
 //                        bValue.getIV().setValue(bValue);
                         value = bValue;
                     }
                 }
 
-                if (value instanceof BigdataValue && !((BigdataValue) value).isRealIV()) {
-                    final BigdataValue bValue = (BigdataValue) value;
-                    defer((BigdataValue)value, new Handler(){
+                if (value instanceof EmbergraphValue && !((EmbergraphValue) value).isRealIV()) {
+                    final EmbergraphValue bValue = (EmbergraphValue) value;
+                    defer((EmbergraphValue)value, new Handler(){
                         @Override
                         public void handle(final IV newIV) {
                             bValue.setIV(newIV);
@@ -818,13 +818,13 @@ public class ASTDeferredIVResolution {
 
     private URI handleDatasetGraph(final AbstractTripleStore store, final URI uri) {
         URI value = uri;
-        if (value!= null && !(value instanceof BigdataValue)) {
+        if (value!= null && !(value instanceof EmbergraphValue)) {
             value = store.getValueFactory().asValue(value);
         }
 
-        if (value instanceof BigdataValue) {
-            final BigdataValue bValue = (BigdataValue) value;
-            defer((BigdataValue)value, new Handler(){
+        if (value instanceof EmbergraphValue) {
+            final EmbergraphValue bValue = (EmbergraphValue) value;
+            defer((EmbergraphValue)value, new Handler(){
                 @Override
                 public void handle(final IV newIV) {
                     bValue.setIV(newIV);
@@ -845,7 +845,7 @@ public class ASTDeferredIVResolution {
 
         if (bop instanceof ConstantNode) {
 
-            final BigdataValue value = ((ConstantNode) bop).getValue();
+            final EmbergraphValue value = ((ConstantNode) bop).getValue();
             if (value != null) {
                 /*
                  * Even if iv is already filled in we should try to resolve it
@@ -868,8 +868,8 @@ public class ASTDeferredIVResolution {
             if (pathBop instanceof Constant) {
                 final Object v = ((Constant)pathBop).get();
                 final int fk = k;
-                if (v instanceof BigdataValue) {
-                    defer((BigdataValue)v, new Handler(){
+                if (v instanceof EmbergraphValue) {
+                    defer((EmbergraphValue)v, new Handler(){
                         @Override
                         public void handle(final IV newIV) {
                             bop.args().set(fk, new Constant(newIV));
@@ -912,7 +912,7 @@ public class ASTDeferredIVResolution {
             // Check for using context value in DATA block with triple store not supporting quads
             // Moved from org.embergraph.rdf.sail.sparql.UpdateExprBuilder.doUnparsedQuadsDataBlock(ASTUpdate, Object, boolean, boolean)
             if (!store.isQuads()) {
-                for (final BigdataStatement sp: update.getData()) {
+                for (final EmbergraphStatement sp: update.getData()) {
                     if (sp.getContext()!=null) {
                         throw new QuadsOperationInTriplesModeException(
                                 "Quads in SPARQL update data block are not supported " +
@@ -984,12 +984,12 @@ public class ASTDeferredIVResolution {
         		    // fix failing TestTicket1747: not materialized IVs do not require resolution
         		    if (veBop instanceof Constant && ((Constant)veBop).get() instanceof IV &&
         		            ((IV) ((Constant)veBop).get()).hasValue()) {
-        		        final BigdataValue v = ((IV) ((Constant)veBop).get()).getValue();
+        		        final EmbergraphValue v = ((IV) ((Constant)veBop).get()).getValue();
         		        final int fk = k;
         		        defer(v, new Handler(){
         		            @Override
         		            public void handle(final IV newIV) {
-        		                final BigdataValue resolved = vf.asValue(v);
+        		                final EmbergraphValue resolved = vf.asValue(v);
         		                if (resolved.getIV() == null && newIV!=null) {
         		                    resolved.setIV(newIV);
         		                    newIV.setValue(resolved);
@@ -1009,8 +1009,8 @@ public class ASTDeferredIVResolution {
         		}
             } else if (fve instanceof Constant) {
                 final Object value = ((Constant)fve).get();
-                if (value instanceof BigdataValue) {
-                    defer((BigdataValue)value, new Handler(){
+                if (value instanceof EmbergraphValue) {
+                    defer((EmbergraphValue)value, new Handler(){
                         @Override
                         public void handle(final IV newIV) {
                             ((FunctionNode)bop).setValueExpression(new Constant(newIV));
@@ -1095,7 +1095,7 @@ public class ASTDeferredIVResolution {
         /*
          * Build up the vocabulary (some key vocabulary items which correspond to syntactic sugar in SPARQL.)
          */
-        final List<BigdataValue> vocab = new LinkedList<>();
+        final List<EmbergraphValue> vocab = new LinkedList<>();
         {
             
             // RDF Collection syntactic sugar vocabulary items.
@@ -1108,7 +1108,7 @@ public class ASTDeferredIVResolution {
 
         final int nvalues = deferred.size() + vocab.size();
         final IV[] ivs = new IV[nvalues]; // FIXME REMOVE.
-        final BigdataValue[] values = new BigdataValue[nvalues];
+        final EmbergraphValue[] values = new EmbergraphValue[nvalues];
         {
         
             /*
@@ -1122,9 +1122,9 @@ public class ASTDeferredIVResolution {
              * for values in deferred list
              */
             
-            for (final BigdataValue v: vocab) {
+            for (final EmbergraphValue v: vocab) {
 
-                final BigdataValue toBeResolved = v; // asValue() invoked above. // f.asValue(v);
+                final EmbergraphValue toBeResolved = v; // asValue() invoked above. // f.asValue(v);
                 ivs[i] = TermId.mockIV(VTE.valueOf(v));
                 if (!toBeResolved.isRealIV()) {
                 	toBeResolved.clearInternalValue();
@@ -1133,9 +1133,9 @@ public class ASTDeferredIVResolution {
                 
             }
 
-            for (final BigdataValue v: deferred.keySet()) {
+            for (final EmbergraphValue v: deferred.keySet()) {
                 
-                final BigdataValue toBeResolved = vf.asValue(v);
+                final EmbergraphValue toBeResolved = vf.asValue(v);
                 ivs[i] = v.getIV();
                 if (!toBeResolved.isRealIV()) {
                 	toBeResolved.clearInternalValue();
@@ -1147,7 +1147,7 @@ public class ASTDeferredIVResolution {
             /*
              * Batch resolution.
              * 
-             * Note: At this point all BigdataValue objects belong to the target
+             * Note: At this point all EmbergraphValue objects belong to the target
              * namespace.
              */
             
@@ -1166,7 +1166,7 @@ public class ASTDeferredIVResolution {
         {
             for (int i = 0; i < values.length; i++) {
 
-                final BigdataValue v = values[i];
+                final EmbergraphValue v = values[i];
 
                 final IV iv;
                 if (v.isRealIV()) {
@@ -1204,7 +1204,7 @@ public class ASTDeferredIVResolution {
                          * fully inline value. A number of SPARQL tests will
                          * fail if this code path is disabled, but note that the
                          * test will only fail if openrdf Value objects are
-                         * being provided rather than BigdataValue objects, so
+                         * being provided rather than EmbergraphValue objects, so
                          * the issue only shows up with embedded SPARQL query
                          * use.
                          * 
@@ -1214,7 +1214,7 @@ public class ASTDeferredIVResolution {
                         final String label = ((Literal) v).getLabel();
                         final URI dataType = ((Literal) v).getDatatype();
                         final String language = ((Literal) v).getLanguage();
-                        final BigdataValue resolved;
+                        final EmbergraphValue resolved;
                         if (language != null) {
                             resolved = vf.createLiteral(label, language);
                         } else {

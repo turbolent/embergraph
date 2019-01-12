@@ -35,12 +35,12 @@ import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.rdf.axioms.NoAxioms;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.AbstractScaleOutClient;
-import org.embergraph.service.IBigdataFederation;
+import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 
@@ -220,7 +220,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 		case quads:
 			properties.setProperty(AbstractTripleStore.Options.QUADS_MODE,
 					"true");
-			properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,
+			properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,
 					"false");
 			properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
 					NoAxioms.class.getName());
@@ -231,7 +231,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 					AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
 			break;
 		case triples:
-			properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,
+			properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,
 					"false");
 			properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
 					NoAxioms.class.getName());
@@ -242,7 +242,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 					AbstractTripleStore.Options.STATEMENT_IDENTIFIERS, "false");
 			break;
 		case sids:
-			properties.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE,
+			properties.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE,
 					"false");
 			properties.setProperty(AbstractTripleStore.Options.AXIOMS_CLASS,
 					NoAxioms.class.getName());
@@ -336,10 +336,10 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
                     } finally {
                         is.close();
                     }
-                    if (System.getProperty(BigdataSail.Options.FILE) != null) {
+                    if (System.getProperty(EmbergraphSail.Options.FILE) != null) {
                         // Override/set from the environment.
-                        properties.setProperty(BigdataSail.Options.FILE, System
-                                .getProperty(BigdataSail.Options.FILE));
+                        properties.setProperty(EmbergraphSail.Options.FILE, System
+                                .getProperty(EmbergraphSail.Options.FILE));
                     }
 					if (properties
 							.getProperty(org.embergraph.journal.Options.FILE) == null) {
@@ -370,7 +370,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
     }
 
 	/**
-	 * Runs the test suite against an {@link IBigdataFederation} or a
+	 * Runs the test suite against an {@link IEmbergraphFederation} or a
 	 * {@link Journal}. The federation must already be up and running. An
 	 * embedded {@link NanoSparqlServer} instance will be created for each test
 	 * run. Each test will run against a distinct KB instance within a unique
@@ -389,7 +389,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 	 *            where propertyFile is the configuration file for a
 	 *            {@link Journal}. <br/>
 	 *            where configFile is the configuration file for an
-	 *            {@link IBigdataFederation}.<br/>
+	 *            {@link IEmbergraphFederation}.<br/>
 	 *            where <i>triples</i> or <i>sids</i> or <i>quads</i> is the
 	 *            database mode.</br> where <i>tm</i> indicates that truth
 	 *            maintenance should be enabled (only valid with triples or

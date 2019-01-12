@@ -28,13 +28,13 @@ import org.openrdf.model.URI;
 
 import org.embergraph.rdf.internal.DTE;
 import org.embergraph.rdf.internal.XSD;
-import org.embergraph.rdf.model.BigdataLiteral;
+import org.embergraph.rdf.model.EmbergraphLiteral;
 
 /**
  * Superclass for the inline numerics - {@link XSDNumericIV},
  * {@link XSDIntegerIV}, and {@link XSDDecimalIV}.
  */ 
-public abstract class NumericIV<V extends BigdataLiteral, T> extends
+public abstract class NumericIV<V extends EmbergraphLiteral, T> extends
         AbstractLiteralIV<V, T> implements Literal {
 	
 	/**

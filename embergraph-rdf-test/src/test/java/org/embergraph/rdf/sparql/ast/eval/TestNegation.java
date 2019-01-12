@@ -21,15 +21,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-import java.util.Collections;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
-import org.embergraph.rdf.model.BigdataURI;
-import org.embergraph.rdf.model.BigdataValue;
-import org.embergraph.rdf.model.BigdataValueFactory;
+import org.embergraph.rdf.model.EmbergraphURI;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sail.sparql.PrefixDeclProcessor;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
@@ -473,21 +471,21 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
        final QueryRoot expected = new QueryRoot(QueryType.SELECT);
         {
             
-            final BigdataValueFactory f = h.getTripleStore().getValueFactory();
+            final EmbergraphValueFactory f = h.getTripleStore().getValueFactory();
             
-            final BigdataURI refEntity = f
+            final EmbergraphURI refEntity = f
                     .createURI("os:prop/analysis/refEntity");
 
-            final BigdataURI Kriterion = f.createURI("os:elem/loc/Kriterion");
+            final EmbergraphURI Kriterion = f.createURI("os:elem/loc/Kriterion");
             
-            final BigdataURI AnalysisResults = f
+            final EmbergraphURI AnalysisResults = f
                     .createURI("os:class/AnalysisResults");
             
-            final BigdataURI Artis = f.createURI("os:elem/loc/Artis");
+            final EmbergraphURI Artis = f.createURI("os:elem/loc/Artis");
             
-            final BigdataURI rdfType = f.asValue(RDF.TYPE);
+            final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
             
-            final BigdataValue[] values = new BigdataValue[] { refEntity,
+            final EmbergraphValue[] values = new EmbergraphValue[] { refEntity,
                     Kriterion, AnalysisResults, Artis, rdfType };
 
             // Resolve IVs (declared when the data were loaded)

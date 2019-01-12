@@ -17,6 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.internal.impl;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
+import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
@@ -31,8 +33,6 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
-import org.embergraph.rdf.model.BigdataLiteral;
-import org.embergraph.rdf.model.BigdataValue;
 import org.embergraph.util.Bytes;
 
 /**
@@ -42,7 +42,7 @@ import org.embergraph.util.Bytes;
  * literals if they are not being inlined). Larger RDF {@link Value}s should be
  * represented with {@link BlobIV} instead of this class.
  */
-public class TermId<V extends BigdataValue>
+public class TermId<V extends EmbergraphValue>
         extends AbstractNonInlineIV<V, Void> {
 
     /**
@@ -72,7 +72,7 @@ public class TermId<V extends BigdataValue>
     /**
      * Create a mock {@link IV} having the indicated {@link VTE} which will
      * report <code>true</code> for {@link #isNullIV()}. This is used by some
-     * code patterns where we need to associate a {@link BigdataValue} not in
+     * code patterns where we need to associate a {@link EmbergraphValue} not in
      * the database with an {@link IV} on a temporary basis.
      * 
      * @param vte
@@ -145,9 +145,9 @@ public class TermId<V extends BigdataValue>
      * URI if one is assigned. This representation is based solely on the flag
      * bits and the term identifier.
      * <p>
-     * The cached {@link BigdataValue}, if any, is also rendered. This is done
-     * using {@link BigdataValue#stringValue()} in order to avoid possible
-     * infinite recursion through {@link BigdataValue#toString()} if the latter
+     * The cached {@link EmbergraphValue}, if any, is also rendered. This is done
+     * using {@link EmbergraphValue#stringValue()} in order to avoid possible
+     * infinite recursion through {@link EmbergraphValue#toString()} if the latter
      * were to display the {@link IV}.
      */
     @Override
@@ -198,7 +198,7 @@ public class TermId<V extends BigdataValue>
      * {@inheritDoc
      * 
      * Note: only the termId matters for equality, unless either is #NULL, in
-     * which case this will compare the cached {@link BigdataValue}s if they
+     * which case this will compare the cached {@link EmbergraphValue }s if they
      * exist.  Null IVs without cached values are never equal.
      */
     @Override
@@ -299,15 +299,15 @@ public class TermId<V extends BigdataValue>
         if (value==null)
             throw new NotMaterializedException();
         
-        if (!(value instanceof BigdataLiteral))
+        if (!(value instanceof EmbergraphLiteral))
             return false;
 
-        return NumericIV.numericalDatatypes.contains(((BigdataLiteral)value).getDatatype());
+        return NumericIV.numericalDatatypes.contains(((EmbergraphLiteral)value).getDatatype());
         
     }
 
 //    /**
-//     * Override default serialization to send the cached {@link BigdataValue}.
+//     * Override default serialization to send the cached {@link EmbergraphValue}.
 //     * 
 //     * @see https://sourceforge.net/apps/trac/bigdata/ticket/337
 //     */
@@ -320,7 +320,7 @@ public class TermId<V extends BigdataValue>
 //	}
 //
 //	/**
-//	 * Override default serialization to recover the cached {@link BigdataValue}
+//	 * Override default serialization to recover the cached {@link EmbergraphValue}
 //	 * .
 //	 */
 //	@SuppressWarnings("unchecked")

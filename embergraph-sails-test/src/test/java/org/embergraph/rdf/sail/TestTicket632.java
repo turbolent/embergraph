@@ -39,7 +39,7 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-import org.embergraph.rdf.sail.BigdataSail.Options;
+import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.embergraph.rdf.sparql.ast.eval.service.OpenrdfNativeMockServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
@@ -49,7 +49,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
  * SERVICE call.
  * <p>
  * To run this test case, specify the following JVM property:
- * <code>-DtestClass=org.embergraph.rdf.sail.TestBigdataSailWithQuads</code>
+ * <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads</code>
  */
 public class TestTicket632 extends QuadsTestCase {
 
@@ -65,9 +65,9 @@ public class TestTicket632 extends QuadsTestCase {
         //the service solutions don't matter cause the error is from before computing the service solutions
         final List<BindingSet> serviceSolutions = new LinkedList<BindingSet>();
         ServiceRegistry.getInstance().add(serviceURI, new OpenrdfNativeMockServiceFactory(serviceSolutions));
-        final BigdataSail sail = getSail();
+        final EmbergraphSail sail = getSail();
         try {
-            executeQuery(serviceURI, new BigdataSailRepository(sail));
+            executeQuery(serviceURI, new EmbergraphSailRepository(sail));
         } finally {            
             ServiceRegistry.getInstance().remove(serviceURI);
             sail.__tearDownUnitTest();

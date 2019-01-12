@@ -19,6 +19,7 @@ package org.embergraph.rdf.internal.impl.literal;
 
 import java.util.Arrays;
 
+import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
 import org.embergraph.btree.keys.KeyBuilder;
@@ -30,7 +31,6 @@ import org.embergraph.rdf.internal.InlineLiteralIV;
 import org.embergraph.rdf.internal.InlineURIHandler;
 import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.lexicon.LexiconRelation;
-import org.embergraph.rdf.model.BigdataLiteral;
 import org.embergraph.util.BytesUtil;
 
 /**
@@ -51,7 +51,7 @@ import org.embergraph.util.BytesUtil;
  * 
  * @author mikepersonick
  */
-public class LiteralArrayIV extends AbstractLiteralIV<BigdataLiteral, Object[]> {
+public class LiteralArrayIV extends AbstractLiteralIV<EmbergraphLiteral, Object[]> {
 
     private static final long serialVersionUID = 9136542087440805253L;
 
@@ -173,7 +173,7 @@ public class LiteralArrayIV extends AbstractLiteralIV<BigdataLiteral, Object[]> 
      * respectively.
      */
     @Override
-    public BigdataLiteral asValue(LexiconRelation lex) throws UnsupportedOperationException {
+    public EmbergraphLiteral asValue(LexiconRelation lex) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
