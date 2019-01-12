@@ -75,7 +75,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
      * Unit test for the AST rewrite of a simple describe query
      * 
      * <pre>
-     * describe <http://www.bigdata.com/Mike>
+     * describe <http://www.embergraph.org/Mike>
      * </pre>
      * 
      * This test verifies that the correct CONSTRUCT clause is generated and
@@ -287,7 +287,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
      * Unit test for the AST rewrite of a simple describe query
      * 
      * <pre>
-     * describe <http://www.bigdata.com/Mike>
+     * describe <http://www.embergraph.org/Mike>
      * </pre>
      * 
      * where the {@link ProjectionNode} has been explicitly marked to specify
@@ -505,7 +505,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
      * Unit test for the AST rewrite of a simple describe query
      * 
      * <pre>
-     * describe <http://www.bigdata.com/Mike>
+     * describe <http://www.embergraph.org/Mike>
      * </pre>
      * 
      * where the {@link ProjectionNode} has been explicitly marked to specify
@@ -731,7 +731,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
      * such that it would NOT be selected by the WHERE clause.
      * 
      * <pre>
-     * describe <http://www.bigdata.com/DC> ?x 
+     * describe <http://www.embergraph.org/DC> ?x
      * where {
      *   ?x rdf:type foaf:Person
      * }

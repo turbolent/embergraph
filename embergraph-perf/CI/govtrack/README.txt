@@ -20,4 +20,4 @@ sessions, for both bills and votes, plus a graph for the people and organization
 [1] http://www.govtrack.us/
 [2] http://www.govtrack.us/data/rdf/
 [3] http://www.govtrack.us/developers/license.xpd
-[4] http://www.bigdata.com/govtrack.zip
+[4] http://www.embergraph.org/govtrack.zip

@@ -1,5 +1,5 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 {
-   <http://www.bigdata.com/DC> rdfs:label "DC" .
+   <http://www.embergraph.org/DC> rdfs:label "DC" .
 }

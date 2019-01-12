@@ -257,7 +257,7 @@ public interface IGASState<VS,ES, ST> {
      * relationships) and is 100% consistent with RDF reification, except that
      * the link attributes are modeled efficiently inline with the links. This
      * is what we call <a
-     * href="http://www.bigdata.com/whitepapers/reifSPARQL.pdf" > Reification
+     * href="http://www.embergraph.org/whitepapers/reifSPARQL.pdf" > Reification
      * Done Right </a>.
      * 
      * @param v
@@ -266,7 +266,7 @@ public interface IGASState<VS,ES, ST> {
      * @return The edge decoded from that vertex and <code>null</code> iff the
      *         vertex is not an edge.
      * 
-     * @see <a href="http://www.bigdata.com/whitepapers/reifSPARQL.pdf" >
+     * @see <a href="http://www.embergraph.org/whitepapers/reifSPARQL.pdf" >
      *      Reification Done Right </a>
      *      
      * @see <a href="http://wiki.blazegraph.com/wiki/index.php/RDF_GAS_API" > RDF

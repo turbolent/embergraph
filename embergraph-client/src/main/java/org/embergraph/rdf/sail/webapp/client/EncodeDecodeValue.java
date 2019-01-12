@@ -384,7 +384,7 @@ public class EncodeDecodeValue {
      * Encode an RDF {@link Value} as it should appear if used in a SPARQL
      * query. E.g., a literal will look like <code>"abc"</code>,
      * <code>"abc"@en</code> or
-     * <code>"3"^^xsd:int.  A URI will look like <code>&lt;http://www.bigdata.com/&gt;</code>
+     * <code>"3"^^xsd:int.  A URI will look like <code>&lt;http://www.embergraph.org/&gt;</code>
      * .
      * 
      * @param v

@@ -316,10 +316,10 @@ public abstract class AbstractCounterSet implements ICounterSet {
      * <pre>
      *      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
      *      &lt;counters xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-     *          &lt;cs path=&quot;/www.bigdata.com/cpu&quot;&gt;
+     *          &lt;cs path=&quot;/www.embergraph.org/cpu&quot;&gt;
      *              &lt;c name=&quot;availableProcessors&quot; type=&quot;xs:int&quot; time=&quot;1205928108602&quot;&gt;2&lt;/c&gt;
      *          &lt;/cs&gt;
-     *          &lt;cs path=&quot;/www.bigdata.com/memory&quot;&gt;
+     *          &lt;cs path=&quot;/www.embergraph.org/memory&quot;&gt;
      *              &lt;c name=&quot;maxMemory&quot; type=&quot;xs:long&quot; time=&quot;1205928108602&quot;&gt;517013504&lt;/c&gt;
      *          &lt;/cs&gt;
      *          &lt;cs path=&quot;/&quot;&gt;

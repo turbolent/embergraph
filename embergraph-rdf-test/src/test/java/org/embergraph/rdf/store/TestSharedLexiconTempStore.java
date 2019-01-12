@@ -57,7 +57,7 @@ public class TestSharedLexiconTempStore extends AbstractTripleStoreTestCase {
     public void test_TempTripleStore_noLexicon() {
         
         final String uriString1 = "http://www.embergraph.org/foo";
-//        final String uriString2 = "http://www.bigdata.com/bar";
+//        final String uriString2 = "http://www.embergraph.org/bar";
         final String uriString3 = "http://www.embergraph.org/goo";
         
         AbstractTripleStore store = getStore();

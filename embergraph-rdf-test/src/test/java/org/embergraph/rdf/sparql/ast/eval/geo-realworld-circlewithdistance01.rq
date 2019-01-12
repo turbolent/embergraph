@@ -1,4 +1,4 @@
-PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
 
 # 320km radius around berlin, should match berlin and bremen
 SELECT * WHERE {

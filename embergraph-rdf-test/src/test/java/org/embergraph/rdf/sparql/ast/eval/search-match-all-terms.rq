@@ -1,5 +1,5 @@
 # Search query.
-PREFIX bd: <http://www.bigdata.com/rdf/search#>
+PREFIX bd: <http://www.embergraph.org/rdf/search#>
 
 SELECT ?subj ?label 
   WITH {

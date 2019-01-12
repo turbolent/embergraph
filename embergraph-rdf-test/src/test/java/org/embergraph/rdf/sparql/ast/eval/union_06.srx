@@ -11,18 +11,18 @@
    <results>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/paul</uri>
+			<uri>http://www.embergraph.org/paul</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/mary</uri>
+			<uri>http://www.embergraph.org/mary</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/john</uri>
+			<uri>http://www.embergraph.org/john</uri>
 		</binding>
      </result>
    </results>

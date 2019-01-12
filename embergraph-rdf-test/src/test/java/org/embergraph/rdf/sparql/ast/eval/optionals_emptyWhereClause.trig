@@ -1,4 +1,4 @@
-@prefix : <http://www.bigdata.com/> .
+@prefix : <http://www.embergraph.org/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 : {

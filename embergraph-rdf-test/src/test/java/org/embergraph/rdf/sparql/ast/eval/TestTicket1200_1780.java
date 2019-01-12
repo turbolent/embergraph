@@ -41,7 +41,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
 	 * {@link BLZG-1780}
 	 * 
 	 * <pre>
-	 * prefix : <http://www.bigdata.com/> 
+	 * prefix : <http://www.embergraph.org/>
 	 * prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 	 * prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 	 * prefix foaf: <http://xmlns.com/foaf/0.1/> 
@@ -72,12 +72,12 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
 	 * 
 	 * {@See BLZG-1780}
 	 * 
-	 * prefix : <http://www.bigdata.com/> prefix rdf:
+	 * prefix : <http://www.embergraph.org/> prefix rdf:
 	 * <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs:
 	 * <http://www.w3.org/2000/01/rdf-schema#> prefix foaf:
 	 * <http://xmlns.com/foaf/0.1/> prefix xsd:
 	 * <http://www.w3.org/2001/XMLSchema#> PREFIX hint:
-	 * <http://www.bigdata.com/queryHints#>
+	 * <http://www.embergraph.org/queryHints#>
 	 * 
 	 * select ?s where { ?s :hasAddress ?address . FILTER(REGEX(?address,
 	 * '^10.*', 'i')) }
@@ -97,7 +97,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
 	 * Test for REGEX on a string literal 
 	 * 
 	 * <pre>
-	 * prefix : <http://www.bigdata.com/> 
+	 * prefix : <http://www.embergraph.org/>
 	 * prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 	 * prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 	 * prefix foaf: <http://xmlns.com/foaf/0.1/> 
@@ -126,7 +126,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
 	 * Test for REGEX on a non-string literal (Inline IPv4) with conversion
 	 * 
 	 * <pre>
-	 * prefix : <http://www.bigdata.com/> 
+	 * prefix : <http://www.embergraph.org/>
 	 * prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 	 * prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 	 * prefix foaf: <http://xmlns.com/foaf/0.1/> 
@@ -155,7 +155,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
 	 * Test for REGEX on a string literal with language annotation
 	 * 
 	 * <pre>
-	 * prefix : <http://www.bigdata.com/> 
+	 * prefix : <http://www.embergraph.org/>
 	 * prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 	 * prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 	 * prefix foaf: <http://xmlns.com/foaf/0.1/> 
@@ -184,7 +184,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
 	 * Test for REGEX on a string literal with language annotation
 	 * 
 	 * <pre>
-	 * prefix : <http://www.bigdata.com/> 
+	 * prefix : <http://www.embergraph.org/>
 	 * prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 	 * prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 	 * prefix foaf: <http://xmlns.com/foaf/0.1/> 

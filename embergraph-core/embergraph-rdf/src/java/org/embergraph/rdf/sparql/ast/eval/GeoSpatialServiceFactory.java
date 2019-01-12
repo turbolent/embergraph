@@ -198,10 +198,10 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
        * Here's how to define the hints:
        * 
        * <code>
-          hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "20" .
-          hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
-          hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "100" .
-          hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "25000" .
+          hint:Prior <http://www.embergraph.org/queryHints#maxParallel> "20" .
+          hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
+          hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "100" .
+          hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "25000" .
          </code>
        */
       final Integer maxParallel = 

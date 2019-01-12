@@ -57,7 +57,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * 
  * <pre>
  * final URI serviceURI = new URIImpl(
- *         &quot;http://www.bigdata.com/rdf/stored-query#my-stored-query&quot;);
+ *         &quot;http://www.embergraph.org/rdf/stored-query#my-stored-query&quot;);
  * 
  * ServiceRegistry.getInstance().add(serviceURI, new MyStoredQueryService());
  * </pre>
@@ -67,7 +67,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * 
  * <pre>
  * SELECT * {
- *    SERVICE <http://www.bigdata.com/rdf/stored-query#my-stored-query> { }
+ *    SERVICE <http://www.embergraph.org/rdf/stored-query#my-stored-query> { }
  * }
  * </pre>
  * 
@@ -77,7 +77,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * 
  * <pre>
  * SELECT * {
- *    SERVICE <http://www.bigdata.com/rdf/stored-query#my-stored-query> {
+ *    SERVICE <http://www.embergraph.org/rdf/stored-query#my-stored-query> {
  *       bd:serviceParam :color :"blue" .
  *       bd:serviceParam :color :"green" .
  *       bd:serviceParam :size  :"large" .
@@ -113,7 +113,7 @@ abstract public class StoredQueryService extends AbstractServiceFactoryBase {
 //        /**
 //         * The namespace used for stored query service.
 //         */
-//        String NAMESPACE = "http://www.bigdata.com/rdf/stored-query#";
+//        String NAMESPACE = "http://www.embergraph.org/rdf/stored-query#";
 
     }
 

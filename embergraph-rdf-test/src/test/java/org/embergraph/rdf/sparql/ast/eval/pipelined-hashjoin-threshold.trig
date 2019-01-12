@@ -1,4 +1,4 @@
-@prefix : <http://www.bigdata.com/> .
+@prefix : <http://www.embergraph.org/> .
 
 : {
 <http://s1> <http://p1> <http://o1-0> .

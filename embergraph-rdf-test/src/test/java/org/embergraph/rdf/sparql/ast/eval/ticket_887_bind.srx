@@ -19,13 +19,13 @@
          <literal>hello world</literal>
       </binding>
       <binding name="member">
-         <uri>http://www.bigdata.com/member</uri>
+         <uri>http://www.embergraph.org/member</uri>
       </binding>
       <binding name="class">
-         <uri>http://www.bigdata.com/cls</uri>
+         <uri>http://www.embergraph.org/cls</uri>
       </binding>
       <binding name="g">
-         <uri>http://www.bigdata.com/</uri>
+         <uri>http://www.embergraph.org/</uri>
       </binding>
      </result>
    </results>

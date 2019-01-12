@@ -64,7 +64,7 @@ public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
      * The original query is:
      * 
      * <pre>
-     * PREFIX : <http://www.bigdata.com/>
+     * PREFIX : <http://www.embergraph.org/>
      * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * SELECT ?a ?x ?y
@@ -138,7 +138,7 @@ public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
      * level merge join code.
      * 
      * <pre>
-     * prefix : <http://www.bigdata.com/>
+     * prefix : <http://www.embergraph.org/>
      * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * SELECT ?a ?x ?y

@@ -459,11 +459,11 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
          *         }
          *       @askVar=-exists-1
          *       
-         *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))] )
+         *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.embergraph.org/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))] )
          * 
          *     } JOIN ON (ar)
          *     
-         *     FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-2))] )
+         *     FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.embergraph.org/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-2))] )
          *     
          *   }
          * </pre>
@@ -609,7 +609,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
              *         }
              *       @askVar=-exists-1
              *       
-             *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))] )
+             *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[ org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.embergraph.org/sparql-1.1-undefined-functionsnot-exists, graphPattern=JoinGroupNode, valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))] )
              * 
              *     } JOIN ON (ar)
              * </pre>
@@ -679,7 +679,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
             /**
              * <pre>
              *       FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-1))[
-             *       org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists,
+             *       org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.embergraph.org/sparql-1.1-undefined-functionsnot-exists,
              *       graphPattern=JoinGroupNode,
              *       valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-1))
              *       ] )
@@ -706,7 +706,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
             /**
              * <pre>
              *     FILTER( org.embergraph.rdf.sparql.ast.NotExistsNode(VarNode(-exists-2))[
-             *     org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.bigdata.com/sparql-1.1-undefined-functionsnot-exists,
+             *     org.embergraph.rdf.sparql.ast.FunctionNode.functionURI=http://www.embergraph.org/sparql-1.1-undefined-functionsnot-exists,
              *     graphPattern=JoinGroupNode,
              *     valueExpr=org.embergraph.rdf.internal.constraints.NotBOp(org.embergraph.rdf.internal.constraints.EBVBOp(-exists-2))
              *     ] )

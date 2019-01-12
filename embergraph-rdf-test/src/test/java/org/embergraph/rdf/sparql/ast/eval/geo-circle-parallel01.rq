@@ -1,4 +1,4 @@
-PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
 
 SELECT * WHERE {
   SERVICE geo:search {
@@ -10,9 +10,9 @@ SELECT * WHERE {
     ?res geo:timeStart "5" .
     ?res geo:timeEnd "5" .
   }
-  hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "5" .
-  hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "5" .
-  hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "10" .
-  hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.numTasksPerThread> "1" .
-  hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.minDatapointsPerTask> "1" .
+  hint:Prior <http://www.embergraph.org/queryHints#maxParallel> "5" .
+  hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "5" .
+  hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "10" .
+  hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.bop.join.PipelineJoin.numTasksPerThread> "1" .
+  hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.bop.join.PipelineJoin.minDatapointsPerTask> "1" .
 } 

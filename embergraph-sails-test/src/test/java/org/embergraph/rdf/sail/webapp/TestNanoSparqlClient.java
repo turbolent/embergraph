@@ -421,7 +421,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //
 //		final Graph g = new LinkedHashModel();
 //
-//		final URI s = new URIImpl("http://www.bigdata.com/");
+//		final URI s = new URIImpl("http://www.embergraph.org/");
 //		final URI p = RDFS.LABEL;
 //		final Literal o = getVeryLargeLiteral();
 //		final Statement stmt = new StatementImpl(s, p, o);
@@ -606,7 +606,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //     * the CONSTRUCT results).
 //     * 
 //     * <pre>
-//     * PREFIX : <http://www.bigdata.com/>
+//     * PREFIX : <http://www.embergraph.org/>
 //     * 
 //     * CONSTRUCT {
 //     *   ?s ?p ?o
@@ -640,7 +640,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 ////        final String queryHint = "\n hint:Query hint:constructDistinctSPO true .\n";
 //        final String queryHint = ""; // No query hint.
 //        
-//        final String queryStr = "PREFIX : <http://www.bigdata.com/> \n" +
+//        final String queryStr = "PREFIX : <http://www.embergraph.org/> \n" +
 //                "CONSTRUCT { ?s ?p ?o }\n"
 //                + "WHERE { " + queryHint + " GRAPH ?g {?s ?p ?o} }";
 //
@@ -659,7 +659,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //     * the CONSTRUCT results).
 //     * 
 //     * <pre>
-//     * PREFIX : <http://www.bigdata.com/>
+//     * PREFIX : <http://www.embergraph.org/>
 //     * 
 //     * CONSTRUCT {
 //     *   ?s ?p ?o
@@ -693,7 +693,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //        
 //        final String queryHint = "\n hint:Query hint:constructDistinctSPO false .\n";
 //        
-//        final String queryStr = "PREFIX : <http://www.bigdata.com/> \n" +
+//        final String queryStr = "PREFIX : <http://www.embergraph.org/> \n" +
 //                "CONSTRUCT { ?s ?p ?o }\n"
 //                + "WHERE { " + queryHint + " GRAPH ?g {?s ?p ?o} }";
 //
@@ -867,7 +867,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //	// "{}";
 //
 //	// new EmbergraphSPARQLParser().parseQuery(deleteQueryStr,
-//	// "http://www.bigdata.com");
+//	// "http://www.embergraph.org");
 //
 //	// }
 //
@@ -904,7 +904,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //				"{ }";
 //
 //		// new EmbergraphSPARQLParser().parseQuery(deleteQueryStr,
-//		// "http://www.bigdata.com");
+//		// "http://www.embergraph.org");
 //
 //		/*
 //		 * First, run the query that we will use the delete the triples. This is

@@ -1,10 +1,10 @@
 Embergraph Cookbook
 ================
-The Embergraph cookbook provides the [embergraph v1.3.1](http://www.bigdata.com/) opensource triplestore/graph database.  The cookbook provides recipes to install the Embergraph server as a web application under Tomcat, with its own embedded Jetty server (NSS - the NanoSparqlServer).  The recipes will install pre-configured packages by node and optionally may build and install the server directly from source archive.
+The Embergraph cookbook provides the [embergraph v1.3.1](http://www.embergraph.org/) opensource triplestore/graph database.  The cookbook provides recipes to install the Embergraph server as a web application under Tomcat, with its own embedded Jetty server (NSS - the NanoSparqlServer).  The recipes will install pre-configured packages by node and optionally may build and install the server directly from source archive.
 
 For more info on Embergraph please visit:
 
-* Embergraph Homepage: [http://www.bigdata.com/](http://www.bigdata.com/)
+* Embergraph Homepage: [http://www.embergraph.org/](http://www.embergraph.org/)
 * Embergraph SourceForge Page: [http://sourceforge.net/projects/bigdata/](http://sourceforge.net/projects/bigdata/)
 
 Requirements

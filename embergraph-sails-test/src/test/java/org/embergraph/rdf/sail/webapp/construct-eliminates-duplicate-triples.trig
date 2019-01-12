@@ -1,4 +1,4 @@
-@prefix : <http://www.bigdata.com/> .
+@prefix : <http://www.embergraph.org/> .
 
 :foo {
 :Bryan :likes :RDF .

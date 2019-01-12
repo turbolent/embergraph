@@ -1,4 +1,4 @@
-PREFIX gas: <http://www.bigdata.com/rdf/gas#>
+PREFIX gas: <http://www.embergraph.org/rdf/gas#>
 SELECT * {
   SERVICE gas:service {
     gas:program gas:gasClass "org.embergraph.rdf.graph.analytics.SSSP" .

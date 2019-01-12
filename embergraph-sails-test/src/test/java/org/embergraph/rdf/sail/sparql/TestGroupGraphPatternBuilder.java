@@ -166,7 +166,7 @@ public class TestGroupGraphPatternBuilder extends
     /**
      * Test for a named graph triple pattern where the graph is a constant.
      * <pre>
-     * select ?s where {GRAPH <http://www.bigdata.com> {?s ?p ?o}}
+     * select ?s where {GRAPH <http://www.embergraph.org> {?s ?p ?o}}
      * </pre>
      */
     public void test_named_graph_pattern_graphConstant() throws MalformedQueryException,
@@ -1296,7 +1296,7 @@ public class TestGroupGraphPatternBuilder extends
      * and attached to the {@link ServiceNode}.
      * 
      * <pre>
-     * PREFIX : <http://www.bigdata.com/>
+     * PREFIX : <http://www.embergraph.org/>
      * SELECT ?s where {?s ?p ?o. SERVICE ?o {?s ?p ?o}}
      * </pre>
      */

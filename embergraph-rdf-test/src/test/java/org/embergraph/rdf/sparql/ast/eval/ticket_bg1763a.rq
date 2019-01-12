@@ -8,7 +8,7 @@ prefix sys: </bdm/api/kbobject/sci:sys:>
 prefix s: </bdm/api/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix scid: </bdm/api/appindividual/scid:>
-prefix bds: <http://www.bigdata.com/rdf/search#>
+prefix bds: <http://www.embergraph.org/rdf/search#>
 prefix sysd: </bdm/api/appindividual/sysd:>
 prefix base: </bdm/api/kbobject/sci:base:>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>

@@ -9,7 +9,7 @@
    <results>
      <result>
 		<binding name="s">
-			<uri>http://www.bigdata.com/Computer2</uri>
+			<uri>http://www.embergraph.org/Computer2</uri>
 		</binding>
      </result>
    </results>

@@ -1,4 +1,4 @@
-PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
 
 # all cities with -50 < lat < 50 -> Barcelona, SF, Johannesburg
 SELECT ?res WHERE {

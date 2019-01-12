@@ -56,7 +56,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -89,7 +89,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -127,7 +127,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -165,7 +165,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -200,7 +200,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {

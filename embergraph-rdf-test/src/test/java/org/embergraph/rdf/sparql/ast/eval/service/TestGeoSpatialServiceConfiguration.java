@@ -54,7 +54,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -80,7 +80,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
     /**
      * Compared to the circle01* queries, the query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -115,7 +115,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
      * 
      * The query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * SELECT ?res ?o WHERE {
      *   SERVICE geo:search {
      *     ?res geo:search "inRectangle" .
@@ -130,20 +130,20 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
      * 
      * is evaluated over data
      * 
-     * <http://s0> <http://p> "0#0#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6> <http://p> "6.666666#6.6666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6b> <http://p> "6.66667#6.6666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6c> <http://p> "6.66667#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s0> <http://p> "0#0#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6> <http://p> "6.666666#6.6666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6b> <http://p> "6.66667#6.6666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6c> <http://p> "6.66667#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
      * 
      * With the given precision, the query is equivalent to
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * SELECT ?res ?o WHERE {
      *   SERVICE geo:search {
      *     ?res geo:search "inRectangle" .
@@ -158,16 +158,16 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
      * 
      * and the data is equivalent to 
      * 
-     * <http://s0> <http://p> "0#0#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6> <http://p> "6.666666#6.666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6b> <http://p> "6.66667#6.666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6d> <http://p> "6.66667#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s0> <http://p> "0#0#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6> <http://p> "6.666666#6.666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6b> <http://p> "6.66667#6.666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6d> <http://p> "6.66667#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
      *  
      * Consequently, only subjects s0 and s6a, s6b, and s6d are *not* contained in the
      * result, while all others are.

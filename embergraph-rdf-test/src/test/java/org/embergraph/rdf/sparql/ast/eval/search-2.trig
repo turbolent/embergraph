@@ -5,7 +5,7 @@
 # There is a worksheet <code>src/architecture/search.xls</code> that gives the 
 # background for this test.  There is also a detailed example in the full text
 # index search code.
-@prefix : <http://www.bigdata.com/> .
+@prefix : <http://www.embergraph.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 :search-2 {

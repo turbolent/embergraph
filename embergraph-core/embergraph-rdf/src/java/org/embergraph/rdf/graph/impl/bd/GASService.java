@@ -85,7 +85,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * For example, the following would run a depth-limited BFS traversal:
  * 
  * <pre>
- * PREFIX gas: <http://www.bigdata.com/rdf/gas#>
+ * PREFIX gas: <http://www.embergraph.org/rdf/gas#>
  * #...
  * SERVICE &lt;gas#service&gt; {
  *    gas:program gas:gasClass "org.embergraph.rdf.graph.analytics.BFS" .
@@ -100,7 +100,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * Or the following would run the FuzzySSSP algorithm.
  * 
  * <pre>
- * PREFIX gas: <http://www.bigdata.com/rdf/gas#>
+ * PREFIX gas: <http://www.embergraph.org/rdf/gas#>
  * #...
  * SERVICE &lt;gas:service&gt; {
  *    gas:program gas:gasClass "org.embergraph.rdf.graph.analytics.FuzzySSSP" .

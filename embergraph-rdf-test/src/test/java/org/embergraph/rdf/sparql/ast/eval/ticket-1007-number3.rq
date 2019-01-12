@@ -1,5 +1,5 @@
 SELECT ?o
 { 
-  ?s <http://www.bigdata.com/integer> ?o
+  ?s <http://www.embergraph.org/integer> ?o
   BIND (10 AS ?o)
 }

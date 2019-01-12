@@ -1,4 +1,4 @@
-@prefix eg: <http://www.bigdata.com/> .
+@prefix eg: <http://www.embergraph.org/> .
 
 eg:g {
  eg:a eg:p eg:a, eg:b, eg:c, eg:d, eg:e, eg:f .

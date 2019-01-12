@@ -61,7 +61,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      * A simple full text search query. The query is transformed from
      * 
      * <pre>
-     * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bd: <http://www.embergraph.org/rdf/search#>
      * 
      * SELECT ?subj ?score 
      * 
@@ -85,15 +85,15 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * <pre>
-     * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bd: <http://www.embergraph.org/rdf/search#>
      * WITH {
      *   QueryType: SELECT
      *   SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
      *     JoinGroupNode {
-     *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+     *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
      *         JoinGroupNode {
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
      *         }
      *       }
      *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
@@ -151,7 +151,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      * 
      * <pre>
      * # Search query.
-     * PREFIX bds: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bds: <http://www.embergraph.org/rdf/search#>
      * 
      * SELECT ?subj ?label 
      * WHERE {
@@ -177,7 +177,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
      * 
      * <pre>
      * # Search query.
-     * PREFIX bds: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bds: <http://www.embergraph.org/rdf/search#>
      * 
      * SELECT ?subj ?label 
      *   WITH {

@@ -44,17 +44,17 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
 	/**
 	 * Namespace for non vertex and edge data (property names).
 	 */
-	public final String GRAPH_NAMESPACE;// = "http://www.bigdata.com/rdf/graph/";
+	public final String GRAPH_NAMESPACE;// = "http://www.embergraph.org/rdf/graph/";
 	
 	/**
 	 * Namespace for vertices.
 	 */
-	public final String VERTEX_NAMESPACE;// = "http://www.bigdata.com/rdf/graph/vertex/";
+	public final String VERTEX_NAMESPACE;// = "http://www.embergraph.org/rdf/graph/vertex/";
 	
     /**
      * Namespace for edges.
      */
-	public final String EDGE_NAMESPACE;// = "http://www.bigdata.com/rdf/graph/edge/";
+	public final String EDGE_NAMESPACE;// = "http://www.embergraph.org/rdf/graph/edge/";
 	
     /**
      * URI used for typing elements.

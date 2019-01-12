@@ -135,14 +135,14 @@ public class TestURIExtensionIV extends TestCase2 {
     
 	public void test_InlineURIIV() {
 
-//        doTest(new URIImpl("http://www.bigdata.com"));
+//        doTest(new URIImpl("http://www.embergraph.org"));
         doTest(new URIImpl("http://www.embergraph.org/"));
         doTest(new URIImpl("http://www.embergraph.org/foo"));
         doTest(RDFS.CLASS);
         doTest(RDFS.SUBPROPERTYOF);
         doTest(new URIImpl("http://www.Department0.University0.edu/UndergraduateStudent488"));
         doTest(new URIImpl("http://www.Department0.University0.edu/GraduateStudent15"));
-//        doTest(new URIImpl("http://www.bigdata.com:80/foo"));
+//        doTest(new URIImpl("http://www.embergraph.org:80/foo"));
 
 	}
 
@@ -179,14 +179,14 @@ public class TestURIExtensionIV extends TestCase2 {
         final List<IV<?,?>> ivs = new LinkedList<IV<?,?>>();
         {
 
-//            ivs.add(newFixture(new URIImpl("http://www.bigdata.com")));
+//            ivs.add(newFixture(new URIImpl("http://www.embergraph.org")));
             ivs.add(newFixture(new URIImpl("http://www.embergraph.org/")));
             ivs.add(newFixture(new URIImpl("http://www.embergraph.org/foo")));
             ivs.add(newFixture(RDFS.CLASS));
             ivs.add(newFixture(RDFS.SUBPROPERTYOF));
             ivs.add(newFixture(new URIImpl("http://www.Department0.University0.edu/UndergraduateStudent488")));
             ivs.add(newFixture(new URIImpl("http://www.Department0.University0.edu/GraduateStudent15")));
-//            ivs.add(newFixture(new URIImpl("http://www.bigdata.com:80/foo")));
+//            ivs.add(newFixture(new URIImpl("http://www.embergraph.org:80/foo")));
 
         }
         

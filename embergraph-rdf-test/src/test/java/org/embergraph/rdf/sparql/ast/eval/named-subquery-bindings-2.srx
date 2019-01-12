@@ -10,7 +10,7 @@
   <results>
     <result>
       <binding name="x">
-      	<uri>http://www.bigdata.com/Mike</uri>
+      	<uri>http://www.embergraph.org/Mike</uri>
       </binding>
       <binding name="o">
       	<literal>Mike</literal>
@@ -19,7 +19,7 @@
 <!--
     <result>
       <binding name="x">
-      	<uri>http://www.bigdata.com/Bryan</uri>
+      	<uri>http://www.embergraph.org/Bryan</uri>
       </binding>
       <binding name="o">
       	<literal>Bryan</literal>

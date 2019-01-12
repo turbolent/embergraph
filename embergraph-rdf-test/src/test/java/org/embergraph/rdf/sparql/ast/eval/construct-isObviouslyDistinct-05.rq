@@ -6,7 +6,7 @@ CONSTRUCT {
   ?s ?p ?o
 }
 WHERE {
-  GRAPH <http://www.bigdata.com/foo> {
+  GRAPH <http://www.embergraph.org/foo> {
     ?s ?p ?o
   }
 }

@@ -11,5 +11,5 @@ where {
 }
 bindings ?x
 {
-  ( <http://www.bigdata.com/Mike> )
+  ( <http://www.embergraph.org/Mike> )
 }

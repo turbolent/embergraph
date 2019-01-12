@@ -2,14 +2,14 @@
 <!-- sample data with provenance information. -->
 <!-- $Id: provenance.rdf 2265 2009-10-26 12:51:06Z thompsonbry $ -->
 <!DOCTYPE data [
-<!ENTITY embergraph "http://www.bigdata.com/rdf#">
+<!ENTITY embergraph "http://www.embergraph.org/rdf#">
 ]>
 
 <rdf:RDF
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:embergraph="http://www.bigdata.com/rdf#"
+    xmlns:embergraph="http://www.embergraph.org/rdf#"
     xml:base="&embergraph;"
 >
 

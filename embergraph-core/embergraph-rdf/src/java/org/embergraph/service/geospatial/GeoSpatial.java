@@ -36,7 +36,7 @@ import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
  * to (0.00003, 0.00003) with times between 1-3s.
  * 
  * <pre>
-   PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+   PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
    SELECT ?res WHERE {
      ?res geo:search "inRectangle" .
      ?res geo:predicate <http://o> .
@@ -53,7 +53,7 @@ import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
  * with times between 1-3s.
  * 
  * <pre>
-   PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+   PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
    SELECT ?res WHERE {
      ?res geo:search "inCircle" .
      ?res geo:predicate <http://o> .

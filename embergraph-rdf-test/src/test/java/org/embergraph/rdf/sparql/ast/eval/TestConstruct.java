@@ -59,7 +59,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
      * CONSTRUCT {
-     *   <http://www.bigdata.com/DC> rdfs:label "DC" .
+     *   <http://www.embergraph.org/DC> rdfs:label "DC" .
      *   ?x rdf:type foaf:Person . 
      * } where {
      *   ?x rdf:type foaf:Person 
@@ -92,7 +92,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
      * CONSTRUCT {
-     *   <http://www.bigdata.com/DC> rdfs:label "DC" .
+     *   <http://www.embergraph.org/DC> rdfs:label "DC" .
      *   ?x rdf:type foaf:Person . 
      * } where {
      *   # Enable the native DISTINCT SPO filter.
@@ -128,7 +128,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
      * CONSTRUCT {
-     *   <http://www.bigdata.com/DC> rdfs:label "DC" .
+     *   <http://www.embergraph.org/DC> rdfs:label "DC" .
      *   ?x rdf:type foaf:Person . 
      * } where {
      *   # Enable the native DISTINCT SPO filter.
@@ -162,7 +162,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * 
      * CONSTRUCT WHERE {
-     *   <http://www.bigdata.com/DC> rdfs:label "MD" 
+     *   <http://www.embergraph.org/DC> rdfs:label "MD"
      * }
      * </pre>
      */
@@ -186,7 +186,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * 
      * CONSTRUCT WHERE {
-     *   <http://www.bigdata.com/DC> rdfs:label "DC" 
+     *   <http://www.embergraph.org/DC> rdfs:label "DC"
      * }
      * </pre>
      */
@@ -206,7 +206,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      * clause.
      * 
      * <pre>
-     * PREFIX : <http://www.bigdata.com/>
+     * PREFIX : <http://www.embergraph.org/>
      * 
      * CONSTRUCT {
      *   :Bryan :likes :RDFS
@@ -438,7 +438,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
      *   ?s ?p ?o
      * }
      * WHERE {
-     *   GRAPH <http://www.bigdata.com/foo> {
+     *   GRAPH <http://www.embergraph.org/foo> {
      *     ?s ?p ?o
      *   }
      * }

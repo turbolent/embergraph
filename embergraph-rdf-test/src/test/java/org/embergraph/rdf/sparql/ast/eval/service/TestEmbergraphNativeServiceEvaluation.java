@@ -78,7 +78,7 @@ public class TestEmbergraphNativeServiceEvaluation extends
      * 
      * SELECT ?book ?title ?price
      * {
-     *    SERVICE <http://www.bigdata.com/mockService/test_service_001> {
+     *    SERVICE <http://www.embergraph.org/mockService/test_service_001> {
      *        ?book :foo :bar
      *    }.
      *    ?book dc:title ?title ;
@@ -147,7 +147,7 @@ public class TestEmbergraphNativeServiceEvaluation extends
      * 
      * SELECT ?book ?title ?price
      * {
-     *    SERVICE <http://www.bigdata.com/mockService/test_service_002> {
+     *    SERVICE <http://www.embergraph.org/mockService/test_service_002> {
      *        ?book :foo :bar
      *    }.
      *    hint:Prior hint:runFirst true .

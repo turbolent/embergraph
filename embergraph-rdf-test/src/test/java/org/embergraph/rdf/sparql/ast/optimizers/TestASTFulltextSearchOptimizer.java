@@ -131,7 +131,7 @@ extends AbstractASTEvaluationTestCase {
          * The source AST.
          * 
          * <pre>
-         * PREFIX fts: <http://www.bigdata.com/rdf/fts#>
+         * PREFIX fts: <http://www.embergraph.org/rdf/fts#>
          * SELECT ?res ?score ?snippet ?p ?o WHERE {
          *   ?res fts:search "blue".
          *   ?res fts:endpoint  "http://my.external.solr.endpoint:5656" .
@@ -201,19 +201,19 @@ extends AbstractASTEvaluationTestCase {
          * The expected AST after the rewrite
          * 
          * <pre>
-         * PREFIX bd: <http://www.bigdata.com/rdf/fts#>
+         * PREFIX bd: <http://www.embergraph.org/rdf/fts#>
          * QueryType: SELECT
          * SELECT ( VarNode(res) AS VarNode(res) ) ( VarNode(score) AS VarNode(score) ) ( VarNode(snippet) AS VarNode(snippet) ) ( VarNode(p) AS VarNode(p) ) ( VarNode(o) AS VarNode(o) )  
          *     JoinGroupNode {
-         *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#search])> {
+         *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#search])> {
          *         JoinGroupNode {
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#search]), ConstantNode(TermId(0L)[blue]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#endpoint]), ConstantNode(TermId(0L)[http://my.external.solr.endpoint:5656]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#endpointType]), ConstantNode(TermId(0L)[bf=uses^50]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#params]), ConstantNode(TermId(0L)[blue]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#searchResultType]), ConstantNode(TermId(0L)[URI]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#score]), VarNode(score), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/fts#snippet]), VarNode(snippet), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#search]), ConstantNode(TermId(0L)[blue]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#endpoint]), ConstantNode(TermId(0L)[http://my.external.solr.endpoint:5656]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#endpointType]), ConstantNode(TermId(0L)[bf=uses^50]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#params]), ConstantNode(TermId(0L)[blue]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#searchResultType]), ConstantNode(TermId(0L)[URI]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#score]), VarNode(score), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(res), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/fts#snippet]), VarNode(snippet), DEFAULT_CONTEXTS)
          *         }
          *       }
          *       StatementPatternNode(VarNode(res), VarNode(p), VarNode(o), DEFAULT_CONTEXTS)

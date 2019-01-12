@@ -950,10 +950,10 @@ public class TestASTQueryHintOptimizer extends
      * <pre>
      * SELECT ?score
      * WHERE {
-     *   SERVICE <http://www.bigdata.com/rdf/search#search>  {
+     *   SERVICE <http://www.embergraph.org/rdf/search#search>  {
      *     JoinGroupNode {
-     *       StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
-     *       StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+     *       StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
+     *       StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
      *     }
      *   }
      *   hint:Prior hint:runLast "true" .

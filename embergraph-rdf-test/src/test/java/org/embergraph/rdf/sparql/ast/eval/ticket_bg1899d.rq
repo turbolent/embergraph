@@ -1,5 +1,5 @@
-PREFIX geoliteral: <http://www.bigdata.com/rdf/geospatial/literals/v1#>
-PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+PREFIX geoliteral: <http://www.embergraph.org/rdf/geospatial/literals/v1#>
+PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
 PREFIX example: <http://www.example.com/>
 
 SELECT ?event WHERE {

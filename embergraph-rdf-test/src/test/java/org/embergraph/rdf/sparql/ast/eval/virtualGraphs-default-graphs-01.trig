@@ -1,5 +1,5 @@
 @prefix : <http://bigdata.com/> .
-@prefix bd: <http://www.bigdata.com/rdf#> .
+@prefix bd: <http://www.embergraph.org/rdf#> .
 
 :c1 {
   :john :loves :mary .

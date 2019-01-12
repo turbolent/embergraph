@@ -4,5 +4,5 @@ SELECT ?x ?name
 WHERE {
   ?x rdf:type foaf:Person .
   ?x rdfs:label ?name
-  FILTER (<http://www.bigdata.com/myFunction2>( ?name )) 
+  FILTER (<http://www.embergraph.org/myFunction2>( ?name ))
 }

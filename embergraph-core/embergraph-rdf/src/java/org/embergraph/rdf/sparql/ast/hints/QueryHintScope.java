@@ -38,7 +38,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 /**
  * Type safe enumeration for the scope of a query hint. The {@link URI} for each
  * scope is {@value QueryHints#NAMESPACE} plus the name of the enumeration
- * value. For example, <code>http://www.bigdata.com/queryHints#Group</code>
+ * value. For example, <code>http://www.embergraph.org/queryHints#Group</code>
  * would apply to the entire group in which that query hint was found.
  * 
  * @see QueryHints

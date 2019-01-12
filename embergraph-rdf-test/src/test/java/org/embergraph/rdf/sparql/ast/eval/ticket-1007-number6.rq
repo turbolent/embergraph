@@ -1,6 +1,6 @@
 SELECT ?o
 { 
-  ?s <http://www.bigdata.com/integer> ?o .
-  <http://www.bigdata.com/c> <http://www.bigdata.com/p5> ?v .
+  ?s <http://www.embergraph.org/integer> ?o .
+  <http://www.embergraph.org/c> <http://www.embergraph.org/p5> ?v .
   BIND (?v*2 AS ?o)
 }

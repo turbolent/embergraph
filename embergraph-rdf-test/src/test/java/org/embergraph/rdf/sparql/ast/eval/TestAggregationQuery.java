@@ -92,7 +92,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
     /**
      * <pre>
      * SELECT (COUNT(?s) AS ?size)
-     * FROM <http://www.bigdata.com/systap>
+     * FROM <http://www.embergraph.org/systap>
      * WHERE { 
      *     ?s ?p ?o . 
      * }
@@ -115,7 +115,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
      * <pre>
      * SELECT (COUNT(?s) AS ?size)
      * WHERE { 
-     *     GRAPH <http://www.bigdata.com/systap> {
+     *     GRAPH <http://www.embergraph.org/systap> {
      *         ?s ?p ?o . 
      *     }
      * }

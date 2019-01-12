@@ -10,10 +10,10 @@
    <results>
      <result>
 		<binding name="s">
-			<uri>http://www.bigdata.com/Mike</uri>
+			<uri>http://www.embergraph.org/Mike</uri>
 		</binding>
 		<binding name="p">
-			<uri>http://www.bigdata.com/property1</uri>
+			<uri>http://www.embergraph.org/property1</uri>
 		</binding>
      </result>
    </results>

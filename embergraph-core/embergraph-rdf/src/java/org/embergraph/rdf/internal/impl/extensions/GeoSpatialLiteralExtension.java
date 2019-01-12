@@ -53,7 +53,7 @@ import org.embergraph.service.geospatial.IGeoSpatialLiteralSerializer;
  * components.
  * 
  * The code to create a literal is, e.g.:
- * <code>"2#4"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral></code>
+ * <code>"2#4"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral></code>
  * 
  * The two components are first broken down long integers, namely
  * - 2 -> 00000000 00000000 00000010

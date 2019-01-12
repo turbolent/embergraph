@@ -61,12 +61,12 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
      * BINDINGS flow into the stored query.
      * 
      * <pre>
-     * PREFIX bsq:  <http://www.bigdata.com/rdf/stored-query#>
+     * PREFIX bsq:  <http://www.embergraph.org/rdf/stored-query#>
      * PREFIX : <http://example.org/book/>
      * 
      * SELECT ?book ?title ?price
      * {
-     *    SERVICE <http://www.bigdata.com/rdf/stored-query#test_stored_query_001> {
+     *    SERVICE <http://www.embergraph.org/rdf/stored-query#test_stored_query_001> {
      *    }
      * } 
      * BINDINGS ?book {
@@ -125,12 +125,12 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
      * {@link ServiceParams}.
      * 
      * <pre>
-     * PREFIX bsq:  <http://www.bigdata.com/rdf/stored-query#>
+     * PREFIX bsq:  <http://www.embergraph.org/rdf/stored-query#>
      * PREFIX : <http://example.org/book/>
      * 
      * SELECT ?book ?title ?price
      * {
-     *    SERVICE <http://www.bigdata.com/rdf/stored-query#test_stored_query_002> {
+     *    SERVICE <http://www.embergraph.org/rdf/stored-query#test_stored_query_002> {
      *        bd:serviceParam :book :book1
      *    }
      * } 
@@ -192,12 +192,12 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
      * {@link SimpleStoredQueryService}.
      * 
      * <pre>
-     * PREFIX bsq:  <http://www.bigdata.com/rdf/stored-query#>
+     * PREFIX bsq:  <http://www.embergraph.org/rdf/stored-query#>
      * PREFIX : <http://example.org/book/>
      * 
      * SELECT ?book ?title ?price
      * {
-     *    SERVICE <http://www.bigdata.com/rdf/stored-query#test_stored_query_003> {
+     *    SERVICE <http://www.embergraph.org/rdf/stored-query#test_stored_query_003> {
      *        bd:serviceParam :book :book1
      *    }
      * }

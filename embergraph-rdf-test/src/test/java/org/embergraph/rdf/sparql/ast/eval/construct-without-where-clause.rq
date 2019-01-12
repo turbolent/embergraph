@@ -1,4 +1,4 @@
-PREFIX : <http://www.bigdata.com/>
+PREFIX : <http://www.embergraph.org/>
 
 CONSTRUCT {
   :Bryan :likes :RDFS

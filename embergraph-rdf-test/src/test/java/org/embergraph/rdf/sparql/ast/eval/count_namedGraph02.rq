@@ -1,6 +1,6 @@
 SELECT (COUNT(?s) AS ?size)
 WHERE { 
-    GRAPH <http://www.bigdata.com/systap> {
+    GRAPH <http://www.embergraph.org/systap> {
         ?s ?p ?o . 
     }
 }

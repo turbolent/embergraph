@@ -67,7 +67,7 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
      * Given
      * 
      * <pre>
-     * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bd: <http://www.embergraph.org/rdf/search#>
      * SELECT ?subj ?score 
      * {
      *    SELECT ?subj ?score
@@ -82,17 +82,17 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
      * The AST is rewritten as:
      * 
      * <pre>
-     * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bd: <http://www.embergraph.org/rdf/search#>
      * QueryType: SELECT
      * SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
      *     JoinGroupNode {
      *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
      *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
      *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
-     *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+     *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
      *         JoinGroupNode {
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
      *         }
      *       }
      *     }
@@ -127,7 +127,7 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
          * The source AST.
          * 
          * <pre>
-         * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+         * PREFIX bd: <http://www.embergraph.org/rdf/search#>
          * SELECT ?subj ?score 
          * {
          *    SELECT ?subj ?score
@@ -168,17 +168,17 @@ public class TestASTSearchOptimizer extends AbstractASTEvaluationTestCase {
          * The expected AST after the rewrite
          * 
          * <pre>
-         * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+         * PREFIX bd: <http://www.embergraph.org/rdf/search#>
          * QueryType: SELECT
          * SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
          *     JoinGroupNode {
          *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
          *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.estimatedCardinality=5
          *         org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex=SPOC
-         *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+         *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
          *         JoinGroupNode {
-         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
          *         }
          *       }
          *     }

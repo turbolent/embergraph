@@ -80,7 +80,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
      * that it would not be selected by the WHERE clause.
      * 
      * <pre>
-     * describe <http://www.bigdata.com/DC> ?x 
+     * describe <http://www.embergraph.org/DC> ?x
      * where {
      *   ?x rdf:type foaf:Person
      * }

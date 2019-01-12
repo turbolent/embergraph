@@ -301,7 +301,7 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
                     final EmbergraphURI B = f
                             .createURI("http://www.embergraph.org/B");
 //                    final EmbergraphURI C = f
-//                            .createURI("http://www.bigdata.com/C");
+//                            .createURI("http://www.embergraph.org/C");
                     final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.removeStatements(A, rdfType, B);
@@ -510,7 +510,7 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
                     final EmbergraphURI B = f
                             .createURI("http://www.embergraph.org/B");
 //                    final EmbergraphURI C = f
-//                            .createURI("http://www.bigdata.com/C");
+//                            .createURI("http://www.embergraph.org/C");
                     final EmbergraphURI rdfType = f.asValue(RDF.TYPE);
 
                     conn.removeStatements(A, rdfType, B);

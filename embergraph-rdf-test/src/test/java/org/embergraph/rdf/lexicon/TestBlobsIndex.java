@@ -830,7 +830,7 @@ public class TestBlobsIndex extends TestCase2 {
 //				for (int i = 0; i < ncollisions; i++) {
 //
 //					final EmbergraphURI uri = vf
-//							.createURI("http://www.bigdata.com/testTerm/" + i);
+//							.createURI("http://www.embergraph.org/testTerm/" + i);
 //
 //					tmp.add(uri);
 //

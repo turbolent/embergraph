@@ -319,7 +319,7 @@ public interface BDS {
      * <strong>Prefix matching is now indicated using a wildcard</strong>
      * 
      * <pre>
-     * PREFIX bds: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bds: <http://www.embergraph.org/rdf/search#>
      * 
      * SELECT ?subj ?label 
      * WHERE {

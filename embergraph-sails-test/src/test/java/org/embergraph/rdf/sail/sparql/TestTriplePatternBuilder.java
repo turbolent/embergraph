@@ -113,7 +113,7 @@ public class TestTriplePatternBuilder extends
      * of a constant, a variable, and a variable.
      * 
      * <pre>
-     * SELECT ?p where {<http://www.bigdata.com/s> ?p ?o}
+     * SELECT ?p where {<http://www.embergraph.org/s> ?p ?o}
      * </pre>
      */
     public void test_triple_pattern_const_var_var() throws MalformedQueryException,
@@ -157,7 +157,7 @@ public class TestTriplePatternBuilder extends
      * of a variable, a constant, and a variable.
      * 
      * <pre>
-     * SELECT ?s where {?s <http://www.bigdata.com/p> ?o}
+     * SELECT ?s where {?s <http://www.embergraph.org/p> ?o}
      * </pre>
      */
     public void test_triple_pattern_var_const_var() throws MalformedQueryException,
@@ -201,7 +201,7 @@ public class TestTriplePatternBuilder extends
      * of a variable, a variable, and a constant.
      * 
      * <pre>
-     * SELECT ?s where {?s ?p <http://www.bigdata.com/o> }
+     * SELECT ?s where {?s ?p <http://www.embergraph.org/o> }
      * </pre>
      */
     public void test_triple_pattern_var_var_const() throws MalformedQueryException,
@@ -245,7 +245,7 @@ public class TestTriplePatternBuilder extends
      * of a constant, a variable, and a constant.
      * 
      * <pre>
-     * SELECT ?p where { <http://www.bigdata.com/s> ?p <http://www.bigdata.com/o> }
+     * SELECT ?p where { <http://www.embergraph.org/s> ?p <http://www.embergraph.org/o> }
      * </pre>
      */
     public void test_triple_pattern_const_var_const() throws MalformedQueryException,
@@ -290,7 +290,7 @@ public class TestTriplePatternBuilder extends
      * of a constant, a constant, and a variable.
      * 
      * <pre>
-     * SELECT ?o where { <http://www.bigdata.com/s> <http://www.bigdata.com/p> ?o }
+     * SELECT ?o where { <http://www.embergraph.org/s> <http://www.embergraph.org/p> ?o }
      * </pre>
      */
     public void test_triple_pattern_const_const_var() throws MalformedQueryException,
@@ -335,7 +335,7 @@ public class TestTriplePatternBuilder extends
      * of a constant, a variable, and a constant.
      * 
      * <pre>
-     * SELECT ?x where { <http://www.bigdata.com/s> <http://www.bigdata.com/p> <http://www.bigdata.com/o> }
+     * SELECT ?x where { <http://www.embergraph.org/s> <http://www.embergraph.org/p> <http://www.embergraph.org/o> }
      * </pre>
      */
     public void test_triple_pattern_const_const_const() throws MalformedQueryException,
@@ -466,7 +466,7 @@ public class TestTriplePatternBuilder extends
      * is a constant (this is interpreted as a property path).
      * 
      * <pre>
-     * select ?s where {?s <http://www.bigdata.com/foo> ?o ; <http://www.bigdata.com/bar> ?o2 }
+     * select ?s where {?s <http://www.embergraph.org/foo> ?o ; <http://www.embergraph.org/bar> ?o2 }
      * </pre>
      */
     public void test_predicate_list_where_predicate_is_constant()
@@ -570,7 +570,7 @@ public class TestTriplePatternBuilder extends
      * Unit test for an object list with constants.
      * 
      * <pre>
-     * select ?s where {?s ?p <http://www.bigdata.com/foo> , <http://www.bigdata.com/bar> , <http://www.bigdata.com/goo> . }
+     * select ?s where {?s ?p <http://www.embergraph.org/foo> , <http://www.embergraph.org/bar> , <http://www.embergraph.org/goo> . }
      * </pre>
      */
     public void test_object_list_where_objects_are_constants()

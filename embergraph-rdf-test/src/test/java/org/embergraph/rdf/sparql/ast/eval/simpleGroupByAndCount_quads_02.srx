@@ -10,7 +10,7 @@
   <results>
     <result>
       <binding name="z">
-         <uri>http://www.bigdata.com/Car</uri>
+         <uri>http://www.embergraph.org/Car</uri>
       </binding>
       <binding name="count">
          <literal datatype="http://www.w3.org/2001/XMLSchema#integer">1</literal>

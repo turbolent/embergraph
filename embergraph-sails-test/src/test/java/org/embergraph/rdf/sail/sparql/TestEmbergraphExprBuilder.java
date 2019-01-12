@@ -711,7 +711,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
      * the query semantics of describe are imposed by an AST rewrite.
      * 
      * <pre>
-     * DESCRIBE <http://www.bigdata.com>
+     * DESCRIBE <http://www.embergraph.org>
      * </pre>
      * 
      * Note: The DESCRIBE projection and where class of the DESCRIBE query are
@@ -754,7 +754,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
      * and IRIs are used in the projection.
      * 
      * <pre>
-     * DESCRIBE ?s <http://www.bigdata.com> where {?s ?p ?o}
+     * DESCRIBE ?s <http://www.embergraph.org> where {?s ?p ?o}
      * </pre>
      * 
      * Note: The DESCRIBE projection and where class of the DESCRIBE query are

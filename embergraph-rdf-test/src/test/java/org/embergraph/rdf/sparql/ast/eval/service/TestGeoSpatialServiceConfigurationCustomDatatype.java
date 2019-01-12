@@ -243,7 +243,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
      * 
      * The query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * SELECT ?res ?o WHERE {
      *   SERVICE geo:search {
      *     ?res geo:search "inRectangle" .
@@ -271,7 +271,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype extends AbstractDa
      * 
      * With the given precision, the query is equivalent to
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * SELECT ?res ?o WHERE {
      *   SERVICE geo:search {
      *     ?res geo:search "inRectangle" .

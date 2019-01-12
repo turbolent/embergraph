@@ -1,4 +1,4 @@
-@prefix geospatial: <http://www.bigdata.com/rdf/geospatial#> .
+@prefix geospatial: <http://www.embergraph.org/rdf/geospatial#> .
 @prefix example: <http://www.example.com/> .
 
 example:Oktoberfest-2013

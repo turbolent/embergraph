@@ -1724,7 +1724,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase
     /*
      * 
      * prefix skos: <http://www.w3.org/2004/02/skos/core#>    
-       prefix bds: <http://www.bigdata.com/rdf/search#>
+       prefix bds: <http://www.embergraph.org/rdf/search#>
    
 select distinct ?o
 where {     
@@ -1778,7 +1778,7 @@ where {
     }
     /*
      prefix skos: <http://www.w3.org/2004/02/skos/core#>   
-prefix bds: <http://www.bigdata.com/rdf/search#> 
+prefix bds: <http://www.embergraph.org/rdf/search#>
    
 select distinct ?o
 where {     
@@ -1853,7 +1853,7 @@ where {
     
     /*
 prefix skos: <http://www.w3.org/2004/02/skos/core#>   
-prefix bds: <http://www.bigdata.com/rdf/search#> 
+prefix bds: <http://www.embergraph.org/rdf/search#>
    
 select distinct ?o
 where {     

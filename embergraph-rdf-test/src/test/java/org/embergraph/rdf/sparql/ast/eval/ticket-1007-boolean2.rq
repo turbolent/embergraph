@@ -1,6 +1,6 @@
 SELECT ?o
 WHERE 
 { 
-  ?s <http://www.bigdata.com/boolean> ?o
-  BIND (?s=<http://www.bigdata.com/s> AS ?o)
+  ?s <http://www.embergraph.org/boolean> ?o
+  BIND (?s=<http://www.embergraph.org/s> AS ?o)
 }

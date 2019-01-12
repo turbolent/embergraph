@@ -146,13 +146,13 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 //                final StatementBuffer<Statement> sb = new StatementBuffer<Statement>(
 //                        sail.database, 100/* capacity */);
 //
-//                sb.add(new URIImpl("http://www.bigdata.com/A"), RDFS.LABEL,
+//                sb.add(new URIImpl("http://www.embergraph.org/A"), RDFS.LABEL,
 //                        new LiteralImpl("Yellow Rose"));
 //
-//                sb.add(new URIImpl("http://www.bigdata.com/B"), RDFS.LABEL,
+//                sb.add(new URIImpl("http://www.embergraph.org/B"), RDFS.LABEL,
 //                        new LiteralImpl("Red Rose"));
 //
-//                sb.add(new URIImpl("http://www.bigdata.com/C"), RDFS.LABEL,
+//                sb.add(new URIImpl("http://www.embergraph.org/C"), RDFS.LABEL,
 //                        new LiteralImpl("Old Yellow House"));
 //
 //                sb.flush();
@@ -529,8 +529,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 //            final BNode b = new BNodeImpl("_:b");
 //            final Literal alice = new LiteralImpl("Alice");
 //            final Literal bob = new LiteralImpl("Bob");
-//            final URI graphA = new URIImpl("http://www.bigdata.com/graphA");
-//            final URI graphB = new URIImpl("http://www.bigdata.com/graphB");
+//            final URI graphA = new URIImpl("http://www.embergraph.org/graphA");
+//            final URI graphB = new URIImpl("http://www.embergraph.org/graphB");
 //            
 ///**/            
 //            cxn.add(
@@ -2429,38 +2429,38 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
     
     /*
 
-prefix BIGDATA_QUERY_HINTS: <http://www.bigdata.com/queryHints#org.embergraph.rdf.sail.QueryHints.optimizer=None>
+prefix BIGDATA_QUERY_HINTS: <http://www.embergraph.org/queryHints#org.embergraph.rdf.sail.QueryHints.optimizer=None>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
 select distinct ?target0  
 where { 
-  ?obj0 <http://www.bigdata.com/rdf/search#search> "stainless" .
+  ?obj0 <http://www.embergraph.org/rdf/search#search> "stainless" .
   ?target0 ?p0 ?obj0 .
-  ?obj1 <http://www.bigdata.com/rdf/search#search> "innovations" .
+  ?obj1 <http://www.embergraph.org/rdf/search#search> "innovations" .
   ?target1 ?p1 ?obj1 .
-  ?obj2 <http://www.bigdata.com/rdf/search#search> "cabin" .
+  ?obj2 <http://www.embergraph.org/rdf/search#search> "cabin" .
   ?target2 ?p2 ?obj2 .
   filter(?target0 = ?target1 && ?target1 = ?target2) .
 }  
 		     
   FILTER (?category = <http://www.ms2w.com/ontologies/autocad/AutoCADBlock>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADBlockAttribute>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADBlockReference>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADFile>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADTable>  || ?category = <http://www.ms2w.com/ontologies/autocad/AutoCADTitleBlock>  || ?category = <http://www.ms2w.com/ontologies/file/Directory>  || ?category = <http://www.ms2w.com/ontologies/file/File>  || ?category = <http://www.ms2w.com/ontologies/pdffile/PdfAnnotation>  || ?category = <http://www.ms2w.com/ontologies/pdffile/PdfFile>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentAssembly>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmTableTypeBOM>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/Component>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/Configuration>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentDrawing>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypeIndented>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentPart>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypePartsOnly>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmTableTypeRevision>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmToolboxCopiedPart>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmToolboxStandardPart>  || ?category = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypeTopLevelOnly> ) . 
 
-prefix BIGDATA_QUERY_HINTS: <http://www.bigdata.com/queryHints#org.embergraph.rdf.sail.QueryHints.optimizer=None>
+prefix BIGDATA_QUERY_HINTS: <http://www.embergraph.org/queryHints#org.embergraph.rdf.sail.QueryHints.optimizer=None>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
 select distinct ?target  
 where { 
-  ?obj0 <http://www.bigdata.com/rdf/search#search> "stainless" . 
-  ?obj0 <http://www.bigdata.com/rdf/search#relevance> ?score0 . 
+  ?obj0 <http://www.embergraph.org/rdf/search#search> "stainless" .
+  ?obj0 <http://www.embergraph.org/rdf/search#relevance> ?score0 .
   ?target ?p0 ?obj0 .  
   ?target <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?category0 . 
   {	
-    ?obj1 <http://www.bigdata.com/rdf/search#search> "innovations" . 
-    ?obj1 <http://www.bigdata.com/rdf/search#relevance> ?score1 . 
+    ?obj1 <http://www.embergraph.org/rdf/search#search> "innovations" .
+    ?obj1 <http://www.embergraph.org/rdf/search#relevance> ?score1 .
     ?target ?p1 ?obj1 .  
     ?target <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?category1 . 
   }
   {
-    ?obj2 <http://www.bigdata.com/rdf/search#search> "cabin" . 
-    ?obj2 <http://www.bigdata.com/rdf/search#relevance> ?score2 . 
+    ?obj2 <http://www.embergraph.org/rdf/search#search> "cabin" .
+    ?obj2 <http://www.embergraph.org/rdf/search#relevance> ?score2 .
     ?target ?p2 ?obj2 .  
     ?target <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?category2 . 
   }

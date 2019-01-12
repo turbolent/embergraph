@@ -5,6 +5,6 @@
 :x1 :p :x2 .
 :x1 :q "embergraph"@en.
 :x1 :q "embergraph"@de.
-:x1 :r <http://www.bigdata.com/blog/> .
+:x1 :r <http://www.embergraph.org/blog/> .
 
 

@@ -9,17 +9,17 @@
    <results>
      <result>
 		<binding name="s">
-			<uri>http://www.bigdata.com/x</uri>
+			<uri>http://www.embergraph.org/x</uri>
 		</binding>
      </result>
      <result>
 		<binding name="s">
-			<uri>http://www.bigdata.com/y</uri>
+			<uri>http://www.embergraph.org/y</uri>
 		</binding>
      </result>
      <result>
 		<binding name="s">
-			<uri>http://www.bigdata.com/z</uri>
+			<uri>http://www.embergraph.org/z</uri>
 		</binding>
      </result>
    </results>

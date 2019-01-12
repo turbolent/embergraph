@@ -102,7 +102,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
 
     /**
      * <pre>
-     * prefix : <http://www.bigdata.com/>
+     * prefix : <http://www.embergraph.org/>
      * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * SELECT ?a ?x ?y
@@ -144,7 +144,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
      * }
      * bindings ?x
      * {
-     *   ( <http://www.bigdata.com/Mike> )
+     *   ( <http://www.embergraph.org/Mike> )
      * }
      * </pre>
      */
@@ -172,7 +172,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
      * }
      * bindings ?x
      * {
-     *   ( <http://www.bigdata.com/Mike> )
+     *   ( <http://www.embergraph.org/Mike> )
      * }
      * </pre>
      */

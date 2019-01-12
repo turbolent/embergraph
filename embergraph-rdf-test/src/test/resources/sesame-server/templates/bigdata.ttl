@@ -5,7 +5,7 @@
 @prefix rep: <http://www.openrdf.org/config/repository#>.
 @prefix sr: <http://www.openrdf.org/config/repository/sail#>.
 @prefix sail: <http://www.openrdf.org/config/sail#>.
-@prefix ns: <http://www.bigdata.com/config/sail/bigdata#>.
+@prefix ns: <http://www.embergraph.org/config/sail/bigdata#>.
 
 [] a rep:Repository ;
    rep:repositoryID "{%Repository ID|embergraph%}" ;

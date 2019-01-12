@@ -988,7 +988,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
      * {@link ServiceNode#getGraphPattern()}.
      * 
      * <pre>
-     * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bd: <http://www.embergraph.org/rdf/search#>
      * SELECT ?subj ?score 
      * WHERE {
      *   ?lit bd:search "mike" .

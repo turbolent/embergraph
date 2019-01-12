@@ -10,7 +10,7 @@
   <results>
     <result>
       <binding name="x">
-      	<uri>http://www.bigdata.com/Bryan</uri>
+      	<uri>http://www.embergraph.org/Bryan</uri>
       </binding>
       <binding name="name">
       	<literal>Bryan</literal>

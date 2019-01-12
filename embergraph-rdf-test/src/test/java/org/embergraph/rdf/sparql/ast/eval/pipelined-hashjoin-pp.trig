@@ -1,4 +1,4 @@
-@prefix : <http://www.bigdata.com/> .
+@prefix : <http://www.embergraph.org/> .
 
 : {
    <http://TestCaseAuthor> <http://is> <http://Michael> .

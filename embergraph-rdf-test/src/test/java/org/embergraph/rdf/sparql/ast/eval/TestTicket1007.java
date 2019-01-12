@@ -113,7 +113,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
     *  Dataset (trig) used in the tests defined in this section:
     * 
       <code>
-      @prefix : <http://www.bigdata.com/> .
+      @prefix : <http://www.embergraph.org/> .
       @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
       @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
       @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -155,7 +155,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
    <code>
       SELECT ?o
       { 
-        ?s <http://www.bigdata.com/double> ?o
+        ?s <http://www.embergraph.org/double> ?o
         BIND ("10.00"^^<http://www.w3.org/2001/XMLSchema#double> AS ?o)
       }
    </code>
@@ -173,7 +173,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
    <code>
       SELECT ?o
       { 
-        ?s <http://www.bigdata.com/integer> ?o
+        ?s <http://www.embergraph.org/integer> ?o
         BIND (10 AS ?o)
       }
    </code>
@@ -191,7 +191,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
    <code>
       SELECT ?o
       { 
-        ?s <http://www.bigdata.com/integer> ?o
+        ?s <http://www.embergraph.org/integer> ?o
         BIND (2*5 AS ?o)
       }
    </code>
@@ -209,7 +209,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
    <code>
       SELECT ?o
       { 
-        ?s <http://www.bigdata.com/integer> ?o
+        ?s <http://www.embergraph.org/integer> ?o
         BIND (xsd:integer("10") AS ?o)
       }
    </code>
@@ -229,8 +229,8 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
    <code>
       SELECT ?o
       { 
-        ?s <http://www.bigdata.com/integer> ?o .
-        <http://www.bigdata.com/c> <http://www.bigdata.com/p5> ?v .
+        ?s <http://www.embergraph.org/integer> ?o .
+        <http://www.embergraph.org/c> <http://www.embergraph.org/p5> ?v .
         BIND (?v*2 AS ?o)
       }
    </code>
@@ -415,7 +415,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
       SELECT ?o
       WHERE 
       { 
-        ?s <http://www.bigdata.com/boolean> ?o
+        ?s <http://www.embergraph.org/boolean> ?o
         BIND (?s=?s AS ?o)
       }
    </code>
@@ -434,8 +434,8 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
       SELECT ?o
       WHERE 
       { 
-         ?s <http://www.bigdata.com/boolean> ?o
-         BIND (?s=<http://www.bigdata.com/s> AS ?o)
+         ?s <http://www.embergraph.org/boolean> ?o
+         BIND (?s=<http://www.embergraph.org/s> AS ?o)
       }
   </code>
   */

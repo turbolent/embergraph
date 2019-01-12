@@ -12,21 +12,21 @@
   <results>
     <result>
       <binding name="x">
-      	<uri>http://www.bigdata.com/Mike</uri>
+      	<uri>http://www.embergraph.org/Mike</uri>
       </binding>
       <binding name="o">
       	<literal>Mike</literal>
       </binding>
       <binding name="y">
-      	<uri>http://www.bigdata.com/Bryan</uri>
+      	<uri>http://www.embergraph.org/Bryan</uri>
       </binding>
       <binding name="z">
-      	<uri>http://www.bigdata.com/Martyn</uri>
+      	<uri>http://www.embergraph.org/Martyn</uri>
       </binding>
     </result>
     <result>
       <binding name="x">
-      	<uri>http://www.bigdata.com/Bryan</uri>
+      	<uri>http://www.embergraph.org/Bryan</uri>
       </binding>
       <binding name="o">
       	<literal>Bryan</literal>
@@ -34,7 +34,7 @@
     </result>
     <result>
       <binding name="x">
-      	<uri>http://www.bigdata.com/Martyn</uri>
+      	<uri>http://www.embergraph.org/Martyn</uri>
       </binding>
     </result>
   </results>

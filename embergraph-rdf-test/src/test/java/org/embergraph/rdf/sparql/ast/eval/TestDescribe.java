@@ -205,7 +205,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
-     * DESCRIBE <http://www.bigdata.com/DC>
+     * DESCRIBE <http://www.embergraph.org/DC>
      * </pre>
      */
     public void test_describe_1() throws Exception {
@@ -345,7 +345,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
-     * DESCRIBE ?y <http://www.bigdata.com/DC>  
+     * DESCRIBE ?y <http://www.embergraph.org/DC>
      * where {
      *   ?y rdf:type foaf:Person 
      * }
@@ -404,7 +404,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      * DESCRIBE a variable.
      * 
      * <pre>
-     * PREFIX : <http://www.bigdata.com/>
+     * PREFIX : <http://www.embergraph.org/>
      * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -467,7 +467,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
     /**
      * <pre>
-     * PREFIX : <http://www.bigdata.com/>
+     * PREFIX : <http://www.embergraph.org/>
      * PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
      * 
      * DESCRIBE ?x ?y
@@ -533,7 +533,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
-     * DESCRIBE <http://www.bigdata.com/DC>
+     * DESCRIBE <http://www.embergraph.org/DC>
      * </pre>
      */
     public void test_describe_1_invalidation() throws Exception {
@@ -629,7 +629,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
-     * DESCRIBE <http://www.bigdata.com/DC>
+     * DESCRIBE <http://www.embergraph.org/DC>
      * {
      *    hint:Query hint:describeMode "SymmetricOneStep"
      * }
@@ -710,7 +710,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
      * PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
      * PREFIX foaf: <http://xmlns.com/foaf/0.1/>
      * 
-     * DESCRIBE <http://www.bigdata.com/DC>
+     * DESCRIBE <http://www.embergraph.org/DC>
      * {
      *    hint:Query hint:describeMode "ForwardOneStep"
      * }

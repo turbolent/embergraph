@@ -15,19 +15,19 @@
   <results>
     <result>
       <binding name="s0">
-        <literal datatype="http://www.bigdata.com/rdf/datatype#compressedTimestamp">0</literal>
+        <literal datatype="http://www.embergraph.org/rdf/datatype#compressedTimestamp">0</literal>
       </binding>
       <binding name="s1">
-        <literal datatype="http://www.bigdata.com/rdf/datatype#compressedTimestamp">1</literal>
+        <literal datatype="http://www.embergraph.org/rdf/datatype#compressedTimestamp">1</literal>
       </binding>
       <binding name="s2">
-        <literal datatype="http://www.bigdata.com/rdf/datatype#compressedTimestamp">2</literal>
+        <literal datatype="http://www.embergraph.org/rdf/datatype#compressedTimestamp">2</literal>
       </binding>
       <binding name="s10">
-        <literal datatype="http://www.bigdata.com/rdf/datatype#compressedTimestamp">10</literal>
+        <literal datatype="http://www.embergraph.org/rdf/datatype#compressedTimestamp">10</literal>
       </binding>
       <binding name="s20">
-        <literal datatype="http://www.bigdata.com/rdf/datatype#compressedTimestamp">20</literal>
+        <literal datatype="http://www.embergraph.org/rdf/datatype#compressedTimestamp">20</literal>
       </binding>
       <binding name="s0pluss1">
         <literal datatype="http://www.w3.org/2001/XMLSchema#integer">1</literal>

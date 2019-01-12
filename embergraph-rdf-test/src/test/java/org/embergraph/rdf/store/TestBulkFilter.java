@@ -186,10 +186,10 @@ public class TestBulkFilter extends AbstractTripleStoreTestCase {
         try {
 
             final URI A = new URIImpl("http://www.embergraph.org/A");
-//            final URI B = new URIImpl("http://www.bigdata.com/B");
-//            final URI C = new URIImpl("http://www.bigdata.com/C");
-//            final URI D = new URIImpl("http://www.bigdata.com/D");
-//            final URI E = new URIImpl("http://www.bigdata.com/E");
+//            final URI B = new URIImpl("http://www.embergraph.org/B");
+//            final URI C = new URIImpl("http://www.embergraph.org/C");
+//            final URI D = new URIImpl("http://www.embergraph.org/D");
+//            final URI E = new URIImpl("http://www.embergraph.org/E");
 
             final URI V = new URIImpl("http://www.embergraph.org/V");
             final URI W = new URIImpl("http://www.embergraph.org/W");

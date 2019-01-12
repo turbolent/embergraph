@@ -3,7 +3,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
-  <http://www.bigdata.com/DC> rdfs:label "DC" .
+  <http://www.embergraph.org/DC> rdfs:label "DC" .
   ?x rdf:type foaf:Person . 
 } where {
   ?x rdf:type foaf:Person 

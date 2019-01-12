@@ -1,21 +1,21 @@
 [ {
-  "@id" : "http://www.bigdata.com/Bryan",
+  "@id" : "http://www.embergraph.org/Bryan",
   "@type" : [ "http://xmlns.com/foaf/0.1/Person" ],
   "http://xmlns.com/foaf/0.1/knows" : [ {
-    "@id" : "http://www.bigdata.com/Mike"
+    "@id" : "http://www.embergraph.org/Mike"
   } ]
 }, {
-  "@id" : "http://www.bigdata.com/Mike",
+  "@id" : "http://www.embergraph.org/Mike",
   "@type" : [ "http://xmlns.com/foaf/0.1/Person" ],
   "http://xmlns.com/foaf/0.1/knows" : [ {
-    "@id" : "http://www.bigdata.com/Bryan"
+    "@id" : "http://www.embergraph.org/Bryan"
   } ]
 }, {
-  "@id" : "http://www.bigdata.com/queryHints#Query",
-  "http://www.bigdata.com/queryHints#analytic" : [ {
+  "@id" : "http://www.embergraph.org/queryHints#Query",
+  "http://www.embergraph.org/queryHints#analytic" : [ {
     "@value" : "true"
   } ],
-  "http://www.bigdata.com/queryHints#constructDistinctSPO" : [ {
+  "http://www.embergraph.org/queryHints#constructDistinctSPO" : [ {
     "@value" : "false"
   } ]
 } ]

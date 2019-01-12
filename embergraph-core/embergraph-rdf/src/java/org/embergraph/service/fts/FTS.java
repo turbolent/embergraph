@@ -57,7 +57,7 @@ import org.embergraph.rdf.store.BDS;
  * Example:
  * 
  * <pre>
- * PREFIX fts: <http://www.bigdata.com/rdf/fts#>
+ * PREFIX fts: <http://www.embergraph.org/rdf/fts#>
  * SELECT ?res ?score ?snippet WHERE {
  *   ?res fts:search "blue !red".
  *   ?res fts:endpoint  "http://my.external.solr.endpoint:5656" .
@@ -77,11 +77,11 @@ import org.embergraph.rdf.store.BDS;
  * Here's another example using a SERVICE keyword directly: 
  * 
  * <pre>
- * PREFIX fts: <http://www.bigdata.com/rdf/fts#>
+ * PREFIX fts: <http://www.embergraph.org/rdf/fts#>
  * SELECT *
  * WHERE {
  *   ?res rdfs:label ?label .
- *   SERVICE <http://www.bigdata.com/rdf/fts#search> {
+ *   SERVICE <http://www.embergraph.org/rdf/fts#search> {
  *     ?res fts:search "blue !red".
  *     ?res fts:endpoint  "http://my.external.solr.endpoint:5656" .
  *   }

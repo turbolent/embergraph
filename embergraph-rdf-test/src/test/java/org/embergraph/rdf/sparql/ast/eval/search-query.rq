@@ -1,4 +1,4 @@
-PREFIX bd: <http://www.bigdata.com/rdf/search#>
+PREFIX bd: <http://www.embergraph.org/rdf/search#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 select ?x ?y

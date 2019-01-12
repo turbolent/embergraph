@@ -9,27 +9,27 @@
    <results>
      <result>
 		<binding name="index">
-      	   <literal>http://www.bigdata.com/x</literal>
+      	   <literal>http://www.embergraph.org/x</literal>
 		</binding>
      </result>
      <result>
 		<binding name="index">
-      	   <literal>http://www.bigdata.com/x</literal>
+      	   <literal>http://www.embergraph.org/x</literal>
 		</binding>
      </result>
      <result>
 		<binding name="index">
-      	   <literal>http://www.bigdata.com/z</literal>
+      	   <literal>http://www.embergraph.org/z</literal>
 		</binding>
      </result>
      <result>
 		<binding name="index">
-      	   <literal>http://www.bigdata.com/x</literal>
+      	   <literal>http://www.embergraph.org/x</literal>
 		</binding>
      </result>
      <result>
 		<binding name="index">
-      	   <literal>http://www.bigdata.com/z</literal>
+      	   <literal>http://www.embergraph.org/z</literal>
 		</binding>
      </result>
    </results>

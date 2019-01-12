@@ -68,14 +68,14 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
      * Given
      * 
      * <pre>
-     * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+     * PREFIX bd: <http://www.embergraph.org/rdf/search#>
      * QueryType: SELECT
      * SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
      *     JoinGroupNode {
-     *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+     *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
      *         JoinGroupNode {
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
      *         }
      *       }
      *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
@@ -93,10 +93,10 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
      *   QueryType: SELECT
      *   SELECT VarNode(lit) VarNode(score)
      *     JoinGroupNode {
-     *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+     *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
      *         JoinGroupNode {
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0U)[mike]), DEFAULT_CONTEXTS)
-     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0U)[mike]), DEFAULT_CONTEXTS)
+     *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
      *         }
      *       }
      *     }
@@ -132,14 +132,14 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
          * The source AST.
          * 
          * <pre>
-         * PREFIX bd: <http://www.bigdata.com/rdf/search#>
+         * PREFIX bd: <http://www.embergraph.org/rdf/search#>
          * QueryType: SELECT
          * SELECT ( VarNode(subj) AS VarNode(subj) ) ( VarNode(score) AS VarNode(score) )
          *     JoinGroupNode {
-         *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+         *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
          *         JoinGroupNode {
-         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0L)[mike]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
          *         }
          *       }
          *       StatementPatternNode(VarNode(subj), VarNode(p), VarNode(lit), DEFAULT_CONTEXTS)
@@ -196,10 +196,10 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
          *   QueryType: SELECT
          *   SELECT VarNode(lit) VarNode(score)
          *     JoinGroupNode {
-         *       SERVICE <ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search])> {
+         *       SERVICE <ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search])> {
          *         JoinGroupNode {
-         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#search]), ConstantNode(TermId(0U)[mike]), DEFAULT_CONTEXTS)
-         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.bigdata.com/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#search]), ConstantNode(TermId(0U)[mike]), DEFAULT_CONTEXTS)
+         *           StatementPatternNode(VarNode(lit), ConstantNode(TermId(0U)[http://www.embergraph.org/rdf/search#relevance]), VarNode(score), DEFAULT_CONTEXTS)
          *         }
          *       }
          *     }

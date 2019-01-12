@@ -56,7 +56,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -82,7 +82,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -109,7 +109,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -135,7 +135,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -161,7 +161,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -188,7 +188,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query (not wrapped into service):
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   ?res geo:search "inRectangle" .
@@ -212,7 +212,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple query and subsequent join of result.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -241,7 +241,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify precision handling. The query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * SELECT ?res ?o WHERE {
      *   SERVICE geo:search {
      *     ?res geo:search "inRectangle" .
@@ -256,21 +256,21 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * 
      * is evaluated over data
      * 
-     * <http://s0> <http://p> "0#0#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6> <http://p> "6.666666#6.6666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6b> <http://p> "6.66667#6.6666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6c> <http://p> "6.66667#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s0> <http://p> "0#0#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6> <http://p> "6.666666#6.6666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6b> <http://p> "6.66667#6.6666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6c> <http://p> "6.66667#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
      * 
      * Since the geospatial datatype has precision=5 (in our standard datatype), 
      * the query is equivalent to
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * SELECT ?res ?o WHERE {
      *   SERVICE geo:search {
      *     ?res geo:search "inRectangle" .
@@ -285,16 +285,16 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * 
      * and the data is equivalent to 
      * 
-     * <http://s0> <http://p> "0#0#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6> <http://p> "6.66666#6.666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6b> <http://p> "6.66667#6.666666#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
-     * <http://s6d> <http://p> "6.66667#6.66667#0"^^<http://www.bigdata.com/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s0> <http://p> "0#0#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s1> <http://p> "1.1#1.1#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s2> <http://p> "2.22#2.22#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s3> <http://p> "3.333#3.333#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s4> <http://p> "4.4444#4.4444#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s5> <http://p> "5.55555#5.55555#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6> <http://p> "6.66666#6.666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6b> <http://p> "6.66667#6.666666#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6c> <http://p> "6.66666#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
+     * <http://s6d> <http://p> "6.66667#6.66667#0"^^<http://www.embergraph.org/rdf/geospatial#geoSpatialLiteral> .
      *  
      * Consequently, subjects s0, s6b, and s6d are *not* contained in the
      * result, while all others are.
@@ -312,7 +312,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify rectangle search with simple:
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -323,10 +323,10 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      *     ?res geo:timeStart "1" .
      *     ?res geo:timeEnd "10" .
      *   }
-     *   hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "10" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "100" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "10" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#maxParallel> "10" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "10" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "100" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "10" .
      * } 
      * 
      * which implies setup of parallel threads for data extraction.
@@ -401,7 +401,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -431,7 +431,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -462,7 +462,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -494,7 +494,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   ?res geo:search "inCircle" .
@@ -523,7 +523,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Compared to the circle01* queries, the query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -569,7 +569,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Compared to queries circle02 and circle03, the query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -599,7 +599,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      *  Compared to queries circle04, the query
      *  
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -630,7 +630,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * Query similar in spirit to circle04, but settled at the corner of our
      * gred (top left):
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -703,7 +703,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Test query
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT * WHERE {
      *   SERVICE geo:search {
@@ -715,10 +715,10 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      *     ?res geo:timeStart "5" .
      *     ?res geo:timeEnd "5" .
      *   }
-     *   hint:Prior <http://www.bigdata.com/queryHints#maxParallel> "5" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "5" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "10" .
-     *   hint:Prior <http://www.bigdata.com/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "3" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#maxParallel> "5" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.BlockingBuffer.chunkOfChunksCapacity> "5" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.relation.accesspath.IBuffer.chunkCapacity> "10" .
+     *   hint:Prior <http://www.embergraph.org/queryHints#org.embergraph.bop.join.PipelineJoin.avgDataPointsPerThread> "3" .
      * } 
      * 
      * , which is the same as circle05 just executed with parallel processing enabled.
@@ -739,7 +739,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify that location value is properly extracted.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -766,7 +766,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify that time value is properly extracted.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -793,7 +793,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     /**
      * Verify that location + time value is properly extracted.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -822,7 +822,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * Verify that all dimension values are extracted properly
      * when respective output variables are present
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SELECT ?res WHERE {
      *   SERVICE geo:search {
@@ -852,7 +852,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * Verify that a circle query with illegal center point latitude
      * value fails.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SERVICE geo:search {
      *   ?res geo:search "inCircle" .
@@ -887,7 +887,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * Verify that a circle query with illegal center point longitude
      * value fails.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SERVICE geo:search {
      *   ?res geo:search "inCircle" .
@@ -926,7 +926,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
      * Verify that a query that spans over the max lat + lon
      * values does not fail, but yields all data in the database.
      * 
-     * PREFIX geo: <http://www.bigdata.com/rdf/geospatial#>
+     * PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
      * 
      * SERVICE geo:search {
      *   ?res geo:search "inCircle" .

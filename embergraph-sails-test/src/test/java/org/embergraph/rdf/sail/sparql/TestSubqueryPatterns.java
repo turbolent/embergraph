@@ -343,7 +343,7 @@ public class TestSubqueryPatterns extends
      * Unit test for simple subquery joined with a bind.
      * 
      * <pre>
-     * SELECT ?s where { bind(<http://www.bigdata.com> as ?o) { SELECT ?s where {?s ?p ?o} } }
+     * SELECT ?s where { bind(<http://www.embergraph.org> as ?o) { SELECT ?s where {?s ?p ?o} } }
      * </pre>
      * 
      * Note: This requires recursion back in through the

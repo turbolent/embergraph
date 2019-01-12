@@ -10,7 +10,7 @@
    <results>
      <result>
 		<binding name="s">
-			<uri>http://www.bigdata.com/a</uri>
+			<uri>http://www.embergraph.org/a</uri>
 		</binding>
         <binding name="a">
             <literal datatype="http://www.w3.org/2001/XMLSchema#integer">25</literal>
@@ -18,7 +18,7 @@
      </result>
      <result>
         <binding name="s">
-            <uri>http://www.bigdata.com/c</uri>
+            <uri>http://www.embergraph.org/c</uri>
         </binding>
         <binding name="a">
             <literal datatype="http://www.w3.org/2001/XMLSchema#integer">35</literal>

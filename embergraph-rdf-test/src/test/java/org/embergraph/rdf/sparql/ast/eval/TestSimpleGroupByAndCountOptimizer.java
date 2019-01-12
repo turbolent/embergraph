@@ -279,7 +279,7 @@ public class TestSimpleGroupByAndCountOptimizer extends
        * 
        * <pre>
        * SELECT  (COUNT(*) as ?count) ?z 
-       * WHERE { GRAPH <http://www.bigdata.com/mygraph> { ?x rdf:type ?z } } GROUP BY ?z
+       * WHERE { GRAPH <http://www.embergraph.org/mygraph> { ?x rdf:type ?z } } GROUP BY ?z
        * </pre>
        * 
        * requires either an CPOS or a PCOS index for the distinct term scan
@@ -313,7 +313,7 @@ public class TestSimpleGroupByAndCountOptimizer extends
        * 
        * <pre>
        * SELECT  (COUNT(*) as ?count) ?s
-       * WHERE { GRAPH <http://www.bigdata.com/mygraph> { ?s ?p ?o } } 
+       * WHERE { GRAPH <http://www.embergraph.org/mygraph> { ?s ?p ?o } }
        * GROUP BY ?s
        * </pre>
        * 
@@ -349,7 +349,7 @@ public class TestSimpleGroupByAndCountOptimizer extends
        * 
        * <pre>
        * SELECT  (COUNT(*) as ?count) ?s
-       * WHERE { GRAPH <http://www.bigdata.com/mygraph> { ?s ?p ?o } } 
+       * WHERE { GRAPH <http://www.embergraph.org/mygraph> { ?s ?p ?o } }
        * GROUP BY ?s
        * </pre>
        */

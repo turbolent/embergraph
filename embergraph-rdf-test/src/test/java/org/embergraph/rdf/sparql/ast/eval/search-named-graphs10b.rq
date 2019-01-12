@@ -1,5 +1,5 @@
-prefix : <http://www.bigdata.com/> 
-PREFIX bd: <http://www.bigdata.com/rdf/search#>
+prefix : <http://www.embergraph.org/>
+PREFIX bd: <http://www.embergraph.org/rdf/search#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 SELECT ?s 
 FROM :graphA

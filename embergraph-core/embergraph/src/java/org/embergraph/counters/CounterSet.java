@@ -54,15 +54,15 @@ import cutthecrap.utils.striterators.Striterator;
  * the {separator, name} sequence reading down from the root to a given node.
  * The "root" is the top-most node in the hierarchy - it always has an empty
  * name and its path is <code>/</code>. The direct children of a root are
- * typically fully qualified host names. E.g., <code>/www.bigdata.com</code>.
+ * typically fully qualified host names. E.g., <code>/www.embergraph.org</code>.
  * <p>
  * Nodes are always created as children of an existing root. Once created, any
  * non-root node may be attached as a child of any other node, including a root
  * node, as long as cycles would not be formed. When a node is attached as a
  * child of another node, the path of the child and all of its children are
  * updated recursively. E.g., if <code>/Memory</code> is attached to
- * <code>/www.bigdata.com</code> then its path becomes
- * <code>/www.bigdata.com/Memory</code>.
+ * <code>/www.embergraph.org</code> then its path becomes
+ * <code>/www.embergraph.org/Memory</code>.
  * <p>
  * Children are either {@link CounterSet}s or individual {@link Counter}s.
  * Counter sets and counters are declared in the namespace and their names must

@@ -1,4 +1,4 @@
-PREFIX fts: <http://www.bigdata.com/rdf/fts#>
+PREFIX fts: <http://www.embergraph.org/rdf/fts#>
 SELECT ?res ?score ?snippet WHERE {
   ?res fts:search "test" .
   ?res fts:endpoint "" .

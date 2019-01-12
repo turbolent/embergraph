@@ -161,7 +161,7 @@ public interface QueryHints {
 //     * statistics for tagged queries.
 //     * 
 //     * <pre>
-//     * PREFIX BIGDATA_QUERY_HINTS: &lt;http://www.bigdata.com/queryHints#org.embergraph.rdf.sparql.ast.QueryHints.tag=Query12&gt;
+//     * PREFIX BIGDATA_QUERY_HINTS: &lt;http://www.embergraph.org/queryHints#org.embergraph.rdf.sparql.ast.QueryHints.tag=Query12&gt;
 //     * </pre>
 //     * 
 //     * @see http://sourceforge.net/apps/trac/bigdata/ticket/207 (Report on Top-N

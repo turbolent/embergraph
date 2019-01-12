@@ -1,4 +1,4 @@
-@prefix : <http://www.bigdata.com/ssspGraph/> .
+@prefix : <http://www.embergraph.org/ssspGraph/> .
 
 #     Source, Target, Weight
 #     --------------------------------

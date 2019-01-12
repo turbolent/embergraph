@@ -38,7 +38,7 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 
 /**
  * Effective, packed representation of timestamps typed as
- * <code><http://www.bigdata.com/rdf/datatype#compressedTimestamp></code>.
+ * <code><http://www.embergraph.org/rdf/datatype#compressedTimestamp></code>.
  * Builds on the {@link PackedLongIV} datatype for representing timestamps,
  * thus supporting the range [0;72057594037927935L].
  * 

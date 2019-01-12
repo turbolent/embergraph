@@ -717,7 +717,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         final URI a = new URIImpl("http://www.embergraph.org/a");
         final URI b = new URIImpl("http://www.embergraph.org/b");
         final URI c = new URIImpl("http://www.embergraph.org/c");
-//        final URI d = new URIImpl("http://www.bigdata.com/d");
+//        final URI d = new URIImpl("http://www.embergraph.org/d");
         final URI sco = RDFS.SUBCLASSOF;
 
         final AbstractTripleStore store = getStore();
@@ -837,7 +837,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 //         * Note: not using rdf:type to avoid entailments about (x rdf:type
 //         * Class) and (x rdfs:subClassOf y) that are not required by this test.
 //         */
-//      URI rdfType = new URIImpl("http://www.bigdata.com/type");
+//      URI rdfType = new URIImpl("http://www.embergraph.org/type");
         final URI rdfType = RDF.TYPE;
 
         final AbstractTripleStore store = getStore();

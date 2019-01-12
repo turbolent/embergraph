@@ -85,7 +85,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * load <http://www.bigdata.com/data>
+     * load <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_graph() throws MalformedQueryException,
@@ -118,7 +118,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
      * Unit test for simple LOAD operation with the SILENT keyword.
      * 
      * <pre>
-     * load silent <http://www.bigdata.com/data>
+     * load silent <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_silent_graph() throws MalformedQueryException,
@@ -153,7 +153,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
      * Unit test for simple LOAD operation with the SILENT keyword.
      * 
      * <pre>
-     * load silent <http://www.bigdata.com/data> into graph <http://www.bigdata.com/graph1>
+     * load silent <http://www.embergraph.org/data> into graph <http://www.embergraph.org/graph1>
      * </pre>
      */
     public void test_load_silent_graph_into_graph() throws MalformedQueryException,
@@ -246,7 +246,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
      * Unit test for simple LOAD operation with the non-standard extension
      * 
      * <pre>
-     * load verifyData=true <http://www.bigdata.com/data>
+     * load verifyData=true <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_verifyData_true() throws MalformedQueryException,
@@ -283,7 +283,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
      * Unit test for simple LOAD operation with the non-standard extension
      * 
      * <pre>
-     * load verifyData=false <http://www.bigdata.com/data>
+     * load verifyData=false <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_verifyData_false() throws MalformedQueryException,
@@ -319,7 +319,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load stopAtFirstError=true <http://www.bigdata.com/data>
+     * load stopAtFirstError=true <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_stopAtFirstError_true() throws MalformedQueryException,
@@ -355,7 +355,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load stopAtFirstError=false <http://www.bigdata.com/data>
+     * load stopAtFirstError=false <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_stopAtFirstError_false() throws MalformedQueryException,
@@ -391,7 +391,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load preserveBNodeIDs=true <http://www.bigdata.com/data>
+     * load preserveBNodeIDs=true <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_preserveBNodeIDs_true() throws MalformedQueryException,
@@ -427,7 +427,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load preserveBNodeIDs=false <http://www.bigdata.com/data>
+     * load preserveBNodeIDs=false <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_preserveBNodeIDs_false() throws MalformedQueryException,
@@ -463,7 +463,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load datatypeHandling=IGNORE <http://www.bigdata.com/data>
+     * load datatypeHandling=IGNORE <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_datatypeHandling_ignore() throws MalformedQueryException,
@@ -499,7 +499,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load datatypeHandling=VERIFY <http://www.bigdata.com/data>
+     * load datatypeHandling=VERIFY <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_datatypeHandling_verify() throws MalformedQueryException,
@@ -535,7 +535,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load datatypeHandling=NORMALIZE <http://www.bigdata.com/data>
+     * load datatypeHandling=NORMALIZE <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_datatypeHandling_normalize() throws MalformedQueryException,
@@ -571,7 +571,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     /**
      * Unit test for simple LOAD operation with the non-standard extension
      * <pre>
-     * load verifyData=true silent datatypeHandling=NORMALIZE <http://www.bigdata.com/data>
+     * load verifyData=true silent datatypeHandling=NORMALIZE <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_load_nonStandard_multipleOptions()
@@ -610,7 +610,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
      * Unit test for simple CLEAR operation.
      * 
      * <pre>
-     * clear graph <http://www.bigdata.com/data>
+     * clear graph <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_clear_graph() throws MalformedQueryException,
@@ -757,7 +757,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     
     /**
      * <pre>
-     * drop graph <http://www.bigdata.com/data>
+     * drop graph <http://www.embergraph.org/data>
      * </pre>
      */
     public void test_drop_graph() throws MalformedQueryException,
@@ -904,7 +904,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     
     /**
      * <pre>
-     * create graph <http://www.bigdata.com/graph1>
+     * create graph <http://www.embergraph.org/graph1>
      * </pre>
      */
     public void test_create() throws MalformedQueryException,
@@ -933,7 +933,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * create silent graph <http://www.bigdata.com/graph1>
+     * create silent graph <http://www.embergraph.org/graph1>
      * </pre>
      */
     public void test_create_silent() throws MalformedQueryException,
@@ -964,7 +964,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * copy <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2> 
+     * copy <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_copy_graph_to_graph() throws MalformedQueryException,
@@ -996,7 +996,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * copy silent <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2> 
+     * copy silent <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_silent_copy_graph_to_graph() throws MalformedQueryException,
@@ -1030,7 +1030,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * copy silent <http://www.bigdata.com/graph1> to default 
+     * copy silent <http://www.embergraph.org/graph1> to default
      * </pre>
      */
     public void test_copy_graph_to_default() throws MalformedQueryException,
@@ -1061,7 +1061,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * copy silent default to <http://www.bigdata.com/graph2> 
+     * copy silent default to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_silent_copy_default_to_graph() throws MalformedQueryException,
@@ -1096,7 +1096,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     
     /**
      * <pre>
-     * move <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2> 
+     * move <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_move_graph_to_graph() throws MalformedQueryException,
@@ -1128,7 +1128,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * move silent <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2> 
+     * move silent <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_silent_move_graph_to_graph() throws MalformedQueryException,
@@ -1162,7 +1162,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * move silent <http://www.bigdata.com/graph1> to default 
+     * move silent <http://www.embergraph.org/graph1> to default
      * </pre>
      */
     public void test_move_graph_to_default() throws MalformedQueryException,
@@ -1193,7 +1193,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * move silent default to <http://www.bigdata.com/graph2> 
+     * move silent default to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_silent_move_default_to_graph() throws MalformedQueryException,
@@ -1228,7 +1228,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     
     /**
      * <pre>
-     * add <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2> 
+     * add <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_add_graph_to_graph() throws MalformedQueryException,
@@ -1260,7 +1260,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * add silent <http://www.bigdata.com/graph1> to <http://www.bigdata.com/graph2> 
+     * add silent <http://www.embergraph.org/graph1> to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_silent_add_graph_to_graph() throws MalformedQueryException,
@@ -1294,7 +1294,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * add silent <http://www.bigdata.com/graph1> to default 
+     * add silent <http://www.embergraph.org/graph1> to default
      * </pre>
      */
     public void test_add_graph_to_default() throws MalformedQueryException,
@@ -1325,7 +1325,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
     /**
      * <pre>
-     * add silent default to <http://www.bigdata.com/graph2> 
+     * add silent default to <http://www.embergraph.org/graph2>
      * </pre>
      */
     public void test_silent_add_default_to_graph() throws MalformedQueryException,

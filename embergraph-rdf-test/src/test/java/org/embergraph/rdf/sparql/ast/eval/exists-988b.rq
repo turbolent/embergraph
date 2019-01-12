@@ -1,4 +1,4 @@
-prefix eg: <http://www.bigdata.com/>
+prefix eg: <http://www.embergraph.org/>
 
 SELECT ?t
 FROM eg:g

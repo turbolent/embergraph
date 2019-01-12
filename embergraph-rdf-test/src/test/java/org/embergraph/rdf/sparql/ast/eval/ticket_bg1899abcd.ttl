@@ -1,4 +1,4 @@
-@prefix geoliteral: <http://www.bigdata.com/rdf/geospatial/literals/v1#> .
+@prefix geoliteral: <http://www.embergraph.org/rdf/geospatial/literals/v1#> .
 @prefix example: <http://www.example.com/> .
 
 example:Oktoberfest-2013

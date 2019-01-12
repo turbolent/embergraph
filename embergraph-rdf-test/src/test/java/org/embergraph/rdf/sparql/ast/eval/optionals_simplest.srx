@@ -11,98 +11,98 @@
    <results>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/paul</uri>
+			<uri>http://www.embergraph.org/paul</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/john</uri>
+			<uri>http://www.embergraph.org/john</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/mary</uri>
+			<uri>http://www.embergraph.org/mary</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/fred</uri>
+			<uri>http://www.embergraph.org/fred</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/leon</uri>
+			<uri>http://www.embergraph.org/leon</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/paul</uri>
+			<uri>http://www.embergraph.org/paul</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/mary</uri>
+			<uri>http://www.embergraph.org/mary</uri>
 		</binding>
 		<binding name="c">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="d">
-			<uri>http://www.bigdata.com/fred</uri>
+			<uri>http://www.embergraph.org/fred</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/paul</uri>
+			<uri>http://www.embergraph.org/paul</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/mary</uri>
+			<uri>http://www.embergraph.org/mary</uri>
 		</binding>
 		<binding name="c">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="d">
-			<uri>http://www.bigdata.com/leon</uri>
+			<uri>http://www.embergraph.org/leon</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/john</uri>
+			<uri>http://www.embergraph.org/john</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/mary</uri>
+			<uri>http://www.embergraph.org/mary</uri>
 		</binding>
 		<binding name="c">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="d">
-			<uri>http://www.bigdata.com/fred</uri>
+			<uri>http://www.embergraph.org/fred</uri>
 		</binding>
      </result>
      <result>
 		<binding name="a">
-			<uri>http://www.bigdata.com/john</uri>
+			<uri>http://www.embergraph.org/john</uri>
 		</binding>
 		<binding name="b">
-			<uri>http://www.bigdata.com/mary</uri>
+			<uri>http://www.embergraph.org/mary</uri>
 		</binding>
 		<binding name="c">
-			<uri>http://www.bigdata.com/brad</uri>
+			<uri>http://www.embergraph.org/brad</uri>
 		</binding>
 		<binding name="d">
-			<uri>http://www.bigdata.com/leon</uri>
+			<uri>http://www.embergraph.org/leon</uri>
 		</binding>
      </result>
    </results>
