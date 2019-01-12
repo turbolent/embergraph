@@ -7,7 +7,7 @@
 	<property file="build.properties" />
 
 	<path id="runtime.classpath">
-		<!-- The bigdata dependencies (for the nano-server). -->
+		<!-- The embergraph dependencies (for the nano-server). -->
 		<fileset dir="${embergraph.build.dir}/lib">
 			<include name="**/*.jar" />
 		</fileset>

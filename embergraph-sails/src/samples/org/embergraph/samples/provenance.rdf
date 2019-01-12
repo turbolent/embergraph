@@ -2,28 +2,28 @@
 <!-- sample data with provenance information. -->
 <!-- $Id$ -->
 <!DOCTYPE data [
-<!ENTITY bigdata "http://www.bigdata.com/rdf#">
+<!ENTITY embergraph "http://www.bigdata.com/rdf#">
 ]>
 
 <rdf:RDF
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:bigdata="http://www.bigdata.com/rdf#"
-    xml:base="&bigdata;"
+    xmlns:embergraph="http://www.bigdata.com/rdf#"
+    xml:base="&embergraph;"
 >
 
 <rdf:Description rdf:about="#Mike" >
-    <rdfs:label bigdata:sid="_S1">Mike</rdfs:label>
-    <bigdata:loves bigdata:sid="_S2" rdf:resource="#RDF" />
+    <rdfs:label embergraph:sid="_S1">Mike</rdfs:label>
+    <embergraph:loves embergraph:sid="_S2" rdf:resource="#RDF" />
 </rdf:Description>
   
 <rdf:Description rdf:nodeID="_S1" >
-    <bigdata:source>www.systap.com</bigdata:source>
+    <embergraph:source>www.systap.com</bigdata:source>
 </rdf:Description>
   
 <rdf:Description rdf:nodeID="_S2" >
-    <bigdata:source>www.systap.com</bigdata:source>
+    <embergraph:source>www.systap.com</bigdata:source>
 </rdf:Description>
   
 </rdf:RDF>

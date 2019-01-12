@@ -1084,8 +1084,8 @@
 
 <rdf:Description rdf:about="http://bigdata.com/test/elm#7a09a307-56e3-466a-bf5a-3f5fed4d0d8c">
 	<ns2:extractedFrom rdf:resource="http://bigdata.com/test/docs#ad541de9-633d-4a69-90f1-186a011d3a7d"/>
-	<rdfs:label>bigdata</rdfs:label>
-	<ns2:lexicalForm>bigdata</ns2:lexicalForm>
+	<rdfs:label>embergraph</rdfs:label>
+	<ns2:lexicalForm>embergraph</ns2:lexicalForm>
 	<rdf:type rdf:resource="http://bigdata.com/test/domain#Artifact"/>
 	<ns5:sameAs rdf:resource="http://bigdata.com/test/elm#00c5fc5a-298e-43c5-9853-28115631b359"/>
 </rdf:Description>
@@ -1211,8 +1211,8 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://bigdata.com/test/elm#00c5fc5a-298e-43c5-9853-28115631b359">
-	<ns2:lexicalForm>bigdata</ns2:lexicalForm>
-	<rdfs:label>bigdata</rdfs:label>
+	<ns2:lexicalForm>embergraph</ns2:lexicalForm>
+	<rdfs:label>embergraph</rdfs:label>
 	<rdf:type rdf:resource="http://bigdata.com/test/domain#Artifact"/>
 	<ns2:importedFrom>file:/D:/Documents and Settings/mikep/Desktop/systap.csv</ns2:importedFrom>
 </rdf:Description>

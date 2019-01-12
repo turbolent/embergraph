@@ -31,7 +31,7 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.rdf.spo.ISPO;
 
 /**
- * Operator to insert {@link ISPO}s into bigdata.
+ * Operator to insert {@link ISPO}s into embergraph.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

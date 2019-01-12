@@ -35,7 +35,7 @@ public class EmbergraphGraphFactory {
 //    private static final transient Logger log = Logger.getLogger(EmbergraphGraphFactory.class);
 
    /**
-    * Connect to a remote bigdata instance.
+    * Connect to a remote embergraph instance.
     * 
     * FIXME This does not parameterize the value of the ContextPath. See
     * {@link EmbergraphStatics#getContextPath()}.
@@ -53,7 +53,7 @@ public class EmbergraphGraphFactory {
     }
     
     /**
-     * Connect to a remote bigdata instance.
+     * Connect to a remote embergraph instance.
      * 
      * @param sparqlEndpointURL
      *            The URL of the SPARQL end point. This will be used to read and
@@ -69,7 +69,7 @@ public class EmbergraphGraphFactory {
     }
 
     /**
-     * Open an existing persistent local bigdata instance.  If a journal does
+     * Open an existing persistent local embergraph instance.  If a journal does
      * not exist at the specified location and the boolean create flag is true
      * a journal will be created at that location.
      */
@@ -80,7 +80,7 @@ public class EmbergraphGraphFactory {
     }
 
     /**
-	 * Create a persistent local bigdata instance. If a journal does not exist
+	 * Create a persistent local embergraph instance. If a journal does not exist
 	 * at the specified location, then a journal will be created at that
 	 * location.
 	 */
@@ -91,14 +91,14 @@ public class EmbergraphGraphFactory {
     }
 
     /**
-     * Create a new local in-memory bigdata instance.
+     * Create a new local in-memory embergraph instance.
      */
     public static EmbergraphGraph create() throws Exception {
         return create(EmbergraphRDFFactory.INSTANCE);
     }
     
     /**
-     * Create a new local in-memory bigdata instance with the supplied value
+     * Create a new local in-memory embergraph instance with the supplied value
      * factory.
      */
     public static EmbergraphGraph create(final BlueprintsValueFactory vf)
@@ -107,7 +107,7 @@ public class EmbergraphGraphFactory {
     }
     
     /**
-     * Create a new local in-memory bigdata instance with the supplied value
+     * Create a new local in-memory embergraph instance with the supplied value
      * factory.
      */
     public static EmbergraphGraph create(final BlueprintsValueFactory vf,
@@ -118,7 +118,7 @@ public class EmbergraphGraphFactory {
     }
     
 //    /**
-//     * Create a new persistent local bigdata instance.
+//     * Create a new persistent local embergraph instance.
 //     */
 //    public static EmbergraphGraph create(final String file)
 //            throws Exception {

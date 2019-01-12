@@ -58,7 +58,7 @@ import cutthecrap.utils.striterators.Striterator;
 
 /**
  * A distributed file system with extensible metadata and atomic append
- * implemented using the bigdata scale-out architecture. Files have a client
+ * implemented using the embergraph scale-out architecture. Files have a client
  * assigned identifier, which is a Unicode string. The file identifier MAY be
  * structured so as to look like a hierarchical file system using any desired
  * convention. Files are versioned and historical versions MAY be accessed until

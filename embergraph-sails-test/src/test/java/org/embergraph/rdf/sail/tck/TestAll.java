@@ -65,7 +65,7 @@ public class TestAll extends TestCase {
         suite.addTestSuite(EmbergraphSPARQLUpdateTxTest.class);
 
         /**
-         * The bigdata extensions to SPARQL UPDATE to support solution sets as
+         * The embergraph extensions to SPARQL UPDATE to support solution sets as
          * well as graphs.
          * 
          * Note: We need to run a few different IRawStore backends to confirm

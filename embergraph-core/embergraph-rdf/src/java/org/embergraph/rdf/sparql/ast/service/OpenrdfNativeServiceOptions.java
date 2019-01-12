@@ -27,7 +27,7 @@ import org.embergraph.bop.IBindingSet;
 
 /**
  * Service options base class for with JVM services which handle openrdf
- * {@link BindingSet}s rather than bigdata {@link IBindingSet}s.
+ * {@link BindingSet}s rather than embergraph {@link IBindingSet}s.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

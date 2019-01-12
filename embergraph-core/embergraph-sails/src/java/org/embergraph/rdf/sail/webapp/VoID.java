@@ -107,7 +107,7 @@ public class VoID {
      *            The SPARQL service end point.
      * @param aDefaultDataset
      *            The data set identifier that will be used on the description
-     *            (the bigdata namespace of the dataset is obtained from the
+     *            (the embergraph namespace of the dataset is obtained from the
      *            <i>tripleStore</i>).
      */
     public VoID(final Graph g, final AbstractTripleStore tripleStore,

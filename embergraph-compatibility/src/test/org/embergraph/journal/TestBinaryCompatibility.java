@@ -36,7 +36,7 @@ import org.embergraph.btree.IndexMetadata;
 /**
  * Test suite for binary compatibility, portability, and forward compatibility
  * or automated migration of persistent stores and persistence or serialization
- * capable objects across different bigdata releases. The tests in this suite
+ * capable objects across different embergraph releases. The tests in this suite
  * rely on artifacts which are archived within SVN.
  * 
  * @todo create w/ small extent and truncate (RW store does not support
@@ -105,7 +105,7 @@ public class TestBinaryCompatibility extends TestCase2 {
 		}
 
 		/**
-		 * The bigdata version number associated with the release. This is in
+		 * The embergraph version number associated with the release. This is in
 		 * the form <code>xx.yy.zz</code>
 		 */
 		public String getVersion() {

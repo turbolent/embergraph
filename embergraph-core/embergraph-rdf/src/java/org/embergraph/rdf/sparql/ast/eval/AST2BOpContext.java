@@ -226,7 +226,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
      * The maximum parallelism for a solution set hash join when the join is
      * used in a context that does permit parallelism, such as sub-group and
      * sub-query evaluation (default {@value #maxParallelForSolutionSetHashJoin}
-     * ). The historical value for bigdata releases through 1.2.1 was ONE (1).
+     * ). The historical value for embergraph releases through 1.2.1 was ONE (1).
      * While this join can be evaluated concurrently for multiple input chunks,
      * assessment done with r6411 on BSBM (explore) and govtrack failed to
      * demonstrate any performance advantage when using maxParallel = 5 (the

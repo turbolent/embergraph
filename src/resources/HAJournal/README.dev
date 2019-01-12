@@ -1,8 +1,8 @@
 This directory contains some sample configuration for a highly available
 Journal.  
 
-Note: The bigdata scripts bundled in this directory are designed to be run
-from the root directory of the SVN checkout of the bigdata code base. This
+Note: The embergraph scripts bundled in this directory are designed to be run
+from the root directory of the SVN checkout of the embergraph code base. This
 is used for developers.  The installation is done using the top-level ant
 build file and the "ant deploy-artifact" target.
 
@@ -70,12 +70,12 @@ HAJournalServer.sh - A shell script that will start the HAJournalServer.
                      commit point when the quorum is fully met.  These HALog files
                      can get large if you are doing a long running update.
 
-log4jHA.properties - A default log4j configuration file for use by the bigdata
+log4jHA.properties - A default log4j configuration file for use by the embergraph
                      services.
 				   
 logging.properties - A default Java logging configuration.  This may be used
 					 to control the log levels for jini/river components inside
-					 of the bigdata services. Those components use java logging
+					 of the embergraph services. Those components use java logging
 					 rather than log4j.
 
 policy.all - A default java permissions file.  This file grants ALL permissions.

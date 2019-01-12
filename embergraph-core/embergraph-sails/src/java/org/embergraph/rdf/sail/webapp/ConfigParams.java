@@ -33,8 +33,8 @@ import org.embergraph.journal.IIndexManager;
 public interface ConfigParams {
 
     /**
-     * The property file (for a standalone bigdata instance) or the jini
-     * configuration file (for a bigdata federation). The file must end with
+     * The property file (for a standalone embergraph instance) or the jini
+     * configuration file (for a embergraph federation). The file must end with
      * either ".properties" or ".config". This parameter is ignored if the
      * {@link IIndexManager} is specified as an attribute of the web application
      * context.
@@ -42,9 +42,9 @@ public interface ConfigParams {
     final String PROPERTY_FILE = "propertyFile";
 
     /**
-     * The default bigdata namespace of for the triple or quad store instance to
+     * The default embergraph namespace of for the triple or quad store instance to
      * be exposed (default {@link #DEFAULT_NAMESPACE}). Note that there can be
-     * many triple or quad store instances within a bigdata instance.
+     * many triple or quad store instances within a embergraph instance.
      */
     final String NAMESPACE = "namespace";
     
@@ -69,7 +69,7 @@ public interface ConfigParams {
     
     /**
      * Force a compacting merge of all shards on all data services in a
-     * bigdata federation (optional, default <code>false</code>).
+     * embergraph federation (optional, default <code>false</code>).
      *
      * <strong>This option should only be used for benchmarking
      * purposes.</strong>

@@ -31,7 +31,7 @@ import org.embergraph.rwstore.RWStore;
 /**
  * Given an existing journal, ensure that any commitRecords that reference a
  * time prior to the last deferred release time are removed. This provides a
- * "fix" for opening a bigdata 1.0.4 journal in bigdata 1.0.6.  
+ * "fix" for opening a embergraph 1.0.4 journal in embergraph 1.0.6.
  * 
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/480"> Error
  *      releasing deferred frees using 1.0.6 against a 1.0.4 journal</a>

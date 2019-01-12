@@ -76,7 +76,7 @@ public class TestHTree extends AbstractHTreeTestCase {
      * insert sequences and goes beyond the introduction of the new directory
      * page.
      * 
-     * @see bigdata/src/architecture/htree.xls#example1
+     * @see embergraph/src/architecture/htree.xls#example1
      * @see #test_example1_splitDir_addressBits2_splitBits1()
      * @see #test_example1_splitDir_addressBits2_splitBits2()
      */

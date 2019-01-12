@@ -1575,7 +1575,7 @@ abstract public class AbstractFederation<T> implements IEmbergraphFederation<T> 
                  * peer unless platform level statistics collection is enabled.
                  * We should be able to separate out the collection of host
                  * metrics from whether or not we are collecting metrics from
-                 * the bigdata service. Do this when moving the host and process
+                 * the embergraph service. Do this when moving the host and process
                  * (pidstat) collectors into the embergraph-ganglia module.
                  * 
                  * TODO The LBS currently does not collect platform statistics.
@@ -1655,7 +1655,7 @@ abstract public class AbstractFederation<T> implements IEmbergraphFederation<T> 
 
                 /*
                  * Layer on the ability to (a) recognize and align host
-                 * bigdata's performance counters hierarchy with those declared
+                 * embergraph's performance counters hierarchy with those declared
                  * by ganglia and; (b) provide nice declarations for various
                  * application counters of interest.
                  */

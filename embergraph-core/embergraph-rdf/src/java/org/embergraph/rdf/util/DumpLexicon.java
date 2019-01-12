@@ -62,12 +62,12 @@ public class DumpLexicon {
      * Open the {@link IIndexManager} identified by the property file.
      * 
      * @param propertyFile
-     *            The property file (for a standalone bigdata instance) or the
-     *            jini configuration file (for a bigdata federation). The file
+     *            The property file (for a standalone embergraph instance) or the
+     *            jini configuration file (for a embergraph federation). The file
      *            must end with either ".properties" or ".config".
      *            
      *            Starting with 1.5.2 the remote dump lexicon capability
-     *            was moved into the bigdata-jini artifact.  See BLZG-1370.
+     *            was moved into the embergraph-jini artifact.  See BLZG-1370.
      *            
      * @return The {@link IIndexManager}.
      */

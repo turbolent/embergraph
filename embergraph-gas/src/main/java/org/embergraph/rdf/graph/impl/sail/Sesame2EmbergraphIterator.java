@@ -26,7 +26,7 @@ import info.aduna.iteration.CloseableIteration;
 import cutthecrap.utils.striterators.ICloseableIterator;
 
 /**
- * Class aligns a Sesame 2 {@link CloseableIteration} with a bigdata
+ * Class aligns a Sesame 2 {@link CloseableIteration} with a embergraph
  * {@link ICloseableIterator}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -39,7 +39,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  *            {@link CloseableIteration}.
  */
 /*
- * Note: This is a clone of the same-named class in the bigdata-rdf module. The
+ * Note: This is a clone of the same-named class in the embergraph-rdf module. The
  * clone exists to have it under the Apache 2 license without going through a
  * large relayering of the dependencies.
  */

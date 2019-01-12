@@ -629,7 +629,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
         final String expectedStr = "2001-10-26T21:32:52.126Z";
 
         /*
-         * A bigdata literal w/o inlining from the *givenStr*. This
+         * A embergraph literal w/o inlining from the *givenStr*. This
          * representation has greater milliseconds+ precision.
          */
         final EmbergraphLiteral lit = vf.createLiteral(df
@@ -645,7 +645,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
          */
         final LiteralExtensionIV<?> iv = ext.createIV(lit);
 
-        // Convert the IV back into a bigdata literal.
+        // Convert the IV back into a embergraph literal.
         final EmbergraphLiteral lit2 = (EmbergraphLiteral) ext.asValue(iv, vf);
 
         // Verify that millisecond precision was retained.

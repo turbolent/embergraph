@@ -33,7 +33,7 @@ public class QueryEngineMetricsCollector implements IGangliaMetricsCollector {
 //    static final Pattern filter; 
 //    static {
 //
-//        // bigdata10.bigdata.com / service /
+//        // embergraph10.bigdata.com / service /
 //        // org.embergraph.service.IMetadataService /
 //        // dabb5034-9db0-4218-a6dd-f9032fc05ce6 / Query Engine /
 //        // blockedWorkQueueCount

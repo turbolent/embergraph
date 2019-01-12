@@ -35,39 +35,39 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
 
 
 /**
- * A vocabulary for bigdata specific extensions.
+ * A vocabulary for embergraph specific extensions.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface BD {
 
     /**
-     * The namespace used for bigdata specific extensions.
+     * The namespace used for embergraph specific extensions.
      */
     String NAMESPACE = "http://www.embergraph.org/rdf#";
     
     /**
      * The name of a per-statement attribute whose value is recognized in
      * RDF/XML as the statement identifier for statement described by the
-     * element on which it appears. The <code>bigdata:sid</code> attribute is
+     * element on which it appears. The <code>embergraph:sid</code> attribute is
      * allowed on elements describing RDF statements and serves as a
-     * per-statement identifier. The value of the <code>bigdata:sid</code>
+     * per-statement identifier. The value of the <code>embergraph:sid</code>
      * attribute must conform to the syntactic constraints of a blank node. By
-     * re-using the value of the <code>bigdata:sid</code> attribute within
+     * re-using the value of the <code>embergraph:sid</code> attribute within
      * other statements in the same RDF/XML document, the client can express
      * statements about the statements.
      * <p>
      * This RDF/XML extension allows us to inline provenance (statements about
      * statements) with RDF/XML to clients in a manner which has minor impact on
      * unaware clients (they will perceive additional statements whose predicate
-     * is <code>bigdata:sid</code>). In addition, clients aware of this
+     * is <code>embergraph:sid</code>). In addition, clients aware of this
      * extension can submit RDF/XML with inline provenance.
      * <p>
      * For example:
      * 
      * <pre>
      * &lt;rdf:Description rdf:about=&quot;http://www.foo.org/A&quot;&gt;
-     *     &lt;label bigdata:sid=&quot;_S67&quot; xmlns=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;&gt;abc&lt;/label&gt;
+     *     &lt;label embergraph:sid=&quot;_S67&quot; xmlns=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;&gt;abc&lt;/label&gt;
      * &lt;/rdf:Description&gt;
      * </pre>
      */
@@ -204,7 +204,7 @@ public interface BD {
 //    URI ATOMIC_UPDATE_SEPARATOR_KEY = new URIImpl(NAMESPACE + "atomicUpdateSeparatorKey");
     
     /**
-     * URI that can be used as the Subject of magic triple patterns for bigdata
+     * URI that can be used as the Subject of magic triple patterns for embergraph
      * SERVICEs. There may be zero or more such triple patterns. The Predicate
      * (key) and Object (val) positions for those triple patterns are extracted
      * into a {@link ServiceParams} object. For each key, there may be one or

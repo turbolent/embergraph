@@ -128,7 +128,7 @@
              <New id="Contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection">
                   <Call name="addHandler">
                     <Arg>
-                        <!-- This is the bigdata web application. -->
+                        <!-- This is the embergraph web application. -->
                         <New id="WebAppContext" class="org.eclipse.jetty.webapp.WebAppContext">
 			             <Set name="war"><SystemProperty name="jetty.home" default="."/></Set>
                          <Set name="contextPath">/</Set>

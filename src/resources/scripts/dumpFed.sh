@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Dump out some stuff for a bigdata federation.
+# Dump out some stuff for a embergraph federation.
 #
 # usage: configFile
 

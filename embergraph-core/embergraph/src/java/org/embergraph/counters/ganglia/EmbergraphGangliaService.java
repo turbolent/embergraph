@@ -14,7 +14,7 @@ import org.embergraph.ganglia.IGangliaDefaults;
 import org.embergraph.ganglia.IGangliaMetadataFactory;
 
 /**
- * A utility class which may be used to run the bigdata performance counter
+ * A utility class which may be used to run the embergraph performance counter
  * collection system within an embedded {@link GangliaService}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ import org.embergraph.ganglia.IGangliaMetadataFactory;
  * 
  *         TODO Can metrics be declared which automatically collect history from
  *         the sampled counters? It would be nice to abstract that stuff out of
- *         bigdata.
+ *         embergraph.
  * 
  *         TODO We should be reporting out the CPU context switches and
  *         interrupts per second data from vmstat. Ganglia does not collect this
@@ -116,7 +116,7 @@ public class EmbergraphGangliaService extends GangliaService {
 						));
 
 		/*
-		 * Layer on the ability to (a) recognize and align host bigdata's
+		 * Layer on the ability to (a) recognize and align host embergraph's
 		 * performance counters hierarchy with those declared by ganglia and;
 		 * (b) provide nice declarations for various application counters of
 		 * interest.

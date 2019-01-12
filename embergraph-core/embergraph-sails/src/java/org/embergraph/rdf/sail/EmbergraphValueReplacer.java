@@ -46,7 +46,7 @@ import org.embergraph.rdf.store.EmbergraphOpenRDFBindingSetsResolverator;
 /**
  * Utility class to manage the efficient translation of openrdf {@link Value}s
  * in a {@link BindingSet} into the {@link EmbergraphValue}s used internally by
- * bigdata.
+ * embergraph.
  * 
  * @see EmbergraphOpenRDFBindingSetsResolverator
  * 

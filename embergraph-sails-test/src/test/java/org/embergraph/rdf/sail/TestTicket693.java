@@ -94,7 +94,7 @@ public class TestTicket693 extends QuadsTestCase {
     public void testBug1() throws Exception {
     	
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
 	  	final EmbergraphSail embergraphSail = getSail();
 	  	
@@ -114,7 +114,7 @@ public class TestTicket693 extends QuadsTestCase {
 //			"}";
 //	  	
 	  	/*
-bigdata results:
+embergraph results:
 [s=http://example.org/A;p=http://www.w3.org/1999/02/22-rdf-syntax-ns#type;o=http://www.w3.org/2002/07/owl#Class]
 [s=http://example.org/B;p=http://www.w3.org/1999/02/22-rdf-syntax-ns#type;o=http://www.w3.org/2002/07/owl#Class]
 [s=http://example.org/C;p=http://www.w3.org/1999/02/22-rdf-syntax-ns#type;o=http://www.w3.org/2002/07/owl#Class]
@@ -139,11 +139,11 @@ bigdata results:
 	  	
 	  		embergraphSail.initialize();
 	  		
-  			final EmbergraphSailRepository bigdataRepo = new EmbergraphSailRepository(embergraphSail);
+  			final EmbergraphSailRepository embergraphRepo = new EmbergraphSailRepository(embergraphSail);
   			
-	  		{ // load the data into the bigdata store
+	  		{ // load the data into the embergraph store
 	  			
-	  			final RepositoryConnection cxn = bigdataRepo.getConnection();
+	  			final RepositoryConnection cxn = embergraphRepo.getConnection();
 	  			try {
 	  				cxn.setAutoCommit(false);
 	  				cxn.add(getClass().getResourceAsStream(data), baseURI, format);
@@ -168,10 +168,10 @@ bigdata results:
 	            }
             
 	            /*
-	             * Run the problem query using the bigdata store and then compare
+	             * Run the problem query using the embergraph store and then compare
 	             * the answer.
 	             */
-	            final RepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+	            final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
 	  			try {
 	  				
 		            final SailTupleQuery tupleQuery = (SailTupleQuery)
@@ -212,10 +212,10 @@ bigdata results:
 	            }
             
 	            /*
-	             * Run the problem query using the bigdata store and then compare
+	             * Run the problem query using the embergraph store and then compare
 	             * the answer.
 	             */
-	            final RepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+	            final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
 	  			try {
 	  				
 		            final SailTupleQuery tupleQuery = (SailTupleQuery)
@@ -247,10 +247,10 @@ bigdata results:
 	            }
             
 	            /*
-	             * Run the problem query using the bigdata store and then compare
+	             * Run the problem query using the embergraph store and then compare
 	             * the answer.
 	             */
-	            final RepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+	            final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
 	  			try {
 	  				
 		            final SailTupleQuery tupleQuery = (SailTupleQuery)
@@ -288,10 +288,10 @@ bigdata results:
 	            }
             
 	            /*
-	             * Run the problem query using the bigdata store and then compare
+	             * Run the problem query using the embergraph store and then compare
 	             * the answer.
 	             */
-	            final RepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+	            final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
 	  			try {
 	  				
 		            final SailTupleQuery tupleQuery = (SailTupleQuery)

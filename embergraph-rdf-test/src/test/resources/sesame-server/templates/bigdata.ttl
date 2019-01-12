@@ -1,5 +1,5 @@
 #
-# Sesame configuration template for a bigdata RDF repository
+# Sesame configuration template for a embergraph RDF repository
 #
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix rep: <http://www.openrdf.org/config/repository#>.
@@ -8,13 +8,13 @@
 @prefix ns: <http://www.bigdata.com/config/sail/bigdata#>.
 
 [] a rep:Repository ;
-   rep:repositoryID "{%Repository ID|bigdata%}" ;
+   rep:repositoryID "{%Repository ID|embergraph%}" ;
    rdfs:label "{%Repository title|Bigdata store%}" ;
    rep:repositoryImpl [
-      rep:repositoryType "bigdata:BigdataRepository" ;
+      rep:repositoryType "embergraph:BigdataRepository" ;
       ns:properties "{%Properties%}"
 #      sr:sailImpl [
-#         sail:sailType "bigdata:BigdataSail" ;
+#         sail:sailType "embergraph:BigdataSail" ;
 #         ns:properties "{%Properties%}"
 #      ]
    ].

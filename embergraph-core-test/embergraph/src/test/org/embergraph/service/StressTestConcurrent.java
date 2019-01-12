@@ -318,7 +318,7 @@ public class StressTestConcurrent extends
      *       <p>
      *       In a distributed configuration, the clients can also be distributed
      *       which raises the complexity further. In all, we really need a means
-     *       to setup a cluster as a bigdata federation based on a master
+     *       to setup a cluster as a embergraph federation based on a master
      *       configuration. E.g., something to generate the individual
      *       configuration files from a master description of the federation and
      *       something to deploy those files together with the necessary

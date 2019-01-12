@@ -78,7 +78,7 @@ public class TestAll extends TestCase {
 
 /*
  * @todo We should run this test suite against a CI cluster on a single machine using
- * the full bigdata federation rather than EDS.
+ * the full embergraph federation rather than EDS.
  */
 //        suite.addTest(org.embergraph.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation
 //                        .suite());
@@ -90,7 +90,7 @@ public class TestAll extends TestCase {
 //            /*
 //             * Test scale-out RDF database.
 //             * 
-//             * Note: This test suite sets up a local bigdata federation for each
+//             * Note: This test suite sets up a local embergraph federation for each
 //             * test. See the test suite for more information about required Java
 //             * properties.
 //             */

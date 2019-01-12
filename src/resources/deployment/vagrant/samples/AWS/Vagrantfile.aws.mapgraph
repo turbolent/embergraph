@@ -63,7 +63,7 @@ SCRIPT
 
     chef.run_list = [
 	"recipe[emacs]",
-        "recipe[bigdata::mapgraph]"
+        "recipe[embergraph::mapgraph]"
     ]
 
   end

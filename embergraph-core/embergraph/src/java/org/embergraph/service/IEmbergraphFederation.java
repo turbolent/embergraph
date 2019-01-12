@@ -36,7 +36,7 @@ import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.service.ndx.IClientIndex;
 
 /**
- * The client-facing interface to a bigdata federation. Note that each bigdata
+ * The client-facing interface to a embergraph federation. Note that each embergraph
  * service has an {@link IEmbergraphFederation} which it uses to communicate with
  * the other services in the federation.
  * 
@@ -357,7 +357,7 @@ public interface IEmbergraphFederation<T> extends IIndexManager,
 
     /**
      * Convenience method to return whether the Federation is a Jini Federation.
-     * Created in BLZG-1370 to factor our bigdata-jini dependency.
+     * Created in BLZG-1370 to factor our embergraph-jini dependency.
      * 
      * This should return true IFF the instance is backed by a org.embergraph.service.jini.JiniFederation.
      * 

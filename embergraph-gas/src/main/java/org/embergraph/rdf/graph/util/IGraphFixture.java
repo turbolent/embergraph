@@ -57,7 +57,7 @@ public interface IGraphFixture {
      * 
      *         TODO DYNAMIC GRAPHS: This does not support dynamic graph patterns
      *         because the view is determined by the connection that is
-     *         supplied. For bigdata, dynamic graphs are achieved by providing
+     *         supplied. For embergraph, dynamic graphs are achieved by providing
      *         the means to identify the graph of interest and then advancing
      *         the commit time view of the graph before each GAS evaluation
      *         round.

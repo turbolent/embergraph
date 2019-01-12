@@ -103,7 +103,7 @@ public class TestOptionals extends QuadsTestCase {
     
     
     /**
-     * Tests mapping of left joins in SPARQL onto optionals in bigdata rules.
+     * Tests mapping of left joins in SPARQL onto optionals in embergraph rules.
      * 
      * @throws Exception 
      */

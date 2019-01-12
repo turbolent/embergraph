@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /**
  * 
  * This servlet implements a proxy pattern to allow for separation of the 
- * bigdata-gpu package.
+ * embergraph-gpu package.
  * 
  */
 package org.embergraph.rdf.sail.webapp;

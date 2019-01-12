@@ -80,7 +80,7 @@ import cutthecrap.utils.striterators.Resolver;
 import cutthecrap.utils.striterators.Striterator;
 
 /**
- * A base class for a Blueprints wrapper around a bigdata back-end.
+ * A base class for a Blueprints wrapper around a embergraph back-end.
  * 
  * @author mikepersonick
  *

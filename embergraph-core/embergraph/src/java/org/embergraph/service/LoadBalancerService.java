@@ -135,7 +135,7 @@ import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCoun
  *       plan to make decisions.
  * 
  * @todo Would it make sense to replace the counters XML mechanism with MXBeans
- *       specific to bigdata and additional MXBeans for performance counters for
+ *       specific to embergraph and additional MXBeans for performance counters for
  *       the operating system?
  */
 abstract public class LoadBalancerService extends AbstractService
@@ -1838,7 +1838,7 @@ abstract public class LoadBalancerService extends AbstractService
 
                         /*
                          * @todo use serviceName, but it has embedded slashes
-                         * (in bigdata-jini) just like a path which makes life
+                         * (in embergraph-jini) just like a path which makes life
                          * difficult.
                          */
                         final String idStr = ss.serviceUUID.toString();
@@ -1884,7 +1884,7 @@ abstract public class LoadBalancerService extends AbstractService
 
                         /*
                          * @todo use serviceName, but it has embedded slashes
-                         * (in bigdata-jini) just like a path which makes life
+                         * (in embergraph-jini) just like a path which makes life
                          * difficult.
                          */
                         final String idStr = ss.serviceUUID.toString();

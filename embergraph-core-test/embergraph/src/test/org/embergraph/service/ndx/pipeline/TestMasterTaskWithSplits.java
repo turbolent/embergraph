@@ -339,7 +339,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
          * cause 2 x 10k chunks to be combined and merge sorted before it writes
          * on the index partition.
          * 
-         * @todo update the bigdataCluster.config appropriately.
+         * @todo update the embergraphCluster.config appropriately.
          * 
          * @todo when I made the subtaskChunkSize large enough that the code was
          * actually combining chunks it uncovered a problem with the

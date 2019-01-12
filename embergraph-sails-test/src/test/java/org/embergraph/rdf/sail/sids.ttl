@@ -1,5 +1,5 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix bigdata: <http://www.bigdata.com/rdf#> .
+@prefix embergraph: <http://www.bigdata.com/rdf#> .
 @prefix myns: <http://mynamespace.com#> .
 
 <http://localhost/host1> rdf:type <http://domainnamespace.com/host#Host> .

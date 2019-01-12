@@ -1,4 +1,4 @@
-# Environment for bigdata HA services.
+# Environment for embergraph HA services.
 #
 # binDir   - The directory containing the installed scripts.
 # pidFile  - The pid is written on this file.
@@ -7,11 +7,11 @@
 # pid file that is written by $binDir/startHAServices.  These SHOULD be
 # absolute path names.
 
-BD_USER="<%= node['bigdata'][:user] %>"
-BD_GROUP="<%= node['bigdata'][:group] %>"
+BD_USER="<%= node['embergraph'][:user] %>"
+BD_GROUP="<%= node['embergraph'][:group] %>"
 
-binDir=<%= node['bigdata'][:home] %>/bin
-pidFile=<%= node['bigdata'][:home] %>/var/lock/pid
+binDir=<%= node['embergraph'][:home] %>/bin
+pidFile=<%= node['embergraph'][:home] %>/var/lock/pid
 
 ##
 # ServiceStarter JVM options.
@@ -22,31 +22,31 @@ pidFile=<%= node['bigdata'][:home] %>/var/lock/pid
 # size of the direct memory heap (used for the write cache buffers and
 # some related things).
 ##
-export JVM_OPTS="<%= node['bigdata'][:java_options] %>"
+export JVM_OPTS="<%= node['embergraph'][:java_options] %>"
 
 ##
 # The following variables configure the startHAServices script, which 
 # passes them through to HAJournal.config.
 ##
 
-# Name of the bigdata gederation of services. Override for real install.
-export FEDNAME=<%= node['bigdata'][:fedname] %>
+# Name of the embergraph gederation of services. Override for real install.
+export FEDNAME=<%= node['embergraph'][:fedname] %>
 
 # This is different for each HA replication cluster in the same federation
 # of services.  If you have multiple such replication cluster, then just
 # given each such cluster its own name.
-export LOGICAL_SERVICE_ID=<%= node['bigdata'][:logical_service_id] %>
+export LOGICAL_SERVICE_ID=<%= node['embergraph'][:logical_service_id] %>
 
 # Local directory where the service will store its state.
-export FED_DIR=<%= node['bigdata'][:home] %>
-export DATA_DIR=<%= node['bigdata'][:data_dir] %>
+export FED_DIR=<%= node['embergraph'][:home] %>
+export DATA_DIR=<%= node['embergraph'][:data_dir] %>
 
 # Apache River - NO default for "LOCATORS".
 export GROUPS="${FEDNAME}"
-export LOCATORS="jini://<%= node['bigdata'][:river_locator1] %>/,jini://<%= node['bigdata'][:river_locator2] %>/,jini://<%= node['bigdata'][:river_locator3] %>/"
+export LOCATORS="jini://<%= node['embergraph'][:river_locator1] %>/,jini://<%= node['embergraph'][:river_locator2] %>/,jini://<%= node['embergraph'][:river_locator3] %>/"
 
 # Apache ZooKeeper - NO default.
-export ZK_SERVERS="<%= node['bigdata'][:zk_server1] %>:<%= node['zookeeper'][:zoocfg][:clientPort] %>,<%= node['bigdata'][:zk_server2] %>:<%= node['zookeeper'][:zoocfg][:clientPort] %>,<%= node['bigdata'][:zk_server3] %>:<%= node['zookeeper'][:zoocfg][:clientPort] %>"
+export ZK_SERVERS="<%= node['embergraph'][:zk_server1] %>:<%= node['zookeeper'][:zoocfg][:clientPort] %>,<%= node['embergraph'][:zk_server2] %>:<%= node['zookeeper'][:zoocfg][:clientPort] %>,<%= node['embergraph'][:zk_server3] %>:<%= node['zookeeper'][:zoocfg][:clientPort] %>"
 
 
 # All of these have defaults. Override as necessary.

@@ -26,7 +26,7 @@ import org.embergraph.rdf.store.BDS;
 
 /**
  * <p>
- * A vocabulary for the bigdata external full text search facility. 
+ * A vocabulary for the embergraph external full text search facility.
  * The FTS search may be used to combine text search and graph search, 
  * just like the {@link BDS} - the basic difference is that this search is
  * going against an *external* service, whereas {@link BDS} is querying the

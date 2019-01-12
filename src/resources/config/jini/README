@@ -10,9 +10,9 @@ The various services are:
      norm: Provides implementations of LeaseRenewalService.
 outrigger: Provides implementation of a JavaSpaces(TM) technology-enabled service.
 
-DO NOT attempt to start the Jini browser service from the bigdata
+DO NOT attempt to start the Jini browser service from the embergraph
 script.  The browser service requires a GUI.  An attempt to start
-the browser from the bigdata script will cause the Jini service
+the browser from the embergraph script will cause the Jini service
 start to fail.
 
 You can always install Jini in the normal manner when logged in

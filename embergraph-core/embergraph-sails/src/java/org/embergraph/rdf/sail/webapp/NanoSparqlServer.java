@@ -100,7 +100,7 @@ public class NanoSparqlServer {
 
         /**
          * The default value works when deployed under the IDE with the
-         * <code>bigdata-war/src</code> directory on the classpath. When
+         * <code>embergraph-war/src</code> directory on the classpath. When
          * deploying outside of that context, the value needs to be set
          * explicitly.
          */
@@ -127,12 +127,12 @@ public class NanoSparqlServer {
          * application to be set from an environment variable. For example:
          * 
          * <pre>
-         * &lt;SystemProperty name="jetty.resourceBase" default="bigdata-war/src" /&gt;
+         * &lt;SystemProperty name="jetty.resourceBase" default="embergraph-war/src" /&gt;
          * </pre>
          * 
          * The <code>jetty.resourceBase</code> variable may identify either a
          * file or a resource on the class path. To force the use of the web
-         * application embedded within the <code>bigdata.jar</code> you need to
+         * application embedded within the <code>embergraph.jar</code> you need to
          * specify a JAR URL along the following lines (using the appropriate
          * file path and jar name and version:
          * 
@@ -151,7 +151,7 @@ public class NanoSparqlServer {
          * <code>jetty.resourceBase</code> is not specified (either
          * <code>null</code> or whitespace).
          * <ol>
-         * <li>An attempt is made to locate the <code>bigdata-war/src</code>
+         * <li>An attempt is made to locate the <code>embergraph-war/src</code>
          * resource in the file system (relative to the current working
          * directory). If found, the <code>jetty.resourceBase</code> environment
          * variable is set to this resource using a <code>file:</code> style
@@ -167,9 +167,9 @@ public class NanoSparqlServer {
          * classpath. If there are multiple such resources on the classpath, the
          * first such resource will be discovered and used.</li>
          * <li>An attempt is made to locate the resource
-         * <code>bigdata-war/src/main/webapp/WEB-INF/web.xml</code> using the classpath
+         * <code>embergraph-war/src/main/webapp/WEB-INF/web.xml</code> using the classpath
          * (this handles the case when running from the command line using a
-         * bigdata JAR). If found, the the <code>jetty.resourceBase</code> is
+         * embergraph JAR). If found, the the <code>jetty.resourceBase</code> is
          * set to the URL formed by the trailing <code>WEB-INF/web.xml</code>
          * for the located resource. This will cause jetty to use the web
          * application resource on the classpath. If there are multiple such
@@ -184,7 +184,7 @@ public class NanoSparqlServer {
          * </ol>
          * 
          * @see <a href="http://trac.blazegraph.com/ticket/939" > NSS does not
-         *      start from command line: bigdata-war/src not found </a>
+         *      start from command line: embergraph-war/src not found </a>
          */
         String JETTY_RESOURCE_BASE = "jetty.resourceBase";
 
@@ -231,7 +231,7 @@ public class NanoSparqlServer {
      * <dt>http://localhost:port/namespace/NAMESPACE</dt>
      * <dd>where <code>NAMESPACE</code> is the namespace of some triple store or
      * quad store, may be used to address ANY triple or quads store in the
-     * bigdata instance.</dd>
+     * embergraph instance.</dd>
      * <dt>http://localhost:port/status</dt>
      * <dd>A status page.</dd>
      * </dl>
@@ -253,7 +253,7 @@ public class NanoSparqlServer {
      *            <dt>propertyFile</dt>
      *            <dd>A java properties file for a standalone {@link Journal}.</dd>
      *            <dt>configFile</dt>
-     *            <dd>A jini configuration file for a bigdata federation.</dd>
+     *            <dd>A jini configuration file for a embergraph federation.</dd>
      *            </dl>
      *            and <i>options</i> are any of:
      *            <dl>
@@ -273,7 +273,7 @@ public class NanoSparqlServer {
      *            {@value ConfigParams#DEFAULT_QUERY_THREAD_POOL_SIZE}).</dd>
      *            <dt>-forceOverflow</dt>
      *            <dd>Force a compacting merge of all shards on all data
-     *            services in a bigdata federation (this option should only be
+     *            services in a embergraph federation (this option should only be
      *            used for benchmarking purposes).</dd>
      *            <dt>-readLock</dt>
      *            <dd>The commit time against which the server will assert a
@@ -867,7 +867,7 @@ public class NanoSparqlServer {
      * @throws MalformedURLException
      * 
      * @see <a href="http://trac.blazegraph.com/ticket/939" > NSS does not start
-     *      from command line: bigdata-war/src not found </a>
+     *      from command line: embergraph-war/src not found </a>
      */
     private static void configureEffectiveResourceBase(
             final ClassLoader classLoader) throws MalformedURLException {
@@ -1106,7 +1106,7 @@ public class NanoSparqlServer {
      * @param server
      *            The {@link Server}.
      *            
-     * @return The {@link WebAppContext} associated with the bigdata webapp.
+     * @return The {@link WebAppContext} associated with the embergraph webapp.
      */
     public static WebAppContext getWebApp(final Server server) {
 
@@ -1114,7 +1114,7 @@ public class NanoSparqlServer {
                 .getChildHandlerByClass(WebAppContext.class);
 
         /*
-         * Note: This assumes that this is the webapp for bigdata. If there are
+         * Note: This assumes that this is the webapp for embergraph. If there are
          * multiple webapps then this assumption is no longer valid and things
          * will break.
          */

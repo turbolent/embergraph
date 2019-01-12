@@ -31,10 +31,10 @@ import org.embergraph.ganglia.IGangliaMetadataFactory;
 import org.embergraph.ganglia.IGangliaMetadataMessage;
 
 /**
- * A factory which integrates the bigdata hierarchical counter set model with
+ * A factory which integrates the embergraph hierarchical counter set model with
  * the ganglia metric model.
  * <p>
- * The bigdata counter set model is hierarchical and collects both per-host and
+ * The embergraph counter set model is hierarchical and collects both per-host and
  * per-service metrics. This is illustrated below.
  * 
  * <pre>
@@ -74,17 +74,17 @@ import org.embergraph.ganglia.IGangliaMetadataMessage;
  * both for the host and for the service (when using <code>pidstat</code> to
  * monitor the service).
  * <p>
- * For the per-host metrics, bigdata and ganglia sometimes collect what is
+ * For the per-host metrics, embergraph and ganglia sometimes collect what is
  * essentially the same metric. For example, <code>CPU/% User Time</code> is
  * essentially the same as <code>cpu_user</code>. However, sometimes the units
- * in which the metric is collected differ. For example, bigdata collects
+ * in which the metric is collected differ. For example, embergraph collects
  * <code>Memory/Bytes Free</code> in <code>byte</code>s using a
  * <code>double</code> counter while ganglia collects <code>mem_free</code> in
  * <code>KB</code>s using a <code>float</code> metric. In these cases, we need
  * to scale the metric and also change the name of the metric in order to report
  * it as if it were a core ganglia metric.
  * <p>
- * Another difference is that bigdata tends to put the units into the name of
+ * Another difference is that embergraph tends to put the units into the name of
  * the metric while ganglia has explicit metadata about the units. For metrics
  * such as <code>CPU/% System Time</code> we need to register the appropriate
  * units (note that ganglia also can not handle the <code>%</code> in the name

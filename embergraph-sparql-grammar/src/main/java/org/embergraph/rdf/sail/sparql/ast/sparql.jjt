@@ -600,7 +600,7 @@ void DatasetClause() :
       // Note: This appears to be an openrdf specific extension whose
       // semantics are to query the default graph.  That is what we do
       // anyway if nothing is specified. E.g., "SELECT * FROM DEFAULT"
-      // and "SELECT *" will do the same thing for bigdata.
+      // and "SELECT *" will do the same thing for embergraph.
       | <DEFAULT_GRAPH> 
     )
 }
@@ -1849,7 +1849,7 @@ void IRI() :
 
 /// SPARQL 1.1 Update productions
 
-// bigdata extensions: GRAPHS, SOLUTIONS, and SolutionsRef(). 
+// embergraph extensions: GRAPHS, SOLUTIONS, and SolutionsRef().
 void GraphRefAll() :
 {}
 {
@@ -1876,14 +1876,14 @@ void GraphRef() #void :
     <GRAPH> IRIref() 
 }
 
-// bigdata extension: either a GRAPH uri or a SOLUTIONS name.
+// embergraph extension: either a GRAPH uri or a SOLUTIONS name.
 //void GraphOrSolutionsRef() #void :
 //{}
 //{ 
 //  (GraphRef()|SolutionsRef())
 //}
 
-// bigdata extension: A SOLUTIONS name (aka named solution set ref).
+// embergraph extension: A SOLUTIONS name (aka named solution set ref).
 void SolutionsRef() :
 {Token t;}
 {
@@ -2003,7 +2003,7 @@ void Copy() :
     <COPY> [<SILENT> {jjtThis.setSilent(true);} ] GraphOrDefault() <TO> GraphOrDefault()
 }
 
-// bigdata extension: CREATE SOLUTIONS ...
+// embergraph extension: CREATE SOLUTIONS ...
 void Create() :
 {}
 {

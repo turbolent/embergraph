@@ -46,7 +46,7 @@ import org.embergraph.util.BytesUtil;
  * Test suite for basic socket behaviors.
  * <p>
  * Note: Tests in this suite should use direct byte buffers (non-heap NIO)
- * buffers in order accurately model the conditions that bigdata uses for write
+ * buffers in order accurately model the conditions that embergraph uses for write
  * replication. If you use heap byte[]s, then they are copied into an NIO direct
  * buffer before they are transmitted over a socket. By using NIO direct
  * buffers, we stay within the zero-copy pattern for sockets.

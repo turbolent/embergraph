@@ -38,7 +38,7 @@ import org.embergraph.relation.AbstractResource;
  * (with changes to the lock manager to decouple threads from lock queues, the
  * imposition of a path syntax on the resource names, and perhaps the
  * introduction of 2PL lock modes {S,I,X}). This lock manager could then be
- * exposed, providing applications with the possibility of 2PL, but bigdata does
+ * exposed, providing applications with the possibility of 2PL, but embergraph does
  * not require that in and of itself (it might be of interest for others).
  * <p>
  * The other feature is distributed locks without deadlock detection. This is

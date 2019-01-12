@@ -97,7 +97,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     public void testInlineUUIDs() throws Exception {
     	
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
         final AbstractTripleStore store = getStore(getProperties());
 	  	
@@ -133,7 +133,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
     public void testInlineIPv4s() throws Exception {
         
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
         final AbstractTripleStore store = getStore(getProperties());
 	  	
@@ -181,7 +181,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
                 CustomInlineURIFactory.class.getName());
         
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
         final AbstractTripleStore store = getStore(props);
 	  	
@@ -269,7 +269,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
         props.setProperty(AbstractTripleStore.Options.INLINE_URI_FACTORY_CLASS,
                 CustomInlineURIFactory.class.getName());
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
         final AbstractTripleStore store = getStore(props);
 	  	
@@ -321,7 +321,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
                 MultipurposeInlineIDFactory.class.getName());
         
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
 		final AbstractTripleStore store = getStore(props);
 
@@ -384,7 +384,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
                 InlineArrayFactory.class.getName());
         
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
         final AbstractTripleStore store = getStore(props);
 

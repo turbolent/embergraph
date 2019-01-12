@@ -144,7 +144,7 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.<p>
       <version>2.1</version>
     </dependency>
     <dependency>
-      <!-- log4j is the primary logger for bigdata. -->
+      <!-- log4j is the primary logger for embergraph. -->
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>

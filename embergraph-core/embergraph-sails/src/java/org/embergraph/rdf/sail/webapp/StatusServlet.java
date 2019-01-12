@@ -619,7 +619,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
                 maxBopLength = 0;
         }
 
-        // bigdata namespaces known to the index manager.
+        // embergraph namespaces known to the index manager.
         final boolean showNamespaces = req.getParameter(SHOW_NAMESPACES) != null;
         
         resp.setContentType(MIME_TEXT_HTML);
@@ -1645,7 +1645,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 					 * 
 					 * TODO This does leave open the possibility that a query
 					 * directly submitted against the database from an
-					 * application which embeds bigdata will not be reported
+					 * application which embeds embergraph will not be reported
 					 * here. One way to handle that is to make a collection of
 					 * all queries which were skipped here, to remove all
 					 * queries from that collection which were identified as

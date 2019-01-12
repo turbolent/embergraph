@@ -17,7 +17,7 @@ case "$1" in
         [ -z "$BLZG_LOG" ] && BLZG_LOG=/var/log/embergraph
 
         # Update the journal file location
-        sed -i -e "s|com\\.bigdata\\.journal\\.AbstractJournal\\.file=.*|org.embergraph.journal.AbstractJournal.file=$JOURNAL|" \
+        sed -i -e "s|com\\.embergraph\\.journal\\.AbstractJournal\\.file=.*|org.embergraph.journal.AbstractJournal.file=$JOURNAL|" \
         $BLZG_CONF/RWStore.properties
 
         # Update the rules.log location

@@ -493,7 +493,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //			// opts.requestParams
 //			// .put("uri",
 //			// new String[] {
-//			// "file:bigdata-rdf/src/test/org/embergraph/rdf/rio/small.rdf" });
+//			// "file:embergraph-rdf/src/test/org/embergraph/rdf/rio/small.rdf" });
 //
 //			// final MutationResult result =
 //			// getMutationResult(doSparqlQuery(opts,

@@ -251,7 +251,7 @@ public interface IGASState<VS,ES, ST> {
      * <p>
      * Note: A vertex may be an edge. A link attribute is modeled by treating
      * the link as a vertex and then asserting a property value about that
-     * "link vertex". For bigdata, this is handled efficiently as inline
+     * "link vertex". For embergraph, this is handled efficiently as inline
      * statements about statements. This approach subsumes the property graph
      * model (property graphs do not permit recursive nesting of these
      * relationships) and is 100% consistent with RDF reification, except that

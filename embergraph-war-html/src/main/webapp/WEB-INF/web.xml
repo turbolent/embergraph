@@ -21,7 +21,7 @@
    <!-- Note: This path is relative to the directory in which you start -->
    <!-- the servlet container or within the classpath as a resource.    -->
    <!-- For the IDE, this is generally the root  -->
-   <!-- of the bigdata project. For the WAR, it depends where you start -->
+   <!-- of the embergraph project. For the WAR, it depends where you start -->
    <!-- the servlet container. The "ant war" target rewrites this to be -->
    <!-- relative to the root of the servlet container by default.       -->
    <param-name>propertyFile</param-name>

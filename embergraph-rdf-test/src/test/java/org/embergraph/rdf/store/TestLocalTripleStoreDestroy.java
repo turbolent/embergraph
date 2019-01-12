@@ -279,7 +279,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
 
     /**
      * Return a list of the namespaces for the {@link AbstractTripleStore}s
-     * registered against the bigdata instance.
+     * registered against the embergraph instance.
      */
     static private List<String> getNamespaces(final IIndexManager indexManager,
             final long timestamp) {

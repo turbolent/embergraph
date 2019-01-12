@@ -28,13 +28,13 @@ import org.openrdf.model.impl.URIImpl;
  * Various declarations used by the client API.
  * <p>
  * Note: Some of these fields are replicated from the org.embergraph.rdf.store.BD
- * interface in order to avoid dragging in other aspects of the bigdata code
+ * interface in order to avoid dragging in other aspects of the embergraph code
  * base.
  */
 public class RemoteRepositoryDecls {
 
    /**
-    * The namespace used for bigdata specific extensions.
+    * The namespace used for embergraph specific extensions.
     */
    private static final String BD_NAMESPACE = "http://www.embergraph.org/rdf#";
 

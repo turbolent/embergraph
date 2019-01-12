@@ -18,13 +18,13 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-config.vm.define :bigdataA do |bigdataA|
-  bigdataA.vm.box = "dummy"
-  bigdataA.vm.hostname = ENV['BIGDATA_HA_HOST_A']
+config.vm.define :embergraphA do |embergraphA|
+  embergraphA.vm.box = "dummy"
+  embergraphA.vm.hostname = ENV['BIGDATA_HA_HOST_A']
 
-  bigdataA.berkshelf.enabled = true
+  embergraphA.berkshelf.enabled = true
 
-  bigdataA.vm.provider :aws do |aws, override|
+  embergraphA.vm.provider :aws do |aws, override|
     aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
     aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
@@ -54,9 +54,9 @@ config.vm.define :bigdataA do |bigdataA|
     override.ssh.private_key_path = ENV['AWS_SSH_PRIVATE_KEY']
   end
 
-  bigdataA.vm.provision :chef_solo do |chef|
+  embergraphA.vm.provision :chef_solo do |chef|
     chef.json = {
-	:bigdata => {
+	:embergraph => {
 		:install_flavor => "ha"
 	},
 	:java => {
@@ -69,25 +69,25 @@ config.vm.define :bigdataA do |bigdataA|
 	}
     }
 
-    bigdataA.vm.provision :shell, inline: "sudo apt-get update ; sudo curl -L https://www.opscode.com/chef/install.sh | sudo bash"
+    embergraphA.vm.provision :shell, inline: "sudo apt-get update ; sudo curl -L https://www.opscode.com/chef/install.sh | sudo bash"
 
     chef.run_list = [
-        "recipe[bigdata::ssd]",
-        "recipe[bigdata::high_availability]"
+        "recipe[embergraph::ssd]",
+        "recipe[embergraph::high_availability]"
     ]
 
   end
 
-end # bigdataA
+end # embergraphA
 
 
-config.vm.define :bigdataB do |bigdataB|
-  bigdataB.vm.box = "dummy"
-  bigdataB.vm.hostname = ENV['BIGDATA_HA_HOST_B']
+config.vm.define :embergraphB do |embergraphB|
+  embergraphB.vm.box = "dummy"
+  embergraphB.vm.hostname = ENV['BIGDATA_HA_HOST_B']
 
-  bigdataB.berkshelf.enabled = true
+  embergraphB.berkshelf.enabled = true
 
-  bigdataB.vm.provider :aws do |aws, override|
+  embergraphB.vm.provider :aws do |aws, override|
     aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
     aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
@@ -117,9 +117,9 @@ config.vm.define :bigdataB do |bigdataB|
     override.ssh.private_key_path = ENV['AWS_SSH_PRIVATE_KEY']
   end
 
-  bigdataB.vm.provision :chef_solo do |chef|
+  embergraphB.vm.provision :chef_solo do |chef|
     chef.json = {
-	:bigdata => {
+	:embergraph => {
 		:install_flavor => "ha"
 	},
 	:java => {
@@ -132,25 +132,25 @@ config.vm.define :bigdataB do |bigdataB|
 	}
     }
 
-    bigdataB.vm.provision :shell, inline: "sudo apt-get update ; sudo curl -L https://www.opscode.com/chef/install.sh | sudo bash"
+    embergraphB.vm.provision :shell, inline: "sudo apt-get update ; sudo curl -L https://www.opscode.com/chef/install.sh | sudo bash"
 
     chef.run_list = [
-        "recipe[bigdata::ssd]",
-        "recipe[bigdata::high_availability]"
+        "recipe[embergraph::ssd]",
+        "recipe[embergraph::high_availability]"
     ]
 
   end
 
-end # bigdataB
+end # embergraphB
 
 
-config.vm.define :bigdataC do |bigdataC|
-  bigdataC.vm.box = "dummy"
-  bigdataC.vm.hostname = ENV['BIGDATA_HA_HOST_C']
+config.vm.define :embergraphC do |embergraphC|
+  embergraphC.vm.box = "dummy"
+  embergraphC.vm.hostname = ENV['BIGDATA_HA_HOST_C']
 
-  bigdataC.berkshelf.enabled = true
+  embergraphC.berkshelf.enabled = true
 
-  bigdataC.vm.provider :aws do |aws, override|
+  embergraphC.vm.provider :aws do |aws, override|
     aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
     aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
@@ -180,9 +180,9 @@ config.vm.define :bigdataC do |bigdataC|
     override.ssh.private_key_path = ENV['AWS_SSH_PRIVATE_KEY']
   end
 
-  bigdataC.vm.provision :chef_solo do |chef|
+  embergraphC.vm.provision :chef_solo do |chef|
     chef.json = {
-	:bigdata => {
+	:embergraph => {
 		:install_flavor => "ha"
 	},
 	:java => {
@@ -195,15 +195,15 @@ config.vm.define :bigdataC do |bigdataC|
 	}
     }
 
-    bigdataC.vm.provision :shell, inline: "sudo apt-get update ; sudo curl -L https://www.opscode.com/chef/install.sh | sudo bash"
+    embergraphC.vm.provision :shell, inline: "sudo apt-get update ; sudo curl -L https://www.opscode.com/chef/install.sh | sudo bash"
 
     chef.run_list = [
-        "recipe[bigdata::ssd]",
-        "recipe[bigdata::high_availability]"
+        "recipe[embergraph::ssd]",
+        "recipe[embergraph::high_availability]"
     ]
 
   end
 
-end # bigdataC
+end # embergraphC
 
 end

@@ -65,7 +65,7 @@ import org.embergraph.util.httpd.NanoHTTPD;
  * Utility to extract a batch of performance counters from a collection of
  * logged XML counter set files. This utility accepts file(s) giving the URLs
  * which would be used to demand the corresponding performance counters against
- * the live bigdata federation. The URLs listed in that file are parsed. The
+ * the live embergraph federation. The URLs listed in that file are parsed. The
  * host and port information are ignored, but the URL query parameters are
  * extracted and used to configured a set of {@link URLQueryModel}s.
  * <p>

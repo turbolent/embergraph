@@ -302,7 +302,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     }
 
     /**
-     * Note: DROP and CLEAR have the identical semantics for bigdata since it
+     * Note: DROP and CLEAR have the identical semantics for embergraph since it
      * does not support empty graphs.
      */
     @Override
@@ -364,7 +364,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     }
 
     /**
-     * Note: DROP and CLEAR have the identical semantics for bigdata since it
+     * Note: DROP and CLEAR have the identical semantics for embergraph since it
      * does not support empty graphs.
      */
     @Override
@@ -804,7 +804,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
      * Collect 'QuadData' for an INSERT DATA or DELETE DATA operation. This form
      * does not allow variables in the quads data.
      * <p>
-     * Note: The QuadData is basically modeled by the bigdata AST as recursive
+     * Note: The QuadData is basically modeled by the embergraph AST as recursive
      * {@link StatementPatternNode} containers. This visits the parser AST nodes
      * and then flattens them into an {@link ISPO}[]. The {@link ISPO}s are
      * {@link EmbergraphStatement}s at this point, but they can be converted to

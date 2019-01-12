@@ -685,7 +685,7 @@ public class TestTriplePatternBuilder extends
      * anonymous variable.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_bnode_bracket_syntax_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -751,7 +751,7 @@ public class TestTriplePatternBuilder extends
      * </pre>
      * 
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_bnode_bracket_syntax_02() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -822,7 +822,7 @@ public class TestTriplePatternBuilder extends
      * assuming that the blank node is given the identity <code>_:b57</code>.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_bnode_bracket_syntax_03() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -902,7 +902,7 @@ public class TestTriplePatternBuilder extends
      * assuming that the blank node is given the identity <code>_:b57</code>.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_bnode_bracket_syntax_04() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -986,7 +986,7 @@ public class TestTriplePatternBuilder extends
      * assuming that the blank node is given the identity <code>_:b18</code>.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_bnode_bracket_syntax_05() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -1086,7 +1086,7 @@ public class TestTriplePatternBuilder extends
      * where _:b0, etc. are blank nodes not appearing elsewhere in the query.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_rdf_collections_01() throws MalformedQueryException,
             TokenMgrError, ParseException {
@@ -1201,7 +1201,7 @@ public class TestTriplePatternBuilder extends
      * where _:b0, etc. are blank nodes not appearing elsewhere in the query.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_rdf_collections_02() throws MalformedQueryException,
             TokenMgrError, ParseException {

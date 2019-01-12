@@ -29,7 +29,7 @@ import info.aduna.iteration.CloseableIteration;
 import cutthecrap.utils.striterators.ICloseableIterator;
 
 /**
- * Class aligns a bigdata {@link ICloseableIterator} with a Sesame 2
+ * Class aligns a embergraph {@link ICloseableIterator} with a Sesame 2
  * {@link CloseableIteration}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

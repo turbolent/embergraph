@@ -212,7 +212,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
 //     * where
 //     * { ?evidence rdf:type &lt;the type&gt; .
 //     *   ?evidence ?anypredicate ?label .
-//     *   ?label bigdata:search &quot;the query&quot; .
+//     *   ?label embergraph:search &quot;the query&quot; .
 //     * }
 //     * </pre>
 //     */

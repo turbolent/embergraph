@@ -40,7 +40,7 @@ import com.tinkerpop.blueprints.Features;
  * implementation by any means (currently does not support caching or batched
  * update). Does have a single "bulk upload" operation that wraps a method on
  * RemoteRepository that will POST a graphml file to the blueprints layer of the
- * bigdata server.
+ * embergraph server.
  * 
  * @see {@link EmbergraphSailRemoteRepository}
  * @see {@link EmbergraphSailRemoteRepositoryConnection}

@@ -140,9 +140,9 @@
                   </Call>
                   <Call name="addHandler">
                     <Arg>
-                        <!-- This is the bigdata web application. -->
+                        <!-- This is the embergraph web application. -->
                         <New id="WebAppContext" class="org.eclipse.jetty.webapp.WebAppContext">
-                         <!-- FIXME:  This should we pulled from a bigdata-war MAVEN artifact -->
+                         <!-- FIXME:  This should we pulled from a embergraph-war MAVEN artifact -->
                          <Set name="war"><SystemProperty name="jetty.resourceBase" default="target/embergraph.war"/></Set>
                          <Set name="contextPath">/embergraph</Set>
                          <Set name="descriptor">WEB-INF/web.xml</Set>

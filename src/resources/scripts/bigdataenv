@@ -11,7 +11,7 @@
 #
 
 #
-# The name of the configured bigdata federation instance.
+# The name of the configured embergraph federation instance.
 #
 export FED=@FED@
 
@@ -23,8 +23,8 @@ export NAS=@NAS@
 
 #
 # A directory on a local volume that will be used to store persistent state
-# of bigdata services on each host, including index files, transaction logs,
-# etc.  This directory will be created if it does not exist.  If a bigdata
+# of embergraph services on each host, including index files, transaction logs,
+# etc.  This directory will be created if it does not exist.  If a embergraph
 # instance is destroyed, then this directory will be destroyed as well.
 #
 export LAS=@LAS@
@@ -97,12 +97,12 @@ export JAVA_OPTS="-server -ea \
 "
 
 #
-# Other things required by the 'bigdata' script.
+# Other things required by the 'embergraph' script.
 #
-# $lockCmd - The command used to obtain the bigdata subsystem lock.
-# $lockFile - The bigdata subsystem lock file.
-# $pidFile  - The bigdata services manager pid is written on this file.
-# $stateFile  - The runstate for the bigdata services managers is read from this file.
+# $lockCmd - The command used to obtain the embergraph subsystem lock.
+# $lockFile - The embergraph subsystem lock file.
+# $pidFile  - The embergraph services manager pid is written on this file.
+# $stateFile  - The runstate for the embergraph services managers is read from this file.
 # 
 export lockCmd="@LOCK_CMD@"
 export lockFile=@LOCK_FILE@
@@ -120,7 +120,7 @@ export configDir=@CONFIG_DIR@
 # Log and Logger configuration.
 ##
 
-# The log4j configuration for the bigdata clients and services.  You MUST
+# The log4j configuration for the embergraph clients and services.  You MUST
 # edit this configuration and specify WHERE it should write its log files.
 # 
 # This configuration also shows how to setup a simple socket logger. This
@@ -149,5 +149,5 @@ export errorLog=@ERROR_LOG@
 export detailLog=@DETAIL_LOG@
 export stateLog=@STATE_LOG@
 
-# Option to use "killall -9 java" for 'bigdata destroy'.
+# Option to use "killall -9 java" for 'embergraph destroy'.
 export FORCE_KILL_ALL=@FORCE_KILL_ALL@

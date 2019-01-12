@@ -56,7 +56,7 @@ abstract public class AbstractService implements IService {
 
         /*
          * Note: This is more or less the same pattern use by AbstractServer (in
-         * the bigdata-jini module) to assign a default service name, but the
+         * the embergraph-jini module) to assign a default service name, but the
          * latter will report the server's class name. That class also makes
          * sure to reports the name which it assigns to the service.
          */

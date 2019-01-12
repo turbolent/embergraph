@@ -28,7 +28,7 @@ import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
 
 
 /**
- *  TODO.  This is a placeholder to remove the bigdata dependency from
+ *  TODO.  This is a placeholder to remove the embergraph dependency from
  *  the embergraph-gas project.  See BLZG-1272.  Needs unit tests:  BLZG-1369.
  * 
  * @author beebs

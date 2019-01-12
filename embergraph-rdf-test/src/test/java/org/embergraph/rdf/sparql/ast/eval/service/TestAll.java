@@ -60,7 +60,7 @@ public class TestAll extends TestCase {
          */
         
         /*
-         * Internal service support (bigdata aware services in the same JVM).
+         * Internal service support (embergraph aware services in the same JVM).
          */
 
         suite.addTestSuite(TestEmbergraphNativeServiceEvaluation.class);

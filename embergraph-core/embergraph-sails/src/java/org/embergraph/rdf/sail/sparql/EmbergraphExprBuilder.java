@@ -510,7 +510,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      */
     private void handleNamedSubqueryClause(final ASTQuery astQuery,
             final QueryBase queryRoot) throws VisitorException {
@@ -712,7 +712,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      */
     @SuppressWarnings("unchecked")
     private void handleWhereClause(final ASTQuery astQuery,
@@ -744,7 +744,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      */
     private void handleGroupBy(final ASTQuery astQuery, final QueryBase queryRoot)
             throws VisitorException {
@@ -768,7 +768,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      */
     private void handleHaving(final ASTQuery astQuery, final QueryBase queryRoot)
             throws VisitorException {
@@ -803,7 +803,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      */
     private void handleOrderBy(final ASTQuery astQuery,
             final QueryBase queryRoot) throws VisitorException {
@@ -834,7 +834,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      */
     private void handleSlice(final ASTQuery astQuery,
             final QueryBase queryRoot) {
@@ -866,7 +866,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
      *            The AST query node. This is an abstract base class. There are
      *            concrete instances for SELECT, ASK, DESCRIBE, and CONSTRUCT.
      * @param queryRoot
-     *            The bigdata query root.
+     *            The embergraph query root.
      * 
      * @throws VisitorException
      */

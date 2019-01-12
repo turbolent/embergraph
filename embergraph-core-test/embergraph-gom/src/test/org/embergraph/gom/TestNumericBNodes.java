@@ -50,7 +50,7 @@ public class TestNumericBNodes extends RemoteGOMTestCase {
 //	 * 
 //	 * Thanks, Bryan
 //	 * 
-//	 * [1] https://sourceforge.net/apps/trac/bigdata/ticket/572 (bigdata
+//	 * [1] https://sourceforge.net/apps/trac/bigdata/ticket/572 (embergraph
 //	 * generates bnode Ids that it can not read). 
 //	 * [2] http://sw.deri.org/2009/01/visinav/faq.html (ViziNav) 
 //	 * [3] http://sw.deri.org/2009/01/visinav/current.nq.gz (TBL plus 6-degrees of

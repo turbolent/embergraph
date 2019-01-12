@@ -912,7 +912,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager> exte
             /*final String servlet,*/ final RDFFormat format) throws Exception {
         
         final byte[] data = genNTRIPLES(ntriples, format);
-//        final File file = File.createTempFile("bigdata-testnssclient", ".data");
+//        final File file = File.createTempFile("embergraph-testnssclient", ".data");
         /*
          * Only for testing. Clients should use AddOp(File, RDFFormat).
          */

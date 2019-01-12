@@ -57,7 +57,7 @@ import org.embergraph.rdf.store.BDS;
 import org.embergraph.service.AbstractTransactionService;
 
 /**
- * Demonstrate how to use bigdata.  You are free to use this code for whatever
+ * Demonstrate how to use embergraph.  You are free to use this code for whatever
  * purpose without restriction.
  * 
  * @author mikep
@@ -67,7 +67,7 @@ public class SampleCode {
     /**
      * Do you have log4j set up correctly?  Bigdata turns its logging level way
      * down by default (WARN).  You should not be seeing INFO or DEBUG log 
-     * statements from bigdata - if you are, then this will severely impact
+     * statements from embergraph - if you are, then this will severely impact
      * performance.
      */
     protected static final Logger log = Logger.getLogger(SampleCode.class);

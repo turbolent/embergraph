@@ -71,7 +71,7 @@ if [ -f "$lockFile" ]; then
     echo "extracted performance counter archive is ready: $tarball"
     ls -lh $tarball
 else
-    echo "bigdata subsystem lock file not found: $lockFile"
+    echo "embergraph subsystem lock file not found: $lockFile"
     exit 1
 fi
 

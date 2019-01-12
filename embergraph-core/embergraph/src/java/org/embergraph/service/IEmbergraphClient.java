@@ -92,7 +92,7 @@ import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 public interface IEmbergraphClient<T> {
 
     /**
-     * Connect to a bigdata federation. If the client is already connected, then
+     * Connect to a embergraph federation. If the client is already connected, then
      * the existing connection is returned.
      * 
      * @return The object used to access the federation services.
@@ -111,7 +111,7 @@ public interface IEmbergraphClient<T> {
     IEmbergraphFederation<T> getFederation();
 
     /**
-     * Disconnect from the bigdata federation.
+     * Disconnect from the embergraph federation.
      * <p>
      * Normal shutdown allows any existing client requests to federation
      * services to complete but does not schedule new requests, and then

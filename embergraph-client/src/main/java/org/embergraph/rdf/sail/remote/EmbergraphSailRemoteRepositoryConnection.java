@@ -73,8 +73,8 @@ import org.embergraph.rdf.sail.webapp.client.RemoteTransactionNotFoundException;
 
 /**
  * An implementation of Sesame's RepositoryConnection interface that wraps a
- * bigdata {@link RemoteRepository}. This provides SAIL API based client access
- * to a bigdata remote NanoSparqlServer.
+ * embergraph {@link RemoteRepository}. This provides SAIL API based client access
+ * to a embergraph remote NanoSparqlServer.
  * 
  * <h2>Transactions</h2>
  * 

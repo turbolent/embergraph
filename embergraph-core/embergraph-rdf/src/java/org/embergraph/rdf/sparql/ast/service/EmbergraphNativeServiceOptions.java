@@ -25,7 +25,7 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.internal.IV;
 
 /**
- * Service options base class for bigdata aware services. Such services are
+ * Service options base class for embergraph aware services. Such services are
  * expected to interchange {@link IBindingSet}s containing {@link IV}s. The
  * {@link IV}s are NOT guaranteed to be materialized.
  * 

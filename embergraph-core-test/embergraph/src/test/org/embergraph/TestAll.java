@@ -82,7 +82,7 @@ public class TestAll extends TestCase {
         
         final TestSuite suite = new TestSuite("embergraph");
 
-        // core bigdata packages.
+        // core embergraph packages.
         suite.addTest( org.embergraph.cache.TestAll.suite() );
         suite.addTest( org.embergraph.io.TestAll.suite() );
         suite.addTest( org.embergraph.net.TestAll.suite() );

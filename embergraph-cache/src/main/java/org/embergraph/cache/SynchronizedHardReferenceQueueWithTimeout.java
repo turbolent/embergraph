@@ -424,10 +424,10 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements
 
     /**
      * This method may be invoked by life cycle operations which need to tear
-     * down the bigdata environment. Normally you do not need to do this as the
+     * down the embergraph environment. Normally you do not need to do this as the
      * cleaner service uses a daemon thread and will not prevent the JVM from
-     * halting. However, a servlet container running bigdata can complain that
-     * some threads were not terminated if the webapp running bigdata is
+     * halting. However, a servlet container running embergraph can complain that
+     * some threads were not terminated if the webapp running embergraph is
      * stopped. You can invoke this method to terminate the stale reference
      * cleaner thread.
      */

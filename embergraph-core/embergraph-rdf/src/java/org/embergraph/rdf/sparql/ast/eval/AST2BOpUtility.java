@@ -1034,7 +1034,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
          * Note: If the serviceRef is a Variable then we MUST add the
          * materialization step since we can not know in advance whether any
          * given binding for the serviceRef will be a REMOTE SERVICE or an
-         * internal bigdata aware service.
+         * internal embergraph aware service.
          */
         final IVariableOrConstant<?> serviceRef = serviceNode.getServiceRef()
                 .getValueExpression();
@@ -1054,7 +1054,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
                             serviceURI, serviceNode, null /* BOpStats not yet available */);
 
             /*
-             * true IFF this is a registered bigdata aware service running in
+             * true IFF this is a registered embergraph aware service running in
              * the same JVM.
              */
             final boolean isBigdata = serviceCall.getServiceOptions()
@@ -1086,7 +1086,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
              * have to assume that we need to do value materialization before
              * the service call.
              * 
-             * Note: If the service call winds up being a native bigdata
+             * Note: If the service call winds up being a native embergraph
              * service, then this will do more work. But, since the service
              * reference does not evaluate to a URI constant we are not able to
              * figure that out in advance.
@@ -1106,7 +1106,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
          * Note: The materialization requirement is only on entry to the
          * SERVICE. Solutions which flow out of the SERVICE will already be
          * materialized (though they might use mock IVs) unless the service is
-         * bigdata aware (in which case it is responsible for getting the IVs
+         * embergraph aware (in which case it is responsible for getting the IVs
          * right).
          */
         

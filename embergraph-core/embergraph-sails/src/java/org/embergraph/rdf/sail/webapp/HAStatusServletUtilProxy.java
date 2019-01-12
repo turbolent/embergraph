@@ -31,7 +31,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.quorum.AsynchronousQuorumCloseException;
 
 /**
- * Proxy class / factory pattern to break bigdata-jini dependency.  See BLZG-1370.
+ * Proxy class / factory pattern to break embergraph-jini dependency.  See BLZG-1370.
  * 
  * @author beebs
  *
@@ -144,7 +144,7 @@ public class HAStatusServletUtilProxy {
 				if (log.isDebugEnabled()) {
 					log.debug(e.toString());
 				}
-				//If we're running without the bigdata-jini package, just return a proxy.
+				//If we're running without the embergraph-jini package, just return a proxy.
 				return new HAStatusServletUtilProxy(indexManager);
 				
 			}

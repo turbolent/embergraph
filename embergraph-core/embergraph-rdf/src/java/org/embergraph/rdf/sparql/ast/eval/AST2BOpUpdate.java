@@ -1072,7 +1072,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
 
 	/**
-	 * Efficiently resolve openrdf {@link BindingSet} into a chunked bigdata
+	 * Efficiently resolve openrdf {@link BindingSet} into a chunked embergraph
 	 * {@link IBindingSet}[] iterator. The closeable semantics of the iteration
 	 * pattern are preserved.
 	 * 
@@ -1084,10 +1084,10 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 	 *            size.
 	 * @param result
 	 *            The openrdf solutions.
-	 * @return An iterator visiting chunked bigdata solutions.
+	 * @return An iterator visiting chunked embergraph solutions.
 	 * 
 	 *         TODO We should not have to do this. We should stay within native
-	 *         bigdata IBindingSet[]s and the native bigdata iterators
+	 *         embergraph IBindingSet[]s and the native embergraph iterators
 	 */
 	private static ICloseableIterator<IBindingSet[]> asEmbergraphIterator(
 			final LexiconRelation r,
@@ -1206,7 +1206,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * Note: The SILENT keyword for ADD, COPY, and MOVE indicates that the
      * implementation SHOULD/MAY report an error if the source graph does not
      * exist (the spec is not consistent here across those operations). Further,
-     * there is no explicit create/drop of graphs in bigdata so it WOULD be Ok
+     * there is no explicit create/drop of graphs in embergraph so it WOULD be Ok
      * if we just ignored the SILENT keyword.
      */
     private static void copyStatements(final AST2BOpUpdateContext context,

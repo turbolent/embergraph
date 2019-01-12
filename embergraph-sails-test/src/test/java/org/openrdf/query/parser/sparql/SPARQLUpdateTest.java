@@ -516,11 +516,11 @@ public abstract class SPARQLUpdateTest extends TestCase {
 	 * This test fails for two reasons.
 	 * 
 	 * (1) It appears that openrdf does not imply a commit() when execute() is
-	 * invoked on a prepared SPARQL UPDATE. However, bigdata does a commit() as
+	 * invoked on a prepared SPARQL UPDATE. However, embergraph does a commit() as
 	 * the last action for the SPARQL UPDATE.
 	 * 
 	 * (2) It relies on different transaction semantics. The snapshot isolation
-	 * semantics of bigdata read-only connections mean that con2 will never see
+	 * semantics of embergraph read-only connections mean that con2 will never see
 	 * the mutation from con.
 	 * 
 	 * Since we can not "fix" (2) (it is not an error - we have better

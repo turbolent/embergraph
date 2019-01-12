@@ -10,7 +10,7 @@ Bigdata Highly Available Replication Cluster
    is running to synchronize the clocks.
 
 1. Edit the various configuration files.  At a minimum, you must edit
-   bigdataHA.conf.
+   embergraphHA.conf.
 
 2. Make sure that ZooKeeper is up and running with a consistent
    configuration and that it is logging somewhere where you can find
@@ -28,16 +28,16 @@ Bigdata Highly Available Replication Cluster
    configuration without stopping your standalone ZooKeeper instance.
    Your life will be significantly easier if you begin with a highly
    available ZooKeeper instance.  Bigdata does not put a heavy load on
-   ZooKeeper, but running bigdata and ZooKeeper on the same instances
+   ZooKeeper, but running embergraph and ZooKeeper on the same instances
    will make it more complex to administer your environment since
    stopping a single node will reduce availability for both ZooKeeper
-   and bigdata.  A recommended practice is to allocate three ZooKeeper
-   VMs with fixed IP addresses when you begin to setup your bigdata
+   and embergraph.  A recommended practice is to allocate three ZooKeeper
+   VMs with fixed IP addresses when you begin to setup your embergraph
    cluster.
 
 3. Once Apache ZooKeeper is setup, do:
 
-      sudo /etc/init.d bigdataHA start
+      sudo /etc/init.d embergraphHA start
 
    This will start the ClassServer, the service registrar (Reggie),
    and the HAJournalServer.  All of these processes will run inside of
@@ -48,7 +48,7 @@ Bigdata Highly Available Replication Cluster
 
 /etc/init.d/bigdataHA
 
-   An init.d script to start/stop of bigdata HA.
+   An init.d script to start/stop of embergraph HA.
 
 /etc/bigdata/bigdataHA.conf - configuration for the HA installation.
 
@@ -75,7 +75,7 @@ doc/
 
 lib/
 
-  The bigdata jar and other dependencies.
+  The embergraph jar and other dependencies.
 
 lib-dl/
 
@@ -96,11 +96,11 @@ var/config/startHAServices.config
     - Reggie : This is the Apache River service registrar.  Bigdata
       services discover service registrars using locators and then
       register themselves. The service registrar is also used by the
-      bigdata services to discover one another. The set of locators is
+      embergraph services to discover one another. The set of locators is
       defined using the LOCATORS environment variable in
       /etc/bigdata/bigdataHA.config; and
 
-    - HAJournalServer : This is the highly available bigdata graph
+    - HAJournalServer : This is the highly available embergraph graph
       database engine and RDF/SPARQL end point.  The service process
       maintains all of its state in the "serviceDir". The location of
       that directory is determined by the FED_DIR environment variable
@@ -134,7 +134,7 @@ var/logging/log4jHA.properties
 var/logging/logging.properties
 
    A default Java logging configuration.  This may be used to control
-   the log levels for jini/river components inside of the bigdata
+   the log levels for jini/river components inside of the embergraph
    services. Those components use java logging rather than log4j.
 
 var/policy/policy.all

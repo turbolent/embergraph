@@ -43,7 +43,7 @@ import org.embergraph.util.DaemonThreadFactory;
  * NanoHTTPD version 1.1, Copyright &copy; 2001,2005-2007 Jarno Elonen
  * (elonen@iki.fi, http://iki.fi/elonen/)
  * <p>
- * Various modifications since supporting integration within bigdata services
+ * Various modifications since supporting integration within embergraph services
  * &copy; 2008, SYSTAP, LLC.
  * <p>
  * <p>

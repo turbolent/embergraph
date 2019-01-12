@@ -33,7 +33,7 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.embergraph.util.httpd.Config;
 
 /**
- * Helper class to create a bigdata instance.
+ * Helper class to create a embergraph instance.
  * 
  * @author mikepersonick
  * 
@@ -43,7 +43,7 @@ import org.embergraph.util.httpd.Config;
 public class EmbergraphSailFactory {
 	
 	/**
-	 * The default bigdata SAIL_PROVIDER.
+	 * The default embergraph SAIL_PROVIDER.
 	 */
 	public static final String EMBERGRAPH_SAIL_INSTANCE = "org.embergraph.rdf.sail.BigdataSail";
 	
@@ -56,7 +56,7 @@ public class EmbergraphSailFactory {
 
     /**
      * A handy list of common Options you might want to specify when creating
-     * your bigdata instance.
+     * your embergraph instance.
      * 
      * @author mikepersonick
      *
@@ -97,7 +97,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-    * Connect to a remote bigdata instance.
+    * Connect to a remote embergraph instance.
     * 
     * FIXME This does not parameterize the value of the ContextPath. See
     * {@link EmbergraphStatics#getContextPath()}.
@@ -109,7 +109,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-	 * Connect to a remote bigdata instance.
+	 * Connect to a remote embergraph instance.
 	 * 
      * @param sparqlEndpointURL
      *            The URL of the SPARQL end point.
@@ -192,7 +192,7 @@ public class EmbergraphSailFactory {
     }
 
     /**
-     * Open an existing persistent bigdata instance. If a journal does
+     * Open an existing persistent embergraph instance. If a journal does
      * not exist at the specified location then an exception will be thrown.
      */
     public static SailRepository openRepository(final String file) {
@@ -202,7 +202,7 @@ public class EmbergraphSailFactory {
     }
         
     /**
-     * Open an existing persistent bigdata instance. If a journal does
+     * Open an existing persistent embergraph instance. If a journal does
      * not exist at the specified location and the boolean create flag is true
      * a journal will be created at that location with the default set of
      * options.
@@ -215,7 +215,7 @@ public class EmbergraphSailFactory {
     }
         
     /**
-     * Open an existing persistent bigdata instance. If a journal does
+     * Open an existing persistent embergraph instance. If a journal does
      * not exist at the specified location then an exception will be thrown.
      */
     public static Sail openSail(final String file) {
@@ -225,7 +225,7 @@ public class EmbergraphSailFactory {
     }
         
     /**
-     * Open an existing persistent bigdata instance. If a journal does
+     * Open an existing persistent embergraph instance. If a journal does
      * not exist at the specified location and the boolean create flag is true
      * a journal will be created at that location with the default set of
      * options.
@@ -254,7 +254,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options.  Since no
+     * Create a new embergraph instance using the specified options.  Since no
      * journal file is specified this must be an in-memory instance.
      */
     public static SailRepository createRepository(final Option... args) {
@@ -264,7 +264,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options.  Since no
+     * Create a new embergraph instance using the specified options.  Since no
      * journal file is specified this must be an in-memory instance.
      */
     public static SailRepository createRepository(final Properties props,
@@ -275,7 +275,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options.
+     * Create a new embergraph instance using the specified options.
      */
     public static SailRepository createRepository(final String file,
             final Option... args) {
@@ -285,7 +285,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options.  Since no
+     * Create a new embergraph instance using the specified options.  Since no
      * journal file is specified this must be an in-memory instance.
      */
     public static SailRepository createRepository(final Properties props,
@@ -296,7 +296,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options.  Since no
+     * Create a new embergraph instance using the specified options.  Since no
      * journal file is specified this must be an in-memory instance.
      */
     public static Sail createSail(final Option... args) {
@@ -306,7 +306,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options and filename.  
+     * Create a new embergraph instance using the specified options and filename.
      */
     public static Sail createSail(final String file, 
             final Option... args) {
@@ -318,7 +318,7 @@ public class EmbergraphSailFactory {
     }
     
     /**
-     * Create a new bigdata instance using the specified options.
+     * Create a new embergraph instance using the specified options.
      */
     public static Sail createSail(final Properties props,
             final String file, final Option... args) {

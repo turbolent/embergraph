@@ -66,7 +66,7 @@ public class TestAll extends TestCase {
              * Note: This is the DAWG test suite. It verifies the compliance of
              * the SPARQL parser in terms of correct acceptance and correct
              * rejection, but it does not check the translation targets for the
-             * parser and it is not aware of bigdata specific SPARQL extensions.
+             * parser and it is not aware of embergraph specific SPARQL extensions.
              */
 
             // non-manifest driven suite for debugging.

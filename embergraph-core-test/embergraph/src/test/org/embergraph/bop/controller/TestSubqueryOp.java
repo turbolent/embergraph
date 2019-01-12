@@ -66,7 +66,7 @@ import org.embergraph.striterator.ChunkedArrayIterator;
  * against a local database instance.
  * 
  * <pre>
- * -Dlog4j.configuration=bigdata/src/resources/logging/log4j.properties
+ * -Dlog4j.configuration=embergraph/src/resources/logging/log4j.properties
  * </pre>
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

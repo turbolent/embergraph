@@ -28,7 +28,7 @@ Sample Session
 % cp Vagrantfile.tomcat Vagrantfile
 % vagrant up
 
-# The bigdata server is now found at: http://33.33.33.10:9999/bigdata
+# The embergraph server is now found at: http://33.33.33.10:9999/bigdata
 
 
 # to login to the host:

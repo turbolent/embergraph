@@ -75,7 +75,7 @@ public class TestAll extends TestCase {
         
         final TestSuite suite = new TestSuite("Sesame 2.x integration");
 
-        // test suite for the SPARQL parse tree => bigdata AST translation.
+        // test suite for the SPARQL parse tree => embergraph AST translation.
         suite.addTest(org.embergraph.rdf.sail.sparql.TestAll.suite());
         
         // bootstrap tests for the EmbergraphSail

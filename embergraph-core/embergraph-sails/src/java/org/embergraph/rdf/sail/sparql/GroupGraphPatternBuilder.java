@@ -315,7 +315,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     }
 
     /**
-     * MINUS is modeled very much like OPTIONAL in the bigdata AST. It is a
+     * MINUS is modeled very much like OPTIONAL in the embergraph AST. It is a
      * {@link JoinGroupNode} which is annotated to indicate the negation
      * semantics.
      * <p>
@@ -443,7 +443,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
      * That is, UNION in a binary operator in the parse tree. If the right hand
      * argument is also a UNION, then you are looking at a sequence of UNIONs at
      * the same level. Such sequences should be turned into a single
-     * {@link UnionNode} in the bigdata AST.
+     * {@link UnionNode} in the embergraph AST.
      * 
      * In contrast, this is a UNION of two groups with another UNION embedded in
      * the 2nd group.

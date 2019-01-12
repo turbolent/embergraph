@@ -182,8 +182,8 @@ public class Depends {
             "http://hc.apache.org/");
 
     /**
-     * Note: This bigdata module is under a different license (Apache 2.0) than
-     * the other bigdata modules.
+     * Note: This embergraph module is under a different license (Apache 2.0) than
+     * the other embergraph modules.
      */
     private final static Dep embergraphGanglia = new ApacheDep("embergraph-ganglia",
             "https://sourceforge.net/projects/embergraph/");

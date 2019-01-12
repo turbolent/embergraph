@@ -68,7 +68,7 @@ public interface IExtension<V extends EmbergraphValue> {
      * @param iv
      *          The extension {@link IV}
      * @param vf
-     *          The bigdata value factory
+     *          The embergraph value factory
      * @return
      *          The RDF {@link Value}
      */

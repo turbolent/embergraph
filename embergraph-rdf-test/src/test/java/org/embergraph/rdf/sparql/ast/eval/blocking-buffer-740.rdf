@@ -15,7 +15,7 @@
 	xmlns:sd="http://www.w3.org/ns/sparql-service-description#"
 	xmlns:c2="http://example.com/a6"
 	xmlns:c2d="http://example.com/a7"
-	xmlns:bigdata="http://www.bigdata.com/rdf#">
+	xmlns:embergraph="http://www.bigdata.com/rdf#">
 
 <rdf:Description rdf:about="http://example.com/a8">
 	<rdfs:subClassOf rdf:resource="http://example.com/a9"/>

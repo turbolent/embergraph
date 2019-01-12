@@ -37,7 +37,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.service.IEmbergraphFederation;
 
 /**
- * Base class for the bigdata operation evaluation context (NOT serializable).
+ * Base class for the embergraph operation evaluation context (NOT serializable).
  */
 public class BOpContextBase {
 
@@ -75,7 +75,7 @@ public class BOpContextBase {
      * {@link IEmbergraphFederation} and otherwise <code>null</code>. When
      * evaluating operations against an {@link IEmbergraphFederation}, this
      * reference provides access to the scale-out view of the indices and to
-     * other bigdata services.
+     * other embergraph services.
      */
     final public IEmbergraphFederation<?> getFederation() {
 

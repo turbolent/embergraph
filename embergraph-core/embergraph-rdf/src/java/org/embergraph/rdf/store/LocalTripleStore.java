@@ -34,7 +34,7 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.relation.locator.DefaultResourceLocator;
 
 /**
- * A triple store based on the <em>bigdata</em> architecture. This class
+ * A triple store based on the <em>embergraph</em> architecture. This class
  * offers extremely low latency for index operations. All indices are local
  * (in-process) objects and there are no concurrency controls, so point tests on
  * the indices are extremely efficient. Significant parallelism is achieved by

@@ -99,7 +99,7 @@ public interface IGraphAccessor {
      *         since that is what is used to actually specify a starting vertex
      *         of the GAS program. However, even then, implementation specific
      *         characteristics might not provide us with the same vertices
-     *         (e.g., bigdata imposes a canonical mapping on xsd:dateTime).
+     *         (e.g., embergraph imposes a canonical mapping on xsd:dateTime).
      */
     VertexDistribution getDistribution(Random r);
 

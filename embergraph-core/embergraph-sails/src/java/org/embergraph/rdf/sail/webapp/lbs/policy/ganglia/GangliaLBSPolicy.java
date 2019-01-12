@@ -228,7 +228,7 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
                 /*
                  * Note: This recognizes the local host name as well as the
                  * canonical hostname. ganglia defaults to reporting the local
-                 * name of the host. bigdata defaults to using the canonical
+                 * name of the host. embergraph defaults to using the canonical
                  * name of the host. To make things line up, we check for a
                  * match on the local name if we do not find any match on the
                  * hostname as self-reported by the service.

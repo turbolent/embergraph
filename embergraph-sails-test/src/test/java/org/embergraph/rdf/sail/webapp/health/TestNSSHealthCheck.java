@@ -330,7 +330,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 	static class HealthCheckTestSuite extends TestSuite {
 
 		/**
-		 * The URL of the bigdata web application.
+		 * The URL of the embergraph web application.
 		 */
 		@SuppressWarnings("unused")
 		private final String requestURI;
@@ -339,7 +339,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 		 * 
 		 * @param name
 		 * @param requestURI
-		 *            The URL of the bigdata web application.
+		 *            The URL of the embergraph web application.
 		 */
 		private HealthCheckTestSuite(final String name, final String requestURI) {
 
@@ -371,7 +371,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 	 * </pre>
 	 * 
 	 * The response is should be <code>index.html</code> since we want the
-	 * bigdata webapp to respond for the top-level context.
+	 * embergraph webapp to respond for the top-level context.
 	 * 
 	 * <p>
 	 * Note: You must ensure that the client follows redirects using a standard

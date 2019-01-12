@@ -1608,7 +1608,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
 
     /*
      * Note: These toString() methods were inlined to remove a dependency on
-     * BytesUtil in the bigdata package (BBT, 9/24/2009).
+     * BytesUtil in the embergraph package (BBT, 9/24/2009).
      */
     
     /**

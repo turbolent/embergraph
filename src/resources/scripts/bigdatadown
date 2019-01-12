@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Script brings down the bigdata services on the local host.
+# Script brings down the embergraph services on the local host.
 #
 
 # Setup the environment.

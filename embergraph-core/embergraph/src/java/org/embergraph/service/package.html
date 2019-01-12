@@ -5,12 +5,12 @@
 <body>
 
 <p>
-This package provides implementations of bigdata services (metadata
+This package provides implementations of embergraph services (metadata
 service, data service, transaction manager service.
 </p>
 
 <p>
-A bigdata federation is comprised of the following essential
+A embergraph federation is comprised of the following essential
 services:
 
 <dl>
@@ -34,9 +34,9 @@ using JINI, but other service locator protocols are possible.
 
 <p>
 
-bigdata provides the following optional services.  These are not
+embergraph provides the following optional services.  These are not
 considered essential since (a) they are not required by clients that
-make direct use of bigdata as a distributed database; and (b) they are
+make direct use of embergraph as a distributed database; and (b) they are
 themselves applications of the services briefly described above.
 
 <dl>
@@ -57,13 +57,13 @@ functional program.</dd>
 
 <p>
 
-In order to deploy a bigdata federation, the following preconditions
+In order to deploy a embergraph federation, the following preconditions
 must be met (a standalone deployment can be realized by meeting these
 preconditions on a single host).  This will go more smoothly if JINI
-is running before you start the various bigdata services since they
+is running before you start the various embergraph services since they
 will then be able to register themselves immediately on
 startup. Service discovery by default uses the local network and the
-"public" group. If you want to run more than one bigdata federation on
+"public" group. If you want to run more than one embergraph federation on
 the same network, then you MUST edit the configuration file.
 
 </p>
@@ -87,7 +87,7 @@ known VMs: <dl>
 of a difference does this make?  Note that JRockit defaults to 75% of
 physical memory or 1G, which ever is less.</li>
 
-<li>the bigdata-server distribution is installed.</li>
+<li>the embergraph-server distribution is installed.</li>
 
 <li>the data service is running.</li>
 
@@ -107,7 +107,7 @@ running.
 
 <li>jini 2.x is installed and running.  This will be used to register
 and lookup services.  It helps if jini is running before you try to
-start the bigdata services since they will be able to register
+start the embergraph services since they will be able to register
 themselves immediately in that case.</li>
 
 <li>a metadata server is running.</li>
@@ -190,10 +190,10 @@ remains the same.</dd>
 
 <p>
 
-While bigdata makes use of jini for service registration and
+While embergraph makes use of jini for service registration and
 discovery, it does not use downloaded code for executing its basic
 services (the necessary interfaces and implementation classes are
-already bundled in bigdata.jar). However, clients MAY use downloaded
+already bundled in embergraph.jar). However, clients MAY use downloaded
 code in order to have data servers execute remote procedures or
 extension batch operations.  In this scenario, the client will create
 and register a JINI service.  The service should perform <em>all</em>
@@ -203,7 +203,7 @@ using jini and then execute it locally.
 
 <p>
 In order for downloaded code to work correctly, clients must ensure
-that their classes are exposed by an HTTP server accessible to bigdata
+that their classes are exposed by an HTTP server accessible to embergraph
 servers and declared to the VM in which the client starts using:
 	  	
 <code>-Djava.rmi.server.codebase=...</code>

@@ -48,7 +48,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
  * Note: This must run before the {@link ASTEmptyGroupOptimizer} in order to
  * eliminate certain UNION/group combinations.
  * <p>
- * Note: The bigdata SPARQL parser no longer produces this nested UNION
+ * Note: The embergraph SPARQL parser no longer produces this nested UNION
  * construction. However, it is possible that other SPARQL parsers or hand
  * construction can still produce this nesting pattern, in which case this
  * optimizer will flatten out that pattern.

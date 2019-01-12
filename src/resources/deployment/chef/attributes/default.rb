@@ -1,40 +1,40 @@
 #
-# Where bigdata resource files will be installed:
+# Where embergraph resource files will be installed:
 #
-default['bigdata'][:home] = "/var/lib/bigdata"
+default['embergraph'][:home] = "/var/lib/bigdata"
 
 #
-# Who runs bigdata? This is applicable to NSS and HA installs only:
+# Who runs embergraph? This is applicable to NSS and HA installs only:
 #
-default['bigdata'][:user]  = "bigdata"
-default['bigdata'][:group] = "bigdata"
-default['bigdata'][:base_version] = "1.3.1"
+default['embergraph'][:user]  = "embergraph"
+default['embergraph'][:group] = "embergraph"
+default['embergraph'][:base_version] = "1.3.1"
 
 #
 # When "build_from_svn" is "true", code retrieved from subversion will be downloaded to the "source_dir" directory:
 #
-default['bigdata'][:source_dir] = "/home/ubuntu/bigdata-code"
+default['embergraph'][:source_dir] = "/home/ubuntu/bigdata-code"
 
 # Where the RWStore.properties file can be found:
-default['bigdata'][:properties] = node['bigdata'][:home] + "/RWStore.properties"
+default['embergraph'][:properties] = node['embergraph'][:home] + "/RWStore.properties"
 
-case node['bigdata'][:install_flavor]
+case node['embergraph'][:install_flavor]
 when "nss"
-	# The URL to the bigdata-nss bundle.  The following is the same bundle used by the Bigdata Brew installer:
-	default['bigdata'][:url] = "http://bigdata.com/deploy/bigdata-#{node['bigdata'][:base_version]}.tgz"
+	# The URL to the embergraph-nss bundle.  The following is the same bundle used by the Bigdata Brew installer:
+	default['embergraph'][:url] = "http://bigdata.com/deploy/bigdata-#{node['embergraph'][:base_version]}.tgz"
 
 	# Where the jetty resourceBase is defined:
-	default['bigdata'][:jetty_dir]  = node['bigdata'][:home] + "/var/jetty"
+	default['embergraph'][:jetty_dir]  = node['embergraph'][:home] + "/var/jetty"
 
 	# Where the log files will live:
-	default['bigdata'][:log_dir]  = node['bigdata'][:home] + "/var/log"
+	default['embergraph'][:log_dir]  = node['embergraph'][:home] + "/var/log"
 
-	# Where the bigdata-ha.jnl file will live:
-	default['bigdata'][:data_dir]  = node['bigdata'][:home] + "/var/data"
+	# Where the embergraph-ha.jnl file will live:
+	default['embergraph'][:data_dir]  = node['embergraph'][:home] + "/var/data"
 
 	# The subversion branch to use when building from source:
-	if node['bigdata'][:build_from_svn]
-		default['bigdata'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
+	if node['embergraph'][:build_from_svn]
+		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
 	end
 when "tomcat"
 	# The Tomcat version to install.  The Bigdata Chef cookbook has only been tested with Version 7:
@@ -43,69 +43,69 @@ when "tomcat"
 	# JRE options options to set for Tomcat, the following is strongly recommended:
 	default['tomcat'][:java_options] = "-Djava.awt.headless=true -server -Xmx4G -XX:+UseG1GC"
 
-	# A SourceForge URL to use for downloading the bigdata.war file:
-	default['bigdata'][:url]  = "http://hivelocity.dl.sourceforge.net/project/bigdata/bigdata/#{node['bigdata'][:base_version]}/bigdata.war"
+	# A SourceForge URL to use for downloading the embergraph.war file:
+	default['embergraph'][:url]  = "http://hivelocity.dl.sourceforge.net/project/bigdata/bigdata/#{node['embergraph'][:base_version]}/bigdata.war"
 
-	# Where the bigdata contents reside under Tomcat:
-	default['bigdata'][:web_home] = node['tomcat'][:webapp_dir] + "/bigdata"
+	# Where the embergraph contents reside under Tomcat:
+	default['embergraph'][:web_home] = node['tomcat'][:webapp_dir] + "/bigdata"
 
 	# Where the log4j.properites file can be found:
-	default['bigdata'][:log4j_properties] = default['bigdata'][:web_home] + "/WEB-INF/classes/log4j.properties"
+	default['embergraph'][:log4j_properties] = default['embergraph'][:web_home] + "/WEB-INF/classes/log4j.properties"
 
-	# Where the bigdata-ha.jnl file will live:
-	default['bigdata'][:data_dir]  = node['bigdata'][:home] + "/data"
+	# Where the embergraph-ha.jnl file will live:
+	default['embergraph'][:data_dir]  = node['embergraph'][:home] + "/data"
 
 	# Where the log files will live:
-	default['bigdata'][:log_dir]  = node['bigdata'][:home] + "/log"
+	default['embergraph'][:log_dir]  = node['embergraph'][:home] + "/log"
 
 	# The subversion branch to use when building from source:
-	if node['bigdata'][:build_from_svn]
-		default['bigdata'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA_RELEASE_1_3_0"
+	if node['embergraph'][:build_from_svn]
+		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA_RELEASE_1_3_0"
 	end
 when "ha"
-	# The URL to the bigdataHA release bundle.
-	default['bigdata'][:url] = "http://softlayer-dal.dl.sourceforge.net/project/bigdata/bigdata/#{node['bigdata'][:base_version]}/REL.bigdata-#{node['bigdata'][:base_version]}.tgz"
+	# The URL to the embergraphHA release bundle.
+	default['embergraph'][:url] = "http://softlayer-dal.dl.sourceforge.net/project/bigdata/bigdata/#{node['embergraph'][:base_version]}/REL.embergraph-#{node['embergraph'][:base_version]}.tgz"
 
 	# The subversion branch to use when building from source:
-	if node['bigdata'][:build_from_svn]
-		# default['bigdata'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA_RELEASE_1_3_0"
-		default['bigdata'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
+	if node['embergraph'][:build_from_svn]
+		# default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA_RELEASE_1_3_0"
+		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
 	end
 
-	# Where the bigdata-ha.jnl file will live:
-	default['bigdata'][:data_dir] = node['bigdata'][:home] + "/data"
+	# Where the embergraph-ha.jnl file will live:
+	default['embergraph'][:data_dir] = node['embergraph'][:home] + "/data"
 
 	# Where the log files will live:
-	default['bigdata'][:log_dir] = node['bigdata'][:home] + "/log"
+	default['embergraph'][:log_dir] = node['embergraph'][:home] + "/log"
 
 	# Where the jetty resourceBase is defined:
-	default['bigdata'][:jetty_dir] = node['bigdata'][:home] + "/var/jetty"
+	default['embergraph'][:jetty_dir] = node['embergraph'][:home] + "/var/jetty"
 
 	# Where the RWStore.properties file can be found:
-	default['bigdata'][:properties] = node['bigdata'][:jetty_dir] + "/WEB-INF/RWStore.properties"
+	default['embergraph'][:properties] = node['embergraph'][:jetty_dir] + "/WEB-INF/RWStore.properties"
 
 	# Name of the federation of services (controls the Apache River GROUPS).
-	default['bigdata'][:fedname] = 'my-cluster-1'
+	default['embergraph'][:fedname] = 'my-cluster-1'
 
 	# Name of the replication cluster to which this HAJournalServer will belong.
-	default['bigdata'][:logical_service_id] = 'HA-Replication-Cluster-1'
+	default['embergraph'][:logical_service_id] = 'HA-Replication-Cluster-1'
 
 	# Set the REPLICATION_FACTOR.  1 = HA1, 3 = HA3, etc
-	default['bigdata'][:replication_factor] = 3
+	default['embergraph'][:replication_factor] = 3
 
 	# Where to find the Apache River service registrars (can also use multicast).
-	default['bigdata'][:river_locator1] = '33.33.33.10'
-	default['bigdata'][:river_locator2] = '33.33.33.11'
-	default['bigdata'][:river_locator3] = '33.33.33.12'
+	default['embergraph'][:river_locator1] = '33.33.33.10'
+	default['embergraph'][:river_locator2] = '33.33.33.11'
+	default['embergraph'][:river_locator3] = '33.33.33.12'
 
 	# Where to find the Apache Zookeeper ensemble.
-	default['bigdata'][:zk_server1] = 'bigdataA'
-	default['bigdata'][:zk_server2] = 'bigdataB'
-	default['bigdata'][:zk_server3] = 'bigdataC'
+	default['embergraph'][:zk_server1] = 'embergraphA'
+	default['embergraph'][:zk_server2] = 'embergraphB'
+	default['embergraph'][:zk_server3] = 'embergraphC'
 
 	# set the JVM_OPTS as used by startHAService
-	default['bigdata'][:java_options] = "-server -Xmx4G -XX:MaxDirectMemorySize=3000m"
-	# default['bigdata'][:java_options] = "-server -Xmx4G -XX:MaxDirectMemorySize=3000m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1046"
+	default['embergraph'][:java_options] = "-server -Xmx4G -XX:MaxDirectMemorySize=3000m"
+	# default['embergraph'][:java_options] = "-server -Xmx4G -XX:MaxDirectMemorySize=3000m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1046"
 end
 
 
@@ -116,31 +116,31 @@ end
 ###################################################################################
 
 
-default['bigdata']['journal.AbstractJournal.bufferMode'] = "DiskRW"
+default['embergraph']['journal.AbstractJournal.bufferMode'] = "DiskRW"
 
 # Setup for the RWStore recycler rather than session protection.
-default['bigdata']['service.AbstractTransactionService.minReleaseAge']= "1"
+default['embergraph']['service.AbstractTransactionService.minReleaseAge']= "1"
 
-default['bigdata']['btree.writeRetentionQueue.capacity'] = "4000"
-default['bigdata']['btree.BTree.branchingFactor'] = "128"
+default['embergraph']['btree.writeRetentionQueue.capacity'] = "4000"
+default['embergraph']['btree.BTree.branchingFactor'] = "128"
 
 # 200M initial extent.
-default['bigdata']['journal.AbstractJournal.initialExtent'] = "209715200"
-default['bigdata']['journal.AbstractJournal.maximumExtent'] = "209715200"
+default['embergraph']['journal.AbstractJournal.initialExtent'] = "209715200"
+default['embergraph']['journal.AbstractJournal.maximumExtent'] = "209715200"
 
 # Setup for QUADS mode without the full text index.
-default['bigdata']['rdf.sail.truthMaintenance'] = "false"
-default['bigdata']['rdf.store.AbstractTripleStore.quads'] = "false"
-default['bigdata']['rdf.store.AbstractTripleStore.statementIdentifiers'] = "false"
-default['bigdata']['rdf.store.AbstractTripleStore.textIndex'] = "false"
-default['bigdata']['rdf.store.AbstractTripleStore.axiomsClass'] = "org.embergraph.rdf.axioms.NoAxioms"
+default['embergraph']['rdf.sail.truthMaintenance'] = "false"
+default['embergraph']['rdf.store.AbstractTripleStore.quads'] = "false"
+default['embergraph']['rdf.store.AbstractTripleStore.statementIdentifiers'] = "false"
+default['embergraph']['rdf.store.AbstractTripleStore.textIndex'] = "false"
+default['embergraph']['rdf.store.AbstractTripleStore.axiomsClass'] = "org.embergraph.rdf.axioms.NoAxioms"
 
 # Bump up the branching factor for the lexicon indices on the default kb.
-default['bigdata']['namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor'] = "400"
+default['embergraph']['namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor'] = "400"
 
 # Bump up the branching factor for the statement indices on the default kb.
-default['bigdata']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor'] = "1024"
-default['bigdata']['rdf.sail.bufferCapacity'] = "100000"
+default['embergraph']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor'] = "1024"
+default['embergraph']['rdf.sail.bufferCapacity'] = "100000"
 
 #
 # Bigdata supports over a hundred properties and only the most commonly configured
@@ -150,7 +150,7 @@ default['bigdata']['rdf.sail.bufferCapacity'] = "100000"
 # "vocabularyClass" property (below) for inline URIs is used as example additional
 # entry:
 #
-# default['bigdata']['rdf.store.AbstractTripleStore.vocabularyClass'] = "com.my.VocabularyClass"
+# default['embergraph']['rdf.store.AbstractTripleStore.vocabularyClass'] = "com.my.VocabularyClass"
 
 
 #################################################################

@@ -74,7 +74,7 @@ Launching the cluster may take up to 10 minutes.  When complete the cluster crea
 SSH to a specific node:
 
   % source aws.rc  # all vagrant commands will depend on exported AWS environment variables 
-  % vagrant ssh bigdataA
+  % vagrant ssh embergraphA
 
 
 Stop & Start the cluster:
@@ -90,7 +90,7 @@ Terminating the cluster:
 
 Trouble Shooting
 ----------------
-If a host is slow to startup there can be an initial connection failure. For example, the bigdataA "status" page may not
-appear if bigdataB or bigdataC is slow to start up. In this case log into bigdataA ("vagrant ssh bigdataA") and restart
+If a host is slow to startup there can be an initial connection failure. For example, the embergraphA "status" page may not
+appear if embergraphB or embergraphC is slow to start up. In this case log into embergraphA ("vagrant ssh embergraphA") and restart
 the service ("sudo /etc/init.d/bigdataA restart") and the host shall connect as expected.
 

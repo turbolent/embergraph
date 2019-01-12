@@ -150,7 +150,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
    }
     
     /**
-     * Post a GraphML file to the blueprints layer of the remote bigdata instance.
+     * Post a GraphML file to the blueprints layer of the remote embergraph instance.
      */
     public long postGraphML(final String path) throws Exception {
         

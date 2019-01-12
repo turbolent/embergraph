@@ -338,7 +338,7 @@ public class TestInlineConstraints extends AbstractDataDrivenSPARQLTestCase {
 //			 */
 //			final AtomicInteger idFactory = new AtomicInteger(0);
 //	
-//			// Convert the step to a bigdata operator tree.
+//			// Convert the step to a embergraph operator tree.
 //			query = Rule2BOpUtility.convert(rule, idFactory, db,
 //					queryEngine, new Properties());
 //	

@@ -78,10 +78,10 @@ public class TestCounterSetBTree extends TestCase2 {
         final CounterSet root = new CounterSet();
 
         // make a child.
-        final CounterSet bigdata = root.makePath("www.embergraph.org");
+        final CounterSet embergraph = root.makePath("www.embergraph.org");
 
         // make a child of a child using a relative path
-        final ICounter memory = bigdata.addCounter("memory",
+        final ICounter memory = embergraph.addCounter("memory",
                 new Instrument<Long>() {
                     public void sample() {
                         setValue(Runtime.getRuntime().freeMemory());

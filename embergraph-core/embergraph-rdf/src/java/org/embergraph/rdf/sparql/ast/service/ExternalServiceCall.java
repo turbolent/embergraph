@@ -27,7 +27,7 @@ import org.openrdf.query.BindingSet;
 import org.embergraph.rdf.internal.IV;
 
 /**
- * Service invocation interface for an external (non-bigdata, but same JVM)
+ * Service invocation interface for an external (non-embergraph, but same JVM)
  * service. Data interchange with the external service uses the Sesame
  * {@link BindingSet} and Sesame {@link Value} objects. Bigdata {@link IV}s will
  * be materialized as Sesame {@link Value}s for the BindingsClause. Sesame

@@ -32,7 +32,7 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 
 /**
  * A factory for service calls against remote SPARQL end points. You can control
- * the way in which bigdata handles SPARQL 1.1 Federated Query for a remote
+ * the way in which embergraph handles SPARQL 1.1 Federated Query for a remote
  * SPARQL end point by: (1) create an instance of this class for the SPARQL end
  * point; (2) customize the {@link RemoteServiceOptions}; and (3) add it to this
  * {@link ServiceRegistry}. You can also subclass this class if you want to

@@ -25,7 +25,7 @@ import org.embergraph.rdf.sail.webapp.HAStatusServletUtilProxy;
 
 /**
  * 
- * Convenience class to break out bigdata-jini dependency. See BLZG-1370.
+ * Convenience class to break out embergraph-jini dependency. See BLZG-1370.
  * 
  * @author beebs
  * 

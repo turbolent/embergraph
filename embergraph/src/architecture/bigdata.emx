@@ -78,13 +78,13 @@
       <children xmi:id="_PqInMM2fEdutrbzDPceyvA" type="Note">
         <children xmi:id="_PqInM82fEdutrbzDPceyvA" type="DiagramName"/>
         <children xmi:id="_PqInNM2fEdutrbzDPceyvA" type="Description"/>
-        <styles xmi:type="notation:ShapeStyle" xmi:id="_PqInMc2fEdutrbzDPceyvA" description="bigdata architecture" fillColor="13369343" lineColor="6737151"/>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_PqInMc2fEdutrbzDPceyvA" description="embergraph architecture" fillColor="13369343" lineColor="6737151"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PqInMs2fEdutrbzDPceyvA" x="952" y="635" width="3492" height="952"/>
       </children>
       <children xmi:id="_Q2bbMM2fEdutrbzDPceyvA" type="Note">
         <children xmi:id="_Q2bbM82fEdutrbzDPceyvA" type="DiagramName"/>
         <children xmi:id="_Q2bbNM2fEdutrbzDPceyvA" type="Description"/>
-        <styles xmi:type="notation:ShapeStyle" xmi:id="_Q2bbMc2fEdutrbzDPceyvA" description="bigdata is a scale-out data-intensive computing architecture for commodity hardware" fillColor="13369343" lineColor="6737151"/>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_Q2bbMc2fEdutrbzDPceyvA" description="embergraph is a scale-out data-intensive computing architecture for commodity hardware" fillColor="13369343" lineColor="6737151"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Q2bbMs2fEdutrbzDPceyvA" x="954" y="7314" width="13996" height="1587"/>
       </children>
       <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_MouEoc2fEdutrbzDPceyvA"/>

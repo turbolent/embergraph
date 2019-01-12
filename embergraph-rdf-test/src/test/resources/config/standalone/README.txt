@@ -1,4 +1,4 @@
-A sample configuration for a standalone bigdata instance (single host, one or
+A sample configuration for a standalone embergraph instance (single host, one or
 more data servers).
 
 Note: If you want to modify this configuration for multiple hosts then
@@ -13,7 +13,7 @@ To enable multicase, change:
 	 * specified.
 	 */
 //    groups = LookupDiscovery.ALL_GROUPS;
-    groups = new String[]{"bigdata"};
+    groups = new String[]{"embergraph"};
 
 	/*
 	 * One or more unicast URIs of the form jini://host/ or jini://host:port/.

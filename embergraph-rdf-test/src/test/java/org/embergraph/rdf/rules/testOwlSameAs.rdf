@@ -6,7 +6,7 @@
 	xmlns:ns2="http://bigdata.com/foo/system#">
 
 <rdf:Description rdf:about="http://bigdata.com/foo/elm#e190026e-c1cd-45d2-afd9-b408553d8bb5">
-	<rdfs:label>bigdata</rdfs:label>
+	<rdfs:label>embergraph</rdfs:label>
 	<ns2:importedFrom>D:\server\jboss-4.2.0.GA\server\default\deploy\foo.sar\foo.war\systap\systap.csv</ns2:importedFrom>
 </rdf:Description>
 
@@ -38,7 +38,7 @@
 <rdf:Description rdf:about="http://bigdata.com/foo/elm#164003db-5dc5-46a4-b0ec-d136e7045b1e">
 	<ns2:extractedFrom rdf:resource="http://bigdata.com/foo/docs#73a85e72-3619-4091-89e8-57e156cf52ac"/>
 	<rdf:type rdf:resource="http://bigdata.com/foo/domain#Product"/>
-	<rdfs:label>bigdata</rdfs:label>
+	<rdfs:label>embergraph</rdfs:label>
 	<ns5:sameAs rdf:resource="http://bigdata.com/foo/elm#e190026e-c1cd-45d2-afd9-b408553d8bb5"/>
 </rdf:Description>
 
@@ -331,7 +331,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://bigdata.com/foo/elm#164003db-5dc5-46a4-b0ec-d136e7045b1e">
-	<ns2:lexicalForm>bigdata</ns2:lexicalForm>
+	<ns2:lexicalForm>embergraph</ns2:lexicalForm>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://bigdata.com/foo/docs#d429c4f2-48dd-40e3-83f2-09ac14375069">
@@ -428,7 +428,7 @@
 </rdf:Description>
 
 <rdf:Description rdf:about="http://bigdata.com/foo/elm#e190026e-c1cd-45d2-afd9-b408553d8bb5">
-	<ns2:lexicalForm>bigdata</ns2:lexicalForm>
+	<ns2:lexicalForm>embergraph</ns2:lexicalForm>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://bigdata.com/foo/elm#efe8273f-eca3-4b4a-af38-013faaf59a70">

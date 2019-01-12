@@ -44,7 +44,7 @@ import org.embergraph.util.BytesUtil;
 
 /**
  * An abstract test harness that sets up (and tears down) the metadata and data
- * services required for a bigdata federation using in-process services rather
+ * services required for a embergraph federation using in-process services rather
  * than service discovery (which means that there is no network IO).
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

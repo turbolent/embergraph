@@ -5,7 +5,7 @@ import java.util.Locale;
 
 /**
  * This is an implementation of RFC 4647 language range,
- * targetted at the specific needs within bigdata, and only
+ * targetted at the specific needs within embergraph, and only
  * supporting the extended filtering specified in section 3.3.2
  * <p>
  * Language ranges are comparable so that

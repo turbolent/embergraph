@@ -42,8 +42,8 @@ public class EmbergraphSailFactory implements SailFactory {
 		
         try {
             
-			final EmbergraphSailConfig bigdataConfig = (EmbergraphSailConfig)config;
-			final Properties properties = bigdataConfig.getProperties();
+			final EmbergraphSailConfig embergraphConfig = (EmbergraphSailConfig)config;
+			final Properties properties = embergraphConfig.getProperties();
     		return new EmbergraphSail(properties);
             
         } catch (Exception ex) {

@@ -28,7 +28,7 @@ import org.embergraph.rdf.model.EmbergraphStatement;
 
 /**
  * This operation creates a graph in the Graph Store (this operation is a NOP
- * for bigdata).
+ * for embergraph).
  * 
  * <pre>
  * CREATE ( SILENT )? GRAPH IRIref

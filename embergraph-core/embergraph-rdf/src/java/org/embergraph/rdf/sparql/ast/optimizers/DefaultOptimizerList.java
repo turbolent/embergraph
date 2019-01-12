@@ -252,7 +252,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
          * { ... {} } => { ... }
          * </pre>
          * <p>
-         * Note: as a policy decision in bigdata 1.1, we do not WANT to combine
+         * Note: as a policy decision in embergraph 1.1, we do not WANT to combine
          * non-empty join groups. The group structure is left AS IS and provides
          * a means for people to control the pruning of variables. Also, even if
          * the group structure were automatically flattened as much as possible

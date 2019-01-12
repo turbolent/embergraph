@@ -51,7 +51,7 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
 
 /**
- * Test suite for bigdata specific extensions in {@link UpdateExprBuilder}.
+ * Test suite for embergraph specific extensions in {@link UpdateExprBuilder}.
  * 
  * @see https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update
  * 
@@ -71,7 +71,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
      */
     
     /**
-     * INSERT INTO named solution set (bigdata extension).
+     * INSERT INTO named solution set (embergraph extension).
      * 
      * <pre>
      * PREFIX dc:  <http://purl.org/dc/elements/1.1/>
@@ -168,7 +168,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     }
 
     /**
-     * DELETE FROM named solution set (bigdata extension).
+     * DELETE FROM named solution set (embergraph extension).
      * 
      * <pre>
      * PREFIX dc:  <http://purl.org/dc/elements/1.1/>

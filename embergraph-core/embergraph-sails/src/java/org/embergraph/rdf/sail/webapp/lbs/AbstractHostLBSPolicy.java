@@ -792,7 +792,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      *         proxied (because we lack enough information to identify a target
      *         host).
      * 
-     * @see bigdata/src/resources/architecture/HA_LBS.xls
+     * @see embergraph/src/resources/architecture/HA_LBS.xls
      */
     static HostScore getHost(
             final double d,

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# init.d style script for bigdata HA services.  The script can be used
+# init.d style script for embergraph HA services.  The script can be used
 # to 'start' or 'stop' services.
 #
 # Environment:
@@ -71,8 +71,8 @@ fi
 cd $FED_DIR
 
 if [ ! -d "$DATA_DIR/lost+found" ]; then
-	mount /dev/vg/lv_bigdata $DATA_DIR
-	action $"`date` : `hostname` : restoring bigdata journal file: " sudo -u $BD_USER -g $BD_GROUP bin/HARestore
+	mount /dev/vg/lv_embergraph $DATA_DIR
+	action $"`date` : `hostname` : restoring embergraph journal file: " sudo -u $BD_USER -g $BD_GROUP bin/HARestore
 fi
 
 

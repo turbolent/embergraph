@@ -34,17 +34,17 @@ public class EmbergraphGraphConfiguration implements GraphConfiguration {
     public interface Options {
         
         /**
-         * Specify the type of bigdata instance to use - embedded or remote.
+         * Specify the type of embergraph instance to use - embedded or remote.
          */
         String TYPE = "properties.type";
         
         /**
-         * Specifies that an embedded bigdata instance should be used.
+         * Specifies that an embedded embergraph instance should be used.
          */
         String TYPE_EMBEDDED = "embedded";
         
         /**
-         * Specifies that a remote bigdata instance should be used. You MUST
+         * Specifies that a remote embergraph instance should be used. You MUST
          * also specify one of the following combinations:
          * <dl>
          * <dt>{@link #HOST} + {@link #PORT}</dt>
@@ -59,17 +59,17 @@ public class EmbergraphGraphConfiguration implements GraphConfiguration {
         String TYPE_REMOTE = "remote";
 
         /**
-         * Journal file for an embedded bigdata instance.
+         * Journal file for an embedded embergraph instance.
          */
         String FILE = "properties.file";
 
         /**
-         * Host for a remote bigdata instance.
+         * Host for a remote embergraph instance.
          */
         String HOST = "properties.host";
 
         /**
-         * Port for a remote bigdata instance.
+         * Port for a remote embergraph instance.
          */
         String PORT = "properties.port";
 

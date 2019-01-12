@@ -886,7 +886,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends
     * value, interpreted as numerical value, are identical.
     * 
     * @param val
-    * @param bigdataLiteral
+    * @param embergraphLiteral
     * 
     * @throw {@link AssertionError} in case they are not
     */

@@ -469,16 +469,16 @@
     <ownedMember xmi:type="uml:Interface" xmi:id="_Jh0kkGgKEd-rfM7SNIF9TA" name="java.net.InetSocketAddress"/>
     <ownedMember xmi:type="uml:Interface" xmi:id="_YAfqEGgJEd-rfM7SNIF9TA" name="Quorum">
       <ownedAttribute xmi:id="_ce5IAGgJEd-rfM7SNIF9TA" name="k" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_fDP7IGgJEd-rfM7SNIF9TA" name="joinedCount" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_flrSwGgJEd-rfM7SNIF9TA" name="currentToken" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_hA3eYGgJEd-rfM7SNIF9TA" name="lastValidToken" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_njJfoWgJEd-rfM7SNIF9TA" name="leader" visibility="private" type="_jj40wGgJEd-rfM7SNIF9TA" association="_njJfoGgJEd-rfM7SNIF9TA"/>
       <ownedAttribute xmi:id="_rYuDAWgJEd-rfM7SNIF9TA" name="follower" visibility="private" type="_jj40wGgJEd-rfM7SNIF9TA" association="_rYuDAGgJEd-rfM7SNIF9TA" aggregation="shared">
@@ -490,7 +490,7 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vlYQs2gJEd-rfM7SNIF9TA"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_f-psEGgMEd-rfM7SNIF9TA" name="memberCount" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_G7QjQWgQEd-rfM7SNIF9TA" name="queue" visibility="private" type="_4ZlCgGgPEd-rfM7SNIF9TA" association="_G7QjQGgQEd-rfM7SNIF9TA" aggregation="composite">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G7QjRGgQEd-rfM7SNIF9TA" value="-1"/>
@@ -500,18 +500,18 @@
     <ownedMember xmi:type="uml:Interface" xmi:id="_jj40wGgJEd-rfM7SNIF9TA" name="HAService">
       <ownedAttribute xmi:id="_njJfomgJEd-rfM7SNIF9TA" name="quorum" visibility="private" type="_YAfqEGgJEd-rfM7SNIF9TA" association="_njJfoGgJEd-rfM7SNIF9TA"/>
       <ownedAttribute xmi:id="_0olr4GgJEd-rfM7SNIF9TA" name="quorumIndex" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_eerbcIq1EduD57FOfu5USw?architecture/PrimitiveTypes/int"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_2GBTMGgJEd-rfM7SNIF9TA" name="readOnly" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_RSWZgYq0EduD57FOfu5USw?architecture/PrimitiveTypes/boolean"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_RSWZgYq0EduD57FOfu5USw?architecture/PrimitiveTypes/boolean"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_88QyQGgJEd-rfM7SNIF9TA" name="quorumToken" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_Fne18GgKEd-rfM7SNIF9TA" name="addrSelf" visibility="private" type="_Jh0kkGgKEd-rfM7SNIF9TA"/>
       <ownedAttribute xmi:id="_aeeS8GgKEd-rfM7SNIF9TA" name="addrNext" visibility="private" type="_Jh0kkGgKEd-rfM7SNIF9TA"/>
       <ownedAttribute xmi:id="_st--EGgPEd-rfM7SNIF9TA" name="serviceId" visibility="private">
-        <type xmi:type="uml:Class" href="bigdata.emx#_9NQV4IrnEduD57FOfu5USw?architecture/UUID"/>
+        <type xmi:type="uml:Class" href="embergraph.emx#_9NQV4IrnEduD57FOfu5USw?architecture/UUID"/>
       </ownedAttribute>
     </ownedMember>
     <ownedMember xmi:type="uml:Association" xmi:id="_njJfoGgJEd-rfM7SNIF9TA" memberEnd="_njJfoWgJEd-rfM7SNIF9TA _njJfomgJEd-rfM7SNIF9TA"/>
@@ -523,7 +523,7 @@
     </ownedMember>
     <ownedMember xmi:type="uml:Interface" xmi:id="_4ZlCgGgPEd-rfM7SNIF9TA" name="QuorumVoteQueue">
       <ownedAttribute xmi:id="_COQooGgQEd-rfM7SNIF9TA" name="lastCommitTime" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="bigdata.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
+        <type xmi:type="uml:PrimitiveType" href="embergraph.emx#_TEqawYqrEduD57FOfu5USw?architecture/PrimitiveTypes/long"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_KofC8WgQEd-rfM7SNIF9TA" name="service" visibility="private" type="_jj40wGgJEd-rfM7SNIF9TA" association="_KofC8GgQEd-rfM7SNIF9TA">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KofC9GgQEd-rfM7SNIF9TA" value="1"/>

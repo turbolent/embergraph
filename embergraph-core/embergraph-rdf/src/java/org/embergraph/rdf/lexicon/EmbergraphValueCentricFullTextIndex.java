@@ -51,7 +51,7 @@ import org.embergraph.search.Hit;
 import org.embergraph.search.TokenBuffer;
 
 /**
- * Implementation based on the built-in keyword search capabilities for bigdata.
+ * Implementation based on the built-in keyword search capabilities for embergraph.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

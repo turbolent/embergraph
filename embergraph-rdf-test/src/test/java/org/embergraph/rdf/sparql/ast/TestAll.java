@@ -80,7 +80,7 @@ public class TestAll extends TestCase {
 //        suite.addTestSuite(TestAST2SparqlGenerator.class);
 
         /*
-         * Test suite for SPARQL named solution sets (bigdata extension).
+         * Test suite for SPARQL named solution sets (embergraph extension).
          * 
          * Note: Most of this stuff is tested using data-driven SPARQL
          * evaluation tests (which are not incorporated into the sub-suite that

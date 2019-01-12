@@ -43,8 +43,8 @@ public class EmbergraphRepositoryFactory implements RepositoryFactory {
 		
         try {
             
-			final EmbergraphRepositoryConfig bigdataConfig = (EmbergraphRepositoryConfig)config;
-			final Properties properties = bigdataConfig.getProperties();
+			final EmbergraphRepositoryConfig embergraphConfig = (EmbergraphRepositoryConfig)config;
+			final Properties properties = embergraphConfig.getProperties();
     		final EmbergraphSail sail = new EmbergraphSail(properties);
     		return new EmbergraphSailRepository(sail);
             

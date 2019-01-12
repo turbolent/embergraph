@@ -49,7 +49,7 @@ public interface ICommitRecord {
     /**
      * The first root address that may be used for a user-defined object. User
      * defined root addresses begin at index 10. The first 10 root addresses are
-     * reserved for use by the bigdata architecture.
+     * reserved for use by the embergraph architecture.
      */
     static public final int FIRST_USER_ROOT      = 10;
 

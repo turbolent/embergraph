@@ -458,7 +458,7 @@ public class CBD {
         // Clear the optimized AST.
         astContainer.clearOptimizedAST();
         
-        // Batch resolve Values to IVs and convert to bigdata binding set.
+        // Batch resolve Values to IVs and convert to embergraph binding set.
         final IBindingSet[] bindingSets = 
               new IBindingSet[] { new ListBindingSet() };
 

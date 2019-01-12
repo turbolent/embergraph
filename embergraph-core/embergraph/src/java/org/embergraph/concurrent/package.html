@@ -7,7 +7,7 @@
 <p>
 
 This package supports concurrency control using exclusive locks on resources.  The
-use case for bigdata is during operations on unisolated named indices on a single
+use case for embergraph is during operations on unisolated named indices on a single
 journal.  (Note that index partitions which are just modeled as named indices).
 Exclusive locks are required for the unisolated indices since the B+Tree implementation
 is NOT thread-safe for concurrent writers.  The concurrency control package provides a
@@ -19,7 +19,7 @@ unisolated indices may run in parallel (depending on the #of available worker ta
 
 <p>
 
-bigdata offers two broad classes of operations: unisolated and isolated (transactional).  The 
+embergraph offers two broad classes of operations: unisolated and isolated (transactional).  The
 unisolated API of the data service ensures that operations use only a single named index
 (or index partition) at a time.  Coordination of distributed locks is not required making
 this the unisolated API suiteable for scale-out "row stores".  Deadlock cycles are not
@@ -49,7 +49,7 @@ Note: While {@link org.embergraph.concurrent.TxDag} provides the ability
 to detect deadlocks, in the special case where locks are pre-declared,
 simply sorting the lock requests made by each task is sufficient to
 guarentee that deadlocks can not arise.  Thus, in practice deadlock
-detection is NOT used by bigdata.
+detection is NOT used by embergraph.
 
 </p>
 

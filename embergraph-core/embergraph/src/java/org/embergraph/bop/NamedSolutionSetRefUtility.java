@@ -91,7 +91,7 @@ public class NamedSolutionSetRefUtility {
      * KB view identified by a <i>namespace</i> and <i>timestamp</i>.
      * 
      * @param namespace
-     *            The bigdata namespace of the {@link AbstractTripleStore} where
+     *            The embergraph namespace of the {@link AbstractTripleStore} where
      *            you need to look to find the data (required).
      * @param timestamp
      *            The timestamp of the view.

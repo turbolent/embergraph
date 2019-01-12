@@ -118,7 +118,7 @@ public class MillisecondTimestampFactory {
     /**
      * This is a paranoia check in case the timestamp overflows. The timestamp
      * value 0L and negative timestamps all have special interpretations for
-     * bigdata so this factory MUST NOT assign a non-positive timestamp.
+     * embergraph so this factory MUST NOT assign a non-positive timestamp.
      * 
      * @param t
      *            A timestamp.

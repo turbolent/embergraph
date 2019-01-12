@@ -408,7 +408,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
       <version>${icu.version}</version>
     </dependency>
     <dependency>
-      <!-- log4j is the primary logger for bigdata. -->
+      <!-- log4j is the primary logger for embergraph. -->
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>

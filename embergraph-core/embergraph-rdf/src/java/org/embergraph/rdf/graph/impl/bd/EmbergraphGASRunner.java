@@ -29,7 +29,7 @@ import org.embergraph.rdf.graph.util.GraphLoader;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Base class for running performance tests against the bigdata backend.
+ * Base class for running performance tests against the embergraph backend.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -51,7 +51,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
         private  BufferMode bufferModeOverride = null; // override only.
         
         /**
-         * The namespace of the bigdata KB instance.
+         * The namespace of the embergraph KB instance.
          */
         private String namespaceOverride = "kb";
 

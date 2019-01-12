@@ -1,14 +1,14 @@
 brew - homebrew installer.  installation is the NSS using jetty.  No HA features.
 
-chef - cook book has recipes for bigdata under tomcat; bigdata HA; MapGraph;
+chef - cook book has recipes for embergraph under tomcat; embergraph HA; MapGraph;
        NSS using jetty.
 
 nss  - NSS using jetty. The directory contains shell scripts to (a) control
-       the run state of bigdata in an init.d style script; and (b) start the
+       the run state of embergraph in an init.d style script; and (b) start the
        NSS using jetty.
 
 vagrant - HA cluster launcher for AWS; MapGraph launcher; NSS using jetty 
-      launcher; tomcat + bigdata.war install.
+      launcher; tomcat + embergraph.war install.
 
 ====== Maintenance ======
 

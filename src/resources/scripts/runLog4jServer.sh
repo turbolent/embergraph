@@ -10,7 +10,7 @@
 # logged by the server.
 #
 # Note: This can also be started automatically on the configured host
-# from the main bigdata configuration file.
+# from the main embergraph configuration file.
 #
 # Note: JAVA_OPTS is ignored since it specifies the log4j configuration
 # and we do not want to use that here.

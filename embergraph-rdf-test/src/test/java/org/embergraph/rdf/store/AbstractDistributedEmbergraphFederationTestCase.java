@@ -27,7 +27,7 @@ import org.embergraph.service.AbstractScaleOutClient;
 
 /**
  * An abstract test harness that sets up (and tears down) the metadata and data
- * services required for a bigdata federation using JINI to handle service
+ * services required for a embergraph federation using JINI to handle service
  * discovery.
  * <p>
  * Note: The configuration options for the (meta)data services are set in their
@@ -46,7 +46,7 @@ abstract public class AbstractDistributedEmbergraphFederationTestCase extends Te
         super(name);
     }
 
-//BLZG-1370 removing unused test classes for bigdata-jini
+//BLZG-1370 removing unused test classes for embergraph-jini
     //private JiniServicesHelper helper = new JiniServicesHelper();
     
     protected AbstractScaleOutClient client;
@@ -54,18 +54,18 @@ abstract public class AbstractDistributedEmbergraphFederationTestCase extends Te
     protected void setUp() throws Exception {
         
         // start services.
-//BLZG-1370 removing unused test classes for bigdata-jini
+//BLZG-1370 removing unused test classes for embergraph-jini
 //        helper.start();
         
         // expose to subclasses.
-//BLZG-1370 removing unused test classes for bigdata-jini
+//BLZG-1370 removing unused test classes for embergraph-jini
 //        client = helper.client;
         
     }
 
     protected void tearDown() throws Exception {
         
-//BLZG-1370 removing unused test classes for bigdata-jini
+//BLZG-1370 removing unused test classes for embergraph-jini
 //        helper.destroy();
         
     }

@@ -147,7 +147,7 @@ public class ServiceCallUtility {
      *            When given, only the projected variables are in the returned
      *            {@link BindingSet}.
      * @param in
-     *            A bigdata {@link IBindingSet} with materialized values.
+     *            A embergraph {@link IBindingSet} with materialized values.
      *            
      * @throws NotMaterializedException
      *             if a non-inline {@link IV} has not had its {@link IVCache}
@@ -223,7 +223,7 @@ public class ServiceCallUtility {
     }
     
     /**
-     * Convert an openrdf {@link BindingSet} into a bigdata {@link IBindingSet}.
+     * Convert an openrdf {@link BindingSet} into a embergraph {@link IBindingSet}.
      * The {@link BindingSet} MUST contain {@link EmbergraphValue}s and the
      * {@link IV}s for those {@link EmbergraphValue}s MUST have been resolved
      * against the database and the {@link IVCache} association set.
@@ -234,7 +234,7 @@ public class ServiceCallUtility {
      * @param in
      *            The openrdf {@link BindingSet}
      * 
-     * @return The bigdata {@link IBindingSet}.
+     * @return The embergraph {@link IBindingSet}.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     static private IBindingSet openrdf2Embergraph(
@@ -332,9 +332,9 @@ public class ServiceCallUtility {
         }
 
         /*
-         * Convert the openrdf BindingSet[] into a bigdata IBindingSet[].
+         * Convert the openrdf BindingSet[] into a embergraph IBindingSet[].
          */
-        final IBindingSet[] bigdataSolutions = new IBindingSet[resolvedServiceResults.length];
+        final IBindingSet[] embergraphSolutions = new IBindingSet[resolvedServiceResults.length];
         {
 
             for (int i = 0; i < resolvedServiceResults.length; i++) {
@@ -344,13 +344,13 @@ public class ServiceCallUtility {
                 final IBindingSet bset2 = openrdf2Embergraph(
                         null/* projectedVars */, bset);
 
-                bigdataSolutions[i] = bset2;
+                embergraphSolutions[i] = bset2;
                 
             }
             
         }
 
-        return bigdataSolutions;
+        return embergraphSolutions;
         
     }
     

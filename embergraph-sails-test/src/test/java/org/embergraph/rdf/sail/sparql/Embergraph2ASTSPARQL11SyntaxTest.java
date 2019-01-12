@@ -151,7 +151,7 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
         try {
 
             if (useEmbergraphParser) {
-                // bigdata parser.
+                // embergraph parser.
                 return new Embergraph2ASTSPARQLParser().parseOperation(query,
                         queryFileURL);
                 

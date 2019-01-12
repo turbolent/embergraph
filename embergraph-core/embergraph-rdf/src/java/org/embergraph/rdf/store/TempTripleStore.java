@@ -43,7 +43,7 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.PropertyUtil;
 
 /**
- * A temporary triple store based on the <em>bigdata</em> architecture. Data
+ * A temporary triple store based on the <em>embergraph</em> architecture. Data
  * is buffered in memory but will overflow to disk for large stores. The backing
  * store is a {@link TemporaryStore}.
  * <p>

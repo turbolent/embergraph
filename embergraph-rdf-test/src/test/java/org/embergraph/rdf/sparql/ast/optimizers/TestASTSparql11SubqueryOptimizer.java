@@ -96,8 +96,8 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
      * return s1,s2,s3 as the solutions for ?s. Joined with the ?s :p ?o, you
      * should only get the statements where ?s is s1,s2,s3.
      * <p>
-     * I haven't debugged bigdata so I don't know exactly what it is doing, but
-     * it seems that currently with the bigdata evaluation, for each solution
+     * I haven't debugged embergraph so I don't know exactly what it is doing, but
+     * it seems that currently with the embergraph evaluation, for each solution
      * produced from ?s :p ?o, the subquery is run, and it seems that the ?s
      * binding in the subquery is getting constrained by the ?s from the inbound
      * solution, so results of the subquery are not always s1,s2,s3, depending

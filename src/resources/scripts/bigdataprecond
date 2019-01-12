@@ -2,7 +2,7 @@
 
 #
 # This provides an extensible hook for verifying per-conditions or taking
-# other site-specific action each time the 'bigdata' script is executed.
+# other site-specific action each time the 'embergraph' script is executed.
 #
 
 # Setup the environment.

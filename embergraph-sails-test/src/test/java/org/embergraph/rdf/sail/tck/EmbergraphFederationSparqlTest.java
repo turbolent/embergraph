@@ -50,14 +50,14 @@ import org.embergraph.service.ScaleOutClientFactory;
 /**
  * Runs the SPARQL test suite against a JiniFederation, which must be
  * already deployed. Each test in the suite is run against a distinct quad store
- * in its own bigdata namespace.
+ * in its own embergraph namespace.
  * <p>
  * To run this test suite, you need to have a deployed federation.  You then specify
  * the configuration file for that deployed federation.  If sysstat is in a non-default
  * location, then it is convenient (but not necessary) to also specify its path. For
  * example:
  * <pre>
- * -Dbigdata.configuration=/nas/bigdata/benchmark/config/bigdataStandalone.config
+ * -Dembergraph.configuration=/nas/bigdata/benchmark/config/bigdataStandalone.config
  * -Dorg.embergraph.counters.linux.sysstat.path=/usr/local/bin
  * </pre>
  * 

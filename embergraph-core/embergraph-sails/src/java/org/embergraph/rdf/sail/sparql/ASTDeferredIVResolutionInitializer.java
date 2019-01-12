@@ -355,15 +355,15 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private EmbergraphValue getEmbergraphValue(final String value, final DTE dte) {
-    	// Check if lexical form is empty, and provide bigdata value
+    	// Check if lexical form is empty, and provide embergraph value
     	// with FullyInlineTypedLiteralIV holding corresponding data type
     	// @see https://jira.blazegraph.com/browse/BLZG-1716 (SPARQL Update parser fails on invalid numeric literals)
     	if (value.isEmpty()) {
-    		EmbergraphLiteral bigdataValue = valueFactory.createLiteral(value, dte.getDatatypeURI());
+    		EmbergraphLiteral embergraphValue = valueFactory.createLiteral(value, dte.getDatatypeURI());
     		IV iv = new FullyInlineTypedLiteralIV<EmbergraphLiteral>("", null, dte.getDatatypeURI(), true);
-			bigdataValue.setIV(iv);
-			iv.setValue(bigdataValue);
-			return bigdataValue;
+			embergraphValue.setIV(iv);
+			iv.setValue(embergraphValue);
+			return embergraphValue;
     	}
         final IV iv = decode(value, dte.name());
         EmbergraphValue embergraphValue;

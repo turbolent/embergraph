@@ -47,7 +47,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * A SERVICE that exposes a stored query for execution. The stored query may be
  * a SPARQL query or arbitrary procedural application logic, but it must
  * evaluate to a solution multi-set. The service interface is written to the
- * openrdf interfaces in order to remove the burden of dealing with bigdata
+ * openrdf interfaces in order to remove the burden of dealing with embergraph
  * {@link IV}s from the application.
  * <p>
  * In order to use a stored query, a concrete instance of this class must be
@@ -100,7 +100,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * 
  *      FIXME Generalize to support groovy scripting.
  * 
- *      TODO We could use {@link ASTEvalHelper} to evaluate at the bigdata level
+ *      TODO We could use {@link ASTEvalHelper} to evaluate at the embergraph level
  *      without forcing the materialization of any variable bindings from the
  *      lexicon indices. This would be faster for some purposes, especially if
  *      the stored procedure is only used to JOIN into an outer query as in

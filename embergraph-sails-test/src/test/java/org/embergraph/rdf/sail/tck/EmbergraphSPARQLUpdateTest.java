@@ -109,7 +109,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
 
     /**
      * Note: This method may be overridden in order to run the test suite
-     * against other variations of the bigdata backend.
+     * against other variations of the embergraph backend.
      */
     protected Properties getProperties() {
 
@@ -746,7 +746,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
             throws Exception
         {
     
-    	//Depends on bigdata-rdf test resource
+    	//Depends on embergraph-rdf test resource
     	final URL url = this.getClass().getClassLoader().getResource(
           "org/embergraph/rdf/rio/small.rdf.gz");
     	

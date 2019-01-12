@@ -33,7 +33,7 @@ import org.embergraph.service.geospatial.GeoSpatial;
 
 /**
  * Translate {@link FTS#GEOSPATIAL} and related magic predicates into a
- * {@link ServiceNode} which will invoke the bigdata geospatial service.
+ * {@link ServiceNode} which will invoke the embergraph geospatial service.
  * 
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

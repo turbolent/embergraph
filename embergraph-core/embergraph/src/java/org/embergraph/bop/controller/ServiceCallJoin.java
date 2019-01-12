@@ -75,7 +75,7 @@ import cutthecrap.utils.striterators.SingleValueIterator;
 /**
  * Vectored pipeline join of the source solution(s) with solutions from a a
  * SERVICE invocation. This operator may be used to invoke: (a) internal,
- * bigdata-aware services; (b) internal openrdf aware services; and (c) remote
+ * embergraph-aware services; (b) internal openrdf aware services; and (c) remote
  * services.
  * <p>
  * Source solutions are vectored for the same target service. Source solutions
@@ -755,7 +755,7 @@ public class ServiceCallJoin extends PipelineOp {
             }
 
             /**
-             * Evaluate a bigdata aware "service" call in the same JVM.
+             * Evaluate a embergraph aware "service" call in the same JVM.
              */
             private ICloseableIterator<IBindingSet> doEmbergraphServiceCall(
                     final EmbergraphServiceCall serviceCall,
@@ -855,11 +855,11 @@ public class ServiceCallJoin extends PipelineOp {
                 final BindingSet[] serviceResultChunk = serviceResults
                         .toArray(new BindingSet[serviceResults.size()]);
 
-                final IBindingSet[] bigdataSolutionChunk = ServiceCallUtility
+                final IBindingSet[] embergraphSolutionChunk = ServiceCallUtility
                         .resolve(db, serviceResultChunk);
 
                 return new ChunkedArrayIterator<IBindingSet>(
-                        bigdataSolutionChunk);
+                        embergraphSolutionChunk);
 
             }
             

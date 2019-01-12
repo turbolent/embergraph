@@ -33,7 +33,7 @@ import org.embergraph.search.IHit;
 
 /**
  * Abstraction for the text indexer for RDF {@link Value}s allowing either the
- * built-in bigdata {@link FullTextIndex} or support for Lucene, etc.
+ * built-in embergraph {@link FullTextIndex} or support for Lucene, etc.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

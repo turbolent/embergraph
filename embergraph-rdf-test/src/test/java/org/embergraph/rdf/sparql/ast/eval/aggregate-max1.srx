@@ -9,7 +9,7 @@
   <results>
     <result>
         <binding name="m">
-            <literal xml:lang="en">bigdata</literal>
+            <literal xml:lang="en">embergraph</literal>
       	   </binding>
     </result>
   </results>

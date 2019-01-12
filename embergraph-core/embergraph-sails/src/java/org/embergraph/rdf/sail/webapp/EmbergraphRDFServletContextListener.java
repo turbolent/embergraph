@@ -684,8 +684,8 @@ public class EmbergraphRDFServletContextListener implements
      * Open the {@link IIndexManager} identified by the property file.
      *
      * @param propertyFile
-     *            The property file (for a standalone bigdata instance) or the
-     *            jini configuration file (for a bigdata federation). The file
+     *            The property file (for a standalone embergraph instance) or the
+     *            jini configuration file (for a embergraph federation). The file
      *            must end with either ".properties" or ".config".
      *
      * @return The {@link IIndexManager}.
@@ -747,7 +747,7 @@ public class EmbergraphRDFServletContextListener implements
             if (isJini) {
 
                 /*
-                 * A bigdata federation.
+                 * A embergraph federation.
                  *
                  * Note: The Apache River configuration mechanism will search
                  * both the file system and the classpath, much as we have done

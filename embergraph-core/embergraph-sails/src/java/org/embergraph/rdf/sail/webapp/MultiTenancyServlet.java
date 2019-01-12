@@ -62,8 +62,8 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.PropertyUtil;
 
 /**
- * Mult-tenancy Administration Servlet (management for bigdata namespaces). A
- * bigdata namespace corresponds to a partition in the naming of durable
+ * Mult-tenancy Administration Servlet (management for embergraph namespaces). A
+ * embergraph namespace corresponds to a partition in the naming of durable
  * resources. A {@link Journal} or {@link IEmbergraphFederation} may have multiple
  * KB instances, each in their own namespace. This servlet allows you to manage
  * those KB instances using CRUD operations.

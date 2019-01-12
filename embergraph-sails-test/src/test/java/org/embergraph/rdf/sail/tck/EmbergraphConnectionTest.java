@@ -59,7 +59,7 @@ import org.embergraph.rdf.sail.EmbergraphSail.Options;
  * Bigdata uses snapshot isolation for transactions while openrdf assumes that
  * any writes committed by a transaction become immediately visible to
  * transactions which are already running. Several unit tests from the base
- * class have to be overridden bigdata has stronger semantics for transactional
+ * class have to be overridden embergraph has stronger semantics for transactional
  * isolation.
  * 
  * @author mrpersonick
@@ -243,7 +243,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
 //    public void testEmptyCommit()
 //        throws Exception
 //    {
-//        log.warn("Test overridden since bigdata uses full snapshot tx isolation.");
+//        log.warn("Test overridden since embergraph uses full snapshot tx isolation.");
 ////      super.testEmptyCommit();
 //		assertTrue(testCon.isEmpty());
 //		assertTrue(testCon2.isEmpty());
@@ -266,7 +266,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
 //    public void testSizeCommit()
 //        throws Exception
 //    {
-//        log.warn("Test overridden since bigdata uses full snapshot tx isolation.");
+//        log.warn("Test overridden since embergraph uses full snapshot tx isolation.");
 ////        super.testSizeCommit();
 //		assertEquals(0, testCon.size());
 //		assertEquals(0, testCon2.size());
@@ -292,7 +292,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
 //    public void testTransactionIsolation()
 //        throws Exception
 //    {
-//        log.warn("Test overridden since bigdata uses full snapshot tx isolation.");
+//        log.warn("Test overridden since embergraph uses full snapshot tx isolation.");
 ////        super.testTransactionIsolation();
 //
 //        testCon.setAutoCommit(false);

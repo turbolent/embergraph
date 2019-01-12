@@ -213,7 +213,7 @@ public class EmbergraphStoreTest extends RDFStoreTest {
 	 * Bigdata uses snapshot isolation for transactions while openrdf assumes
 	 * that any writes committed by a transaction become immediately visible to
 	 * transactions which are already running. This unit test from the base
-	 * class has been overridden since bigdata has stronger semantics for
+	 * class has been overridden since embergraph has stronger semantics for
 	 * transactional isolation.
 	 * 
 	 * Also modified to use SPARQL instead of SeRQL.
@@ -241,7 +241,7 @@ public class EmbergraphStoreTest extends RDFStoreTest {
 	        	evaluate(query, con2);
 	        
 //			final int nexpected = 5; // No. This is openrdf "read-committed" semantics.
-			final int nexpected = 1; // Yes. This is bigdata snapshot isolation semantics.
+			final int nexpected = 1; // Yes. This is embergraph snapshot isolation semantics.
 			assertEquals(nexpected, countElements(queryResult));
 			Runnable clearer = new Runnable() {
 

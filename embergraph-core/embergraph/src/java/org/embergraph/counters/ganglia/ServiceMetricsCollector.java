@@ -96,7 +96,7 @@ public class ServiceMetricsCollector implements IGangliaMetricsCollector {
              * have different prefixes but different DS instances on different
              * nodes would use the same name for a given performance counter.
              * 
-             * / bigdata10.bigdata.com / service /
+             * / embergraph10.bigdata.com / service /
              * org.embergraph.service.IMetadataService /
              * f4c2ee13-0679-494d-913d-76d14f7d0385 / ...
              */

@@ -919,7 +919,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
      *             coupling between the {@link RunningQuery}, the
      *             {@link EmbergraphSailQuery}, and the {@link IRunningQuery}. It
      *             was not possible to obtain that tight coupling with the 1.0.x
-     *             releases of bigdata due to the integration with the Sail.
+     *             releases of embergraph due to the integration with the Sail.
      *             This led to the practice of setting the query {@link UUID} so
      *             we could resolve it once the query was executing using
      *             {@link QueryEngine#getRunningQuery(UUID)}. This also required

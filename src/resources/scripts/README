@@ -1,6 +1,6 @@
 This directory contains some scripts which may be useful on a un*x platform.
 
-bigdataenv
+embergraphenv
  
           The configuration file for the shell environment.  The other
           scripts in this directory rely on this script to setup their
@@ -10,28 +10,28 @@ bigdataenv
           substitution has taken place for files in both this
           directory and the config directory.
  
-bigdata   
+embergraph
 
 		  An init.d style script with start, stop, status, destroy, etc. actions.
-		  In order to start up bigdata on a cluster, this script must be executed
-		  on each machine which will participate in the bigdata federation.  This
+		  In order to start up embergraph on a cluster, this script must be executed
+		  on each machine which will participate in the embergraph federation.  This
 		  can be done in a variety of ways, including cron jobs, puppet, torque,
 		  etc.
 
-	start - Starts a bigdata services manager on the local host.  The services
+	start - Starts a embergraph services manager on the local host.  The services
 			manager will discover services which are already running and will
 			attempt to start any services which may run on the local host based
 			on the current configuration.
 			
-	stop  - Stops the bigdata services manager and any services on the local host
+	stop  - Stops the embergraph services manager and any services on the local host
 			which it was managing.  Services which have been stopped may be restarted
 			at a later time.
 			
-  destroy - Destroys the bigdata services manager and any services on the local
+  destroy - Destroys the embergraph services manager and any services on the local
 			host which it was manager together with their data.  This action will
 			DESTROY any persistent data associated with those service(s). 
 
-   status - Reports on the run state of the bigdata services manager on the local
+   status - Reports on the run state of the embergraph services manager on the local
    			host.
 
       hup - Sends a HUP signal to the services manager.  This will cause a configuration
@@ -42,23 +42,23 @@ bigdata
      file <file>
           - Reads the desired run state from the specified file.
 
-bigdataup
-bigdatadown 
-bigdataprecond
-bigdatasetup
+embergraphup
+embergraphdown
+embergraphprecond
+embergraphsetup
           
-          These scripts are invoked automatically by the bigdata script.
+          These scripts are invoked automatically by the embergraph script.
 
 crontab.user
 
-		  A sample user crontab.  If installed, it will execute the 'bigdata' script
+		  A sample user crontab.  If installed, it will execute the 'embergraph' script
 		  once per minute specifying the desired run state indirectly using the 'file'
 		  argument and passing @stateFile@ as the file containing the desired run state.
 		  This is not installed by default.
 
 crontab.system
 
-		  A sample system crontab.  If installed, it will execute the 'bigdata' script
+		  A sample system crontab.  If installed, it will execute the 'embergraph' script
 		  once per minute specifying the desired run state indirectly using the 'file'
 		  argument and passing @stateFile@ as the file containing the desired run state.
 		  This is not installed by default.
@@ -75,5 +75,5 @@ dumpZoo.sh
 counters.sh
 
           Starts an httpd instance which may be used to view historical or post-
-          mortem performance counters or events logged by bigdata.
+          mortem performance counters or events logged by embergraph.
           

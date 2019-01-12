@@ -347,7 +347,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph implements Transact
     private final List<IChangeRecord> removes = new LinkedList<IChangeRecord>();
     
     /**
-     * Changed events coming from bigdata.
+     * Changed events coming from embergraph.
      */
     @Override
     public void changeEvent(final IChangeRecord record) {
@@ -386,7 +386,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph implements Transact
     }
     
     /**
-     * Turn a bigdata change record into a graph edit.
+     * Turn a embergraph change record into a graph edit.
      * 
      * @param record
      *          Bigdata change record

@@ -1155,7 +1155,7 @@
     <implementation xmi:id="_hPNxkM0fEd2u45QNMGmXTQ" client="_fnNR8M0fEd2u45QNMGmXTQ" supplier="_XlkWwM0fEd2u45QNMGmXTQ" realizingClassifier="_XlkWwM0fEd2u45QNMGmXTQ" contract="_XlkWwM0fEd2u45QNMGmXTQ">
       <mapping xmi:id="_hPNxkc0fEd2u45QNMGmXTQ"/>
     </implementation>
-    <ownedAttribute xmi:id="__LYboc0lEd2u45QNMGmXTQ" name="ibigdatafederation" visibility="private" type="_8rMW0M0lEd2u45QNMGmXTQ" association="__LYboM0lEd2u45QNMGmXTQ">
+    <ownedAttribute xmi:id="__LYboc0lEd2u45QNMGmXTQ" name="iembergraphfederation" visibility="private" type="_8rMW0M0lEd2u45QNMGmXTQ" association="__LYboM0lEd2u45QNMGmXTQ">
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__LYbpM0lEd2u45QNMGmXTQ" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__LYbo80lEd2u45QNMGmXTQ"/>
     </ownedAttribute>

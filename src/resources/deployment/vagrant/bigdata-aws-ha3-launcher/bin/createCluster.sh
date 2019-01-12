@@ -10,11 +10,11 @@ vagrant up
 #
 # Occassionally, usually during svn based builds, AWS has timeout issues.  If this occurs, launch the cluster instances individually:
 #
-# vagrant up bigdataA
-# echo "\nbigdataA is up\n"
-# vagrant up bigdataB
-# echo "\nbigdataB is up\n"
-# vagrant up bigdataC
-# echo "\nbigdataC is up\n"
+# vagrant up embergraphA
+# echo "\nembergraphA is up\n"
+# vagrant up embergraphB
+# echo "\nembergraphB is up\n"
+# vagrant up embergraphC
+# echo "\nembergraphC is up\n"
 echo "Vagrant up completed. Setting host names..."
 python ./bin/setHosts.py

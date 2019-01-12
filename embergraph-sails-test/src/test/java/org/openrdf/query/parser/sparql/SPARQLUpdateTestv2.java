@@ -233,7 +233,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
 
     /**
      * Note: This method may be overridden in order to run the test suite
-     * against other variations of the bigdata backend.
+     * against other variations of the embergraph backend.
      */
     protected Properties getProperties() {
 

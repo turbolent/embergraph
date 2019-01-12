@@ -164,7 +164,7 @@ public class TestAll extends TestCase {
 
         }
         
-        // Test suite for embedded bigdata query hints.
+        // Test suite for embedded embergraph query hints.
         suite.addTestSuite(TestQueryHints.class);
 
         // Test suite with explicitly enabled hash joins.

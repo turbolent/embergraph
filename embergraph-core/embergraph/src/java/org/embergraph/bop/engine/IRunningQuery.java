@@ -60,7 +60,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
      * The {@link IEmbergraphFederation} IFF the operator is being evaluated on an
      * {@link IEmbergraphFederation}. When evaluating operations against an
      * {@link IEmbergraphFederation}, this reference provides access to the
-     * scale-out view of the indices and to other bigdata services.
+     * scale-out view of the indices and to other embergraph services.
      */
     IEmbergraphFederation<?> getFederation();
 

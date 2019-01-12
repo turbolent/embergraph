@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
 
 /**
- * Low level IO performance tests in support of bigdata design options.
+ * Low level IO performance tests in support of embergraph design options.
  * 
  * @todo Develop test to compare efficiency of an ordered write to random writes
  *       of the same pages. Use a random sequence of pages. Selection without

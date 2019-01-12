@@ -89,7 +89,7 @@ public class TestTicket581 extends QuadsTestCase {
     public void testBug() throws Exception {
     	
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
 	  	final EmbergraphSail embergraphSail = getSail();
 	  	
@@ -132,11 +132,11 @@ public class TestTicket581 extends QuadsTestCase {
 	  	
 	  		embergraphSail.initialize();
 	  		
-  			final EmbergraphSailRepository bigdataRepo = new EmbergraphSailRepository(embergraphSail);
+  			final EmbergraphSailRepository embergraphRepo = new EmbergraphSailRepository(embergraphSail);
   			
-	  		{ // load the data into the bigdata store
+	  		{ // load the data into the embergraph store
 	  			
-	  			final RepositoryConnection cxn = bigdataRepo.getConnection();
+	  			final RepositoryConnection cxn = embergraphRepo.getConnection();
 	  			try {
 	  				cxn.setAutoCommit(false);
 	  				cxn.add(getClass().getResourceAsStream(data), baseURI, format);
@@ -148,10 +148,10 @@ public class TestTicket581 extends QuadsTestCase {
 	  		}
 	  		
             /*
-             * Run the problem query using the bigdata store and then compare
+             * Run the problem query using the embergraph store and then compare
              * the answer.
              */
-            final RepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+            final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
   			try {
 	            final SailGraphQuery graphQuery = (SailGraphQuery)
 	                cxn.prepareGraphQuery(QueryLanguage.SPARQL, query);

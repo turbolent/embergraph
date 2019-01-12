@@ -832,7 +832,7 @@ abstract public class AbstractTripleStore extends
          * and you CAN NOT translate from a statement identifier back to the
          * original statement.
          * <p>
-         * bigdata supports an RDF/XML interchange extension for the interchange
+         * embergraph supports an RDF/XML interchange extension for the interchange
          * of <em>triples</em> with statement identifiers that may be used as
          * blank nodes to make statements about statements. See {@link BD} and
          * {@link RDFXMLParser}.
@@ -3350,7 +3350,7 @@ abstract public class AbstractTripleStore extends
     }
 
     /**
-     * Convert a Sesame Value based triple pattern into a bigdata Predicate.
+     * Convert a Sesame Value based triple pattern into a embergraph Predicate.
      * Will return null if any of the Sesame Values are not present in the
      * database.
      */

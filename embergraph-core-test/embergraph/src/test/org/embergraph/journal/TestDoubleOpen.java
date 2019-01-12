@@ -76,7 +76,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
      * IOException as well. That is just making do with reality.
      * 
      * <pre>
-     * java.util.concurrent.ExecutionException: java.lang.RuntimeException: file=C:\DOCUME~1\BRYANT~1\LOCALS~1\Temp\bigdata-Disk-6474551553928984593.jnl
+     * java.util.concurrent.ExecutionException: java.lang.RuntimeException: file=C:\DOCUME~1\BRYANT~1\LOCALS~1\Temp\embergraph-Disk-6474551553928984593.jnl
      *     at java.util.concurrent.FutureTask$Sync.innerGet(FutureTask.java:222)
      *     at java.util.concurrent.FutureTask.get(FutureTask.java:83)
      *     at org.embergraph.journal.TestDoubleOpen.test_doubleOpen(TestDoubleOpen.java:119)
@@ -98,7 +98,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
      *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-     * Caused by: java.lang.RuntimeException: file=C:\DOCUME~1\BRYANT~1\LOCALS~1\Temp\bigdata-Disk-6474551553928984593.jnl
+     * Caused by: java.lang.RuntimeException: file=C:\DOCUME~1\BRYANT~1\LOCALS~1\Temp\embergraph-Disk-6474551553928984593.jnl
      *     at org.embergraph.journal.FileMetadata.<init>(FileMetadata.java:760)
      *     at org.embergraph.journal.AbstractJournal.<init>(AbstractJournal.java:1066)
      *     at org.embergraph.journal.AbstractJournal.<init>(AbstractJournal.java:659)

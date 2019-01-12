@@ -192,7 +192,7 @@ import info.aduna.iteration.CloseableIteration;
  * </p>
  * <p>
  * Concurrent fully isolated read/write transactions against the same Sail are
- * also implemented in the bigdata SAIL. To turn on read/write transactions, use
+ * also implemented in the embergraph SAIL. To turn on read/write transactions, use
  * the option {@link Options#ISOLATABLE_INDICES}. If this option is set to true,
  * then {@link #getConnection()} will return an isolated read/write view of the
  * database. Multiple concurrent read/write transactions are allowed, and the
@@ -4634,7 +4634,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         }
 
         /**
-         * Evaluate a bigdata query model.
+         * Evaluate a embergraph query model.
          * 
          * @param queryRoot
          *            The query model.
@@ -4652,7 +4652,7 @@ public class EmbergraphSail extends SailBase implements Sail {
          * @throws SailException
          * 
          * @deprecated Consider removing this method from our public API. It is
-         *             no longer in any code path for the bigdata code base.
+         *             no longer in any code path for the embergraph code base.
          *             Embedded applications requiring high level evaluation
          *             should use {@link EmbergraphSailRepositoryConnection}. It
          *             does not call through here, but goes directly to the
@@ -4820,7 +4820,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 		 * MVCC(full read-write tx) or simply a single writer on the live
 		 * indices (unisolated). The latter has more throughput.
 		 * 
-		 * FIXME Use the MVCC semantics in bigdata do use a prepare()/commit()
+		 * FIXME Use the MVCC semantics in embergraph do use a prepare()/commit()
 		 * pattern and have the notion of active and inactive transactions. This
 		 * transaction statement metadata could be exposed to the SailConnection
 		 * for the EmbergraphSailReadOnlyConnection and BigdataSailRWConnection,
@@ -4890,7 +4890,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 		 * This API is new with openrdf 2.7. It is not supported. Bigdata has a
 		 * different logical operator model from openrdf. The UpdateContext is
 		 * expressed in terms of the openrdf logical operator model
-		 * (UpdateExpr). Therefore it can not be used with bigdata.
+		 * (UpdateExpr). Therefore it can not be used with embergraph.
 		 * 
 		 * (non-Javadoc)
 		 * 

@@ -466,7 +466,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager> extends
         // Load the resource into the KB.
         {
         	cxn.add( this.getClass().getClassLoader().getResource("org/embergraph/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
-            //cxn.add(new URL("file:bigdata-rdf/src/test/org/embergraph/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
+            //cxn.add(new URL("file:embergraph-rdf/src/test/org/embergraph/rdf/rio/small.rdf"), "", RDFFormat.RDFXML);
             assertEquals(expectedStatementCount, getExactSize());
         }
 

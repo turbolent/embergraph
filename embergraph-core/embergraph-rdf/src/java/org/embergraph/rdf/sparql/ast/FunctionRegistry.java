@@ -336,7 +336,7 @@ public class FunctionRegistry {
 
             }
         });
-		// add the bigdata built-ins
+		// add the embergraph built-ins
 
 		add(BOUND, new Factory() {
 			public IValueExpression<? extends IV> create(final BOpContextBase context, final GlobalAnnotations globals,

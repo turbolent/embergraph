@@ -105,7 +105,7 @@ public class TestAll_AST extends TestCase {
         suite.addTestSuite(TestUpdateExprBuilder.class);
 
         /*
-         * Test suite for bigdata extensions to SPARQL UPDATE.
+         * Test suite for embergraph extensions to SPARQL UPDATE.
          */
         suite.addTestSuite(TestUpdateExprBuilder2.class);
 

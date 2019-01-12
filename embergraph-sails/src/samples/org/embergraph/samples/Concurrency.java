@@ -56,7 +56,7 @@ public class Concurrency {
         "select ?x where { ?x <"+RDF.TYPE+"> <"+LUBM.FULL_PROFESSOR+"> . }";
     
     /**
-     * Manage the control flow of the program.  Open a bigdata repository,
+     * Manage the control flow of the program.  Open a embergraph repository,
      * kick off the writer, kick off the readers, wait for the writer to 
      * complete, kill the readers, wait for the readers to complete, shutdown 
      * the repository.
@@ -91,7 +91,7 @@ public class Concurrency {
             }
             
             // launch the threads and get their futures
-            // bigdata has an executor service but any executor service will do
+            // embergraph has an executor service but any executor service will do
             ExecutorService executor = Executors.newCachedThreadPool();
             Future writerFuture = executor.submit(writer);
             Collection<Future> readerFutures = new LinkedList<Future>();
@@ -184,14 +184,14 @@ public class Concurrency {
     private static class BigdataWriter implements Runnable {
         
         /**
-         * The bigdata repository
+         * The embergraph repository
          */
         private BigdataSailRepository repo;
         
         /**
          * Construct the writer task.
          * 
-         * @param fed the bigdata repository
+         * @param fed the embergraph repository
          */
         public BigdataWriter(BigdataSailRepository repo) {
             
@@ -308,7 +308,7 @@ public class Concurrency {
     private static class BigdataReader implements Runnable {
         
         /**
-         * The bigdata repository
+         * The embergraph repository
          */
         private BigdataSailRepository repo;
         
@@ -320,7 +320,7 @@ public class Concurrency {
         /**
          * Create the reader.
          * 
-         * @param fed the bigdata repository
+         * @param fed the embergraph repository
          */
         public BigdataReader(BigdataSailRepository repo) {
             

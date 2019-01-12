@@ -10,7 +10,7 @@
     <result>
         <binding name="m">
             <literal
-             xml:lang="de">bigdata</literal>
+             xml:lang="de">embergraph</literal>
         </binding>
     </result>
   </results>

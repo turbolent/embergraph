@@ -385,8 +385,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
      * Open the {@link IIndexManager} identified by the property file.
      * 
      * @param propertyFile
-     *            The property file (for a standalone bigdata instance) or the
-     *            jini configuration file (for a bigdata federation). The file
+     *            The property file (for a standalone embergraph instance) or the
+     *            jini configuration file (for a embergraph federation). The file
      *            must end with either ".properties" or ".config".
      *            
      * @return The {@link IIndexManager}.
@@ -425,7 +425,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
             if (isJini) {
 
                 /*
-                 * A bigdata federation.
+                 * A embergraph federation.
                  */
 
 				@SuppressWarnings("rawtypes")
@@ -488,7 +488,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 	 * {@link Journal}. The federation must already be up and running. An
 	 * embedded {@link NanoSparqlServer} instance will be created for each test
 	 * run. Each test will run against a distinct KB instance within a unique
-	 * bigdata namespace on the same backing {@link IIndexManager}.
+	 * embergraph namespace on the same backing {@link IIndexManager}.
 	 * <p>
 	 * When run for CI, this can be executed as:
 	 * <pre>

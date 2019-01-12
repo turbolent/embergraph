@@ -143,7 +143,7 @@ public class ASTEvalHelper {
         // Clear the optimized AST.
         astContainer.clearOptimizedAST();
 
-        // Batch resolve Values to IVs and convert to bigdata binding set.
+        // Batch resolve Values to IVs and convert to embergraph binding set.
         final IBindingSet[] globallyScopedBSAsList = toBindingSet(resolved.bindingSet) ;
 
         // Convert the query (generates an optimized AST as a side-effect).
@@ -274,7 +274,7 @@ public class ASTEvalHelper {
         // Clear the optimized AST.
         astContainer.clearOptimizedAST();
 
-        // Batch resolve Values to IVs and convert to bigdata binding set.
+        // Batch resolve Values to IVs and convert to embergraph binding set.
         final IBindingSet[] globallyScopedBSAsList = toBindingSet(globallyScopedBS) ;
 
         // Convert the query (generates an optimized AST as a side-effect).
@@ -343,7 +343,7 @@ public class ASTEvalHelper {
                  * the query plan.
                  * 
                  * Note: This does not materialize the IVCache for inline IVs.
-                 * The assumption is that the consumer is bigdata aware and can
+                 * The assumption is that the consumer is embergraph aware and can
                  * use inline IVs directly.
                  */
                 
@@ -413,7 +413,7 @@ public class ASTEvalHelper {
         // Clear the optimized AST.
         astContainer.clearOptimizedAST();
 
-        // Batch resolve Values to IVs and convert to bigdata binding set.
+        // Batch resolve Values to IVs and convert to embergraph binding set.
         final IBindingSet[] globallyScopedBSAsList = toBindingSet(resolved.bindingSet) ;
 
         // Convert the query (generates an optimized AST as a side-effect).
@@ -750,7 +750,7 @@ public class ASTEvalHelper {
             runningQuery.setStaticAnalysisStats(ctx.getStaticAnalysisStats());
 
             /*
-             * Wrap up the native bigdata query solution iterator as Sesame
+             * Wrap up the native embergraph query solution iterator as Sesame
              * compatible iteration with materialized RDF Values.
              */
             return iterator(runningQuery, ctx.db,
@@ -767,7 +767,7 @@ public class ASTEvalHelper {
     }
     
     /**
-     * Convert a Sesame {@link BindingSet} into a bigdata {@link IBindingSet}.
+     * Convert a Sesame {@link BindingSet} into a embergraph {@link IBindingSet}.
      * 
      * @param src
      *            The {@link BindingSet} (optional).
@@ -876,7 +876,7 @@ public class ASTEvalHelper {
         
             /*
              * The projection of the query is being materialized by the query
-             * plan. All we have to do here is convert bigdata IBindingSets
+             * plan. All we have to do here is convert embergraph IBindingSets
              * consisting of IVs having cached BigdataValues to Sesame
              * BindingSets.
              */
@@ -943,7 +943,7 @@ public class ASTEvalHelper {
             final int termsChunkSize = chunkCapacity;
             final int blobsChunkSize = chunkCapacity;
             
-            // Convert bigdata binding sets to Sesame binding sets.
+            // Convert embergraph binding sets to Sesame binding sets.
             it3 = new Embergraph2Sesame2BindingSetIterator(
                     // Materialize IVs as RDF Values.
                     new EmbergraphBindingSetResolverator(db, it2,
@@ -1047,7 +1047,7 @@ public class ASTEvalHelper {
             // Propagate attribute.
             ctx.setIncludeInferred(includeInferred);
             
-            // Batch resolve Values to IVs and convert to bigdata binding set.
+            // Batch resolve Values to IVs and convert to embergraph binding set.
             final IBindingSet[] bindingSets = toBindingSet(resolved.bindingSet) ;
             
             // Propagate bindings

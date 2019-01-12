@@ -296,7 +296,7 @@ public class ExportKB {
 
     /**
      * Return a list of the namespaces for the {@link AbstractTripleStore}s
-     * registered against the bigdata instance.
+     * registered against the embergraph instance.
      */
     static List<String> getNamespaces(final IIndexManager indexManager) {
     

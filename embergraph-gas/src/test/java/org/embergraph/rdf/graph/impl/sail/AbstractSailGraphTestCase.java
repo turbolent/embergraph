@@ -96,7 +96,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
         public SmallGraphProblem(final SailGraphFixture graphFixture) throws Exception {
 
             try {
-                // in eclipse with bigdata as the root dir.
+                // in eclipse with embergraph as the root dir.
                 graphFixture.loadGraph(smallGraph1);
             } catch (FileNotFoundException ex) {
                 // from the ant build file with embergraph-gas as the root dir.
@@ -223,7 +223,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
                 throws Exception {
 
             try {
-                // in eclipse with bigdata as the root dir.
+                // in eclipse with embergraph as the root dir.
                 graphFixture.loadGraph(ssspGraph1);
             } catch (FileNotFoundException ex) {
                 // from the ant build file with embergraph-gas as the root dir.

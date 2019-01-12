@@ -36,7 +36,7 @@ if [ -z "${ZK_SERVERS}" ] ; then
 	#Placeholder to make sure ZK SERVERS are set and started.
 	export ZK_SERVERS=""
 	#Use for a multiple ZK configuration
-	#export ZK_SERVERS="bigdata15:2081,bigdata16:2081,bigdata17:2081"
+	#export ZK_SERVERS="embergraph15:2081,embergraph16:2081,embergraph17:2081"
 fi
 
 #Replication Factor (set to one for HA1) configuration

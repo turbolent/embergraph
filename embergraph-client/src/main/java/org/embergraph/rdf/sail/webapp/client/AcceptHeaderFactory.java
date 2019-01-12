@@ -50,7 +50,7 @@ import org.openrdf.rio.RDFParserRegistry;
  * @version $Id$
  * 
  *          TODO Add a parameter for SID support or just specify as the
- *          preferredFormat when the database is using SIDs (or for any bigdata
+ *          preferredFormat when the database is using SIDs (or for any embergraph
  *          database if we support SIDs in all modes).
  * 
  *          TODO It would be nice if the formats indicated their compactness and

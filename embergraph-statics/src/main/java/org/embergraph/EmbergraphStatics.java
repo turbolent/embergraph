@@ -99,7 +99,7 @@ public class EmbergraphStatics {
 
     /**
      * Return the web application context path for the default deployment of the
-     * bigdata web application.
+     * embergraph web application.
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/730" >
      *      Allow configuration of embedded NSS jetty server using jetty-web.xml

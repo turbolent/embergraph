@@ -71,7 +71,7 @@ import org.embergraph.striterator.ChunkedArrayIterator;
  * Note: You can not use multiple {@link DataService}s in this test suite with
  * the {@link EmbeddedFederation} because the services are not sufficiently
  * distinct based on how they are created. Therefore unit tests against more
- * than one {@link DataService} are located in the <code>bigdata-jini</code>
+ * than one {@link DataService} are located in the <code>embergraph-jini</code>
  * module.
  * <p>
  * Note: Distributed query processing generally means that the order in which
@@ -80,7 +80,7 @@ import org.embergraph.striterator.ChunkedArrayIterator;
  * {@link SortOp}.
  * 
  * <pre>
- * -Dlog4j.configuration=bigdata/src/resources/logging/log4j.properties
+ * -Dlog4j.configuration=embergraph/src/resources/logging/log4j.properties
  * </pre>
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

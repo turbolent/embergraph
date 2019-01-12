@@ -1,5 +1,5 @@
-Summary: bigdata highly available RDF/graph/SPARQL database
-Name: bigdata
+Summary: embergraph highly available RDF/graph/SPARQL database
+Name: embergraph
 Version: @build.ver@
 Release: @package.release@
 License: GPLv2

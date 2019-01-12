@@ -129,7 +129,7 @@ public class SD {
     static public final URI BasicFederatedQuery = new URIImpl(NS + "BasicFederatedQuery");
     
     /**
-     * The namespace for the bigdata specific features.
+     * The namespace for the embergraph specific features.
      */
     static public final String BDFNS = BD.NAMESPACE+"/features/";
 

@@ -1012,7 +1012,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
      * Return a filter that only visits the edges of graph that are instances of
      * the specified link attribute type.
      * <p>
-     * Note: For bigdata, the visited edges can be decoded to recover the
+     * Note: For embergraph, the visited edges can be decoded to recover the
      * original link as well. 
      * 
      * @see IGASState#isLinkAttrib(Statement, URI)
@@ -1027,7 +1027,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
     /**
      * Filter visits only edges where the {@link Statement} is an instance of
-     * the specified link attribute type. For bigdata, the visited edges can be
+     * the specified link attribute type. For embergraph, the visited edges can be
      * decoded to recover the original link as well.
      */
     private class LinkAttribFilter extends Filter {

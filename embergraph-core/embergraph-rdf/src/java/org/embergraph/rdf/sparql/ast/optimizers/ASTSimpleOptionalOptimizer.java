@@ -193,7 +193,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
                     /*
                      * Do NOT translate SERVICE nodes (unless they are a well
-                     * known bigdata service).
+                     * known embergraph service).
                      */
 
                     continue;

@@ -71,7 +71,7 @@ public interface QueryHints {
 //    String PREFIX = "BIGDATA_QUERY_HINTS";
 
     /**
-     * The namespace for the bigdata query hints.
+     * The namespace for the embergraph query hints.
      */
     String NAMESPACE = "http://www.embergraph.org/queryHints#";
 
@@ -649,7 +649,7 @@ public interface QueryHints {
     String FILTER_EXISTS = "filterExists";
 
     /**
-     * Note: The historical behavior up through bigdata release 1.3.1 is
+     * Note: The historical behavior up through embergraph release 1.3.1 is
      * {@link FilterExistsModeEnum#VectoredSubPlan}.
      */
     FilterExistsModeEnum DEFAULT_FILTER_EXISTS = FilterExistsModeEnum.VectoredSubPlan;

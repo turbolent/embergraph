@@ -6,29 +6,29 @@ from boto import ec2
 from boto.manage.cmdshell import sshclient_from_instance
 import paramiko
 
-bigdataA = os.environ["BIGDATA_HA_HOST_A"]
-bigdataB = os.environ["BIGDATA_HA_HOST_B"]
-bigdataC = os.environ["BIGDATA_HA_HOST_C"]
+embergraphA = os.environ["BIGDATA_HA_HOST_A"]
+embergraphB = os.environ["BIGDATA_HA_HOST_B"]
+embergraphC = os.environ["BIGDATA_HA_HOST_C"]
 
 hostMap = {}
-bigdataHosts = [None] * 3
+embergraphHosts = [None] * 3
 
 def createHostAdditions( instances ):
 	hostsAdd = "\n"
 	for instance in instances:
     		data = instance.__dict__
-		if bigdataA in data['tags']['Name']:
-			bigdataHosts[0] = instance
-			hostsAdd += data[ 'private_ip_address' ] + "\\t" + bigdataA + "\\n"
-			hostMap[ bigdataA ] = data[ 'private_ip_address' ]
-		elif bigdataB in data['tags']['Name']:
-			bigdataHosts[1] = instance
-			hostsAdd += data[ 'private_ip_address' ] + "\\t" + bigdataB + "\\n"
-			hostMap[ bigdataB ] = data[ 'private_ip_address' ]
-		elif bigdataC in data['tags']['Name']:
-			bigdataHosts[2] = instance
-			hostsAdd += data[ 'private_ip_address' ] + "\\t" + bigdataC + "\\n"
-			hostMap[ bigdataC ] = data[ 'private_ip_address' ]
+		if embergraphA in data['tags']['Name']:
+			embergraphHosts[0] = instance
+			hostsAdd += data[ 'private_ip_address' ] + "\\t" + embergraphA + "\\n"
+			hostMap[ embergraphA ] = data[ 'private_ip_address' ]
+		elif embergraphB in data['tags']['Name']:
+			embergraphHosts[1] = instance
+			hostsAdd += data[ 'private_ip_address' ] + "\\t" + embergraphB + "\\n"
+			hostMap[ embergraphB ] = data[ 'private_ip_address' ]
+		elif embergraphC in data['tags']['Name']:
+			embergraphHosts[2] = instance
+			hostsAdd += data[ 'private_ip_address' ] + "\\t" + embergraphC + "\\n"
+			hostMap[ embergraphC ] = data[ 'private_ip_address' ]
 
 	return hostsAdd
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 	print "JINI_LOCATORS = " + jini_locators
 
 	i = 1
-	for host in bigdataHosts:
+	for host in embergraphHosts:
 		ssh_client = sshclient_from_instance( host, key_path, user_name='ubuntu' )
 		# ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -76,9 +76,9 @@ if __name__ == '__main__':
 		#    A string containing the stderr output of the command
 		status, stdin, stderr = ssh_client.run( "sudo sh -c 'echo \"" + hostsAdd + "\" >> /etc/hosts'" )
 		status, stdin, stderr = ssh_client.run( "sudo sh -c 'echo " + str(i) + " > /var/lib/zookeeper/myid'" )
-		status, stdin, stderr = ssh_client.run( createZookeeperSubstitution( "1", bigdataA, hostMap[ bigdataA ] ) )
-		status, stdin, stderr = ssh_client.run( createZookeeperSubstitution( "2", bigdataB, hostMap[ bigdataB ] ) )
-		status, stdin, stderr = ssh_client.run( createZookeeperSubstitution( "3", bigdataC, hostMap[ bigdataC ] ) )
+		status, stdin, stderr = ssh_client.run( createZookeeperSubstitution( "1", embergraphA, hostMap[ embergraphA ] ) )
+		status, stdin, stderr = ssh_client.run( createZookeeperSubstitution( "2", embergraphB, hostMap[ embergraphB ] ) )
+		status, stdin, stderr = ssh_client.run( createZookeeperSubstitution( "3", embergraphC, hostMap[ embergraphC ] ) )
 
 		status, stdin, stderr = ssh_client.run( jini_locators )
 
@@ -94,9 +94,9 @@ if __name__ == '__main__':
 		status, stdin, stderr = ssh_client.run( "sudo /etc/init.d/zookeeper-server restart" )
 		# print "Running: sudo /etc/init.d/bigdata restart on host ", host
 		status, stdin, stderr = ssh_client.run( "sudo /etc/init.d/bigdataHA restart" )
-		# status, stdin, stderr = ssh_client.run( "sudo service bigdataHA restart" )
+		# status, stdin, stderr = ssh_client.run( "sudo service embergraphHA restart" )
 		# host.reboot()
 
-	print "The bigdata HA service is now restarting, this may take several minutes. \nOnce back up, you may confirm status by visiting:\n"
-	for host in bigdataHosts:
+	print "The embergraph HA service is now restarting, this may take several minutes. \nOnce back up, you may confirm status by visiting:\n"
+	for host in embergraphHosts:
 		print "\thttp://" + host.__dict__['ip_address'] + ":9999/bigdata/status\n"

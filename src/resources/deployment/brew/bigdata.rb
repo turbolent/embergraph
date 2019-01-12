@@ -17,14 +17,14 @@ class Bigdata < Formula
       s.sub! "<%= INSTALL_TYPE %>", "BREW"
     end
 
-    # Set the installation path as the root for bigdata.jnl file location (<bigdata_home>/data):
+    # Set the installation path as the root for embergraph.jnl file location (<embergraph_home>/data):
     inreplace "#{prefix}/var/jetty/WEB-INF/RWStore.properties", "<%= BD_HOME %>", prefix
 
-    # Set the installation path as the root for log files (<bigdata_home>/log):
+    # Set the installation path as the root for log files (<embergraph_home>/log):
     inreplace "#{prefix}/var/jetty/WEB-INF/classes/log4j.properties", "<%= BD_HOME %>", prefix
   end
 
-  plist_options :startup => 'true', :manual => 'bigdata start'
+  plist_options :startup => 'true', :manual => 'embergraph start'
 
   def plist; <<-EOS.undent
     <?xml version="1.0" encoding="UTF-8"?>

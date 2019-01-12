@@ -90,7 +90,7 @@ public class ScaleOut {
             BigdataReader reader = new BigdataReader(fed);
             
             // launch the threads and get their futures
-            // bigdata has an executor service but any executor service will do
+            // embergraph has an executor service but any executor service will do
             Future writerFuture = fed.getExecutorService().submit(writer);
             Future readerFuture = fed.getExecutorService().submit(reader);
             

@@ -140,7 +140,7 @@
                   </Call>
                   <Call name="addHandler">
                     <Arg>
-                        <!-- This is the bigdata web application. -->
+                        <!-- This is the embergraph web application. -->
                         <New id="WebAppContext" class="org.eclipse.jetty.webapp.WebAppContext">
                          <Set name="war"><SystemProperty name="jetty.resourceBase" default="../embergraph-war-html/src/main/webapp/"/></Set>
                          <Set name="contextPath">/embergraph</Set>

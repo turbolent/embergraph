@@ -101,7 +101,7 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
     
     /**
      * Return an empty {@link File} created using the temporary file name
-     * mechanism. The file name will begin with <code>bigdata</code> and end
+     * mechanism. The file name will begin with <code>embergraph</code> and end
      * with <code>.tmp</code>. The file is marked for eventual deletion.
      */
     static protected File getTempFile() {
@@ -126,7 +126,7 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
      * Return an empty {@link File} created using the temporary file name
      * mechanism in the specified directory. The directory will be created if it
      * does not exist and the caller has sufficient permissions. The file name
-     * will begin with <code>bigdata</code> and end with <code>.tmp</code>. The
+     * will begin with <code>embergraph</code> and end with <code>.tmp</code>. The
      * file is marked for eventual deletion.
      * 
      * @param tmpDir

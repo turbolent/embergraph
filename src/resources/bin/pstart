@@ -63,7 +63,7 @@ Useful properties:
         is set to the empty string ("") or a value that does not
         correspond to any of the network interfaces on the system.
 
-    bigdata.codebase.host=<interfacename|ipaddress|hostname>
+    embergraph.codebase.host=<interfacename|ipaddress|hostname>
         Specifies the network address of the codebase HTTP server. If the
         value is an interface name, the IP address assigned to that interface
         will be used. If the value is an IP address or hostname, that value
@@ -73,12 +73,12 @@ Useful properties:
         configuration file to use the IPv4 address of the first active
         network inteface that can be found on the system.
 
-    bigdata.codebase.port=<n>
-        The port number on <bigdata.codebase.host> on which the HTTP class
+    embergraph.codebase.port=<n>
+        The port number on <embergraph.codebase.host> on which the HTTP class
         server is listening.
 
 """
-    serviceNames = bigdataServiceMap.keys()
+    serviceNames = embergraphServiceMap.keys()
     serviceNames.sort()
     print "Services: \n  " + ", ".join(serviceNames)
 
@@ -124,12 +124,12 @@ class BigdataServiceBase:
 
     def setPathProperties(self):
         self.properties['appHome'] = self.appHome
-        self.properties['bigdata.logDir'] = os.path.join( \
+        self.properties['embergraph.logDir'] = os.path.join( \
             self.appHome,  "var", "log")
         # Paths to items in the release directory structure
         appHome = self.appHome
         self.properties['java.library.path'] = os.path.join(appHome, "lib")
-        self.properties['bigdata.codebase.rootDir'] = \
+        self.properties['embergraph.codebase.rootDir'] = \
             os.path.join(appHome, "lib-dl")
 
     def setSecurityProperties(self):
@@ -142,8 +142,8 @@ class BigdataServiceBase:
         self.properties['default.nic'] = "${default.nic}"
         self.properties['exportHost'] = socket.gethostname()
         self.properties['exportPort'] = "0"
-        self.properties['bigdata.codebase.host'] = "${bigdata.codebase.host}"
-        self.properties['bigdata.codebase.port'] = "8081"
+        self.properties['embergraph.codebase.host'] = "${embergraph.codebase.host}"
+        self.properties['embergraph.codebase.port'] = "8081"
 
         self.properties['log4j.configuration'] = os.path.join( \
             self.appHome,  "var", "config", "logging", "log4j.properties")
@@ -201,14 +201,14 @@ class BigdataServiceBase:
             self.properties[k] = v
 
     def migrateProperties(self):
-        # entityCodebasePort -> bigdata.codebase.port
+        # entityCodebasePort -> embergraph.codebase.port
         if self.properties.has_key("entityCodebasePort"):
-            self.properties["bigdata.codebase.port"] = \
+            self.properties["embergraph.codebase.port"] = \
                 self.properties["entityCodebasePort"]
             del self.properties["entityCodebasePort"]
-        # entityCodebaseHost -> bigdata.codebase.host
+        # entityCodebaseHost -> embergraph.codebase.host
         if self.properties.has_key("entityCodebaseHost"):
-            self.properties["bigdata.codebase.host"] = \
+            self.properties["embergraph.codebase.host"] = \
                 self.properties["entityCodebaseHost"]
             del self.properties["entityCodebaseHost"]
 
@@ -217,7 +217,7 @@ class BigdataServiceBase:
         starterClasspath = [
             os.path.join(self.appHome, "lib", "start.jar"),
             os.path.join(self.appHome, "lib", "log4j.jar"),
-            os.path.join(self.appHome, "lib", "bigdata.jar"),
+            os.path.join(self.appHome, "lib", "embergraph.jar"),
             os.path.join(self.appHome, "lib", "zookeeper.jar"),
             os.path.join(self.appHome, "lib", "jsk-lib.jar") ]
 
@@ -274,7 +274,7 @@ class GenericBigdataService(BigdataServiceBase):
         # Use the generic service template and fill in the fields
         self.properties['entityType'] = self.serviceName
         self.properties['entityClasspathJar'] = os.path.join(self.appHome, \
-            "lib", "bigdata.jar")
+            "lib", "embergraph.jar")
         self.properties['entityMain'] = "org.embergraph." + self.serviceName + \
             ".ServiceImpl"
         self.properties['entityCodebaseJar'] = self.serviceName + "-dl.jar"
@@ -408,7 +408,7 @@ class JiniBrowser(BigdataService):
 # An entry in this map is not required. If one is not found, the default
 # 'GenericBigdataService' class will be used with the default codebase port
 # and default export port
-bigdataServiceMap = {
+embergraphServiceMap = {
     'jini'              : (BigdataMetaservice,      9010, 20010),
     'reggie'            : (BigdataMetaservice,      9010, 20010),
     'httpd'             : (BigdataServiceOldLog,    9010),
@@ -473,7 +473,7 @@ if __name__ == '__main__':
     # Instiantate the object for the service
     serviceName = args[0]
     try:
-        serviceTuple = bigdataServiceMap[serviceName]
+        serviceTuple = embergraphServiceMap[serviceName]
     except KeyError:
         serviceTuple = (GenericBigdataService,)
 
@@ -482,7 +482,7 @@ if __name__ == '__main__':
 
     # Apply the export and codebase port shortcut
     if len(serviceTuple) > 1:
-        service.properties['bigdata.codebase.port'] = str(serviceTuple[1])
+        service.properties['embergraph.codebase.port'] = str(serviceTuple[1])
     if len(serviceTuple) > 2:
         service.properties['exportPort'] = str(serviceTuple[2])
 

@@ -1,4 +1,4 @@
-name		'bigdata'
+name		'embergraph'
 maintainer	'Daniel Mekonnen'
 maintainer_email 'daniel<no-spam-at>systap.com'
 license		'GNU GPLv2'

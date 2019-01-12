@@ -114,7 +114,7 @@ public class TestICUPortabilityBug extends TestCase {
         if (VersionInfo.ICU_VERSION.getMajor() == 3
                 && VersionInfo.ICU_VERSION.getMinor() == 6) {
             /*
-             * bigdata was initially deployed against v3.6.
+             * embergraph was initially deployed against v3.6.
              */
             expected = new byte[] { 7, -124, 7, -124, 53, 63, 69, 43, 41, 63,
                     75, 69, 85, 77, 79, 69, 75, 49, 1, 20, 1, 126, -113, -124,

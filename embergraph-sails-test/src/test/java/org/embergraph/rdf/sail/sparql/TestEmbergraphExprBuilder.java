@@ -1159,7 +1159,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
      * assuming that the blank node is given the identity <code>_:b18</code>.
      * <p>
      * Note: blank nodes are translated into anonymous variables in the parse
-     * tree before the bigdata AST model is generated.
+     * tree before the embergraph AST model is generated.
      */
     public void test_bnode_bracket_syntax_05() throws MalformedQueryException,
             TokenMgrError, ParseException {

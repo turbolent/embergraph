@@ -87,7 +87,7 @@ public interface IJournal extends IMRMW, IAtomicStore, IBTreeManager {
          AsynchronousQuorumCloseException;
    
    /**
-    * Convenience method created in BLZG-1370 to factor out bigdata-jini
+    * Convenience method created in BLZG-1370 to factor out embergraph-jini
     * artifact dependencies.
     * 
     * This should return true IFF the underlying journal is org.embergraph.jini.ha.HAJournal.

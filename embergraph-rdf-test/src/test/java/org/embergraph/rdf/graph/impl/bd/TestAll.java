@@ -52,10 +52,10 @@ public class TestAll extends TestCase {
         final TestSuite suite = new TestSuite("Bigdata Graph Engine");
         
         /*
-         * Some basic correctness tests against the bigdata backend.
+         * Some basic correctness tests against the embergraph backend.
          * 
          * FIXME TEST: Extend/override the analytic test suite to also work for
-         * the bigdata backend. This is a bit tricky because the bigdata backend
+         * the embergraph backend. This is a bit tricky because the embergraph backend
          * opererates in IV and ISPO objects that are not automatically resolved
          * to Value and Statement objects. Maybe we can add a resolution pattern
          * to the test suites (wrapping the GAS outputs) and get better reuse

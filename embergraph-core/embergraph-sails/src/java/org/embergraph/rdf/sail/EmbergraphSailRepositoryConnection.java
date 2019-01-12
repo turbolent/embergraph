@@ -49,7 +49,7 @@ import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Class with support for a variety of bigdata specific extensions,
+ * Class with support for a variety of embergraph specific extensions,
  * <p>
  * {@inheritDoc}
  * 
@@ -197,7 +197,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
      * @param baseURI
      *            The base URI.
      * 
-     * @return An object wrapping the bigdata AST model for that query.
+     * @return An object wrapping the embergraph AST model for that query.
      * 
      * @throws MalformedQueryException
      * @throws UnsupportedOperationException
@@ -250,7 +250,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
      * @param baseURI
      *            The base URI.
      * 
-     * @return An object wrapping the bigdata AST model for that request.
+     * @return An object wrapping the embergraph AST model for that request.
      * 
      * @throws MalformedQueryException
      * @throws UnsupportedOperationException

@@ -167,7 +167,7 @@ public class TestOwlGOM extends ProxyGOMTest {
 //		Properties properties = new Properties();
 //
 //		// create a backing file for the database
-//		File journal = File.createTempFile("bigdata", ".jnl");
+//		File journal = File.createTempFile("embergraph", ".jnl");
 //		properties.setProperty(EmbergraphSail.Options.FILE, journal
 //				.getAbsolutePath());
 //		properties

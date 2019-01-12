@@ -1,13 +1,13 @@
-This directory contains some sample configuration for a bigdata federation
+This directory contains some sample configuration for a embergraph federation
 and default configurations for logging and java permissions.
 
-bigdataStandalone.config - A sample configuration file for a workstation.
+embergraphStandalone.config - A sample configuration file for a workstation.
 
-bigdataCluster.config - A sample configuration file for a 3-node cluster.
+embergraphCluster.config - A sample configuration file for a 3-node cluster.
 
-bigdataCluster.config - A sample configuration file for a 16-node cluster.
+embergraphCluster.config - A sample configuration file for a 16-node cluster.
 
-log4j.properties - A default log4j configuration file for use by the bigdata
+log4j.properties - A default log4j configuration file for use by the embergraph
 				   clients and services.
 				   
 logging.properties - A default Java logging configuration.  This may be used

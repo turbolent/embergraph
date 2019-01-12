@@ -5059,7 +5059,7 @@ public abstract class AbstractJournal implements IJournal/* , ITimestampService 
 	}
 
     /**
-     * Note: There are some bigdata releases (such as 1.0.4) where the commit
+     * Note: There are some embergraph releases (such as 1.0.4) where the commit
      * record index was not pruned when deferred deletes were recycled. By
      * maintaining this test, we will correctly refuse to return a commit record
      * for a commit point whose deferred deletes have been recycled, even when

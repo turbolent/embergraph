@@ -194,7 +194,7 @@ abstract public class AbstractResource<E> implements IMutableResource<E> {
      * Options for locatable resources.
      * 
      * @todo most of these options effect asynchronous iterators, access path
-     *       behavior, and join behavior. these are general features for bigdata
+     *       behavior, and join behavior. these are general features for embergraph
      *       resources, but some of the code to support this stuff is still
      *       local to the RDF module. That can be fixed using an abstract base
      *       class for {@link IJoinNexus} and {@link IJoinNexusFactory}.

@@ -83,7 +83,7 @@ public class TestAll extends TestCase {
          * federation with a single data service.
          * 
          * Note: The multi-data service test suites are located in the
-         * bigdata-jini module since they must be executed against a full
+         * embergraph-jini module since they must be executed against a full
          * federation.
          */
         suite.addTestSuite(TestFederatedQueryEngine.class);

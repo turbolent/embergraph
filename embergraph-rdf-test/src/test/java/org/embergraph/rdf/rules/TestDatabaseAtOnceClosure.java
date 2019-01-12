@@ -520,12 +520,12 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
 
 //    /**
 //     * Compares ground truth for the closure of the source RDF/XML file (as
-//     * computed by Sesame 2) against the closure as computed by bigdata.
+//     * computed by Sesame 2) against the closure as computed by embergraph.
 //     * 
 //     * @param file
 //     *            The RDF/XML file.
 //     * @param closureType
-//     *            The closure program to be applied by bigdata.
+//     *            The closure program to be applied by embergraph.
 //     * 
 //     * @throws Exception
 //     */
@@ -584,7 +584,7 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
 
     /**
      * Compares ground truth for the closure of the source RDF/XML file(s) (as
-     * computed by Sesame 2) against the closure as computed by bigdata.
+     * computed by Sesame 2) against the closure as computed by embergraph.
      * 
      * @param resources
      *            The RDF/XML files.
@@ -815,8 +815,8 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
             
             /*
              * Note: For this test the closure of the [groundTruth] was computed
-             * by Sesame and just loaded into a bigdata triple store instance
-             * while the closure of the [closure] graph was computed by bigdata
+             * by Sesame and just loaded into a embergraph triple store instance
+             * while the closure of the [closure] graph was computed by embergraph
              * itself. In order to be able to compare these two graphs, we first
              * bulk export the [closure] graph (with its backchained
              * entailments) into a TempTripleStore and then compare that

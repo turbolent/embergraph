@@ -84,23 +84,23 @@ public class TestCounters extends TestCase {
         assertEquals(0,root.getDepth());
 
         // make a child.
-        final CounterSet bigdata = root.makePath("www.embergraph.org");
+        final CounterSet embergraph = root.makePath("www.embergraph.org");
 
-        assertNotNull(bigdata);
-        assertFalse(root == bigdata);
+        assertNotNull(embergraph);
+        assertFalse(root == embergraph);
         
         // verify parent.
-        assertTrue(root == bigdata.getParent());
-        assertEquals(1,bigdata.getDepth());
+        assertTrue(root == embergraph.getParent());
+        assertEquals(1,embergraph.getDepth());
 
-        assertEquals("www.embergraph.org",bigdata.getName());
+        assertEquals("www.embergraph.org",embergraph.getName());
         
-        assertEquals("/www.embergraph.org",bigdata.getPath());
+        assertEquals("/www.embergraph.org",embergraph.getPath());
         
         // make a child of a child using a relative path
-        final CounterSet memory = bigdata.makePath("memory");
+        final CounterSet memory = embergraph.makePath("memory");
         
-        assertTrue(bigdata == memory.getParent());
+        assertTrue(embergraph == memory.getParent());
         
         assertEquals(2,memory.getDepth());
 
@@ -111,7 +111,7 @@ public class TestCounters extends TestCase {
         // make a child of a child using an absolute path.
         final CounterSet disk = root.makePath("/www.embergraph.org/disk");
         
-        assertTrue(bigdata == disk.getParent());
+        assertTrue(embergraph == disk.getParent());
 
         assertEquals("disk",disk.getName());
         
@@ -124,7 +124,7 @@ public class TestCounters extends TestCase {
         
         assertTrue(root == root.makePath("/"));
         
-        assertTrue(bigdata == root.makePath("/www.embergraph.org"));
+        assertTrue(embergraph == root.makePath("/www.embergraph.org"));
         
         assertTrue(memory == root.makePath("/www.embergraph.org/memory"));
 
@@ -143,11 +143,11 @@ public class TestCounters extends TestCase {
          * paths.
          */
         
-        assertTrue(bigdata == root.makePath("www.embergraph.org"));
+        assertTrue(embergraph == root.makePath("www.embergraph.org"));
         
         assertTrue(memory == root.makePath("www.embergraph.org/memory"));
 
-        assertTrue(memory == bigdata.makePath("memory"));
+        assertTrue(memory == embergraph.makePath("memory"));
                 
         /*
          * Test lookup with absolute paths.
@@ -155,7 +155,7 @@ public class TestCounters extends TestCase {
         
         assertTrue(root == root.getPath("/"));
 
-        assertTrue(bigdata == root.getPath("/www.embergraph.org"));
+        assertTrue(embergraph == root.getPath("/www.embergraph.org"));
 
         assertTrue(memory == root.getPath("/www.embergraph.org/memory"));
 
@@ -170,11 +170,11 @@ public class TestCounters extends TestCase {
             System.err.println("Ignoring expected exception: " + ex);
         }
 
-        assertTrue(bigdata == root.getPath("www.embergraph.org"));
+        assertTrue(embergraph == root.getPath("www.embergraph.org"));
 
         assertTrue(memory == root.getPath("www.embergraph.org/memory"));
 
-        assertTrue(memory == bigdata.getPath("memory"));
+        assertTrue(memory == embergraph.getPath("memory"));
         
     }
     

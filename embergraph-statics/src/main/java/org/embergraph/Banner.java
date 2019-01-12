@@ -49,7 +49,7 @@ import org.embergraph.util.config.NicUtil;
 /**
  * Class has a static method which writes a copyright banner on stdout once per
  * JVM. This method is invoked from several core classes in order to ensure that
- * the copyright banner is always written out on bigdata startup.
+ * the copyright banner is always written out on embergraph startup.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -264,7 +264,7 @@ public class Banner {
                 /*
                  * Note: The SLF4J bridge can cause a NoSuchMethodException to
                  * be thrown out of Logger.setLevel(). We trap this exception
-                 * and log a message @ ERROR. It is critical that bigdata
+                 * and log a message @ ERROR. It is critical that embergraph
                  * logging is properly configured as logging at INFO for
                  * org.embergraph will cause a tremendous loss of performance.
                  * 
@@ -297,7 +297,7 @@ public class Banner {
      *         Thompson</a>
      */
     public interface BuildInfoMeta {
-        /** The bigdata release version. */
+        /** The embergraph release version. */
         static final String buildVersion = "buildVersion";
         /** The source code revision. */
         static final String svnRevision = "svnRevision";
@@ -329,7 +329,7 @@ public class Banner {
     }
     
     /**
-     * Method used to discover and report on the bigdata build information. A
+     * Method used to discover and report on the embergraph build information. A
      * <code>org.embergraph.BuildInfo</code> class is built when the JAR is
      * created. However, it may not be present when running under an IDE from
      * the source code and, therefore, there MUST NOT be any compile time

@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: bigdata
+# Cookbook Name:: embergraph
 # Recipe:: mapgraph
 #
 # Copyright 2014, Systap
@@ -12,7 +12,7 @@ include_recipe "java"
 
 
 #
-# Make sure the Bigdata home directory is owned by the bigdata user and group:
+# Make sure the Bigdata home directory is owned by the embergraph user and group:
 #
 execute "pull mapgraph from svn repo" do
 	user	'ec2-user'
@@ -44,7 +44,7 @@ end
 #
 # "recursive true" did not work here
 #
-# directory node['bigdata'][:mapgraph_home] do
+# directory node['embergraph'][:mapgraph_home] do
 # 	owner 'ec2-user'
 # 	group 'ec2-user'
 # 	recursive true

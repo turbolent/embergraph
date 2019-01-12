@@ -10,7 +10,7 @@ import org.openrdf.model.impl.ValueFactoryImpl;
  */
 public class EmbergraphConfigSchema {
 
-	/** The bigdata schema namespace 
+	/** The embergraph schema namespace
      * (<tt>http://www.embergraph.org/config/sail/embergraph#</tt>).
      */
 	public static final String NAMESPACE = 

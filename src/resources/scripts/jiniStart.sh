@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Starts the jini services (normally done automatically by the
-# bigdata script).
+# embergraph script).
 
 source `dirname $0`/bigdataenv
 

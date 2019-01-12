@@ -132,7 +132,7 @@ public class GASService extends CustomServiceFactoryBase {
     public interface Options {
         
         /**
-         * The namespace used for bigdata GAS API.
+         * The namespace used for embergraph GAS API.
          */
         String NAMESPACE = "http://www.embergraph.org/rdf/gas#";
 

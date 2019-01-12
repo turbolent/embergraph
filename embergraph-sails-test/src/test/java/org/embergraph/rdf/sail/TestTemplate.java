@@ -104,7 +104,7 @@ public class TestTemplate extends QuadsTestCase {
         final Sail sesameSail = new MemoryStore();
         
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
 	  	final EmbergraphSail embergraphSail = getSail();
 	  	
@@ -142,7 +142,7 @@ public class TestTemplate extends QuadsTestCase {
 	  		embergraphSail.initialize();
 	  		
   			final Repository sesameRepo = new SailRepository(sesameSail);
-  			final EmbergraphSailRepository bigdataRepo = new EmbergraphSailRepository(embergraphSail);
+  			final EmbergraphSailRepository embergraphRepo = new EmbergraphSailRepository(embergraphSail);
   			
 	  		{ // load the data into the Sesame store
 	  			
@@ -157,9 +157,9 @@ public class TestTemplate extends QuadsTestCase {
 	  			
 	  		}
 	  		
-	  		{ // load the data into the bigdata store
+	  		{ // load the data into the embergraph store
 	  			
-	  			final RepositoryConnection cxn = bigdataRepo.getConnection();
+	  			final RepositoryConnection cxn = embergraphRepo.getConnection();
 	  			try {
 	  				cxn.setAutoCommit(false);
 	  				cxn.add(getClass().getResourceAsStream(data), baseURI, format);
@@ -216,10 +216,10 @@ public class TestTemplate extends QuadsTestCase {
             }
                 
             /*
-             * Run the problem query using the bigdata store and then compare
+             * Run the problem query using the embergraph store and then compare
              * the answer.
              */
-            final RepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+            final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
   			try {
 	            final SailTupleQuery tupleQuery = (SailTupleQuery)
 	                cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);

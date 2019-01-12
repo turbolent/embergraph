@@ -30,7 +30,7 @@ import org.embergraph.rdf.sparql.ast.eval.SliceServiceFactory;
 
 
 /**
- * A vocabulary for the bigdata full text search facility. Full text search may
+ * A vocabulary for the embergraph full text search facility. Full text search may
  * be used to combine text search and graph search. Low-latency, user facing
  * search applications may be created by slicing the full text search results
  * and feeding them incrementally into SPARQL queries. This approach allows the
@@ -64,7 +64,7 @@ public interface BDS {
      * 
      * <pre>
      * 
-     * ( s?, bigdata:search, &quot;scale-out RDF triplestore&quot; )
+     * ( s?, embergraph:search, &quot;scale-out RDF triplestore&quot; )
      * 
      * </pre>
      * 

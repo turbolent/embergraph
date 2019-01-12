@@ -43,7 +43,7 @@ log4j.logger.org.embergraph.quorum.zk=INFO
 # See http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
 #log4j.appender.dest2=org.apache.log4j.ConsoleAppender
 log4j.appender.dest2=org.apache.log4j.RollingFileAppender
-log4j.appender.dest2.File=<%= node['bigdata'][:log_dir] %>/HAJournalServer.log
+log4j.appender.dest2.File=<%= node['embergraph'][:log_dir] %>/HAJournalServer.log
 log4j.appender.dest2.MaxFileSize=500MB
 log4j.appender.dest2.MaxBackupIndex=20
 log4j.appender.dest2.layout=org.apache.log4j.PatternLayout
@@ -60,7 +60,7 @@ log4j.appender.dest2.layout.ConversionPattern=%-5p: %r %d{ISO8601} %X{hostname} 
 log4j.additivity.org.embergraph.bop.engine.QueryLog=false
 log4j.appender.queryLog=org.apache.log4j.FileAppender
 log4j.appender.queryLog.Threshold=ALL
-log4j.appender.queryLog.File=<%= node['bigdata'][:log_dir] %>/queryLog.csv
+log4j.appender.queryLog.File=<%= node['embergraph'][:log_dir] %>/queryLog.csv
 log4j.appender.queryLog.Append=true
 # I find that it is nicer to have this unbuffered since you can see what
 # is going on and to make sure that I have complete rule evaluation logs
@@ -75,7 +75,7 @@ log4j.appender.queryLog.layout.ConversionPattern=%m
 log4j.additivity.org.embergraph.bop.engine.RunState$TableLog=false
 log4j.appender.queryRunStateLog=org.apache.log4j.FileAppender
 log4j.appender.queryRunStateLog.Threshold=ALL
-log4j.appender.queryRunStateLog.File=<%= node['bigdata'][:log_dir] %>/queryRunState.log
+log4j.appender.queryRunStateLog.File=<%= node['embergraph'][:log_dir] %>/queryRunState.log
 log4j.appender.queryRunStateLog.Append=true
 # I find that it is nicer to have this unbuffered since you can see what
 # is going on and to make sure that I have complete rule evaluation logs

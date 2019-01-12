@@ -32,7 +32,7 @@ import org.embergraph.rdf.store.BDS;
 
 /**
  * Translate {@link BDS#SEARCH} and related magic predicates into a
- * {@link ServiceNode} which will invoke the bigdata search engine.
+ * {@link ServiceNode} which will invoke the embergraph search engine.
  * 
  * <pre>
  * with {

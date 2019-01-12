@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Start a NanoSparqlServer fronting for a bigdata federation.
+# Start a NanoSparqlServer fronting for a embergraph federation.
 #
 # usage: configFile
 

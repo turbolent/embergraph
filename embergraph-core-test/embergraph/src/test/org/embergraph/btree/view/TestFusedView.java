@@ -1041,7 +1041,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     /**
      * This tests the ability to traverse the tuples in the {@link FusedView} in
      * reverse order. This ability is a requirement for several aspects of the
-     * total architecture, including atomic append for the bigdata file system,
+     * total architecture, including atomic append for the embergraph file system,
      * locating an index partition, and finding the last entry in a set or a
      * map.
      * 

@@ -138,7 +138,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends
     * </pre>
     * 
     * The response is should be <code>index.html</code> since we want the
-    * bigdata webapp to respond for the top-level context.
+    * embergraph webapp to respond for the top-level context.
     * 
     * <p>
     * Note: You must ensure that the client follows redirects using a standard

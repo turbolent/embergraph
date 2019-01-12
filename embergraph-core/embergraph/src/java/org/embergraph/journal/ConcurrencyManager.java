@@ -1441,7 +1441,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
      * @todo revisit the question of imposed latency here based on performance
      *       analysis (of queue length vs response time) for the federation
      *       under a variety of workloads (tasks such as rdf data load, rdf data
-     *       query, bigdata repository workloads, etc.).
+     *       query, embergraph repository workloads, etc.).
      *       <p>
      *       Note that {@link Executors#newCachedThreadPool()} uses a
      *       {@link SynchronousQueue} and that queue has ZERO capacity.

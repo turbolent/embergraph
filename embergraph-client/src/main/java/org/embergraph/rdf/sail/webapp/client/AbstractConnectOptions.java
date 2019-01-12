@@ -83,7 +83,7 @@ public class AbstractConnectOptions implements IMimeTypes {
          * Note: This has been commented out. If it is included, then a lot of
          * the total code base gets dragged into the embergraph-client JAR. If this
          * creates a problem for clients, then we will need to examine the
-         * bigdata RDF model and bigdata RDF parser packages carefully and
+         * embergraph RDF model and embergraph RDF parser packages carefully and
          * relayer them in order to decouple them from the rest of the code
          * base.
          * 
@@ -96,8 +96,8 @@ public class AbstractConnectOptions implements IMimeTypes {
          * FIXME We really need to know whether we are talking to a triple or
          * quads mode end point before we can set this to [true]. The preference
          * winds up as BINARY, which happens to support context so we are not
-         * forcing bigdata (at least) into a choice that it can not make. We
-         * might run into problems with non-bigdata end points. If they support
+         * forcing embergraph (at least) into a choice that it can not make. We
+         * might run into problems with non-embergraph end points. If they support
          * SPARQL Service Description, then we could figure out whether the end
          * point is triples or quads and setup the Accept header appropriately.
          * Otherwise we might have to raise this into the application (or the

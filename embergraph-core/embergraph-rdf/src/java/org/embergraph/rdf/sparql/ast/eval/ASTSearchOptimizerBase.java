@@ -54,7 +54,7 @@ import org.embergraph.service.fts.FTS;
 
 /**
  * Translate {@link FTS#SEARCH} and related magic predicates into a
- * {@link ServiceNode} which will invoke the bigdata search engine.
+ * {@link ServiceNode} which will invoke the embergraph search engine.
  * 
  * <pre>
  * with {

@@ -65,7 +65,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * paths. This sets the ground for testing the evaluation of {@link Predicate}s
  * with various constraints, filters, etc.
  * <p>
- * Note: Tests of remote access path reads are done in the context of a bigdata
+ * Note: Tests of remote access path reads are done in the context of a embergraph
  * federation since there must be a data service in play for a remote access
  * path.
  * 

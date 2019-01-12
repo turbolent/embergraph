@@ -28,7 +28,7 @@ import org.embergraph.rdf.sparql.ast.eval.ASTEvalHelper;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
 /**
- * Extension API for bigdata.
+ * Extension API for embergraph.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

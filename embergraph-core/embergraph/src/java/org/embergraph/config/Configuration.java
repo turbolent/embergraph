@@ -46,7 +46,7 @@ import org.embergraph.util.NV;
  *       whether this can be improved on readily.
  *       <p>
  *       We can not report properties that DO NOT correspond to any known
- *       property within the umbrella bigdata namespace (as log4j does) because
+ *       property within the umbrella embergraph namespace (as log4j does) because
  *       we do not make a closed world assumption for properties in that
  *       namespace.
  *       <p>

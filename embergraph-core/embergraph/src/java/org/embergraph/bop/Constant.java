@@ -57,7 +57,7 @@ final public class Constant<E> extends ImmutableBOp implements IConstant<E> {
          * takes care of propagating the binding onto the variable for solutions
          * which join.
          * <p>
-         * Note: The {@link Var} class in bigdata provides a guarantee of
+         * Note: The {@link Var} class in embergraph provides a guarantee of
          * reference testing for equality, which is why we can not simply attach
          * the constant to the variable and have the variable report its bound
          * value. *
@@ -113,7 +113,7 @@ final public class Constant<E> extends ImmutableBOp implements IConstant<E> {
      * solutions are joined the resulting solutions will have the variable with
      * its constant bound value.
      * <p>
-     * Note: The {@link Var} class in bigdata provides a guarantee of reference
+     * Note: The {@link Var} class in embergraph provides a guarantee of reference
      * testing for equality, which is why we can not simply attach the constant
      * to the variable and have the variable report its bound value. *
      * <p>

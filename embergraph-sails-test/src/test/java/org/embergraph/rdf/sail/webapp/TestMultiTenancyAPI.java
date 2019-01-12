@@ -115,7 +115,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
         final Resource dataset;
         /** The dc:title(s) for the data set. */
         final List<Literal> title = new LinkedList<Literal>();
-        /** The bigdata namespace for the data set. */
+        /** The embergraph namespace for the data set. */
         final Literal namespace;
         /** The sparql end point URL(s) for the data set. */
         final List<URI> sparqlEndpoint = new LinkedList<URI>();
@@ -300,7 +300,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
          * org.embergraph.search.FullTextIndex.fieldsEnabled=false,
          * org.embergraph.relation.class=org.embergraph.rdf.store.LocalTripleStore,
          * com
-         * .bigdata.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.
+         * .embergraph.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.
          * rdf.vocab.NoVocabulary,
          * org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers=false,
          * org.embergraph.rdf.sail.truthMaintenance=false,
@@ -447,7 +447,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends
          * CREATE operation.
          * 
          * Note: The '/' character is reserved by zookeeper for a path separator.
-         * It can not appear in a bigdata namespace in scale-out.
+         * It can not appear in a embergraph namespace in scale-out.
          */
 //        final String namespace2 = "kb2-" + UUID.randomUUID() + "-&/<>-foo";
         final String namespace2 = "kb2-" + UUID.randomUUID() + "-&<>-foo";

@@ -108,7 +108,7 @@ import cutthecrap.utils.striterators.IFilter;
  * {@link DataService} and thereby absorb a thread.
  * 
  * @todo Review JERI options to support secure RMI protocols. For example, using
- *       SSL or an SSH tunnel. For most purposes I expect bigdata to operate on
+ *       SSL or an SSH tunnel. For most purposes I expect embergraph to operate on
  *       a private network, but replicate across gateways is also a common use
  *       case. Do we have to handle it specially?
  */

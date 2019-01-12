@@ -43,7 +43,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 	public void test_metric_heartbeat_uint32() {
 
 		// declared-by: GangliaMetadataMessage{ recordType=METADATA,
-		// hostName=bigdata10, metricName=heartbeat, spoof=false,
+		// hostName=embergraph10, metricName=heartbeat, spoof=false,
 		// metricType=UINT32, metricName2=heartbeat, units=, slope=unspecified,
 		// tmax=20, dmax=0,
 		// extraValues={TITLE="heartbeat"},DESC="Last heartbeat"},GROUP="core"}}}
@@ -63,7 +63,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
 		assertEncodeDecode(null/* decl */, decl);
 		
-		// GangliaMetricMessage{recordType=UINT32, hostName=bigdata10,
+		// GangliaMetricMessage{recordType=UINT32, hostName=embergraph10,
 		// metricName=heartbeat, spoof=false, format=%u,
 		// value=1326920615 (valueClass=Long)}
 		final IGangliaMetricMessage expected = new GangliaMetricMessage(
@@ -89,8 +89,8 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 			
 		}
 		
-//		declared-by: GangliaMetadataMessage{ recordType=METADATA, hostName=bigdata10, metricName=heartbeat, spoof=false, metricType=UINT32, metricName2=heartbeat, units=, slope=unspecified, tmax=20, dmax=0, extraValues={TITLE="heartbeat",DESC="Last heartbeat",GROUP="core"}}
-//		GangliaMetricMessage{recordType=UINT32, hostName=bigdata10, metricName=heartbeat, spoof=false, format=%u, value=1326920615 (valueClass=Long)}
+//		declared-by: GangliaMetadataMessage{ recordType=METADATA, hostName=embergraph10, metricName=heartbeat, spoof=false, metricType=UINT32, metricName2=heartbeat, units=, slope=unspecified, tmax=20, dmax=0, extraValues={TITLE="heartbeat",DESC="Last heartbeat",GROUP="core"}}
+//		GangliaMetricMessage{recordType=UINT32, hostName=embergraph10, metricName=heartbeat, spoof=false, format=%u, value=1326920615 (valueClass=Long)}
 //		RECEIVED RECORD : [0, 0, 0, -124, 0, 0, 0, 9, 98, 105, 103, 100, 97, 116, 97, 49, 48, 0, 0, 0, 0, 0, 0, 9, 104, 101, 97, 114, 116, 98, 101, 97, 116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 37, 117, 0, 0, 79, 23, 51, -89]
 
 	}
@@ -101,7 +101,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 	public void test_metric_cpu_num_uint16() {
 
 		// declared-by: GangliaMetadataMessage{ recordType=METADATA,
-		// hostName=bigdata10, metricName=cpu_num, spoof=false,
+		// hostName=embergraph10, metricName=cpu_num, spoof=false,
 		// metricType=UINT16, metricName2=cpu_num, units=CPUs, slope=zero,
 		// tmax=1200, dmax=0,
 		// extraValues={TITLE="CPU Count",DESC="Total number of CPUs",GROUP="cpu"}}
@@ -121,7 +121,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
 		assertEncodeDecode(null/* decl */, decl);
 		
-		// GangliaMetricMessage{recordType=UINT16, hostName=bigdata10,
+		// GangliaMetricMessage{recordType=UINT16, hostName=embergraph10,
 		// metricName=cpu_num, spoof=false, format=%hu, value=4
 		// (valueClass=Integer)}
 		final IGangliaMetricMessage expected = new GangliaMetricMessage(
@@ -152,7 +152,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 	public void test_metric_cpu_speed_uint32() {
 
 		// declared-by: GangliaMetadataMessage{ recordType=METADATA,
-		// hostName=bigdata10, metricName=cpu_speed, spoof=false,
+		// hostName=embergraph10, metricName=cpu_speed, spoof=false,
 		// metricType=UINT32, metricName2=cpu_speed, units=MHz, slope=zero,
 		// tmax=1200, dmax=0,
 		// extraValues={TITLE="CPU Speed",DESC="CPU Speed in terms of MHz",GROUP="cpu"}}
@@ -171,7 +171,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
 		assertEncodeDecode(null/* decl */, decl);
 
-		// GangliaMetricMessage{recordType=UINT32, hostName=bigdata10,
+		// GangliaMetricMessage{recordType=UINT32, hostName=embergraph10,
 		// metricName=cpu_speed, spoof=false, format=%u, value=2701
 		// (valueClass=Long)}
 		final IGangliaMetricMessage expected = new GangliaMetricMessage(
@@ -202,7 +202,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 	public void test_metric_mem_free_float() {
 
 		// declared-by: GangliaMetadataMessage{ recordType=METADATA,
-		// hostName=bigdata11, metricName=mem_free, spoof=false,
+		// hostName=embergraph11, metricName=mem_free, spoof=false,
 		// metricType=FLOAT, metricName2=mem_free, units=KB, slope=both,
 		// tmax=180, dmax=0,
 		// extraValues={TITLE="Free Memory",DESC="Amount of available memory",GROUP="memory"}}
@@ -221,7 +221,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
 		assertEncodeDecode(null/* decl */, decl);
 
-		// GangliaMetricMessage{recordType=FLOAT, hostName=bigdata11,
+		// GangliaMetricMessage{recordType=FLOAT, hostName=embergraph11,
 		// metricName=mem_free, spoof=false, format=%.0f, value=1.5857544E7
 		// (valueClass=Float)}
 		final IGangliaMetricMessage expected = new GangliaMetricMessage(

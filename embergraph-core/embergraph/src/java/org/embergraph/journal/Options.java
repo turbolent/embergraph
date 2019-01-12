@@ -445,7 +445,7 @@ public interface Options {
      * <strong>WARNING - The use of this option is dangerous.</strong> This
      * option may be used to update the {@link ICUVersionRecord} associated with
      * the journal. ICU provides a Unicode sort key generation service for
-     * bigdata. Unicode sort keys are used in many indices, including the
+     * embergraph. Unicode sort keys are used in many indices, including the
      * {@link Name2Addr} index. If the new ICU version produces Unicode sort
      * keys which are not binary compatible with the Journal, then your data may
      * become inaccessible since you will be unable to probe the

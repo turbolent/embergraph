@@ -1,7 +1,7 @@
 This directory contains some tools which are useful for inspecting the
-performance counters for a live (or post-mortem) bigdata instance.
+performance counters for a live (or post-mortem) embergraph instance.
 
-bigdataServices_0h.xls
+embergraphServices_0h.xls
 
 	An Excel worksheet.  The worksheet has several tabs. Each tab has one
 	or more built-in HTTP requests which can be executed on demand.  The

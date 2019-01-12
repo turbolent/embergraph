@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * Abstract base class for mutable {@link BOp}s. Unlike {@link BOpBase}, this
- * class supports destructive mutation. This is the base class for the bigdata
+ * class supports destructive mutation. This is the base class for the embergraph
  * AST nodes. ASTs are destructively rewritten by optimizers before they are
  * turned into a query plan.
  * <p>

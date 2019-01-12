@@ -15,6 +15,6 @@ java \
  -Dlog4j.configuration=${LOG4J_CONFIG}\
  -Dcodebase.port=${CODEBASE_PORT}\
  -Djava.net.preferIPv4Stack=true\
- -Dbigdata.fedname=${FEDNAME}\
+ -Dembergraph.fedname=${FEDNAME}\
  -Ddefault.nic=`hostname`\
  org.embergraph.service.jini.util.LookupStarter

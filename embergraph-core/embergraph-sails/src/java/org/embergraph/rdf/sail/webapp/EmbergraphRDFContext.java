@@ -2689,7 +2689,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
     /**
      * Return a list of the namespaces for the {@link AbstractTripleStore}s
-     * registered against the bigdata instance.
+     * registered against the embergraph instance.
      * 
      * @see <a href="http://trac.blazegraph.com/ticket/867"> NSS concurrency
      *      problem with list namespaces and create namespace </a>

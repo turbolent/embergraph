@@ -41,7 +41,7 @@ import org.embergraph.util.InnerCause;
 import cutthecrap.utils.striterators.ICloseableIterator;
 
 /**
- * Converts a bigdata {@link ICloseableIterator} {@link IBindingSet}s containing
+ * Converts a embergraph {@link ICloseableIterator} {@link IBindingSet}s containing
  * either (a) {@link EmbergraphValue}s or (b) {@link IV}s having cached
  * {@link EmbergraphValue}s into a Sesame 2 {@link CloseableIteration} visiting
  * Sesame 2 {@link BindingSet}s containing {@link EmbergraphValue}s.
@@ -248,10 +248,10 @@ public class Embergraph2Sesame2BindingSetIterator implements
     }
 
     /**
-     * Aligns a bigdata {@link IBindingSet} with the Sesame 2 {@link BindingSet}.
+     * Aligns a embergraph {@link IBindingSet} with the Sesame 2 {@link BindingSet}.
      * 
      * @param src
-     *            A bigdata {@link IBindingSet} containing only
+     *            A embergraph {@link IBindingSet} containing only
      *            {@link EmbergraphValue}s.
      * 
      * @return The corresponding Sesame 2 {@link BindingSet}.

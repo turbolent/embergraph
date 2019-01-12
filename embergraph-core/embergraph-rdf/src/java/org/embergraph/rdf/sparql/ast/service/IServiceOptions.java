@@ -35,7 +35,7 @@ import org.embergraph.rdf.internal.IV;
 public interface IServiceOptions {
 
     /**
-     * Return <code>true</code> iff the service is a native (aka "bigdata"
+     * Return <code>true</code> iff the service is a native (aka "embergraph"
      * aware) internal service. When <code>true</code>, the {@link ServiceCall}
      * implementation is expected to exchange {@link IBindingSet}s containing
      * {@link IV}s and those {@link IV}s are NOT guaranteed to be materialized.
@@ -71,10 +71,10 @@ public interface IServiceOptions {
     boolean isRunFirst();
 
     /**
-     * Return <code>true</code> if the remote service is known to be a bigdata
+     * Return <code>true</code> if the remote service is known to be a embergraph
      * service that exposes the HA load balancer servlet (default
      * <code>false</code>). The default may be overridden iff the end point is
-     * known to expose the bigdata LBS pattern.
+     * known to expose the embergraph LBS pattern.
      */
     boolean isEmbergraphLBS();
     

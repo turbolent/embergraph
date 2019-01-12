@@ -64,7 +64,7 @@ fi
 # need to be sure that nothing will be adversely effected by that.
 # 
 # Note: This will only execute if it is run from the directory containing the
-# bigdata source (it looks for the queries to run in a known location but also
+# embergraph source (it looks for the queries to run in a known location but also
 # has a dependency on the build.properties and build.xml files for ant).
 #
 # Note: This creates a 2nd archive with just the extracted performance counters,

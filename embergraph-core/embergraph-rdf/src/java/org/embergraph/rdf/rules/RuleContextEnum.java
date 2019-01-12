@@ -219,7 +219,7 @@ public enum RuleContextEnum {
 	/**
 	 * <p>
 	 * High-level queries (SPARQL) can in general be translated into a rule that
-	 * is directly executed by the bigdata rule execution layer. This provides
+	 * is directly executed by the embergraph rule execution layer. This provides
 	 * extremely efficient query answering. The same approach can be used with
 	 * custom rule evaluation - there is no difference once it gets down to the
 	 * execution of the rule(s).

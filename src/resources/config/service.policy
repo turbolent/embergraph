@@ -27,12 +27,12 @@ grant {
     permission java.util.PropertyPermission 
                         "log4j.primary.configuration", "read";
     permission java.util.PropertyPermission
-                                     "bigdata.logDir", "read";
+                                     "embergraph.logDir", "read";
 
     permission java.io.FilePermission 
                              "${log4j.configuration}", "read";
     permission java.io.FilePermission 
                      "${log4j.primary.configuration}", "read";
     permission java.io.FilePermission
-                          "${bigdata.logDir}/*", "read,write";
+                          "${embergraph.logDir}/*", "read,write";
 };

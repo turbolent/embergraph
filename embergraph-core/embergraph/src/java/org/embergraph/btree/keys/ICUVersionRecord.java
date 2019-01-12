@@ -31,18 +31,18 @@ import com.ibm.icu.util.VersionInfo;
 
 /**
  * Persistent record in which we store the version metadata for the ICU
- * dependency in use when the journal was created. bigdata uses Unicode sort
+ * dependency in use when the journal was created. embergraph uses Unicode sort
  * keys for various indices, including {@link Name2Addr}. A change in the ICU
  * version can result in sort keys which are NOT compatible. Binary
- * compatibility for Unicode sort keys is an absolute requirement for bigdata.
+ * compatibility for Unicode sort keys is an absolute requirement for embergraph.
  * The purpose of this persistence capable data record is to note the version of
- * ICU against which bigdata was linked with the associated binary store file
+ * ICU against which embergraph was linked with the associated binary store file
  * was created.
  * <p>
  * Note: This can result in data which apparently becomes "lost", such as this
  * <a href="http://sourceforge.net/apps/trac/bigdata/ticket/193>trac issue</a>.
  * The underlying problem was substituting a newer version of ICU for the one
- * included in the bigdata distribution. Such errors are now caught by detecting
+ * included in the embergraph distribution. Such errors are now caught by detecting
  * a change in the ICU runtime environment.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

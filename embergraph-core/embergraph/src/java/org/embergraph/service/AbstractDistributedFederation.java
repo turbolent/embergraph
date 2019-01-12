@@ -60,7 +60,7 @@ abstract public class AbstractDistributedFederation<T> extends AbstractScaleOutF
     }
     
     /**
-     * Convenience method to remove linkage for bigdata-jini
+     * Convenience method to remove linkage for embergraph-jini
      * 
      * BLZG-1370
      * @return

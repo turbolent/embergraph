@@ -65,7 +65,7 @@ import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
 import org.embergraph.util.InnerCause;
 
 /**
- * Abstract base class for {@link Servlet}s which interact with the bigdata RDF
+ * Abstract base class for {@link Servlet}s which interact with the embergraph RDF
  * data and/or SPARQL query layers.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -37,7 +37,7 @@ fi
 mkdir -p "${ARTIFACT_DIR}"
 
 #copy the war artifacts
-WAR_ARTIFACTS="bigdata embergraph"
+WAR_ARTIFACTS="embergraph embergraph"
 
 for file in $WAR_ARTIFACTS; do
     EXT=war
@@ -52,7 +52,7 @@ for file in $WAR_ARTIFACTS; do
 done
 
 #copy the jar artifacts
-JAR_ARTIFACTS="bigdata embergraph"
+JAR_ARTIFACTS="embergraph embergraph"
 
 for file in $JAR_ARTIFACTS; do
     EXT=jar

@@ -77,7 +77,7 @@ import junit.framework.TestCase;
  * 
  * Note that GC page faults may causing blocking in any case!
  * 
- * @todo Get some performance statistics for the bigdata design features.
+ * @todo Get some performance statistics for the embergraph design features.
  * 
  * @todo Develop protocol for the load balancer to start and stop segment
  *       instances and to report disk, CPU and network statistics to the load

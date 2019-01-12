@@ -93,7 +93,7 @@ public class TestUnions extends QuadsTestCase {
     final URI DC11_CREATOR = new URIImpl(DC11+"creator"); 
     
     /**
-     * Tests mapping of UNIONS in SPARQL onto unions in bigdata rules.
+     * Tests mapping of UNIONS in SPARQL onto unions in embergraph rules.
      * 
      * @throws Exception 
      */
@@ -198,7 +198,7 @@ public class TestUnions extends QuadsTestCase {
     }
     
     /**
-     * Tests mapping of UNIONS in SPARQL onto unions in bigdata rules.
+     * Tests mapping of UNIONS in SPARQL onto unions in embergraph rules.
      * 
      * @throws Exception 
      */

@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: bigdata
+# Cookbook Name:: embergraph
 # Recipe:: tomcat
 #
 # Copyright 2014, Systap
@@ -8,7 +8,7 @@
 #
 # Only do the following for Bigdata Tomcat install
 #
-if node['bigdata'][:install_flavor] == "tomcat"
+if node['embergraph'][:install_flavor] == "tomcat"
 
 	include_recipe "java"
 	include_recipe "tomcat"
@@ -27,27 +27,27 @@ if node['bigdata'][:install_flavor] == "tomcat"
 	end
 
 
-	if node['bigdata'][:build_from_svn]
+	if node['embergraph'][:build_from_svn]
 		include_recipe	"ant"
 		include_recipe	"subversion::client"
 
 		#
 		# Retrieve the Bigdata source from the specified subversion branch:
 		#
-		execute "checkout bigdata from svn repo" do
+		execute "checkout embergraph from svn repo" do
 			user 	'ubuntu'
 		 	group	'ubuntu'
 			cwd	"/home/ubuntu"
-		        command	"svn checkout #{node['bigdata'][:svn_branch]} #{node['bigdata'][:source_dir]}"
+		        command	"svn checkout #{node['embergraph'][:svn_branch]} #{node['embergraph'][:source_dir]}"
 		end
 
 		#
-		# Build the bigdata.war file:
+		# Build the embergraph.war file:
 		#
 		execute "build the war file" do
 			user	'ubuntu'
 		 	group	'ubuntu'
-			cwd	node['bigdata'][:source_dir]
+			cwd	node['embergraph'][:source_dir]
 			command	"ant war"
 		end
 
@@ -55,7 +55,7 @@ if node['bigdata'][:install_flavor] == "tomcat"
 		# Install the WAR file:
 		#
 		remote_file "#{node['tomcat'][:webapp_dir]}/bigdata.war" do
-			source	"file:///#{node['bigdata'][:source_dir]}/ant-build/bigdata.war"
+			source	"file:///#{node['embergraph'][:source_dir]}/ant-build/bigdata.war"
 			owner	node['tomcat'][:user]
 			group	node['tomcat'][:group]
 		end
@@ -65,7 +65,7 @@ if node['bigdata'][:install_flavor] == "tomcat"
 		# Install the WAR file from the SourceForge URL:
 		#
 		remote_file "#{node['tomcat'][:webapp_dir]}/bigdata.war" do
-			source	node['bigdata'][:url]
+			source	node['embergraph'][:url]
 			owner	node['tomcat'][:user]
 			group	node['tomcat'][:group]
 		end
@@ -74,7 +74,7 @@ if node['bigdata'][:install_flavor] == "tomcat"
 	#
 	# Create the JNL home directory
 	#
-	directory node['bigdata'][:data_dir] do
+	directory node['embergraph'][:data_dir] do
 		owner	node['tomcat'][:user]
 		group	node['tomcat'][:group]
 		mode 	00755
@@ -86,7 +86,7 @@ if node['bigdata'][:install_flavor] == "tomcat"
 	#
 	# Create the Bigdata log home
 	#
-	directory node['bigdata'][:log_dir] do
+	directory node['embergraph'][:log_dir] do
 		owner	node['tomcat'][:user]
 		group	node['tomcat'][:group]
 		mode	00755
@@ -98,7 +98,7 @@ if node['bigdata'][:install_flavor] == "tomcat"
 	#
 	# Install the RWStore.properties file:
 	#
-	template node['bigdata'][:properties] do
+	template node['embergraph'][:properties] do
 		source	"RWStore.properties.erb"
 		owner	node['tomcat'][:user]
 		group	node['tomcat'][:group]
@@ -109,7 +109,7 @@ if node['bigdata'][:install_flavor] == "tomcat"
 	#
 	# Install the log4j.properties file:
 	#
-	template node['bigdata'][:log4j_properties] do
+	template node['embergraph'][:log4j_properties] do
 		source	"log4j.properties.erb"
 		owner	node['tomcat'][:user]
 		group	node['tomcat'][:group]
@@ -132,21 +132,21 @@ if node['bigdata'][:install_flavor] == "tomcat"
 	# The RWStore.properties path is the only property that needs to be adjusted in the web.xml file. 
 	# Using a sed command to adjust the property avoids the need to maintain a web.xml template which
 	# in turn updates frequently relative to the other property files.  Thus this recipe becomes
-	# suitable against a larger range of bigdata releases.
+	# suitable against a larger range of embergraph releases.
 	#
-	if node['bigdata'][:base_version].gsub(/\./, '').to_i >= 131
+	if node['embergraph'][:base_version].gsub(/\./, '').to_i >= 131
 		#
 		# Set the RWStore.properties path in the web.xml file:
 		#
 		execute "set absolute path for RWStore.properties" do
-			cwd	"#{node['bigdata'][:web_home]}/WEB-INF"
-			command	"sed -i 's|<param-value>../webapps/bigdata/WEB-INF/RWStore.properties|<param-value>#{node['bigdata'][:home]}/RWStore.properties|' web.xml"
+			cwd	"#{node['embergraph'][:web_home]}/WEB-INF"
+			command	"sed -i 's|<param-value>../webapps/bigdata/WEB-INF/RWStore.properties|<param-value>#{node['embergraph'][:home]}/RWStore.properties|' web.xml"
 		end
 
 		#
 		# Remove original RWStore.properties file to avoid user confusion
 		#
-		file "#{node['bigdata'][:web_home]}/WEB-INF/RWStore.properties" do
+		file "#{node['embergraph'][:web_home]}/WEB-INF/RWStore.properties" do
 			action :delete
 		end
 	else
@@ -154,14 +154,14 @@ if node['bigdata'][:install_flavor] == "tomcat"
 		# 1.3.0 and earlier uses a different path for RWStore.properties.  We can remove this if block in 1.3.1
 		#
 		execute "set absolute path for RWStore.properties" do
-			cwd	"#{node['bigdata'][:web_home]}/WEB-INF"
-			command	"sed -i 's|<param-value>../webapps/bigdata/RWStore.properties|<param-value>#{node['bigdata'][:home]}/RWStore.properties|' web.xml"
+			cwd	"#{node['embergraph'][:web_home]}/WEB-INF"
+			command	"sed -i 's|<param-value>../webapps/bigdata/RWStore.properties|<param-value>#{node['embergraph'][:home]}/RWStore.properties|' web.xml"
 		end
 
 		#
 		# Remove original RWStore.properties file to avoid user confusion
 		#
-		file "#{node['bigdata'][:web_home]}/RWStore.properties" do
+		file "#{node['embergraph'][:web_home]}/RWStore.properties" do
 			action	:delete
 		end
 	end

@@ -75,7 +75,7 @@ import org.embergraph.util.PropertyUtil;
 
 /**
  * A manager for connections to one or more REST API / SPARQL end points for the
- * same bigdata service.
+ * same embergraph service.
  * 
  * @author bryan
  */
@@ -375,10 +375,10 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
      *            <p>
      *            This version does not force the caller to decide whether or
      *            not the LBS pattern will be used. In general, it should be
-     *            used if the end point is bigdata. This class is generally, but
-     *            not always, used with a bigdata end point. The main exception
+     *            used if the end point is embergraph. This class is generally, but
+     *            not always, used with a embergraph end point. The main exception
      *            is SPARQL Basic Federated Query. For that use case we can not
-     *            assume that the end point is bigdata and thus we can not use
+     *            assume that the end point is embergraph and thus we can not use
      *            the LBS prefix.
      */
     public RemoteRepositoryManager(final String serviceURL, final HttpClient httpClient, final Executor executor) {
@@ -475,7 +475,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
         } catch (java.lang.NoClassDefFoundError | java.lang.ExceptionInInitializerError e) {
             // If we are running in unit tests in the client package this
             // introduces
-            // a runtime dependency on the bigdata-core artifact. Just catch the
+            // a runtime dependency on the embergraph-core artifact. Just catch the
             // Exception and let the unit test complete.
             if (log.isInfoEnabled()) {
                 log.info(EXCEPTION_MSG);
@@ -609,7 +609,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
      * remote service.
      * 
      * @param namespace
-     *            The name of the data set (its bigdata namespace).
+     *            The name of the data set (its embergraph namespace).
      * 
      * @return An interface which may be used to talk to that data set.
      */
@@ -1418,7 +1418,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 		
 		/**
 		 * Use copies of these from {@link org.embergraph.rdf.sail.webapp.BackupServlet}
-		 * to avoid introducing cyclical dependency with bigdata-core.
+		 * to avoid introducing cyclical dependency with embergraph-core.
 		 * 
 		 */
 		

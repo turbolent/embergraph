@@ -33,13 +33,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.util.Version;
 
 /**
- * This class can be used with the bigdata properties file to specify
+ * This class can be used with the embergraph properties file to specify
  * which {@link Analyzer}s are used for which languages.
  * Languages are specified by the language tag on RDF literals, which conform
  * with <a href="http://www.rfc-editor.org/rfc/rfc5646.txt">RFC 5646</a>.
- * Within bigdata plain literals are assigned to the default locale's language. 
+ * Within embergraph plain literals are assigned to the default locale's language.
  * 
- * The bigdata properties are used to map language ranges, as specified by 
+ * The embergraph properties are used to map language ranges, as specified by
  * <a href="http://www.rfc-editor.org/rfc/rfc4647.txt">RFC 4647</a> to classes which extend {@link Analyzer}.
  * Supported classes included all the natural language specific classes from Lucene, and also:
  * <ul>
@@ -62,7 +62,7 @@ import org.apache.lucene.util.Version;
  * and such stopwords are usable by this class. If no stop word set can be found, and there is a constructor without
  * stopwords and a constructor with stopwords, then the former is assumed to use a default stop word set.
  * <p>
- * Configuration is by means of the bigdata properties file.
+ * Configuration is by means of the embergraph properties file.
  * All relevant properties start <code>org.embergraph.search.ConfigurableAnalyzerFactory</code> which we
  * abbreviate to <code>c.b.s.C</code> in this documentation. 
  * Properties from {@link Options} apply to the factory.
@@ -70,7 +70,7 @@ import org.apache.lucene.util.Version;
  * Other properties, from {@link AnalyzerOptions} start with
  * <code>c.b.s.C.analyzer.<em>language-range</em></code> where <code><em>language-range</em></code> conforms
  * with the extended language range construct from RFC 4647, section 2.2. 
- * There is an issue that bigdata does not allow '*' in property names, and we use the character '_' to
+ * There is an issue that embergraph does not allow '*' in property names, and we use the character '_' to
  * substitute for '*' in extended language ranges in property names.
  * These are used to specify an analyzer for the given language range.
  * <p>

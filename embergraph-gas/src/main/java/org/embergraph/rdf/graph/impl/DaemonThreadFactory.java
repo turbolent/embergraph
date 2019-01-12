@@ -27,9 +27,9 @@ import java.util.concurrent.ThreadFactory;
  * @version $Id: DaemonThreadFactory.java 5824 2011-12-29 20:52:02Z thompsonbry $
  */
 /*
- * Note: This is a clone of the same-named class in the bigdata module. The
+ * Note: This is a clone of the same-named class in the embergraph module. The
  * clone exists to have it under the Apache 2 license requiring the creation of
- * a bigdata-commons module.
+ * a embergraph-commons module.
  */
 class DaemonThreadFactory implements ThreadFactory {
 

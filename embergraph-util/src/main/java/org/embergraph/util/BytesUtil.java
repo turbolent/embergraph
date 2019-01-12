@@ -809,7 +809,7 @@ public class BytesUtil {
 	 * library location using the PATH environment variable, e.g.,
 	 * 
 	 * <pre>
-	 *   cd bigdata
+	 *   cd embergraph
 	 *   set PATH=%PATH%;lib
 	 *   java -cp bin org.embergraph.btree.BytesUtil
 	 * </pre>
@@ -1083,7 +1083,7 @@ public class BytesUtil {
 	 * zeros suppressed).
 	 * <p>
 	 * Note: This method is design for use with the unsigned byte[] keys in a
-	 * bigdata hash index. All keys in bigdata are internally represented as
+	 * embergraph hash index. All keys in embergraph are internally represented as
 	 * unsigned byte[]s, which is why this method accepts a byte[] rather than
 	 * an long[] for the bits. Also, while the length of an unsigned byte[] key
 	 * can vary, they are never huge and an int32 value is sufficient to index
@@ -1324,7 +1324,7 @@ public class BytesUtil {
 	 * int32 value whose binary representation was <code>10</code> (with leading
 	 * zeros suppressed).
 	 * <p>
-	 * Note: This method is design for use in a bigdata hash index having native
+	 * Note: This method is design for use in a embergraph hash index having native
 	 * int32 keys rather than unsigned byte[] keys.
 	 * 
 	 * @param a

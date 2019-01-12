@@ -25,21 +25,21 @@ import java.util.UUID;
 import org.embergraph.journal.IJournal;
 
 /**
- * Convenience interface created in BLZG-1370 to factor out bigdata-jini
+ * Convenience interface created in BLZG-1370 to factor out embergraph-jini
  * artifact dependencies.
  * 
  */
 public interface IHAJournal extends IJournal {
 
 	/**
-	 * Convenience method created in BLZG-1370 to factor out bigdata-jini
+	 * Convenience method created in BLZG-1370 to factor out embergraph-jini
 	 * artifact dependencies.
 	 * 
 	 */
 	public UUID getServiceID();
 
 	/**
-	 * Convenience method created in BLZG-1370 to factor out bigdata-jini
+	 * Convenience method created in BLZG-1370 to factor out embergraph-jini
 	 * artifact dependencies.
 	 * 
 	 */

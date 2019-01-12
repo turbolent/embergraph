@@ -56,7 +56,7 @@ import org.embergraph.rawstore.IRawStore;
  * the {@link IRawStore} interface. However, it is possible to get by with int32
  * addresses when using the RWStore.
  * <p>
- * Finally, bigdata uses checksums on all data records. Therefore the maximum
+ * Finally, embergraph uses checksums on all data records. Therefore the maximum
  * space available on a 4k page is actually 4096-4 := 4094 bytes. [Yikes! This
  * means that we can not store power of 2 addresses efficiently. That means that
  * we really need to use a compressed dictionary representation in order to have

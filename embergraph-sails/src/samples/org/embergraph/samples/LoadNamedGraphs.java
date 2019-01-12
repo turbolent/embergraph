@@ -77,7 +77,7 @@ public class LoadNamedGraphs extends SampleCode {
     	
 //        // create a backing file
 //        final File journalFile = new File("c:/bigdata.jnl");
-////        final File journalFile = File.createTempFile("bigdata", ".jnl");
+////        final File journalFile = File.createTempFile("embergraph", ".jnl");
 ////        journalFile.deleteOnExit();
 //        properties.setProperty(BigdataSail.Options.FILE, journalFile
 //                .getAbsolutePath());
@@ -195,10 +195,10 @@ public class LoadNamedGraphs extends SampleCode {
                          * index for many cases in order to report an exact
                          * range count.  This is an issue with the Sesame API
                          * semantics (exact range count reporting) and with
-                         * delete markers in the bigdata indices.  Fast range
+                         * delete markers in the embergraph indices.  Fast range
                          * counts are available with two key probes but do not
                          * satisfy the Sesame semantics.  You can get the fast
-                         * range count from the bigdata APIs.
+                         * range count from the embergraph APIs.
                          */
 						final long elapsed = System.currentTimeMillis() - start;
 		                // fast range count!

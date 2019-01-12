@@ -37,7 +37,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
 /**
  * Data driven test suite for SPARQL 1.1 Federated Query against an internal,
- * bigdata "aware" service (similar to our integrated full text search
+ * embergraph "aware" service (similar to our integrated full text search
  * facility).
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

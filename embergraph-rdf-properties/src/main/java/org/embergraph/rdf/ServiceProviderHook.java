@@ -60,12 +60,12 @@ import org.openrdf.rio.RDFWriterRegistry;
  * providers for the same <i>key</i> and service interface, there is no way to
  * control which service provider will remain in the {@link ServiceRegistry}.
  * <p>
- * This effects things such as the bigdata extension for the RDF/XML parser
+ * This effects things such as the embergraph extension for the RDF/XML parser
  * which adds support for SIDs mode interchange and the interchange of
  * {@link org.embergraph.rdf.model.StatementEnum} metadata.
  * <p>
  * This class is used to "hook" the various service registeries and force the
- * use of the bigdata extension when it adds semantics not present in the base
+ * use of the embergraph extension when it adds semantics not present in the base
  * service provider implementation. For such "hooked" services providers, the
  * service registry pattern using <code>META-INF/services</code> is not
  * manditory, but following the pattern is never the less recommended.
@@ -147,7 +147,7 @@ public class ServiceProviderHook {
     
     /**
 	 * This hook may be used to force the load of this class so it can ensure
-	 * that the bigdata version of a service provider is used instead of the
+	 * that the embergraph version of a service provider is used instead of the
 	 * openrdf version. This is NOT optional. Without this hook, we do not have
 	 * control over which version is resolved last in the processed
 	 * <code>META-INF/services</code> files.

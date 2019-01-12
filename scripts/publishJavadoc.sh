@@ -3,13 +3,13 @@
 BASE_DIR=`dirname $0`
 PARENT_POM="${BASE_DIR}/../pom.xml"
 DEST_DIR=database/apidocs/
-#You must have cloned https://github.com/embergraph/embergraph.github.io into a directory at the same level as where bigdata is checked out
+#You must have cloned https://github.com/embergraph/embergraph.github.io into a directory at the same level as where embergraph is checked out
 GITHUB_PAGES="${BASE_DIR}/../../embergraph.github.io"
 
 if [ ! -d "${GITHUB_PAGES}" ] ; then
 
    echo "${GITHUB_PAGES} does not exist."
-   echo "You must have cloned git@github.com:embergraph/embergraph.github.io.git into a directory at the same level as where bigdata is checked out."
+   echo "You must have cloned git@github.com:embergraph/embergraph.github.io.git into a directory at the same level as where embergraph is checked out."
    exit 1
 
 fi

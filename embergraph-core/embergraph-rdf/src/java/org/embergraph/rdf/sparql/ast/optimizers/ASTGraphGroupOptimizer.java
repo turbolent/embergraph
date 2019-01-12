@@ -361,7 +361,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
             if (child instanceof ServiceNode) {
 
                 /*
-                 * Do NOT translate SERVICE nodes (unless they are a bigdata
+                 * Do NOT translate SERVICE nodes (unless they are a embergraph
                  * service).
                  */
 

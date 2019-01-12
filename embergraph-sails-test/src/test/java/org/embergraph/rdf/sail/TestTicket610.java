@@ -75,7 +75,7 @@ public class TestTicket610 extends ProxyEmbergraphSailTestCase {
         }));
 	  	
         /*
-         * The bigdata store, backed by a temporary journal file.
+         * The embergraph store, backed by a temporary journal file.
          */
 	  	final EmbergraphSail sail = getSail();
 	  	
@@ -83,11 +83,11 @@ public class TestTicket610 extends ProxyEmbergraphSailTestCase {
 	  	
 	  		sail.initialize();
 	  		
-  			final EmbergraphSailRepository bigdataRepo = new EmbergraphSailRepository(sail);
+  			final EmbergraphSailRepository embergraphRepo = new EmbergraphSailRepository(sail);
   			
-	  		{ // load the data into the bigdata store
+	  		{ // load the data into the embergraph store
 	  			
-	  			final RepositoryConnection cxn = bigdataRepo.getConnection();
+	  			final RepositoryConnection cxn = embergraphRepo.getConnection();
 	  			try {
 	  				cxn.setAutoCommit(false);
 	  				cxn.add(data);
@@ -100,7 +100,7 @@ public class TestTicket610 extends ProxyEmbergraphSailTestCase {
 	  		
 	  		{ // check the closure
 	  			
-	  			final EmbergraphSailRepositoryConnection cxn = bigdataRepo.getReadOnlyConnection();
+	  			final EmbergraphSailRepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
 	  			try {
 	  				
 	  				final AbstractTripleStore store = cxn.getTripleStore();

@@ -49,7 +49,7 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
- * Efficiently resolve openrdf {@link BindingSet}s to bigdata
+ * Efficiently resolve openrdf {@link BindingSet}s to embergraph
  * {@link IBindingSet}s (this is a streaming API).
  * 
  * @see EmbergraphValueReplacer

@@ -36,7 +36,7 @@ public enum UpdateType {
      */
     /**
      * This operation creates a graph in the Graph Store (this operation is a
-     * NOP for bigdata).
+     * NOP for embergraph).
      * 
      * <pre>
      * CREATE ( SILENT )? GRAPH IRIref

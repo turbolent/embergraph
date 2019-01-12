@@ -1027,7 +1027,7 @@ The following two are covered by: https://jira.blazegraph.com/browse/BLZG-1721
 
     /**
      * Note: This method may be overridden in order to run the test suite
-     * against other variations of the bigdata backend.
+     * against other variations of the embergraph backend.
      * 
      * @see #suiteLTSWithNestedSubquery()
      * @see #suiteLTSWithPipelineJoins()

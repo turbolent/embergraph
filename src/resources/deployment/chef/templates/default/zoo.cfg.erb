@@ -10,6 +10,6 @@ initLimit=10
 # sending a request and getting an acknowledgement
 syncLimit=5
 # the ensemble
-server.1=<%= node['bigdata'][:zk_server1] %>:2888:3888
-server.2=<%= node['bigdata'][:zk_server2] %>:2888:3888
-server.3=<%= node['bigdata'][:zk_server3] %>:2888:3888
+server.1=<%= node['embergraph'][:zk_server1] %>:2888:3888
+server.2=<%= node['embergraph'][:zk_server2] %>:2888:3888
+server.3=<%= node['embergraph'][:zk_server3] %>:2888:3888

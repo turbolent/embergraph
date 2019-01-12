@@ -25,26 +25,26 @@ script = <<SCRIPT
 	apt-get install -y curl
 	curl -L https://www.opscode.com/chef/install.sh | bash
 	mkdir -p /var/lib/zookeeper
-	echo "33.33.33.10  bigdataA" >> /etc/hosts
-	echo "33.33.33.11  bigdataB" >> /etc/hosts
-	echo "33.33.33.12  bigdataC" >> /etc/hosts
+	echo "33.33.33.10  embergraphA" >> /etc/hosts
+	echo "33.33.33.11  embergraphB" >> /etc/hosts
+	echo "33.33.33.12  embergraphC" >> /etc/hosts
 SCRIPT
 
 $scriptA = "#{script}\n\techo 1 > /var/lib/zookeeper/myid\n"
-config.vm.define :bigdataA do |bigdataA|
+config.vm.define :embergraphA do |embergraphA|
 
-  bigdataA.vm.hostname = "bigdataA"
-  bigdataA.vm.box = "precise64"
+  embergraphA.vm.hostname = "embergraphA"
+  embergraphA.vm.box = "precise64"
 
-  bigdataA.berkshelf.enabled = true
+  embergraphA.berkshelf.enabled = true
 
-  bigdataA.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  embergraphA.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  bigdataA.vm.network :private_network, ip: "33.33.33.10"
+  embergraphA.vm.network :private_network, ip: "33.33.33.10"
 
-  bigdataA.vm.provision :chef_solo do |chef|
+  embergraphA.vm.provision :chef_solo do |chef|
     chef.json = {
-	:bigdata => {
+	:embergraph => {
 		:install_flavor => "ha"
 	},
 	:java => {
@@ -57,32 +57,32 @@ config.vm.define :bigdataA do |bigdataA|
 	}
     }
 
-    bigdataA.vm.provision :shell, inline: $scriptA
+    embergraphA.vm.provision :shell, inline: $scriptA
 
     chef.run_list = [
-        "recipe[bigdata::high_availability]"
+        "recipe[embergraph::high_availability]"
     ]
 
   end
 
-end # bigdataA
+end # embergraphA
 
 
 $scriptB = "#{script}\n\techo 2 > /var/lib/zookeeper/myid\n"
-config.vm.define :bigdataB do |bigdataB|
+config.vm.define :embergraphB do |embergraphB|
 
-  bigdataB.vm.hostname = "bigdataB"
-  bigdataB.vm.box = "precise64"
+  embergraphB.vm.hostname = "embergraphB"
+  embergraphB.vm.box = "precise64"
 
-  bigdataB.berkshelf.enabled = true
+  embergraphB.berkshelf.enabled = true
 
-  bigdataB.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  embergraphB.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  bigdataB.vm.network :private_network, ip: "33.33.33.11"
+  embergraphB.vm.network :private_network, ip: "33.33.33.11"
 
-  bigdataB.vm.provision :chef_solo do |chef|
+  embergraphB.vm.provision :chef_solo do |chef|
     chef.json = {
-	:bigdata => {
+	:embergraph => {
 		:install_flavor => "ha"
 	},
 	:java => {
@@ -95,32 +95,32 @@ config.vm.define :bigdataB do |bigdataB|
 	}
     }
 
-    bigdataB.vm.provision :shell, inline: $scriptB
+    embergraphB.vm.provision :shell, inline: $scriptB
 
     chef.run_list = [
-        "recipe[bigdata::high_availability]"
+        "recipe[embergraph::high_availability]"
     ]
 
   end
 
-end # bigdataB
+end # embergraphB
 
 
 $scriptC = "#{script}\n\techo 3 > /var/lib/zookeeper/myid\n"
-config.vm.define :bigdataC do |bigdataC|
+config.vm.define :embergraphC do |embergraphC|
 
-  bigdataC.vm.hostname = "bigdataC"
-  bigdataC.vm.box = "precise64"
+  embergraphC.vm.hostname = "embergraphC"
+  embergraphC.vm.box = "precise64"
 
-  bigdataC.berkshelf.enabled = true
+  embergraphC.berkshelf.enabled = true
 
-  bigdataC.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  embergraphC.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  bigdataC.vm.network :private_network, ip: "33.33.33.12"
+  embergraphC.vm.network :private_network, ip: "33.33.33.12"
 
-  bigdataC.vm.provision :chef_solo do |chef|
+  embergraphC.vm.provision :chef_solo do |chef|
     chef.json = {
-	:bigdata => {
+	:embergraph => {
 		:install_flavor => "ha"
 	},
 	:java => {
@@ -133,14 +133,14 @@ config.vm.define :bigdataC do |bigdataC|
 	}
     }
 
-    bigdataC.vm.provision :shell, inline: $scriptC
+    embergraphC.vm.provision :shell, inline: $scriptC
 
     chef.run_list = [
-        "recipe[bigdata::high_availability]"
+        "recipe[embergraph::high_availability]"
     ]
 
   end
 
-end # bigdataC
+end # embergraphC
 
 end

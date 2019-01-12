@@ -7533,7 +7533,7 @@ public class SyntaxTreeBuilder/*@bgen(jjtree)*/implements SyntaxTreeBuilderTreeC
 
 /// SPARQL 1.1 Update productions
 
-// bigdata extensions: GRAPHS, SOLUTIONS, and SolutionsRef(). 
+// embergraph extensions: GRAPHS, SOLUTIONS, and SolutionsRef().
   final public void GraphRefAll() throws ParseException {
  /*@bgen(jjtree) GraphRefAll */
   ASTGraphRefAll jjtn000 = new ASTGraphRefAll(JJTGRAPHREFALL);
@@ -7663,14 +7663,14 @@ public class SyntaxTreeBuilder/*@bgen(jjtree)*/implements SyntaxTreeBuilderTreeC
     IRIref();
   }
 
-// bigdata extension: either a GRAPH uri or a SOLUTIONS name.
+// embergraph extension: either a GRAPH uri or a SOLUTIONS name.
 //void GraphOrSolutionsRef() #void :
 //{}
 //{ 
 //  (GraphRef()|SolutionsRef())
 //}
 
-// bigdata extension: A SOLUTIONS name (aka named solution set ref).
+// embergraph extension: A SOLUTIONS name (aka named solution set ref).
   final public void SolutionsRef() throws ParseException {
  /*@bgen(jjtree) SolutionsRef */
  ASTSolutionsRef jjtn000 = new ASTSolutionsRef(JJTSOLUTIONSREF);
@@ -8299,7 +8299,7 @@ public class SyntaxTreeBuilder/*@bgen(jjtree)*/implements SyntaxTreeBuilderTreeC
     }
   }
 
-// bigdata extension: CREATE SOLUTIONS ...
+// embergraph extension: CREATE SOLUTIONS ...
   final public void Create() throws ParseException {
  /*@bgen(jjtree) Create */
   ASTCreate jjtn000 = new ASTCreate(JJTCREATE);

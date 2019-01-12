@@ -9,34 +9,34 @@
 # The backing file. This contains all your data.  You want to put this someplace
 # safe.  The default locator will wind up in the directory from which you start
 # your servlet container.
-org.embergraph.journal.AbstractJournal.file=<%= node['bigdata'][:data_dir] %>/bigdata.jnl
+org.embergraph.journal.AbstractJournal.file=<%= node['embergraph'][:data_dir] %>/bigdata.jnl
 
 # The persistence engine.  Use 'Disk' for the WORM or 'DiskRW' for the RWStore.
-org.embergraph.journal.AbstractJournal.bufferMode=<%= node['bigdata']['journal.AbstractJournal.bufferMode'] %>
+org.embergraph.journal.AbstractJournal.bufferMode=<%= node['embergraph']['journal.AbstractJournal.bufferMode'] %>
 
 # Setup for the RWStore recycler rather than session protection.
-org.embergraph.service.AbstractTransactionService.minReleaseAge=<%= node['bigdata']['service.AbstractTransactionService.minReleaseAge'] %>
+org.embergraph.service.AbstractTransactionService.minReleaseAge=<%= node['embergraph']['service.AbstractTransactionService.minReleaseAge'] %>
 
-org.embergraph.btree.writeRetentionQueue.capacity=<%= node['bigdata']['btree.writeRetentionQueue.capacity'] %>
-org.embergraph.btree.BTree.branchingFactor=<%= node['bigdata']['btree.BTree.branchingFactor'] %>
+org.embergraph.btree.writeRetentionQueue.capacity=<%= node['embergraph']['btree.writeRetentionQueue.capacity'] %>
+org.embergraph.btree.BTree.branchingFactor=<%= node['embergraph']['btree.BTree.branchingFactor'] %>
 
 # 200M initial extent.
-org.embergraph.journal.AbstractJournal.initialExtent=<%= node['bigdata']['journal.AbstractJournal.initialExtent'] %>
-org.embergraph.journal.AbstractJournal.maximumExtent=<%= node['bigdata']['journal.AbstractJournal.maximumExtent'] %>
+org.embergraph.journal.AbstractJournal.initialExtent=<%= node['embergraph']['journal.AbstractJournal.initialExtent'] %>
+org.embergraph.journal.AbstractJournal.maximumExtent=<%= node['embergraph']['journal.AbstractJournal.maximumExtent'] %>
 
 ##
 ## Setup for QUADS mode without the full text index.
 ##
-org.embergraph.rdf.sail.truthMaintenance=<%= node['bigdata']['rdf.sail.truthMaintenance'] %>
-org.embergraph.rdf.store.AbstractTripleStore.quads=<%= node['bigdata']['rdf.store.AbstractTripleStore.quads'] %>
-org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers=<%= node['bigdata']['rdf.store.AbstractTripleStore.statementIdentifiers'] %>
-org.embergraph.rdf.store.AbstractTripleStore.textIndex=<%= node['bigdata']['rdf.store.AbstractTripleStore.textIndex'] %>
-org.embergraph.rdf.store.AbstractTripleStore.axiomsClass=<%= node['bigdata']['rdf.store.AbstractTripleStore.axiomsClass'] %>
+org.embergraph.rdf.sail.truthMaintenance=<%= node['embergraph']['rdf.sail.truthMaintenance'] %>
+org.embergraph.rdf.store.AbstractTripleStore.quads=<%= node['embergraph']['rdf.store.AbstractTripleStore.quads'] %>
+org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers=<%= node['embergraph']['rdf.store.AbstractTripleStore.statementIdentifiers'] %>
+org.embergraph.rdf.store.AbstractTripleStore.textIndex=<%= node['embergraph']['rdf.store.AbstractTripleStore.textIndex'] %>
+org.embergraph.rdf.store.AbstractTripleStore.axiomsClass=<%= node['embergraph']['rdf.store.AbstractTripleStore.axiomsClass'] %>
 
 # Bump up the branching factor for the lexicon indices on the default kb.
-org.embergraph.namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor=<%= node['bigdata']['namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor'] %>
+org.embergraph.namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor=<%= node['embergraph']['namespace.kb.lex.org.embergraph.btree.BTree.branchingFactor'] %>
 
 # Bump up the branching factor for the statement indices on the default kb.
-org.embergraph.namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor=<%= node['bigdata']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor'] %>
-org.embergraph.rdf.sail.bufferCapacity=<%= node['bigdata']['rdf.sail.sailBufferCapacity'] %>
-# org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=<%= node['bigdata']['rdf.store.AbstractTripleStore.vocabularyClass'] %>
+org.embergraph.namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor=<%= node['embergraph']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFactor'] %>
+org.embergraph.rdf.sail.bufferCapacity=<%= node['embergraph']['rdf.sail.sailBufferCapacity'] %>
+# org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=<%= node['embergraph']['rdf.store.AbstractTripleStore.vocabularyClass'] %>

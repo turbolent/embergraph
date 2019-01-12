@@ -3865,7 +3865,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
              * Free deferrals.
              * 
              * Note: Per ticket#480, we can not begin recycling from the first
-             * commit point in the commit record index as there are some bigdata
+             * commit point in the commit record index as there are some embergraph
              * versions (1.0.4) where we did not prune the commit record index.
              * Therefore, this relies on the (lastDeferredReleaseTime+1) for the
              * exclusive lower bound. This is avoids triggering an exception

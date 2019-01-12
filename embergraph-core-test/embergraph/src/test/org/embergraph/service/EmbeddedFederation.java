@@ -276,7 +276,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 //    }
     
     /**
-     * Start or restart an embedded bigdata federation.
+     * Start or restart an embedded embergraph federation.
      * 
      * @param client
      *            The client.

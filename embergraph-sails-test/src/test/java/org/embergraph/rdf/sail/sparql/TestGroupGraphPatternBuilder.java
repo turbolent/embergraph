@@ -53,7 +53,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
 /**
  * Test suite for translating the openrdf SPARQL AST nodes for
- * <code>GroupGraphPattern</code> into the bigdata AST (join groups, union,
+ * <code>GroupGraphPattern</code> into the embergraph AST (join groups, union,
  * etc).
  * 
  * @see TestSubqueryPatterns

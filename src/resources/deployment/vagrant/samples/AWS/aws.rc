@@ -40,6 +40,6 @@ export AWS_INSTANCE_TYPE="m3.xlarge"
 #
 # Default host names, adjust as desired:
 #
-export BIGDATA_HA_HOST_A="bigdataA"
-export BIGDATA_HA_HOST_B="bigdataB"
-export BIGDATA_HA_HOST_C="bigdataC"
+export BIGDATA_HA_HOST_A="embergraphA"
+export BIGDATA_HA_HOST_B="embergraphB"
+export BIGDATA_HA_HOST_C="embergraphC"
